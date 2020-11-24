@@ -1,0 +1,23 @@
+html{
+    height: 100%;
+    margin: 0;
+}
+body{
+    height: 100%;
+    margin: 0;
+}
+.container-fluid{
+    /* height: 100%; */
+    padding-right: 4%;
+}
+.container {
+    height: 100%;
+}
+.listDiv{
+    background: #ededed;
+}
+.card{
+    max-width: 300;
+    max-height: 500;
+    cursor: pointer;
+}
