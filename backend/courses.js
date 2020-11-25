@@ -17,9 +17,9 @@ $(document).ready(function () {
                     });    */     
                     //  alert(value.name);
                     if(value.course_image)
-                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card border-danger mb-3'><div class='card-header'><img class='image-responsive' width='200' src='" + value.course_image + "' alt='No Image'></div><div class='card-body'><h5 class='card-title'>" + value.name + "</h4></div></div></div>");
+                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3'><img class='card-img-top p-2' width='200' src='" + value.course_image + "' alt='No Image'><div class='card-body'><h5 class='card-title'>" + value.name + "</h4></div></div></div>");
                     else
-                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card border-danger mb-3'><div class='card-header'><img class='image-responsive' width='200' src='../images/onlineCourses.png' alt='No Image'></div><div class='card-body'><h5 class='card-title'>" + value.name + "</h4></div></div></div>");
+                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3'><img class='card-img-top p-2' width='200' src='../images/onlineCourses.png' alt='No Image'><div class='card-body'><h5 class='card-title'>" + value.name + "</h4></div></div></div>");
                 });
             }
             else
