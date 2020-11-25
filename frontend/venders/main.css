@@ -5,11 +5,13 @@ html{
 body{
     height: 100%;
     margin: 0;
+    padding: 0;
 }
 .container-fluid{
     /* height: 100%; */
     padding-right: 0;
     padding-left: 0;
+    margin: 0;
 }
 .container {
     height: 100%;
@@ -24,9 +26,6 @@ body{
     cursor: pointer;
     box-shadow: 3px 3px gray;
     border-radius: 15px;
-}
-body{
-    padding-top: 50px;   
 }
 
 .list-item{
@@ -100,7 +99,7 @@ body{
   text-align: start;
   margin-left: 0;
   margin-top: 0;
-  border: 5px solid lightblue;
+  border: 5px solid #008cba;
   border-radius: 5px;
 }
 
