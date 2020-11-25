@@ -5,11 +5,13 @@ html{
 body{
     height: 100%;
     margin: 0;
+    padding: 0;
 }
 .container-fluid{
     /* height: 100%; */
     padding-right: 0;
     padding-left: 0;
+    margin: 0;
 }
 .container {
     height: 100%;
@@ -97,7 +99,7 @@ body{
   text-align: start;
   margin-left: 0;
   margin-top: 0;
-  border: 5px solid lightblue;
+  border: 5px solid #008cba;
   border-radius: 5px;
 }
 
@@ -110,6 +112,13 @@ body{
   border: 2px solid gray;
   border-radius: 25px;
   background: white;
+}
+
+.badge{
+  color: black;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
 }
 
 /* end courseDetails.html */

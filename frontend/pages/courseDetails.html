@@ -19,6 +19,7 @@
         
     <!-- add custom stylesheet here -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script>alert("1");</script> -->
 
     <title>Edwisely - Course Details</title>
 
@@ -74,12 +75,13 @@
             <div class="container-fluid">
               <div class="container px-5 py-0 shadow-sm">
                   <h2 class="mt-1">
-                      <p class="font-weight-bold">Your Courses</p>
+                      <p class="font-weight-bold" id="courseName"></p>
                   </h2>
                   <hr class="titlehr">
                   <p class="list pb-2">
                       <span class="list-item"><a href=index.html>Home</a> ></span>
-                      <span class="list-item-active"><a href=courses.html>Your Courses</a></span>
+                      <span class="list-item"><a href=courses.html>Your Courses</a> ></span>
+                      <span class="list-item-active"><a href="#">Course Details</a></span>
                   </p>
               </div>
               <div class="container-fluid pt-5 px-5">
@@ -102,20 +104,53 @@
                               <div class="row p-3">
                                 <div class="col-sm-8 my-auto">
                                   <h6 class="font-weight-bold">Course Description</h6>
-                                  <p id="courseDesc">No Data Available</p>
-                                  <h6 class="font-weight-bold mt-2">Course Description</h6>
-                                  <p id="courseDesc">No Data Available</p>
-                                  <h6 class="font-weight-bold mt-2">Course Description</h6>
-                                  <p id="courseDesc">No Data Available</p>
+                                  <p class="ml-2" id="courseDesc">No Data Available</p>
+                                  <h6 class="font-weight-bold mt-2">Learing Objectives</h6>
+                                  <p class="ml-2" id="courseObjc">No Data Available</p>
+                                  <h6 class="font-weight-bold mt-2">Learning Outcomes</h6>
+                                  <p class="ml-2" id="courseOutc">No Data Available</p>
                                 </div>
                                 <div class="col-sm-4">
-                                  <img class="img-responsive m-2" src="../images/onlineCourses.png">
-                                  <div class="coursetab p-1 pl-3">
-                                    <h6 class="p-2">Your Classes</h6>
+                                  <img class="img-responsive m-2" id="courseImg" width="200" src="../images/onlineCourses.png" alt="No Image">
+                                  <div class="coursetab p-1 pl-3 mt-4">
+                                    <h6 class="px-2 mt-1">Your Classes</h6>
                                     <div id="courseClass">
                                       <p>3 Section A</p>
                                       <p>3 Section B</p>
                                     </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade show active" id="nav-syllabus" role="tabpanel" aria-labelledby="nav-syllabus-tab">
+                            <div class="container m-2 coursetab" id="courseSyllabus">
+                              <div class="row p-3 mb-2">
+                                <div class="col-sm-8">
+                                  <p class="mt-1"><strong id="courseSTitle">Unit 1</strong></p>
+                                  <div class="my-auto">
+                                    <p>
+                                      <span>Objectives</span>
+                                      <ul id="courseObjUl">
+                                        <li>abc</li>
+                                        <li>abc</li>
+                                      </ul>
+                                    </p>
+                                    <p class="mt-2">
+                                      <span>Outcome</span>
+                                      <ul id="courseOutUl">
+                                        <li>abc</li>
+                                        <li>abc</li>
+                                      </ul>
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4">
+                                  <p><strong>Topics Covered</strong></p>
+                                  <div id="courseTopics">
+                                    <span class="badge badge-pill badge-secondary">Classification of flow</span><br>
+                                    <span class="badge badge-pill badge-secondary mt-1">Classification of flow</span><br>
+                                    <span class="badge badge-pill badge-secondary my-1">Classification of flow</span>
                                   </div>
                                 </div>
                               </div>
