@@ -25,17 +25,14 @@ body{
     box-shadow: 3px 3px gray;
     border-radius: 15px;
 }
-body{
-    padding-top: 50px;   
-}
 
-.list-item{
-  color: #56849d;
+.list-item a{
+  color: #4c768b;
   cursor: pointer;
   background: #fff;
 }
 
-.list-item-active{
+.list-item-active a{
   color: #5F93AE;
   cursor: pointer;
   background: #fff;
@@ -104,13 +101,15 @@ body{
   border-radius: 5px;
 }
 
-.headerhr{
-  border: 0;
-  /* box-shadow: 5px 0 8px black; */
-  box-shadow: 0 8px 6px -6px black;
-}
 
 /* end courses.html */
 
 
-  
+/* start courseDetails.html */
+.coursetab{
+  border: 2px solid gray;
+  border-radius: 25px;
+  background: white;
+}
+
+/* end courseDetails.html */
