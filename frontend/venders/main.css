@@ -121,4 +121,9 @@ body{
   text-decoration: none;
 }
 
+.table .table-borderless {
+  border-collapse: separate;
+  border-spacing: 1em;
+}
+
 /* end courseDetails.html */
