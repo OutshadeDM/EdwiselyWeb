@@ -24,7 +24,6 @@ body{
     max-width: 300;
     max-height: 500;
     cursor: pointer;
-    box-shadow: 3px 3px gray;
     border-radius: 15px;
 }
 
@@ -122,3 +121,16 @@ body{
 }
 
 /* end courseDetails.html */
+
+
+/* my assessments */
+
+
+.assBtn {
+float: right;
+background-color: #008cba;
+border-radius: 40px;
+border: none;
+}
+
+/* end my assessments */
