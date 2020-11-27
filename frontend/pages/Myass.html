@@ -40,7 +40,7 @@
             class="fas fa-book px-2 py-2"></i>All Courses</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark text-white "><i
             class="fas fa-bookmark px-2 py-2"></i>Add Course</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-white "><i
+        <a href="Myass.html" class="list-group-item list-group-item-action bg-dark text-white "><i
             class="fas fa-chart-bar px-2 py-2 "></i>Assessments</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark text-white "><i
             class="fas fa-tv px-2 py-2"></i>Live Class</a>
@@ -80,8 +80,7 @@
           <hr class="titlehr">
           <p class="list pb-2">
             <span class="list-item"><a href=index.html>Home</a> ></span>
-            <span class="list-item"><a href=courses.html>Your Courses</a> ></span>
-            <span class="list-item-active"><a href="#">Course Details</a></span>
+            <span class="list-item active"><a href=Myass.html>My Assessments</a></span>
           </p>
         </div>
         <div class="container-fluid pt-5 px-5">
@@ -104,45 +103,20 @@
                   </nav>
 
 
-
+                  <!-- tab1 -->
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-about" role="tabpanel"
                       aria-labelledby="nav-about-tab">
-                      <!-- <div class="container m-2 coursetab">
-                        <div class="row p-3">
-                          <div class="col-sm-8 my-auto">
-                            <h6 class="font-weight-bold">Course Description</h6>
-                            <p class="ml-2" id="courseDesc">No Data Available</p>
-                            <h6 class="font-weight-bold mt-2">Learing Objectives</h6>
-                            <p class="ml-2" id="courseObjc">No Data Available</p>
-                            <h6 class="font-weight-bold mt-2">Learning Outcomes</h6>
-                            <p class="ml-2" id="courseOutc">No Data Available</p>
-                          </div>
-                          <div class="col-sm-4">
-                            <img class="img-responsive m-2" id="courseImg" width="200" src="../images/onlineCourses.png"
-                              alt="No Image">
-                            <div class="coursetab p-1 pl-3 mt-4">
-                              <h6 class="px-2 mt-1">Your Classes</h6>
-                              <div id="courseClass">
-                                <p>3 Section A</p>
-                                <p>3 Section B</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
+
                       <div class="pt-5">
-                        <select class="form-control form-control-lg col-4">
-                          <option>Large select</option>
+                        <select class="form-control form-control-lg col-4" id="objective-assessments">
                         </select>
                       </div>
 
 
-                      <!--assessments List-->
+                      <!-- objective-assessments List-->
                       <div class="container-fluid pt-5 px-5">
-                        <div class="row text-center" id="assessmentList">
-                          <h4>No Assessments</h4>
-
+                        <div class="row text-center" id="objectiveassessmentList">
                         </div>
                       </div>
 
@@ -151,40 +125,22 @@
                     </div>
 
 
-
+                    <!-- tab2 -->
                     <div class="tab-pane fade show active" id="nav-syllabus" role="tabpanel"
                       aria-labelledby="nav-syllabus-tab">
-                      <div class="container m-2 coursetab" id="courseSyllabus">
-                        <div class="row p-3 mb-2">
-                          <div class="col-sm-8">
-                            <p class="mt-1"><strong id="courseSTitle">Unit 1</strong></p>
-                            <div class="my-auto">
-                              <p>
-                                <span>Objectives</span>
-                              <ul id="courseObjUl">
-                                <li>abc</li>
-                                <li>abc</li>
-                              </ul>
-                              </p>
-                              <p class="mt-2">
-                                <span>Outcome</span>
-                              <ul id="courseOutUl">
-                                <li>abc</li>
-                                <li>abc</li>
-                              </ul>
-                              </p>
-                            </div>
-                          </div>
-                          <div class="col-sm-4">
-                            <p><strong>Topics Covered</strong></p>
-                            <div id="courseTopics">
-                              <span class="badge badge-pill badge-secondary">Classification of flow</span><br>
-                              <span class="badge badge-pill badge-secondary mt-1">Classification of flow</span><br>
-                              <span class="badge badge-pill badge-secondary my-1">Classification of flow</span>
-                            </div>
-                          </div>
+                      <div class="pt-5">
+                        <select class="form-control form-control-lg col-4" id="subjective-assessments">
+                        </select>
+                      </div>
+
+
+                      <!-- subjective-assessments List-->
+                      <div class="container-fluid pt-5 px-5">
+                        <div class="row text-center" id="subjectiveassessmentList">
                         </div>
                       </div>
+
+                      <!-- assessment list end -->
                     </div>
 
 
