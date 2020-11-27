@@ -1,25 +1,30 @@
 
 
-ul {
+.courseTagsUl {
   list-style: none;
 }
-li {
+.courseTagsLi {
   display: inline-block;
-  margin-right: 2px;
-}
-input {
-  visibility:hidden;
-}
-label {
+  color: #929292;
   cursor: pointer;
-  border: 2px solid gray;
-  border-radius:20px;
-  padding:3px;
 }
-input:checked + label {
+.courseTagsInput {
+  visibility:hidden;
+  cursor: pointer;
+}
+.courseTagsLabel {
+  border: 2px solid gray;
+  padding: 5px;
+  border-radius:20px;
+  cursor: pointer;
+  background: #FAFAFA;
+}
+.courseTagsInput:checked + .courseTagsLabel {
   color: blue;
+  background: lightblue;
 }
 
-input:hover + label {
-background-color:gray;
+.courseTagsInput:hover + .courseTagsLabel {
+  background-color:gray;
+  color: white;
 }
