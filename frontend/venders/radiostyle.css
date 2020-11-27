@@ -1,0 +1,25 @@
+
+
+ul {
+  list-style: none;
+}
+li {
+  display: inline-block;
+  margin-right: 2px;
+}
+input {
+  visibility:hidden;
+}
+label {
+  cursor: pointer;
+  border: 2px solid gray;
+  border-radius:20px;
+  padding:3px;
+}
+input:checked + label {
+  color: blue;
+}
+
+input:hover + label {
+background-color:gray;
+}
