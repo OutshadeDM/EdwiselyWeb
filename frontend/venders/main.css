@@ -92,6 +92,38 @@ body{
   }
   /* end sidebar */
 
+/* default */
+
+.headerBanner {
+  position: relative;
+}
+
+.assBtn {
+  float: right;
+  background-color: #1B658C;
+  border-radius: 40px;
+  border: none;
+  }
+  
+  .BigBtn {
+    background-color: #1B658C;
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    color: white;
+    position: absolute;
+    right: 100px;
+    bottom: 90px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+
+
+
+/* end default */
+
+
   /* courses.html */
 .titlehr{
   width: 20%;
@@ -131,11 +163,15 @@ body{
 /* my assessments */
 
 
-.assBtn {
-float: right;
-background-color: #008cba;
-border-radius: 40px;
-border: none;
+.createQuestions {
+  display: inline-block;
+  height: 150px;
+  padding: 50px 0;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
 }
+
 
 /* end my assessments */
