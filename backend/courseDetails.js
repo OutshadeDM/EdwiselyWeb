@@ -15,7 +15,7 @@ $(document).ready(function(){
                 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
             },
             success: function (result) {
-                alert(result.status);
+                // alert(result.status);
                 $('#courseClass').empty();
                 if(result.status == 200){
 
@@ -27,8 +27,8 @@ $(document).ready(function(){
                     if(result.data.description)
                         $("#courseDesc").text(result.data.description);
 
-                    if(result.data.objectives){
-                        alert(result.data.objectives);
+                    if(result.data.objectives != "" && result.data.objectives){
+                        // alert(result.data.objectives);
                         $("#courseObjc").empty();
                         $("#courseObjc").append("<ul>");
                         $.each(result.data.objectives , function(key , value){
@@ -36,10 +36,8 @@ $(document).ready(function(){
                         });
                         $("#courseObjc").append("</ul>");
                     }
-                    else
-                        alert("here");
 
-                    if(result.data.outcomes){
+                    if(result.data.outcomes != "" && result.data.outcomes){
                         $("#courseOutc").empty();
                         $("#courseOutc").append("<ul>");
                         $.each(result.data.outcomes , function(key , value){
@@ -48,10 +46,10 @@ $(document).ready(function(){
                         $("#courseOutc").append("</ul>");
                     }
 
-                    if(result.data.image)
+                    if(result.data.image != "" && result.data.image)
                         $("#courseImg").attr("src",result.data.image);
 
-                    if(result.data.sections){
+                    if(result.data.sections != "" && result.data.sections){
                         $("#courseClass").empty();
                         $("#courseClass").append("<ul>");
                         $.each(result.data.sections , function(key , value){
@@ -89,7 +87,7 @@ $(document).ready(function(){
             success: function (result) {
                 // alert(result.status);
                 $('#courseSyllabus').empty();
-                if(result.status == 200 && result.data){
+                if(result.status == 200 && result.data != ""){
                     $.each(result.data , function(key , value){
                         // alert(value);
                         let div = "";
@@ -290,7 +288,7 @@ $(document).ready(function(){
                 }
                 else{
                     $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
-                    alert("here");
+                    // alert("here");
                 }
             },
             error: function (error) {
@@ -325,15 +323,21 @@ $(document).ready(function(){
             $("#nav-content-tab").click();
     });
 
+    let editCourseContentFlag = false;
+
     $('#exampleModal').on('show.bs.modal', function (event) {
-        // var button = $(event.relatedTarget) // Button that triggered the modal
-        // var recipient = button.data('whatever') // Extract info from data-* attributes
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        let material_id = button.data('id'); // Extract info from data-* attributes
+        let type = button.data('type');
+        let topic_code = button.data('topic');
+        let title = button.data('title');
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         // var modal = $(this)
         // modal.find('.modal-title').text('New message to ' + recipient)
         // modal.find('.modal-body input').val(recipient)
         // alert("here");
+
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id='+subSemId,
@@ -350,7 +354,7 @@ $(document).ready(function(){
                     $.each(result.data , function(key , value){
                         // alert(value);
                         $.each(value.topics , function(key , value){
-                            $('#courseTags').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='"+value.code+"' name='courseTagAdd' id='courseTagAdd"+i+"'/><label for='courseTagAdd"+i+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.topic_name+"</label></li>");
+                            $('#courseTags').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='"+value.code+"' name='courseTagAdd' id='courseTagAdd"+value.code+"'/><label for='courseTagAdd"+value.code+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.topic_name+"</label></li>");
                             i++;
                         });
                     });
@@ -360,13 +364,51 @@ $(document).ready(function(){
                     $('#courseTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                     alert("here");
                 }
+
+                if(material_id){
+
+                    // alert(material_id+" "+type+" "+topic_code+" "+title);
+        
+                    switch(type){
+                        case "DOCS":
+                            $("#courseTypeAdd").val("1");
+                            break;
+                        case "PDF":
+                            $("#courseTypeAdd").val("7");
+                            break;
+                        case "VIDEO":
+                            $("#courseTypeAdd").val("4");
+                            break;
+                        case "PPT":
+                            $("#courseTypeAdd").val("3");
+                            break;
+                        case "URL":
+                            $("#courseTypeAdd").val("URL");
+                            break;
+                        default:
+                            $("#courseTypeAdd").val("1");
+                    }
+                    
+                    $("#courseTitleAdd").val(title);
+                    // $("input[name='courseTagAdd']").val(topic_code);
+                    $("input[name='courseTagAdd'][value='" + topic_code + "']").prop("checked", true);
+                    $("input[name='courseTagAdd']:checked").siblings(".show1").click();
+                    // alert($("input[name='courseTagAdd']:checked").val());
+                    // alert(topic_code);
+
+                    $('#courseAddSave').data('id', material_id);
+                    // alert($("#courseAddSave").data('id'));
+
+                    editCourseContentFlag = true;
+        
+                }
             },
             error: function (error) {
                 alert(result.message);
             }
         });
 
-      })
+    });
 
     $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
@@ -378,86 +420,37 @@ $(document).ready(function(){
         $(".show1").children("i").hide();
         $(this).children("i").show();
     });
-
+    
     $('#courseDisplayTypeAdd').on('change', function() {
         let value1 = $(this).is(':checked') ? "public" : 'private';
         $(this).val(value1);
         // alert($(this).val());
     });
-    
 
-    $("#courseAddSave").click(function(){
+    $('#errorToast,#successToast').on('show.bs.toast', function () {
+        setInterval(function() {    
+            $('#errorToast').toast('hide');
+            $('#successToast').toast('hide');
+        }, 5000);
+        $("#errorToast,successToast").toast({
+            delay:53000
+        });
+    });
 
-        let courseUnits = $('#courseUnits').val();
-        let courseTypeAdd = $("#courseTypeAdd").val();
-        let courseFileAdd = $("#courseFileAdd")[0].files[0];
-        let courseTitleAdd = $("#courseTitleAdd").val();
-        let courseTagAdd = $("input[name='courseTagAdd']:checked").val();
-        let courseDisplayTypeAdd = $("#courseDisplayTypeAdd").val();
-        // if($("#courseDisplayTypeAdd").is
-        // if($("#courseDisplayTypeAdd:checked")){
-            // alert(courseDisplayTypeAdd);
-        // }
+    $(document).on('click', '.bookmark', function(){
+        // alert("ok");
+        let material_id = $(this).data('id');
+        let type = $(this).data('type');
 
-        // $('#successToast').toast('show');
-        // $('#errorToast').toast('show');
-        // alert(courseUnits);
-
-        
-        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            background: "#fff",
-            opacity: 0.7
-        }).appendTo($("#modalContent").css("position", "relative"));
-        $("#fileDiv").css('opacity','0.5');
-        // $('#exampleModal').attr('data-backdrop', 'static');
-        // $('#exampleModal').data('backdrop', 'static');
-        // $('#exampleModal').modal({backdrop: 'static', keyboard: false});
-        // $('#exampleModal').modal('toggle');
-        // $("#exampleModal").modal({data-backdrop: 'static'});
-
-        setInterval(function(){
-            $( "#loadingDiv" ).remove();
-            $('#modalContent').css('position', 'absolute');
-        },50000);
-
-        if(courseUnits && courseTypeAdd && courseFileAdd && courseTitleAdd && courseTagAdd && courseDisplayTypeAdd){
+        if(material_id && type){
 
             var form = new FormData();
-            form.append("unit_id", courseUnits);
-            // alert(JSON.stringify(form));
-            form.append("topic_code", courseTagAdd);
-            // alert(JSON.stringify(form));
-            form.append("material_type", courseTypeAdd);
-            // alert(JSON.stringify(form));
-            form.append("name", courseTitleAdd);
-            // alert(JSON.stringify(form));
-            form.append("attachments", courseFileAdd);
-            // alert(JSON.stringify(form)); 
-            form.append("display_type", courseDisplayTypeAdd);
-            form.append("external_url", "");
-            // alert(JSON.stringify(form));
-            // $('#modalContent').css('position', 'relative');
-            // let div = "<div style='postion:absolute;width:100%;height:100%;left:50%;top:50%;' id='loadingDiv'><img src='../images/loading.gif' alt='No Image'></div>";
-            // $('#modalContent').append(div);
-            $("<div id='loadingDiv'>Loading...</div>").css({
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                top: 0,
-                left: 0,
-                background: "#ccc",
-                opacity: 1
-            }).appendTo($("#modalContent").css("position", "relative"));
+            form.append("id", material_id);
+            form.append("type", type);
 
-            // for(var key of form.entries()){
-            //     alert(key[1]);
-            // }
-            
+
             $.ajax({
-                url: 'https://stagingfacultypython.edwisely.com/addFacultyContent',
+                url: 'https://stagingfacultypython.edwisely.com/addBookmark',
                 type: 'POST',
                 dataType: 'json',
                 data: form,
@@ -468,14 +461,17 @@ $(document).ready(function(){
                 },
                 success: function (result) {
                     // alert(result.message);
-                    if(result.status == 200 && result.material_id){
-                        $( "#loadingDiv" ).remove();
-                        $('#modalContent').css('position', 'absolute');
+                    if(result.status == 200){
+                        $('#successToastBody').text('Bookmarked SuccessFully');
                         $('#successToast').toast('show');
-                        $('#exampleModal').modal('toggle');
                         $("#nav-content-tab").click();
                     }
+                    else if(result.status == 500){
+                        $('#errorToastBody').text('Already bookmarked');
+                        $('#errorToast').toast('show');
+                    }
                     else{
+                        $('#errorToastBody').text('Request Unsuccessful');
                         $('#errorToast').toast('show');
                         alert(result.message);
                     }
@@ -484,19 +480,235 @@ $(document).ready(function(){
                     alert(result.message);
                 }
             });
+        }
+
+    });
+
+    $(document).on('click', '.unbookmark', function(){
+        // alert("ok");
+        let material_id = $(this).data('id');
+        let type = $(this).data('type');
+
+        if(material_id && type){
+
+            var form = new FormData();
+            form.append("id", material_id);
+            form.append("type", type);
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/deleteBookmark',
+                type: 'POST',
+                dataType: 'json',
+                data: form,
+                contentType: false,
+                processData: false, 
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                },
+                success: function (result) {
+                    // alert(result.message);
+                    if(result.status == 200){
+                        $('#successToastBody').text('Bookmarked Removed SuccessFully');
+                        $('#successToast').toast('show');
+                        $("#nav-content-tab").click();
+                    }
+                    else if(result.status == 500){
+                        $('#errorToastBody').text('Already Not Bookmarked');
+                        $('#errorToast').toast('show');
+                    }
+                    else{
+                        $('#errorToastBody').text('Request Unsuccessful');
+                        $('#errorToast').toast('show');
+                        alert(result.message);
+                    }
+                },
+                error: function (error) {
+                    alert(result.message);
+                }
+            });
+        }
+
+    });
+    
+    $(document).on('click', '.deleteContent', function(){
+        // alert("ok");
+        let material_id = $(this).data('id');
+        let topic_id = $(this).data('topic');
+
+        if(material_id && topic_id){
+
+            var form = new FormData();
+            form.append("material_id", material_id);
+            form.append("topic_id", topic_id);
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/units/deleteMaterial',
+                type: 'POST',
+                dataType: 'json',
+                data: form,
+                contentType: false,
+                processData: false, 
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                },
+                success: function (result) {
+                    // alert(result.message);
+                    if(result.status == 200){
+                        $('#successToastBody').text('Material Content Deleted SuccessFully');
+                        $('#successToast').toast('show');
+                        $("#nav-content-tab").click();
+                    }
+                    else{
+                        $('#errorToastBody').text('Request Unsuccessful');
+                        $('#errorToast').toast('show');
+                        alert(result.message);
+                    }
+                },
+                error: function (error) {
+                    alert(result.message);
+                }
+            });
+        }
+
+    });
+
+    $("#courseAddSave").click(function(){
+
+        let courseUnits = $('#courseUnits').val();
+        let courseTypeAdd = $("#courseTypeAdd").val();
+        let courseFileAdd = $("#courseFileAdd")[0].files[0];
+        let courseTitleAdd = $("#courseTitleAdd").val();
+        let courseTagAdd = $("input[name='courseTagAdd']:checked").val();
+        let courseDisplayTypeAdd = $("#courseDisplayTypeAdd").val();
+        // $('#successToast').toast('show');
+        // $('#errorToast').toast('show');
+        // alert(courseUnits);
+
+        
+        // $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+        //     position: "absolute",
+        //     width: "100%",
+        //     height: "100%",
+        //     background: "#fff",
+        //     opacity: 0.7
+        // }).appendTo($("#modalContent").css("position", "relative"));
+        // $("#fileDiv").css('opacity','0.5');
+        // setInterval(function(){
+        //     $( "#loadingDiv" ).remove();
+        //     $('#modalContent').css('position', 'absolute');
+        // },50000);
+
+        if(courseUnits && courseTypeAdd && courseFileAdd && courseTitleAdd && courseTagAdd && courseDisplayTypeAdd){
+
+            var form = new FormData();
+            form.append("unit_id", courseUnits);
+            form.append("topic_code", courseTagAdd);
+            form.append("material_type", courseTypeAdd);
+            form.append("name", courseTitleAdd);
+            form.append("attachments", courseFileAdd);
+            form.append("display_type", courseDisplayTypeAdd);
+            form.append("external_url", "");
+
+            // for(var key of form.entries()){
+            //     alert(key[1]);
+            // }
+            
+            $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                background: "#fff",
+                opacity: 0.7
+            }).appendTo($("#modalContent").css("position", "relative"));
+            $("#fileDiv").css('opacity','0.5');
+
+            if(editCourseContentFlag){
+
+                let material_id = $("#courseAddSave").data('id');
+
+                if(material_id){
+
+                    form.append("material_id", material_id);
+                    // alert(material_id);
+
+                    $.ajax({
+                        url: 'https://stagingfacultypython.edwisely.com/updateFacultyAcademicMaterials',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: form,
+                        contentType: false,
+                        processData: false, 
+                        headers: {
+                            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                        },
+                        success: function (result) {
+                            // alert(result.message);
+                            editCourseContentFlag = false;
+                            if(result.status == 200){
+                                $("#courseAddSave").removeData("id");
+                                $('#successToastBody').text('Content has been updated successfully');
+                                $('#successToast').toast('show');
+                                $('#exampleModal').modal('toggle');
+                                $("#nav-content-tab").click();
+                            }
+                            else{
+                                $('#errorToastBody').text('Request Unsuccesful');
+                                $('#errorToast').toast('show');
+                                alert(result.message);
+                            }
+
+                            $( "#loadingDiv" ).remove();
+                            $('#modalContent').css('position', 'absolute');
+                        },
+                        error: function (error) {
+                            alert(result.message);
+                        }
+                    });
+                }
+                else{
+                    alert("Server error Occured.Refresh Page.")
+                }
+
+            }
+            else{
+            
+                $.ajax({
+                    url: 'https://stagingfacultypython.edwisely.com/addFacultyContent',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form,
+                    contentType: false,
+                    processData: false, 
+                    headers: {
+                        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    },
+                    success: function (result) {
+                        // alert(result.message);
+                        if(result.status == 200 && result.material_id){
+                            $('#successToastBody').text('Content has been saved successfully');
+                            $('#successToast').toast('show');
+                            $('#exampleModal').modal('toggle');
+                            $("#nav-content-tab").click();
+                        }
+                        else{
+                            $('#errorToastBody').text('Request Unsuccesful');
+                            $('#errorToast').toast('show');
+                            alert(result.message);
+                        }
+
+                        $( "#loadingDiv" ).remove();
+                        $('#modalContent').css('position', 'absolute');
+                    },
+                    error: function (error) {
+                        alert(result.message);
+                    }
+                });
+            }
 
         }
         else
             $('#errorToast').toast('show');
     });
-
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
-        setInterval(function() {    
-            $('#errorToast').toast('hide');
-            $('#successToast').toast('hide');
-        }, 5000);
-    })
-
 
     function processFiles(result = []){
 
@@ -506,10 +718,13 @@ $(document).ready(function(){
             files.push({
                 "material_id":value.material_id,
                 "title":value.title,
+                "topic_code":value.topic_code,
                 "url":value.file_url,
                 "type":value.type,
                 "level":value.level,
-                "bookmarked":value.bookmarked
+                "learning_content":"1",
+                "bookmarked":value.bookmarked,
+                "topic_id":value.topic_id
             });
             // div = div + "</div>";
         });
@@ -519,10 +734,13 @@ $(document).ready(function(){
             files.push({
                 "material_id":value.material_id,
                 "title":value.title,
+                "topic_code":value.topic_code,
                 "url":value.file_url,
                 "type":value.type,
                 "level":value.level,
-                "bookmarked":value.bookmarked
+                "learning_content":"0",
+                "bookmarked":value.bookmarked,
+                "topic_id":value.topic_id
             });
             // alert(value);
         });
@@ -572,9 +790,16 @@ $(document).ready(function(){
                     div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
                     div = div + "</button>";
                     div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-                    div = div + "<a class='dropdown-item' href='#'>Edit</a>";
-                    div = div + "<a class='dropdown-item' href='#'>Bookmarked</a>";
-                    div = div + "<a class='dropdown-item' href='#'>Delete</a>";
+                    if(value.learning_content == "1")
+                        div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#exampleModal' data-id='"+value.material_id+"' data-type='"+value.type+"' data-topic='"+value.topic_code+"' data-title='"+value.title+"'>Edit</a>";
+
+                    let arrayType = value.learning_content == '1' ? 'academic_materials':'learning_content';
+                    if(value.bookmarked == "0")
+                        div = div + "<a class='dropdown-item bookmark' href='#' data-id='"+value.material_id+"' data-type='" + arrayType + "'>Bookmark</a>";
+                    else
+                        div = div + "<a class='dropdown-item unbookmark' href='#' data-id='"+value.material_id+"' data-type='" + arrayType + "'>UnBookmark</a>";
+                    if(value.learning_content == "1")
+                        div = div + "<a class='dropdown-item deleteContent' href='#' data-topic='"+value.topic_id+"' data-id='"+value.material_id+"'>Delete</a>";
                     div = div + "</div></div></div></div>";
                 }
                 // alert(value);

@@ -172,7 +172,7 @@
                                   </div>
                                   <div class="col-sm-4 d-flex flex-row-reverse">
 
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-plus"></i> Add Your Content</button>
 
                                     <!-- <button class="btn btn-primary">Add Your Content</button> -->
                                   </div>
@@ -219,9 +219,9 @@
                                   </table>
                                 </div>
                                 <div style="width: 100%;" id="courseFiles">
-                                  <div class="row">
+                                  <!-- <div class="row">
                                     <div class="col-sm-2 d-flex justify-content-end">
-                                      <!-- <img class="img-responsive" src="" alt="No Image"> -->
+                                      <img class="img-responsive" src="" alt="No Image">
                                       <i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>
                                     </div>
                                     <div class="col-sm-9 d-flex justify-content-start align-middle" style="cursor: pointer;">
@@ -239,7 +239,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
 
@@ -290,7 +290,7 @@
                       </div>
                       <div class="form-group">
                         <ul class="courseTagsUl" id="courseTags">
-                          <li class="courseTagsLi">
+                          <!-- <li class="courseTagsLi">
                             <input type='radio' class="courseTagsInput" value='1' name='radio' id='radio1' />
                             <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
                           </li>
@@ -305,7 +305,7 @@
                           <li class="courseTagsLi">
                             <input type='radio' class="courseTagsInput"  value='3' name='radio' id='radio3' />
                             <label for='radio3' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hjcsxcd</label>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
                       <div class="form-group">
@@ -345,25 +345,28 @@
             <!-- end modal -->
 
             <!-- toasts -->
+            <div>
 
-            <div class="toast" data-autohide="false" id="errorToast"  style="position: absolute; top: 5%; right: 5%; z-index: 9999999999;">
-              <div class="toast-header">
-                <strong class="mr-auto text-danger">Error !!!</strong>
-                <small class="text-muted">Just Now</small>
+              <div class="toast fade" data-autohide="false" id="errorToast" style="position: absolute; top: 5%; right: 5%; z-index: 9999999999;">
+                <div class="toast-header">
+                  <strong class="mr-auto text-danger">Error !!!</strong>
+                  <small class="text-muted">Just Now</small>
+                </div>
+                <div class="toast-body">
+                  <p id="errorToastBody">All fields are mandatory to save.</p>
+                </div>
               </div>
-              <div class="toast-body">
-                All fields are mandatory to save.
-              </div>
-            </div>
 
-            <div class="toast" data-autohide="false" id="successToast"  style="position: absolute; top: 5%; right: 5%; z-index: 9999999999;">
-              <div class="toast-header">
-                <strong class="mr-auto text-success">Success !!!</strong>
-                <small class="text-muted">Just Now</small>
+              <div class="toast fade" data-autohide="false" id="successToast" style="position: absolute; top: 5%; right: 5%; z-index: 9999999999;">
+                <div class="toast-header">
+                  <strong class="mr-auto text-success">Success !!!</strong>
+                  <small class="text-muted">Just Now</small>
+                </div>
+                <div class="toast-body">
+                  <p id="successToastBody">Content has been saved successfully.</p>
+                </div>
               </div>
-              <div class="toast-body">
-                Content has been saved successfully.
-              </div>
+
             </div>
 
             <!-- end toasts -->
