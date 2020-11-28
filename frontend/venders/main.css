@@ -173,5 +173,13 @@ body{
   line-height: 1.5;
 }
 
+/* addques page */
+
+.addques {
+  height: 60vh;
+  align-items: center;
+}
+
+/* end addques page */
 
 /* end my assessments */
