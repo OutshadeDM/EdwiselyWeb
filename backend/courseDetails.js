@@ -15,7 +15,7 @@ $(document).ready(function(){
                 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
             },
             success: function (result) {
-                // alert(result.status);
+                alert(result.status);
                 $('#courseClass').empty();
                 if(result.status == 200){
 
@@ -28,6 +28,7 @@ $(document).ready(function(){
                         $("#courseDesc").text(result.data.description);
 
                     if(result.data.objectives){
+                        alert(result.data.objectives);
                         $("#courseObjc").empty();
                         $("#courseObjc").append("<ul>");
                         $.each(result.data.objectives , function(key , value){
@@ -35,6 +36,8 @@ $(document).ready(function(){
                         });
                         $("#courseObjc").append("</ul>");
                     }
+                    else
+                        alert("here");
 
                     if(result.data.outcomes){
                         $("#courseOutc").empty();
