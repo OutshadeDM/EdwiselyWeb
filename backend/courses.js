@@ -10,30 +10,30 @@ $(document).ready(function () {
         success: function (result) {
             // alert(result.status);
             $('#courseList').empty();
-            if(result.status == 200){
-                $.each(result.data , function(key , value){
+            if (result.status == 200) {
+                $.each(result.data, function (key, value) {
                     /*  $.each(value.stars , function(k , v ){
                         alert(v)
-                    });    */     
+                    });    */
                     //  alert(value.name);
-                    if(value.course_image)
-                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3'><img class='card-img-top p-2' width='200' src='" + value.course_image + "' alt='No Image'><div class='card-body'><h5 class='card-title font-weight-bold'>" + value.name + "</h4></div></div></div>");
+                    if (value.course_image)
+                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3 shadow-sm'><img class='card-img-top p-2' width='200' src='" + value.course_image + "' alt='No Image'><div class='card-body'><h5 class='card-title font-weight-bold'>" + value.name + "</h4></div></div></div>");
                     else
-                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3'><img class='card-img-top p-2' width='200' src='../images/onlineCourses.png' alt='No Image'><div class='card-body'><h5 class='card-title font-weight-bold'>" + value.name + "</h4></div></div></div>");
+                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3 shadow-sm'><img class='card-img-top p-2' width='200' src='../images/onlineCourses.png' alt='No Image'><div class='card-body'><h5 class='card-title font-weight-bold'>" + value.name + "</h4></div></div></div>");
                 });
             }
             else
-            $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+                $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
             alert(result.message);
         }
     });
 
-    $(document).on('click', '.course', function(){
+    $(document).on('click', '.course', function () {
         let id = $(this).data('subsemid');
-        if(id)
-            window.location.href = "courseDetails.html?id="+id;
+        if (id)
+            window.location.href = "courseDetails.html?id=" + id;
         // alert(id);
     });
 });
