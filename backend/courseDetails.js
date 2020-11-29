@@ -2,7 +2,7 @@ $(document).ready(function(){
     // alert("ok");
     let searchParams = new URLSearchParams(window.location.search);
     let subSemId;
-    let units = [];
+    // let units = [];
     if(searchParams.has('id')){
         subSemId = searchParams.get('id');
         // alert(subSemId);
@@ -812,6 +812,105 @@ $(document).ready(function(){
         else
             $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
     }
+
+
+    $("#nav-question-tab").click(function(){
+        // alert("The paragraph was clicked.");
+        
+        let courseUnits = $('#courseUnits').val();
+
+        $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id='+subSemId,
+            type: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+            },
+            success: function (result) {
+                // alert(result.message);
+                if(result.status == 200 && result.data != null){
+
+                    let units = [];
+                    $('#courseQuestionUnits').empty();
+                    $.each(result.data , function(key , value){
+                        // alert(value);
+                        units.push({"id":value.id,"name":value.name});
+                        // $('#courseQuestionUnits').append("<button type='button' data-id='"+value.id+"' class='btn btn-light btnQuestion'>"+value.name+"</button>");
+                    });
+                    // $('#courseUnits').val(units[0]['id']);
+                    courseUnits = units[0]['id'];
+                    // alert(units[0]['id']);
+
+                    $.ajax({
+                        url: 'https://stagingfacultypython.edwisely.com/getCourseDetails?subject_semester_id='+subSemId,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                        },
+                        success: function (result) {
+                            // alert(result.status);
+                            // $('#courseClass').empty();
+                            if(result.status == 200){ 
+                                $.each(units , function(key , value){
+                                    // alert(value);
+                                    // units.push({"id":value.id,"name":value.name});
+                                    $('#courseQuestionUnits').append("<button type='button' data-uid='"+value.id+"' data-sid='"+result.data.subject_id+"' id='courseUnitBtn' class='btn btn-light btnQuestion'>"+value.name+"</button>");
+                                });
+                                
+                                $('#courseQuestionUnits :first-child').click();
+            
+                            }
+                            else{
+                                alert(result.message+" Please Login again");
+                                window.location.href = "Loginpage.html";
+                            }
+                        },
+                        error: function (error) {
+                            alert(result.message);
+                        }
+                    });
+
+
+                }
+            },
+            error: function (error) {
+                alert(result.message);
+            }
+        });
+    });
+
+    $(document).on('click', '#courseUnitBtn', function(){
+        // alert("ok");
+        let unit_id = $(this).data('uid');
+        let subject_id = $(this).data('sid');
+        $(this).removeClass('btnQuestion').addClass('btnQuestionClick');
+
+        if(unit_id && subject_id){
+
+            var form = new FormData();
+            form.append("unit_id", unit_id);
+            form.append("subject_id", subject_id);
+
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/questions/getUnitObjectiveQuestions?subject_id='+subject_id+'&unit_id='+unit_id,
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                },
+                success: function (result) {
+                    alert(result.message);
+                    
+                },
+                error: function (error) {
+                    alert(result.message);
+                }
+            });
+        }
+
+    });
 
       
 

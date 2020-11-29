@@ -54,3 +54,17 @@
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
+
+.btn-group-vertical{
+    width: 100%;
+}
+
+.btnQuestion{
+    opacity: 0.7;
+    font-size: 17px;
+}
+
+.btnQuestionClick{
+    opacity: 1;
+    font-size: 20px;
+}
