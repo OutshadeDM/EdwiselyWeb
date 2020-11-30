@@ -172,7 +172,7 @@
                                   </div>
                                   <div class="col-sm-4 d-flex flex-row-reverse">
 
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-plus"></i> Add Your Content</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#courseContentModal" data-whatever="@mdo"><i class="fas fa-plus"></i> Add Your Content</button>
 
                                     <!-- <button class="btn btn-primary">Add Your Content</button> -->
                                   </div>
@@ -247,7 +247,8 @@
                           </div>
                           <div class="tab-pane fade" id="nav-question" role="tabpanel" aria-labelledby="nav-question-tab">
                             <div class="container m-2">
-
+                              <input type="hidden" id="questionSelectedUnitId" value="0">
+                              <input type="hidden" id="questionSelectedSubjectId" value="0">
                               <div class="row">
                                 <div class="col-sm-3">
                                   <div class="btn-group-vertical" id="courseQuestionUnits">
@@ -278,20 +279,20 @@
                                               <td class="px-3">Questions</td>
                                             </tr>
                                             <tr>
-                                              <td class="px-3">
+                                              <td class="px-2">
                                                 <div class="form-group">
-                                                  <select class="form-control" id="courseType" style="max-width: 300px;">
+                                                  <select class="form-control" id="questionBloomsLevel" style="max-width: 300px;">
                                                     <option value="0">ALL</option>
-                                                    <option value="DOCS">Document</option>
-                                                    <option value="VIDEO">Videos</option>
-                                                    <option value="PPT">PPT</option>
-                                                    <option value="URL">Other Links</option>
+                                                    <option value="1">Remember</option>
+                                                    <option value="2">Understand</option>
+                                                    <option value="3">Apply</option>
+                                                    <option value="4">Analyze</option>
                                                   </select>
                                                 </div>
                                               </td>
-                                              <td class="px-3">
+                                              <td class="px-2">
                                                 <div class="form-group" style="max-width: 300px;">
-                                                  <select class="form-control" id="courseLevel">
+                                                  <select class="form-control" id="questionTopics">
                                                     <option value="0">ALL</option>
                                                     <option value="easy">Easy</option>
                                                     <option value="medium">Medium</option>
@@ -299,10 +300,10 @@
                                                   </select>
                                                 </div>
                                               </td>
-                                              <td class="px-3">
+                                              <td class="px-2">
                                                 <div class="form-group" style="max-width: 300px;">
-                                                  <select class="form-control" id="courseCatagory">
-                                                    <option value="all">ALL</option>
+                                                  <select class="form-control" id="questionCatagory">
+                                                    <option value="0">ALL</option>
                                                     <option value="bookmarked">Bookmarked</option>
                                                     <option value="yourContent">Your Content</option>
                                                   </select>
@@ -351,29 +352,8 @@
                                     </div>
                                   </section>
 
-
-
                                 </div>
-
-
-
-
-
-
-
-
-
                               </div>
-
-
-
-
-
-
-
-
-
-
 
                             </div>
                           </div>
@@ -387,8 +367,9 @@
                 
             </div>
 
-            <!-- modal -->
-            <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- modal -->
+            <!-- start content modal -->
+            <div class="modal fade" id="courseContentModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content" id="modalContent">
                   <!-- <div class="modal-header">
@@ -473,13 +454,52 @@
                 </div>
               </div>
             </div>
+            <!-- end content modal -->
+
+            <!-- statt question modal -->
+            <div class="modal fade" id="courseQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content" id="modalContent">
+                  <div class="modal-body">
+                    <table class="table table-bordered text-center" style="width: 100%;">
+                      <tr>
+                        <th style="height: 100%;">Question</th>
+                        <td><p id="questionModalQuestion">Ouestion</p></td>
+                        <td><a href="#" target="_blank" id="questionModalQuestionImgA"><img src="../images/onlineCourses.png" width="100" id="questionModalQuestionImg" alt="No Image"></a></td>
+                      </tr>
+                      <tr>
+                        <th>Option A</th>
+                        <td><p id="questionModalOptionA">Option A</p></td>
+                        <td><a href="#" id="questionModalOptionAImgA"><img src="../images/onlineCourses.png" width="100" id="questionModalOptionAImg" alt="No Image"></a></td>
+                      </tr>
+                      <tr>
+                        <th>Option B</th>
+                        <td><p id="questionModalOptionB">Option B</p></td>
+                        <td><a href="#" id="questionModalOptionBImgA"><img src="../images/onlineCourses.png" width="100" id="questionModalOptionBImg" alt="No Image"></a></td>
+                      </tr>
+                      <tr>
+                        <th>Option C</th>
+                        <td><p id="questionModalOptionC">Option C</p></td>
+                        <td><a href="#" id="questionModalOptionCImgA"><img src="../images/onlineCourses.png" width="100" id="questionModalOptionCImg" alt="No Image"></a></td>
+                      </tr>
+                      <tr>
+                        <th>Option D</th>
+                        <td><p id="questionModalOptionD">Option D</p></td>
+                        <td><a href="#" id="questionModalOptionDImgA"><img src="../images/onlineCourses.png" width="100" id="questionModalOptionDImg" alt="No Image"></a></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end question modal -->
             
-            <!-- end modal -->
+          <!-- end modal -->
 
-            <!-- toasts -->
+          <!-- toasts -->
             <div>
-
-              <div class="toast fade" data-autohide="false" id="errorToast" style="position: absolute; top: 5%; right: 5%; z-index: 9999999999;">
+              <!-- start error toast -->
+              <div class="toast fade" data-autohide="false" id="errorToast">
                 <div class="toast-header">
                   <strong class="mr-auto text-danger">Error !!!</strong>
                   <small class="text-muted">Just Now</small>
@@ -488,8 +508,10 @@
                   <p id="errorToastBody">All fields are mandatory to save.</p>
                 </div>
               </div>
+              <!-- end error toast -->
 
-              <div class="toast fade" data-autohide="false" id="successToast" style="position: absolute; top: 5%; right: 5%; z-index: 9999999999;">
+              <!-- start success toast -->
+              <div class="toast fade" data-autohide="false" id="successToast">
                 <div class="toast-header">
                   <strong class="mr-auto text-success">Success !!!</strong>
                   <small class="text-muted">Just Now</small>
@@ -498,6 +520,7 @@
                   <p id="successToastBody">Content has been saved successfully.</p>
                 </div>
               </div>
+              <!-- end success toast -->
 
             </div>
 

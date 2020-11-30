@@ -123,6 +123,13 @@ body{
   background: #F9F9F9;
 }
 
+.toast{
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  z-index: 999999;
+}
+
 
 /* end default */
 
@@ -161,11 +168,12 @@ body{
 }
 
 .questionTab{
+  background: white;
   border-radius: 25px;
-  height: 100%;
   width: 100%;
   overflow-y: scroll;
-  overflow-x: auto;
+  overflow-x: hidden;
+  max-height: 300px;
   margin-right: -15px;
 }
 
