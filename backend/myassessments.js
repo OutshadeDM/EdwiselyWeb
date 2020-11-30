@@ -1,5 +1,33 @@
 $(document).ready(function () {
   //   alert("ok");
+
+  $.ajax({
+    url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
+    type: 'GET',
+    contentType: 'application/json',
+    headers: {
+      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+    },
+    success: function (result) {
+      // alert(result.status);
+      $('#courseTags').empty();
+      if (result.status == 200 && result.data) {
+        $.each(result.data, function (key, value) {
+          // alert(value);
+
+          $('#objective-assessments').append("<option value=" + value.id + ">" + value.name + "</option>");
+
+        });
+
+      }
+
+    },
+    error: function (error) {
+      alert(result.message);
+    }
+  });
+
+
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTests',
     type: 'GET',
@@ -13,7 +41,6 @@ $(document).ready(function () {
       if (result.status == 200) {
         $.each(result.data, function (key, value) {
 
-          $('#objective-assessments').append("<option value=" + value.subject_id + ">" + value.subject_name + "</option>");
 
 
           if (value.questions_count)
@@ -65,6 +92,35 @@ $(document).ready(function () {
     // alert("The paragraph was clicked.");
 
     $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+      },
+      success: function (result) {
+        // alert(result.status);
+        $('#courseTags').empty();
+        if (result.status == 200 && result.data) {
+          $.each(result.data, function (key, value) {
+            // alert(value);
+
+            $('#subjective-assessments').append("<option value=" + value.id + ">" + value.name + "</option>");
+
+          });
+
+        }
+
+      },
+      error: function (error) {
+        alert(result.message);
+      }
+    });
+
+
+
+
+    $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectiveTests',
       type: 'GET',
       contentType: 'application/json',
@@ -76,9 +132,6 @@ $(document).ready(function () {
         $('#subjectiveassessmentList').empty();
         if (result.status == 200) {
           $.each(result.data, function (key, value) {
-
-            $('#subjective-assessments').append("<option value=" + value.subject_id + ">" + value.subject_name + "</option>");
-
 
             if (value.questions_count)
               $('#subjectiveassessmentList').append(
