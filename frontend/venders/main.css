@@ -216,3 +216,12 @@ body{
 /* end addques page */
 
 /* end my assessments */
+
+
+/* create assessment */
+.createassessment {
+  align-items: center;
+  padding: 0 180px;
+}
+
+/* end create assessment */
