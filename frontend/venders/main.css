@@ -39,6 +39,16 @@ body{
   background: #fff;
 }
 
+#password {
+  position: relative;
+}
+.input-group-addon {
+  position: absolute;
+  top: 11px;
+  right: 15px;
+}
+
+
 /* SIDEBAR AND NAVBAR STYLES */
 
 #wrapper {
