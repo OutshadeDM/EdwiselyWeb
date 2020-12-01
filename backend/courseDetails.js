@@ -349,7 +349,7 @@ $(document).ready(function(){
             success: function (result) {
                 // alert(result.status);
                 $('#courseTags').empty();
-                if(result.status == 200 && result.data){
+                if(result.status == 200 && Array.isArray(result.data) && result.data.length){
                     let i = 1;
                     $.each(result.data , function(key , value){
                         // alert(value);
@@ -467,8 +467,10 @@ $(document).ready(function(){
                         $('#successToast').toast('show');
                         if(content == "nav")
                             $("#nav-content-tab").click();
-                        else if(content == "question")
+                        else if(content == "objQuestion")
                             $("#nav-question-tab").click();
+                        else if(content == "subQuestion")
+                            $("#nav-question-sub-tab").click();
                     }
                     else if(result.status == 500){
                         $('#errorToastBody').text('Already bookmarked');
@@ -517,8 +519,10 @@ $(document).ready(function(){
                         $('#successToast').toast('show');
                         if(content == "nav")
                             $("#nav-content-tab").click();
-                        else if(content == "question")
+                        else if(content == "objQuestion")
                             $("#nav-question-tab").click();
+                        else if(content == "subQuestion")
+                            $("#nav-question-sub-tab").click();
                     }
                     else if(result.status == 500){
                         $('#errorToastBody').text('Already Not Bookmarked');
@@ -665,8 +669,7 @@ $(document).ready(function(){
                                 alert(result.message);
                             }
 
-                            $( "#loadingDiv" ).remove();
-                            $('#modalContent').css('position', 'absolute');
+                            
                         },
                         error: function (error) {
                             alert(result.message);
@@ -676,7 +679,9 @@ $(document).ready(function(){
                 else{
                     alert("Server error Occured.Refresh Page.")
                 }
-
+                
+                // $( "#loadingDiv" ).remove();
+                // $('#modalContent').css('position', 'absolute');
             }
             else{
             
@@ -704,8 +709,6 @@ $(document).ready(function(){
                             alert(result.message);
                         }
 
-                        $( "#loadingDiv" ).remove();
-                        $('#modalContent').css('position', 'absolute');
                     },
                     error: function (error) {
                         alert(result.message);
@@ -713,6 +716,8 @@ $(document).ready(function(){
                 });
             }
 
+            $( "#loadingDiv" ).remove();
+            $('#modalContent').css('position', 'absolute');
         }
         else
             $('#errorToast').toast('show');
@@ -836,7 +841,7 @@ $(document).ready(function(){
             },
             success: function (result) {
                 // alert(result.message);
-                if(result.status == 200 && result.data != null){
+                if(result.status == 200 && Array.isArray(result.data) && result.data.length){
 
                     let units = [];
                     $('#courseQuestionUnits').empty();
@@ -869,8 +874,9 @@ $(document).ready(function(){
                                     // units.push({"id":value.id,"name":value.name});
                                     $('#courseQuestionUnits').append("<button type='button' data-uid='"+value.id+"' data-sid='"+result.data.subject_id+"' id='courseUnitBtn' class='btn btn-light btnQuestion'>"+value.name+"</button>");
                                 });
+                                $("#nav-question-obj-tab").click()
                                 
-                                $('#courseQuestionUnits :first-child').click();
+                                // $('#courseQuestionUnits :first-child').click();
                             }
                             else{
                                 alert(result.message+" Please Login again");
@@ -891,6 +897,16 @@ $(document).ready(function(){
         });
     });
 
+    $("#nav-question-obj-tab").click(function(){
+        $("#questionSwitch").val("0");
+        $('#courseQuestionUnits :first-child').click();
+    });
+
+    $("#nav-question-sub-tab").click(function(){
+        $("#questionSwitch").val("1");
+        $('#courseQuestionUnits :first-child').click();;
+    });
+
     $(document).on('click', '#courseUnitBtn', function(){
         // alert("ok");
         let unit_id = $(this).data('uid');
@@ -898,6 +914,7 @@ $(document).ready(function(){
 
         $("#questionSelectedUnitId").val(unit_id);
         $("#questionSelectedSubjectId").val(subject_id);
+        let questionSwitch = $("#questionSwitch").val();
         // alert(unit_id);
 
         // let questionBloomsLevel = $('#questionBloomsLevel').val();
@@ -907,7 +924,10 @@ $(document).ready(function(){
         $(".btnQuestionClick").removeClass('btnQuestionClick').addClass('btnQuestion');
         $(this).removeClass('btnQuestion').addClass('btnQuestionClick');
 
-        getQuestions(unit_id,subject_id);
+        if(questionSwitch == "0")
+            getObjQuestions(unit_id,subject_id);
+        else
+            getSubQuestions(unit_id,subject_id);
 
     });
 
@@ -916,25 +936,37 @@ $(document).ready(function(){
         // $("#courseUnitBtn").click();
         let unit_id = $("#questionSelectedUnitId").val();
         let subject_id = $("#questionSelectedSubjectId").val();
+        let questionSwitch = $("#questionSwitch").val();
 
-        getQuestions(unit_id,subject_id);
+        if(questionSwitch == "0")
+            getObjQuestions(unit_id,subject_id);
+        else
+            getSubQuestions(unit_id,subject_id);
     });
 
     $('#questionTopics').on('change', function() {
         let unit_id = $("#questionSelectedUnitId").val();
         let subject_id = $("#questionSelectedSubjectId").val();
+        let questionSwitch = $("#questionSwitch").val();
 
-        getQuestions(unit_id,subject_id);
+        if(questionSwitch == "0")
+            getObjQuestions(unit_id,subject_id);
+        else
+            getSubQuestions(unit_id,subject_id);
     });
 
     $('#questionCatagory').on('change', function() {
         let unit_id = $("#questionSelectedUnitId").val();
         let subject_id = $("#questionSelectedSubjectId").val();
+        let questionSwitch = $("#questionSwitch").val();
 
-        getQuestions(unit_id,subject_id);
+        if(questionSwitch == "0")
+            getObjQuestions(unit_id,subject_id);
+        else
+            getSubQuestions(unit_id,subject_id);
     });
 
-    function getQuestions(unit_id,subject_id){
+    function getObjQuestions(unit_id,subject_id){
 
         let questionBloomsLevel = $('#questionBloomsLevel').val();
         let questionTopics = $('#questionTopics').val();
@@ -951,6 +983,16 @@ $(document).ready(function(){
             form.append("unit_id", unit_id);
             form.append("subject_id", subject_id);
 
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                background: "#fff",
+                opacity: 0.7
+            }).appendTo($("#objQuestions"));
+            // $("#fileDiv").css('opacity','0.5');
+
+
             $.ajax({
                 url: 'https://stagingfacultypython.edwisely.com/questions/getUnitObjectiveQuestions?subject_id='+subject_id+'&unit_id='+unit_id,
                 type: 'GET',
@@ -960,59 +1002,28 @@ $(document).ready(function(){
                 },
                 success: function (result) {
                     // alert(result.message);
-                    let questions = [];
-                    if(result.status == 200 && result.data != null){
+                    // let questions = [];
+                    if(result.status == 200 && Array.isArray(result.data) && result.data.length){
                         // let div = "";
-                        $.each(result.data , function(key , value){
-                            // alert(value.name);
-                            if((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
-                                (questionTopics == value.type_code || questionTopics == "0") &&
-                                ((questionCatagory == "bookmarked" && value.bookmarked == "1") ||
-                                questionCatagory == "0")){
-
-                                    let question = [];
-                                    question.push({
-                                        "name":value.name,
-                                        "media":value.media,
-                                        "question_img":value.question_img
-                                    });
-                                    
-                                    let options=[];
-                                    $.each(value.questions_options , function(key , value){
-                                        options.push({
-                                            "name":value.name,
-                                            "media":value.media,
-                                            "img":value.option_img
-                                        });
-                                    });
-    
-                                    questions.push({
-                                        "id":value.id,
-                                        "blooms_level":value.blooms_level,
-                                        "bookmarked":value.bookmarked,
-                                        "type":"objective_questions",
-                                        "question":{
-                                            "name":value.name,
-                                            "media":value.media,
-                                            "question_img":value.question_img
-                                        },
-                                        "options": options
-                                    });
-                            }
-                        });
-                        // alert(div);
+                        processObjQuestions(result,questionBloomsLevel,questionTopics,questionCatagory,false);
+                        // alert(questions);
                         // alert(JSON.stringify(questions));
                         // $('#courseName').text(JSON.stringify(questions[0]));
-                        displayQuestions(questions);
+                        // displayObjQuestions(questions);
                     }
-                    else
+                    else{
                         $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $( "#loadingDiv" ).remove();
+                    }
                     
                 },
                 error: function (error) {
                     alert(result.message);
                 }
             });
+            
+            // $( "#loadingDiv" ).remove();
+            // $('#objQuestions').css('position', 'absolute');
         }
         else if(unit_id && subject_id && questionBloomsLevel && questionTopics && questionCatagory && questionCatagory == "yourContent"){
 
@@ -1021,6 +1032,17 @@ $(document).ready(function(){
             var form = new FormData();
             form.append("unit_id", unit_id);
             // form.append("subject_id", subject_id);
+
+            // alert(unit_id);
+
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+                position: "raltive",
+                width: "100%",
+                height: "100%",
+                background: "#fff",
+                opacity: 0.7
+            }).appendTo($("#objQuestions"));
+            // $("#fileDiv").css('opacity','0.5');
 
             $.ajax({
                 url: 'https://stagingfacultypython.edwisely.com/questions/getFacultyAddedObjectiveQuestions?unit_id='+unit_id,
@@ -1031,91 +1053,311 @@ $(document).ready(function(){
                 },
                 success: function (result) {
                     // alert(result.message);
-                    let questions = [];
-                    if(result.status == 200 && result.data != null){
+                    // let questions = [];
+                    if(result.status == 200 && Array.isArray(result.data) && result.data.length){
                         // let div = "";
-                        $.each(result.data , function(key , value){
-                            // alert(value.name);
-                            if((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
-                                (questionTopics == value.type_code || questionTopics == "0") &&
-                                ((questionCatagory == "bookmarked" && value.bookmarked == "1") || 
-                                questionCatagory == "yourContent")){
-
-                                    let question = [];
-                                    question.push({
-                                        "name":value.name,
-                                        "media":value.media,
-                                        "question_img":value.question_img
-                                    });
-                                    
-                                    let options=[];
-                                    $.each(value.questions_options , function(key , value){
-                                        options.push({
-                                            "name":value.name,
-                                            "media":value.media,
-                                            "img":value.option_img
-                                        });
-                                    });
-    
-                                    questions.push({
-                                        "id":value.id,
-                                        "blooms_level":value.blooms_level,
-                                        "bookmarked":value.bookmarked,
-                                        "type":"objective_questions",
-                                        "question":{
-                                            "name":value.name,
-                                            "media":value.media,
-                                            "question_img":value.question_img
-                                        },
-                                        "options": options
-                                    });
-                            }
-                        });
-                        // alert(questions[0].id);
+                        processObjQuestions(result,questionBloomsLevel,questionTopics,questionCatagory,true);
+                        // alert(questions);
                         // $("#courseName").text(result.data.subject_name);
                         // $('#courseName').text(questions[0].id);
-                        displayQuestions(questions);
+                        // displayObjQuestions(questions);
                     }
-                    else
+                    else{
                         $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $( "#loadingDiv" ).remove();
+                    }
                     
                 },
                 error: function (error) {
                     alert(result.message);
                 }
             });
+            
+            // $( "#loadingDiv" ).remove();
+            // $('#objQuestions').css('position', 'absolute');
         }
     }
 
-    function displayQuestions(questions = []){
-        
-        let div = "";
-        // alert("here");
-        // alert(questions[0].question.name);
+    function getSubQuestions(unit_id,subject_id){
 
-        $.each(questions , function(key , value){
-            div = div + "<div class='objQuestionTab'>";
-            div = div + "<div class='row py-2 px-3 p-2'>";
-            div = div + "<div class='col-sm-10' style='cursor:pointer;' data-toggle='modal' data-target='#courseQuestionModal' data-whatever='"+JSON.stringify(value)+"'>";
-            if(value.question.name.length > 100)
-                div = div + "<p class='question'>"+value.question.name.substr(0,100)+" ...</p>";
-            else
-            div = div + "<p class='question'>"+value.question.name+"</p>";
-            div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level "+value.blooms_level+"</p>";
-            div = div + "</div>";
-            div = div + "<div class='col-sm-2 text-center d-flex align-items-center'>";
-            if(value.bookmarked == 1)
-                div = div + "<a class='unbookmark' href='#' data-id='"+value.id+"' data-type='"+value.type+"' data-content='question'><i class='fas fa-bookmark'></i></a>";
-            else
-            div = div + "<a class='bookmark' href='#' data-id='"+value.id+"' data-type='"+value.type+"' data-content='question'><i class='far fa-bookmark'></i></a>";
-            div = div + "</div></div></div>";
-        });
-        // alert(div);
-        
-        $('#objQuestions').append(div);
+        let questionBloomsLevel = $('#questionBloomsLevel').val();
+        let questionTopics = $('#questionTopics').val();
+        let questionCatagory = $('#questionCatagory').val();
+        // alert("here");
+
+        if(unit_id && subject_id && questionBloomsLevel && questionTopics && questionCatagory && questionCatagory != "yourContent"){
+
+            // alert(unit_id);
+
+            $('#subQuestions').empty();
+
+            var form = new FormData();
+            form.append("unit_id", unit_id);
+            form.append("subject_id", subject_id);
+
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                background: "#fff",
+                opacity: 0.7
+            }).appendTo($("#subQuestions"));
+            // $("#fileDiv").css('opacity','0.5');
+
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/questions/getUnitSubjectiveQuestions?subject_id='+subject_id+'&unit_id='+unit_id,
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                },
+                success: function (result) {
+                    // alert(result.message);
+                    // let questions = [];
+                    if(result.status == 200 && Array.isArray(result.data) && result.data.length){
+                        // let div = "";
+                        processSubQuestions(result,questionBloomsLevel,questionTopics,questionCatagory,false);
+                        // alert("here");
+                        // alert(JSON.stringify(questions));
+                        // $('#courseName').text(JSON.stringify(questions[0]));
+                        // displaySubQuestions(questions);
+                    }
+                    else{
+                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $( "#loadingDiv" ).remove();
+                    }
+                    
+                },
+                error: function (error) {
+                    alert(result.message);
+                }
+            });
+            
+            // $( "#loadingDiv" ).remove();
+            // $('#objQuestions').css('position', 'absolute');
+        }
+        else if(unit_id && subject_id && questionBloomsLevel && questionTopics && questionCatagory && questionCatagory == "yourContent"){
+
+            $('#subQuestions').empty();
+
+            var form = new FormData();
+            form.append("unit_id", unit_id);
+            // form.append("subject_id", subject_id);
+
+            // alert(unit_id);
+
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+                position: "raltive",
+                width: "100%",
+                height: "100%",
+                background: "#fff",
+                opacity: 0.7
+            }).appendTo($("#subQuestions"));
+            // $("#fileDiv").css('opacity','0.5');
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/questions/getFacultyAddedSubjectiveQuestions?unit_id='+unit_id,
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                },
+                success: function (result) {
+                    // alert(result.message);
+                    // let questions = [];
+                    if(result.status == 200 && Array.isArray(result.data) && result.data.length){
+                        // let div = "";
+                        processSubQuestions(result,questionBloomsLevel,questionTopics,questionCatagory,true);
+                        // alert("here");
+                        // $("#courseName").text(result.data.subject_name);
+                        // $('#courseName').text(questions[0].id);
+                        // displaySubQuestions(questions);
+                    }
+                    else{
+                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $( "#loadingDiv" ).remove();
+                    }
+                    
+                },
+                error: function (error) {
+                    alert(result.message);
+                }
+            });
+            
+            // $( "#loadingDiv" ).remove();
+            // $('#objQuestions').css('position', 'absolute');
+        }
     }
 
-    $('#courseQuestionModal').on('show.bs.modal', function (event) {
+    function processObjQuestions(result = [],questionBloomsLevel,questionTopics,questionCatagory,yourContent){
+        let questions = [];
+        $.each(result.data , function(key , value){
+            // alert(value.name);
+            if(!yourContent){
+                if((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
+                    (questionTopics == value.type_code || questionTopics == "0") &&
+                    ((questionCatagory == "bookmarked" && value.bookmarked == "1") ||
+                    questionCatagory == "0")){
+                        
+                        let options=[];
+                        $.each(value.questions_options , function(key , value){
+                            options.push({
+                                "name":value.name,
+                                "media":value.media,
+                                "img":value.option_img
+                            });
+                        });
+
+                        questions.push({
+                            "id":value.id,
+                            "blooms_level":value.blooms_level,
+                            "bookmarked":value.bookmarked,
+                            "type":"objective_questions",
+                            "question":{
+                                "name":value.name,
+                                "media":value.media,
+                                "question_img":value.question_img
+                            },
+                            "options": options
+                        });
+                }
+            }
+            else{
+                if((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
+                    (questionTopics == value.type_code || questionTopics == "0") &&
+                    ((questionCatagory == "bookmarked" && value.bookmarked == "1") || 
+                    questionCatagory == "yourContent")){
+                        
+                        let options=[];
+                        $.each(value.questions_options , function(key , value){
+                            options.push({
+                                "name":value.name,
+                                "media":value.media,
+                                "img":value.option_img
+                            });
+                        });
+
+                        questions.push({
+                            "id":value.id,
+                            "blooms_level":value.blooms_level,
+                            "bookmarked":value.bookmarked,
+                            "type":"objective_questions",
+                            "question":{
+                                "name":value.name,
+                                "media":value.media,
+                                "question_img":value.question_img
+                            },
+                            "options": options
+                        });
+                }
+            }
+        });
+        // alert(questions);
+        if(Array.isArray(questions) && questions.length){
+            let div = "";
+            // alert(questions[0].question.name);
+
+            $.each(questions , function(key , value){
+                div = div + "<div class='objQuestionTab'>";
+                div = div + "<div class='row py-2 px-3 p-2'>";
+                div = div + "<div class='col-sm-10' style='cursor:pointer;' data-toggle='modal' data-target='#courseObjQuestionModal' data-whatever='"+JSON.stringify(value)+"'>";
+                if(value.question.name.length > 100)
+                    div = div + "<p class='question'>"+value.question.name.substr(0,100)+" ...</p>";
+                else
+                    div = div + "<p class='question'>"+value.question.name+"</p>";
+                div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level "+value.blooms_level+"</p>";
+                div = div + "</div>";
+                div = div + "<div class='col-sm-2 text-center d-flex align-items-center'>";
+                if(value.bookmarked == 1)
+                    div = div + "<a class='unbookmark' href='#' data-id='"+value.id+"' data-type='"+value.type+"' data-content='objQuestion'><i class='fas fa-bookmark'></i></a>";
+                else
+                div = div + "<a class='bookmark' href='#' data-id='"+value.id+"' data-type='"+value.type+"' data-content='objQuestion'><i class='far fa-bookmark'></i></a>";
+                div = div + "</div></div></div>";
+            });
+        // alert(div); 
+            $('#objQuestions').append(div);
+        }
+        else
+            $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+
+        $( "#loadingDiv" ).remove();
+    }
+
+    function processSubQuestions(result = [],questionBloomsLevel,questionTopics,questionCatagory,yourContent){
+        
+        let questions = [];
+        $.each(result.data , function(key , value){
+            // alert(value.name);
+            if(!yourContent){
+                if((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
+                    (questionTopics == value.type_code || questionTopics == "0") &&
+                    ((questionCatagory == "bookmarked" && value.bookmarked == "1") ||
+                    questionCatagory == "0")){
+
+                        questions.push({
+                            "id":value.id,
+                            "blooms_level":value.blooms_level,
+                            "bookmarked":value.bookmarked,
+                            "type":"subjective_questions",
+                            "evaluation_schema_url":value.evaluation_schema_url,
+                            "question_img":value.question_img
+                        });
+                }
+            }
+            else{
+                if((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
+                    (questionTopics == value.type_code || questionTopics == "0") &&
+                    ((questionCatagory == "bookmarked" && value.bookmarked == "1") || 
+                    questionCatagory == "yourContent")){
+                        
+                        questions.push({
+                            "id":value.id,
+                            "blooms_level":value.blooms_level,
+                            "bookmarked":value.bookmarked,
+                            "type":"subjective_questions",
+                            "evaluation_schema_url":value.evaluation_schema_url,
+                            "question_img":value.question_img
+                        });
+                }
+            }
+        });
+        // alert(questions);
+        let div = "";
+        // alert(questions[0].question.name);
+
+        if(Array.isArray(questions) && questions.length){
+
+            $.each(questions , function(key , value){
+                div = div + "<div class='objQuestionTab'>";
+                div = div + "<div class='row py-2 px-3 p-2'>";
+                div = div + "<div class='col-sm-10'>";
+                div = div + "<div class='row'>";
+                div = div + "<div class='col-sm-6'>";
+                div = div + "<img class='responsive' width='150' src='"+value.question_img+"' alt='No Image' data-toggle='modal' data-target='#courseQuestionImageModal' data-whatever='"+value.question_img+"' style='cursor:pointer;'>";
+                div = div + "</div>";
+                div = div + "<div class='col-sm-6'>";
+                div = div + "<img class='img-responsive' width='150' src='"+value.evaluation_schema_url+"' alt='No Image' data-toggle='modal' data-target='#courseQuestionImageModal' data-whatever='"+value.evaluation_schema_url+"' style='cursor:pointer;'>";
+                div = div + "</div></div>";
+                div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level "+value.blooms_level+"</p>";
+                div = div + "</div>";
+                div = div + "<div class='col-sm-2 text-center d-flex align-items-center'>";
+                if(value.bookmarked == 1)
+                    div = div + "<a class='unbookmark' href='#' data-id='"+value.id+"' data-type='"+value.type+"' data-content='subQuestion'><i class='fas fa-bookmark'></i></a>";
+                else
+                div = div + "<a class='bookmark' href='#' data-id='"+value.id+"' data-type='"+value.type+"' data-content='subQuestion'><i class='far fa-bookmark'></i></a>";
+                div = div + "</div></div></div>";
+            });
+            // alert(div); 
+            $('#subQuestions').append(div);
+        }
+        else
+            $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+
+        $( "#loadingDiv" ).remove();  
+    }
+
+    $('#courseObjQuestionModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let question = button.data('whatever'); // Extract info from data-* attributes
         // alert(question.options[0].name);
@@ -1128,25 +1370,41 @@ $(document).ready(function(){
 
         if(question.question.media == 1){
             $("#questionModalQuestionImgA").attr("href", question.question.img);
+            $("#questionModalQuestionImgA").attr("target", "_blank");
             $("#questionModalQuestionImg").attr("src",question.question.img);
         }
 
         if(question.options[0].media == 1){
             $("#questionModalOptionAImgA").attr("href", question.options[0].img);
+            $("#questionModalOptionAImgA").attr("target", "_blank");
             $("#questionModalOptionAImg").attr("src",question.options[0].img);
         }
-        if(question.options[0].media == 1){
+        if(question.options[1].media == 1){
             $("#questionModalOptionBImgA").attr("href", question.options[1].img);
+            $("#questionModalOptionBImgA").attr("target", "_blank");
             $("#questionModalOptionBImg").attr("src",question.options[1].img);
         }
-        if(question.options[0].media == 1){
+        if(question.options[2].media == 1){
             $("#questionModalOptionCImgA").attr("href", question.options[2].img);
+            $("#questionModalOptionCImgA").attr("target", "_blank");
             $("#questionModalOptionCImg").attr("src",question.options[2].img);
         }
-        if(question.options[0].media == 1){
+        if(question.options[3].media == 1){
             $("#questionModalOptionDImgA").attr("href", question.options[3].img);
+            $("#questionModalOptionDImgA").attr("target", "_blank");
             $("#questionModalOptionDImg").attr("src",question.options[3].img);
         }
+
+    });
+
+    $('#courseQuestionImageModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        let image = button.data('whatever'); // Extract info from data-* attributes
+        // alert(question.options[0].name);
+
+        $("#modalImageA").attr("href", image);
+        $("#modalImageA").attr("target", "_blank");
+        $("#modalImage").attr("src", image);        
 
     });
 
