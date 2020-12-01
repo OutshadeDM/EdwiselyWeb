@@ -84,6 +84,9 @@
             <span class="list-item"><a href=courses.html>Assessments</a> ></span>
             <span class="list-item-active"><a href=courses.html>Create Assessment</a></span>
           </p>
+          <button id="createAssessmentBtn" class="BigBtn shadow-sm"></i> <a href="../pages/createAssessmentPage.html"
+              class="btnLink"><i class="fas fa-save pr-2"></i>Continue</a></button>
+
         </div>
 
 
@@ -93,18 +96,25 @@
 
 
             <div class="form-group createassessment">
-              <label class="col-form-label col-form-label-lg" for="title-assess">Add Title</label>
-              <input class="form-control form-control-lg" type="text" id="title-assess" maxlength="80">
-              <label class="col-form-label col-form-label-lg" for="desc-assess">Description</label>
-              <textarea class="form-control" id="desc-assess" rows="3" maxlength="200"
+              <label class="col-form-label col-form-label-lg" for="title-objective">Add Title</label>
+              <input class="form-control form-control-lg" type="text" id="title-objective" maxlength="80">
+              <label class="col-form-label col-form-label-lg" for="desc-objective">Description</label>
+              <textarea class="form-control" id="desc-objective" rows="3" maxlength="200"
                 style="margin-top: 0px; margin-bottom: 0px; height: 96px; resize: none;"></textarea>
 
 
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary my-4 assBtn choose-subject" id="subject-modal"
-                data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-              </button>
+
+              <div class="py-3 my-1 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
+                data-target="#exampleModal">
+
+                <i class="fas fa-bars pl-2 pr-0"></i>
+
+                <span class=" pl-2 pr-5">Select a subject</span>
+                <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 20px;"></i>
+
+
+              </div>
 
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

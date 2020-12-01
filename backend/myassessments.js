@@ -1,6 +1,14 @@
 $(document).ready(function () {
   //   alert("ok");
 
+
+  $('#createAssessmentBtn').on('click', function (event) {
+    event.preventDefault();
+    var url = $(this).data('target');
+    location.replace(url);
+  })
+
+
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
     type: 'GET',
@@ -49,7 +57,7 @@ $(document).ready(function () {
               "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
               "</h5><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
               "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-              "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'>Send</button></div></div>"
+              "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html' class='btnLink'>Send</a></button></div></div>"
             );
           else
             $('#objectiveassessmentList').append(
@@ -57,7 +65,7 @@ $(document).ready(function () {
               "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
               "</h5><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
               "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-              "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentAddBtn' data-target='AddQuestionsPage.html'>Add</button></div></div>"
+              "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentAddBtn'><a href='../pages/AddQuestionsPage.html' class='btnLink'>Add</a></button></div></div>"
             );
         });
       }
@@ -72,16 +80,13 @@ $(document).ready(function () {
 
   //for send btn
   $(document).on('click', '#assignmentSendBtn', function () {
-    alert("sent")
+    //alert("sent")
   });
 
 
   //for add btn
   $(document).on('click', '#assignmentAddBtn', function (event) {
     //alert("added")
-    event.preventDefault();
-    var url = $(this).data('target');
-    location.replace(url);
   });
 
 

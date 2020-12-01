@@ -141,6 +141,16 @@ body{
 }
 
 
+.btnLink {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+.btnLink:hover {
+  color: white;
+  text-decoration: none;
+}
+
 /* end default */
 
 
@@ -240,6 +250,19 @@ body{
 .createassessment {
   align-items: center;
   padding: 0 180px;
+}
+
+#subject-modal-div {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  border: solid 1px rgb(196, 195, 195);
+  border-radius: 5px;
+}
+
+#subject-modal-div:hover {
+  background-color: rgb(247, 247, 247);
+  cursor: pointer;
 }
 
 /* end create assessment */
