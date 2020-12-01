@@ -110,11 +110,12 @@ $(document).ready(function () {
           'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjc0MjYyMyIsImV4cCI6IjE2MDgwMzg2MjMifQ.74y5dyBOCgwbVs7gUDn2Nn_ZRGrQhUhwD_waW9ialJk'
         },
         success: function (result) {
-          alert(result.message);
+          //alert(result.message);
           //console.log('4') 
 
           if (result.status == 200) {
             alert(result.message)
+            window.location.href = "AddQuestionspage.html"
           }
         },
         error: function (error) {
