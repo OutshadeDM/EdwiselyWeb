@@ -53,11 +53,13 @@ $(document).ready(function () {
                         $("#courseClass").empty();
                         $("#courseClass").append("<ul>");
                         $.each(result.data.sections, function (key, value) {
-                            // alert(value);
+                            // alert(value.name);
                             $("#courseClass").append("<li>" + value.name + "</li>");
                         });
                         $("#courseClass").append("</ul>");
                     }
+                    else
+                    $("#courseClass").append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                 }
                 else {
                     alert(result.message + " Please Login again");
@@ -85,12 +87,12 @@ $(document).ready(function () {
                 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
             },
             success: function (result) {
-                // alert(result.status);
+                // alert(result.message);
                 $('#courseSyllabus').empty();
-                if (result.status == 200 && result.data != "") {
+                if (result.status == 200 && Array.isArray(result.data)) {
                     let div = "";
                     $.each(result.data, function (key, value) {
-                        // alert(value);
+                        // alert("here");
                         div = div + "<div class='row p-3 mb-2'>";
                         div = div + "<div class='col-sm-8'>";
                         div = div + "<p class='mt-1'><strong>" + value.name + "</strong></p>";
