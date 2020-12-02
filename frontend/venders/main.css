@@ -223,6 +223,15 @@ body{
 
 /* my assessments */
 
+.objCard {
+  position: relative;
+}
+
+.editBtn {
+  position: absolute;
+  right: 0px;
+}
+
 
 .createQuestions {
   display: inline-block;

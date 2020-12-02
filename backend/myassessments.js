@@ -54,16 +54,16 @@ $(document).ready(function () {
           if (value.questions_count)
             $('#objectiveassessmentList').append(
               "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-              "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-              "</h5><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+              "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+              "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
               "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
               "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html' class='btnLink'>Send</a></button></div></div>"
             );
           else
             $('#objectiveassessmentList').append(
               "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-              "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-              "</h5><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+              "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+              "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
               "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
               "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentAddBtn'><a href='../pages/AddQuestionsPage.html' class='btnLink'>Add</a></button></div></div>"
             );
@@ -88,6 +88,11 @@ $(document).ready(function () {
   $(document).on('click', '#assignmentAddBtn', function (event) {
     //alert("added")
   });
+
+  //for edit button
+  $(document).on('click', '.editBtn', function () {
+    window.location.href = "AddQuestionspage.html"
+  })
 
 
 
@@ -142,7 +147,7 @@ $(document).ready(function () {
               $('#subjectiveassessmentList').append(
                 "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
                 "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
                 "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
                 "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</button></div></div>"
               );
@@ -150,7 +155,7 @@ $(document).ready(function () {
               $('#subjectiveassessmentList').append(
                 "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
                 "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
                 "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
                 "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</button></div></div>"
               );
