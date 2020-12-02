@@ -13,10 +13,14 @@ body{
     padding-left: 0;
     margin: 0;
 }
-.container {
+#theMainDiv {
     height: 100%;
+    width: 100%;
     margin-bottom: 0;
+    padding-left: 6%;
+    padding-right: 10%;
 }
+
 .listDiv{
     background: #fff;
 }
@@ -160,7 +164,7 @@ body{
   text-align: start;
   margin-left: 0;
   margin-top: 0;
-  border: 5px solid #008cba;
+  border: 5px solid #1b668c;
   border-radius: 5px;
 }
 
@@ -231,7 +235,7 @@ body{
 /* start courseDetails.html */
 .coursetab{
   border: 2px solid gray;
-  border-radius: 25px;
+  border-radius: 20px;
   background: white;
 }
 
@@ -281,7 +285,8 @@ body{
 }
 
 .scrollDiv{
-  max-height: 300px;
+  height: auto;
+  max-height: 450px;
   width: 100%;
   overflow-x: hidden;
   height: 100%;
@@ -310,6 +315,11 @@ body{
 .btn-primary{
   background: #1B658C;
   border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }
 
 /* end courseDetails.html */

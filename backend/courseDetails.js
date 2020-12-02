@@ -779,7 +779,7 @@ $(document).ready(function () {
         if (files) {
             $.each(files, function (key, value) {
                 if ((courseType == value.type || courseType == "0") && (courseLevel == value.level || courseLevel == "0")) {
-                    div = div + "<div class='row'>";
+                    div = div + "<div class='row my-2'>";
                     div = div + "<div class='col-sm-1 d-flex justify-content-end'>";
                     switch (value.type) {
                         case "DOCS":
@@ -805,11 +805,11 @@ $(document).ready(function () {
                     }
                     // div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
                     div = div + "</div>";
-                    div = div + "<div class='col-sm-10 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-url='" + value.url + "'>";
+                    div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-url='" + value.url + "'>";
                     div = div + "<h6>" + value.title + "</h6>";
                     div = div + "</div>";
-                    div = div + "<div class='col-sm-1'>";
-                    div = div + "<div class='dropdown'>";
+                    div = div + "<div class='col-sm-2 d-flex justify-content-end align-middle '>";
+                    div = div + "<div class='dropdown pr-1'>";
                     div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
                     div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
                     div = div + "</button>";
