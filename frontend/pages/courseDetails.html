@@ -8,6 +8,7 @@
 
   <!-- add custom stylesheet here -->
   <link href="../venders/main.css" rel="stylesheet">
+  <link href="../venders/pages/courseDetails.css" rel="stylesheet">
   <link href="../venders/sidebar.css" rel="stylesheet">
   <link href="../venders/radiostyle.css" rel="stylesheet">
 
@@ -77,6 +78,15 @@
                     <span class="menu-collapsed">Notify</span>
                 </div>
               </a>
+
+              <li class="list-group-item sidebar-separator menu-collapsed"></li>
+              <a href="#" data-toggle="sidebar-collapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+                  <div class="d-flex w-100 justify-content-start align-items-center">
+                      <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
+                      <span id="collapse-text" class="menu-collapsed">Logout</span>
+                  </div>
+              </a>
+              
               <li class="list-group-item sidebar-separator menu-collapsed"></li>
               <a href="#" data-toggle="sidebar-collapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
                   <div class="d-flex w-100 justify-content-start align-items-center">
@@ -84,6 +94,7 @@
                       <span id="collapse-text" class="menu-collapsed">Collapse</span>
                   </div>
               </a>
+
           </ul>
         </div>
         <!-- List Group END-->
@@ -548,7 +559,7 @@
               <tr>
                 <th style="height: 100%;">Question</th>
                 <td>
-                  <p id="questionModalQuestion">Ouestion</p>
+                  <span id="questionModalQuestion">Question</span>
                 </td>
                 <td><a href="#" id="questionModalQuestionImgA"><img src="../images/onlineCourses.png" width="100"
                       id="questionModalQuestionImg" alt="No Image"></a></td>

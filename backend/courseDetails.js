@@ -415,6 +415,16 @@ $(document).ready(function () {
 
     });
 
+    $('#courseContentModal').on('hidden.bs.modal', function (event) {
+        $("#courseTypeAdd").val("1");
+        $("#courseFileAdd").val(null);
+        $("#courseTitleAdd").val(null);
+        $('input[name="courseTagAdd"]').prop('checked', false);
+        $("#courseDisplayTypeAdd").val(null);
+        clearModal();
+        $(".custom-file-label").removeClass("selected").html("");
+    });
+
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -667,21 +677,35 @@ $(document).ready(function () {
                                 $("#courseAddSave").removeData("id");
                                 $('#successToastBody').text('Content has been updated successfully');
                                 $('#successToast').toast('show');
+
+                                clearModal();
+                                $(".custom-file-label").removeClass("selected").html("");
+                                courseFileAdd = null;
+                                // courseUnits = null;
+                                courseTypeAdd = null;
+                                courseTitleAdd = null;
+                                courseTagAdd = null;
+                                courseDisplayTypeAdd = null;
+
                                 $('#courseContentModal').modal('toggle');
                                 $("#nav-content-tab").click();
                             }
                             else {
                                 $('#errorToastBody').text('Request Unsuccesful');
                                 $('#errorToast').toast('show');
+
+                                clearModal();
+
                                 alert(result.message);
                             }
 
 
                         },
                         error: function (error) {
+                            clearModal();
+                            $(".custom-file-label").removeClass("selected").html("");
+                            courseFileAdd = null;
                             alert(result.message);
-                            $('#modalContent').css('position', 'absolute');
-                            $('#courseContentModal').modal('toggle');
                         }
                     });
                 }
@@ -709,31 +733,42 @@ $(document).ready(function () {
                         $('#modalContent').css('position', 'absolute');
                         $('#courseContentModal').modal('toggle');
                         if (result.status == 200 && result.material_id) {
+                            $("#courseAddSave").removeData("id");
                             $('#successToastBody').text('Content has been saved successfully');
                             $('#successToast').toast('show');
-                            $("#loadingDiv").remove();
+
+                            clearModal();
+                            $(".custom-file-label").removeClass("selected").html("");
+                            courseFileAdd = null;
+
+                            $('#courseContentModal').modal('toggle');
                             $("#nav-content-tab").click();
                         }
                         else {
                             $('#errorToastBody').text('Request Unsuccesful');
                             $('#errorToast').toast('show');
-                            $("#loadingDiv").remove();
-                            $('#modalContent').css('position', 'absolute');
+                            
+                            clearModal();
+
                             alert(result.message);
                         }
 
                     },
                     error: function (error) {
+                        clearModal();
+                        $(".custom-file-label").removeClass("selected").html("");
+                        courseFileAdd = null;
                         alert(result.message);
-                        $('#modalContent').css('position', 'absolute');
-                        $('#courseContentModal').modal('toggle');
                     }
                 });
             }
 
         }
-        else
+        else{
+            // alert("herer");
+            $('#errorToastBody').text('All fields are mandatory for upload.');
             $('#errorToast').toast('show');
+        }
     });
 
     function processFiles(result = []) {
@@ -810,7 +845,7 @@ $(document).ready(function () {
                     div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-url='" + value.url + "'>";
                     div = div + "<h6>" + value.title + "</h6>";
                     div = div + "</div>";
-                    div = div + "<div class='col-sm-2 d-flex justify-content-end align-middle '>";
+                    div = div + "<div class='col-sm-2 d-flex justify-content-end'>";
                     div = div + "<div class='dropdown pr-1'>";
                     div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
                     div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
@@ -837,6 +872,12 @@ $(document).ready(function () {
         }
         else
             $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+    }
+
+    function clearModal(){
+        $("#loadingDiv").remove();
+        $('#modalContent').css('position', 'absolute');
+        $("#fileDiv").css('opacity', '1');
     }
 
 
@@ -1374,7 +1415,7 @@ $(document).ready(function () {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let question = button.data('whatever'); // Extract info from data-* attributes
         // alert(question.options[0].name);
-        $('#questionModalQuestion').text(question.question.name);
+        $('#questionModalQuestion').val(question.question.name);
         $('#questionModalOptionA').text(question.options[0].name);
         $('#questionModalOptionB').text(question.options[1].name);
         $('#questionModalOptionC').text(question.options[2].name);
