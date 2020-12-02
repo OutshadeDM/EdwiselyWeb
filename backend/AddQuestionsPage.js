@@ -1,18 +1,15 @@
 $(document).ready(function () {
 
-  $(document).on('click', '#addques', function (event) {
-    alert('add question')
-    event.preventDefault();
-    var url = $(this).data('target');
-    location.replace(url);
+  $(document).on('click', '#addques', function () {
+    window.location.href = "Addques.html"
   })
 
   $(document).on('click', '#uploadques', function (event) {
-    alert('upload question')
+    window.location.href = "Uploadques.html"
   })
 
   $(document).on('click', '#chooseques', function (event) {
-    alert('choose question')
+    window.location.href = "Chooseques.html"
   })
 
 });

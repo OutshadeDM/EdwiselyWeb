@@ -243,6 +243,39 @@ body{
 
 /* end addques page */
 
+#inputUpload {
+  display: none;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+  font-size: large;
+  color: gray;
+}
+
+.custom-file-upload:hover {
+  text-decoration: none;
+  font-size: large;
+  color: black;
+}
+
+.uploadques{
+  text-align: center;
+  height: 100vh;
+  line-height: 100vh;
+  font-size: large;
+}
+
+.uploadLinks {
+  color: gray;
+  text-decoration: none;
+}
+
+.uploadLinks:hover {
+  color: black;
+  text-decoration: none;
+}
+
 /* end my assessments */
 
 
