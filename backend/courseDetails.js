@@ -88,19 +88,19 @@ $(document).ready(function () {
                 // alert(result.status);
                 $('#courseSyllabus').empty();
                 if (result.status == 200 && result.data != "") {
+                    let div = "";
                     $.each(result.data, function (key, value) {
                         // alert(value);
-                        let div = "";
                         div = div + "<div class='row p-3 mb-2'>";
                         div = div + "<div class='col-sm-8'>";
                         div = div + "<p class='mt-1'><strong>" + value.name + "</strong></p>";
                         div = div + "<div class='my-auto'>";
-                        div = div + "<p><span>Objectives</span><ul>";
+                        div = div + "<p><span class='span-heading'>Objectives</span><ul class='list-unstyled'>";
                         $.each(value.objectives, function (key, value) {
                             div = div + "<li>" + value + "</li>";
                         });
                         div = div + "</ul></p>";
-                        div = div + "<p class='mt-2'><span>Outcome</span><ul>";
+                        div = div + "<p class='mt-2'><span class='span-heading'>Outcome</span><ul class='list-unstyled'>";
                         $.each(value.outcomes, function (key, value) {
                             div = div + "<li>" + value + "</li>";
                         });
@@ -109,13 +109,13 @@ $(document).ready(function () {
                         div = div + "<div class='col-sm-4'>";
                         div = div + "<p><strong>Topics Covered</strong></p>";
                         $.each(value.topics, function (key, value) {
-                            div = div + "<span class='badge badge-pill badge-secondary'>" + value.topic_name + "</span><br>";
+                            div = div + "<span class='badge badge-pill'>" + value.topic_name + "</span><br>";
                         });
-                        div = div + "</div></div";
-                        $('#courseSyllabus').append(div);
+                        div = div + "</div></div><hr class='syllabusHr'>";
                         // $('#courseSyllabus').append("</ul>");
                         // $('#courseSyllabus').append("</ul>");
                     });
+                    $('#courseSyllabus').append(div);
 
                 }
                 else {
@@ -331,6 +331,9 @@ $(document).ready(function () {
         let type = button.data('type');
         let topic_code = button.data('topic');
         let title = button.data('title');
+        $("#courseTypeAdd").val("1");
+        $("#courseTitleAdd").val("");
+        $('input[name="courseTagAdd"]').prop('checked', false);
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         // var modal = $(this)
@@ -655,6 +658,8 @@ $(document).ready(function () {
                         },
                         success: function (result) {
                             // alert(result.message);
+                            $('#modalContent').css('position', 'absolute');
+                            $('#courseContentModal').modal('toggle');
                             editCourseContentFlag = false;
                             if (result.status == 200) {
                                 $("#courseAddSave").removeData("id");
@@ -673,6 +678,8 @@ $(document).ready(function () {
                         },
                         error: function (error) {
                             alert(result.message);
+                            $('#modalContent').css('position', 'absolute');
+                            $('#courseContentModal').modal('toggle');
                         }
                     });
                 }
@@ -697,27 +704,31 @@ $(document).ready(function () {
                     },
                     success: function (result) {
                         // alert(result.message);
+                        $('#modalContent').css('position', 'absolute');
+                        $('#courseContentModal').modal('toggle');
                         if (result.status == 200 && result.material_id) {
                             $('#successToastBody').text('Content has been saved successfully');
                             $('#successToast').toast('show');
-                            $('#courseContentModal').modal('toggle');
+                            $("#loadingDiv").remove();
                             $("#nav-content-tab").click();
                         }
                         else {
                             $('#errorToastBody').text('Request Unsuccesful');
                             $('#errorToast').toast('show');
+                            $("#loadingDiv").remove();
+                            $('#modalContent').css('position', 'absolute');
                             alert(result.message);
                         }
 
                     },
                     error: function (error) {
                         alert(result.message);
+                        $('#modalContent').css('position', 'absolute');
+                        $('#courseContentModal').modal('toggle');
                     }
                 });
             }
 
-            $("#loadingDiv").remove();
-            $('#modalContent').css('position', 'absolute');
         }
         else
             $('#errorToast').toast('show');

@@ -164,6 +164,66 @@ body{
   border-radius: 5px;
 }
 
+.card{
+  height: 300px;
+  max-height: 300px;
+}
+
+.card-body{
+  padding: 15px;
+}
+
+.autocomplete-items {
+  display: none;
+  position: absolute;
+  width: 250px;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  background: white;
+  overflow: auto;
+  max-height: 200px;
+  z-index: 99999999;
+}
+
+.autocomplete-items li {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items li:hover {
+  background-color: #e9e9e9;
+}
+
+.fake-input {
+   position: relative;
+   width: 250px;
+   border: 1px solid gray;
+   padding: 5px;
+}
+
+.fake-input input {
+   border:none;
+   background-color:#fff;
+   display:block;
+   width: 100%;
+   border-radius: 20px;
+}
+
+.fake-input input:active + .fake-input {
+  border:1px solid lightblue;
+}
+
+.fake-input i {
+   position: absolute;
+   top: 18px; 
+   right: 15px; 
+   height: 100%; 
+}
+
 
 /* end courses.html */
 
@@ -176,10 +236,12 @@ body{
 }
 
 .badge{
-  color: black;
+  color: gray;
+  background: #EEEEEE;
   text-align: center;
   font-size: 15px;
   text-decoration: none;
+  margin: 5px;
 }
 
 .table .table-borderless {
@@ -216,6 +278,38 @@ body{
   margin-bottom: 5px;
   padding-top: 0;
   margin-top: 0;
+}
+
+.scrollDiv{
+  max-height: 300px;
+  width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.scrollDivContent{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  margin-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+
+.list-unstyled{
+  list-style-type: none;
+}
+
+.span-heading{
+  font-size: 12px;
+}
+
+.syllabusHr{
+  border: 1px solid black;
+}
+
+.btn-primary{
+  background: #1B658C;
+  border-radius: 10px;
 }
 
 /* end courseDetails.html */
