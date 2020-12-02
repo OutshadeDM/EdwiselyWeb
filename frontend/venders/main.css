@@ -234,14 +234,6 @@ body{
   line-height: 1.5;
 }
 
-/* addques page */
-
-.addques {
-  height: 60vh;
-  align-items: center;
-}
-
-/* end addques page */
 
 #inputUpload {
   display: none;
@@ -277,6 +269,66 @@ body{
 }
 
 /* end my assessments */
+
+
+/* addques page */
+
+.addques {
+  height: 60vh;
+  align-items: center;
+}
+
+#addques {
+  text-align: center;
+}
+.divInput {
+  background-color: #EEEEEE;
+}
+
+#quesInput {
+  height: 80px;
+  background-color: transparent;
+  border: none;
+}
+
+.levelSelect{
+  border: none;
+ border-bottom: 1px solid gray;
+}
+
+.bloomSelect {
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+
+.firstOption {
+ background-color: #C04DD8;
+ color: white;
+}
+
+.secondOption {
+  background-color: #4FB277;
+  color: white;
+}
+
+.thirdOption {
+  background-color: #508AE0;
+  color: white;
+}
+
+.fourthOption {
+  background-color: #4ED8EA;
+  color: white;
+}
+
+#sourceInput {
+  height: 50px;
+  background-color: transparent;
+  border: none;
+}
+
+/* end addques page */
 
 
 /* create assessment */

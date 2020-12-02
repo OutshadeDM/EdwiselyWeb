@@ -77,8 +77,8 @@
           <hr class="titlehr">
           <p class="list pb-2">
             <span class="list-item"><a href=index.html>Home</a> ></span>
-            <span class="list-item"><a href=courses.html>Add Question</a></span>
-            <span class="list-item-active"><a href=courses.html>Add Objective Question</a></span>
+            <span class="list-item"><a href=AddQuestionspage.html>Add Question</a> ></span>
+            <span class="list-item-active"><a href=Addques.html>Add Objective Question</a></span>
           </p>
           <button class="BigBtn shadow-sm"><i class="fas fa-save"></i> Save</button>
         </div>
@@ -88,14 +88,88 @@
           <div class="container px-5">
             <!-- Start Page Contents -->
             <div class="row">
-              <div class="col-md-3 shadow-sm addques px-4 py-2" id="addques">
-                addques
+              <div class="col-md-3 shadow-sm addques px-4 py-2 " id="addques">
+                Add Questions to this Assignment
               </div>
 
 
 
               <div class="col-md-7 shadow-sm addques px-4 py-2" id="createques">
-                typing
+                <div class="divInput">
+                  <input class="form-control form-control-lg" type="text"
+                    placeholder="Click to start Typing your question" id="quesInput">
+                </div>
+                <div class="row pt-4">
+                  <div class="col-6">
+                    <span>Bloom</span>
+                    <select class="bloomSelect mx-2">
+                      <option selected="">Remember</option>
+                      <option value="1">Understand</option>
+                      <option value="2">Apply</option>
+                      <option value="3">Analyze</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6" id="levelDropDiv">
+
+                    <select class="levelSelect mx-2 float-right">
+                      <option selected="">Level 1</option>
+                      <option value="1">Level 2</option>
+                      <option value="2">Level 3</option>
+                      <option value="3">Level 4</option>
+                      <option value="3">Level 5</option>
+                    </select>
+                    <span class="float-right">Difficulty</span>
+                  </div>
+                </div>
+
+                <div class="row pt-4">
+                  <div class="col-5">
+                    <div class="row options">
+                      <div class="col-2 selectOption mx-0 pt-1 firstOption"><i class="far fa-square fa-lg "></i></div>
+                      <div class="col-8 inputOption px-0"><input type="text" class="form-control"
+                          placeholder="Default input"></div>
+                      <div class="col-2 chooseImage mx-0 pt-1 firstOption"><i class="fas fa-image fa-lg "></i></div>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    <div class="row options">
+                      <div class="col-2 selectOption mx-0 pt-1 secondOption"><i class="far fa-square fa-lg "></i></div>
+                      <div class="col-8 inputOption px-0"><input type="text" class="form-control"
+                          placeholder="Default input"></div>
+                      <div class="col-2 chooseImage mx-0 pt-1 secondOption"><i class="fas fa-image fa-lg "></i></div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="row pt-4">
+                  <div class="col-5">
+                    <div class="row options">
+                      <div class="col-2 selectOption mx-0 pt-1 thirdOption"><i class="far fa-square fa-lg "></i></div>
+                      <div class="col-8 inputOption px-0"><input type="text" class="form-control"
+                          placeholder="Default input"></div>
+                      <div class="col-2 chooseImage mx-0 pt-1 thirdOption"><i class="fas fa-image fa-lg "></i></div>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    <div class="row options">
+                      <div class="col-2 selectOption mx-0 pt-1 fourthOption"><i class="far fa-square fa-lg "></i></div>
+                      <div class="col-8 inputOption px-0"><input type="text" class="form-control"
+                          placeholder="Default input"></div>
+                      <div class="col-2 chooseImage mx-0 pt-1 fourthOption"><i class="fas fa-image fa-lg "></i></div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="divInput mt-5">
+                  <input class="form-control form-control-lg " type="text" placeholder="Source... (if any)"
+                    id="sourceInput">
+                </div>
               </div>
 
 
