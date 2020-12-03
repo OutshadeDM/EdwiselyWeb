@@ -333,9 +333,9 @@ $(document).ready(function () {
         let type = button.data('type');
         let topic_code = button.data('topic');
         let title = button.data('title');
-        $("#courseTypeAdd").val("1");
-        $("#courseTitleAdd").val("");
-        $('input[name="courseTagAdd"]').prop('checked', false);
+        // $("#courseTypeAdd").val("1");
+        // $("#courseTitleAdd").val("");
+        // $('input[name="courseTagAdd"]').prop('checked', false);
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         // var modal = $(this)
@@ -422,7 +422,7 @@ $(document).ready(function () {
         $('input[name="courseTagAdd"]').prop('checked', false);
         $("#courseDisplayTypeAdd").val(null);
         clearModal();
-        $(".custom-file-label").removeClass("selected").html("");
+        $(".custom-file-label").removeClass("selected").html("Choose file");
     });
 
     $(".custom-file-input").on("change", function () {
@@ -669,7 +669,7 @@ $(document).ready(function () {
                             'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
                         },
                         success: function (result) {
-                            // alert(result.message);
+                            alert(result.message);
                             $('#modalContent').css('position', 'absolute');
                             $('#courseContentModal').modal('toggle');
                             editCourseContentFlag = false;
@@ -679,7 +679,7 @@ $(document).ready(function () {
                                 $('#successToast').toast('show');
 
                                 clearModal();
-                                $(".custom-file-label").removeClass("selected").html("");
+                                $(".custom-file-label").removeClass("selected").html("Choose file");
                                 courseFileAdd = null;
                                 // courseUnits = null;
                                 courseTypeAdd = null;
@@ -703,8 +703,9 @@ $(document).ready(function () {
                         },
                         error: function (error) {
                             clearModal();
-                            $(".custom-file-label").removeClass("selected").html("");
+                            $(".custom-file-label").removeClass("selected").html("Choose file");
                             courseFileAdd = null;
+                            $("#courseFileAdd").val(null);
                             alert(result.message);
                         }
                     });
@@ -738,7 +739,8 @@ $(document).ready(function () {
                             $('#successToast').toast('show');
 
                             clearModal();
-                            $(".custom-file-label").removeClass("selected").html("");
+                            $(".custom-file-label").removeClass("selected").html("Choose File");
+                            $("#courseFileAdd").val(null);
                             courseFileAdd = null;
 
                             $('#courseContentModal').modal('toggle');
@@ -756,7 +758,8 @@ $(document).ready(function () {
                     },
                     error: function (error) {
                         clearModal();
-                        $(".custom-file-label").removeClass("selected").html("");
+                        $(".custom-file-label").removeClass("selected").html("Choose File");
+                        $("#courseFileAdd").val(null);
                         courseFileAdd = null;
                         alert(result.message);
                     }
@@ -805,6 +808,7 @@ $(document).ready(function () {
             });
             // alert(value);
         });
+        alert(files[0].topic_code);
 
         return files;
     }
@@ -826,19 +830,19 @@ $(document).ready(function () {
                             div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
                             break;
                         case "VIDEO":
-                            div = div + "<i class='fa fa-video-pdf fa-2x' aria-hidden='true'></i>";
+                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
                             break;
                         case "MP4":
-                            div = div + "<i class='fa fa-video-pdf fa-2x' aria-hidden='true'></i>";
+                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
                             break;
                         case "PPT":
-                            div = div + "<i class='fa fa-file-excel fa-2x' aria-hidden='true'></i>";
+                            div = div + "<i class='fas fa-file-powerpoint fa-2x'></i>";
                             break;
                         case "URL":
-                            div = div + "<i class='fa fa-file-zip fa-2x' aria-hidden='true'></i>";
+                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
                             break;
                         default:
-                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
                     }
                     // div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
                     div = div + "</div>";
@@ -1415,7 +1419,7 @@ $(document).ready(function () {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let question = button.data('whatever'); // Extract info from data-* attributes
         // alert(question.options[0].name);
-        $('#questionModalQuestion').val(question.question.name);
+        $('#questionModalQuestion').html(question.question.name);
         $('#questionModalOptionA').text(question.options[0].name);
         $('#questionModalOptionB').text(question.options[1].name);
         $('#questionModalOptionC').text(question.options[2].name);

@@ -169,12 +169,12 @@ body{
   border-radius: 5px;
 }
 
-.card{
+.course-card{
   height: 300px;
   max-height: 300px;
 }
 
-.card-body{
+.course-card .card-body{
   padding: 15px;
 }
 
@@ -321,6 +321,15 @@ body{
 
 /* end courseDetails.html */
 
+/* addcourses */
+
+.span-dept{
+  background: #F7F1E3;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+/* end addcourses */
 
 /* my assessments */
 
