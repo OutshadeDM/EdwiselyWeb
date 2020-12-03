@@ -819,7 +819,10 @@ $(document).ready(function () {
 
         if (files) {
             $.each(files, function (key, value) {
-                if ((courseType == value.type || courseType == "0") && (courseLevel == value.level || courseLevel == "0")) {
+                if (
+                    ((courseType == value.type || (courseType == 'DOCS' && value.type == 'PDF') || (courseType == 'VIDEO' && value.type == 'MP4')) || courseType == "0") 
+
+                && (courseLevel == value.level || courseLevel == "0")) {
                     div = div + "<div class='row my-2'>";
                     div = div + "<div class='col-sm-1 d-flex justify-content-end'>";
                     switch (value.type) {
