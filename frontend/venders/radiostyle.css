@@ -28,3 +28,34 @@
   background-color:gray;
   color: white;
 }
+
+
+
+.topicTagsUl {
+  list-style: none;
+}
+.topicTagsLi {
+  display: inline-block;
+  color: #929292;
+  cursor: pointer;
+}
+.topicTagsInput {
+  visibility:hidden;
+  cursor: pointer;
+}
+.topicTagsLabel {
+  border: 2px solid gray;
+  padding: 5px;
+  border-radius:20px;
+  cursor: pointer;
+  background: #FAFAFA;
+}
+.topicTagsInput:checked + .topicTagsLabel {
+  color: blue;
+  background: lightblue;
+}
+
+.topicTagsInput:hover + .topicTagsLabel {
+  background-color:gray;
+  color: white;
+}

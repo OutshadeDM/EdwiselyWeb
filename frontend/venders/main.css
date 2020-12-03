@@ -352,9 +352,23 @@ body{
   background-color: #EEEEEE;
 }
 
+.imgPreviewques {
+  height: 50px;
+  width: 100px;
+}
+
+.imgPreviewhint {
+  height: 50px;
+  width: 100px;
+}
+
+.imgPreviewsolution {
+  height: 50px;
+  width: 100px;
+}
 #quesInput {
   height: 80px;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   border: none;
 display: inline-block;
@@ -362,7 +376,7 @@ display: inline-block;
 
 #hintInput {
   height: 80px;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   border: none;
 display: inline-block;
@@ -370,13 +384,13 @@ display: inline-block;
 
 #solutionInput {
   height: 80px;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   border: none;
 display: inline-block;
 }
 
-#inputImage {
+#quesImage {
   display: none;
 }
 

@@ -24,6 +24,80 @@ $(document).ready(function () {
     $('#solutionDiv').show()
   })
 
+  //initially hide the uploaded fonticons and image
+  $('.uploadedques').hide()
+  $('.uploadedhint').hide()
+  $('.uploadedsolution').hide()
+  $('.imgPreviewques').hide()
+  $('.imgPreviewhint').hide()
+  $('.imgPreviewsolution').hide()
+
+
+
+
+  //displaying ques image 
+  function readURLques(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image_preview_ques').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#quesImage").change(function () {
+    readURLques(this);
+    //changing styles
+    $('.uploadedques').show()
+    $('.imgPreviewques').show()
+    $('.notUploadedques').hide()
+
+  });
+
+
+  //displaying hint image
+  function readURLhint(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image_preview_hint').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#hintImage").change(function () {
+    readURLhint(this);
+    $('.uploadedhint').show()
+    $('.imgPreviewhint').show()
+    $('.notUploadedhint').hide()
+  });
+
+
+
+  //displaying solution image
+  function readURLsolution(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image_preview_solution').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#solutionImage").change(function () {
+    readURLsolution(this);
+    $('.uploadedsolution').show()
+    $('.imgPreviewsolution').show()
+    $('.notUploadedsolution').hide()
+  });
 
 
   //get topics api
@@ -82,8 +156,22 @@ $(document).ready(function () {
 
 
 
+  let question = $('#quesInput').val()
   let hint = $('#hintInput').val()
-
+  let solution = $('#solutionInput').val()
+  let source = $('#sourceInput').val()
+  let bloom_level = $('.bloomSelect').val()
+  let difficulty_level = $('.levelSelect').val()
+  let topics = []
+  let field_type = 1
+  let question_img
+  let solution_img
+  let hint_img
+  let option1_img
+  let option2_img
+  let option3_img
+  let option4_img
+  let option5_img
 
 
 
@@ -96,7 +184,7 @@ $(document).ready(function () {
 
   //window
 
-  //let type = $("input[name='courseTagAdd']:checked").val();
+  //let type = $("input[name='topicTagAdd']:checked").val();
 
   let type = ''
   if ($("#customSwitch1:checked")) {
@@ -105,10 +193,7 @@ $(document).ready(function () {
     type = 'private'
   }
 
-  // alert(type)
-
-
-  //on click of + btn
+  //on click of + btn(post request)
 
 
 
