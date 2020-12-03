@@ -2,10 +2,8 @@ $(document).ready(function () {
   //   alert("ok");
 
 
-  $('#createAssessmentBtn').on('click', function (event) {
-    event.preventDefault();
-    var url = $(this).data('target');
-    location.replace(url);
+  $('#createAssessmentBtn').on('click', function () {
+    window.location.href = "CreateAssessmentpage.html"
   })
 
 
