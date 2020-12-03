@@ -1057,7 +1057,7 @@ $(document).ready(function () {
                                 $.each(units, function (key, value) {
                                     // alert(value);
                                     // units.push({"id":value.id,"name":value.name});
-                                    $('#courseQuestionUnits').append("<button type='button' data-uid='" + value.id + "' data-sid='" + result.data.subject_id + "' id='courseUnitBtn' class='btn btn-light btnQuestion'>" + value.name + "</button>");
+                                    $('#courseQuestionUnits').append("<button type='button' data-uid='" + value.id + "' data-sid='" + result.data.subject_id + "' id='courseUnitBtn' class='btn btnQuestion'>" + value.name + "</button>");
                                 });
                                 $("#nav-question-obj-tab").click()
 
@@ -1145,8 +1145,8 @@ $(document).ready(function () {
             }
         });
 
-        $(".btnQuestionClick").removeClass('btnQuestionClick').addClass('btnQuestion');
-        $(this).removeClass('btnQuestion').addClass('btnQuestionClick');
+        $(".btnQuestionClick").removeClass('btnQuestionClick bg-secondary').addClass('btnQuestion bg-light');
+        $(this).removeClass('btnQuestion bg-light').addClass('btnQuestionClick bg-secondary');
 
     });
 

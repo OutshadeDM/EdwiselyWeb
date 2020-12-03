@@ -54,59 +54,6 @@ body{
 }
 
 
-/* SIDEBAR AND NAVBAR STYLES */
-
-#wrapper {
-    overflow-x: hidden;
-  }
-  
-  #sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin .3s ease-out;
-  -moz-transition: margin .3s ease-out;
-  -o-transition: margin .3s ease-out;
-  transition: margin .3s ease-out;
-  }
-  
-  
-  .heading{
-    font-size: 38px;
-  }
-  
-  #sidebar-wrapper .list-group {
-  width: 15rem;
-  font-size: 18px;
-  }
-  
-  #page-content-wrapper {
-  min-width: 100vw;
-  }
-  
-  #wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
-  }
-  
-  .nav-link {
-    font-size: 18px;
-  }
-  
-  @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-  
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-  
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
-  }
-  /* end sidebar */
-
 /* default */
 
 .headerBanner {
