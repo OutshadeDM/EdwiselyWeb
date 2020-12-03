@@ -437,6 +437,18 @@ display: inline-block;
   color: white;
 }
 
+.fifthOption {
+  background-color: #FF6B6B;
+  color: white;
+}
+
+
+.fifthOptionBtn {
+  color: white;
+  background-color: #FF6B6B;
+}
+
+
 #hintBtn {
   border: none;
 }

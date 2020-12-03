@@ -12,6 +12,7 @@ $(document).ready(function () {
   //initially hidin the hint and solution divs
   $('#hintDiv').hide()
   $('#solutionDiv').hide()
+  $('#fifth').hide()
 
 
   //on click of hint btn
@@ -22,6 +23,13 @@ $(document).ready(function () {
   //on click of solution btn
   $('#solutionBtn').on('click', function () {
     $('#solutionDiv').show()
+  })
+
+  //onclick of add option btn
+  $('.fifthOptionBtn').on('click', function () {
+    $('.fifthOptionBtn').hide()
+    $('#fifth').show()
+
   })
 
   //initially hide the uploaded fonticons and image
