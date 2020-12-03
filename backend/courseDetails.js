@@ -76,8 +76,15 @@ $(document).ready(function () {
         window.location.href = "courses.html";
     // alert(subSemId);
 
+    $("#nav-about-tab").click(function () {
+        refreshContents();
+        refreshQuestions();
+    });
+
     $("#nav-syllabus-tab").click(function () {
         // alert("The paragraph was clicked.");
+        refreshContents();
+        refreshQuestions();
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id=' + subSemId,
@@ -137,6 +144,8 @@ $(document).ready(function () {
 
     $("#nav-content-tab").click(function () {
         // alert("The paragraph was clicked.");
+        refreshQuestions();
+        // alert(courseBookmarkedFlag);
 
         let courseUnits = $('#courseUnits').val();
 
@@ -209,7 +218,7 @@ $(document).ready(function () {
                     }
                     else if (courseBookmarkedFlag) {
 
-                        courseBookmarkedFlag = false;
+                        // courseBookmarkedFlag = false;
 
                         $.ajax({
                             url: 'https://stagingfacultypython.edwisely.com/getFacultyBookmarkedCourseContent?unit_id=' + courseUnits + '&subject_semester_id=' + subSemId,
@@ -245,7 +254,7 @@ $(document).ready(function () {
                     }
                     else if (courseYourContentFlag) {
 
-                        courseYourContentFlag = false;
+                        // courseYourContentFlag = false;
 
                         $.ajax({
                             url: 'https://stagingfacultypython.edwisely.com/getFacultyAddedCourseContent?unit_id=' + courseUnits + '&subject_semester_id=' + subSemId,
@@ -267,7 +276,7 @@ $(document).ready(function () {
                                             "url": value.file_url,
                                             "type": value.type,
                                             "level": value.level,
-                                            "bookmarked": value.bookmarked
+                                            learning_content:"1"
                                         });
                                         // div = div + "</div>";
                                     });
@@ -308,6 +317,7 @@ $(document).ready(function () {
     });
 
     $('#courseUnits').on('change', function () {
+        refreshContents();
         $("#nav-content-tab").click();
     });
 
@@ -315,14 +325,19 @@ $(document).ready(function () {
         let courseCatagory = $('#courseCatagory').val();
         if (courseCatagory == "bookmarked") {
             courseBookmarkedFlag = true;
+            courseYourContentFlag = false;
             $("#nav-content-tab").click();
         }
         else if (courseCatagory == "yourContent") {
             courseYourContentFlag = true;
+            courseBookmarkedFlag = false;
             $("#nav-content-tab").click();
         }
-        else
+        else{
+            courseBookmarkedFlag = false;
+            courseYourContentFlag = false;
             $("#nav-content-tab").click();
+        }
     });
 
     let editCourseContentFlag = false;
@@ -333,6 +348,7 @@ $(document).ready(function () {
         let type = button.data('type');
         let topic_code = button.data('topic');
         let title = button.data('title');
+        let url = button.data('url');
         // $("#courseTypeAdd").val("1");
         // $("#courseTitleAdd").val("");
         // $('input[name="courseTagAdd"]').prop('checked', false);
@@ -400,6 +416,9 @@ $(document).ready(function () {
                     $("input[name='courseTagAdd']:checked").siblings(".show1").click();
                     // alert($("input[name='courseTagAdd']:checked").val());
                     // alert(topic_code);
+                    $("#courseFileAddATag").show();
+                    $("#courseFileAddATag").attr("href",url);
+                    $("#contentModalSmall").show();
 
                     $('#courseAddSave').data('id', material_id);
                     // alert($("#courseAddSave").data('id'));
@@ -421,6 +440,9 @@ $(document).ready(function () {
         $("#courseTitleAdd").val(null);
         $('input[name="courseTagAdd"]').prop('checked', false);
         $("#courseDisplayTypeAdd").val(null);
+        $("#courseFileAddATag").attr("href","#");
+        $("#courseFileAddATag").hide();
+        $("#contentModalSmall").hide();
         clearModal();
         $(".custom-file-label").removeClass("selected").html("Choose file");
     });
@@ -428,12 +450,88 @@ $(document).ready(function () {
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+        let type = $('#courseTypeAdd').val();
+        let success = true;
+        switch(type){
+            case "1":
+                if($.inArray(ext, ['doc','docx']) == -1) {
+                   success = false;
+                }
+                break;
+            case "7":
+                if($.inArray(ext, ['pdf']) == -1) {
+                    success = false;
+                }
+                break;
+            case "4":
+                if($.inArray(ext, ['mp4']) == -1) {
+                    success = false;
+                }
+                break;
+            case "3":
+                if($.inArray(ext, ['ppt','pptx']) == -1) {
+                    success = false;
+                }
+                break;
+            case "URL":
+                // if($.inArray(ext, ['ppt','pptx']) == -1) {
+                //     success = false;
+                // }
+                break;                
+            default:
+                if($.inArray(ext, ['doc','docx']) == -1) {
+                    success = false;
+                }
+        }
+
+        if(!success){
+            $('#errorToastBody').text('Invalid Attachment Type');
+            $('#errorToast').toast('show');
+        }
+
+        // var ext = $(this).val().split('.').pop().toLowerCase();
+        // if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+        //     alert('invalid extension!');
+        // }
+    });
+
+    $('#courseTypeAdd').on('change', function () {
+        let type = $(this).val();
+        switch(type){
+            case "1":
+                $("#courseFileAdd").attr("accept",".doc,.docx");
+                break;
+            case "7":
+                $("#courseFileAdd").attr("accept",".pdf");
+                break;
+            case "4":
+                $("#courseFileAdd").attr("accept",".mp4");
+                break;
+            case "3":
+                $("#courseFileAdd").attr("accept",".ppt,.pptx");
+                break;
+            case "URL":
+                $("#courseFileAdd").attr("accept","");
+                break;
+            default:
+                $("#courseFileAdd").attr("accept","");
+        }
     });
 
     $(document).on('click', '.show1', function () {
         // alert("ok");
         $(".show1").children("i").hide();
         $(this).children("i").show();
+    });
+
+    $(document).on('click', '.download', function () {
+        // alert("ok");
+        url = $(this).data("url");
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = "_blank";
+        link.dispatchEvent(new MouseEvent('click'));
     });
 
     $('#courseDisplayTypeAdd').on('change', function () {
@@ -607,6 +705,7 @@ $(document).ready(function () {
         let courseTitleAdd = $("#courseTitleAdd").val();
         let courseTagAdd = $("input[name='courseTagAdd']:checked").val();
         let courseDisplayTypeAdd = $("#courseDisplayTypeAdd").val();
+        let courseFileUrlAdd = $("#courseFileAddATag").attr('href');
         // $('#successToast').toast('show');
         // $('#errorToast').toast('show');
         // alert(courseUnits);
@@ -625,16 +724,14 @@ $(document).ready(function () {
         //     $('#modalContent').css('position', 'absolute');
         // },50000);
 
-        if (courseUnits && courseTypeAdd && courseFileAdd && courseTitleAdd && courseTagAdd && courseDisplayTypeAdd) {
+        if (courseUnits && courseTypeAdd && (courseFileAdd || courseFileUrlAdd) && courseTitleAdd && courseTagAdd && courseDisplayTypeAdd) {
 
             var form = new FormData();
             form.append("unit_id", courseUnits);
             form.append("topic_code", courseTagAdd);
             form.append("material_type", courseTypeAdd);
             form.append("name", courseTitleAdd);
-            form.append("attachments", courseFileAdd);
             form.append("display_type", courseDisplayTypeAdd);
-            form.append("external_url", "");
 
             // for(var key of form.entries()){
             //     alert(key[1]);
@@ -655,6 +752,14 @@ $(document).ready(function () {
 
                 if (material_id) {
 
+                    if(courseFileAdd != null){
+                        form.append("attachments", courseFileAdd);
+                        form.append("external_url", "");
+                    }
+                    else{
+                        form.append("attachments", "");
+                        form.append("external_url", courseFileUrlAdd);
+                    }
                     form.append("material_id", material_id);
                     // alert(material_id);
 
@@ -718,6 +823,9 @@ $(document).ready(function () {
                 // $('#modalContent').css('position', 'absolute');
             }
             else {
+                
+                form.append("attachments", courseFileAdd);
+                form.append("external_url", "");
 
                 $.ajax({
                     url: 'https://stagingfacultypython.edwisely.com/addFacultyContent',
@@ -853,22 +961,25 @@ $(document).ready(function () {
                     div = div + "<h6>" + value.title + "</h6>";
                     div = div + "</div>";
                     div = div + "<div class='col-sm-2 d-flex justify-content-end'>";
-                    div = div + "<div class='dropdown pr-1'>";
-                    div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-                    div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
-                    div = div + "</button>";
-                    div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-                    if (value.learning_content == "1")
-                        div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "'>Edit</a>";
+                    if(value.learning_content == "1" || value.bookmarked == "0" || value.bookmarked == "1"){
+                        div = div + "<div class='dropdown pr-1'>";
+                        div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+                        div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
+                        div = div + "</button>";
+                        div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+                        if (value.learning_content == "1")
+                            div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
 
-                    let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
-                    if (value.bookmarked == "0")
-                        div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>Bookmark</a>";
-                    else
-                        div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>UnBookmark</a>";
-                    if (value.learning_content == "1")
-                        div = div + "<a class='dropdown-item deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'>Delete</a>";
-                    div = div + "</div></div></div></div>";
+                        let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
+                        if (value.bookmarked == "0")
+                            div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>Bookmark</a>";
+                        else if(value.bookmarked == "1")
+                            div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>UnBookmark</a>";
+                        if (value.learning_content == "1")
+                            div = div + "<a class='dropdown-item deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'>Delete</a>";
+                        div = div + "</div></div>";    
+                    }
+                    div = div + "</div></div>";
                 }
                 // alert(value);
             });
@@ -887,9 +998,22 @@ $(document).ready(function () {
         $("#fileDiv").css('opacity', '1');
     }
 
+    function refreshContents(){
+        $('#courseType').val("0");
+        $('#courseLevel').val("0");
+        $('#courseCatagory').val("all");
+    }
+
+    function refreshQuestions(){
+        $('#questionBloomsLevel').val("0");
+        $('#questionTopics').val("0");
+        $('#questionCatagory').val("0");
+    }
+
 
     $("#nav-question-tab").click(function () {
         // alert("The paragraph was clicked.");
+        refreshContents();
 
         // let courseUnits = $('#courseUnits').val();
 
@@ -906,14 +1030,14 @@ $(document).ready(function () {
 
                     let units = [];
                     $('#courseQuestionUnits').empty();
-                    $('#questionTopics').empty();
-                    $('#questionTopics').append("<option value='0'>All</option>");
+                    // $('#questionTopics').empty();
+                    // $('#questionTopics').append("<option value='0'>All</option>");
                     $.each(result.data, function (key, value) {
                         // alert(value);
                         units.push({ "id": value.id, "name": value.name });
-                        $.each(value.topics, function (key, value) {
-                            $('#questionTopics').append("<option value='" + value.code + "'>" + value.topic_name + "</option>");
-                        });
+                        // $.each(value.topics, function (key, value) {
+                        //     $('#questionTopics').append("<option value='" + value.code + "'>" + value.topic_name + "</option>");
+                        // });
                     });
                     // $('#courseUnits').val(units[0]['id']);
                     // courseUnits = units[0]['id'];
@@ -981,14 +1105,48 @@ $(document).ready(function () {
         // let questionBloomsLevel = $('#questionBloomsLevel').val();
         // let questionTopics = $('#questionTopics').val();
         // let questionCatagory = $('#questionCatagory').val();
+        
+        $('#questionTopics').empty();
+        $('#questionTopics').append("<option value='0'>All</option>");
+
+        $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id=' + subSemId,
+            type: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+            },
+            success: function (result) {
+                // alert(result.status);
+                // $('#courseClass').empty();
+                if (result.status == 200) {
+                    $.each(result.data, function (key, value) {
+                        if(value.id == unit_id){
+                            // alert(value.id);
+                            $.each(value.topics, function (key, value) {
+                                $('#questionTopics').append("<option value='" + value.code + "'>" + value.topic_name + "</option>");
+                            });
+                        }
+                    });
+                    
+                    if (questionSwitch == "0")
+                        getObjQuestions(unit_id, subject_id);
+                    else
+                        getSubQuestions(unit_id, subject_id);
+
+                }
+                else {
+                    alert(result.message + " Please Login again");
+                    window.location.href = "Loginpage.html";
+                }
+            },
+            error: function (error) {
+                alert(result.message);
+            }
+        });
 
         $(".btnQuestionClick").removeClass('btnQuestionClick').addClass('btnQuestion');
         $(this).removeClass('btnQuestion').addClass('btnQuestionClick');
-
-        if (questionSwitch == "0")
-            getObjQuestions(unit_id, subject_id);
-        else
-            getSubQuestions(unit_id, subject_id);
 
     });
 
@@ -1026,6 +1184,7 @@ $(document).ready(function () {
         else
             getSubQuestions(unit_id, subject_id);
     });
+
 
     function getObjQuestions(unit_id, subject_id) {
 
@@ -1266,7 +1425,8 @@ $(document).ready(function () {
                         options.push({
                             "name": value.name,
                             "media": value.media,
-                            "img": value.option_img
+                            "img": value.option_img,
+                            "is_answer":value.is_answer
                         });
                     });
 
@@ -1295,7 +1455,8 @@ $(document).ready(function () {
                         options.push({
                             "name": value.name,
                             "media": value.media,
-                            "img": value.option_img
+                            "img": value.option_img,
+                            "is_answer":value.is_answer
                         });
                     });
 
@@ -1318,23 +1479,24 @@ $(document).ready(function () {
         if (Array.isArray(questions) && questions.length) {
             let div = "";
             // alert(questions[0].question.name);
-
+            let i = 1;
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
                 div = div + "<div class='row py-2 px-3 p-2'>";
-                div = div + "<div class='col-sm-10' style='cursor:pointer;' data-toggle='modal' data-target='#courseObjQuestionModal' data-whatever='" + JSON.stringify(value) + "'>";
-                if (value.question.name.length > 100)
-                    div = div + "<p class='question'>" + value.question.name.substr(0, 100) + " ...</p>";
-                else
-                    div = div + "<p class='question'>" + value.question.name + "</p>";
+                div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-target='#courseObjQuestionModal' data-whatever='" + JSON.stringify(value) + "'>";
+                // if (value.question.name.length > 100)
+                //     div = div + "<p class='question'>" + value.question.name.substr(0, 100) + " ...</p>";
+                // else
+                    div = div + "<p class='question'>Q." + i + " "+ value.question.name + "</p>";
                 div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level " + value.blooms_level + "</p>";
                 div = div + "</div>";
-                div = div + "<div class='col-sm-2 text-center d-flex align-items-center'>";
+                div = div + "<div class='col-sm-1 text-center d-flex align-items-center justify-content-start'>";
                 if (value.bookmarked == 1)
                     div = div + "<a class='unbookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'><i class='fas fa-bookmark'></i></a>";
                 else
                     div = div + "<a class='bookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'><i class='far fa-bookmark'></i></a>";
                 div = div + "</div></div></div>";
+                i++;
             });
             // alert(div); 
             $('#objQuestions').append(div);
@@ -1423,38 +1585,65 @@ $(document).ready(function () {
         let question = button.data('whatever'); // Extract info from data-* attributes
         // alert(question.options[0].name);
         $('#questionModalQuestion').html(question.question.name);
-        $('#questionModalOptionA').text(question.options[0].name);
-        $('#questionModalOptionB').text(question.options[1].name);
-        $('#questionModalOptionC').text(question.options[2].name);
-        $('#questionModalOptionD').text(question.options[3].name);
+        $('#questionModalOptionA').html(question.options[0].name);
+        $('#questionModalOptionB').html(question.options[1].name);
+        $('#questionModalOptionC').html(question.options[2].name);
+        $('#questionModalOptionD').html(question.options[3].name);
+        // alert(question.options[2].is_answer);
 
 
         if (question.question.media == 1) {
+            $("#questionModalQuestionTr").append("<td><a href='#' id='questionModalQuestionImgA'><img src='' width='100' id='questionModalQuestionImg' alt='No Image'></a></td>")
             $("#questionModalQuestionImgA").attr("href", question.question.img);
             $("#questionModalQuestionImgA").attr("target", "_blank");
             $("#questionModalQuestionImg").attr("src", question.question.img);
         }
 
         if (question.options[0].media == 1) {
+            $("#questionModalOptionATr").append("<td><a href='#' id='questionModalOptionAImgA'><img src='' width='100' id='questionModalOptionAImg' alt='No Image'></a></td>")
             $("#questionModalOptionAImgA").attr("href", question.options[0].img);
             $("#questionModalOptionAImgA").attr("target", "_blank");
             $("#questionModalOptionAImg").attr("src", question.options[0].img);
         }
         if (question.options[1].media == 1) {
+            $("#questionModalOptionBTr").append("<td><a href='#' id='questionModalOptionBImgA'><img src='' width='100' id='questionModalOptionBImg' alt='No Image'></a></td>")
             $("#questionModalOptionBImgA").attr("href", question.options[1].img);
             $("#questionModalOptionBImgA").attr("target", "_blank");
             $("#questionModalOptionBImg").attr("src", question.options[1].img);
         }
         if (question.options[2].media == 1) {
+            $("#questionModalOptionCTr").append("<td><a href='#' id='questionModalOptionCImgA'><img src='' width='100' id='questionModalOptionCImg' alt='No Image'></a></td>")
             $("#questionModalOptionCImgA").attr("href", question.options[2].img);
             $("#questionModalOptionCImgA").attr("target", "_blank");
             $("#questionModalOptionCImg").attr("src", question.options[2].img);
         }
         if (question.options[3].media == 1) {
+            $("#questionModalOptionDTr").append("<td><a href='#' id='questionModalOptionCImgA'><img src='' width='100' id='questionModalOptionDImg' alt='No Image'></a></td>")
             $("#questionModalOptionDImgA").attr("href", question.options[3].img);
             $("#questionModalOptionDImgA").attr("target", "_blank");
             $("#questionModalOptionDImg").attr("src", question.options[3].img);
         }
+
+        
+        if(question.options[0].is_answer == 1)
+            $('#questionModalOptionA').css("color","green");
+        else
+            $('#questionModalOptionA').css("color","black");
+        
+        if(question.options[1].is_answer == 1)
+            $('#questionModalOptionB').css("color","green");
+        else
+            $('#questionModalOptionB').css("color","black");
+
+        if(question.options[2].is_answer == 1)
+            $('#questionModalOptionC').css("color","darkgreen");    
+        else
+            $('#questionModalOptionC').css("color","black");
+
+        if(question.options[3].is_answer == 1)
+            $('#questionModalOptionD').css("color","darkgreen"); 
+        else
+            $('#questionModalOptionD').css("color","black");
 
     });
 

@@ -120,7 +120,7 @@
 
         <div class="container" id="theMainDiv"><!-- put everything in this div -->
 
-          <section class="mx-5">
+          <section class="px-0">
             <div class="container mb-5">
               <div class="row">
                 <div class="col-sm-12">
@@ -304,7 +304,7 @@
 
                           <div class="col-sm-9">
 
-                            <section class="mx-5">
+                            <section class="px-5">
                               <div class="container mb-5">
                                 <div class="row">
                                   <div class="col-md-12">
@@ -456,200 +456,202 @@
 
 
         <!-- modal -->
-      <!-- start content modal -->
-      <div class="modal fade" id="courseContentModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-      role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content" id="modalContent">
-          <!-- <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div> -->
-          <div class="modal-body px-5">
-            <form enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="courseTypeAdd">Type</label>
-                <select class="form-control" id="courseTypeAdd" style="max-width: 200px;">
-                  <option value="1">Document</option>
-                  <option value="7">PDF</option>
-                  <option value="4">Videos</option>
-                  <option value="3">PPT</option>
-                  <option value="URL">Other Links</option>
-                </select>
-              </div>
-              <div class="form-group" id="fileDiv">
-                <label for="courseFileAdd">Attachment</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="courseFileAdd">
-                  <label class="custom-file-label" for="courseFileAdd">Choose file</label>
+        <!-- start content modal -->
+        <div class="modal fade" id="courseContentModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" id="modalContent">
+            <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div> -->
+            <div class="modal-body px-5">
+              <form enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="courseTypeAdd">Type</label>
+                  <select class="form-control" id="courseTypeAdd" style="max-width: 200px;">
+                    <option value="1">Document</option>
+                    <option value="7">PDF</option>
+                    <option value="4">Videos</option>
+                    <option value="3">PPT</option>
+                    <option value="URL">Other Links</option>
+                  </select>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="courseTitleAdd">Title</label>
-                <input type="text" class="form-control coursetab" id="courseTitleAdd"
-                  placeholder="Enter Your Content's Title">
-              </div>
-              <div class="form-group">
-                <label for="courseTags">Tag Topics</label>
-                <ul class="courseTagsUl" id="courseTags">
-                  <!-- <li class="courseTagsLi">
-                          <input type='radio' class="courseTagsInput" value='1' name='radio' id='radio1' />
-                          <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
-                        </li>
-                        <li class="courseTagsLi">
-                          <input type='radio' class="courseTagsInput" value='4' name='radio' id='radio1' />
-                          <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
-                        </li>
-                        <li class="courseTagsLi">
-                          <input type='radio' class="courseTagsInput"  value='2' name='radio' id='radio2' />
-                          <label for='radio2' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hgdjsf</label>
-                        </li>
-                        <li class="courseTagsLi">
-                          <input type='radio' class="courseTagsInput"  value='3' name='radio' id='radio3' />
-                          <label for='radio3' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hjcsxcd</label>
-                        </li> -->
-                </ul>
-              </div>
-              <div class="form-group">
-                <label for="courseTypeAdd">Make Public</label>
-                <div class="onoffswitch">
-                  <input type="checkbox" class="onoffswitch-checkbox" id="courseDisplayTypeAdd" value="public"
-                    tabindex="0" checked>
-                  <label class="onoffswitch-label" for="courseDisplayTypeAdd">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                  </label>
+                <div class="form-group" id="fileDiv">
+                  <label for="courseFileAdd">Attachment</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="courseFileAdd" accept=".doc,.docx">
+                    <label class="custom-file-label" for="courseFileAdd">Choose file</label>
+                  </div>
+                  <a class="pt-1" href="#" id="courseFileAddATag" target="_blank" style="display: none;">View File</a><br>
+                  <small id="contentModalSmall" style="display: none;">While editing file is not mandatory</small>
+                </div>                
+                <div class="form-group">
+                  <label for="courseTitleAdd">Title</label>
+                  <input type="text" class="form-control coursetab" id="courseTitleAdd"
+                    placeholder="Enter Your Content's Title">
                 </div>
-              </div>
-              <!-- <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                      </div> -->
-              <!-- <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                      </div>
-                    </form> -->
-              <hr>
-              <div class="row text-center">
-                <div class="col-sm-6">
-                  <button type="button" class="btn btn-primary" id="courseAddSave"><i class="fas fa-save"></i>
-                    Save</button>
+                <div class="form-group">
+                  <label for="courseTags">Tag Topics</label>
+                  <ul class="courseTagsUl" id="courseTags">
+                    <!-- <li class="courseTagsLi">
+                            <input type='radio' class="courseTagsInput" value='1' name='radio' id='radio1' />
+                            <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
+                          </li>
+                          <li class="courseTagsLi">
+                            <input type='radio' class="courseTagsInput" value='4' name='radio' id='radio1' />
+                            <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
+                          </li>
+                          <li class="courseTagsLi">
+                            <input type='radio' class="courseTagsInput"  value='2' name='radio' id='radio2' />
+                            <label for='radio2' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hgdjsf</label>
+                          </li>
+                          <li class="courseTagsLi">
+                            <input type='radio' class="courseTagsInput"  value='3' name='radio' id='radio3' />
+                            <label for='radio3' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hjcsxcd</label>
+                          </li> -->
+                  </ul>
                 </div>
-                <div class="col-sm-6">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <div class="form-group">
+                  <label for="courseTypeAdd">Make Public</label>
+                  <div class="onoffswitch">
+                    <input type="checkbox" class="onoffswitch-checkbox" id="courseDisplayTypeAdd" value="public"
+                      tabindex="0" checked>
+                    <label class="onoffswitch-label" for="courseDisplayTypeAdd">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            </form>
+                <!-- <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Recipient:</label>
+                          <input type="text" class="form-control" id="recipient-name">
+                        </div> -->
+                <!-- <div class="form-group">
+                          <label for="message-text" class="col-form-label">Message:</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                      </form> -->
+                <hr>
+                <div class="row text-center">
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-primary" id="courseAddSave"><i class="fas fa-save"></i>
+                      Save</button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- end content modal -->
+        </div>
+        <!-- end content modal -->
 
-    <!-- statt question modal -->
-    <div class="modal fade" id="courseObjQuestionModal" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content" id="modalContent">
-          <div class="modal-body">
-            <table class="table table-bordered text-center" >
-              <tr>
-                <th style="width: 10%;">Question</th>
-                <td style="width: 70%;">
-                  <span id="questionModalQuestion">Question</span>
-                </td>
-                <td style="width: 20%;">
-                  <a href="#" id="questionModalQuestionImgA"><img src="../images/onlineCourses.png" width="100"
-                      id="questionModalQuestionImg" alt="No Image"></a>
-                </td>
-              </tr>
-              <tr>
-                <th>Option A</th>
-                <td>
-                  <p id="questionModalOptionA">Option A</p>
-                </td>
-                <td><a href="#" id="questionModalOptionAImgA"><img src="../images/onlineCourses.png" width="100"
-                      id="questionModalOptionAImg" alt="No Image"></a></td>
-              </tr>
-              <tr>
-                <th>Option B</th>
-                <td>
-                  <p id="questionModalOptionB">Option B</p>
-                </td>
-                <td><a href="#" id="questionModalOptionBImgA"><img src="../images/onlineCourses.png" width="100"
-                      id="questionModalOptionBImg" alt="No Image"></a></td>
-              </tr>
-              <tr>
-                <th>Option C</th>
-                <td>
-                  <p id="questionModalOptionC">Option C</p>
-                </td>
-                <td><a href="#" id="questionModalOptionCImgA"><img src="../images/onlineCourses.png" width="100"
-                      id="questionModalOptionCImg" alt="No Image"></a></td>
-              </tr>
-              <tr>
-                <th>Option D</th>
-                <td>
-                  <p id="questionModalOptionD">Option D</p>
-                </td>
-                <td><a href="#" id="questionModalOptionDImgA"><img src="../images/onlineCourses.png" width="100"
-                      id="questionModalOptionDImg" alt="No Image"></a></td>
-              </tr>
-            </table>
+        <!-- statt question modal -->
+        <div class="modal fade" id="courseObjQuestionModal" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="modalContent">
+              <div class="modal-body" style="overflow-x: auto;">
+                <table class="table table-bordered text-center" >
+                  <tr id="questionModalQuestionTr">
+                    <th>Question</th>
+                    <td>
+                      <span id="questionModalQuestion">Question</span>
+                    </td>
+                    <!-- <td>
+                      <a href="#" id="questionModalQuestionImgA"><img src="../images/onlineCourses.png" width="100"
+                          id="questionModalQuestionImg" alt="No Image"></a>
+                    </td> -->
+                  </tr>
+                  <tr id="questionModalOptionATr">
+                    <th>Option A</th>
+                    <td>
+                      <p id="questionModalOptionA">Option A</p>
+                    </td>
+                    <!-- <td><a href="#" id="questionModalOptionAImgA"><img src="../images/onlineCourses.png" width="100"
+                          id="questionModalOptionAImg" alt="No Image"></a></td> -->
+                  </tr>
+                  <tr id="questionModalOptionBTr">
+                    <th>Option B</th>
+                    <td>
+                      <p id="questionModalOptionB">Option B</p>
+                    </td>
+                    <!-- <td><a href="#" id="questionModalOptionBImgA"><img src="../images/onlineCourses.png" width="100"
+                          id="questionModalOptionBImg" alt="No Image"></a></td> -->
+                  </tr>
+                  <tr id="questionModalOptionCTr">
+                    <th>Option C</th>
+                    <td>
+                      <p id="questionModalOptionC">Option C</p>
+                    </td>
+                    <!-- <td><a href="#" id="questionModalOptionCImgA"><img src="../images/onlineCourses.png" width="100"
+                          id="questionModalOptionCImg" alt="No Image"></a></td> -->
+                  </tr>
+                  <tr id="questionModalOptionDTr">
+                    <th>Option D</th>
+                    <td>
+                      <p id="questionModalOptionD">Option D</p>
+                    </td>
+                    <!-- <td><a href="#" id="questionModalOptionDImgA"><img src="../images/onlineCourses.png" width="100"
+                          id="questionModalOptionDImg" alt="No Image"></a></td> -->
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- end question modal -->
+        <!-- end question modal -->
 
-    <!-- start image modal -->
-    <div class="modal fade" id="courseQuestionImageModal" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content" id="modalContent">
-          <div class="modal-body">
-            <a href="#" id="modalImageA"><img class="responsive" id="modalImage" width="100%" height="100%" src=""
-                alt="No Image" style="width: 100%;height: 100%;"></a>
+        <!-- start image modal -->
+        <div class="modal fade" id="courseQuestionImageModal" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="modalContent">
+              <div class="modal-body">
+                <a href="#" id="modalImageA"><img class="responsive" id="modalImage" width="100%" height="100%" src=""
+                    alt="No Image" style="width: 100%;height: 100%;"></a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- end image modal -->
+        <!-- end image modal -->
 
-    <!-- end modal -->
+        <!-- end modal -->
 
-    <!-- toasts -->
-    <div>
-      <!-- start error toast -->
-      <div class="toast fade" data-autohide="false" id="errorToast">
-        <div class="toast-header">
-          <strong class="mr-auto text-danger">Error !!!</strong>
-          <small class="text-muted">Just Now</small>
+        <!-- toasts -->
+        <div>
+          <!-- start error toast -->
+          <div class="toast fade" data-autohide="false" id="errorToast">
+            <div class="toast-header">
+              <strong class="mr-auto text-danger">Error !!!</strong>
+              <small class="text-muted">Just Now</small>
+            </div>
+            <div class="toast-body">
+              <p id="errorToastBody">All fields are mandatory to save.</p>
+            </div>
+          </div>
+          <!-- end error toast -->
+
+          <!-- start success toast -->
+          <div class="toast fade" data-autohide="false" id="successToast">
+            <div class="toast-header">
+              <strong class="mr-auto text-success">Success !!!</strong>
+              <small class="text-muted">Just Now</small>
+            </div>
+            <div class="toast-body">
+              <p id="successToastBody">Content has been saved successfully.</p>
+            </div>
+          </div>
+          <!-- end success toast -->
+
         </div>
-        <div class="toast-body">
-          <p id="errorToastBody">All fields are mandatory to save.</p>
-        </div>
-      </div>
-      <!-- end error toast -->
 
-      <!-- start success toast -->
-      <div class="toast fade" data-autohide="false" id="successToast">
-        <div class="toast-header">
-          <strong class="mr-auto text-success">Success !!!</strong>
-          <small class="text-muted">Just Now</small>
-        </div>
-        <div class="toast-body">
-          <p id="successToastBody">Content has been saved successfully.</p>
-        </div>
-      </div>
-      <!-- end success toast -->
-
-    </div>
-
-    <!-- end toasts -->
+        <!-- end toasts -->
 
         <!-- End Page Content -->
       </div>
@@ -659,7 +661,7 @@
   <!-- body-row END -->
 </body>
 <!-- add extra js files here -->
-<script src="../../backend/sidebar.js"></script>
+<!-- <script src="../../backend/sidebar.js"></script> -->
 <script src="../../backend/courseDetails.js"></script>
 
 </html>
