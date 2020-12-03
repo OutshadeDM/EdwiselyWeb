@@ -669,7 +669,7 @@ $(document).ready(function () {
                             'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
                         },
                         success: function (result) {
-                            alert(result.message);
+                            // alert(result.message);
                             $('#modalContent').css('position', 'absolute');
                             $('#courseContentModal').modal('toggle');
                             editCourseContentFlag = false;
@@ -808,7 +808,7 @@ $(document).ready(function () {
             });
             // alert(value);
         });
-        alert(files[0].topic_code);
+        // alert(files[0].topic_code);
 
         return files;
     }
