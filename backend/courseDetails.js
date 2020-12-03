@@ -1102,9 +1102,9 @@ $(document).ready(function () {
         let questionSwitch = $("#questionSwitch").val();
         // alert(unit_id);
 
-        // let questionBloomsLevel = $('#questionBloomsLevel').val();
-        // let questionTopics = $('#questionTopics').val();
-        // let questionCatagory = $('#questionCatagory').val();
+        $('#questionBloomsLevel').val("0");
+        $('#questionTopics').val("0");
+        $('#questionCatagory').val("0");
         
         $('#questionTopics').empty();
         $('#questionTopics').append("<option value='0'>All</option>");
