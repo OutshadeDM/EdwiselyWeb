@@ -123,6 +123,9 @@
               <div class="divInput">
                 <input class="form-control form-control-lg" type="text"
                   placeholder="Click to start Typing your question" id="quesInput">
+                <div class="titleImg py-3"><i class="fas fa-image fa-lg px-2 "></i>
+                  <label for="inputImage" class="custom-file-upload">Add Image</label>
+                  <input id="inputImage" type="file" /></div>
               </div>
               <div class="row pt-4">
                 <div class="col-6">
@@ -153,7 +156,7 @@
                   <div class="row options">
                     <div class="col-2 selectOption mx-0 pt-1 firstOption"><i class="far fa-square fa-lg "></i></div>
                     <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Default input"></div>
+                        placeholder="Default input" id="firstOption"></div>
                     <div class="col-2 chooseImage mx-0 pt-1 firstOption"><i class="fas fa-image fa-lg "></i></div>
                   </div>
                 </div>
@@ -162,7 +165,7 @@
                   <div class="row options">
                     <div class="col-2 selectOption mx-0 pt-1 secondOption"><i class="far fa-square fa-lg "></i></div>
                     <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Default input"></div>
+                        placeholder="Default input" id="secondOption"></div>
                     <div class="col-2 chooseImage mx-0 pt-1 secondOption"><i class="fas fa-image fa-lg "></i></div>
                   </div>
                 </div>
@@ -175,7 +178,7 @@
                   <div class="row options">
                     <div class="col-2 selectOption mx-0 pt-1 thirdOption"><i class="far fa-square fa-lg "></i></div>
                     <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Default input"></div>
+                        placeholder="Default input" id="thirdOption"></div>
                     <div class="col-2 chooseImage mx-0 pt-1 thirdOption"><i class="fas fa-image fa-lg "></i></div>
                   </div>
                 </div>
@@ -184,10 +187,24 @@
                   <div class="row options">
                     <div class="col-2 selectOption mx-0 pt-1 fourthOption"><i class="far fa-square fa-lg "></i></div>
                     <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Default input"></div>
+                        placeholder="Default input" id="fourthOption"></div>
                     <div class="col-2 chooseImage mx-0 pt-1 fourthOption"><i class="fas fa-image fa-lg "></i></div>
                   </div>
                 </div>
+              </div>
+
+              <div class="divInput mt-5 mb-3" id="hintDiv">
+                <input class="form-control form-control-lg" type="text" placeholder="Hint" id="hintInput">
+                <div class="titleImg py-3"><i class="fas fa-image fa-lg px-2 "></i>
+                  <label for="inputImage" class="custom-file-upload">Add Image</label>
+                  <input id="hintImage" type="file" /></div>
+              </div>
+
+              <div class="divInput my-3" id="solutionDiv">
+                <input class="form-control form-control-lg" type="text" placeholder="Solution" id="solutionInput">
+                <div class="titleImg py-3"><i class="fas fa-image fa-lg px-2 "></i>
+                  <label for="inputImage" class="custom-file-upload">Add Image</label>
+                  <input id="solutionImage" type="file" /></div>
               </div>
 
 
@@ -206,6 +223,48 @@
                   <label class="custom-control-label" for="customSwitch1">Public</label>
                 </div>
 
+
+                <!-- Button trigger modal -->
+
+                <div class="py-3 my-1 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
+                  data-target="#exampleModal">
+
+                  <i class="fas fa-bars pl-2 pr-0"></i>
+
+                  <span class=" pl-2 pr-2">Topics</span>
+                  <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 20px;"></i>
+
+
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <ul class="courseTopics" id="topicTags">
+
+                          </ul>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <button class="btn btn-primary btn-block mt-3 py-0 shadow-sm" id="hintBtn">Add Hint</button>
+                <button class="btn btn-primary btn-block mt-3 py-0 shadow-sm" id="solutionBtn">Add Solution</button>
+                <button class="btn btn-primary btn-block mt-3 py-0 shadow-sm" id="plusBtn">+</button>
+
               </div>
             </div>
           </div>
@@ -219,6 +278,6 @@
 </body>
 <!-- add extra js files here -->
 <script src="../../backend/sidebar.js"></script>
-<script src="../../backend/createAssessment.js"></script>
+<script src="../../backend/Addques.js"></script>
 
 </html>

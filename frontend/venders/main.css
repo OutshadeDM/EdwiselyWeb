@@ -393,7 +393,7 @@ body{
 /* addques page */
 
 .addques {
-  height: 60vh;
+  height: 80vh;
   align-items: center;
 }
 
@@ -406,8 +406,42 @@ body{
 
 #quesInput {
   height: 80px;
+  width: 75%;
   background-color: transparent;
   border: none;
+display: inline-block;
+}
+
+#hintInput {
+  height: 80px;
+  width: 75%;
+  background-color: transparent;
+  border: none;
+display: inline-block;
+}
+
+#solutionInput {
+  height: 80px;
+  width: 75%;
+  background-color: transparent;
+  border: none;
+display: inline-block;
+}
+
+#inputImage {
+  display: none;
+}
+
+#hintImage {
+  display: none;
+}
+
+#solutionImage {
+  display: none;
+}
+
+.titleImg {
+  display: inline-block;
 }
 
 .levelSelect{
@@ -439,6 +473,16 @@ body{
 .fourthOption {
   background-color: #4ED8EA;
   color: white;
+}
+
+#hintBtn {
+  border: none;
+}
+#solutionBtn {
+  border: none;
+}
+#plusBtn {
+  border: none;
 }
 
 #sourceInput {
