@@ -12,6 +12,7 @@ $(document).ready(function () {
   //initially hidin the hint and solution divs
   $('#hintDiv').hide()
   $('#solutionDiv').hide()
+  $('#fifth').hide()
 
 
   //on click of hint btn
@@ -23,6 +24,118 @@ $(document).ready(function () {
   $('#solutionBtn').on('click', function () {
     $('#solutionDiv').show()
   })
+
+  //onclick of add option btn
+  $('.fifthOptionBtn').on('click', function () {
+    $('.fifthOptionBtn').hide()
+    $('#fifth').show()
+
+  })
+
+  //initially hide the uploaded fonticons and image
+  $('.uploadedques').hide()
+  $('.uploadedhint').hide()
+  $('.uploadedsolution').hide()
+  $('.imgPreviewques').hide()
+  $('.imgPreviewhint').hide()
+  $('.imgPreviewsolution').hide()
+
+
+
+
+  //displaying ques image 
+  function readURLques(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image_preview_ques').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#quesImage").change(function () {
+    readURLques(this);
+    //changing styles
+    $('.uploadedques').show()
+    $('.imgPreviewques').show()
+    $('.notUploadedques').hide()
+
+  });
+
+
+  //displaying hint image
+  function readURLhint(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image_preview_hint').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#hintImage").change(function () {
+    readURLhint(this);
+    $('.uploadedhint').show()
+    $('.imgPreviewhint').show()
+    $('.notUploadedhint').hide()
+  });
+
+
+
+  //displaying solution image
+  function readURLsolution(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image_preview_solution').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#solutionImage").change(function () {
+    readURLsolution(this);
+    $('.uploadedsolution').show()
+    $('.imgPreviewsolution').show()
+    $('.notUploadedsolution').hide()
+  });
+
+
+
+
+  //on click of delete image changing the styling again
+  $('.uploadedques').on('click', function () {
+    $('.uploadedques').hide()
+    $('.notUploadedques').show()
+    $('.imgPreviewques').hide()
+    $('#quesImage').val('')
+  })
+
+  $('.uploadedhint').on('click', function () {
+    $('.uploadedhint').hide()
+    $('.notUploadedhint').show()
+    $('.imgPreviewhint').hide()
+    $('#hintImage').val('')
+  })
+
+  $('.uploadedsolution').on('click', function () {
+    $('.uploadedsolution').hide()
+    $('.notUploadedsolution').show()
+    $('.imgPreviewsolution').hide()
+    $('#solutionImage').val('')
+  })
+
+
+
+
+
 
 
 
@@ -82,8 +195,22 @@ $(document).ready(function () {
 
 
 
+  let question = $('#quesInput').val()
   let hint = $('#hintInput').val()
-
+  let solution = $('#solutionInput').val()
+  let source = $('#sourceInput').val()
+  let bloom_level = $('.bloomSelect').val()
+  let difficulty_level = $('.levelSelect').val()
+  let topics = []
+  let field_type = 1
+  let question_img
+  let solution_img
+  let hint_img
+  let option1_img
+  let option2_img
+  let option3_img
+  let option4_img
+  let option5_img
 
 
 
@@ -96,7 +223,7 @@ $(document).ready(function () {
 
   //window
 
-  //let type = $("input[name='courseTagAdd']:checked").val();
+  //let type = $("input[name='topicTagAdd']:checked").val();
 
   let type = ''
   if ($("#customSwitch1:checked")) {
@@ -105,16 +232,78 @@ $(document).ready(function () {
     type = 'private'
   }
 
-  // alert(type)
+  // radios for selecting
+  $('.tick').hide()
 
 
-  //on click of + btn
+  $('.radiostest').on('change', function () {
+    if ($('#Radios1').is(':checked') === true) {
+      $('.untick1').hide()
+      $('.untick2').show()
+      $('.untick3').show()
+      $('.untick4').show()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick1').show()
+      $('.tick2').hide()
+      $('.tick3').hide()
+      $('.tick4').hide()
+    }
+    if ($('#Radios2').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').hide()
+      $('.untick3').show()
+      $('.untick4').show()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick2').show()
+      $('.tick1').hide()
+      $('.tick3').hide()
+      $('.tick4').hide()
+    }
+    if ($('#Radios3').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').show()
+      $('.untick3').hide()
+      $('.untick4').show()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick3').show()
+      $('.tick2').hide()
+      $('.tick1').hide()
+      $('.tick4').hide()
+    }
+    if ($('#Radios4').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').show()
+      $('.untick3').show()
+      $('.untick4').hide()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick4').show()
+      $('.tick2').hide()
+      $('.tick3').hide()
+      $('.tick1').hide()
+    }
+    if ($('#Radios5').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').show()
+      $('.untick3').show()
+      $('.untick4').show()
+      $('.untick5').hide()
+      $('.tick4').hide()
+      $('.tick2').hide()
+      $('.tick3').hide()
+      $('.tick1').hide()
+      $('.tick5').show()
+    }
+  })
 
 
 
 
 
-
+  //on click of + btn(post request)
 
 
 
@@ -122,3 +311,27 @@ $(document).ready(function () {
 
 
 })
+
+
+
+
+
+
+
+// //to select multiple values of selected checkboxes
+
+// $("#merge_button").click(function(event){
+//   event.preventDefault();
+//   var searchIDs = $("#find-table input:checkbox:checked").map(function(){
+//     return $(this).val();
+//   }).get(); // <----
+//   console.log(searchIDs);
+// });
+
+
+
+
+//// resetiing the input file
+//
+//$('#example-file').val('')
+//

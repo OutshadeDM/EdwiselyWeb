@@ -352,9 +352,23 @@ body{
   background-color: #EEEEEE;
 }
 
+.imgPreviewques {
+  height: 50px;
+  width: 100px;
+}
+
+.imgPreviewhint {
+  height: 50px;
+  width: 100px;
+}
+
+.imgPreviewsolution {
+  height: 50px;
+  width: 100px;
+}
 #quesInput {
   height: 80px;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   border: none;
 display: inline-block;
@@ -362,7 +376,7 @@ display: inline-block;
 
 #hintInput {
   height: 80px;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   border: none;
 display: inline-block;
@@ -370,13 +384,13 @@ display: inline-block;
 
 #solutionInput {
   height: 80px;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   border: none;
 display: inline-block;
 }
 
-#inputImage {
+#quesImage {
   display: none;
 }
 
@@ -386,6 +400,29 @@ display: inline-block;
 
 #solutionImage {
   display: none;
+}
+
+#opt1Image {
+  display: none;
+}
+#opt2Image {
+  display: none;
+}
+
+#opt3Image {
+  display: none;
+}
+
+#opt4Image {
+  display: none;
+}
+
+#opt5Image {
+  display: none;
+}
+
+.optImgs {
+  color: white;
 }
 
 .titleImg {
@@ -423,6 +460,18 @@ display: inline-block;
   color: white;
 }
 
+.fifthOption {
+  background-color: #FF6B6B;
+  color: white;
+}
+
+
+.fifthOptionBtn {
+  color: white;
+  background-color: #FF6B6B;
+}
+
+
 #hintBtn {
   border: none;
 }
@@ -438,6 +487,14 @@ display: inline-block;
   background-color: transparent;
   border: none;
 }
+
+
+ 
+.radiostest {
+  display: none;
+} 
+
+
 
 /* end addques page */
 
