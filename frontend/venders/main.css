@@ -402,6 +402,29 @@ display: inline-block;
   display: none;
 }
 
+#opt1Image {
+  display: none;
+}
+#opt2Image {
+  display: none;
+}
+
+#opt3Image {
+  display: none;
+}
+
+#opt4Image {
+  display: none;
+}
+
+#opt5Image {
+  display: none;
+}
+
+.optImgs {
+  color: white;
+}
+
 .titleImg {
   display: inline-block;
 }
@@ -464,6 +487,14 @@ display: inline-block;
   background-color: transparent;
   border: none;
 }
+
+
+ 
+.radiostest {
+  display: none;
+} 
+
+
 
 /* end addques page */
 

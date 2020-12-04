@@ -108,6 +108,37 @@ $(document).ready(function () {
   });
 
 
+
+
+  //on click of delete image changing the styling again
+  $('.uploadedques').on('click', function () {
+    $('.uploadedques').hide()
+    $('.notUploadedques').show()
+    $('.imgPreviewques').hide()
+    $('#quesImage').val('')
+  })
+
+  $('.uploadedhint').on('click', function () {
+    $('.uploadedhint').hide()
+    $('.notUploadedhint').show()
+    $('.imgPreviewhint').hide()
+    $('#hintImage').val('')
+  })
+
+  $('.uploadedsolution').on('click', function () {
+    $('.uploadedsolution').hide()
+    $('.notUploadedsolution').show()
+    $('.imgPreviewsolution').hide()
+    $('#solutionImage').val('')
+  })
+
+
+
+
+
+
+
+
   //get topics api
 
   $('#exampleModal').on('shown.bs.modal', function (event) {
@@ -201,6 +232,77 @@ $(document).ready(function () {
     type = 'private'
   }
 
+  // radios for selecting
+  $('.tick').hide()
+
+
+  $('.radiostest').on('change', function () {
+    if ($('#Radios1').is(':checked') === true) {
+      $('.untick1').hide()
+      $('.untick2').show()
+      $('.untick3').show()
+      $('.untick4').show()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick1').show()
+      $('.tick2').hide()
+      $('.tick3').hide()
+      $('.tick4').hide()
+    }
+    if ($('#Radios2').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').hide()
+      $('.untick3').show()
+      $('.untick4').show()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick2').show()
+      $('.tick1').hide()
+      $('.tick3').hide()
+      $('.tick4').hide()
+    }
+    if ($('#Radios3').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').show()
+      $('.untick3').hide()
+      $('.untick4').show()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick3').show()
+      $('.tick2').hide()
+      $('.tick1').hide()
+      $('.tick4').hide()
+    }
+    if ($('#Radios4').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').show()
+      $('.untick3').show()
+      $('.untick4').hide()
+      $('.untick5').show()
+      $('.tick5').hide()
+      $('.tick4').show()
+      $('.tick2').hide()
+      $('.tick3').hide()
+      $('.tick1').hide()
+    }
+    if ($('#Radios5').is(':checked') === true) {
+      $('.untick1').show()
+      $('.untick2').show()
+      $('.untick3').show()
+      $('.untick4').show()
+      $('.untick5').hide()
+      $('.tick4').hide()
+      $('.tick2').hide()
+      $('.tick3').hide()
+      $('.tick1').hide()
+      $('.tick5').show()
+    }
+  })
+
+
+
+
+
   //on click of + btn(post request)
 
 
@@ -208,10 +310,28 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
 })
+
+
+
+
+
+
+
+// //to select multiple values of selected checkboxes
+
+// $("#merge_button").click(function(event){
+//   event.preventDefault();
+//   var searchIDs = $("#find-table input:checkbox:checked").map(function(){
+//     return $(this).val();
+//   }).get(); // <----
+//   console.log(searchIDs);
+// });
+
+
+
+
+//// resetiing the input file
+//
+//$('#example-file').val('')
+//
