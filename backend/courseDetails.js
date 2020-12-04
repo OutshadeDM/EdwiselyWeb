@@ -273,10 +273,13 @@ $(document).ready(function () {
                                         files.push({
                                             "material_id": value.material_id,
                                             "title": value.title,
+                                            "topic_code": value.topic_code,
                                             "url": value.file_url,
                                             "type": value.type,
                                             "level": value.level,
-                                            learning_content:"1"
+                                            "learning_content":"1",
+                                            "bookmarked": value.bookmarked,
+                                            "topic_id": value.topic_id
                                         });
                                         // div = div + "</div>";
                                     });
@@ -307,6 +310,116 @@ $(document).ready(function () {
             }
         });
     });
+
+    function processFiles(result = []) {
+
+        let files = [];
+
+        $.each(result.academic_materials, function (key, value) {
+            files.push({
+                "material_id": value.material_id,
+                "title": value.title,
+                "topic_code": value.topic_code,
+                "url": value.file_url,
+                "type": value.type,
+                "level": value.level,
+                "learning_content": "1",
+                "bookmarked": value.bookmarked,
+                "topic_id": value.topic_id
+            });
+            // div = div + "</div>";
+        });
+
+        $.each(result.learning_content, function (key, value) {
+            // alert(value.title);
+            files.push({
+                "material_id": value.material_id,
+                "title": value.title,
+                "topic_code": value.topic_code,
+                "url": value.file_url,
+                "type": value.type,
+                "level": value.level,
+                "learning_content": "0",
+                "bookmarked": value.bookmarked,
+                "topic_id": value.topic_id
+            });
+            // alert(value);
+        });
+        // alert(files[0].topic_code);
+
+        return files;
+    }
+
+    function displayFiles(files = [], courseType, courseLevel) {
+
+        let div = "";
+
+        if (files) {
+            $.each(files, function (key, value) {
+                if (
+                    ((courseType == value.type || (courseType == 'DOCS' && value.type == 'PDF') || (courseType == 'VIDEO' && value.type == 'MP4')) || courseType == "0") 
+
+                && (courseLevel == value.level || courseLevel == "0")) {
+                    div = div + "<div class='row my-2'>";
+                    div = div + "<div class='col-sm-1 d-flex justify-content-end'>";
+                    switch (value.type) {
+                        case "DOCS":
+                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            break;
+                        case "PDF":
+                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            break;
+                        case "VIDEO":
+                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
+                            break;
+                        case "MP4":
+                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
+                            break;
+                        case "PPT":
+                            div = div + "<i class='fas fa-file-powerpoint fa-2x'></i>";
+                            break;
+                        case "URL":
+                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
+                            break;
+                        default:
+                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
+                    }
+                    // div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                    div = div + "</div>";
+                    div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-url='" + value.url + "'>";
+                    div = div + "<h6>" + value.title + "</h6>";
+                    div = div + "</div>";
+                    div = div + "<div class='col-sm-2 d-flex justify-content-end'>";
+                    if(value.learning_content == "1" || value.bookmarked == "0" || value.bookmarked == "1"){
+                        div = div + "<div class='dropdown pr-1'>";
+                        div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+                        div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
+                        div = div + "</button>";
+                        div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+                        if (value.learning_content == "1")
+                            div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
+
+                        let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
+                        if (value.bookmarked == "0")
+                            div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>Bookmark</a>";
+                        else if(value.bookmarked == "1")
+                            div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>UnBookmark</a>";
+                        if (value.learning_content == "1")
+                            div = div + "<a class='dropdown-item deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'>Delete</a>";
+                        div = div + "</div></div>";    
+                    }
+                    div = div + "</div></div>";
+                }
+                // alert(value);
+            });
+            if (div)
+                $('#courseFiles').append(div);
+            else
+                $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+        }
+        else
+            $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+    }
 
     $('#courseType').on('change', function () {
         $("#nav-content-tab").click();
@@ -359,6 +472,14 @@ $(document).ready(function () {
         // modal.find('.modal-body input').val(recipient)
         // alert("here");
 
+        $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            position: "raltive",
+            width: "100%",
+            height: "100%",
+            background: "#fff",
+            opacity: 0.7
+        }).appendTo($("#courseTags"));
+
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id=' + subSemId,
@@ -369,6 +490,7 @@ $(document).ready(function () {
             },
             success: function (result) {
                 // alert(result.status);
+                $("#loadingDiv").remove();
                 $('#courseTags').empty();
                 if (result.status == 200 && Array.isArray(result.data) && result.data.length) {
                     let i = 1;
@@ -389,6 +511,7 @@ $(document).ready(function () {
                 if (material_id) {
 
                     // alert(material_id+" "+type+" "+topic_code+" "+title);
+                    // alert(type);
 
                     switch (type) {
                         case "DOCS":
@@ -412,6 +535,7 @@ $(document).ready(function () {
 
                     $("#courseTitleAdd").val(title);
                     // $("input[name='courseTagAdd']").val(topic_code);
+                    // alert(topic_code);
                     $("input[name='courseTagAdd'][value='" + topic_code + "']").prop("checked", true);
                     $("input[name='courseTagAdd']:checked").siblings(".show1").click();
                     // alert($("input[name='courseTagAdd']:checked").val());
@@ -429,6 +553,7 @@ $(document).ready(function () {
             },
             error: function (error) {
                 alert(result.message);
+                $("#loadingDiv").remove();
             }
         });
 
@@ -439,7 +564,8 @@ $(document).ready(function () {
         $("#courseFileAdd").val(null);
         $("#courseTitleAdd").val(null);
         $('input[name="courseTagAdd"]').prop('checked', false);
-        $("#courseDisplayTypeAdd").val(null);
+        let value1 = $("#courseDisplayTypeAdd").is(':checked') ? "public" : 'private';
+        $("#courseDisplayTypeAdd").val(value1);
         $("#courseFileAddATag").attr("href","#");
         $("#courseFileAddATag").hide();
         $("#contentModalSmall").hide();
@@ -708,7 +834,7 @@ $(document).ready(function () {
         let courseFileUrlAdd = $("#courseFileAddATag").attr('href');
         // $('#successToast').toast('show');
         // $('#errorToast').toast('show');
-        // alert(courseUnits);
+        alert(courseDisplayTypeAdd);
 
 
         // $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -882,116 +1008,6 @@ $(document).ready(function () {
         }
     });
 
-    function processFiles(result = []) {
-
-        let files = [];
-
-        $.each(result.academic_materials, function (key, value) {
-            files.push({
-                "material_id": value.material_id,
-                "title": value.title,
-                "topic_code": value.topic_code,
-                "url": value.file_url,
-                "type": value.type,
-                "level": value.level,
-                "learning_content": "1",
-                "bookmarked": value.bookmarked,
-                "topic_id": value.topic_id
-            });
-            // div = div + "</div>";
-        });
-
-        $.each(result.learning_content, function (key, value) {
-            // alert(value.title);
-            files.push({
-                "material_id": value.material_id,
-                "title": value.title,
-                "topic_code": value.topic_code,
-                "url": value.file_url,
-                "type": value.type,
-                "level": value.level,
-                "learning_content": "0",
-                "bookmarked": value.bookmarked,
-                "topic_id": value.topic_id
-            });
-            // alert(value);
-        });
-        // alert(files[0].topic_code);
-
-        return files;
-    }
-
-    function displayFiles(files = [], courseType, courseLevel) {
-
-        let div = "";
-
-        if (files) {
-            $.each(files, function (key, value) {
-                if (
-                    ((courseType == value.type || (courseType == 'DOCS' && value.type == 'PDF') || (courseType == 'VIDEO' && value.type == 'MP4')) || courseType == "0") 
-
-                && (courseLevel == value.level || courseLevel == "0")) {
-                    div = div + "<div class='row my-2'>";
-                    div = div + "<div class='col-sm-1 d-flex justify-content-end'>";
-                    switch (value.type) {
-                        case "DOCS":
-                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
-                            break;
-                        case "PDF":
-                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
-                            break;
-                        case "VIDEO":
-                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
-                            break;
-                        case "MP4":
-                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
-                            break;
-                        case "PPT":
-                            div = div + "<i class='fas fa-file-powerpoint fa-2x'></i>";
-                            break;
-                        case "URL":
-                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
-                            break;
-                        default:
-                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
-                    }
-                    // div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
-                    div = div + "</div>";
-                    div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-url='" + value.url + "'>";
-                    div = div + "<h6>" + value.title + "</h6>";
-                    div = div + "</div>";
-                    div = div + "<div class='col-sm-2 d-flex justify-content-end'>";
-                    if(value.learning_content == "1" || value.bookmarked == "0" || value.bookmarked == "1"){
-                        div = div + "<div class='dropdown pr-1'>";
-                        div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-                        div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
-                        div = div + "</button>";
-                        div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-                        if (value.learning_content == "1")
-                            div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
-
-                        let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
-                        if (value.bookmarked == "0")
-                            div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>Bookmark</a>";
-                        else if(value.bookmarked == "1")
-                            div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>UnBookmark</a>";
-                        if (value.learning_content == "1")
-                            div = div + "<a class='dropdown-item deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'>Delete</a>";
-                        div = div + "</div></div>";    
-                    }
-                    div = div + "</div></div>";
-                }
-                // alert(value);
-            });
-            if (div)
-                $('#courseFiles').append(div);
-            else
-                $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
-        }
-        else
-            $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
-    }
-
     function clearModal(){
         $("#loadingDiv").remove();
         $('#modalContent').css('position', 'absolute');
@@ -1002,6 +1018,8 @@ $(document).ready(function () {
         $('#courseType').val("0");
         $('#courseLevel').val("0");
         $('#courseCatagory').val("all");
+        courseBookmarkedFlag = false;
+        courseYourContentFlag = false;
     }
 
     function refreshQuestions(){
