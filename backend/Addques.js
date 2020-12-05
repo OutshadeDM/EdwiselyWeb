@@ -162,7 +162,7 @@ $(document).ready(function () {
           $.each(result.data, function (key, value) {
             // alert(value);
 
-            $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.name + "'/><label for='topicTagAdd" + value.name + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
+            $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
 
           });
 
@@ -183,54 +183,6 @@ $(document).ready(function () {
   })
 
 
-
-
-
-
-
-
-
-  //preparing for post api of questions
-
-
-
-
-  let question = $('#quesInput').val()
-  let hint = $('#hintInput').val()
-  let solution = $('#solutionInput').val()
-  let source = $('#sourceInput').val()
-  let bloom_level = $('.bloomSelect').val()
-  let difficulty_level = $('.levelSelect').val()
-  let topics = []
-  let field_type = 1
-  let question_img
-  let solution_img
-  let hint_img
-  let option1_img
-  let option2_img
-  let option3_img
-  let option4_img
-  let option5_img
-
-
-
-  let options = []
-  options.push($('#firstOption').val())
-  options.push($('#secondOption').val())
-  options.push($('#thirdOption').val())
-  options.push($('#fourthOption').val())
-
-
-  //window
-
-  //let type = $("input[name='topicTagAdd']:checked").val();
-
-  let type = ''
-  if ($("#customSwitch1:checked")) {
-    type = 'public'
-  } else {
-    type = 'private'
-  }
 
   // radios for selecting
   $('.tick').hide()
@@ -300,14 +252,224 @@ $(document).ready(function () {
   })
 
 
+  //preparing for post api of questions
+
+  let question = ''
+  let hint = ''
+  let solution = ''
+  let source = ''
+  let bloom_level = 1
+  let difficulty_level = 1
+  let field_type = 1
+  //
+  let topics = []
+  let options = []
+  //
+  let option1 = ''
+  let option2 = ''
+  let option3 = ''
+  let option4 = ''
+  let option5 = ''
+  //
+  let question_img = ""
+  let solution_img = ""
+  let hint_img = ""
+  let option1_img = ""
+  let option2_img = ""
+  let option3_img = ""
+  let option4_img = ""
+  let option5_img = ""
+
+
+  //textboxes and dropdowns
+  $('#quesInput').on('change', function () {
+    question = $('#quesInput').val()
+  })
+  $('#hintInput').on('change', function () {
+    hint = $('#hintInput').val()
+  })
+  $('#solutionInput').on('change', function () {
+    solution = $('#solutionInput').val()
+  })
+  $('#sourceInput').on('change', function () {
+    source = $('#sourceInput').val()
+  })
+  $('.bloomSelect').on('change', function () {
+    bloom_level = $('.bloomSelect').val()
+  })
+  $('.levelSelect').on('change', function () {
+    difficulty_level = $('.levelSelect').val()
+  })
+  $('#firstOption').on('change', function () {
+    option1 = $('#firstOption').val()
+  })
+  $('#secondOption').on('change', function () {
+    option2 = $('#secondOption').val()
+  })
+  $('#thirdOption').on('change', function () {
+    option3 = $('#thirdOption').val()
+  })
+  $('#fourthOption').on('change', function () {
+    option4 = $('#fourthOption').val()
+  })
+  $('#fifthOption').on('change', function () {
+    option5 = $('#fifthOption').val()
+  })
+
+  //images
+  // $('#quesImage').on('change', function () {
+  //   question_img = $('#quesImage').val()
+  // })
+  // $('#hintImage').on('change', function () {
+  //   hint_img = $('#hintImage').val()
+  // })
+  // $('#solutionImage').on('change', function () {
+  //   solution_img = $('#solutionImage').val()
+  // })
+  // $('#opt1Image').on('change', function () {
+  //   option1_img = $('#opt1Image').val()
+  // })
+  // $('#opt2Image').on('change', function () {
+  //   option2_img = $('#opt2Image').val()
+  // })
+  // $('#opt3Image').on('change', function () {
+  //   option3_img = $('#opt3Image').val()
+  // })
+  // $('#opt4Image').on('change', function () {
+  //   option4_img = $('#opt4Image').val()
+  // })
+  // $('#opt5Image').on('change', function () {
+  //   option5_img = $('#opt5Image').val()
+  // })
+
+
+
+
+
+  let type = ''
+
+  $('#customSwitch1').on('change', function () {
+    if ($("input[name='public_pvt']:checked").val() === 'public') {
+      type = "public"
+    } else {
+      type = "private"
+    }
+  })
+
+  let answer = ''
+  $('input[name=Radios]').on('change', function () {
+    answer = $('input[name=Radios]:checked').val()
+  })
+
+
+
+  // //to select multiple values of selected checkboxes
+
+
+
+  //alert("hello")
+
+  $(document).on('click', '.topicTagsInput', function () {
+    topics.push({ "id": $(this).val(), "type": $(this).data('type').charAt(0) + $(this).data('type').charAt(1).toUpperCase() + $(this).data('type').slice(2) });
+  })
+
+
 
 
 
   //on click of + btn(post request)
 
+  $('#plusBtn').on('click', function () {
+
+    //saving in array
+    options.push("" + option1 + "")
+    options.push("" + option2 + "")
+    if (option3 !== "") {
+      options.push("" + option3 + "")
+    }
+    if (option4 !== "") {
+      options.push("" + option4 + "")
+    }
+    if (option5 !== "") {
+      options.push("" + option5 + "")
+    }
+
+    //making objects
+
+
+    //  for (i = 0; i < options.length; i++) {
+    //    options.push({ "id": topics[i].id, "type": topics[i].type })
+
+    //  console.log(objects)
+
+    //making the form
+
+    //let question_img = $("#quesImage")[0].files[0];
 
 
 
+
+    var form = new FormData();
+    form.append("question", question);
+    //form.append("topics", JSON.stringify(topics, null, 1).replace(/^ +/gm, " ").replace(/\n/g, "").replace(/{ /g, "{").replace(/ }/g, "}").replace(/\[ /g, "[").replace(/ \]/g, "]"));
+    //form.append("topics", JSON.stringify([{ "id": "13779", "type": "GTopic" }]))
+    //form.append("topics", JSON.stringify([{ "id": "13779", "type": "Gtopic" }]))
+    form.append("topics", JSON.stringify(topics))
+    form.append("options", "[" + '"' + options.join('","') + '"' + "]");
+    form.append("blooms_level", bloom_level);
+    form.append("difficulty_level", difficulty_level);
+    form.append("hint", hint);
+    form.append("source", source);
+    form.append("type", type);
+    form.append("field_type", field_type);
+    form.append("answer", answer);
+    form.append("question_img", question_img);
+    form.append("solution_img", solution_img);
+    form.append("option1_img", option1_img);
+    form.append("option2_img", option2_img);
+    form.append("option3_img", option3_img);
+    form.append("option4_img", option4_img);
+    form.append("option5_img", option5_img);
+    form.append("solution", solution);
+    form.append("hint_img", hint_img);
+
+
+    for (var key of form.entries()) {
+      console.log(key[1]);
+    }
+
+
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/addObjectiveQuestion',
+      type: 'POST',
+      dataType: 'json',
+      data: form,
+      contentType: false,
+      processData: false,
+      headers: {
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjc0MjYyMyIsImV4cCI6IjE2MDgwMzg2MjMifQ.74y5dyBOCgwbVs7gUDn2Nn_ZRGrQhUhwD_waW9ialJk'
+      },
+      success: function (result) {
+        //alert(result.message);
+        //console.log('4') 
+        options = []
+        topics = []
+        //alert(result.message)
+
+        if (result.status == 200) {
+          //alert(result.message)
+          console.log(result.data)
+          //window.location.href = "AddQuestionspage.html"
+        }
+      },
+      error: function (result) {
+        alert(result.message);
+        //console.log('5')
+
+      }
+    });
+
+  })
 
 
 })
@@ -316,22 +478,11 @@ $(document).ready(function () {
 
 
 
-
-
-// //to select multiple values of selected checkboxes
-
-// $("#merge_button").click(function(event){
-//   event.preventDefault();
-//   var searchIDs = $("#find-table input:checkbox:checked").map(function(){
-//     return $(this).val();
-//   }).get(); // <----
-//   console.log(searchIDs);
-// });
-
-
-
-
 //// resetiing the input file
 //
 //$('#example-file').val('')
 //
+
+
+
+//        let courseFileAdd = $("#courseFileAdd")[0].files[0];
