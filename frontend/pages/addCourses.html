@@ -9,6 +9,7 @@
   <!-- add custom stylesheet here -->
   <link href="../venders/main.css" rel="stylesheet">
   <link href="../venders/sidebar.css" rel="stylesheet">
+  <link href="../venders/radiostyle.css" rel="stylesheet">
 
   <!-- font-awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -115,14 +116,27 @@
 
         <div class="container" id="theMainDiv"><!-- put everything in this div -->
 
-          <div class="form-group px-5" style="max-width: 250px;line-height: 40px;">
-            <div class="fake-input">
-              <input type="text" autocomplete="off" placeholder="Search Courses" id="courseSelect"
-              onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Courses'" class="single-input">
-              <i class="fas fa-search" aria-hidden="true"></i>
-            </div> 
-            <div id="courseSelectList" class="autocomplete-items"></div>
-          </div> 
+          <div class="row px-3 pb-3">
+
+            <div class="form-group px-5" style="max-width: 350px;line-height: 40px;">
+              <div class="fake-input">
+                <input type="text" autocomplete="off" placeholder="Search Courses" id="courseSelect"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Courses'" class="single-input">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </div> 
+              <div id="courseSelectList" class="autocomplete-items"></div>
+            </div>
+            <div class="form-group">
+              <select class="form-control"  id="courseSelectDept" style="max-width: 200px;height: 50px;max-height: 50px;">
+                <option value="0" selected disabled>Select Department</option>
+                <option value="1">Document</option>
+                <option value="7">PDF</option>
+                <option value="4">Videos</option>
+                <option value="3">PPT</option>
+              </select>
+            </div>
+
+          </div>
           <!--Courses List-->
           <div class="container-fluid pt-1 px-5 listDiv">
             <div class="row" id="courseList">
@@ -169,51 +183,90 @@
   </div>
 
   <!-- modal -->
-  <!-- start content modal -->
-  <div class="modal fade" id="courseModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" id="modalContent">
+    <!-- start content modal -->
+    <div class="modal fade" id="courseModal" tabindex="-1"
+          role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content p-3" id="modalContent">
 
-        <h5 class="font-weight-bold" id="courseModalHeader">FInilize Adding Database Management Systems to Your Courses</h5>
-        <div class="p-5">
-          <h5 class="font-weight-bold">Which Department DO Your Teach</h5>
-          <ul class="courseTagsUl" id="courseModalDept">
-            <li class="courseTagsLi">
-              <input type='radio' class="courseTagsInput" value='1' name='courseDept' id='radio1' />
-              <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
-            </li>
-            <li class="courseTagsLi">
-              <input type='radio' class="courseTagsInput" value='4' name='courseDept' id='radio1' />
-              <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
-            </li>
-          </ul>
-          <h5 class="font-weight-bold">Pick Your Class</h5>
-          <ul class="courseTagsUl" id="courseModalClass">
-            <li class="courseTagsLi">
-              <input type='radio' class="courseTagsInput" value='1' name='courseClass' id='radio1' />
-              <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
-            </li>
-            <li class="courseTagsLi">
-              <input type='radio' class="courseTagsInput" value='4' name='radio' id='radio1' />
-              <label for='radio1' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
-            </li>
-            <li class="courseTagsLi">
-              <input type='radio' class="courseTagsInput"  value='2' name='radio' id='radio2' />
-              <label for='radio2' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hgdjsf</label>
-            </li>
-            <li class="courseTagsLi">
-              <input type='radio' class="courseTagsInput"  value='3' name='radio' id='radio3' />
-              <label for='radio3' class="courseTagsLabel show"><i class="fas fa-check" style="display: none;"></i> hjcsxcd</label>
-            </li>
-          </ul>
-        </div>
+          <h6 class="font-weight-bold" id="courseModalHeader">FInilize Adding Database Management Systems to Your Courses</h6>
+          <div class="px-4 py-2">
+            <h6 class="font-weight-bold">Which Department Do Your Teach</h6>
+            <ul class="courseTagsUl" id="courseModalDept">
+              <!-- <li class="courseTagsLi">
+                <input type='radio' class="courseTagsInput" value='1' name='courseDept' id='radio1' />
+                <label for='radio1' class="courseTagsLabel show1"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
+              </li>
+              <li class="courseTagsLi">
+                <input type='radio' class="courseTagsInput" value='4' name='courseDept' id='radio2' />
+                <label for='radio2' class="courseTagsLabel show1"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
+              </li> -->
+            </ul>
+            <h6 class="font-weight-bold">Pick Your Class</h6>
+            <ul class="courseTagsUl" id="courseModalClass">
+              <!-- <li class="courseTagsLi">
+                <input type='checkbox' class="courseTagsInput" value='1' name='courseClass' id='checkbox1' />
+                <label for='checkbox1' class="courseTagsLabel show2"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
+              </li>
+              <li class="courseTagsLi">
+                <input type='checkbox' class="courseTagsInput" value='4' name='courseClass' id='checkbox2' />
+                <label for='checkbox2' class="courseTagsLabel show2"><i class="fas fa-check" style="display: none;"></i> Hadhsb</label>
+              </li>
+              <li class="courseTagsLi">
+                <input type='checkbox' class="courseTagsInput"  value='2' name='courseClass' id='checkbox3' />
+                <label for='checkbox3' class="courseTagsLabel show2"><i class="fas fa-check" style="display: none;"></i> hgdjsf</label>
+              </li>
+              <li class="courseTagsLi">
+                <input type='checkbox' class="courseTagsInput"  value='3' name='courseClass' id='checkbox4' />
+                <label for='checkbox4' class="courseTagsLabel show2"><i class="fas fa-check" style="display: none;"></i> hjcsxcd</label>
+              </li> -->
+            </ul>
+            <div class="row pt-3 text-center">
+              <div class="col-sm-6">
+                <button type="button" class="btn btn-primary" id="modalSaveBtn"><i class="fas fa-save"></i>
+                  Save</button>
+              </div>
+              <div class="col-sm-6">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
 
-      </div>        
+        </div>        
+      </div>
     </div>
+    <!-- end content modal -->
+  <!-- end modal -->
+
+  <!-- toasts -->
+  <div>
+    <!-- start error toast -->
+    <div class="toast fade" data-autohide="false" id="errorToast">
+      <div class="toast-header">
+        <strong class="mr-auto text-danger">Error !!!</strong>
+        <small class="text-muted">Just Now</small>
+      </div>
+      <div class="toast-body">
+        <p id="errorToastBody">All fields are mandatory to save.</p>
+      </div>
+    </div>
+    <!-- end error toast -->
+
+    <!-- start success toast -->
+    <div class="toast fade" data-autohide="false" id="successToast">
+      <div class="toast-header">
+        <strong class="mr-auto text-success">Success !!!</strong>
+        <small class="text-muted">Just Now</small>
+      </div>
+      <div class="toast-body">
+        <p id="successToastBody">Content has been saved successfully.</p>
+      </div>
+    </div>
+    <!-- end success toast -->
+
   </div>
-  <!-- end content modal -->
-<!-- end modal -->
+
+  <!-- end toasts -->
 
 
 

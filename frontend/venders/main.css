@@ -86,7 +86,7 @@ body{
 }
 
 .toast{
-  position: absolute;
+  position: fixed;
   top: 10px;
   right: 10px;
   z-index: 999999;
@@ -272,7 +272,7 @@ body{
 /* addcourses */
 
 .span-dept{
-  background: #F7F1E3;
+  background: #f8c6f8;
   border-radius: 10px;
   font-size: 10px;
 }

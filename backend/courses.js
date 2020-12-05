@@ -35,7 +35,7 @@ $(document).ready(function () {
                 $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-            alert(result.message);
+            alert(error);
         }
     });
 

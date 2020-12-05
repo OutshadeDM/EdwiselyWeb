@@ -67,7 +67,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(result.message);
+                alert(error);
             }
         });
 
@@ -138,7 +138,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(result.message);
+                alert(error);
             }
         });
 
@@ -217,7 +217,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(result.message);
+                                alert(error);
                             }
                         });
                     }
@@ -252,7 +252,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(result.message);
+                                alert(error);
                             }
                         });
 
@@ -298,7 +298,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(result.message);
+                                alert(error);
                             }
                         });
 
@@ -557,7 +557,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(result.message);
+                alert(error);
                 $("#loadingDiv").remove();
             }
         });
@@ -727,7 +727,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
         }
@@ -779,7 +779,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
         }
@@ -821,7 +821,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
         }
@@ -907,7 +907,6 @@ $(document).ready(function () {
                         success: function (result) {
                             // alert(result.message);
                             $('#modalContent').css('position', 'absolute');
-                            $('#courseContentModal').modal('toggle');
                             editCourseContentFlag = false;
                             if (result.status == 200) {
                                 $("#courseAddSave").removeData("id");
@@ -942,7 +941,7 @@ $(document).ready(function () {
                             $(".custom-file-label").removeClass("selected").html("Choose file");
                             courseFileAdd = null;
                             $("#courseFileAdd").val(null);
-                            alert(result.message);
+                            alert(error);
                         }
                     });
                 }
@@ -970,7 +969,6 @@ $(document).ready(function () {
                     },
                     success: function (result) {
                         // alert(result.message);
-                        $('#modalContent').css('position', 'absolute');
                         $('#courseContentModal').modal('toggle');
                         if (result.status == 200 && result.material_id) {
                             $("#courseAddSave").removeData("id");
@@ -1000,7 +998,7 @@ $(document).ready(function () {
                         $(".custom-file-label").removeClass("selected").html("Choose File");
                         $("#courseFileAdd").val(null);
                         courseFileAdd = null;
-                        alert(result.message);
+                        alert(error);
                     }
                 });
             }
@@ -1092,7 +1090,7 @@ $(document).ready(function () {
                             }
                         },
                         error: function (error) {
-                            alert(result.message);
+                            alert(error);
                         }
                     });
 
@@ -1100,7 +1098,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(result.message);
+                alert(error);
             }
         });
     });
@@ -1164,7 +1162,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(result.message);
+                alert(error);
             }
         });
 
@@ -1261,7 +1259,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
 
@@ -1312,7 +1310,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
 
@@ -1373,7 +1371,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
 
@@ -1424,7 +1422,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(result.message);
+                    alert(error);
                 }
             });
 
