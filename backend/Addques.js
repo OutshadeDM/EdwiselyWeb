@@ -317,30 +317,44 @@ $(document).ready(function () {
   })
 
   //images
-  // $('#quesImage').on('change', function () {
-  //   question_img = $('#quesImage').val()
-  // })
-  // $('#hintImage').on('change', function () {
-  //   hint_img = $('#hintImage').val()
-  // })
-  // $('#solutionImage').on('change', function () {
-  //   solution_img = $('#solutionImage').val()
-  // })
-  // $('#opt1Image').on('change', function () {
-  //   option1_img = $('#opt1Image').val()
-  // })
-  // $('#opt2Image').on('change', function () {
-  //   option2_img = $('#opt2Image').val()
-  // })
-  // $('#opt3Image').on('change', function () {
-  //   option3_img = $('#opt3Image').val()
-  // })
-  // $('#opt4Image').on('change', function () {
-  //   option4_img = $('#opt4Image').val()
-  // })
-  // $('#opt5Image').on('change', function () {
-  //   option5_img = $('#opt5Image').val()
-  // })
+  $('#quesImage').on('change', function () {
+    //question_img = $('#quesImage').val()
+    question_img = $("#quesImage")[0].files[0];
+
+  })
+  $('#hintImage').on('change', function () {
+    // hint_img = $('#hintImage').val()
+    hint_img = $("#hintImage")[0].files[0];
+
+  })
+  $('#solutionImage').on('change', function () {
+    // solution_img = $('#solutionImage').val()
+    solution_img = $("#solutionImage")[0].files[0];
+
+  })
+  $('#opt1Image').on('change', function () {
+    // option1_img = $('#opt1Image').val()
+    option1_img = $("#opt1Image")[0].files[0];
+
+  })
+  $('#opt2Image').on('change', function () {
+    // option2_img = $('#opt2Image').val()
+    option2_img = $("#opt2Image")[0].files[0];
+
+  })
+  $('#opt3Image').on('change', function () {
+    // option3_img = $('#opt3Image').val()
+    option3_img = $("#opt3Image")[0].files[0];
+
+  })
+  $('#opt4Image').on('change', function () {
+    // option4_img = $('#opt4Image').val()
+    option4_img = $("#opt4Image")[0].files[0];
+
+  })
+  $('#opt5Image').on('change', function () {
+    option5_img = $('#opt5Image')[0].files[0]
+  })
 
 
 
@@ -434,9 +448,9 @@ $(document).ready(function () {
     form.append("hint_img", hint_img);
 
 
-    for (var key of form.entries()) {
-      console.log(key[1]);
-    }
+    // for (var key of form.entries()) {
+    //   console.log(key[1]);
+    // }
 
 
     $.ajax({
@@ -454,12 +468,13 @@ $(document).ready(function () {
         //console.log('4') 
         options = []
         topics = []
-        //alert(result.message)
+        alert(result.message)
 
         if (result.status == 200) {
-          //alert(result.message)
           console.log(result.data)
-          //window.location.href = "AddQuestionspage.html"
+          $('.initData').remove()
+          $('#addques').prepend(`<div class="addObjQuestions mb-1"><ol class="questionsUl ml-0"><li class="questionsLi" id="${result.data.id}"> ${result.data.name}</li></ol></div>`)
+
         }
       },
       error: function (result) {
@@ -473,16 +488,3 @@ $(document).ready(function () {
 
 
 })
-
-
-
-
-
-//// resetiing the input file
-//
-//$('#example-file').val('')
-//
-
-
-
-//        let courseFileAdd = $("#courseFileAdd")[0].files[0];

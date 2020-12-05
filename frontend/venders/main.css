@@ -487,12 +487,22 @@ display: inline-block;
   background-color: transparent;
   border: none;
 }
-
-
  
 .radiostest {
   display: none;
 } 
+
+
+.addObjQuestions {
+  border-bottom: solid 1px black;
+  text-align: left;
+  font-size: large;
+}
+ 
+/*.questionsUl{
+  
+} */
+
 
 
 
