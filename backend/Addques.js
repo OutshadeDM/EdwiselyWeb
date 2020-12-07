@@ -154,7 +154,7 @@ $(document).ready(function () {
         'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
       },
       success: function (result) {
-        //alert(result.status);
+        alert(result.status);
         //alert(subSemId)
 
         $('#topicTags').empty();
@@ -478,7 +478,7 @@ $(document).ready(function () {
         }
       },
       error: function (result) {
-        alert(result.message);
+        alert(error);
         //console.log('5')
 
       }

@@ -3,7 +3,7 @@ $(document).ready(function () {
 
 
   $('#createAssessmentBtn').on('click', function () {
-    window.location.href = "CreateAssessmentpage.html"
+    window.location.href = "createAssessmentpage.html"
   })
 
 
@@ -16,12 +16,16 @@ $(document).ready(function () {
     },
     success: function (result) {
       // alert(result.status);
-      $('#courseTags').empty();
+      $('#objective-assessments').empty();
+      $('#objective-assessments').append("<option value='0'>All</option>");
+      $('#subjective-assessments').empty();
+      $('#subjective-assessments').append("<option value='0'>All</option>");
       if (result.status == 200 && result.data) {
         $.each(result.data, function (key, value) {
           // alert(value);
 
           $('#objective-assessments').append("<option value=" + value.id + ">" + value.name + "</option>");
+          $('#subjective-assessments').append("<option value=" + value.id + ">" + value.name + "</option>");
 
         });
 
@@ -29,60 +33,24 @@ $(document).ready(function () {
 
     },
     error: function (error) {
-      alert(result.message);
+      alert(error);
     }
   });
 
-  $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTests',
-    type: 'GET',
-    contentType: 'application/json',
-    headers: {
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjI4MDA5NyIsImV4cCI6IjE2MDc1NzYwOTcifQ.53VXe4V8WCJUTogRAxiBmN-PRn8FkGd1il_SkgLh1RE'
-    },
-    success: function (result) {
-      // alert(result.status);
-      $('#objectiveassessmentList').empty();
-      if (result.status == 200) {
-        $.each(result.data, function (key, value) {
-
-
-
-          if (value.questions_count)
-            $('#objectiveassessmentList').append(
-              "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-              "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-              "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-              "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-              "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
-            );
-          else
-            $('#objectiveassessmentList').append(
-              "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-              "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-              "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-              "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-              "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentAddBtn'><a href='../pages/AddQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Add</a></button></div></div>"
-            );
-        });
-      }
-      else
-        $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
-    },
-    error: function (error) {
-      alert(result.message);
-    }
-  });
-
-
+  getObjAssesments();
 
 
   $('#objective-assessments').change(function () {
+    getObjAssesments();
+  });
 
+  function getObjAssesments(){
+    $('#subjective-assessments').val("0");
     let subject = $('#objective-assessments').val()
-    //alert(subject)
+    // alert(subject)
 
     if (subject == 0) {
+      // alert("here");
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTests',
@@ -97,22 +65,20 @@ $(document).ready(function () {
           if (result.status == 200) {
             $.each(result.data, function (key, value) {
 
-
-
               if (value.questions_count)
                 $('#objectiveassessmentList').append(
-                  "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-                  "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                  "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
+                  "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
+                  "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                  "</h5><button class='btn editBtn' data-id='" + value.subject_id +"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
                   "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
                 );
               else
                 $('#objectiveassessmentList').append(
-                  "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-                  "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                  "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
+                  "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
+                  "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                  "</h5><button class='btn editBtn' data-id='" + value.subject_id +"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
                   "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentAddBtn'><a href='../pages/AddQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Add</a></button></div></div>"
                 );
             });
@@ -121,13 +87,10 @@ $(document).ready(function () {
             $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(result.message);
+          alert(error);
         }
       });
     }
-
-
-
     else {
 
       $.ajax({
@@ -143,37 +106,34 @@ $(document).ready(function () {
           if (result.status == 200) {
             $.each(result.data, function (key, value) {
 
-
-
               if (value.questions_count)
                 $('#objectiveassessmentList').append(
-                  "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-                  "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                  "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
+                  "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
+                  "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                  "</h5><button class='btn editBtn' data-id='"+value.subject_id+"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
                   "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
                 );
               else
-                $('#objectiveassessmentList').append(
-                  "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-                  "'><div class='card mb-3 objCard text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                  "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-                  "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentAddBtn'><a href='../pages/AddQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Add</a></button></div></div>"
-                );
+              $('#objectiveassessmentList').append(
+                "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
+                "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                "</h5><button class='btn editBtn' data-id='"+value.subject_id+"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
+                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
+              );
             });
           }
           else
             $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(result.message);
+          alert(error);
         }
       });
 
     }
-
-  })
+  }
 
 
   //for send btn
@@ -189,84 +149,121 @@ $(document).ready(function () {
 
   //for edit button
   $(document).on('click', '.editBtn', function () {
-    window.location.href = "AddQuestionspage.html?subSemId="
+    let subSemId = $(this).data('id');
+    window.location.href = "AddQuestionspage.html?subSemId="+subSemId;
   })
 
 
-
-
   //different  tab
-  $("#nav-syllabus-tab").click(function () {
-    // alert("The paragraph was clicked.");
+  $("#nav-sub-tab").click(function () {
+    getSubAssesments();
+    $('#objective-assessments').val("0");
+  });
 
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
-      },
-      success: function (result) {
-        // alert(result.status);
-        $('#courseTags').empty();
-        if (result.status == 200 && result.data) {
-          $.each(result.data, function (key, value) {
-            // alert(value);
+  $('#subjective-assessments').change(function () {
+    getSubAssesments();
+  });
 
-            $('#subjective-assessments').append("<option value=" + value.id + ">" + value.name + "</option>");
+  function getSubAssesments(){
+    let subject = $('#objective-assessments').val()
+    // alert(subject)
 
-          });
+    if (subject == "0") {
+      // alert("here");
 
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectiveTests',
+        type: 'GET',
+        contentType: 'application/json',
+        headers: {
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+        },
+        success: function (result) {
+          // alert(result.status);
+          $('#subjectiveassessmentList').empty();
+          if (result.status == 200) {
+            $.each(result.data, function (key, value) {
+  
+              if (value.questions_count)
+                $('#subjectiveassessmentList').append(
+                  "<div class='col-sm-6 assessment'><div class='card mb-3 text-left'>"+
+                  "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                  "</h5><button class='btn editBtn' data-id='"+value.subSemId+"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
+                  "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</button></div></div>"
+                );
+              else
+                $('#subjectiveassessmentList').append(
+                  "<div class='col-sm-6 assessment'><div class='card mb-3 text-left'>"+
+                  "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                  "</h5><button class='btn editBtn' data-id='"+value.subSemId+"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
+                  "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</button></div></div>"
+                );
+            });
+          }
+          else
+            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+        },
+        error: function (error) {
+          alert(result.message);
         }
+      });
+    }
+    else {
 
-      },
-      error: function (error) {
-        alert(result.message);
-      }
-    });
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectWiseSubjectiveTests?subject_id=' + subject,
+        type: 'GET',
+        contentType: 'application/json',
+        headers: {
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjI4MDA5NyIsImV4cCI6IjE2MDc1NzYwOTcifQ.53VXe4V8WCJUTogRAxiBmN-PRn8FkGd1il_SkgLh1RE'
+        },
+        success: function (result) {
+          // alert(result.status);
+          $('#subjectiveassessmentList').empty();
+          if (result.status == 200) {
+            $.each(result.data, function (key, value) {
 
-
-
-
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectiveTests',
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
-      },
-      success: function (result) {
-        // alert(result.status);
-        $('#subjectiveassessmentList').empty();
-        if (result.status == 200) {
-          $.each(result.data, function (key, value) {
-
-            if (value.questions_count)
+              if (value.questions_count)
+                $('#subjectiveassessmentList').append(
+                  "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
+                  "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                  "</h5><button class='btn editBtn' data-id='"+value.subject_id+"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                  "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
+                  "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
+                );
+              else
               $('#subjectiveassessmentList').append(
-                "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-                "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</button></div></div>"
+                "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
+                "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
+                "</h5><button class='btn editBtn' data-id='"+value.subject_id+"'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
+                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
+                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
               );
-            else
-              $('#subjectiveassessmentList').append(
-                "<div class='col-sm-6 assessment' data-subSemId='" + value.subject_id +
-                "'><div class='card mb-3 text-left'><h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><button class='btn editBtn'><i class='fas fa-pen'></i></button><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions:" + value.questions_count +
-                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</button></div></div>"
-              );
-          });
+            });
+          }
+          else
+            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+        },
+        error: function (error) {
+          alert(error);
         }
-        else
-          $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
-      },
-      error: function (error) {
-        alert(result.message);
-      }
-    });
+      });
 
+    }
+  }
+
+  $('.input-group.date').datepicker({
+    format: "yyyy-mm-dd",
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true
+  });
+  $("#nav-cond-tab").click(function () {
+    // getSubAssesments();
+    $('#subjective-assessments').val("0");
+    $('#objective-assessments').val("0");
   });
 
 
