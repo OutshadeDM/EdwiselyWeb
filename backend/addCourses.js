@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id=71',
         type: 'GET',
