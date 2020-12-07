@@ -277,6 +277,15 @@ body{
   font-size: 10px;
 }
 
+.addCourseCard{
+  height: 400px;
+  max-height: 400px;
+}
+
+.addCourseCard .card-body{
+  padding: 15px;
+}
+
 /* end addcourses */
 
 /* my assessments */
