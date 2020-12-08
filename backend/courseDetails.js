@@ -275,6 +275,7 @@ $(document).ready(function () {
                                 let files = [];
                                 if (result.status == 200 && result.data) {
                                     $.each(result.data, function (key, value) {
+										let learning_content = 
                                         files.push({
                                             "material_id": value.material_id,
                                             "title": value.title,
@@ -282,7 +283,7 @@ $(document).ready(function () {
                                             "url": value.file_url,
                                             "type": value.type,
                                             "level": value.level,
-                                            "learning_content":"1",
+                                            "learning_content":value.faculty_content,
                                             "bookmarked": value.bookmarked,
                                             "topic_id": value.topic_id
                                         });

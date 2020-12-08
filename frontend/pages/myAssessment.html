@@ -178,52 +178,105 @@
 
 
                 <div class="tab-pane fade" id="nav-cond" role="tabpanel" aria-labelledby="nav-cond-tab">
-                  <div class="pt-5">
-                    <div class="row">
-                      <div class="col-lg-2">
-                        <div class="input-group date">
-                            <i class="far fa-calendar-alt"></i>
-                          <input type="text" class="form-control" placeholder="Filter By Date" style="min-width: 150px;; min-height: 100%;">
-                          <span class="input-group-addon">
-                          </span>
+                  <div class="row p-2 pt-5">
+                    <div class="col-md-12">
+                      <nav class="col-md-6">
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                          <a class="nav-item nav-link active font-weight-bold" id="nav-cond-obj-tab" data-toggle="tab"
+                            href="#nav-cond-obj" role="tab" aria-controls="nav-cond-obj" aria-selected="true">Objective</a>
+                          <a class="nav-item nav-link font-weight-bold" id="nav-cond-sub-tab" data-toggle="tab"
+                            href="#nav-cond-sub" role="tab" aria-controls="nav-cond-sub" aria-selected="false">Subjective</a>
                         </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <select class="form-control form-control-lg" id="cond-assessments" style="width: 100%;">
-                          <option value="0" selected disabled>Filter Assessment By Section</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-6">
-                        <select class="form-control form-control-lg" id="cond-assessments">
-                          <option value="0">Filter Assessment By Subject</option>
-                        </select>
+                      </nav>
+        
+        
+                      <!-- tab1 -->
+                      <div class="tab-content" id="nav-tabContent">
+
+                        <div class="tab-pane fade show active" id="nav-cond-obj" role="tabpanel" aria-labelledby="nav-cond-obj-tab">        
+        
+                          <!-- objective-assessments List-->
+                          <div class="container-fluid px-5">
+                            <div class="row text-center" id="objectiveassessmentList">
+                              <div class="pt-5">
+                                <div class="row">
+                                  <div class="col-lg-2">
+                                    <div class="input-group date">                            
+                                      <input type="text" placeholder="Filter By Date" id="condDate" style="min-width: 120px;; min-height: 30px;border: 1px solid #a6a6a6;">
+                                      <span class="input-group-addon">
+                                        <!-- <i class="far fa-calendar-alt"></i> -->
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                    <select class="form-control form-control-sm" id="cond-assessmentsSection" style="width: 100%;">
+                                      <option value="0" selected disabled>Filter Assessment By Section</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <select class="form-control form-control-sm" id="cond-assessmentsSubject">
+                                      <option value="0" selected disabled>Filter Assessment By Subject</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+
+                            <!-- subjective-assessments List-->
+                              <div class="container-fluid pt-5 px-5">
+                                <div class="row" id="condAssessmentList">
+                                  <div class='col-sm-6 assessment'>
+                                    <div class='card mb-3 objCard text-left'>
+                                      <h5 class='font-weight-bold pl-3 pt-2 pr-3'>ABCD</h5>
+                                      <p class='pl-3 condCardDesc'>DESC</p>
+                                      <div class='card-body pl-1 pb-0 align-bottom'>
+                                        <h6 class="font-weight-bold">Faculty Web App Issues</h6>
+                                      </div>
+                                      <div class='px-3 text-muted card-footer'>
+                                        <div class="row">
+                                          <div class="col-sm-4">
+                                            Questions: <span class="font-weight-bold">5</span>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            Sent To: <span class="font-weight-bold">5</span>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            Answered: <span class="font-weight-bold">5</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+        
+                          <!-- assessment list end -->
+        
+                        </div>
+                        <div class="tab-pane fade" id="nav-cond-sub" role="tabpanel" aria-labelledby="nav-cond-obj-tab">
+        
+                          <div class="pt-5">
+                            <select class="form-control form-control-lg col-4" id="objective-assessments">
+                              <option value="0">All</option>
+                            </select>
+                          </div>
+        
+        
+                          <!-- objective-assessments List-->
+                          <div class="container-fluid pt-5 px-5">
+                            <div class="row text-center" id="objectiveassessmentList">
+                            </div>
+                          </div>
+        
+                          <!-- assessment list end -->
+        
+                        </div>
+        
                       </div>
                     </div>
-                  </div>
-
-
-                  <!-- subjective-assessments List-->
-                  <div class="container-fluid pt-5 px-5">
-                    <div class='col-sm-6 assessment'>
-                      <div class='card mb-3 objCard text-left'>
-                        <h5 class=' font-weight-bold pl-3 pt-2 pr-3'>ABCD</h5>
-                        <button class='btn editBtn' data-id='"+value.subject_id+"'>
-                          <i class='fas fa-pen'></i>
-                        </button>
-                        <div class='card-body pl-0'>
-                          <p class='card-text pl-3'>DESC</p>
-                        </div>
-                        <div class='p-1 pl-3 pr-3 text-muted card-footer'>
-                          Questions: 5
-                          <button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'>
-                            <a href='../pages/SendQuestionsPage.html?subSemId='' class='btnLink'>Send</a>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  
+                  </div>                  
                   
                 </div>
               </div>
