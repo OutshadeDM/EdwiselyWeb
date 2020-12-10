@@ -1,8 +1,9 @@
 $(async function() {
 	// Check if User is logged in
 	$user = "";
-	if ($user = isLoggedIn()) {
-		$user = JSON.parse($user);
+	if (isLoggedIn()) {
+		console.log(isLoggedIn(), 'yes');
+		$user = JSON.parse(isLoggedIn());
 		$('html').removeClass('d-none');
 	} else {
 		window.location.replace("login.html");
