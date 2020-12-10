@@ -205,7 +205,7 @@ $(document).ready(function () {
 
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a>";
+      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a>";
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
