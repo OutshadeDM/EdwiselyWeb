@@ -179,6 +179,7 @@ $(document).ready(function () {
 
   loadList();
   let questionsList = [];
+  let questions = [];
 
 
   function loadList(){    
@@ -200,6 +201,7 @@ $(document).ready(function () {
             $('.initData').remove();
             $('#addques').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='`+value.id+`'>`+value.name+`</p></div>`)
             questionsList.push(value.id);
+            questions.push(value);
           });
 
         }
@@ -671,11 +673,20 @@ $(document).ready(function () {
   });
 
   $(document).on('click', '.questions', function () {
-    alert("ok");
+    // alert("ok");
     $('#deleteBtn').show();
     $('#quesInput').val($(this).text());
+    $('#questionId').val($(this).data('id'));x
   });
 
+  $("#deleteBtn").click(function () {
 
+    let questionId = $('questionId').val();
+
+    if(questionId && questionId != "0"){
+
+    }
+
+  });
 
 });
