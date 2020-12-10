@@ -1,5 +1,15 @@
 $(document).ready(function () {
     // alert("ok");
+
+    $user = "";
+    if (isLoggedIn()) {
+      console.log(isLoggedIn(), 'yes');
+      $user = JSON.parse(isLoggedIn());
+      $('html').removeClass('d-none');
+    } else {
+      window.location.replace("login.html");
+    }
+
     let searchParams = new URLSearchParams(window.location.search);
     let subSemId;
     // let units = [];
@@ -12,7 +22,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -62,12 +72,11 @@ $(document).ready(function () {
                         $("#courseClass").append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                 }
                 else {
-                    alert(result.message + " Please Login again");
-                    window.location.href = "Loginpage.html";
+                    alert(result.message);
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
 
@@ -91,7 +100,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.message);
@@ -138,7 +147,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
 
@@ -159,7 +168,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -195,7 +204,7 @@ $(document).ready(function () {
                             type: 'GET',
                             contentType: 'application/json',
                             headers: {
-                                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                                'Authorization': `Bearer ${$user.token}`
                             },
                             success: function (result) {
                                 // alert(result.status);
@@ -217,7 +226,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(error);
+                                alert("Request Failed with status: "+error.status);
                             }
                         });
                     }
@@ -230,7 +239,7 @@ $(document).ready(function () {
                             type: 'GET',
                             contentType: 'application/json',
                             headers: {
-                                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                                'Authorization': `Bearer ${$user.token}`
                             },
                             success: function (result) {
                                 // alert(result.learning_content);
@@ -252,7 +261,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(error);
+                                alert("Request Failed with status: "+error.status);
                             }
                         });
 
@@ -266,7 +275,7 @@ $(document).ready(function () {
                             type: 'GET',
                             contentType: 'application/json',
                             headers: {
-                                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                                'Authorization': `Bearer ${$user.token}`
                             },
                             success: function (result) {
                                 // alert(result.academic_materials);
@@ -275,6 +284,7 @@ $(document).ready(function () {
                                 let files = [];
                                 if (result.status == 200 && result.data) {
                                     $.each(result.data, function (key, value) {
+										let learning_content = 
                                         files.push({
                                             "material_id": value.material_id,
                                             "title": value.title,
@@ -282,7 +292,7 @@ $(document).ready(function () {
                                             "url": value.file_url,
                                             "type": value.type,
                                             "level": value.level,
-                                            "learning_content":"1",
+                                            "learning_content":value.faculty_content,
                                             "bookmarked": value.bookmarked,
                                             "topic_id": value.topic_id
                                         });
@@ -298,7 +308,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(error);
+                                alert("Request Failed with status: "+error.status);
                             }
                         });
 
@@ -478,7 +488,7 @@ $(document).ready(function () {
         // alert("here");
 
         $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-            position: "raltive",
+            position: "relative",
             width: "100%",
             height: "100%",
             background: "#fff",
@@ -491,7 +501,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -557,7 +567,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
                 $("#loadingDiv").remove();
             }
         });
@@ -702,7 +712,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -727,7 +737,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
         }
@@ -754,7 +764,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -779,7 +789,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
         }
@@ -805,7 +815,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -821,7 +831,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
         }
@@ -902,7 +912,7 @@ $(document).ready(function () {
                         contentType: false,
                         processData: false,
                         headers: {
-                            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                            'Authorization': `Bearer ${$user.token}`
                         },
                         success: function (result) {
                             // alert(result.message);
@@ -941,7 +951,7 @@ $(document).ready(function () {
                             $(".custom-file-label").removeClass("selected").html("Choose file");
                             courseFileAdd = null;
                             $("#courseFileAdd").val(null);
-                            alert(error);
+                            alert("Request Failed with status: "+error.status);
                         }
                     });
                 }
@@ -965,7 +975,7 @@ $(document).ready(function () {
                     contentType: false,
                     processData: false,
                     headers: {
-                        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                        'Authorization': `Bearer ${$user.token}`
                     },
                     success: function (result) {
                         // alert(result.message);
@@ -998,7 +1008,7 @@ $(document).ready(function () {
                         $(".custom-file-label").removeClass("selected").html("Choose File");
                         $("#courseFileAdd").val(null);
                         courseFileAdd = null;
-                        alert(error);
+                        alert("Request Failed with status: "+error.status);
                     }
                 });
             }
@@ -1043,7 +1053,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.message);
@@ -1069,7 +1079,7 @@ $(document).ready(function () {
                         type: 'GET',
                         contentType: 'application/json',
                         headers: {
-                            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                            'Authorization': `Bearer ${$user.token}`
                         },
                         success: function (result) {
                             // alert(result.status);
@@ -1090,7 +1100,7 @@ $(document).ready(function () {
                             }
                         },
                         error: function (error) {
-                            alert(error);
+                            alert("Request Failed with status: "+error.status);
                         }
                     });
 
@@ -1098,7 +1108,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
     });
@@ -1135,7 +1145,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -1162,7 +1172,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
 
@@ -1239,7 +1249,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1259,7 +1269,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
@@ -1290,7 +1300,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1310,7 +1320,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
@@ -1351,7 +1361,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1371,7 +1381,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
@@ -1402,7 +1412,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1422,7 +1432,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 

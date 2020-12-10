@@ -111,8 +111,8 @@ body{
 
 .toast{
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 5%;
+  right: 1%;
   z-index: 999999;
   /* display: none; */
 }
@@ -373,6 +373,10 @@ body{
   text-decoration: none;
 }
 
+.condCardDesc{
+  font-size: 12px;
+}
+
 /* end my assessments */
 
 
@@ -532,7 +536,6 @@ display: inline-block;
 
 
 .addObjQuestions {
-  border-bottom: solid 1px black;
   text-align: left;
   font-size: large;
 }

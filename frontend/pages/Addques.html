@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="d-none" lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -58,7 +58,7 @@
               <span class="menu-collapsed">Add Courses</span>
             </div>
           </a>
-          <a href="Myass.html" class="bg-dark list-group-item list-group-item-action">
+          <a href="myAssessment.html" class="bg-dark list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fas fa-chart-bar fa-fw mr-3"></span>
               <span class="menu-collapsed">Assessments</span>
@@ -76,6 +76,14 @@
               <span class="menu-collapsed">Notify</span>
             </div>
           </a>
+          <li class="list-group-item sidebar-separator menu-collapsed"></li>
+          <a href="#" onclick="logout();" data-toggle="sidebar-collapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+              <div class="d-flex w-100 justify-content-start align-items-center">
+                  <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
+                  <span id="collapse-text" class="menu-collapsed">Logout</span>
+              </div>
+          </a>
+          
           <li class="list-group-item sidebar-separator menu-collapsed"></li>
           <a href="#" data-toggle="sidebar-collapse"
             class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
@@ -95,16 +103,16 @@
         <div class="shadow-sm">
           <div class="px-4 headerBanner">
             <h2 class="mt-1">
-              <p class="font-weight-bold" id="courseName">Create new Objective Assessment</p>
+              <p class="font-weight-bold" id="courseName">Add Questions</p>
             </h2>
             <hr class="titlehr">
             <p class="list pb-2">
-              <span class="list-item"><a href=index.html>Home</a> ></span>
-              <span class="list-item"><a href="myAssessment.html">Assessments</a> ></span>
-              <span class="list-item-active"><a href="addQues.html">Create Assessment</a></span>
+              <span class="list-item"><a href="index.html">Home</a> ></span>
+              <span class="list-item"><a href="myAssessment.html">Assessment</a> ></span>
+              <span class="list-item-active"><a href="#">Add Question</a></span>
             </p>
-            <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink"><i
-                class="fas fa-save pr-2"></i>Save</button>
+            <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mr-5"><i class="fas fa-save"></i>
+              Save</button>
           </div>
         </div>
         <!-- Start Page Content -->
@@ -112,33 +120,28 @@
         <div class="container-fluid" id="theMainDiv">
           <!-- put everything in this div -->
 
-          <div class="row">
+          <div class="row" id="abcd">
             <div class="col-md-3 shadow-sm addques px-4 py-2 " id="addques">
               <div class="initData">Add Questions to this Assignment</div>
             </div>
 
-
-
-
-
-
-            <div class="col-md-7 shadow-sm addques px-4 py-2" id="createques">
+            <div class="col-md-7 shadow-sm addques py-2 pb-5 mb-5" id="createques">
               <div class="divInput">
-                <input class="form-control form-control-lg" type="text" placeholder="Start Typing your question"
-                  id="quesInput">
+                <input class="form-control form-control-lg" type="textarea" style="resize: none;"
+                  placeholder="Start Typing your question" id="quesInput">
                 <div class="titleImg py-3 ">
                   <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
                   <!-- <i class="fas fa-edit fa-lg px-2 uploaded"></i> -->
                   <i class="fas fa-trash-alt fa-lg px-2 uploadedques"></i>
                   <i class="fas fa-image fa-lg px-2 notUploadedques"></i>
-                  <label for="quesImage" class="custom-file-upload">Add Image</label>
+                  <label for="quesImage" class="custom-file-upload" id="quesImageLabel">Add Image</label>
                   <input id="quesImage" type="file" /></div>
               </div>
               <div class="row pt-4">
                 <div class="col-6">
                   <span>Bloom</span>
-                  <select class="bloomSelect mx-2">
-                    <option value="1" selected="">Remember</option>
+                  <select class="bloomSelect mx-2" id="selectBloomLevel">
+                    <option value="1" selected>Remember</option>
                     <option value="2">Understand</option>
                     <option value="3">Apply</option>
                     <option value="4">Analyze</option>
@@ -147,8 +150,8 @@
 
                 <div class="col-6" id="levelDropDiv">
 
-                  <select class="levelSelect mx-2 float-right">
-                    <option value="1" selected="">Level 1</option>
+                  <select class="levelSelect mx-2 float-right" id="selectLevel">
+                    <option value="1" selected>Level 1</option>
                     <option value="2">Level 2</option>
                     <option value="3">Level 3</option>
                     <option value="4">Level 4</option>
@@ -158,129 +161,142 @@
                 </div>
               </div>
 
-              <div class="row pt-4 pl-5">
-                <div class="col-5">
-                  <div class="row options">
-                    <div class="col-2 selectOption mx-0 pt-1 firstOption">
+              <div class="row pt-4">
+
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 firstOption">
                       <div class="form-check p-0">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios1" value="0">
-                          <i class="far fa-square fa-lg untick untick1"></i>
-                          <i class="fas fa-check-square fa-lg tick tick1"></i>
+                          <i class="far fa-square pl-2 pt-3 fa-lg untick untick1" style="width: 100%;"></i>
+                          <i class="fas fa-check-square pl-2 pt-3 fa-lg tick tick1"></i>
                         </label>
                       </div>
                     </div>
-                    <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Enter Option" id="firstOption"></div>
-                    <div class="col-2 chooseImage mx-0 pt-1 firstOption">
-                      <label for="opt1Image" class="custom-file-upload optImgs"><i
-                          class="fas fa-image fa-lg "></i></label>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <input type="text" class="form-control" placeholder="Enter Option" id="firstOption"
+                        style="height: 50px;">
+                    </div>
+                    <div class="col-2 chooseImage px-0 pt-1 firstOption">
+                      <label for="opt1Image" class="custom-file-upload optImgs">
+                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                      </label>
                       <input id="opt1Image" type="file" /></div>
                   </div>
                 </div>
 
-                <div class="col-1"></div>
-
-                <div class="col-5">
-                  <div class="row options">
-                    <div class="col-2 selectOption mx-0 pt-1 secondOption">
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 secondOption">
                       <div class="form-check p-0">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios2" value="1">
-                          <i class="far fa-square fa-lg untick untick2"></i>
-                          <i class="fas fa-check-square fa-lg tick tick2"></i>
+                          <i class="far fa-square pl-2 pt-3 fa-lg untick untick2" style="width: 100%;"></i>
+                          <i class="fas fa-check-square pl-2 pt-3 fa-lg tick tick2"></i>
                         </label>
                       </div>
                     </div>
-                    <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Enter Option" id="secondOption"></div>
-                    <div class="col-2 chooseImage mx-0 pt-1 secondOption">
-                      <label for="opt2Image" class="custom-file-upload optImgs"><i
-                          class="fas fa-image fa-lg "></i></label>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <input type="text" class="form-control" placeholder="Enter Option" id="secondOption"
+                        style="height: 50px;">
+                    </div>
+                    <div class="col-2 chooseImage px-0 pt-1 secondOption">
+                      <label for="opt2Image" class="custom-file-upload optImgs">
+                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                      </label>
                       <input id="opt2Image" type="file" /></div>
                   </div>
                 </div>
+
               </div>
+              <div class="row pt-4">
 
-
-
-
-              <div class="row pt-4 pl-5">
-                <div class="col-5">
-                  <div class="row options">
-                    <div class="col-2 selectOption mx-0 pt-1 thirdOption">
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 thirdOption">
                       <div class="form-check p-0">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios3" value="2">
-                          <i class="far fa-square fa-lg untick untick3"></i>
-                          <i class="fas fa-check-square fa-lg tick tick3"></i>
+                          <i class="far fa-square pl-2 pt-3 fa-lg untick untick3" style="width: 100%;"></i>
+                          <i class="fas fa-check-square pl-2 pt-3 fa-lg tick tick3"></i>
                         </label>
                       </div>
                     </div>
-                    <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Enter Option (Optional)" id="thirdOption"></div>
-                    <div class="col-2 chooseImage mx-0 pt-1 thirdOption">
-                      <label for="opt3Image" class="custom-file-upload optImgs"><i
-                          class="fas fa-image fa-lg "></i></label>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <input type="text" class="form-control" placeholder="Enter Option" id="thirdOption"
+                        style="height: 50px;">
+                    </div>
+                    <div class="col-2 chooseImage px-0 pt-1 thirdOption">
+                      <label for="opt1Image" class="custom-file-upload optImgs">
+                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                      </label>
                       <input id="opt3Image" type="file" /></div>
-                    </i>
                   </div>
                 </div>
 
-                <div class="col-1"></div>
-
-                <div class="col-5">
-                  <div class="row options">
-                    <div class="col-2 selectOption mx-0 pt-1 fourthOption">
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 fourthOption">
                       <div class="form-check p-0">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios4" value="3">
-                          <i class="far fa-square fa-lg untick untick4"></i>
-                          <i class="fas fa-check-square fa-lg tick tick4"></i>
+                          <i class="far fa-square pl-2 pt-3 fa-lg untick untick4" style="width: 100%;"></i>
+                          <i class="fas fa-check-square pl-2 pt-3 fa-lg tick tick4"></i>
                         </label>
                       </div>
                     </div>
-                    <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Enter Option (Optional)" id="fourthOption"></div>
-                    <div class="col-2 chooseImage mx-0 pt-1 fourthOption">
-                      <label for="opt4Image" class="custom-file-upload optImgs"><i
-                          class="fas fa-image fa-lg "></i></label>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <input type="text" class="form-control" placeholder="Enter Option" id="fourthOption"
+                        style="height: 50px;">
+                    </div>
+                    <div class="col-2 chooseImage px-0 pt-1 fourthOption">
+                      <label for="opt4Image" class="custom-file-upload optImgs">
+                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                      </label>
                       <input id="opt4Image" type="file" /></div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row pt-4 pl-5">
-                <div class="col-5">
+              </div>
+              <div class="row pt-4">
+
+                <div class="col-12 px-0">
                   <button class="btn btn-lg fifthOptionBtn">Add Option</button>
-                  <div class="row options" id="fifth">
-                    <div class="col-2 selectOption mx-0 pt-1 fifthOption">
-                      <div class="form-check p-0">
-                        <label class="radiolabel">
-                          <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4">
-                          <i class="far fa-square fa-lg untick untick5"></i>
-                          <i class="fas fa-check-square fa-lg tick tick5"></i>
-                        </label>
+                  <div class="col-6">
+                    <div class="row options" id="fifth">
+                      <div class="col-2 mx-0 p-1 fifthOption">
+                        <div class="form-check p-0">
+                          <label class="radiolabel">
+                            <input type="radio" class="radiostest" name="Radios" id="Radios4" value="3">
+                            <i class="far fa-square pl-2 pt-3 fa-lg untick untick5" style="width: 100%;"></i>
+                            <i class="fas fa-check-square pl-2 pt-3 fa-lg tick tick5"></i>
+                          </label>
+                        </div>
                       </div>
+                      <div class="col-8 inputOption px-0" style="width: 100%;">
+                        <input type="text" class="form-control" placeholder="Enter Option (Optional)" id="fifthOption"
+                          style="height: 50px;">
+                      </div>
+                      <div class="col-2 chooseImage px-0 pt-1 fifthOption">
+                        <label for="opt5Image" class="custom-file-upload optImgs">
+                          <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                        </label>
+                        <input id="opt5Image" type="file" /></div>
                     </div>
-                    <div class="col-8 inputOption px-0"><input type="text" class="form-control"
-                        placeholder="Enter Option (Optional)" id="fifthOption"></div>
-                    <div class="col-2 chooseImage mx-0 pt-1 fifthOption">
-                      <label for="opt5Image" class="custom-file-upload optImgs"><i
-                          class="fas fa-image fa-lg "></i></label>
-                      <input id="opt5Image" type="file" /></div>
                   </div>
                 </div>
+
               </div>
 
-              <div class="divInput mt-5 mb-3" id="hintDiv">
+              <div class="divInput my-3" id="hintDiv">
                 <input class="form-control form-control-lg" type="text" placeholder="Hint" id="hintInput">
                 <div class="titleImg py-3">
                   <img id="image_preview_hint" class="imgPreviewhint" src="" alt="your image" />
                   <!-- <i class="fas fa-edit fa-lg px-2 uploaded"></i> -->
                   <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
                   <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
-                  <label for="hintImage" class="custom-file-upload">Add Image</label>
+                  <label for="hintImage" class="custom-file-upload" id="hintImageLabel">Add Image</label>
                   <input id="hintImage" type="file" /></div>
               </div>
 
@@ -291,12 +307,12 @@
                   <!-- <i class="fas fa-edit fa-lg px-2 uploaded"></i> -->
                   <i class="fas fa-trash-alt fa-lg px-2 uploadedsolution"></i>
                   <i class="fas fa-image fa-lg px-2 notUploadedsolution"></i>
-                  <label for="solutionImage" class="custom-file-upload">Add Image</label>
+                  <label for="solutionImage" class="custom-file-upload" id="solutionImageLabel">Add Image</label>
                   <input id="solutionImage" type="file" /></div>
               </div>
 
 
-              <div class="divInput mt-3">
+              <div class="divInput mt-3 mb-5">
                 <input class="form-control form-control-lg " type="text" placeholder="Source... (if any)"
                   id="sourceInput">
               </div>
@@ -321,7 +337,7 @@
                   <i class="fas fa-bars pl-2 pr-0"></i>
 
                   <span class=" pl-2 pr-2">Topics</span>
-                  <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 20px;"></i>
+                  <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 10px;"></i>
 
 
                 </div>
@@ -350,17 +366,17 @@
                 </div>
 
 
-                <button class="btn btn-primary btn-block mt-3 py-0 shadow-sm" id="hintBtn">Add Hint</button>
-                <button class="btn btn-primary btn-block mt-3 py-0 shadow-sm" id="solutionBtn">Add Solution</button>
-                <button class="btn btn-primary btn-block mt-3 py-0 shadow-sm" id="plusBtn">+</button>
-
-
-
-
-
-
-
-
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add
+                  Hint</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add
+                  Solution</button>
+                <input type="hidden" value="0" id="questionId">
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="deleteBtn"
+                  style="display: none;">Delete</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                  id="plusBtn">+</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                  id="editBtn">Edit</button>
 
 
 
@@ -368,6 +384,36 @@
               </div>
             </div>
           </div>
+
+          <!-- toasts -->
+          <div id="toastDiv" style="display: none;">
+            <!-- start error toast -->
+            <div class="toast fade" data-autohide="false" id="errorToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-danger">Error !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="errorToastBody">All fields are mandatory to save.</p>
+              </div>
+            </div>
+            <!-- end error toast -->
+
+            <!-- start success toast -->
+            <div class="toast fade" data-autohide="false" id="successToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-success">Success !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="successToastBody">Content has been saved successfully.</p>
+              </div>
+            </div>
+            <!-- end success toast -->
+
+          </div>
+
+          <!-- end toasts -->
 
           <!-- End Page Content -->
         </div>
@@ -377,7 +423,9 @@
     <!-- body-row END -->
 </body>
 <!-- add extra js files here -->
+<script type="text/javascript" src="../venders/scripts/cookies.js"></script>
+<script type="text/javascript" src="../../backend/cookies.js"></script>
 <script src="../../backend/sidebar.js"></script>
-<script src="../../backend/Addques.js"></script>
+<script src="../../backend/addQues.js"></script>
 
 </html>

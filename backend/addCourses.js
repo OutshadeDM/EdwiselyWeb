@@ -1,10 +1,21 @@
 $(document).ready(function() {
+
+    $user = "";
+	if (isLoggedIn()) {
+		// console.log(isLoggedIn(), 'yes');
+		$user = JSON.parse(isLoggedIn());
+		$('html').removeClass('d-none');
+	} else {
+		window.location.replace("login.html");
+    }
+
+
     $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id=71',
+        url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+`${$user.university_degree_department_id}`,
         type: 'GET',
         contentType: 'application/json',
         headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+            'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
             // alert(result.status);
@@ -14,13 +25,9 @@ $(document).ready(function() {
                     $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
                 });
             }
-            else {
-                alert(result.message + " Please Login again");
-                window.location.href = "Loginpage.html";
-            }
         },
         error: function (error) {
-            alert(error);
+            alert("Request Failed with status: "+error.status);
         }
     });
 
@@ -42,7 +49,7 @@ $(document).ready(function() {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.message);
@@ -166,7 +173,7 @@ $(document).ready(function() {
                     $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
     }
@@ -287,7 +294,7 @@ $(document).ready(function() {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -320,7 +327,7 @@ $(document).ready(function() {
                     $("#loadingDiv").remove();
                     $('#modalContent').css('position', 'absolute');
                     $('courseModal').modal('toggle');
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
