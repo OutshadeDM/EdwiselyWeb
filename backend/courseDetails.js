@@ -1,5 +1,15 @@
 $(document).ready(function () {
     // alert("ok");
+
+    $user = "";
+    if (isLoggedIn()) {
+      console.log(isLoggedIn(), 'yes');
+      $user = JSON.parse(isLoggedIn());
+      $('html').removeClass('d-none');
+    } else {
+      window.location.replace("login.html");
+    }
+
     let searchParams = new URLSearchParams(window.location.search);
     let subSemId;
     // let units = [];
@@ -12,7 +22,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -62,8 +72,7 @@ $(document).ready(function () {
                         $("#courseClass").append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                 }
                 else {
-                    alert(result.message + " Please Login again");
-                    window.location.href = "Loginpage.html";
+                    alert(result.message);
                 }
             },
             error: function (error) {
@@ -91,7 +100,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.message);
@@ -159,7 +168,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -195,7 +204,7 @@ $(document).ready(function () {
                             type: 'GET',
                             contentType: 'application/json',
                             headers: {
-                                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                                'Authorization': `Bearer ${$user.token}`
                             },
                             success: function (result) {
                                 // alert(result.status);
@@ -230,7 +239,7 @@ $(document).ready(function () {
                             type: 'GET',
                             contentType: 'application/json',
                             headers: {
-                                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                                'Authorization': `Bearer ${$user.token}`
                             },
                             success: function (result) {
                                 // alert(result.learning_content);
@@ -266,7 +275,7 @@ $(document).ready(function () {
                             type: 'GET',
                             contentType: 'application/json',
                             headers: {
-                                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                                'Authorization': `Bearer ${$user.token}`
                             },
                             success: function (result) {
                                 // alert(result.academic_materials);
@@ -492,7 +501,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -703,7 +712,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -755,7 +764,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -806,7 +815,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -903,7 +912,7 @@ $(document).ready(function () {
                         contentType: false,
                         processData: false,
                         headers: {
-                            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                            'Authorization': `Bearer ${$user.token}`
                         },
                         success: function (result) {
                             // alert(result.message);
@@ -966,7 +975,7 @@ $(document).ready(function () {
                     contentType: false,
                     processData: false,
                     headers: {
-                        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                        'Authorization': `Bearer ${$user.token}`
                     },
                     success: function (result) {
                         // alert(result.message);
@@ -1044,7 +1053,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.message);
@@ -1070,7 +1079,7 @@ $(document).ready(function () {
                         type: 'GET',
                         contentType: 'application/json',
                         headers: {
-                            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                            'Authorization': `Bearer ${$user.token}`
                         },
                         success: function (result) {
                             // alert(result.status);
@@ -1136,7 +1145,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
                 // alert(result.status);
@@ -1240,7 +1249,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1291,7 +1300,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1352,7 +1361,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);
@@ -1403,7 +1412,7 @@ $(document).ready(function () {
                 type: 'GET',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+                    'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
                     // alert(result.message);

@@ -500,8 +500,8 @@ $(document).ready(function () {
 
     // $("#abcd").css('display','none')
 
-    bloom_level = $('#selectBloomLevel');
-    difficulty_level = $('#selectLevel');
+    bloom_level = $('#selectBloomLevel').val();
+    difficulty_level = $('#selectLevel').val();
 
     if(topics !=null && option1 && option2 && bloom_level && difficulty_level && answer && question && type){
       

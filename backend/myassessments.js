@@ -78,21 +78,10 @@ $(document).ready(function () {
           // alert(result.status);
           $('#objectiveassessmentList').empty();
           if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-              // alert("addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id);
-
-              $('#objectiveassessmentList').append(
-                "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
-                "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><a class='btn editBtn' href='addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
-                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
-              );
-
-            });
+            displayCards(result.data,true);
           }
           else
-            $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+            $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
           alert("Request Failed with status: "+error.status);
@@ -112,21 +101,10 @@ $(document).ready(function () {
           // alert(result.status);
           $('#objectiveassessmentList').empty();
           if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-              alert("addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id);
-
-              $('#objectiveassessmentList').append(
-                "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
-                "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><a class='btn editBtn' href='addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
-                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
-              );
-
-            });
+            displayCards(result.data,true);
           }
           else
-            $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+            $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
           alert("Request Failed with status: "+error.status);
@@ -183,20 +161,10 @@ $(document).ready(function () {
           // alert(result.status);
           $('#subjectiveassessmentList').empty();
           if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-
-              $('#subjectiveassessmentList').append(
-                "<div class='col-sm-6 assessment'><div class='card mb-3 text-left'>"+
-                "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><a class='btn editBtn' href='addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"><i class='fas fa-pen'></i></a><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
-                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</button></div></div>"
-              );
-              
-            });
+            displayCards(result.data,false)
           }
           else
-            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
           alert(result.message);
@@ -216,20 +184,11 @@ $(document).ready(function () {
           // alert(result.status);
           $('#subjectiveassessmentList').empty();
           if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-
-              $('#subjectiveassessmentList').append(
-                "<div class='col-sm-6 assessment'><div class='card mb-3 objCard text-left'>"+
-                "<h5 class=' font-weight-bold pl-3 pt-2 pr-3'>" + value.name +
-                "</h5><a class='btn editBtn' href='addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"><i class='fas fa-pen'></i></a><div class='card-body pl-0'><p class='card-text pl-3'>" + value.description +
-                "</p></div><div class='p-1 pl-3 pr-3 text-muted card-footer'>Questions: " + value.questions_count +
-                "<button class='btn btn-primary text-white pl-4 pr-4 assBtn' id='assignmentSendBtn'><a href='../pages/SendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btnLink'>Send</a></button></div></div>"
-              );
-            });
+            displayCards(result.data,false);
             
           }
           else
-            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
           alert("Request Failed with status: "+error.status);
@@ -237,6 +196,33 @@ $(document).ready(function () {
       });
 
     }
+  }
+
+  function displayCards(data = [],isObj){
+    let div = "";
+
+    $.each(data, function (key, value) {
+
+      div = div + "<div class='col-sm-6 assessment'>";
+      div = div + "<div class='card mb-3 objCard text-left'></h5>";
+      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a>";
+      div = div + "<div class='card-body pl-0'>";
+      div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
+      div = div + "</div>";
+      div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
+      div = div + "Questions: " + value.questions_count;
+      if(value.questions_count)
+        div = div + "<a href='../pages/addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+      else
+        div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";        
+      div = div + "</div></div>";
+
+    });
+
+    if(isObj)
+      $('#objectiveassessmentList').append(div);
+    else if(!isObj)
+      $('#subjectiveassessmentList').append(div)
   }
 
   $('.input-group.date').datepicker({
@@ -271,6 +257,8 @@ $(document).ready(function () {
         alert("Request Failed with status: "+error.status);
     }
   });
+
+  
 
   $("#nav-cond-tab").click(function () {
     // getSubAssesments();
@@ -473,6 +461,33 @@ $(document).ready(function () {
     }
 
   });
+
+  function displayCondCards(){
+    let div = "";
+
+    $.each(result.data, function (key, value) {
+
+      div = div + "<div class='col-sm-6 assessment'>";
+      div = div + "<div class='card mb-3 objCard text-left'>";
+      div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>"+value.name+"</h5>";
+      div = div + "<p class='pl-3 condCardDesc'>"+value.description+"</p>";
+      div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
+      div = div + "<h6 class='font-weight-bold'>"+value.created_at+" - "+value.doe+"</h6>";
+      div = div + "</div><div class='px-3 text-muted card-footer'>";
+      div = div + "<div class='row'>";
+      div = div + "<div class='col-sm-4'>";
+      div = div + "Questions: <span class='font-weight-bold'>"+value.questions_count+"</span>";
+      div = div + "</div>";
+      div = div + "<div class='col-sm-4'>";
+      div = div + "Sent To: <span class='font-weight-bold'>"+value.students_count+"</span>";
+      div = div + "</div>";
+      div = div + "<div class='col-sm-4'>";
+      div = div + "Answered: <span class='font-weight-bold'>"+value.test_completed+"</span>";
+      div = div + "</div></div></div></div></div>";
+
+    });
+
+  }
 
   $('#cond-ObjassessmentsSection').change(function () {
     $('#nav-cond-tab').click();

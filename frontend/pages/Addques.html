@@ -77,6 +77,14 @@
             </div>
           </a>
           <li class="list-group-item sidebar-separator menu-collapsed"></li>
+          <a href="#" onclick="logout();" data-toggle="sidebar-collapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+              <div class="d-flex w-100 justify-content-start align-items-center">
+                  <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
+                  <span id="collapse-text" class="menu-collapsed">Logout</span>
+              </div>
+          </a>
+          
+          <li class="list-group-item sidebar-separator menu-collapsed"></li>
           <a href="#" data-toggle="sidebar-collapse"
             class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
             <div class="d-flex w-100 justify-content-start align-items-center">
@@ -404,9 +412,9 @@
     <!-- body-row END -->
 </body>
 <!-- add extra js files here -->
-<script src="../../backend/sidebar.js"></script>
-<script src="../../backend/addQues.js"></script>
 <script type="text/javascript" src="../venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="../../backend/cookies.js"></script>
+<script src="../../backend/sidebar.js"></script>
+<script src="../../backend/addQues.js"></script>
 
 </html>
