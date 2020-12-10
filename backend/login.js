@@ -17,7 +17,7 @@ $(document).ready(function () {
             console.log(result, result.token, JSON.stringify(result));
             if (result.token) {
               $.cookie('user', JSON.stringify(result), {expires: 365});
-              // window.location.replace("index.html");
+              window.location.replace("index.html");
             } else {
               window.location.replace('login.html');
             }

@@ -33,6 +33,15 @@ body{
     border-radius: 15px;
 }
 
+.card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+.slick-prev::before, .slick-next::before {
+  color: rgb(81 84 205) !important;
+}
+
 .list-item a{
   color: #4c768b;
   cursor: pointer;
@@ -54,6 +63,20 @@ body{
   right: 15px;
 }
 
+/* Home */
+/* Hide scrollbar for Chrome, Safari and Opera */
+#peer::-webkit-scrollbar, #upcoming::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#peer, #upcoming {
+  overflow: auto;
+  height: 200px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/* Home */
 
 /* default */
 
@@ -281,6 +304,11 @@ body{
 .addCourseCard{
   height: 400px;
   max-height: 400px;
+}
+
+.home .addCourseCard {
+  height: auto;
+  max-height: max-content;
 }
 
 .addCourseCard .card-body{
