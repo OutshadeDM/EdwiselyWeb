@@ -148,84 +148,9 @@ $(document).ready(function () {
     $('#solutionImage').val('')
   });
 
-  $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
-    type: 'GET',
-    contentType: 'application/json',
-    headers: {
-      'Authorization': `Bearer ${$user.token}`
-    },
-    success: function (result) {
-      // alert(result.status);
-      //alert(subSemId)
+  getTopics();
 
-      $('#topicTags').empty();
-      if (result.status == 200 && result.data) {
-        $.each(result.data, function (key, value) {
-          // alert(value);
-
-          $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
-
-        });
-
-      }
-      else {
-        $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-        //alert("here");
-      }
-
-
-    },
-    error: function (error) {
-      alert("Request Failed with status: " + error.status);
-    }
-  });
-
-  loadList();
-  let questionsList = [];
-  let questions = [];
-
-
-  function loadList() {
-
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-        // alert(result.status);
-
-        // $('#topicTags').empty();
-        if (result.status == 200 && result.data) {
-          $.each(result.data, function (key, value) {
-            // alert(value);
-            $('.initData').remove();
-            $('#addques').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + value.id + `'>` + value.name + `</p></div>`)
-            questionsList.push(value.id);
-            questions.push(value);
-          });
-
-        }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
-
-
-  }
-
-
-
-  //get topics api
-
-  $('#exampleModal').on('shown.bs.modal', function (event) {
-    //let button = $(event.relatedTarget) // Button that triggered the modal
-
-    //alert("hello")
+  function getTopics(){
 
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
@@ -256,14 +181,64 @@ $(document).ready(function () {
 
       },
       error: function (error) {
-        alert(result.message);
+        alert("Request Failed with status: " + error.status);
       }
+    });
+  }
+
+  let questionsList = [];
+  let questions = [];
+
+  $.ajax({
+    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+    type: 'GET',
+    contentType: 'application/json',
+    headers: {
+      'Authorization': `Bearer ${$user.token}`
+    },
+    success: function (result) {
+      // alert(result.status);
+
+      // $('#topicTags').empty();
+      if (result.status == 200 && result.data) {
+        $('.initData').remove();
+
+        $.each(result.data, function (key, value) {
+          // alert(value);
+          questionsList.push(value.id);
+          questions.push(value);
+        });
+          
+        loadList();
+
+      }
+    },
+    error: function (error) {
+      alert("Request Failed with status: " + error.status);
+    }
+  });
+
+
+  function loadList() {
+    // alert(JSON.stringify(questions));
+    $("#addques").empty();
+
+    $.each(questions, function (key, value) {
+      // alert(JSON.stringify(value));
+      $('#addques').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + value.id + `'>` + value.name.replace('<pre>','') + `</p></div>`);
     });
 
 
-  });
+  }
 
-  $('#exampleModal').on('hidden.bs.modal', function (event) {
+
+
+  //get topics api
+
+  $('#exampleModal').on('shown.bs.modal', function (event) {
+    //let button = $(event.relatedTarget) // Button that triggered the modal
+
+    //alert("hello")
 
   });
 
@@ -273,7 +248,8 @@ $(document).ready(function () {
   $('.tick').hide()
 
 
-  $('.radiostest').on('change', function () {
+  $('.radiostest').on('click', function () {
+    // alert("here");
     if ($('#Radios1').is(':checked') === true) {
       $('.untick1').hide()
       $('.untick2').show()
@@ -507,7 +483,7 @@ $(document).ready(function () {
     bloom_level = $('#selectBloomLevel').val();
     difficulty_level = $('#selectLevel').val();
 
-    if (topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type) {
+    if (topics != null && topics.length > 1 && option1 && option2 && bloom_level && difficulty_level && source&& answer && question && answer&& type) {
 
 
       //saving in array
@@ -573,41 +549,123 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          alert(result.message);
+          // alert(result.message);
           //console.log('4') 
-          options = []
-          topics = []
 
           if (result.status == 200) {
             // console.log(result.data)
             $('#loadingDiv').remove();
-            $('#abcd').css('position', 'absolute');
+            // $('#abcd').css('position', 'absolute');
             $('#successToastBody').text('Question Added to Database Successfully');
             $('#successToast').toast('show');
             // $('.initData').remove();
             $('#addques').prepend(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
             questionsList.push(result.data.id);
             $("input.custom-control-input").attr("disabled", false);
+            clearAll();
+          }
+          else{
+            $('#loadingDiv').remove();
+            // $('#abcd').css('position', 'absolute');
+            $("input.custom-control-input").attr("disabled", false);
           }
         },
         error: function (error) {
           $('#loadingDiv').remove();
-          $('#abcd').css('position', 'absolute');
+          // $('#abcd').css('position', 'absolute');
           $("input.custom-control-input").attr("disabled", false);
           alert("Request Failed with status: " + error.status);
         }
       });
     }
     else {
-      alert("here");
-
+      // alert(topics.length);
+      if(topics == null || !topics || topics.length == "0")
+        $('#errorToastBody').text("Please Select Topics");
+      else if(!option1 || !option2)
+        $('#errorToastBody').text("2 Options are Mandatory");
+      else if(!bloom_level || !difficulty_level)
+        $('#errorToastBody').text("Bloom and Diffculty values cannot be empty");
+      else if(!question)
+        $('#errorToastBody').text("Please enter Question");
+      else if(!type)
+        $('#errorToastBody').text("Please Select Public or Private");
+      else if(!answer)
+        $('#errorToastBody').text("Please Select a Option as Answer");
+      else if(!source)
+        $('#errorToastBody').text("Please Enter Source");
+      else if(topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type)
+        $('#errorToastBody').text("Some fields are mandatory");
+      $('#errorToast').toast('show');
     }
 
   });
 
+  function clearAll(){
+    $("input[name='Radios']").prop("checked", false);
+    $('.untick1').show()
+    $('.untick2').show()
+    $('.untick3').show()
+    $('.untick4').show()
+    $('.untick5').show()
+    $('.tick1').hide()
+    $('.tick2').hide()
+    $('.tick3').hide()
+    $('.tick4').hide()
+    $('.tick5').hide()
+    question = ''
+    hint = ''
+    solution = ''
+    source = ''
+    bloom_level = ""
+    difficulty_level = ""
+    field_type = 1
+    topics = []
+    options = []
+    option1 = ''
+    option2 = ''
+    option3 = ''
+    option4 = ''
+    option5 = ''
+    question_img = ""
+    solution_img = ""
+    hint_img = ""
+    option1_img = ""
+    option2_img = ""
+    option3_img = ""
+    option4_img = ""
+    option5_img = ""
+
+    $('#quesInput').val("");
+    $('#selectBloomLevel').val("1");
+    $('#selectLevel').val("1");
+    $('#firstOption').val("");
+    $('#secondOption').val("");
+    $('#thirdOption').val("");
+    $('#fourthOption').val("");
+    $('#fifthOption').val("");
+    $('#opt1Image').val("");
+    $('#opt2Image').val("");
+    $('#opt3Image').val("");
+    $('#opt4Image').val("");
+    $('#opt5Image').val("");
+    $('#hintImage').val("");
+    $('#solutionImage').val("");
+    $('#sourceInput').val("");
+    $('#solutionInput').val("");
+    $('#hintInput').val("");
+    $('#customSwitch1').val("public");
+    $('#hintInput').val("");
+    $('#hintInput').val("");
+
+    getTopics();
+
+  }
+
+
   $("#btnSave").click(function () {
     if (questionsList != null && questionsList.length > 0) {
-      alert(JSON.stringify(questionsList));
+      // alert(JSON.stringify(questionsList));
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
         position: "absolute",
@@ -680,25 +738,124 @@ $(document).ready(function () {
   //clicking questions
   $(document).on('click', '.questions', function () {
     $('#deleteBtn').show();
+    $('#plusBtn').hide();
     $('#editBtn').show();
     $('#quesInput').val($(this).text());
-    $('#questionId').val($(this).data('id'));
+
+    let questionId = $(this).data('id');
+    $('#questionId').val(questionId);
+    // alert($('#questionId').val());
 
     //i have question id
     //now using that id, iterate through the questions array questions and find the match the ques.
     //fill uske options in the options inputs.
 
-    for (i = 0; i < questions.length(); i++) {
-      if ($(this).data('id') === questions[i].id) {
-        $('#firstOption').val(questions[i].questions_options[0].name)
-        $('#secondOption').val(questions[i].questions_options[1].name)
-        $('#thirdOption').val(questions[i].questions_options[2].name)
-        $('#fourthOption').val(questions[i].questions_options[3].name)
-        $('#fifthOption').val(questions[i].questions_options[4].name)
+    $.each(questions, function (key, value) {
+      // alert(questionId);
+      if (questionId == value.id) {
+        // alert(value.id)
+        // alert(value.questions_options[0].name);
+        $('#firstOption').val(value.questions_options[0].name);
+        $('#secondOption').val(value.questions_options[1].name);
+
+        if(value.questions_options[2])
+        $('#thirdOption').val(value.questions_options[2].name);
+        if(value.questions_options[3])
+        $('#fourthOption').val(value.questions_options[3].name);
+        if(value.questions_options[4]){
+          $(".fifthOptionBtn").click();
+          $('#fifthOption').val(value.questions_options[4].name);
+        }
+
+        if(value.solution){
+          $('#solutionDiv').show();
+          $('#solutionInput').val(value.solution);
+        }
+
+        if(value.hint){
+          $('#hintDiv').show();
+          $('#hintInput').val(value.hint);
+        }
+
+        if(value.blooms_level){
+          $('#selectBloomLevel').val(value.blooms_level);
+        }
+
+        // if(value.blooms_level){
+        //   $('#selectLevel').val(value.blooms_level);
+        // }
 
 
+
+        if(value.questions_options[0].is_answer == "1"){
+          // alert("here");
+          $("input[name='Radios'][value='0']").prop("checked", true);
+          $('.untick1').hide()
+          $('.untick2').show()
+          $('.untick3').show()
+          $('.untick4').show()
+          $('.untick5').show()
+          $('.tick1').show()
+          $('.tick2').hide()
+          $('.tick3').hide()
+          $('.tick4').hide()
+          $('.tick5').hide()
+          // $("input[name=Radios][value=0]").attr("checked",true);
+        }
+        else if(value.questions_options[1].is_answer == "1"){
+          $("input[name='Radios'][value='1']").prop("checked",true);
+          $('.untick1').show()
+          $('.untick2').hide()
+          $('.untick3').show()
+          $('.untick4').show()
+          $('.untick5').show()
+          $('.tick1').hide()
+          $('.tick2').show()
+          $('.tick3').hide()
+          $('.tick4').hide()
+          $('.tick5').hide()
+        }
+        else if(value.questions_options[2].is_answer == "1"){
+          $("input[name='Radios'][value='2']").prop("checked",true);
+          $('.untick1').show()
+          $('.untick2').show()
+          $('.untick3').hide()
+          $('.untick4').show()
+          $('.untick5').show()
+          $('.tick1').hide()
+          $('.tick2').hide()
+          $('.tick3').show()
+          $('.tick4').hide()
+          $('.tick5').hide()
+        }
+        else if(value.questions_options[3].is_answer == "1"){
+          $("input[name='Radios'][value='3']").prop("checked",true);
+          $('.untick1').show()
+          $('.untick2').show()
+          $('.untick3').show()
+          $('.untick4').hide()
+          $('.untick5').show()
+          $('.tick1').hide()
+          $('.tick2').hide()
+          $('.tick3').hide()
+          $('.tick4').show()
+          $('.tick5').hide()
+        }
+        else if(value.questions_options[4].is_answer == "1"){
+          $("input[name='Radios'][value='4']").prop("checked",true);
+          $('.untick1').show()
+          $('.untick2').show()
+          $('.untick3').show()
+          $('.untick4').show()
+          $('.untick5').hide()
+          $('.tick1').hide()
+          $('.tick2').hide()
+          $('.tick3').hide()
+          $('.tick4').hide()
+          $('.tick5').show()
+        }
       }
-    }
+    });
 
   });
 
@@ -707,11 +864,92 @@ $(document).ready(function () {
   //delete btn
   $("#deleteBtn").click(function () {
 
-    let questionId = $('questionId').val();
+    let questionId = $('#questionId').val()
+    // alert("here");
+    // alert(questionId);
 
     if (questionId && questionId != "0") {
 
+      questions = $.grep(questions, function (e) {
+        return e.id != questionId;
+      });
+
+      questionsList.splice($.inArray("abc", questionsList), 1);
+      
+      loadList();
+
     }
+
+  });
+
+  $("#editBtn").click(function () {
+
+    let questionId = $('#questionId').val()
+    // alert("here");
+    // alert(questionId);
+    let newQuestion = [];
+
+    if (questionId && questionId != "0") {
+
+      $.each(questions, function (key, value) {
+        if(questionId == value.id){
+          newQuestion = value;
+          return false;
+        }
+      });
+
+      let question = $('#quesInput').val();
+      // $("#courseName").text(JSON.stringify(newQuestion));
+      // alert(JSON.stringify(newQuestion));
+
+      if(question != newQuestion.name && question_img!= null && solution_img != null && hint_img != null){
+
+        let form = new FormData();
+        form.append("question",question);
+        form.append("question_img",question_img);
+        form.append("solution_img",solution_img);
+        form.append("hint_img",hint_img);
+      
+
+      // $.ajax({
+      //   url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
+      //   type: 'POST',
+      //   dataType: 'json',
+      //   data: form,
+      //   contentType: false,
+      //   processData: false,
+      //   headers: {
+      //     'Authorization': `Bearer ${$user.token}`
+      //   },
+      //   success: function (result) {
+      //     // alert(result.message);
+      //     //console.log('4') 
+
+      //     if (result.status == 200) {
+      //       // console.log(result.data)
+      //       $('#successToastBody').text(result.message);
+      //       $('#successToast').toast('show');
+      //       $('#loadingDiv').remove();
+      //       // $('#abcd').css('position','absolute');
+      //       $("input.custom-control-input").attr("disabled", false);
+      //     }
+      //     else {
+      //       $('#loadingDiv').remove();
+      //       // $('#abcd').css('position','absolute');
+      //       $("input.custom-control-input").attr("disabled", false);
+      //     }
+      //   },
+      //   error: function (error) {
+      //     $('#loadingDiv').remove();
+      //     // $('#abcd').css('position','absolute');
+      //     $("input.custom-control-input").attr("disabled", false);
+      //     alert("Request Failed with status: " + error.status);
+      //   }
+      // });
+      }
+
+    }
+      
 
   });
 
