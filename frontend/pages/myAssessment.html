@@ -65,7 +65,7 @@
                   <span class="menu-collapsed">Add Courses</span>
                 </div>
               </a>
-              <a href="Myass.html" class="bg-dark list-group-item list-group-item-action">
+              <a href="myAssessment.html" class="bg-dark list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fas fa-chart-bar fa-fw mr-3"></span>
                   <span class="menu-collapsed">Assessments</span>
@@ -107,9 +107,8 @@
             </h2>
             <hr class="titlehr">
             <p class="list pb-2">
-              <span class="list-item"><a href=index.html>Home</a> ></span>
-              <span class="list-item"><a href=courses.html>Assessments</a> ></span>
-              <span class="list-item-active"><a href="#">Create Assessment</a></span>
+              <span class="list-item"><a href="index.html">Home</a> ></span>
+              <span class="list-item-active"><a href="myAssessment.html">Assessments</a></span>
             </p>
             <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink"><i
                 class="fas fa-save pr-2"></i>Create Assessment</button>
@@ -178,7 +177,7 @@
 
 
                 <div class="tab-pane fade" id="nav-cond" role="tabpanel" aria-labelledby="nav-cond-tab">
-                  <div class="row p-2 pt-5">
+                  <div class="row p-2 pt-4">
                     <div class="col-md-12">
                       <nav class="col-md-6">
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -209,12 +208,12 @@
                                     </div>
                                   </div>
                                   <div class="col-lg-4">
-                                    <select class="form-control form-control-sm" id="cond-assessmentsSection" style="width: 100%;">
+                                    <select class="form-control form-control-sm" id="cond-ObjassessmentsSection" style="width: 100%;">
                                       <option value="0" selected disabled>Filter Assessment By Section</option>
                                     </select>
                                   </div>
                                   <div class="col-lg-6">
-                                    <select class="form-control form-control-sm" id="cond-assessmentsSubject">
+                                    <select class="form-control form-control-sm" id="cond-ObjassessmentsSubject">
                                       <option value="0" selected disabled>Filter Assessment By Subject</option>
                                     </select>
                                   </div>
@@ -223,8 +222,9 @@
 
                             <!-- subjective-assessments List-->
                               <div class="container-fluid pt-5 px-5">
-                                <div class="row" id="condAssessmentList">
-                                  <div class='col-sm-6 assessment'>
+                                <div class="row" id="condObjAssessmentList">
+
+                                  <!-- <div class='col-sm-6 assessment'>
                                     <div class='card mb-3 objCard text-left'>
                                       <h5 class='font-weight-bold pl-3 pt-2 pr-3'>ABCD</h5>
                                       <p class='pl-3 condCardDesc'>DESC</p>
@@ -245,7 +245,72 @@
                                         </div>
                                       </div>
                                     </div>
+                                  </div> -->
+
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+        
+                          <!-- assessment list end -->
+        
+                        </div>
+                        <div class="tab-pane fade" id="nav-cond-sub" role="tabpanel" aria-labelledby="nav-cond-sub-tab">        
+        
+                          <!-- objective-assessments List-->
+                          <div class="container-fluid px-5">
+                            <div class="row text-center" id="objectiveassessmentList">
+                              <div class="pt-5">
+                                <div class="row">
+                                  <div class="col-lg-2">
+                                    <div class="input-group date">                            
+                                      <input type="text" placeholder="Filter By Date" id="condDate" style="min-width: 120px;; min-height: 30px;border: 1px solid #a6a6a6;">
+                                      <span class="input-group-addon">
+                                        <!-- <i class="far fa-calendar-alt"></i> -->
+                                      </span>
+                                    </div>
                                   </div>
+                                  <div class="col-lg-4">
+                                    <select class="form-control form-control-sm" id="cond-SubassessmentsSection" style="width: 100%;">
+                                      <option value="0" selected disabled>Filter Assessment By Section</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <select class="form-control form-control-sm" id="cond-SubassessmentsSubject">
+                                      <option value="0" selected disabled>Filter Assessment By Subject</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+
+                            <!-- subjective-assessments List-->
+                              <div class="container-fluid pt-5 px-5">
+                                <div class="row" id="condSubAssessmentList">
+
+                                  <!-- <div class='col-sm-6 assessment'>
+                                    <div class='card mb-3 objCard text-left'>
+                                      <h5 class='font-weight-bold pl-3 pt-2 pr-3'>ABCD</h5>
+                                      <p class='pl-3 condCardDesc'>DESC</p>
+                                      <div class='card-body pl-1 pb-0 align-bottom'>
+                                        <h6 class="font-weight-bold">Faculty Web App Issues</h6>
+                                      </div>
+                                      <div class='px-3 text-muted card-footer'>
+                                        <div class="row">
+                                          <div class="col-sm-4">
+                                            Questions: <span class="font-weight-bold">5</span>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            Sent To: <span class="font-weight-bold">5</span>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            Answered: <span class="font-weight-bold">5</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> -->
+                                  
                                 </div>
                               </div>
 

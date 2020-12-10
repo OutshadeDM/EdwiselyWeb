@@ -479,7 +479,7 @@ $(document).ready(function () {
         // alert("here");
 
         $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-            position: "raltive",
+            position: "relative",
             width: "100%",
             height: "100%",
             background: "#fff",

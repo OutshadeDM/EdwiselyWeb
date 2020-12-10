@@ -14,10 +14,6 @@ $(document).ready(function() {
                     $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
                 });
             }
-            else {
-                alert(result.message + " Please Login again");
-                window.location.href = "Loginpage.html";
-            }
         },
         error: function (error) {
             alert(error);
