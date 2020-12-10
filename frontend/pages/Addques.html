@@ -103,8 +103,8 @@
               <span class="list-item"><a href="myAssessment.html">Assessment</a> ></span>
               <span class="list-item-active"><a href="#">Add Question</a></span>
             </p>
-            <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mr-5"><i
-                class="fas fa-save"></i> Save</button>
+            <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mr-5"><i class="fas fa-save"></i>
+              Save</button>
           </div>
         </div>
         <!-- Start Page Content -->
@@ -119,8 +119,8 @@
 
             <div class="col-md-7 shadow-sm addques py-2 pb-5 mb-5" id="createques">
               <div class="divInput">
-                <input class="form-control form-control-lg" type="textarea" style="resize: none;" placeholder="Start Typing your question"
-                  id="quesInput">
+                <input class="form-control form-control-lg" type="textarea" style="resize: none;"
+                  placeholder="Start Typing your question" id="quesInput">
                 <div class="titleImg py-3 ">
                   <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
                   <!-- <i class="fas fa-edit fa-lg px-2 uploaded"></i> -->
@@ -167,8 +167,9 @@
                       </div>
                     </div>
                     <div class="col-8 inputOption px-0" style="width: 100%;">
-                      <input type="text" class="form-control" placeholder="Enter Option" id="firstOption" style="height: 50px;">
-                      </div>
+                      <input type="text" class="form-control" placeholder="Enter Option" id="firstOption"
+                        style="height: 50px;">
+                    </div>
                     <div class="col-2 chooseImage px-0 pt-1 firstOption">
                       <label for="opt1Image" class="custom-file-upload optImgs">
                         <i class="fas fa-image fa-lg pl-2 pt-3"></i>
@@ -189,8 +190,9 @@
                       </div>
                     </div>
                     <div class="col-8 inputOption px-0" style="width: 100%;">
-                      <input type="text" class="form-control" placeholder="Enter Option" id="secondOption" style="height: 50px;">
-                      </div>
+                      <input type="text" class="form-control" placeholder="Enter Option" id="secondOption"
+                        style="height: 50px;">
+                    </div>
                     <div class="col-2 chooseImage px-0 pt-1 secondOption">
                       <label for="opt2Image" class="custom-file-upload optImgs">
                         <i class="fas fa-image fa-lg pl-2 pt-3"></i>
@@ -214,8 +216,9 @@
                       </div>
                     </div>
                     <div class="col-8 inputOption px-0" style="width: 100%;">
-                      <input type="text" class="form-control" placeholder="Enter Option" id="thirdOption" style="height: 50px;">
-                      </div>
+                      <input type="text" class="form-control" placeholder="Enter Option" id="thirdOption"
+                        style="height: 50px;">
+                    </div>
                     <div class="col-2 chooseImage px-0 pt-1 thirdOption">
                       <label for="opt1Image" class="custom-file-upload optImgs">
                         <i class="fas fa-image fa-lg pl-2 pt-3"></i>
@@ -236,8 +239,9 @@
                       </div>
                     </div>
                     <div class="col-8 inputOption px-0" style="width: 100%;">
-                      <input type="text" class="form-control" placeholder="Enter Option" id="fourthOption" style="height: 50px;">
-                      </div>
+                      <input type="text" class="form-control" placeholder="Enter Option" id="fourthOption"
+                        style="height: 50px;">
+                    </div>
                     <div class="col-2 chooseImage px-0 pt-1 fourthOption">
                       <label for="opt4Image" class="custom-file-upload optImgs">
                         <i class="fas fa-image fa-lg pl-2 pt-3"></i>
@@ -263,8 +267,9 @@
                         </div>
                       </div>
                       <div class="col-8 inputOption px-0" style="width: 100%;">
-                        <input type="text" class="form-control" placeholder="Enter Option (Optional)" id="fifthOption" style="height: 50px;">
-                        </div>
+                        <input type="text" class="form-control" placeholder="Enter Option (Optional)" id="fifthOption"
+                          style="height: 50px;">
+                      </div>
                       <div class="col-2 chooseImage px-0 pt-1 fifthOption">
                         <label for="opt5Image" class="custom-file-upload optImgs">
                           <i class="fas fa-image fa-lg pl-2 pt-3"></i>
@@ -353,11 +358,17 @@
                 </div>
 
 
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add Hint</button>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add Solution</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add
+                  Hint</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add
+                  Solution</button>
                 <input type="hidden" value="0" id="questionId">
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="deleteBtn" style="display: none;">Delete</button>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="plusBtn">+</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="deleteBtn"
+                  style="display: none;">Delete</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                  id="plusBtn">+</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                  id="editBtn">Edit</button>
 
 
 
@@ -367,34 +378,34 @@
           </div>
 
           <!-- toasts -->
-        <div id="toastDiv" style="display: none;">
-          <!-- start error toast -->
-          <div class="toast fade" data-autohide="false" id="errorToast">
-            <div class="toast-header">
-              <strong class="mr-auto text-danger">Error !!!</strong>
-              <small class="text-muted">Just Now</small>
+          <div id="toastDiv" style="display: none;">
+            <!-- start error toast -->
+            <div class="toast fade" data-autohide="false" id="errorToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-danger">Error !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="errorToastBody">All fields are mandatory to save.</p>
+              </div>
             </div>
-            <div class="toast-body">
-              <p id="errorToastBody">All fields are mandatory to save.</p>
+            <!-- end error toast -->
+
+            <!-- start success toast -->
+            <div class="toast fade" data-autohide="false" id="successToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-success">Success !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="successToastBody">Content has been saved successfully.</p>
+              </div>
             </div>
+            <!-- end success toast -->
+
           </div>
-          <!-- end error toast -->
 
-          <!-- start success toast -->
-          <div class="toast fade" data-autohide="false" id="successToast">
-            <div class="toast-header">
-              <strong class="mr-auto text-success">Success !!!</strong>
-              <small class="text-muted">Just Now</small>
-            </div>
-            <div class="toast-body">
-              <p id="successToastBody">Content has been saved successfully.</p>
-            </div>
-          </div>
-          <!-- end success toast -->
-
-        </div>
-
-        <!-- end toasts -->
+          <!-- end toasts -->
 
           <!-- End Page Content -->
         </div>
