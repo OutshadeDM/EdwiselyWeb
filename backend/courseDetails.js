@@ -67,7 +67,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
 
@@ -138,7 +138,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
 
@@ -217,7 +217,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(error);
+                                alert("Request Failed with status: "+error.status);
                             }
                         });
                     }
@@ -252,7 +252,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(error);
+                                alert("Request Failed with status: "+error.status);
                             }
                         });
 
@@ -299,7 +299,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (error) {
-                                alert(error);
+                                alert("Request Failed with status: "+error.status);
                             }
                         });
 
@@ -558,7 +558,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
                 $("#loadingDiv").remove();
             }
         });
@@ -728,7 +728,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
         }
@@ -780,7 +780,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
         }
@@ -822,7 +822,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
         }
@@ -942,7 +942,7 @@ $(document).ready(function () {
                             $(".custom-file-label").removeClass("selected").html("Choose file");
                             courseFileAdd = null;
                             $("#courseFileAdd").val(null);
-                            alert(error);
+                            alert("Request Failed with status: "+error.status);
                         }
                     });
                 }
@@ -999,7 +999,7 @@ $(document).ready(function () {
                         $(".custom-file-label").removeClass("selected").html("Choose File");
                         $("#courseFileAdd").val(null);
                         courseFileAdd = null;
-                        alert(error);
+                        alert("Request Failed with status: "+error.status);
                     }
                 });
             }
@@ -1091,7 +1091,7 @@ $(document).ready(function () {
                             }
                         },
                         error: function (error) {
-                            alert(error);
+                            alert("Request Failed with status: "+error.status);
                         }
                     });
 
@@ -1099,7 +1099,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
     });
@@ -1163,7 +1163,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(error);
+                alert("Request Failed with status: "+error.status);
             }
         });
 
@@ -1260,7 +1260,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
@@ -1311,7 +1311,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
@@ -1372,7 +1372,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 
@@ -1423,7 +1423,7 @@ $(document).ready(function () {
 
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Request Failed with status: "+error.status);
                 }
             });
 

@@ -1,17 +1,16 @@
 $(document).ready(function () {
     // alert("ok");
 
-  // $user = "";
-	// if ($user = isLoggedIn()) {
-  //   $('html').removeClass('d-none');
-  //   alert("here");
-  // }
-  // else {
-	// 	window.location.replace("login.html");
-  // }
-  // alert(JSON.stringify($user));
+    $user = "";
+    if (isLoggedIn()) {
+      console.log(isLoggedIn(), 'yes');
+      $user = JSON.parse(isLoggedIn());
+      $('html').removeClass('d-none');
+    } else {
+      window.location.replace("login.html");
+    }
 
-  let university_degree_department_id = "71";
+  // let university_degree_department_id = "71";
 
 
   $('#createAssessmentBtn').on('click', function () {
@@ -24,7 +23,7 @@ $(document).ready(function () {
     type: 'GET',
     contentType: 'application/json',
     headers: {
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+      'Authorization': `Bearer ${$user.token}`
     },
     success: function (result) {
       // alert(result.status);
@@ -49,7 +48,7 @@ $(document).ready(function () {
 
     },
     error: function (error) {
-      alert(error);
+      alert("Request Failed with status: "+error.status);
     }
   });
 
@@ -73,7 +72,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -96,7 +95,7 @@ $(document).ready(function () {
             $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
     }
@@ -107,7 +106,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -130,7 +129,7 @@ $(document).ready(function () {
             $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
 
@@ -178,7 +177,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -211,7 +210,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -233,7 +232,7 @@ $(document).ready(function () {
             $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
 
@@ -248,11 +247,11 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+university_degree_department_id,
+    url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+`${$user.university_degree_department_id}`,
     type: 'GET',
     contentType: 'application/json',
     headers: {
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+        'Authorization': `Bearer ${$user.token}`
     },
     success: function (result) {
         // alert(result.status);
@@ -269,7 +268,7 @@ $(document).ready(function () {
         // }
     },
     error: function (error) {
-        alert(error);
+        alert("Request Failed with status: "+error.status);
     }
   });
 
@@ -293,7 +292,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -327,7 +326,7 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
 
@@ -339,7 +338,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -373,7 +372,7 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
 
@@ -385,7 +384,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -419,7 +418,7 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
 
@@ -431,7 +430,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNzU4Mjk5NCIsImV4cCI6IjE2MDg4Nzg5OTQifQ.qhQ3en3nxGgCCha78273ZfJRLUV3ea_cB-GPcfRcl9k'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           // alert(result.status);
@@ -467,7 +466,7 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert(error);
+          alert("Request Failed with status: "+error.status);
         }
       });
 

@@ -95,16 +95,16 @@
         <div class="shadow-sm">
           <div class="px-4 headerBanner">
             <h2 class="mt-1">
-              <p class="font-weight-bold" id="courseName">Create new Objective Assessment</p>
+              <p class="font-weight-bold" id="courseName">Add Questions</p>
             </h2>
             <hr class="titlehr">
             <p class="list pb-2">
-              <span class="list-item"><a href=index.html>Home</a> ></span>
-              <span class="list-item"><a href="myAssessment.html">Assessments</a> ></span>
-              <span class="list-item-active"><a href="addQues.html">Create Assessment</a></span>
+              <span class="list-item"><a href="index.html">Home</a> ></span>
+              <span class="list-item"><a href="myAssessment.html">Assessment</a> ></span>
+              <span class="list-item-active"><a href="#">Add Question</a></span>
             </p>
-            <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink"><i
-                class="fas fa-save pr-2"></i>Save</button>
+            <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mr-5"><i
+                class="fas fa-save"></i> Save</button>
           </div>
         </div>
         <!-- Start Page Content -->
@@ -117,14 +117,9 @@
               <div class="initData">Add Questions to this Assignment</div>
             </div>
 
-
-
-
-
-
             <div class="col-md-7 shadow-sm addques py-2 pb-5 mb-5" id="createques">
               <div class="divInput">
-                <input class="form-control form-control-lg" type="text" placeholder="Start Typing your question"
+                <input class="form-control form-control-lg" type="textarea" style="resize: none;" placeholder="Start Typing your question"
                   id="quesInput">
                 <div class="titleImg py-3 ">
                   <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
@@ -137,8 +132,8 @@
               <div class="row pt-4">
                 <div class="col-6">
                   <span>Bloom</span>
-                  <select class="bloomSelect mx-2">
-                    <option value="1" selected="">Remember</option>
+                  <select class="bloomSelect mx-2" id="selectBloomLevel">
+                    <option value="1" selected>Remember</option>
                     <option value="2">Understand</option>
                     <option value="3">Apply</option>
                     <option value="4">Analyze</option>
@@ -147,8 +142,8 @@
 
                 <div class="col-6" id="levelDropDiv">
 
-                  <select class="levelSelect mx-2 float-right">
-                    <option value="1" selected="">Level 1</option>
+                  <select class="levelSelect mx-2 float-right" id="selectLevel">
+                    <option value="1" selected>Level 1</option>
                     <option value="2">Level 2</option>
                     <option value="3">Level 3</option>
                     <option value="4">Level 4</option>
@@ -360,6 +355,8 @@
 
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add Hint</button>
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add Solution</button>
+                <input type="hidden" value="0" id="questionId">
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="deleteBtn" style="display: none;">Delete</button>
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="plusBtn">+</button>
 
 
@@ -370,7 +367,7 @@
           </div>
 
           <!-- toasts -->
-        <div>
+        <div id="toastDiv" style="display: none;">
           <!-- start error toast -->
           <div class="toast fade" data-autohide="false" id="errorToast">
             <div class="toast-header">

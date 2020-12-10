@@ -1,5 +1,17 @@
 $(document).ready(function () {
     //   alert("ok");
+
+    $user = "";
+	if (isLoggedIn()) {
+		// console.log(isLoggedIn(), 'yes');
+		$user = JSON.parse(isLoggedIn());
+		$('html').removeClass('d-none');
+	} else {
+		window.location.replace("login.html");
+    }
+    alert
+
+
     let courses = [];
 
     $.ajax({
@@ -7,7 +19,7 @@ $(document).ready(function () {
         type: 'GET',
         contentType: 'application/json',
         headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjI4MDA5NyIsImV4cCI6IjE2MDc1NzYwOTcifQ.53VXe4V8WCJUTogRAxiBmN-PRn8FkGd1il_SkgLh1RE'
+            'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
             // alert(result.status);
@@ -35,7 +47,7 @@ $(document).ready(function () {
                 $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-            alert(error);
+            alert("Request Failed with status: "+error.status);
         }
     });
 

@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     },
     error: function (error) {
-      alert(result.message);
+      alert("Request Failed with status: "+error.status);
     }
   });
 
@@ -126,9 +126,7 @@ $(document).ready(function () {
           }
         },
         error: function (error) {
-          alert(result.message);
-          //console.log('5')
-
+          alert("Request Failed with status: "+error.status);
         }
       });
     }
