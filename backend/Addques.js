@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
   $user = "";
-	if (isLoggedIn()) {
-		// console.log(isLoggedIn(), 'yes');
-		$user = JSON.parse(isLoggedIn());
-		$('html').removeClass('d-none');
-	} else {
-		window.location.replace("login.html");
+  if (isLoggedIn()) {
+    // console.log(isLoggedIn(), 'yes');
+    $user = JSON.parse(isLoggedIn());
+    $('html').removeClass('d-none');
+  } else {
+    window.location.replace("login.html");
   }
   // alert(`${$user.token}`);
 
@@ -25,6 +25,10 @@ $(document).ready(function () {
   $('#hintDiv').hide()
   $('#solutionDiv').hide()
   $('#fifth').hide()
+
+  //hiding edit btn
+  $('#editBtn').hide()
+
 
 
   //on click of hint btn
@@ -145,7 +149,7 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id='+`${$user.university_degree_department_id}`,
+    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
     type: 'GET',
     contentType: 'application/json',
     headers: {
@@ -173,7 +177,7 @@ $(document).ready(function () {
 
     },
     error: function (error) {
-      alert("Request Failed with status: "+error.status);
+      alert("Request Failed with status: " + error.status);
     }
   });
 
@@ -182,10 +186,10 @@ $(document).ready(function () {
   let questions = [];
 
 
-  function loadList(){    
+  function loadList() {
 
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id='+tId,
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
       type: 'GET',
       contentType: 'application/json',
       headers: {
@@ -199,7 +203,7 @@ $(document).ready(function () {
           $.each(result.data, function (key, value) {
             // alert(value);
             $('.initData').remove();
-            $('#addques').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='`+value.id+`'>`+value.name+`</p></div>`)
+            $('#addques').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + value.id + `'>` + value.name + `</p></div>`)
             questionsList.push(value.id);
             questions.push(value);
           });
@@ -207,7 +211,7 @@ $(document).ready(function () {
         }
       },
       error: function (error) {
-        alert(JSON.stringify(error));
+        alert("Request Failed with status: " + error.status);
       }
     });
 
@@ -224,7 +228,7 @@ $(document).ready(function () {
     //alert("hello")
 
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id='+`${$user.university_degree_department_id}`,
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
       type: 'GET',
       contentType: 'application/json',
       headers: {
@@ -467,19 +471,19 @@ $(document).ready(function () {
   $(document).on('click', '.topicTagsInput', function () {
 
     let value = $(this).data('type');
-    
+
     // let type = value.charAt(0) + value.charAt(1).toUpperCase() + value.slice(2);
 
-    if(!topics.includes(value)){
+    if (!topics.includes(value)) {
       topics.push({ "id": $(this).val(), "type": value });
     }
 
-    if($(this).prop('checked') == false){
-      topics = $.grep(topics, function(e){ 
-        return e.id != $(this).val(); 
-      });      
+    if ($(this).prop('checked') == false) {
+      topics = $.grep(topics, function (e) {
+        return e.id != $(this).val();
+      });
     }
-    
+
     // alert(JSON.stringify(topics));
 
   });
@@ -503,8 +507,8 @@ $(document).ready(function () {
     bloom_level = $('#selectBloomLevel').val();
     difficulty_level = $('#selectLevel').val();
 
-    if(topics !=null && option1 && option2 && bloom_level && difficulty_level && answer && question && type){
-      
+    if (topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type) {
+
 
       //saving in array
       options.push("" + option1 + "")
@@ -554,7 +558,7 @@ $(document).ready(function () {
         height: "100%",
         background: "#fff",
         opacity: 0.7
-      }).appendTo($("#abcd").css('position','relative'));
+      }).appendTo($("#abcd").css('position', 'relative'));
       $("input.custom-control-input").attr("disabled", true);
 
 
@@ -577,24 +581,24 @@ $(document).ready(function () {
           if (result.status == 200) {
             // console.log(result.data)
             $('#loadingDiv').remove();
-            $('#abcd').css('position','absolute');
+            $('#abcd').css('position', 'absolute');
             $('#successToastBody').text('Question Added to Database Successfully');
             $('#successToast').toast('show');
             // $('.initData').remove();
-            $('#addques').prepend(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='`+result.data.id+`'>`+result.data.name+`</p></div>`)
+            $('#addques').prepend(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
             questionsList.push(result.data.id);
             $("input.custom-control-input").attr("disabled", false);
           }
         },
         error: function (error) {
           $('#loadingDiv').remove();
-          $('#abcd').css('position','absolute');
+          $('#abcd').css('position', 'absolute');
           $("input.custom-control-input").attr("disabled", false);
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
     }
-    else{
+    else {
       alert("here");
 
     }
@@ -602,7 +606,7 @@ $(document).ready(function () {
   });
 
   $("#btnSave").click(function () {
-    if(questionsList != null && questionsList.length > 0){
+    if (questionsList != null && questionsList.length > 0) {
       alert(JSON.stringify(questionsList));
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -615,9 +619,9 @@ $(document).ready(function () {
       $("input.custom-control-input").attr("disabled", true);
 
       let form = new FormData();
-      form.append("test_id",tId);
-      form.append("questions","["+questionsList+"]");
-      form.append("units","[]");
+      form.append("test_id", tId);
+      form.append("questions", "[" + questionsList + "]");
+      form.append("units", "[]");
 
       // for (var key of form.entries()) {
       //   alert(key[1]);
@@ -645,7 +649,7 @@ $(document).ready(function () {
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
           }
-          else{
+          else {
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
@@ -655,7 +659,7 @@ $(document).ready(function () {
           $('#loadingDiv').remove();
           // $('#abcd').css('position','absolute');
           $("input.custom-control-input").attr("disabled", false);
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
@@ -666,24 +670,46 @@ $(document).ready(function () {
   $('#errorToast,#successToast').on('show.bs.toast', function () {
     $('#toastDiv').show();
     setInterval(function () {
-        $('#errorToast').toast('hide');
-        $('#successToast').toast('hide');
-        $('#toastDiv').hide();
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
     }, 5000);
   });
 
+
+  //clicking questions
   $(document).on('click', '.questions', function () {
-    // alert("ok");
     $('#deleteBtn').show();
+    $('#editBtn').show();
     $('#quesInput').val($(this).text());
-    $('#questionId').val($(this).data('id'));x
+    $('#questionId').val($(this).data('id'));
+
+    //i have question id
+    //now using that id, iterate through the questions array questions and find the match the ques.
+    //fill uske options in the options inputs.
+
+    for (i = 0; i < questions.length(); i++) {
+      if ($(this).data('id') === questions[i].id) {
+        $('#firstOption').val(questions[i].questions_options[0].name)
+        $('#secondOption').val(questions[i].questions_options[1].name)
+        $('#thirdOption').val(questions[i].questions_options[2].name)
+        $('#fourthOption').val(questions[i].questions_options[3].name)
+        $('#fifthOption').val(questions[i].questions_options[4].name)
+
+
+      }
+    }
+
   });
 
+
+
+  //delete btn
   $("#deleteBtn").click(function () {
 
     let questionId = $('questionId').val();
 
-    if(questionId && questionId != "0"){
+    if (questionId && questionId != "0") {
 
     }
 
