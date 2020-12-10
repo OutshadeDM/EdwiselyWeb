@@ -212,7 +212,7 @@ $(document).ready(function () {
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
       div = div + "Questions: " + value.questions_count;
       if(value.questions_count)
-        div = div + "<a href='../pages/addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+        div = div + "<a href='../pages/addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id+"' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       else
         div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";        
       div = div + "</div></div></div>";
