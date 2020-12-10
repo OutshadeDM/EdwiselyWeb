@@ -15,8 +15,6 @@ $(async function() {
     $('#endtime').datetimepicker({
     	format:'Y-m-d H:i:s',
     });    
-
-
 	let tabNumber = 1;
 	let first = true;
 
