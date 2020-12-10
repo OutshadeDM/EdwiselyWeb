@@ -204,7 +204,7 @@ $(document).ready(function () {
     $.each(data, function (key, value) {
 
       div = div + "<div class='col-sm-6 assessment'>";
-      div = div + "<div class='card mb-3 objCard text-left'></h5>";
+      div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a>";
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
@@ -215,7 +215,7 @@ $(document).ready(function () {
         div = div + "<a href='../pages/addQuestionsPage.html?id='"+value.subject_id+"&tid="+value.id+"' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       else
         div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";        
-      div = div + "</div></div>";
+      div = div + "</div></div></div>";
 
     });
 

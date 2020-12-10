@@ -1,13 +1,14 @@
 $(document).ready(function() {
 
     $user = "";
-	if (isLoggedIn()) {
-		// console.log(isLoggedIn(), 'yes');
-		$user = JSON.parse(isLoggedIn());
-		$('html').removeClass('d-none');
-	} else {
-		window.location.replace("login.html");
+    if (isLoggedIn()) {
+      console.log(isLoggedIn(), 'yes');
+      $user = JSON.parse(isLoggedIn());
+      $('html').removeClass('d-none');
+    } else {
+      window.location.replace("login.html");
     }
+
 
 
     $.ajax({
@@ -69,7 +70,7 @@ $(document).ready(function() {
                             div = div + "<div class='col-sm-4 course'>";
                             div = div + "<div class='card mb-3 shadow-sm addCourseCard'>";
                             if (value.course_image)
-                                div = div + "<img class='card-img-top py-2' width='200' height='200' src='"+value.course_image+"' alt='No Image'>";
+                                div = div + "<img class='p-2' style='width:100%' height='250' src='"+value.course_image+"' alt='No Image'>";
                             else
                                 div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
                             // div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
