@@ -11,26 +11,26 @@ $(document).ready(function() {
 
 
 
-    $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+`${$user.university_degree_department_id}`,
-        type: 'GET',
-        contentType: 'application/json',
-        headers: {
-            'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-            // alert(result.status);
-            $('#courseModalClass').empty();
-            if (result.status == 200) {
-                $.each(result.data, function (key, value) {
-                    $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
-                });
-            }
-        },
-        error: function (error) {
-            alert("Request Failed with status: "+error.status);
-        }
-    });
+    // $.ajax({
+    //     url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+`${$user.university_degree_department_id}`,
+    //     type: 'GET',
+    //     contentType: 'application/json',
+    //     headers: {
+    //         'Authorization': `Bearer ${$user.token}`
+    //     },
+    //     success: function (result) {
+    //         // alert(result.status);
+    //         $('#courseModalClass').empty();
+    //         if (result.status == 200) {
+    //             $.each(result.data, function (key, value) {
+    //                 $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
+    //             });
+    //         }
+    //     },
+    //     error: function (error) {
+    //         alert("Request Failed with status: "+error.status);
+    //     }
+    // });
 
     let courses = [];
     let deptArr = [];
@@ -65,7 +65,7 @@ $(document).ready(function() {
                         // alert(value.id);
                         //  alert(value.name);
 
-                        if(!courseDept || courseDept == "0"){
+                        if(!courseDept || courseDept == "0" || courseDept == "all"){
 
                             div = div + "<div class='col-sm-4 course'>";
                             div = div + "<div class='card mb-3 shadow-sm addCourseCard'>";
@@ -85,6 +85,7 @@ $(document).ready(function() {
                                 div = div + "</div>";
                                 dept.push({
                                     "id":value.subject_semester_id,
+                                    "uid":value.university_degree_department_id,
                                     "name":value.name
                                 });    
 
@@ -137,6 +138,7 @@ $(document).ready(function() {
                                     div = div + "</div>";
                                     dept.push({
                                         "id":value.subject_semester_id,
+                                        "uid":value.university_degree_department_id,
                                         "name":value.name
                                     });
                                 });
@@ -164,6 +166,7 @@ $(document).ready(function() {
                     if(deptArr != null && deptArr.length > 0 && !courseDept){
                         $('#courseSelectDept').empty();
                         $('#courseSelectDept').append("<option value='0' disabled selected>Select Department</option>");
+                        $('#courseSelectDept').append("<option value='all'>All</option>")
                         $.each(deptArr,function(key,value){
                             $('#courseSelectDept').append("<option value='"+value+"'>"+value+"</option>")
                         });
@@ -217,6 +220,10 @@ $(document).ready(function() {
         $(this).children("i").show();
     });
 
+    $(document).on('click', '.courseTagsInput', function () {
+        getSections($("input[name='courseDept']:checked").data('uid'));
+    });
+
     let classes = [];
 
     $(document).on('click', 'input[name=courseClass]', function () {
@@ -246,10 +253,47 @@ $(document).ready(function() {
         $('#courseModalHeader').html("Finilize '"+subject_name+"' to Your Courses")
 
         $.each(dept, function(key, value){
-            $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='"+value.id+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
+            $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='"+value.id+"' data-uid='"+value.uid+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
         });
 
     });
+
+    function getSections(uid){
+        // alert(uid);
+
+        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            background: "#fff",
+            opacity: 0.7
+          }).appendTo($("#courseModalClass").css('position', 'relative'));
+
+        $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+uid,
+            type: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+                // alert(result.message);
+                $('#courseModalClass').empty();
+                if (result.status == 200) {
+                    $.each(result.data, function (key, value) {
+                        // alert(value.name);
+                        $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i>"+value.name+"</label></li>");
+                    });
+                    
+                    $('#loadingDiv').remove();
+                    // $('#courseModalClass').css('position', 'absolute');
+                }
+            },
+            error: function (error) {
+                alert("Request Failed with status: "+error.status);
+            }
+        });
+    }
 
     $('#courseModal').on('hide.bs.modal', function (event) {
         // alert("here");

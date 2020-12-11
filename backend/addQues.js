@@ -13,10 +13,14 @@ $(document).ready(function () {
   let searchParams = new URLSearchParams(window.location.search);
   let subSemId = 0;
   let tId = 0;
+  let unit_id = "";
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
+  }
+  if(searchParams.has('uid')){
+    unit_id = searchParams.get('uid');
   }
 
   // let university_degree_department_id = 71
@@ -679,7 +683,7 @@ $(document).ready(function () {
       let form = new FormData();
       form.append("test_id", tId);
       form.append("questions", "[" + questionsList + "]");
-      form.append("units", "[]");
+      form.append("units", "["+unit_id+"]");
 
       // for (var key of form.entries()) {
       //   alert(key[1]);
