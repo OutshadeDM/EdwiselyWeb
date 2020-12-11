@@ -82,7 +82,7 @@ $(document).ready(function () {
     $('.uploadedques').show()
     $('.imgPreviewques').show()
     $('.notUploadedques').hide()
-
+    $('#quesLabel').hide()
   });
 
 
@@ -104,6 +104,7 @@ $(document).ready(function () {
     $('.uploadedhint').show()
     $('.imgPreviewhint').show()
     $('.notUploadedhint').hide()
+    $('#hintLabel').hide()
   });
 
 
@@ -125,6 +126,7 @@ $(document).ready(function () {
     $('.uploadedsolution').show()
     $('.imgPreviewsolution').show()
     $('.notUploadedsolution').hide()
+    $('#solutionLabel').hide()
   });
 
 
@@ -136,6 +138,7 @@ $(document).ready(function () {
     $('.notUploadedques').show()
     $('.imgPreviewques').hide()
     $('#quesImage').val('')
+    $('#quesLabel').show()
   })
 
   $('.uploadedhint').on('click', function () {
@@ -143,6 +146,7 @@ $(document).ready(function () {
     $('.notUploadedhint').show()
     $('.imgPreviewhint').hide()
     $('#hintImage').val('')
+    $('#hintLabel').show()
   })
 
   $('.uploadedsolution').on('click', function () {
@@ -150,6 +154,7 @@ $(document).ready(function () {
     $('.notUploadedsolution').show()
     $('.imgPreviewsolution').hide()
     $('#solutionImage').val('')
+    $('#solutionLabel').show()
   });
 
   getTopics();
@@ -234,18 +239,6 @@ $(document).ready(function () {
 
 
   }
-
-
-
-  //get topics api
-
-  $('#exampleModal').on('shown.bs.modal', function (event) {
-    //let button = $(event.relatedTarget) // Button that triggered the modal
-
-    //alert("hello")
-
-  });
-
 
 
   // radios for selecting
@@ -427,13 +420,14 @@ $(document).ready(function () {
 
   let type = 'public';
 
-  $('#customSwitch1').on('change', function () {
+  $('#customSwitch1').on('click', function () {
+    // alert("gere");
     if ($("input[name='public_pvt']:checked").val() === 'public') {
       type = "public"
     } else {
       type = "private"
     }
-  })
+  });
 
   let answer = ''
   $('input[name=Radios]').on('change', function () {
@@ -487,7 +481,7 @@ $(document).ready(function () {
     bloom_level = $('#selectBloomLevel').val();
     difficulty_level = $('#selectLevel').val();
 
-    if (topics != null && topics.length > 1 && option1 && option2 && bloom_level && difficulty_level && source&& answer && question && answer&& type) {
+    if (topics != null && topics.length > 0 && option1 && option2 && bloom_level && difficulty_level && source&& answer && question && answer&& type) {
 
 
       //saving in array
@@ -662,6 +656,10 @@ $(document).ready(function () {
     $('#hintInput').val("");
     $('#hintInput').val("");
 
+    $('.uploadedques').click();
+    $('.uploadedhint').click();
+    $('.uploadedsolution').click();
+
     getTopics();
 
   }
@@ -735,7 +733,7 @@ $(document).ready(function () {
       $('#errorToast').toast('hide');
       $('#successToast').toast('hide');
       $('#toastDiv').hide();
-    }, 5000);
+    }, 10000);
   });
 
 
