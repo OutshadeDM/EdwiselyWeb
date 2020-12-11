@@ -423,33 +423,41 @@ $(document).ready(function () {
                     ((courseType == value.type || (courseType == 'DOCS' && value.type == 'PDF') || (courseType == 'VIDEO' && value.type == 'MP4')) || courseType == "0") 
 
                 && (courseLevel == value.level || courseLevel == "0")) {
+                    let fileType = "";
                     div = div + "<div class='row my-2'>";
                     div = div + "<div class='col-sm-1 d-flex justify-content-end'>";
                     switch (value.type) {
                         case "DOCS":
                             div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            fileType = "doc";
                             break;
                         case "PDF":
                             div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            fileType = "pdf";
                             break;
                         case "VIDEO":
                             div = div + "<i class='fas fa-file-video fa-2x'></i>";
+                            fileType = "video";
                             break;
                         case "MP4":
                             div = div + "<i class='fas fa-file-video fa-2x'></i>";
+                            fileType = "mp4";
                             break;
                         case "PPT":
                             div = div + "<i class='fas fa-file-powerpoint fa-2x'></i>";
+                            fileType = "ppt";
                             break;
                         case "URL":
                             div = div + "<i class='fas fa-file-alt fa-2x'></i>";
+                            fileType = "url";
                             break;
                         default:
                             div = div + "<i class='fas fa-file-alt fa-2x'></i>";
+                            fileType = "url";
                     }
                     // div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
                     div = div + "</div>";
-                    div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-url='" + value.url + "'>";
+                    div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-type='"+fileType+"' data-url='" + value.url + "'>";
                     div = div + "<h6>" + value.title + "</h6>";
                     div = div + "</div>";
                     div = div + "<div class='col-sm-2 d-flex justify-content-end'>";
@@ -460,7 +468,7 @@ $(document).ready(function () {
                         div = div + "</button>";
                         div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
                         if (value.learning_content == "1" && value.display_type == "private")
-                            div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
+                            div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
 
                         let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
                         if (value.bookmarked == "0")
@@ -525,6 +533,7 @@ $(document).ready(function () {
         let topic_code = button.data('topic');
         let title = button.data('title');
         let url = button.data('url');
+        let fileType = button.data('filetype');
         
         let courseUnits = $('#courseUnits').val();
         // $("#courseTypeAdd").val("1");
@@ -614,7 +623,7 @@ $(document).ready(function () {
                     // alert($("input[name='courseTagAdd']:checked").val());
                     // alert(topic_code);
                     $("#courseFileAddATag").show();
-                    $("#courseFileAddATag").attr("href", url);
+                    $('#courseFileAddATag').attr('href', "viewFile.html?url="+url+"&type="+fileType);
                     $("#contentModalSmall").show();
 
                     $('#courseAddSave').data('id', material_id);
@@ -726,11 +735,30 @@ $(document).ready(function () {
 
     $(document).on('click', '.download', function () {
         // alert("ok");
-        url = $(this).data("url");
-        var link = document.createElement('a');
-        link.href = url;
-        link.target = "_blank";
-        link.dispatchEvent(new MouseEvent('click'));
+        let url = $(this).data("url");
+        let type = $(this).data("type");
+        $('#overlayModal').modal('toggle');
+        if(type == "doc" || type == "pdf" || type == "ppt")
+            $('#overlayModaliFrame').attr('src',"https://drive.google.com/viewerng/viewer?embedded=true&url="+url.split('?')[0]);
+        else if(type == "mp4" || type == "video"){
+            // console.log(linkifyYouTubeURLs(url));
+            if(url.includes("youtube"))
+                $('#overlayModaliFrame').attr('src',"https://www.youtube.com/embed/"+linkifyYouTubeURLs(url)+"?autoplay=1&mute=1");
+            // $('#overlayModal').modal('toggle');
+            // var link = document.createElement('a');
+            // link.href = url;
+            // link.target = "_blank";
+            // link.dispatchEvent(new MouseEvent('click'));
+        }
+    });
+
+    function linkifyYouTubeURLs(text) {
+        var re = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
+        return text.replace(re,'$1');
+    }
+
+    $('#overlayModal').on('hidden.bs.modal', function (event) {
+        $('#overlayModaliFrame').attr('src',"");
     });
 
     $('#courseDisplayTypeAdd').on('change', function () {
