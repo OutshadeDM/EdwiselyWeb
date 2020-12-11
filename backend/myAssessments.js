@@ -1,14 +1,14 @@
 $(document).ready(function () {
-    // alert("ok");
+  // alert("ok");
 
-    $user = "";
-    if (isLoggedIn()) {
-      console.log(isLoggedIn(), 'yes');
-      $user = JSON.parse(isLoggedIn());
-      $('html').removeClass('d-none');
-    } else {
-      window.location.replace("login.html");
-    }
+  $user = "";
+  if (isLoggedIn()) {
+    console.log(isLoggedIn(), 'yes');
+    $user = JSON.parse(isLoggedIn());
+    $('html').removeClass('d-none');
+  } else {
+    window.location.replace("login.html");
+  }
 
   // let university_degree_department_id = "71";
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
       $('#subjective-assessments').append("<option value='0'>All</option>");
       $('#cond-ObjassessmentsSubject').empty();
       $('#cond-ObjassessmentsSubject').append("<option value='0' selected disabled>Filter Assessment By Subject</option>");
-      
+
       if (result.status == 200 && result.data) {
         $.each(result.data, function (key, value) {
           // alert(value);
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     },
     error: function (error) {
-      alert("Request Failed with status: "+error.status);
+      alert("Request Failed with status: " + error.status);
     }
   });
 
@@ -59,7 +59,7 @@ $(document).ready(function () {
     getObjAssesments();
   });
 
-  function getObjAssesments(){
+  function getObjAssesments() {
     $('#subjective-assessments').val("0");
     let subject = $('#objective-assessments').val()
     // alert(subject)
@@ -78,13 +78,13 @@ $(document).ready(function () {
           // alert(result.status);
           $('#objectiveassessmentList').empty();
           if (result.status == 200) {
-            displayCards(result.data,true);
+            displayCards(result.data, true);
           }
           else
             $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
     }
@@ -101,13 +101,13 @@ $(document).ready(function () {
           // alert(result.status);
           $('#objectiveassessmentList').empty();
           if (result.status == 200) {
-            displayCards(result.data,true);
+            displayCards(result.data, true);
           }
           else
             $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
@@ -143,7 +143,7 @@ $(document).ready(function () {
     getSubAssesments();
   });
 
-  function getSubAssesments(){
+  function getSubAssesments() {
     let subject = $('#objective-assessments').val()
     // alert(subject)
 
@@ -161,7 +161,7 @@ $(document).ready(function () {
           // alert(result.status);
           $('#subjectiveassessmentList').empty();
           if (result.status == 200) {
-            displayCards(result.data,false)
+            displayCards(result.data, false)
           }
           else
             $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -184,44 +184,45 @@ $(document).ready(function () {
           // alert(result.status);
           $('#subjectiveassessmentList').empty();
           if (result.status == 200) {
-            displayCards(result.data,false);
-            
+            displayCards(result.data, false);
+
           }
           else
             $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
     }
   }
 
-  function displayCards(data = [],isObj){
+  function displayCards(data = [], isObj) {
     let div = "";
 
     $.each(data, function (key, value) {
 
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id+"'><i class='fas fa-pen'></i></a>";
+      div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
+      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
       div = div + "Questions: " + value.questions_count;
-      if(value.questions_count)
-        div = div + "<a href='../pages/addQuestionsPage.html?id="+value.subject_id+"&tid="+value.id+"' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+      if (!value.questions_count)
+        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
       else
-        div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";        
+        div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       div = div + "</div></div></div>";
 
     });
 
-    if(isObj)
+    if (isObj)
       $('#objectiveassessmentList').append(div);
-    else if(!isObj)
+    else if (!isObj)
       $('#subjectiveassessmentList').append(div)
   }
 
@@ -233,32 +234,32 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+`${$user.university_degree_department_id}`,
+    url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id=' + `${$user.university_degree_department_id}`,
     type: 'GET',
     contentType: 'application/json',
     headers: {
-        'Authorization': `Bearer ${$user.token}`
+      'Authorization': `Bearer ${$user.token}`
     },
     success: function (result) {
-        // alert(result.status);
-        $('#cond-ObjassessmentsSection').empty();
-        $('#cond-ObjassessmentsSection').append("<option value='0' selected disabled>Filter Assessment By Section</option>");
-        if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-                $('#cond-ObjassessmentsSection').append("<option value='"+value.id+"'>"+value.name+"</option>");
-            });
-        }
-        // else {
-        //     alert(result.message + " Please Login again");
-        //     window.location.href = "Loginpage.html";
-        // }
+      // alert(result.status);
+      $('#cond-ObjassessmentsSection').empty();
+      $('#cond-ObjassessmentsSection').append("<option value='0' selected disabled>Filter Assessment By Section</option>");
+      if (result.status == 200) {
+        $.each(result.data, function (key, value) {
+          $('#cond-ObjassessmentsSection').append("<option value='" + value.id + "'>" + value.name + "</option>");
+        });
+      }
+      // else {
+      //     alert(result.message + " Please Login again");
+      //     window.location.href = "Loginpage.html";
+      // }
     },
     error: function (error) {
-        alert("Request Failed with status: "+error.status);
+      alert("Request Failed with status: " + error.status);
     }
   });
 
-  
+
 
   $("#nav-cond-tab").click(function () {
     // getSubAssesments();
@@ -270,13 +271,13 @@ $(document).ready(function () {
     let condObjAssessmentsSubject = $('#cond-ObjassessmentsSubject').val();
 
     // alert(condObjAssessmentsSection);
-    if(!condObjDate || condObjDate == null) condObjDate = "2020-06-01";
+    if (!condObjDate || condObjDate == null) condObjDate = "2020-06-01";
     // alert(condObjAssessmentsSubject);
-  
-    if(condObjDate && !condObjAssessmentsSection && !condObjAssessmentsSubject){
+
+    if (condObjDate && !condObjAssessmentsSection && !condObjAssessmentsSubject) {
 
       $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getConductedObjectiveTests?from_date='+condObjDate,
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getConductedObjectiveTests?from_date=' + condObjDate,
         type: 'GET',
         contentType: 'application/json',
         headers: {
@@ -289,23 +290,23 @@ $(document).ready(function () {
             $.each(result.data, function (key, value) {
 
               $('#condObjAssessmentList').append(
-                "<div class='col-sm-6 assessment'>"+
-                "<div class='card mb-3 objCard text-left'>"+
-                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>"+value.name+"</h5>"+
-                "<p class='pl-3 condCardDesc'>"+value.description+"</p>"+
-                "<div class='card-body pl-1 pb-0 align-bottom'>"+
-                "<h6 class='font-weight-bold'>"+value.created_at+" - "+value.doe+"</h6>"+
-                "</div>"+
-                "<div class='px-3 text-muted card-footer'>"+
-                "<div class='row'>"+
-                "<div class='col-sm-4'>"+
-                "Questions: <span class='font-weight-bold'>"+value.questions_count+"</span>"+
-                "</div>"+
-                "<div class='col-sm-4'>"+
-                "Sent To: <span class='font-weight-bold'>"+value.students_count+"</span>"+
-                "</div>"+
-                "<div class='col-sm-4'>"+
-                "Answered: <span class='font-weight-bold'>"+value.test_completed+"</span>"+
+                "<div class='col-sm-6 assessment'>" +
+                "<div class='card mb-3 objCard text-left'>" +
+                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
+                "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
+                "<div class='card-body pl-1 pb-0 align-bottom'>" +
+                "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
+                "</div>" +
+                "<div class='px-3 text-muted card-footer'>" +
+                "<div class='row'>" +
+                "<div class='col-sm-4'>" +
+                "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
+                "</div>" +
+                "<div class='col-sm-4'>" +
+                "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
+                "</div>" +
+                "<div class='col-sm-4'>" +
+                "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
                 "</div></div></div></div></div>"
               );
             });
@@ -314,15 +315,15 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
     }
-    else if(condObjDate && !condObjAssessmentsSection && condObjAssessmentsSubject){
+    else if (condObjDate && !condObjAssessmentsSection && condObjAssessmentsSubject) {
 
       $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectWiseConductedObjectiveTests?subject_id='+condObjAssessmentsSubject,
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectWiseConductedObjectiveTests?subject_id=' + condObjAssessmentsSubject,
         type: 'GET',
         contentType: 'application/json',
         headers: {
@@ -335,23 +336,23 @@ $(document).ready(function () {
             $.each(result.data, function (key, value) {
 
               $('#condObjAssessmentList').append(
-                "<div class='col-sm-6 assessment'>"+
-                "<div class='card mb-3 objCard text-left'>"+
-                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>"+value.name+"</h5>"+
-                "<p class='pl-3 condCardDesc'>"+value.description+"</p>"+
-                "<div class='card-body pl-1 pb-0 align-bottom'>"+
-                "<h6 class='font-weight-bold'>"+value.created_at+" - "+value.doe+"</h6>"+
-                "</div>"+
-                "<div class='px-3 text-muted card-footer'>"+
-                "<div class='row'>"+
-                "<div class='col-sm-4'>"+
-                "Questions: <span class='font-weight-bold'>"+value.questions_count+"</span>"+
-                "</div>"+
-                "<div class='col-sm-4'>"+
-                "Sent To: <span class='font-weight-bold'>"+value.students_count+"</span>"+
-                "</div>"+
-                "<div class='col-sm-4'>"+
-                "Answered: <span class='font-weight-bold'>"+value.test_completed+"</span>"+
+                "<div class='col-sm-6 assessment'>" +
+                "<div class='card mb-3 objCard text-left'>" +
+                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
+                "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
+                "<div class='card-body pl-1 pb-0 align-bottom'>" +
+                "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
+                "</div>" +
+                "<div class='px-3 text-muted card-footer'>" +
+                "<div class='row'>" +
+                "<div class='col-sm-4'>" +
+                "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
+                "</div>" +
+                "<div class='col-sm-4'>" +
+                "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
+                "</div>" +
+                "<div class='col-sm-4'>" +
+                "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
                 "</div></div></div></div></div>"
               );
             });
@@ -360,15 +361,15 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
     }
-    else if(condObjDate && condObjAssessmentsSection && !condObjAssessmentsSubject){
+    else if (condObjDate && condObjAssessmentsSection && !condObjAssessmentsSubject) {
 
       $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSectionWiseConductedObjectiveTests?section_id='+condObjAssessmentsSection,
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSectionWiseConductedObjectiveTests?section_id=' + condObjAssessmentsSection,
         type: 'GET',
         contentType: 'application/json',
         headers: {
@@ -381,23 +382,23 @@ $(document).ready(function () {
             $.each(result.data, function (key, value) {
 
               $('#condObjAssessmentList').append(
-                "<div class='col-sm-6 assessment'>"+
-                "<div class='card mb-3 objCard text-left'>"+
-                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>"+value.name+"</h5>"+
-                "<p class='pl-3 condCardDesc'>"+value.description+"</p>"+
-                "<div class='card-body pl-1 pb-0 align-bottom'>"+
-                "<h6 class='font-weight-bold'>"+value.created_at+" - "+value.doe+"</h6>"+
-                "</div>"+
-                "<div class='px-3 text-muted card-footer'>"+
-                "<div class='row'>"+
-                "<div class='col-sm-4'>"+
-                "Questions: <span class='font-weight-bold'>"+value.questions_count+"</span>"+
-                "</div>"+
-                "<div class='col-sm-4'>"+
-                "Sent To: <span class='font-weight-bold'>"+value.students_count+"</span>"+
-                "</div>"+
-                "<div class='col-sm-4'>"+
-                "Answered: <span class='font-weight-bold'>"+value.test_completed+"</span>"+
+                "<div class='col-sm-6 assessment'>" +
+                "<div class='card mb-3 objCard text-left'>" +
+                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
+                "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
+                "<div class='card-body pl-1 pb-0 align-bottom'>" +
+                "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
+                "</div>" +
+                "<div class='px-3 text-muted card-footer'>" +
+                "<div class='row'>" +
+                "<div class='col-sm-4'>" +
+                "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
+                "</div>" +
+                "<div class='col-sm-4'>" +
+                "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
+                "</div>" +
+                "<div class='col-sm-4'>" +
+                "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
                 "</div></div></div></div></div>"
               );
             });
@@ -406,15 +407,15 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
     }
-    else if(condObjDate && condObjAssessmentsSection && condObjAssessmentsSubject){
+    else if (condObjDate && condObjAssessmentsSection && condObjAssessmentsSubject) {
 
       $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSectionWiseConductedObjectiveTests?section_id='+condObjAssessmentsSection,
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSectionWiseConductedObjectiveTests?section_id=' + condObjAssessmentsSection,
         type: 'GET',
         contentType: 'application/json',
         headers: {
@@ -426,25 +427,25 @@ $(document).ready(function () {
           if (result.status == 200) {
             $.each(result.data, function (key, value) {
 
-              if(value.subject_id == condObjAssessmentsSubject){
+              if (value.subject_id == condObjAssessmentsSubject) {
                 $('#condObjAssessmentList').append(
-                  "<div class='col-sm-6 assessment'>"+
-                  "<div class='card mb-3 objCard text-left'>"+
-                  "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>"+value.name+"</h5>"+
-                  "<p class='pl-3 condCardDesc'>"+value.description+"</p>"+
-                  "<div class='card-body pl-1 pb-0 align-bottom'>"+
-                  "<h6 class='font-weight-bold'>"+value.created_at+" - "+value.doe+"</h6>"+
-                  "</div>"+
-                  "<div class='px-3 text-muted card-footer'>"+
-                  "<div class='row'>"+
-                  "<div class='col-sm-4'>"+
-                  "Questions: <span class='font-weight-bold'>"+value.questions_count+"</span>"+
-                  "</div>"+
-                  "<div class='col-sm-4'>"+
-                  "Sent To: <span class='font-weight-bold'>"+value.students_count+"</span>"+
-                  "</div>"+
-                  "<div class='col-sm-4'>"+
-                  "Answered: <span class='font-weight-bold'>"+value.test_completed+"</span>"+
+                  "<div class='col-sm-6 assessment'>" +
+                  "<div class='card mb-3 objCard text-left'>" +
+                  "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
+                  "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
+                  "<div class='card-body pl-1 pb-0 align-bottom'>" +
+                  "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
+                  "</div>" +
+                  "<div class='px-3 text-muted card-footer'>" +
+                  "<div class='row'>" +
+                  "<div class='col-sm-4'>" +
+                  "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
+                  "</div>" +
+                  "<div class='col-sm-4'>" +
+                  "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
+                  "</div>" +
+                  "<div class='col-sm-4'>" +
+                  "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
                   "</div></div></div></div></div>"
                 );
               }
@@ -454,7 +455,7 @@ $(document).ready(function () {
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
 
@@ -462,27 +463,27 @@ $(document).ready(function () {
 
   });
 
-  function displayCondCards(){
+  function displayCondCards() {
     let div = "";
 
     $.each(result.data, function (key, value) {
 
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
-      div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>"+value.name+"</h5>";
-      div = div + "<p class='pl-3 condCardDesc'>"+value.description+"</p>";
+      div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
+      div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
       div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
-      div = div + "<h6 class='font-weight-bold'>"+value.created_at+" - "+value.doe+"</h6>";
+      div = div + "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>";
       div = div + "</div><div class='px-3 text-muted card-footer'>";
       div = div + "<div class='row'>";
       div = div + "<div class='col-sm-4'>";
-      div = div + "Questions: <span class='font-weight-bold'>"+value.questions_count+"</span>";
+      div = div + "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>";
       div = div + "</div>";
       div = div + "<div class='col-sm-4'>";
-      div = div + "Sent To: <span class='font-weight-bold'>"+value.students_count+"</span>";
+      div = div + "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>";
       div = div + "</div>";
       div = div + "<div class='col-sm-4'>";
-      div = div + "Answered: <span class='font-weight-bold'>"+value.test_completed+"</span>";
+      div = div + "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>";
       div = div + "</div></div></div></div></div>";
 
     });
