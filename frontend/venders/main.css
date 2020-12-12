@@ -35,7 +35,7 @@ body{
 
 .card-img-top {
   width: 100%;
-  height: auto;
+  height: 200px;
 }
 
 .slick-prev::before, .slick-next::before {
@@ -308,10 +308,10 @@ body{
   font-size: 10px;
 }
 
-.addCourseCard{
+/* .addCourseCard{
   height: 400px;
   max-height: 400px;
-}
+} */
 
 .home .addCourseCard {
   height: auto;
