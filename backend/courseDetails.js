@@ -808,7 +808,7 @@ $(document).ready(function () {
                         if (content == "nav")
                             $("#nav-content-tab").click();
                         else if (content == "objQuestion")
-                            $("#nav-question-tab").click();
+                            $("#nav-question-obj-tab").click();
                         else if (content == "subQuestion")
                             $("#nav-question-sub-tab").click();
                     }
@@ -860,7 +860,7 @@ $(document).ready(function () {
                         if (content == "nav")
                             $("#nav-content-tab").click();
                         else if (content == "objQuestion")
-                            $("#nav-question-tab").click();
+                            $("#nav-question-obj-tab").click();
                         else if (content == "subQuestion")
                             $("#nav-question-sub-tab").click();
                     }
@@ -1174,7 +1174,7 @@ $(document).ready(function () {
                                 $.each(units, function (key, value) {
                                     // alert(value);
                                     // units.push({"id":value.id,"name":value.name});
-                                    $('#courseQuestionUnits').append("<button type='button' data-uid='" + value.id + "' data-sid='" + result.data.subject_id + "' id='courseUnitBtn' class='btn btnQuestion'>" + value.name + "</button>");
+                                    $('#courseQuestionUnits').append("<button type='button' data-uid='" + value.id + "' data-sid='" + result.data.subject_id + "' id='courseUnitBtn' value='"+value.id+"' class='btn btnQuestion'>" + value.name + "</button>");
                                 });
                                 $("#nav-question-obj-tab").click()
 
@@ -1200,12 +1200,19 @@ $(document).ready(function () {
 
     $("#nav-question-obj-tab").click(function () {
         $("#questionSwitch").val("0");
-        $('#courseQuestionUnits :first-child').click();
+        
+        let unit_id = $("#questionSelectedUnitId").val();
+        let subject_id = $("#questionSelectedSubjectId").val();
+        // alert(unit_id);
+        if(unit_id != "0")
+            getObjQuestions(unit_id,subject_id);
+        else
+            $('#courseQuestionUnits :first-child').click();
     });
 
     $("#nav-question-sub-tab").click(function () {
         $("#questionSwitch").val("1");
-        $('#courseQuestionUnits :first-child').click();;
+        $('#courseQuestionUnits :first-child').click();
     });
 
     $(document).on('click', '#courseUnitBtn', function () {
@@ -1225,7 +1232,7 @@ $(document).ready(function () {
         $('#questionCatagory').val("0");
 
         $('#questionTopics').empty();
-        $('#questionTopics').append("<option value='0'>All</option>");
+        $('#questionTopics').append("<option value='0' selected>All</option>");
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id=' + subSemId,
@@ -1254,8 +1261,7 @@ $(document).ready(function () {
 
                 }
                 else {
-                    alert(result.message + " Please Login again");
-                    window.location.href = "Loginpage.html";
+                    alert(result.message);
                 }
             },
             error: function (error) {

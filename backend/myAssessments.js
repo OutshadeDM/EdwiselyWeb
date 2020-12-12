@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   $user = "";
   if (isLoggedIn()) {
-    console.log(isLoggedIn(), 'yes');
+    // console.log(isLoggedIn(), 'yes');
     $user = JSON.parse(isLoggedIn());
     $('html').removeClass('d-none');
   } else {
@@ -54,6 +54,22 @@ $(document).ready(function () {
 
   getObjAssesments();
 
+  function clearSelections(){
+    $('#objective-assessments').val("0");
+    $('#subjective-assessments').val("0");
+    $('#cond-ObjassessmentsSubject').val("0");
+    $('#cond-ObjassessmentsSection').val("0");
+    $('#condObjDate').val("");
+    $('#cond-SubassessmentsSubject').val("0");
+    $('#cond-SubassessmentsSection').val("0");
+    $('#condSubDate').val("");
+  }
+
+  $("#nav-obj-tab").click(function () {
+    clearSelections();
+    getObjAssesments();
+  });
+
 
   $('#objective-assessments').change(function () {
     getObjAssesments();
@@ -61,6 +77,7 @@ $(document).ready(function () {
 
   function getObjAssesments() {
     $('#subjective-assessments').val("0");
+    $('#cond-ObjassessmentsSection').val("0");
     let subject = $('#objective-assessments').val()
     // alert(subject)
 
@@ -135,8 +152,8 @@ $(document).ready(function () {
 
   //different  tab
   $("#nav-sub-tab").click(function () {
+    clearSelections();
     getSubAssesments();
-    $('#objective-assessments').val("0");
   });
 
   $('#subjective-assessments').change(function () {
@@ -259,12 +276,14 @@ $(document).ready(function () {
     }
   });
 
-
-
   $("#nav-cond-tab").click(function () {
+    clearSelections();
+    $("#nav-cond-obj-tab").click();
+  });
+
+
+  $("#nav-cond-obj-tab").click(function () {
     // getSubAssesments();
-    $('#subjective-assessments').val("0");
-    $('#objective-assessments').val("0");
 
     let condObjDate = $('#condObjDate').val();
     let condObjAssessmentsSection = $('#cond-ObjassessmentsSection').val();
@@ -286,30 +305,8 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
-          if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-
-              $('#condObjAssessmentList').append(
-                "<div class='col-sm-6 assessment'>" +
-                "<div class='card mb-3 objCard text-left'>" +
-                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
-                "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
-                "<div class='card-body pl-1 pb-0 align-bottom'>" +
-                "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
-                "</div>" +
-                "<div class='px-3 text-muted card-footer'>" +
-                "<div class='row'>" +
-                "<div class='col-sm-4'>" +
-                "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
-                "</div>" +
-                "<div class='col-sm-4'>" +
-                "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
-                "</div>" +
-                "<div class='col-sm-4'>" +
-                "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
-                "</div></div></div></div></div>"
-              );
-            });
+          if (result.status == 200 && result.data) {
+            displayCondCards(result.data);
           }
           else
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
@@ -332,30 +329,8 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
-          if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-
-              $('#condObjAssessmentList').append(
-                "<div class='col-sm-6 assessment'>" +
-                "<div class='card mb-3 objCard text-left'>" +
-                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
-                "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
-                "<div class='card-body pl-1 pb-0 align-bottom'>" +
-                "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
-                "</div>" +
-                "<div class='px-3 text-muted card-footer'>" +
-                "<div class='row'>" +
-                "<div class='col-sm-4'>" +
-                "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
-                "</div>" +
-                "<div class='col-sm-4'>" +
-                "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
-                "</div>" +
-                "<div class='col-sm-4'>" +
-                "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
-                "</div></div></div></div></div>"
-              );
-            });
+          if (result.status == 200 && result.data) {
+            displayCondCards(result.data);
           }
           else
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
@@ -378,30 +353,8 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
-          if (result.status == 200) {
-            $.each(result.data, function (key, value) {
-
-              $('#condObjAssessmentList').append(
-                "<div class='col-sm-6 assessment'>" +
-                "<div class='card mb-3 objCard text-left'>" +
-                "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
-                "<p class='pl-3 condCardDesc'>" + value.description + "</p>" +
-                "<div class='card-body pl-1 pb-0 align-bottom'>" +
-                "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
-                "</div>" +
-                "<div class='px-3 text-muted card-footer'>" +
-                "<div class='row'>" +
-                "<div class='col-sm-4'>" +
-                "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
-                "</div>" +
-                "<div class='col-sm-4'>" +
-                "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>" +
-                "</div>" +
-                "<div class='col-sm-4'>" +
-                "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
-                "</div></div></div></div></div>"
-              );
-            });
+          if (result.status == 200 && result.data) {
+            displayCondCards(result.data);
           }
           else
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
@@ -463,17 +416,20 @@ $(document).ready(function () {
 
   });
 
-  function displayCondCards() {
+  function displayCondCards(data = []) {
     let div = "";
 
-    $.each(result.data, function (key, value) {
+    $.each(data, function (key, value) {
 
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
       div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
-      div = div + "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>";
+      if(value.start_time)
+        div = div + "<h6 class='font-weight-bold'>" + value.start_time + " - " + value.doe + "</h6>";
+      else
+        div = div + "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>";
       div = div + "</div><div class='px-3 text-muted card-footer'>";
       div = div + "<div class='row'>";
       div = div + "<div class='col-sm-4'>";
@@ -488,14 +444,16 @@ $(document).ready(function () {
 
     });
 
+    $('#condObjAssessmentList').append(div);
+
   }
 
   $('#cond-ObjassessmentsSection').change(function () {
-    $('#nav-cond-tab').click();
+    $('#nav-cond-obj-tab').click();
   });
 
   $('#cond-ObjassessmentsSubject').change(function () {
-    $('#nav-cond-tab').click();
+    $('#nav-cond-obj-tab').click();
   });
 
 
