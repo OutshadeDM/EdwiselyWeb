@@ -1220,7 +1220,8 @@ $(document).ready(function () {
         let unit_id = $(this).data('uid');
         let subject_id = $(this).data('sid');
 
-        $("#addQuestion").attr('href','#');
+        $("#addQuestion").attr('href','addQuestionsPage.html?id='+subject_id+'&tid=0&uid='+unit_id);
+        // $("#addQuestion").attr("href", question.options[3].img);
 
         $("#questionSelectedUnitId").val(unit_id);
         $("#questionSelectedSubjectId").val(subject_id);

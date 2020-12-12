@@ -11,9 +11,9 @@ $(document).ready(function () {
   // alert(`${$user.token}`);
 
   let searchParams = new URLSearchParams(window.location.search);
-  let subSemId = 0;
-  let tId = 0;
-  let unit_id = "";
+  let subSemId = "0";
+  let tId = "0";
+  let unit_id = "0";
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
@@ -666,7 +666,7 @@ $(document).ready(function () {
 
 
   $("#btnSave").click(function () {
-    if (questionsList != null && questionsList.length > 0) {
+    if (questionsList != null && questionsList.length > 0 && tId != "0") {
       // alert(JSON.stringify(questionsList));
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -724,6 +724,10 @@ $(document).ready(function () {
       });
 
 
+    }
+    else if(tId == "0"){
+      $('#errorToastBody').text("No test found to add question");
+      $('#errorToast').toast('show');
     }
   });
 
