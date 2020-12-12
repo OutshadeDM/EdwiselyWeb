@@ -83,7 +83,7 @@ $(document).ready(function () {
                         $("#courseClass").append("<ul>");
                         $.each(result.data.sections, function (key, value) {
                             // alert(value.name);
-                            $("#courseClass").append("<li>" + value.name + "&emsp;<span>"+value.department_name+"</span>&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
+                            $("#courseClass").append("<li><span>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
                         });
                         $("#courseClass").append("</ul>");
                     }
@@ -339,6 +339,7 @@ $(document).ready(function () {
                                             "type": value.type,
                                             "level": value.level,
                                             "learning_content":value.faculty_content,
+                                            "display_type":value.display_type,
                                             "bookmarked": value.bookmarked,
                                             "topic_id": value.topic_id
                                         });
@@ -768,13 +769,12 @@ $(document).ready(function () {
     });
 
     $('#errorToast,#successToast').on('show.bs.toast', function () {
+        $('#toastDiv').show();
         setInterval(function () {
             $('#errorToast').toast('hide');
             $('#successToast').toast('hide');
-        }, 5000);
-        $("#errorToast,successToast").toast({
-            delay: 53000
-        });
+            $('#toastDiv').hide();
+        }, 7000);
     });
 
     $(document).on('click', '.bookmark', function () {
@@ -936,6 +936,7 @@ $(document).ready(function () {
         // $('#successToast').toast('show');
         // $('#errorToast').toast('show');
         // alert(courseDisplayTypeAdd);
+        let material_id = $(this).data('id');
 
 
         // $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -975,8 +976,6 @@ $(document).ready(function () {
 
             if (editCourseContentFlag) {
 
-                let material_id = $("#courseAddSave").data('id');
-
                 if (material_id) {
 
                     if (courseFileAdd != null) {
@@ -1005,7 +1004,6 @@ $(document).ready(function () {
                             $('#modalContent').css('position', 'absolute');
                             editCourseContentFlag = false;
                             if (result.status == 200) {
-                                $("#courseAddSave").removeData("id");
                                 $('#successToastBody').text('Content has been updated successfully');
                                 $('#successToast').toast('show');
 
@@ -1067,7 +1065,6 @@ $(document).ready(function () {
                         // alert(result.message);
                         $('#courseContentModal').modal('toggle');
                         if (result.status == 200 && result.material_id) {
-                            $("#courseAddSave").removeData("id");
                             $('#successToastBody').text('Content has been saved successfully');
                             $('#successToast').toast('show');
 
@@ -1098,6 +1095,40 @@ $(document).ready(function () {
                     }
                 });
             }
+
+            if(courseDisplayTypeAdd == 'public'){
+
+                let form1 = new FormData();
+                form1.append('material_id',material_id);
+
+                $.ajax({
+                    url: 'https://stagingfacultypython.edwisely.com/updateFacultyContentDisplayType',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form1,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': `Bearer ${$user.token}`
+                    },
+                    success: function (result) {
+                        alert(result.message);
+                        if (result.status == 200) {
+                            $("#courseAddSave").removeData("id");
+                        }
+                        else {
+                            $('#errorToastBody').text(result.message);
+                            $('#errorToast').toast('show');
+                        }
+                    },
+                    error: function (error) {
+                        clearModal();
+                        alert("Request Failed with status: "+error.status);
+                    }
+                });
+            }
+
+
 
         }
         else {
@@ -1220,7 +1251,7 @@ $(document).ready(function () {
         let unit_id = $(this).data('uid');
         let subject_id = $(this).data('sid');
 
-        $("#addQuestion").attr('href','addQuestionsPage.html?id='+subject_id+'&tid=0&uid='+unit_id);
+        $("#addQuestion").attr('href','addQues.html?id='+subject_id+'&tid=0&uid='+unit_id);
         // $("#addQuestion").attr("href", question.options[3].img);
 
         $("#questionSelectedUnitId").val(unit_id);
@@ -1721,32 +1752,32 @@ $(document).ready(function () {
 
 
         if (question.question.media == 1) {
-            $("#questionModalQuestionTr").append("<td><a href='#' id='questionModalQuestionImgA'><img src='' width='100' id='questionModalQuestionImg' alt='No Image'></a></td>")
-            $("#questionModalQuestionImgA").attr("href", question.question.img);
+            $("#questionModalQuestionTd").show();
+            $("#questionModalQuestionImgA").attr("href", question.question.question_img);
             $("#questionModalQuestionImgA").attr("target", "_blank");
-            $("#questionModalQuestionImg").attr("src", question.question.img);
+            $("#questionModalQuestionImg").attr("src", question.question.question_img);
         }
 
         if (question.options[0].media == 1) {
-            $("#questionModalOptionATr").append("<td><a href='#' id='questionModalOptionAImgA'><img src='' width='100' id='questionModalOptionAImg' alt='No Image'></a></td>")
+            $("#questionModalOptionATd").show();
             $("#questionModalOptionAImgA").attr("href", question.options[0].img);
             $("#questionModalOptionAImgA").attr("target", "_blank");
             $("#questionModalOptionAImg").attr("src", question.options[0].img);
         }
         if (question.options[1].media == 1) {
-            $("#questionModalOptionBTr").append("<td><a href='#' id='questionModalOptionBImgA'><img src='' width='100' id='questionModalOptionBImg' alt='No Image'></a></td>")
+            $("#questionModalOptionBTd").show();
             $("#questionModalOptionBImgA").attr("href", question.options[1].img);
             $("#questionModalOptionBImgA").attr("target", "_blank");
             $("#questionModalOptionBImg").attr("src", question.options[1].img);
         }
         if (question.options[2] && question.options[2].media == 1) {
-            $("#questionModalOptionCTr").append("<td><a href='#' id='questionModalOptionCImgA'><img src='' width='100' id='questionModalOptionCImg' alt='No Image'></a></td>")
+            $("#questionModalOptionCTd").show();
             $("#questionModalOptionCImgA").attr("href", question.options[2].img);
             $("#questionModalOptionCImgA").attr("target", "_blank");
             $("#questionModalOptionCImg").attr("src", question.options[2].img);
         }
         if (question.options[3] && question.options[3].media == 1) {
-            $("#questionModalOptionDTr").append("<td><a href='#' id='questionModalOptionCImgA'><img src='' width='100' id='questionModalOptionDImg' alt='No Image'></a></td>")
+            $("#questionModalOptionDTd").show();
             $("#questionModalOptionDImgA").attr("href", question.options[3].img);
             $("#questionModalOptionDImgA").attr("target", "_blank");
             $("#questionModalOptionDImg").attr("src", question.options[3].img);
@@ -1754,12 +1785,12 @@ $(document).ready(function () {
 
 
         if (question.options[0].is_answer == 1)
-            $('#questionModalOptionA').css("color", "green");
+            $('#questionModalOptionA').css("color", "darkgreen");
         else
             $('#questionModalOptionA').css("color", "black");
 
         if (question.options[1].is_answer == 1)
-            $('#questionModalOptionB').css("color", "green");
+            $('#questionModalOptionB').css("color", "darkgreen");
         else
             $('#questionModalOptionB').css("color", "black");
 
@@ -1772,6 +1803,46 @@ $(document).ready(function () {
             $('#questionModalOptionD').css("color", "darkgreen");
         else
             $('#questionModalOptionD').css("color", "black");
+
+    });
+
+    $('#courseObjQuestionModal').on('hide.bs.modal', function (event) {
+        $('#questionModalQuestion').html("");
+        $('#questionModalOptionA').html("");
+        $('#questionModalOptionB').html("");
+        $('#questionModalOptionC').html("");
+        $('#questionModalOptionD').html("");
+
+        $('#questionModalQuestionTd').hide();
+        $('#questionModalOptionATd').hide();
+        $('#questionModalOptionBTd').hide();
+        $('#questionModalOptionCTd').hide();
+        $('#questionModalOptionDTd').hide();
+
+        $("#questionModalQuestionImgA").attr("href", "#");
+        $("#questionModalQuestionImgA").attr("target", "");
+        $("#questionModalQuestionImg").attr("src", "");
+
+        $("#questionModalOptionAImgA").attr("href", "#");
+        $("#questionModalOptionAImgA").attr("target", "");
+        $("#questionModalOptionAImg").attr("src", "");
+
+        $("#questionModalOptionBImgA").attr("href", "#");
+        $("#questionModalOptionBImgA").attr("target", "");
+        $("#questionModalOptionBImg").attr("src", "");
+
+        $("#questionModalOptionCImgA").attr("href", "#");
+        $("#questionModalOptionCImgA").attr("target", "");
+        $("#questionModalOptionCImg").attr("src", "");
+
+        $("#questionModalOptionDImgA").attr("href", "#");
+        $("#questionModalOptionDImgA").attr("target", "");
+        $("#questionModalOptionDImg").attr("src", "");
+        
+        $('#questionModalOptionA').css("color", "black");
+        $('#questionModalOptionB').css("color", "black");
+        $('#questionModalOptionC').css("color", "black");
+        $('#questionModalOptionD').css("color", "black");
 
     });
 
