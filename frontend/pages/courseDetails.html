@@ -555,47 +555,65 @@
             <div class="modal-content" id="modalContent">
               <div class="modal-body" style="overflow-x: auto;">
                 <table class="table table-bordered text-center" >
-                  <tr id="questionModalQuestionTr">
+                  <tr>
                     <th>Question</th>
                     <td>
                       <span id="questionModalQuestion"></span>
                     </td>
                     <!-- <td>
-                      <a href="#" id="questionModalQuestionImgA"><img src="../images/onlineCourses.png" width="100"
-                          id="questionModalQuestionImg" alt="No Image"></a>
+                      <a href="#" id="questionModalQuestionImgA">
+                        <img src="" width="100"id="questionModalQuestionImg" alt="No Image">
+                      </a>
                     </td> -->
+                    <td id="questionModalQuestionTd" style="display: none;">
+                      <a href='#' id='questionModalQuestionImgA'>
+                        <img src='' width='100' id='questionModalQuestionImg' alt='No Image'>
+                      </a>
+                    </td>
                   </tr>
-                  <tr id="questionModalOptionATr">
+                  <tr>
                     <th>Option A</th>
                     <td>
                       <p id="questionModalOptionA"></p>
                     </td>
-                    <!-- <td><a href="#" id="questionModalOptionAImgA"><img src="../images/onlineCourses.png" width="100"
-                          id="questionModalOptionAImg" alt="No Image"></a></td> -->
+                    <td id="questionModalOptionATd" style="display: none;">
+                      <a href="#" id="questionModalOptionAImgA">
+                        <img src="" width="100" id="questionModalOptionAImg" alt="No Image">
+                        </a>
+                      </td>
                   </tr>
-                  <tr id="questionModalOptionBTr">
+                  <tr>
                     <th>Option B</th>
                     <td>
                       <p id="questionModalOptionB"></p>
                     </td>
-                    <!-- <td><a href="#" id="questionModalOptionBImgA"><img src="../images/onlineCourses.png" width="100"
-                          id="questionModalOptionBImg" alt="No Image"></a></td> -->
+                    <td id="questionModalOptionBTd" style="display: none;">
+                      <a href="#" id="questionModalOptionBImgA">
+                        <img src="" width="100" id="questionModalOptionBImg" alt="No Image">
+                      </a>
+                    </td>
                   </tr>
-                  <tr id="questionModalOptionCTr">
+                  <tr>
                     <th>Option C</th>
                     <td>
                       <p id="questionModalOptionC"></p>
                     </td>
-                    <!-- <td><a href="#" id="questionModalOptionCImgA"><img src="../images/onlineCourses.png" width="100"
-                          id="questionModalOptionCImg" alt="No Image"></a></td> -->
+                    <td id="questionModalOptionCTd" style="display: none;">
+                      <a href="#" id="questionModalOptionCImgA">
+                        <img src="" width="100" id="questionModalOptionCImg" alt="No Image">
+                      </a>
+                    </td>
                   </tr>
-                  <tr id="questionModalOptionDTr">
+                  <tr>
                     <th>Option D</th>
                     <td>
                       <p id="questionModalOptionD"></p>
                     </td>
-                    <!-- <td><a href="#" id="questionModalOptionDImgA"><img src="../images/onlineCourses.png" width="100"
-                          id="questionModalOptionDImg" alt="No Image"></a></td> -->
+                    <td id="questionModalOptionDTd" style="display: none;">
+                      <a href="#" id="questionModalOptionDImgA">
+                        <img src="" width="100" id="questionModalOptionDImg" alt="No Image">
+                      </a>
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -624,7 +642,7 @@
           <div class="modal-dialog modal-xl">
             <div class="modal-content" id="modalContent">
               <div class="modal-body">
-                <iframe src="" frameborder="0" width="100%" height="500px" id="overlayModaliFrame"></iframe>
+                <iframe src="" frameborder="0" width="100%" height="550px" id="overlayModaliFrame"></iframe>
               </div>
             </div>
           </div>
@@ -634,7 +652,7 @@
         <!-- end modal -->
 
         <!-- toasts -->
-        <div>
+        <div id="toastDiv" style="display: none;">
           <!-- start error toast -->
           <div class="toast fade" data-autohide="false" id="errorToast">
             <div class="toast-header">

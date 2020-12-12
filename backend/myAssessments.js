@@ -563,7 +563,7 @@ $(document).ready(function () {
 
     $.each(data, function (key, value) {
 
-      div = div + "<div class='col-sm-6 assessment condLink'>";
+      div = div + "<div class='col-sm-6 assessment condLink' data-id='"+value.id+"'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
@@ -618,8 +618,9 @@ $(document).ready(function () {
 
   $(document).on('click', '.condLink', function () {
     //alert("sent")
-    var link = document.createElement('a');
-    link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=1979&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJ1c2VyIjoicHJha2FzaEBlZHdpc2VseS5jb20iLCJpbmkiOjE1OTUyNDQwNzYsImV4cCI6MTU5NjEwODA3Nn0.bRYda8H_LFqGWQr9_5awWkA1-K00-CLZ-AGsreBIiwk";
+    let test_id = $(this).data('id'); 
+    let link = document.createElement('a');
+    link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id="+test_id+"&token="+`${$user.token}`;
     link.target = "_blank";
     link.dispatchEvent(new MouseEvent('click'));
   });

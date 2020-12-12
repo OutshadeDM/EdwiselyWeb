@@ -298,6 +298,8 @@ $(document).ready(function() {
     $('#courseModal').on('hide.bs.modal', function (event) {
         // alert("here");
         $('#courseModalDept').empty();
+        $('#courseModalClass').empty();
+        $('#courseModalClass').append("<p>Select Department First</p>");
         $('input[name="courseDept"]').prop('checked', false);
         // $('input:checkbox').removeAttr('checked');
         $('input[name=courseClass]').prop('checked', false)
@@ -386,13 +388,12 @@ $(document).ready(function() {
     });
 
     $('#errorToast,#successToast').on('show.bs.toast', function () {
+        $('#toastDiv').show();
         setInterval(function () {
             $('#errorToast').toast('hide');
             $('#successToast').toast('hide');
-        }, 5000);
-        $("#errorToast,successToast").toast({
-            delay: 53000
-        });
+            $('#toastDiv').hide();
+        }, 7000);
     });
 
 });

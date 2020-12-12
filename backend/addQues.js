@@ -198,34 +198,39 @@ $(document).ready(function () {
   let questionsList = [];
   let questions = [];
 
-  $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
-    type: 'GET',
-    contentType: 'application/json',
-    headers: {
-      'Authorization': `Bearer ${$user.token}`
-    },
-    success: function (result) {
-      // alert(result.status);
+  refreshQuestions();
 
-      // $('#topicTags').empty();
-      if (result.status == 200 && result.data) {
-        $('.initData').remove();
+  function refreshQuestions(){
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        // alert(result.status);
 
-        $.each(result.data, function (key, value) {
-          // alert(value);
-          questionsList.push(value.id);
-          questions.push(value);
-        });
+        // $('#topicTags').empty();
+        if (result.status == 200 && result.data) {
+          $('.initData').remove();
 
-        loadList();
+          $.each(result.data, function (key, value) {
+            // alert(value);
+            questionsList.push(value.id);
+            questions.push(value);
+          });
 
+          loadList();
+
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
       }
-    },
-    error: function (error) {
-      alert("Request Failed with status: " + error.status);
-    }
-  });
+    });
+
+  }
 
 
   function loadList() {
@@ -316,8 +321,8 @@ $(document).ready(function () {
   let hint = ''
   let solution = ''
   let source = ''
-  let bloom_level = ""
-  let difficulty_level = ""
+  let bloom_level = "1"
+  let difficulty_level = "1"
   let field_type = 1
   //
   let topics = []
@@ -713,6 +718,7 @@ $(document).ready(function () {
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
+            alert(refreshQuestions.message);
           }
         },
         error: function (error) {
@@ -737,7 +743,7 @@ $(document).ready(function () {
       $('#errorToast').toast('hide');
       $('#successToast').toast('hide');
       $('#toastDiv').hide();
-    }, 10000);
+    }, 7000);
   });
 
 
@@ -904,55 +910,73 @@ $(document).ready(function () {
         }
       });
 
-      let question = $('#quesInput').val();
       // $("#courseName").text(JSON.stringify(newQuestion));
       // alert(JSON.stringify(newQuestion));
+      // alert(`${$user.user_id}`);
+      // alert($('#quesInput').val());
 
-      if (question != newQuestion.name && question_img != null && solution_img != null && hint_img != null) {
+      
+
+        newQuestion.college_account_id = `${$user.user_id}`;
+        newQuestion.hint = $('#hintInput').val();
+        newQuestion.blooms_level = bloom_level;
+        newQuestion.name = $('#quesInput').val();
+        if(topics.length > 0)
+          newQuestion.topics_details = JSON.stringify(topics);
+        newQuestion.solution = $('#solutionInput').val();
+        newQuestion.question_type = type;
+        console.log(JSON.stringify(newQuestion));
+        
 
         let form = new FormData();
-        form.append("question", question);
+        form.append("question", JSON.stringify(newQuestion));
         form.append("question_img", question_img);
         form.append("solution_img", solution_img);
         form.append("hint_img", hint_img);
 
+        // for (var key of form.entries()) {
+        //   alert(key[1]);
+        // }
 
-        // $.ajax({
-        //   url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
-        //   type: 'POST',
-        //   dataType: 'json',
-        //   data: form,
-        //   contentType: false,
-        //   processData: false,
-        //   headers: {
-        //     'Authorization': `Bearer ${$user.token}`
-        //   },
-        //   success: function (result) {
-        //     // alert(result.message);
-        //     //console.log('4') 
 
-        //     if (result.status == 200) {
-        //       // console.log(result.data)
-        //       $('#successToastBody').text(result.message);
-        //       $('#successToast').toast('show');
-        //       $('#loadingDiv').remove();
-        //       // $('#abcd').css('position','absolute');
-        //       $("input.custom-control-input").attr("disabled", false);
-        //     }
-        //     else {
-        //       $('#loadingDiv').remove();
-        //       // $('#abcd').css('position','absolute');
-        //       $("input.custom-control-input").attr("disabled", false);
-        //     }
-        //   },
-        //   error: function (error) {
-        //     $('#loadingDiv').remove();
-        //     // $('#abcd').css('position','absolute');
-        //     $("input.custom-control-input").attr("disabled", false);
-        //     alert("Request Failed with status: " + error.status);
-        //   }
-        // });
-      }
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            alert(result.message);
+            //console.log('4') 
+
+            if (result.status == 200) {
+              // console.log(result.data)
+              $('#successToastBody').text(result.message);
+              $('#successToast').toast('show');
+              $('#loadingDiv').remove();
+              // $('#abcd').css('position','absolute');
+              $("input.custom-control-input").attr("disabled", false);
+            }
+            else {
+              $('#loadingDiv').remove();
+              // $('#abcd').css('position','absolute');
+              $("input.custom-control-input").attr("disabled", false);
+              alert(result.message);
+            }
+          },
+          error: function (error) {
+            $('#loadingDiv').remove();
+            // $('#abcd').css('position','absolute');
+            $("input.custom-control-input").attr("disabled", false);
+            alert("Request Failed with status: " + error.status);
+          }
+        });
+
+
 
     }
 
