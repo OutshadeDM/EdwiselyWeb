@@ -295,10 +295,18 @@ $(document).ready(function () {
     let condObjAssessmentsSubject = $('#cond-ObjassessmentsSubject').val();
 
     // alert(condObjAssessmentsSection);
-    // alert(condObjDate);  
+    let date = new Date();
+    date.setMonth(date.getMonth () - 6);
+    // let fullDate = date.toDateString();
+    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
 
-    if (!condObjDate || condObjDate == null) condObjDate = "2020-06-01";
+    if (!condObjDate || condObjDate == null){
+       condObjDate = fullDate;
+       $('#condObjDate').val(fullDate);
+    }
+    // "2020-06-01"
     // alert(condObjAssessmentsSubject);
+    // alert(condObjDate);
 
     if (condObjDate && !condObjAssessmentsSection && !condObjAssessmentsSubject) {
 
@@ -431,7 +439,15 @@ $(document).ready(function () {
     let condSubAssessmentsSubject = $('#cond-SubassessmentsSubject').val();
 
     // alert(condSubAssessmentsSection);
-    if (!condSubDate || condSubDate == null) condSubDate = "2020-06-01";
+    let date = new Date();
+    date.setMonth(date.getMonth () - 6);
+    // let fullDate = date.toDateString();
+    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+
+    if (!condSubDate || condSubDate == null){
+       condSubDate = fullDate;
+       $('#condSubDate').val(fullDate);
+    }
     // alert(condSubAssessmentsSubject);
     // alert(condSubDate);
 

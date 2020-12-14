@@ -220,7 +220,7 @@ $(document).ready(function() {
         $(this).children("i").show();
     });
 
-    $(document).on('click', '.courseTagsInput', function () {
+    $(document).on('click', '.courseSelectDept', function () {
         getSections($("input[name='courseDept']:checked").data('uid'));
     });
 
@@ -253,7 +253,7 @@ $(document).ready(function() {
         $('#courseModalHeader').html("Finilize '"+subject_name+"' to Your Courses")
 
         $.each(dept, function(key, value){
-            $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='"+value.id+"' data-uid='"+value.uid+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
+            $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput courseSelectDept' value='"+value.id+"' data-uid='"+value.uid+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
         });
 
     });

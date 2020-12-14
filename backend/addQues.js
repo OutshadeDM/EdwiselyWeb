@@ -713,6 +713,9 @@ $(document).ready(function () {
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
+            setInterval(function(){
+              window.location.replace('myassessment.html');
+            },2000);
           }
           else {
             $('#loadingDiv').remove();
@@ -796,6 +799,11 @@ $(document).ready(function () {
         // if(value.blooms_level){
         //   $('#selectLevel').val(value.blooms_level);
         // }
+
+        $.each(value.topics_details,function(key, value){
+          // alert($('#topicTagAdd13779').attr('class'));
+          $('#topicTagAdd'+value.id).click();
+        });
 
 
 
@@ -888,7 +896,8 @@ $(document).ready(function () {
 
       questionsList.splice($.inArray("abc", questionsList), 1);
 
-      loadList();
+      refreshQuestions();
+      clearAll();
 
     }
 
@@ -960,6 +969,8 @@ $(document).ready(function () {
               $('#loadingDiv').remove();
               // $('#abcd').css('position','absolute');
               $("input.custom-control-input").attr("disabled", false);
+              clearAll();
+              refreshQuestions();
             }
             else {
               $('#loadingDiv').remove();
@@ -975,8 +986,6 @@ $(document).ready(function () {
             alert("Request Failed with status: " + error.status);
           }
         });
-
-
 
     }
 

@@ -26,8 +26,13 @@ $(document).ready(function () {
             if(url.includes("youtube"))
                 $('#mainiFrame').attr('src',"https://www.youtube.com/embed/"+linkifyYouTubeURLs(url)+"?autoplay=1&mute=1");
         }
-        else
-            $('#mainiFrame').attr('src',url);
+        else if(type == "img"){
+          $('#mainImg').show();
+          $('#mainiFrame').hide();
+          $('#mainImg').attr('src',url);
+        }
+        else{
+        }
     }
 
     function linkifyYouTubeURLs(text) {

@@ -1753,32 +1753,32 @@ $(document).ready(function () {
 
         if (question.question.media == 1) {
             $("#questionModalQuestionTd").show();
-            $("#questionModalQuestionImgA").attr("href", question.question.question_img);
+            $("#questionModalQuestionImgA").attr("href", "viewFile.html?url="+question.question.question_img+"&type=img");
             $("#questionModalQuestionImgA").attr("target", "_blank");
             $("#questionModalQuestionImg").attr("src", question.question.question_img);
         }
 
         if (question.options[0].media == 1) {
             $("#questionModalOptionATd").show();
-            $("#questionModalOptionAImgA").attr("href", question.options[0].img);
+            $("#questionModalOptionAImgA").attr("href", "viewFile.html?url="+question.options[0].img+"&type=img");
             $("#questionModalOptionAImgA").attr("target", "_blank");
             $("#questionModalOptionAImg").attr("src", question.options[0].img);
         }
         if (question.options[1].media == 1) {
             $("#questionModalOptionBTd").show();
-            $("#questionModalOptionBImgA").attr("href", question.options[1].img);
+            $("#questionModalOptionBImgA").attr("href", "viewFile.html?url="+question.options[1].img+"&type=img");
             $("#questionModalOptionBImgA").attr("target", "_blank");
             $("#questionModalOptionBImg").attr("src", question.options[1].img);
         }
         if (question.options[2] && question.options[2].media == 1) {
             $("#questionModalOptionCTd").show();
-            $("#questionModalOptionCImgA").attr("href", question.options[2].img);
+            $("#questionModalOptionCImgA").attr("href", "viewFile.html?url="+question.options[2].img+"&type=img");
             $("#questionModalOptionCImgA").attr("target", "_blank");
             $("#questionModalOptionCImg").attr("src", question.options[2].img);
         }
         if (question.options[3] && question.options[3].media == 1) {
             $("#questionModalOptionDTd").show();
-            $("#questionModalOptionDImgA").attr("href", question.options[3].img);
+            $("#questionModalOptionDImgA").attr("href", "viewFile.html?url="+question.options[3].img+"&type=img");
             $("#questionModalOptionDImgA").attr("target", "_blank");
             $("#questionModalOptionDImg").attr("src", question.options[3].img);
         }
