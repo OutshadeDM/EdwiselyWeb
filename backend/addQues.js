@@ -201,6 +201,7 @@ $(document).ready(function () {
   refreshQuestions();
 
   function refreshQuestions(){
+    questions = [];
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
       type: 'GET',
@@ -235,11 +236,11 @@ $(document).ready(function () {
 
   function loadList() {
     // alert(JSON.stringify(questions));
-    $("#addques").empty();
+    $("#addquesDiv").empty();
 
     $.each(questions, function (key, value) {
       // alert(JSON.stringify(value));
-      $('#addques').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
+      $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
     });
 
 
@@ -454,7 +455,7 @@ $(document).ready(function () {
     // let type = value.charAt(0) + value.charAt(1).toUpperCase() + value.slice(2);
 
     if (!topics.includes(value)) {
-      topics.push({ "id": $(this).val(), "type": value });
+      topics.push({ "id": parseInt($(this).val()), "type": value });
     }
 
     if ($(this).prop('checked') == false) {
@@ -562,10 +563,16 @@ $(document).ready(function () {
             $('#successToastBody').text('Question Added to Database Successfully');
             $('#successToast').toast('show');
             // $('.initData').remove();
-            $('#addques').prepend(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
+            $('#addquesDiv').prepend(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
             questionsList.push(result.data.id);
             $("input.custom-control-input").attr("disabled", false);
             clearAll();
+
+            if(unit_id != "0"){
+              setInterval(function(){
+                window.location.replace('myAssessment.html');
+              },2000)
+            }
           }
           else {
             $('#loadingDiv').remove();
@@ -714,14 +721,14 @@ $(document).ready(function () {
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             setInterval(function(){
-              window.location.replace('myassessment.html');
+              window.location.replace('myAssessment.html');
             },2000);
           }
           else {
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
-            alert(refreshQuestions.message);
+            alert(result.message);
           }
         },
         error: function (error) {
@@ -896,7 +903,7 @@ $(document).ready(function () {
 
       questionsList.splice($.inArray("abc", questionsList), 1);
 
-      refreshQuestions();
+      loadList();
       clearAll();
 
     }
@@ -919,7 +926,6 @@ $(document).ready(function () {
         }
       });
 
-      // $("#courseName").text(JSON.stringify(newQuestion));
       // alert(JSON.stringify(newQuestion));
       // alert(`${$user.user_id}`);
       // alert($('#quesInput').val());
@@ -931,10 +937,10 @@ $(document).ready(function () {
         newQuestion.blooms_level = bloom_level;
         newQuestion.name = $('#quesInput').val();
         if(topics.length > 0)
-          newQuestion.topics_details = JSON.stringify(topics);
+          newQuestion.topics_details = topics;
         newQuestion.solution = $('#solutionInput').val();
         newQuestion.question_type = type;
-        console.log(JSON.stringify(newQuestion));
+        // console.log(JSON.stringify(newQuestion));
         
 
         let form = new FormData();
@@ -942,6 +948,7 @@ $(document).ready(function () {
         form.append("question_img", question_img);
         form.append("solution_img", solution_img);
         form.append("hint_img", hint_img);
+        // $("#courseName").text(JSON.stringify(newQuestion));
 
         // for (var key of form.entries()) {
         //   alert(key[1]);
@@ -970,6 +977,7 @@ $(document).ready(function () {
               // $('#abcd').css('position','absolute');
               $("input.custom-control-input").attr("disabled", false);
               clearAll();
+              $("#addquesDiv").empty();
               refreshQuestions();
             }
             else {

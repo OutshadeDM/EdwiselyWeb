@@ -96,7 +96,7 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#objectiveassessmentList').empty();
-          if (result.status == 200) {
+          if (result.status == 200 && result.data) {
             displayCards(result.data, true);
           }
           else
@@ -119,7 +119,7 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#objectiveassessmentList').empty();
-          if (result.status == 200) {
+          if (result.status == 200 && result.data) {
             displayCards(result.data, true);
           }
           else
@@ -179,7 +179,7 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#subjectiveassessmentList').empty();
-          if (result.status == 200) {
+          if (result.status == 200 && result.data) {
             displayCards(result.data, false)
           }
           else
@@ -202,7 +202,7 @@ $(document).ready(function () {
         success: function (result) {
           // alert(result.status);
           $('#subjectiveassessmentList').empty();
-          if (result.status == 200) {
+          if (result.status == 200 && result.data) {
             displayCards(result.data, false);
 
           }
@@ -579,7 +579,7 @@ $(document).ready(function () {
 
     $.each(data, function (key, value) {
 
-      div = div + "<div class='col-sm-6 assessment condLink' data-id='"+value.id+"'>";
+      div = div + "<div class='col-sm-6 assessment condLink' data-id='"+value.id+"' data-test='"+value.test_completed+"'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
@@ -635,11 +635,36 @@ $(document).ready(function () {
   $(document).on('click', '.condLink', function () {
     //alert("sent")
     let test_id = $(this).data('id'); 
-    let link = document.createElement('a');
-    link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id="+test_id+"&token="+`${$user.token}`;
-    link.target = "_blank";
-    link.dispatchEvent(new MouseEvent('click'));
+    let test_completed = $(this).data('test'); 
+    if(test_completed > 0){
+      let link = document.createElement('a');
+      link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id="+test_id+"&token="+`${$user.token}`;
+      link.target = "_blank";
+      link.dispatchEvent(new MouseEvent('click'));
+    }
   });
+
+  $("#condObjDate").blur(function () {
+    // alert("here");
+    let date = new Date();
+    date.setMonth(date.getMonth () - 6);
+    // let fullDate = date.toDateString();
+    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+
+    $("#condObjDate").val(fullDate);
+
+});
+
+$("#condSubDate").blur(function () {
+  // alert("here");
+  let date = new Date();
+  date.setMonth(date.getMonth () - 6);
+  // let fullDate = date.toDateString();
+  let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+
+  $("#condSubDate").val(fullDate);
+
+});
 
 
 
