@@ -44,6 +44,19 @@ $(async function() {
 		});
 	}
 
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var status = url.searchParams.get("status");
+	var message = url.searchParams.get("message");
+	if (status) {
+	  if (message == "notify")
+		$('.alert strong').text('Successfully added Notification!');
+	  else if (message == "liveclass")
+		$('.alert strong').text('Successfully added Live Class');      
+	  $('.alert').addClass(`alert-${status}`);
+	  $('.alert').removeClass('d-none');
+	}
+
 	// Get peer data function
 	const peerData = (delta_days, from_date="") => {
 		return new Promise((resolve, reject) => {
@@ -106,8 +119,8 @@ $(async function() {
 			// 	$sections.append($sectionCol);
 			// });
 			$cardBody = $('<div></div>').addClass('card-body p-2').append($title);
-			$card = $('<div></div>').addClass('card mb-3 shadow-sm addCourseCard').append($img, $cardBody);
-			$gotoCard = $('<a></a>').attr('href', 'courses.html').append($card);
+			$card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').append($img, $cardBody);
+			$gotoCard = $('<a></a>').attr('href', `courseDetails.html?id=${course.subject_semester_id}`).append($card);
 			$course = $('<div></div>').addClass('course col-lg-4 col-md-6 col-12 h-100').append($gotoCard);
 			$('#courseList').append($course);
 
@@ -168,7 +181,7 @@ $(async function() {
 		});
 		$.each(upcomings.vc, (index, videoConference) => {
 			if (videoConference.start_time && new Date(videoConference.start_time).getTime() - new Date().getTime() <= 5*60*1000)
-				text = `Live Class named ${videoConference.title} - ${videoConference.description} is going to start at ${videoConference.start_time} <a href="${videoConference.url}"><i class="fas fa-external-link-alt"></i></a>`;
+				text = `Live Class named ${videoConference.title} - ${videoConference.description} is going to start at ${videoConference.start_time} <a href="${videoConference.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`;
 			else if (videoConference.start_time)
 				text = `Live Class named ${videoConference.title} - ${videoConference.description} is going to start at ${videoConference.start_time}`;
 			else 
