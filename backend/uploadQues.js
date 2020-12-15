@@ -13,15 +13,23 @@ $(document).ready(function () {
   let searchParams = new URLSearchParams(window.location.search);
   let subSemId = 0;
   let tId = 0;
+  let tname = "";
   let unit_id = "";
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
+    tname = searchParams.get('tname');
   }
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
   }
+
+
+  //setting the name of test
+  $('#courseName').append(tname)
+
+
 
   //alert(subSemId)
   getTopics();
@@ -111,7 +119,7 @@ $('#uploadBtn').on('click', function () {
   var form = new FormData();
   form.append("files", uploaded_question);
   form.append("topics", JSON.stringify(topics));
-
+  //alert(JSON.stringify(topics))
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
     type: 'POST',

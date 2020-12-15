@@ -14,16 +14,21 @@ $(document).ready(function () {
   let subSemId = "0";
   let tId = "0";
   let unit_id = "0";
+  let tname = ""
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
+    tname = searchParams.get('tname');
   }
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
   }
 
   // let university_degree_department_id = 71
+
+  //setting the name of test
+  $('#courseName').append(tname)
 
   //initially hiding the hint and solution divs
   $('#hintDiv').hide()
@@ -200,7 +205,7 @@ $(document).ready(function () {
 
   refreshQuestions();
 
-  function refreshQuestions(){
+  function refreshQuestions() {
     questions = [];
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
@@ -568,10 +573,10 @@ $(document).ready(function () {
             $("input.custom-control-input").attr("disabled", false);
             clearAll();
 
-            if(unit_id != "0"){
-              setInterval(function(){
+            if (unit_id != "0") {
+              setInterval(function () {
                 window.location.replace('myAssessment.html');
-              },2000)
+              }, 2000)
             }
           }
           else {
@@ -720,9 +725,9 @@ $(document).ready(function () {
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
-            setInterval(function(){
+            setInterval(function () {
               window.location.replace('myAssessment.html');
-            },2000);
+            }, 2000);
           }
           else {
             $('#loadingDiv').remove();
@@ -741,7 +746,7 @@ $(document).ready(function () {
 
 
     }
-    else if(tId == "0"){
+    else if (tId == "0") {
       $('#errorToastBody').text("No test found to add question");
       $('#errorToast').toast('show');
     }
@@ -807,9 +812,9 @@ $(document).ready(function () {
         //   $('#selectLevel').val(value.blooms_level);
         // }
 
-        $.each(value.topics_details,function(key, value){
+        $.each(value.topics_details, function (key, value) {
           // alert($('#topicTagAdd13779').attr('class'));
-          $('#topicTagAdd'+value.id).click();
+          $('#topicTagAdd' + value.id).click();
         });
 
 
@@ -930,70 +935,70 @@ $(document).ready(function () {
       // alert(`${$user.user_id}`);
       // alert($('#quesInput').val());
 
-      
-
-        newQuestion.college_account_id = `${$user.user_id}`;
-        newQuestion.hint = $('#hintInput').val();
-        newQuestion.blooms_level = bloom_level;
-        newQuestion.name = $('#quesInput').val();
-        if(topics.length > 0)
-          newQuestion.topics_details = topics;
-        newQuestion.solution = $('#solutionInput').val();
-        newQuestion.question_type = type;
-        // console.log(JSON.stringify(newQuestion));
-        
-
-        let form = new FormData();
-        form.append("question", JSON.stringify(newQuestion));
-        form.append("question_img", question_img);
-        form.append("solution_img", solution_img);
-        form.append("hint_img", hint_img);
-        // $("#courseName").text(JSON.stringify(newQuestion));
-
-        // for (var key of form.entries()) {
-        //   alert(key[1]);
-        // }
 
 
-        $.ajax({
-          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
-          type: 'POST',
-          dataType: 'json',
-          data: form,
-          contentType: false,
-          processData: false,
-          headers: {
-            'Authorization': `Bearer ${$user.token}`
-          },
-          success: function (result) {
-            alert(result.message);
-            //console.log('4') 
+      newQuestion.college_account_id = `${$user.user_id}`;
+      newQuestion.hint = $('#hintInput').val();
+      newQuestion.blooms_level = bloom_level;
+      newQuestion.name = $('#quesInput').val();
+      if (topics.length > 0)
+        newQuestion.topics_details = topics;
+      newQuestion.solution = $('#solutionInput').val();
+      newQuestion.question_type = type;
+      // console.log(JSON.stringify(newQuestion));
 
-            if (result.status == 200) {
-              // console.log(result.data)
-              $('#successToastBody').text(result.message);
-              $('#successToast').toast('show');
-              $('#loadingDiv').remove();
-              // $('#abcd').css('position','absolute');
-              $("input.custom-control-input").attr("disabled", false);
-              clearAll();
-              $("#addquesDiv").empty();
-              refreshQuestions();
-            }
-            else {
-              $('#loadingDiv').remove();
-              // $('#abcd').css('position','absolute');
-              $("input.custom-control-input").attr("disabled", false);
-              alert(result.message);
-            }
-          },
-          error: function (error) {
+
+      let form = new FormData();
+      form.append("question", JSON.stringify(newQuestion));
+      form.append("question_img", question_img);
+      form.append("solution_img", solution_img);
+      form.append("hint_img", hint_img);
+      // $("#courseName").text(JSON.stringify(newQuestion));
+
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
+
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          alert(result.message);
+          //console.log('4') 
+
+          if (result.status == 200) {
+            // console.log(result.data)
+            $('#successToastBody').text(result.message);
+            $('#successToast').toast('show');
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
-            alert("Request Failed with status: " + error.status);
+            clearAll();
+            $("#addquesDiv").empty();
+            refreshQuestions();
           }
-        });
+          else {
+            $('#loadingDiv').remove();
+            // $('#abcd').css('position','absolute');
+            $("input.custom-control-input").attr("disabled", false);
+            alert(result.message);
+          }
+        },
+        error: function (error) {
+          $('#loadingDiv').remove();
+          // $('#abcd').css('position','absolute');
+          $("input.custom-control-input").attr("disabled", false);
+          alert("Request Failed with status: " + error.status);
+        }
+      });
 
     }
 

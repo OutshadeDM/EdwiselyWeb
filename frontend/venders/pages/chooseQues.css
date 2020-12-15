@@ -1,0 +1,101 @@
+/* choose3 questions start */
+
+.chooseQues{
+  overflow-y: scroll;
+  height: 70vh;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chooseQues::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chooseQues {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+
+.chooseQuesNavs div {
+  color: gray;
+  cursor: pointer;
+  font-size: large;
+}
+
+.chooseQuesNavs a .active {
+  color: black;
+}
+
+.chooseQues :nth-child(even){
+  background-color: #ffffff;
+}
+
+.chooseQues :nth-child(odd){
+  background-color: #E8EFF3;
+}
+
+
+.chooseQuestionsLi{
+list-style: none;
+overflow-x: hidden;
+}
+
+
+.chooseQuestionsInput {
+  float: right;
+}
+/* 
+.chooseQuestionssLabel {
+  background-color: transparent;
+  max-width: 500px;
+  display: inline-block;
+} */
+
+.answers {
+  color: gray;
+  font-size: small;
+}
+
+.viewMoreBtn{
+  float: right;
+  border: none;
+  font-size: 16px;
+}
+
+.viewMoreBtn :hover {
+  font-weight: 600;
+}
+
+.getUnits {
+  border: solid black 2px;
+  border-radius: 5px;
+}
+
+.getUnitsInput {
+  display: none;
+}
+
+.getUnitsLi {
+  list-style: none;
+}
+
+.getUnitsLabel{
+  color: gray;
+}
+
+input[type="radio"]:checked+label{
+  color: black;
+  font-size:x-large;
+  font-weight: 400;
+}
+
+
+pre {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: transparent;
+}
+
+/* choose questions end */
