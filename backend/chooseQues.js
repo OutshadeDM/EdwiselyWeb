@@ -110,6 +110,7 @@ $(document).ready(function () {
               $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "' checked/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
             })
           });
+          fillTopics()
 
         }
         else {
@@ -128,14 +129,58 @@ $(document).ready(function () {
 
 
 
+  //let topics = [13779, 13780, 13781, 13782]
+  let topics = []
+  //fillTopics()
+
+  //iterating thorugh all the topics initially
+  function fillTopics() {
+    topics = []
+    $('.topicTagsInput').each(function () {
+      if (this.checked) {
+        topics.push($(this).data('id'))
+      }
+
+    })
+    //console.log(topics);
+    getQuestions()
+  }
+
+
+
+
+  $(document).on('change', '.topicTagsInput', function () {
+    // let topicId = $(this).data('id')
+    // if (!topics.includes(topicId)) {
+    //   topics.push(topicId)
+    // }
+
+    let checked = $(this).data('id');
+    if ($(this).is(':checked')) {
+      if (!topics.includes(checked)) {
+        topics.push(checked);
+      }
+    }
+    else {
+      //topics.splice($.inArray(checked, topics), 1);
+      topics.splice(topics.indexOf($(this).data('id')), 1)
+    }
+
+    //console.log(topics);
+
+    getQuestions()
+  });
+
+
+
+
   //getting the questions api
 
-
-  getQuestions();
+  getQuestions()
   function getQuestions() {
-
+    //alert("fnjmf")
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=&topic_ids=13779,13780,13781,13782&sub_topic_ids=15835,15836,15837,15838,15839,15840,15844,15845,15846,15847,15848,15849',
+      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=&topic_ids=' + topics + '&sub_topic_ids=15835,15836,15837,15838,15839,15840,15844,15845,15846,15847,15848,15849',
       type: 'GET',
       contentType: 'application/json',
       headers: {
@@ -148,11 +193,6 @@ $(document).ready(function () {
         $('.chooseQues').empty();
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
-            //console.log(value);
-            //$.each(value.topic, function (key, unitTopic) {
-            //console.log(unitTopic)
-
-            //$('.chooseQues').append("<li class='chooseQuestionsLi'><input type='checkbox' class='chooseQuestionsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/><label for='chooseQuestionsAdd" + value.id + "' class='chooseQuestionssLabel show1'>" + displayQues + "</label></li>");
 
             let displayedQues = ""
             if (value.name.length > 110) {
@@ -162,27 +202,18 @@ $(document).ready(function () {
             else {
               displayedQues = value.name
             }
-            //console.log(displayedQues)
-            //$('.chooseQues').append("<li class='chooseQuestionsLi px-1 py-2'><input type='checkbox' class='chooseQuestionsInput px-2' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/><label for='chooseQuestionsAdd" + value.id + "' class='chooseQuestionssLabel show1' style='background-color: transparent;'>" + displayedQues + "</label><div class='answers' style='background-color: transparent;'>Answers <button class='viewMoreBtn' style='background-color: transparent;'>viewMore</button></div></li>");
-
-            let answer;
-            //console.log(value.questions_options.length)
-            for (let i = 0; i < value.questions_options.length; i++) {
-              //for (let j = 0; j < value.questions_options.length; j++) {
-              //console.log(value.questions_options[i])
-              // if (value.questions_options[j].is_answer === 1) {
-              //   answer = value.questions_options[i].name
-              // }
-              // break
-              //}
-
-            }
+            // let answer;
+            // console.log(value.questions_options.length)
+            // for (let i = 0; i < value.questions_options.length; i++) {
 
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi px-1 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+            // }
+
+
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
               "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + displayedQues +
-              "<div class='answers' style='background-color: transparent;'>Answers:" + answer +
+              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal' data-question='" + JSON.stringify(value) +
               "'>viewMore</button></div></li>"
 
@@ -219,7 +250,7 @@ $(document).ready(function () {
 
     //(e.target.checked) ? console.log('hello') : console.log("bye")
     //questions.push($(this).data('value'))
-    console.log(questions)
+    //console.log(questions)
 
   });
 
@@ -261,13 +292,6 @@ $(document).ready(function () {
       }
     }
   }
-
-
-
-  $(document).on('click', '.chosenQuestions', function () {
-
-  })
-
 
 
 
