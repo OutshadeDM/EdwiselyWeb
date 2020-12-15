@@ -17,8 +17,11 @@
 scrollbar-width: none;  /* Firefox */
 }
 
-.chooseQuesNavs a {
+
+.chooseQuesNavs div {
   color: gray;
+  cursor: pointer;
+  font-size: large;
 }
 
 .chooseQuesNavs a .active {

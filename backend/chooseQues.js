@@ -143,7 +143,7 @@ $(document).ready(function () {
 
     })
     //console.log(topics);
-    getQuestions()
+    getAllQuestions()
   }
 
 
@@ -168,7 +168,7 @@ $(document).ready(function () {
 
     //console.log(topics);
 
-    getQuestions()
+    getAllQuestions()
   });
 
 
@@ -176,8 +176,8 @@ $(document).ready(function () {
 
   //getting the questions api
 
-  getQuestions()
-  function getQuestions() {
+  getAllQuestions()
+  function getAllQuestions() {
     //alert("fnjmf")
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=&topic_ids=' + topics + '&sub_topic_ids=15835,15836,15837,15838,15839,15840,15844,15845,15846,15847,15848,15849',
@@ -236,21 +236,107 @@ $(document).ready(function () {
   }
 
 
+  //get questions bloom wise
+
+  function getBloomQuestions(blooms_lvl) {
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=&topic_ids=' + topics + '&sub_topic_ids=15835,15836,15837,15838,15839,15840,15844,15845,15846,15847,15848,15849',
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        //alert(result.status);
+        //alert(subSemId)
+
+        $('.chooseQues').empty();
+        if (result.status == 200 && result.data) {
+          $.each(result.data, function (key, value) {
+
+            let displayedQues = ""
+            if (value.name.length > 110) {
+              displayedQues = value.name.substr(0, 110)
+            }
+
+            else {
+              displayedQues = value.name
+            }
+            // let answer;
+            // console.log(value.questions_options.length)
+            // for (let i = 0; i < value.questions_options.length; i++) {
+
+
+            // }
+
+            if (value.blooms_level == blooms_lvl) {
+              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
+                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + displayedQues +
+                "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
+                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal' data-question='" + JSON.stringify(value) +
+                "'>viewMore</button></div></li>"
+
+              );
+            }
+          });
+
+        }
+        else {
+          $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
+          //alert("here");
+        }
+
+
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+
+
+  $('#navAll').on('click', function () {
+    getAllQuestions()
+  })
+
+
+  $('#navRemember').on('click', function () {
+    getBloomQuestions(1)
+  })
+
+  $('#navUnderstand').on('click', function () {
+    getBloomQuestions(2)
+  })
+
+  $('#navApply').on('click', function () {
+    getBloomQuestions(3)
+  })
+
+  $('#navAnalyze').on('click', function () {
+    getBloomQuestions(4)
+  })
+
+
+
+
+
+
+
+
+
+
+
+
   //selecting questions on checking of checkbox
 
-  //selected questions
-
   let questions = []
-
 
   $(document).on('change', '.chooseQuestionsInput', function (e) {
     //add questions to a array which are selected
 
     (e.target.checked) ? questions.push($(this).data('value')) : (questions.splice(questions.indexOf($(this).data('value')), 1))
-
-    //(e.target.checked) ? console.log('hello') : console.log("bye")
-    //questions.push($(this).data('value'))
-    //console.log(questions)
 
   });
 
