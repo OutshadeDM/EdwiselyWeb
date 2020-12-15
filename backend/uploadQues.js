@@ -111,7 +111,7 @@ $('#uploadBtn').on('click', function () {
   var form = new FormData();
   form.append("files", uploaded_question);
   form.append("topics", JSON.stringify(topics));
-
+  //alert(JSON.stringify(topics))
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
     type: 'POST',

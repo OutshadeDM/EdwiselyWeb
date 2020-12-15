@@ -586,26 +586,3 @@ display: inline-block;
 
 
 
-/* choose3 questions start */
-
-.chooseQuesNavs a {
-  color: gray;
-}
-
-.chooseQuesNavs a .active {
-  color: black;
-}
-
-
-.chooseQues :nth-child(even){
-  background-color: #ffffff;
-}
-.chooseQues :nth-child(odd){
-  background-color: #E8EFF3;
-}
-
-
-
-
-/* choose questions end */
-
