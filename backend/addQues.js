@@ -563,8 +563,9 @@ $(document).ready(function () {
             $('#successToastBody').text('Question Added to Database Successfully');
             $('#successToast').toast('show');
             // $('.initData').remove();
-            $('#addquesDiv').prepend(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
+            $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
             questionsList.push(result.data.id);
+            question.push(result.data);
             $("input.custom-control-input").attr("disabled", false);
             clearAll();
 
@@ -775,8 +776,34 @@ $(document).ready(function () {
     $.each(questions, function (key, value) {
       // alert(questionId);
       if (questionId == value.id) {
-        // alert(value.id)
-        // alert(value.questions_options[0].name);
+        console.log(value);
+        
+        $('#addsoln').show();
+        $('#topicsDiv').hide();
+
+        if(value.question_type){
+
+          if(value.question_type == 'private'){
+            if ($("input[name='public_pvt']:checked").val() === 'public') {
+              $('#customSwitch1').click();
+            }
+          }
+          else if(value.question_type == 'public'){
+            // alert("here");
+            if ($("input[name='public_pvt']:checked").val() != 'public') {
+              // alert("here");
+              $('#customSwitch1').click();
+            }
+          }
+
+        }
+        else{
+          $('#addsoln').hide();
+          $('#topicsDiv').show();
+          $('#topicsDiv').empty();
+          $('#topicsDiv').append("<p class='font-weight-bold'>Topics</p>");
+        }
+
         $('#firstOption').val(value.questions_options[0].name);
         $('#secondOption').val(value.questions_options[1].name);
 
@@ -787,6 +814,10 @@ $(document).ready(function () {
         if (value.questions_options[4]) {
           $(".fifthOptionBtn").click();
           $('#fifthOption').val(value.questions_options[4].name);
+        }
+
+        if (value.source) {
+          $('#sourceInput').val(value.solution);
         }
 
         if (value.solution) {
@@ -809,8 +840,41 @@ $(document).ready(function () {
 
         $.each(value.topics_details,function(key, value){
           // alert($('#topicTagAdd13779').attr('class'));
-          $('#topicTagAdd'+value.id).click();
+          if(value.question_type)
+            $('#topicTagAdd'+value.id).click();
+          else{
+            $('#topicsDiv').append("<span class='badge badge-pill'>"+value.id+"</span><br>");
+          }
         });
+
+        if(value.question_img && value.question_img != null && value.question_img != " "){
+          // alert('here');
+          $('.uploadedques').show()
+          $('.imgPreviewques').show()
+          $('.notUploadedques').hide()
+          $('#quesLabel').hide()
+          $('#image_preview_ques').attr('src',value.question_img);
+        }
+
+        if(value.hint_image && value.hint_image != null){
+          // alert('here1');
+          $('#hintDiv').show();
+          $('.uploadedhint').show()
+          $('.imgPreviewhint').show()
+          $('.notUploadedhint').hide()
+          $('#hintLabel').hide()
+          $('#image_preview_hint').attr('src',value.hint_image);
+        }
+
+        if(value.solution_image && value.solution_image != null){
+          // alert('here2');
+          $('#solutionDiv').show();
+          $('.uploadedsolution').show()
+          $('.imgPreviewsolution').show()
+          $('.notUploadedsolution').hide()
+          $('#solutionLabel').hide()
+          $('#image_preview_solution').attr('src',value.solution_image);
+        }
 
 
 
@@ -932,15 +996,19 @@ $(document).ready(function () {
 
       
 
-        newQuestion.college_account_id = `${$user.user_id}`;
+        newQuestion.college_account_id = parseInt(`${$user.user_id}`);
         newQuestion.hint = $('#hintInput').val();
         newQuestion.blooms_level = bloom_level;
         newQuestion.name = $('#quesInput').val();
         if(topics.length > 0)
           newQuestion.topics_details = topics;
         newQuestion.solution = $('#solutionInput').val();
-        newQuestion.question_type = type;
+        // newQuestion.question_type = type;
         // console.log(JSON.stringify(newQuestion));
+
+        let question_type1 = $("input[name='public_pvt']:checked").val();
+        if(!question_type1)
+          question_type1 = "private";
         
 
         let form = new FormData();
@@ -954,7 +1022,6 @@ $(document).ready(function () {
         //   alert(key[1]);
         // }
 
-
         $.ajax({
           url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
           type: 'POST',
@@ -966,19 +1033,69 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
           },
           success: function (result) {
-            alert(result.message);
-            //console.log('4') 
+            // alert(result.message);
 
             if (result.status == 200) {
-              // console.log(result.data)
-              $('#successToastBody').text(result.message);
-              $('#successToast').toast('show');
-              $('#loadingDiv').remove();
-              // $('#abcd').css('position','absolute');
-              $("input.custom-control-input").attr("disabled", false);
-              clearAll();
-              $("#addquesDiv").empty();
-              refreshQuestions();
+
+              if(question_type1 != newQuestion.question_type){
+                // alert("here");
+                let form1 = new FormData();
+                form1.append("question_id",newQuestion.id);
+                form1.append("type",question_type1);
+
+                $.ajax({
+                  url: 'https://stagingfacultypython.edwisely.com/questions/updateFacultyAddedObjectiveQuestions',
+                  type: 'POST',
+                  dataType: 'json',
+                  data: form1,
+                  contentType: false,
+                  processData: false,
+                  headers: {
+                    'Authorization': `Bearer ${$user.token}`
+                  },
+                  success: function (result) {
+                    // alert(result.message);
+                    //console.log('4') 
+
+                    if (result.status == 200 || result.status == 400) {
+                      // alert("here1");
+                      $('#successToastBody').text("Question updated Successfully");
+                      $('#successToast').toast('show');
+                      $('#loadingDiv').remove();
+                      // $('#abcd').css('position','absolute');
+                      $("input.custom-control-input").attr("disabled", false);
+                      clearAll();
+                      $("#addquesDiv").empty();
+                      refreshQuestions();
+                    }
+                  },
+                  error: function (error) {
+                    $('#loadingDiv').remove();
+                    // $('#abcd').css('position','absolute');
+                    $("input.custom-control-input").attr("disabled", false);
+                    alert("Request Failed with status: " + error.status);
+                  }
+                });
+
+              }
+              else{
+
+                if(newQuestion.questions_options[0].name != option1 || option1_img != null)
+                  updateOption(newQuestion.questions_options[0].id,option1,option1_img,true);
+
+                if(newQuestion.questions_options[1].name != option2 || option2_img != null)
+                  updateOption(newQuestion.questions_options[1].id,option2,option2_img,true);
+
+                $('#successToastBody').text(result.message);
+                $('#successToast').toast('show');
+                $('#loadingDiv').remove();
+                // $('#abcd').css('position','absolute');
+                $("input.custom-control-input").attr("disabled", false);
+                clearAll();
+                $("#addquesDiv").empty();
+                refreshQuestions();
+
+              }
             }
             else {
               $('#loadingDiv').remove();
@@ -997,7 +1114,56 @@ $(document).ready(function () {
 
     }
 
-
   });
+
+  function updateOption(id,option,option_img,toEdit){
+
+    if(toEdit){
+
+      let form = new FormData();
+      form.append("new_option_img", option_img);
+      form.append("option_id", id);
+      form.append("name", option);
+      form.append("is_answer", "0");
+      form.append("option_img", "https://edwisely-academic-materials-v2.s3.ap-south-1.amazonaws.com/faculty/Prakash Reddy Edwisely/brightened.jpg");
+      form.append("question_id", "55989");
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestionOption',
+        type: 'POST',
+        dataType: 'json',
+        data: form1,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          // alert(result.message);
+          //console.log('4') 
+
+          if (result.status == 200 || result.status == 400) {
+            // alert("here1");
+            $('#successToastBody').text("Question updated Successfully");
+            $('#successToast').toast('show');
+            $('#loadingDiv').remove();
+            // $('#abcd').css('position','absolute');
+            $("input.custom-control-input").attr("disabled", false);
+            clearAll();
+            $("#addquesDiv").empty();
+            refreshQuestions();
+          }
+        },
+        error: function (error) {
+          $('#loadingDiv').remove();
+          // $('#abcd').css('position','absolute');
+          $("input.custom-control-input").attr("disabled", false);
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+    }
+
+
+  }
 
 });
