@@ -19,13 +19,26 @@ $(document).ready(function () {
               $.cookie('user', JSON.stringify(result), {expires: 365});
               window.location.replace("index.html");
             } else {
-              window.location.replace('login.html');
+              window.location.replace('login.html?status=danger&message=401');
             }
         },
         error: function (error) {
             alert(error);
         }
     });
+  }
+
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var status = url.searchParams.get("status");
+  var message = url.searchParams.get("message");
+  if (status) {
+    if (message == 401)
+      $('.alert strong').text('Wrong Email Id or Password!');
+    else if (message == 200)
+      $('.alert strong').text('Successfully Logged Out');      
+    $('.alert').addClass(`alert-${status}`);
+    $('.alert').removeClass('d-none');
   }
 
   // Check if user is already logged in

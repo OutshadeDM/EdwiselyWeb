@@ -56,7 +56,7 @@ $(document).ready(function () {
 
   getObjAssesments();
 
-  function clearSelections(){
+  function clearSelections() {
     $('#objective-assessments').val("0");
     $('#subjective-assessments').val("0");
     $('#cond-ObjassessmentsSubject').val("0");
@@ -225,14 +225,14 @@ $(document).ready(function () {
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
+      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tname="+value.name+"&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
       div = div + "Questions: " + value.questions_count;
       if (!value.questions_count)
-        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
+        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
       else
         div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       div = div + "</div></div></div>";
@@ -245,13 +245,8 @@ $(document).ready(function () {
       $('#subjectiveassessmentList').append(div)
   }
 
-  $('.input-group.date').datepicker({
-    format: "yyyy-mm-dd",
-    calendarWeeks: true,
-    autoclose: true,
-    todayHighlight: true
-  });
-
+  
+  
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id=' + `${$user.university_degree_department_id}`,
     type: 'GET',
@@ -294,17 +289,16 @@ $(document).ready(function () {
     let condObjAssessmentsSection = $('#cond-ObjassessmentsSection').val();
     let condObjAssessmentsSubject = $('#cond-ObjassessmentsSubject').val();
 
-    // alert(condObjAssessmentsSection);
     let date = new Date();
-    date.setMonth(date.getMonth () - 6);
-    // let fullDate = date.toDateString();
+    date.setMonth(date.getMonth() - 6);
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-
-    if (!condObjDate || condObjDate == null){
-       condObjDate = fullDate;
-       $('#condObjDate').val(fullDate);
+    if (!condObjDate || condObjDate == null) {
+      condObjDate = fullDate;
+      // $('#condObjDate').val(fullDate);
+      $('#condObjDate').datepicker('setDate', date);
     }
-    // "2020-06-01"
+
+    // alert(condObjAssessmentsSection);
     // alert(condObjAssessmentsSubject);
     // alert(condObjDate);
 
@@ -321,7 +315,7 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
           if (result.status == 200 && result.data) {
-            displayCondCards(result.data,true);
+            displayCondCards(result.data, true);
           }
           else
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -345,7 +339,7 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
           if (result.status == 200 && result.data) {
-            displayCondCards(result.data,true);
+            displayCondCards(result.data, true);
           }
           else
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -369,7 +363,7 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
           if (result.status == 200 && result.data) {
-            displayCondCards(result.data,true);
+            displayCondCards(result.data, true);
           }
           else
             $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -438,16 +432,16 @@ $(document).ready(function () {
     let condSubAssessmentsSection = $('#cond-SubassessmentsSection').val();
     let condSubAssessmentsSubject = $('#cond-SubassessmentsSubject').val();
 
-    // alert(condSubAssessmentsSection);
     let date = new Date();
-    date.setMonth(date.getMonth () - 6);
-    // let fullDate = date.toDateString();
+    date.setMonth(date.getMonth() - 6);
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-
-    if (!condSubDate || condSubDate == null){
-       condSubDate = fullDate;
-       $('#condSubDate').val(fullDate);
+    if (!condSubDate || condSubDate == null) {
+      condSubDate = fullDate;
+      // $('#condSubDate').val(fullDate);
+      $('#condSubDate').datepicker('setDate', date);
     }
+
+    // alert(condSubAssessmentsSection);
     // alert(condSubAssessmentsSubject);
     // alert(condSubDate);
 
@@ -464,7 +458,7 @@ $(document).ready(function () {
           // alert(result.message);
           $('#condSubAssessmentList').empty();
           if (result.status == 200 && result.data) {
-            displayCondCards(result.data,false);
+            displayCondCards(result.data, false);
           }
           else
             $('#condSubAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -488,7 +482,7 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condSubAssessmentList').empty();
           if (result.status == 200 && result.data) {
-            displayCondCards(result.data,false);
+            displayCondCards(result.data, false);
           }
           else
             $('#condSubAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -512,7 +506,7 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condSubAssessmentList').empty();
           if (result.status == 200 && result.data) {
-            displayCondCards(result.data,false);
+            displayCondCards(result.data, false);
           }
           else
             $('#condSubAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
@@ -574,17 +568,17 @@ $(document).ready(function () {
 
   });
 
-  function displayCondCards(data = [],isObj) {
+  function displayCondCards(data = [], isObj) {
     let div = "";
 
     $.each(data, function (key, value) {
 
-      div = div + "<div class='col-sm-6 assessment condLink' data-id='"+value.id+"' data-test='"+value.test_completed+"'>";
+      div = div + "<div class='col-sm-6 assessment condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
       div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
-      if(value.start_time)
+      if (value.start_time)
         div = div + "<h6 class='font-weight-bold'>" + value.start_time + " - " + value.doe + "</h6>";
       else
         div = div + "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>";
@@ -602,7 +596,7 @@ $(document).ready(function () {
 
     });
 
-    if(isObj)
+    if (isObj)
       $('#condObjAssessmentList').append(div);
     else
       $('#condSubAssessmentList').append(div);
@@ -634,37 +628,48 @@ $(document).ready(function () {
 
   $(document).on('click', '.condLink', function () {
     //alert("sent")
-    let test_id = $(this).data('id'); 
-    let test_completed = $(this).data('test'); 
-    if(test_completed > 0){
+    let test_id = $(this).data('id');
+    let test_completed = $(this).data('test');
+    if (test_completed > 0) {
       let link = document.createElement('a');
-      link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id="+test_id+"&token="+`${$user.token}`;
+      link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=" + test_id + "&token=" + `${$user.token}`;
       link.target = "_blank";
       link.dispatchEvent(new MouseEvent('click'));
     }
   });
 
+  // let date1 = new Date();
+  // date1.setMonth(date1.getMonth() - 6);
+  // let month = date1.getMonth();
+  // if(month.length == 1) month = "0"+month;
+
+  $('.input-group.date').datepicker({
+    format: "yyyy-mm-dd",
+    calendarWeeks: true,
+    autoclose: true
+  });
+
+
   $("#condObjDate").blur(function () {
     // alert("here");
     let date = new Date();
-    date.setMonth(date.getMonth () - 6);
-    // let fullDate = date.toDateString();
+    date.setMonth(date.getMonth() - 6);
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    // $("#condObjDate").val(fullDate);
+    $('#condObjDate').datepicker('setDate', date);
 
-    $("#condObjDate").val(fullDate);
 
-});
+  });
 
-$("#condSubDate").blur(function () {
-  // alert("here");
-  let date = new Date();
-  date.setMonth(date.getMonth () - 6);
-  // let fullDate = date.toDateString();
-  let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+  $("#condSubDate").blur(function () {
+    let date = new Date();
+    date.setMonth(date.getMonth() - 6);
+    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    $("#condSubDate").val(fullDate);
+    $('#condSubDate').datepicker('setDate', date);
+      // $("#condSubDate").val(fullDate);
 
-  $("#condSubDate").val(fullDate);
-
-});
+  });
 
 
 

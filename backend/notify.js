@@ -8,7 +8,14 @@ $(async function() {
 		window.location.replace("login.html");
 	}
 
+	$('#myTabContent').on('click', '.selectAll', function() {
+		const tab = $(this).data('tab');
+		const checkBoxes = $(`#t${tab} .single input:checkbox`);
+		checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+	});	
+
 	let tabNumber = 1;
+	let selectNumber = 0;
 	let first = true;
 
 	// Get faculty data function
@@ -73,11 +80,15 @@ $(async function() {
 		$('#myTab').append(`<li class="nav-item">
                             <a class="nav-link ${first? 'active':''}" id="t${tabNumber}-tab" data-toggle="tab" href="#t${tabNumber}" role="tab" aria-controls="t${tabNumber}" aria-selected="true">${section.name}</a>
                           </li>`);
-		$('#myTabContent').append(`<div class="tab-pane fade ${first? 'show active': ''}" id="t${tabNumber}" role="tabpanel" aria-labelledby="t${tabNumber}-tab"></div>`)
+		$('#myTabContent').append(`<div class="tab-pane fade ${first? 'show active': ''}" id="t${tabNumber}" role="tabpanel" aria-labelledby="t${tabNumber}-tab"></div>`);
+		$(`#t${tabNumber}`).append(`<div class="form-check">
+		<label class="form-check-label" for="select${tabNumber}">SELECT ALL</label>
+		<input style="float: right;right: 0px;" name="selectAll" data-tab=${tabNumber} type="checkbox" class="form-check-input selectAll" id="select${tabNumber}">
+		</div>`)		
 		$.each(section.students.data, (index, student) => {
-			$(`#t${tabNumber}`).append(`<div class="form-check">
-	                                  <label class="form-check-label" for="exampleCheck${tabNumber}">${student.name}</label>
-	                                  <input style="float: right;right: 0px;" name="students[]" value="${student.id}" type="checkbox" class="form-check-input" id="exampleCheck${tabNumber}">
+			$(`#t${tabNumber}`).append(`<div class="form-check single my-2">
+	                                  <label class="form-check-label" for="exampleCheck${selectNumber}">${student.roll_number} - ${student.name}</label>
+	                                  <input style="float: right;right: 0px;" name="students[]" value="${student.id}" type="checkbox" class="form-check-input" id="exampleCheck${selectNumber++}">
 	                                </div>`)
 		});
 		tabNumber++;
@@ -151,7 +162,7 @@ $('#formdata').submit(function(e) {
         },	        
         success: function (data) {
             console.log(data);
-            $('.alert').removeClass('d-none');
+            window.location.replace("index.html?status=success&message=notify");
         },
         error: function (error) {
             console.log(error);
