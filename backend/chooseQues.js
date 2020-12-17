@@ -77,7 +77,12 @@ $(document).ready(function () {
         console.log(unitsIds)
         console.log(first_unit)
         if (unitsIds.length !== 0) {
-          $(first_unit).attr('checked', true)
+          $("#" + first_unit).attr('checked', true)
+          unit = $(".getUnitsInput:checked").val();
+          subTopicsId = []
+          topicsId = []
+          grandTopicsId = []
+          getTopics()
         }
 
       },
