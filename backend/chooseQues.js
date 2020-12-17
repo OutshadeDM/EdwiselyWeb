@@ -74,8 +74,8 @@ $(document).ready(function () {
         }
 
         let first_unit = "getUnitsAdd" + unitsIds[0]
-        console.log(unitsIds)
-        console.log(first_unit)
+        //console.log(unitsIds)
+        //console.log(first_unit)
         if (unitsIds.length !== 0) {
           $("#" + first_unit).attr('checked', true)
           unit = $(".getUnitsInput:checked").val();
@@ -240,20 +240,20 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
-            let displayedQues = ""
-            if (value.name.length > 110) {
-              displayedQues = value.name
-            }
+            // let displayedQues = ""
+            // if (value.name.length > 110) {
+            //   displayedQues = value.name
+            // }
 
-            else {
-              displayedQues = value.name
-            }
+            // else {
+            //   displayedQues = value.name
+            // }
 
             //console.log(value.name)
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-              "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + displayedQues +
+              "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
               "'>viewMore</button></div></li>" +
@@ -312,14 +312,14 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
-            let displayedQues = ""
-            if (value.name.length > 110) {
-              displayedQues = value.name.substr(0, 110)
-            }
+            // let displayedQues = ""
+            // if (value.name.length > 110) {
+            //   displayedQues = value.name
+            // }
 
-            else {
-              displayedQues = value.name
-            }
+            // else {
+            //   displayedQues = value.name
+            // }
             // let answer;
             // console.log(value.questions_options.length)
             // for (let i = 0; i < value.questions_options.length; i++) {
@@ -330,7 +330,7 @@ $(document).ready(function () {
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + displayedQues +
+                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + value.name +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
                 " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
                 "'>viewMore</button></div></li>" +
