@@ -7,22 +7,63 @@ $(async function() {
 	} else {
 		window.location.replace("login.html");
 	}
-
-	$('#myTabContent').on('click', '.selectAll', function() {
+	$('#myTabContent').on('change', '.selectAll', function() {
 		const tab = $(this).data('tab');
 		const checkBoxes = $(`#t${tab} .single input:checkbox`);
-		checkBoxes.prop("checked", !checkBoxes.prop("checked"));
-	});
-	var checkPastTime = function(inputDateTime) {
+		if ($(this).prop('checked')) {
+			checkBoxes.prop("checked", true);
+		} else {
+			checkBoxes.prop("checked", false);
+		}
+	});	
+
+	Date.prototype.addHours = function(h) {
+		this.setTime(this.getTime() + (h*60*60*1000));
+		return this;
+	}
+	var checkPastTimeS = function(inputDateTime) {
 		if (typeof(inputDateTime) != "undefined" && inputDateTime !== null) {
 			var current = new Date();
 	 
 			//check past year and month
 			if (inputDateTime.getFullYear() < current.getFullYear()) {
-				$('#datetimepicker7').datetimepicker('reset');
+				$('#starttime').datetimepicker('reset');
 				alert("Sorry! Past date time not allow.");
 			} else if ((inputDateTime.getFullYear() == current.getFullYear()) && (inputDateTime.getMonth() < current.getMonth())) {
-				$('#datetimepicker7').datetimepicker('reset');
+				$('#starttime').datetimepicker('reset');
+				alert("Sorry! Past date time not allow.");
+			}
+	 
+			// 'this' is jquery object datetimepicker
+			// check input date equal to todate date
+			if (inputDateTime.getDate() == current.getDate()) {
+				if (inputDateTime.getHours() < current.getHours()) {
+					$('#starttime').datetimepicker('reset');
+				}
+			} else {
+				this.setOptions({
+					minTime: false
+				});
+				// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
+			}
+			// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({minDate: $('#starttime').data('xdsoft_datetimepicker').getValue()});
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxDate: new Date($('#starttime').data('xdsoft_datetimepicker').getValue()).addHours(3)});
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({minTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 'h'});
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 3 + 'h'});
+		}
+	};
+	
+	var checkPastTimeE = function(inputDateTime) {
+		if (typeof(inputDateTime) != "undefined" && inputDateTime !== null) {
+			var current = new Date();
+	 
+			//check past year and month
+			if (inputDateTime.getFullYear() < current.getFullYear()) {
+				$('#starttime').datetimepicker('reset');
+				alert("Sorry! Past date time not allow.");
+			} else if ((inputDateTime.getFullYear() == current.getFullYear()) && (inputDateTime.getMonth() < current.getMonth())) {
+				$('#starttime').datetimepicker('reset');
 				alert("Sorry! Past date time not allow.");
 			}
 	 
@@ -31,38 +72,47 @@ $(async function() {
 			console.log(this);
 			if (inputDateTime.getDate() == current.getDate()) {
 				if (inputDateTime.getHours() < current.getHours()) {
-					$('#datetimepicker7').datetimepicker('reset');
+					$('#starttime').datetimepicker('reset');
 				}
-				this.setOptions({
-					minTime: current.getHours() + ':00' //here pass current time hour
-				});
-				// $('#endtime').datetimepicker().setOptions({
-				// 	minTime: (inputDateTime.getHours() + 3) + ':00' //here pass current time hour
-				// });
 			} else {
 				this.setOptions({
 					minTime: false
 				});
-				// $('#endtime').datetimepicker('option', 'maxTime', (inputDateTime.getHours() + 3) + ':00');
+				// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
 			}
+			// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({minDate: $('#starttime').data('xdsoft_datetimepicker').getValue()});
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxDate: new Date($('#starttime').data('xdsoft_datetimepicker').getValue()).addHours(3)});
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({minTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 'h'});
+			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 3 + 'h'});
 		}
-	};	
+	};
+
 	var currentYear = new Date();
-    $('#starttime').datetimepicker({
+    var startTime = $('#starttime').datetimepicker({
 		format:'Y-m-d H:i:s',
 		minDate : 0,
 		yearStart : currentYear.getFullYear(), // Start value for current Year selector
-		onChangeDateTime:checkPastTime,
-		onShow:checkPastTime,	
+		onChangeDateTime:checkPastTimeS,
+		onShow:checkPastTimeS,	
     });
-
-    $('#endtime').datetimepicker({
+	console.log(startTime.data("datetimepicker"));
+    var endTime = $('#endtime').datetimepicker({
 		format:'Y-m-d H:i:s',
 		minDate: 0,
 		yearStart : currentYear.getFullYear(), // Start value for current Year selector
-		onChangeDateTime:checkPastTime,
-		onShow:checkPastTime,		
-    });    
+		onChangeDateTime:checkPastTimeE,
+		onShow:checkPastTimeE,		
+	});    
+	
+	$("#starttime").on("dp.change", function(e) {
+		$('#endtime').data('xdsoft_datetimepicker').setOptions({minDate: $('#starttime').data('xdsoft_datetimepicker').getValue('minDate')});
+	 });
+  
+	 $("#endtime").on("dp.change", function(e) {
+		$('#starttime').data('xdsoft_datetimepicker').setOptions({maxDate: $('#endtime').data('xdsoft_datetimepicker').getValue('maxDate')});
+	 });
+
 	let tabNumber = 1;
 	let selectNumber = 0;
 	let first = true;

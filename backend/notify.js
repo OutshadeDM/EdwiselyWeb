@@ -8,10 +8,15 @@ $(async function() {
 		window.location.replace("login.html");
 	}
 
-	$('#myTabContent').on('click', '.selectAll', function() {
+	$('#myTabContent').on('change', '.selectAll', function() {
 		const tab = $(this).data('tab');
 		const checkBoxes = $(`#t${tab} .single input:checkbox`);
-		checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+		console.log($(this).prop('checked'));
+		if ($(this).prop('checked')) {
+			checkBoxes.prop("checked", true);
+		} else {
+			checkBoxes.prop("checked", false);
+		}
 	});	
 
 	let tabNumber = 1;
