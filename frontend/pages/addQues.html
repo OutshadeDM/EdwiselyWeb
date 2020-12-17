@@ -181,10 +181,18 @@
                         style="height: 50px;">
                     </div>
                     <div class="col-2 chooseImage px-0 pt-1 firstOption">
+                      <label class="custom-file-upload optImgs">
+                        <i class="fas fa-trash-alt fa-lg pl-2 pt-3" id="uploadedoption1"></i>
+                      </label>
                       <label for="opt1Image" class="custom-file-upload optImgs">
-                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                        <i class="fas fa-image fa-lg pl-2 pt-3" id ="notUploadedoption1"></i>
                       </label>
                       <input id="opt1Image" type="file" />
+                    </div>
+                  </div>
+                  <div class="row" id="option1ImagePreview">
+                    <div class="col-12 text-center">
+                      <img id="image_preview_option1" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -205,10 +213,18 @@
                         style="height: 50px;">
                     </div>
                     <div class="col-2 chooseImage px-0 pt-1 secondOption">
+                      <label class="custom-file-upload optImgs">
+                        <i class="fas fa-trash-alt fa-lg pl-2 pt-3" id="uploadedoption2"></i>
+                      </label>
                       <label for="opt2Image" class="custom-file-upload optImgs">
-                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                        <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption2"></i>
                       </label>
                       <input id="opt2Image" type="file" />
+                    </div>
+                  </div>
+                  <div class="row" id="option2ImagePreview">
+                    <div class="col-12 text-center">
+                      <img id="image_preview_option2" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -232,10 +248,18 @@
                         style="height: 50px;">
                     </div>
                     <div class="col-2 chooseImage px-0 pt-1 thirdOption">
+                      <label class="custom-file-upload optImgs">
+                        <i class="fas fa-trash-alt fa-lg pl-2 pt-3" id="uploadedoption3"></i>
+                      </label>
                       <label for="opt3Image" class="custom-file-upload optImgs">
-                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                        <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption3"></i>
                       </label>
                       <input id="opt3Image" type="file" />
+                    </div>
+                  </div>
+                  <div class="row" id="option3ImagePreview">
+                    <div class="col-12 text-center">
+                      <img id="image_preview_option3" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -256,10 +280,18 @@
                         style="height: 50px;">
                     </div>
                     <div class="col-2 chooseImage px-0 pt-1 fourthOption">
+                      <label class="custom-file-upload optImgs">
+                        <i class="fas fa-trash-alt fa-lg pl-2 pt-3" id="uploadedoption4"></i>
+                      </label>
                       <label for="opt4Image" class="custom-file-upload optImgs">
-                        <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                        <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption4"></i>
                       </label>
                       <input id="opt4Image" type="file" />
+                    </div>
+                  </div>
+                  <div class="row" id="option4ImagePreview">
+                    <div class="col-12 text-center">
+                      <img id="image_preview_option4" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -274,7 +306,7 @@
                       <div class="col-2 mx-0 p-1 fifthOption">
                         <div class="form-check p-0">
                           <label class="radiolabel">
-                            <input type="radio" class="radiostest" name="Radios" id="Radios4" value="3">
+                            <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4">
                             <i class="far fa-square pl-2 pt-3 fa-lg untick untick5" style="width: 100%;"></i>
                             <i class="fas fa-check-square pl-2 pt-3 fa-lg tick tick5"></i>
                           </label>
@@ -285,10 +317,18 @@
                           style="height: 50px;">
                       </div>
                       <div class="col-2 chooseImage px-0 pt-1 fifthOption">
+                        <label class="custom-file-upload optImgs">
+                          <i class="fas fa-trash-alt fa-lg pl-2 pt-3" id="uploadedoption5"></i>
+                        </label>
                         <label for="opt5Image" class="custom-file-upload optImgs">
-                          <i class="fas fa-image fa-lg pl-2 pt-3"></i>
+                          <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption5"></i>
                         </label>
                         <input id="opt5Image" type="file" />
+                      </div>
+                    </div>
+                    <div class="row" id="option5ImagePreview">
+                      <div class="col-12 text-center">
+                        <img id="image_preview_option5" src="" width="60" alt="No image" />
                       </div>
                     </div>
                   </div>
@@ -375,7 +415,6 @@
                   </div>
                 </div>
 
-
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add
                   Hint</button>
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add
@@ -387,11 +426,17 @@
                   id="plusBtn">+</button>
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
                   id="editBtn">Edit</button>
-
-
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                    id="addNewBtn">Add New</button>
 
 
               </div>
+            </div>
+            <div class="col-md-2 shadow-sm addques px-4 py-2" id="topicsDiv" style="display: none;">
+              <!-- <p class="font-weight-bold">Topics</p>
+              <span class="badge badge-pill">Classification of flow</span><br>
+              <span class="badge badge-pill my-1">Classification of flow</span><br>
+              <span class="badge badge-pill my-1">Classification of flow</span> -->
             </div>
           </div>
 

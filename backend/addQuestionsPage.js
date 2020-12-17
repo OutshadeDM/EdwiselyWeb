@@ -7,19 +7,18 @@ $(document).ready(function () {
 
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
-    tId = searchParams.get('tid');
+    tid = searchParams.get('tid');
+  }
+
+  if (searchParams.has('tname')) {
     tname = searchParams.get('tname');
+    if(tname)
+      $('#courseName').text(tname);
   }
 
   //setting the name of test
-  $('#courseName').append(tname)
+ 
 
-
-  if (searchParams.has('id') && searchParams.has('tid')) {
-    subSemId = searchParams.get('id');
-    tid = searchParams.get('tid');
-    tname = searchParams.get('tname');
-  }
   if (searchParams.has('uid')) {
     uid = searchParams.get('uid');
   }

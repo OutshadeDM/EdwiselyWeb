@@ -225,7 +225,7 @@ $(document).ready(function () {
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
+      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tname="+value.name+"&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
@@ -245,13 +245,8 @@ $(document).ready(function () {
       $('#subjectiveassessmentList').append(div)
   }
 
-  $('.input-group.date').datepicker({
-    format: "yyyy-mm-dd",
-    calendarWeeks: true,
-    autoclose: true,
-    todayHighlight: true
-  });
-
+  
+  
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id=' + `${$user.university_degree_department_id}`,
     type: 'GET',
@@ -294,17 +289,16 @@ $(document).ready(function () {
     let condObjAssessmentsSection = $('#cond-ObjassessmentsSection').val();
     let condObjAssessmentsSubject = $('#cond-ObjassessmentsSubject').val();
 
-    // alert(condObjAssessmentsSection);
     let date = new Date();
     date.setMonth(date.getMonth() - 6);
-    // let fullDate = date.toDateString();
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-
     if (!condObjDate || condObjDate == null) {
       condObjDate = fullDate;
-      $('#condObjDate').val(fullDate);
+      // $('#condObjDate').val(fullDate);
+      $('#condObjDate').datepicker('setDate', date);
     }
-    // "2020-06-01"
+
+    // alert(condObjAssessmentsSection);
     // alert(condObjAssessmentsSubject);
     // alert(condObjDate);
 
@@ -438,16 +432,16 @@ $(document).ready(function () {
     let condSubAssessmentsSection = $('#cond-SubassessmentsSection').val();
     let condSubAssessmentsSubject = $('#cond-SubassessmentsSubject').val();
 
-    // alert(condSubAssessmentsSection);
     let date = new Date();
     date.setMonth(date.getMonth() - 6);
-    // let fullDate = date.toDateString();
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-
     if (!condSubDate || condSubDate == null) {
       condSubDate = fullDate;
-      $('#condSubDate').val(fullDate);
+      // $('#condSubDate').val(fullDate);
+      $('#condSubDate').datepicker('setDate', date);
     }
+
+    // alert(condSubAssessmentsSection);
     // alert(condSubAssessmentsSubject);
     // alert(condSubDate);
 
@@ -644,25 +638,36 @@ $(document).ready(function () {
     }
   });
 
+  // let date1 = new Date();
+  // date1.setMonth(date1.getMonth() - 6);
+  // let month = date1.getMonth();
+  // if(month.length == 1) month = "0"+month;
+
+  $('.input-group.date').datepicker({
+    format: "yyyy-mm-dd",
+    calendarWeeks: true,
+    autoclose: true
+  });
+
+
   $("#condObjDate").blur(function () {
     // alert("here");
     let date = new Date();
     date.setMonth(date.getMonth() - 6);
-    // let fullDate = date.toDateString();
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    // $("#condObjDate").val(fullDate);
+    $('#condObjDate').datepicker('setDate', date);
 
-    $("#condObjDate").val(fullDate);
 
   });
 
   $("#condSubDate").blur(function () {
-    // alert("here");
     let date = new Date();
     date.setMonth(date.getMonth() - 6);
-    // let fullDate = date.toDateString();
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-
     $("#condSubDate").val(fullDate);
+    $('#condSubDate').datepicker('setDate', date);
+      // $("#condSubDate").val(fullDate);
 
   });
 
