@@ -28,12 +28,16 @@ scrollbar-width: none;  /* Firefox */
   color: black;
 }
 
-.chooseQues :nth-child(even){
-  background-color: #ffffff;
+.chooseQues :nth-child(4n+0){
+  background-color: #E8EFF3;
 }
 
-.chooseQues :nth-child(odd){
+.chooseQues :nth-child(4n+1){
   background-color: #E8EFF3;
+}
+
+.chooseQues :nth-child(4n+2){
+  background-color: #ffffff;
 }
 
 

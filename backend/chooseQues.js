@@ -80,11 +80,23 @@ $(document).ready(function () {
   }
 
 
+
+
+  //arrays to store topic ids
+  let subTopicsId = []
+  let topicsId = []
+  let grandTopicsId = []
+
+
+
   //changing unit on selecting of radio
   let unit = 0
   $(document).on('click', '.getUnitsInput', function () {
     //alert("hello")
     unit = $(".getUnitsInput:checked").val();
+    subTopicsId = []
+    topicsId = []
+    grandTopicsId = []
     getTopics()
   });
 
@@ -113,10 +125,24 @@ $(document).ready(function () {
             // console.log(value);
             $.each(value.topic, function (key, unitTopic) {
               // console.log(unitTopic)
+              if (unitTopic.type === "GSubtopic") {
+                subTopicsId.push(unitTopic.topic_id)
+              }
+              else if (unitTopic.type === "GTopic") {
+                topicsId.push(unitTopic.topic_id)
+              }
+              else {
+                grandTopicsId.push(unitTopic.topic_id)
+              }
               $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "' checked/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
             })
           });
-          fillTopics()
+          // console.log(topicsId)
+          // console.log(subTopicsId)
+          // console.log(grandTopicsId)
+
+          //fillTopics()
+          getAllQuestions()
 
         }
         else {
@@ -135,58 +161,59 @@ $(document).ready(function () {
 
 
 
-  //let topics = [13779, 13780, 13781, 13782]
-  let topics = []
-  //fillTopics()
-
-  //iterating thorugh all the topics initially
-  function fillTopics() {
-    topics = []
-    $('.topicTagsInput').each(function () {
-      if (this.checked) {
-        topics.push($(this).data('id'))
-      }
-
-    })
-    //console.log(topics);
-    getAllQuestions()
-  }
 
 
 
 
   $(document).on('change', '.topicTagsInput', function () {
-    // let topicId = $(this).data('id')
-    // if (!topics.includes(topicId)) {
-    //   topics.push(topicId)
-    // }
 
-    let checked = $(this).data('id');
-    if ($(this).is(':checked')) {
-      if (!topics.includes(checked)) {
-        topics.push(checked);
+    if ($(this).data('type') === "GSubtopic") {
+      if ($(this).is(':checked')) {
+        if (!subTopicsId.includes($(this).data('id'))) {
+          subTopicsId.push($(this).data('id'))
+        }
+      }
+      else {
+        subTopicsId.splice(subTopicsId.indexOf($(this).data('id')), 1)
       }
     }
-    else {
-      //topics.splice($.inArray(checked, topics), 1);
-      topics.splice(topics.indexOf($(this).data('id')), 1)
+
+    else if ($(this).data('type') === "GTopic") {
+      if ($(this).is(':checked')) {
+        if (!topicsId.includes($(this).data('id'))) {
+          topicsId.push($(this).data('id'))
+        }
+      }
+      else {
+        topicsId.splice(topicsId.indexOf($(this).data('id')), 1)
+      }
     }
 
-    //console.log(topics);
+    else {
+      if ($(this).is(':checked')) {
+        if (!grandTopicsId.includes($(this).data('id'))) {
+          grandTopicsId.push($(this).data('id'))
+        }
+      }
+      else {
+        grandTopicsId.splice(grandTopicsId.indexOf($(this).data('id')), 1)
+      }
+    }
 
     getAllQuestions()
-  });
+
+
+  })
 
 
 
-
-  //getting the questions api
+  //getting the selectedQuestions api
 
   getAllQuestions()
   function getAllQuestions() {
     //alert("fnjmf")
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=&topic_ids=' + topics + '&sub_topic_ids=15835,15836,15837,15838,15839,15840,15844,15845,15846,15847,15848,15849',
+      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=' + grandTopicsId + '&topic_ids=' + topicsId + '&sub_topic_ids=' + subTopicsId,
       type: 'GET',
       contentType: 'application/json',
       headers: {
@@ -208,21 +235,33 @@ $(document).ready(function () {
             else {
               displayedQues = value.name
             }
-            // let answer;
-            // console.log(value.questions_options.length)
-            // for (let i = 0; i < value.questions_options.length; i++) {
 
-
-            // }
-
+            //console.log(value.name)
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
               "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + displayedQues +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
-              " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal' data-question='" + JSON.stringify(value) +
-              "'>viewMore</button></div></li>"
+              " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
+              "'>viewMore</button></div></li>" +
 
+
+              "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
+              "<div class='modal-dialog' role='document'>" +
+              "<div class='modal-content'>" +
+
+              "<div class='modal-body'>" +
+              "<div class='pb-4'>" + value.name + "</div>" +
+              (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
+              (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
+              (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
+              (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
+              (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
+
+              "</div>" +
+              "</div>" +
+              "</div>" +
+              "</div>"
             );
 
           });
@@ -242,11 +281,11 @@ $(document).ready(function () {
   }
 
 
-  //get questions bloom wise
+  //get selectedQuestions bloom wise
 
   function getBloomQuestions(blooms_lvl) {
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=&topic_ids=' + topics + '&sub_topic_ids=15835,15836,15837,15838,15839,15840,15844,15845,15846,15847,15848,15849',
+      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=' + grandTopicsId + '&topic_ids=' + topicsId + '&sub_topic_ids=' + subTopicsId,
       type: 'GET',
       contentType: 'application/json',
       headers: {
@@ -301,27 +340,54 @@ $(document).ready(function () {
     });
   }
 
+  $('#navAll').css({ "color": "black", "font-weight": "bolder" })
+
 
 
   $('#navAll').on('click', function () {
     getAllQuestions()
+    $('#navAll').css({ "color": "black", "font-weight": "bolder" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
   })
 
 
   $('#navRemember').on('click', function () {
     getBloomQuestions(1)
+    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
+    $('#navRemember').css({ "color": "black", "font-weight": "bolder" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
   })
 
   $('#navUnderstand').on('click', function () {
     getBloomQuestions(2)
+    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
+    $('#navUnderstand').css({ "color": "black", "font-weight": "bolder" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
   })
 
   $('#navApply').on('click', function () {
     getBloomQuestions(3)
+    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
+    $('#navApply').css({ "color": "black", "font-weight": "bolder" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
   })
 
   $('#navAnalyze').on('click', function () {
     getBloomQuestions(4)
+    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAnalyze').css({ "color": "black", "font-weight": "bolder" })
   })
 
 
@@ -335,14 +401,16 @@ $(document).ready(function () {
 
 
 
-  //selecting questions on checking of checkbox
+  //selecting Questions on checking of checkbox
 
-  let questions = []
+  let selectedQuestions = []
+  let selectedQuestionsId = []
 
   $(document).on('change', '.chooseQuestionsInput', function (e) {
-    //add questions to a array which are selected
+    //add Questions to a array which are selected
 
-    (e.target.checked) ? questions.push($(this).data('value')) : (questions.splice(questions.indexOf($(this).data('value')), 1))
+    (e.target.checked) ? selectedQuestions.push($(this).data('value')) : (selectedQuestions.splice(selectedQuestions.indexOf($(this).data('value')), 1));
+    (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
 
   });
 
@@ -353,39 +421,91 @@ $(document).ready(function () {
 
   function displaySelectedQuestions() {
 
-    if (questions.length === 0) {
+    console.log(selectedQuestions)
+    if (selectedQuestions.length === 0) {
       $('.addingQues').empty()
       $('.addingQues').append("Add Questions to this Assignment")
     }
     else {
       $('.addingQues').empty()
-      for (let i = 0; i < questions.length; i++) {
-        //$('.addingQues').append(`<div class="chosenQuestions my-2 p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p data-question='` + questions[i] + `'>` + questions[i].name + `</p></div>`)
-        $('.addingQues').append(`
-        <div class="chosenQuestions my-2 p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;' data-toggle="modal" data-target=".chosenQuestionModal" data-question=${questions[i]}>
-          ${questions[i].name.substr(0, 110)}
-        </div>
-        
-        <div class="modal fade chosenQuestionModal" tabindex="-1" role="dialog" aria-labelledby="chosenModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              
-              <div class="modal-body">
-                <div class='pb-4'>${questions[i].name}</div>
-                <div style="${questions[i].questions_options[0].is_answer == 1 ? 'background-color:#B4F7D6' : 'background-color:#FFFFFF'} ">${JSON.stringify(questions[i].questions_options[0].name)}</div>
-                <div style="${questions[i].questions_options[1].is_answer == 1 ? 'background-color:#B4F7D6' : 'background-color:#FFFFFF'} ">${JSON.stringify(questions[i].questions_options[1].name)}</div>
-                <div style="${questions[i].questions_options[2].is_answer == 1 ? 'background-color:#B4F7D6' : 'background-color:#FFFFFF'} ">${JSON.stringify(questions[i].questions_options[2].name)}</div>
-                <div style="${questions[i].questions_options[3].is_answer == 1 ? 'background-color:#B4F7D6' : 'background-color:#FFFFFF'} ">${JSON.stringify(questions[i].questions_options[3].name)}</div>
-              </div>
-              
-            </div>
-          </div>
-        </div>`)
+      for (let i = 0; i < selectedQuestions.length; i++) {
+
+
+        console.log(selectedQuestions[i].questions_options[0].name)
+        $('.addingQues').append("<div class='chosenQuestions my-2 p-2' style='background:#e6e6e6;border-radius: 10px;cursor:pointer;' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
+          selectedQuestions[i].name.substr(0, 110) + "</div>" +
+
+          "<div class='modal fade chosenQuestionModal" + selectedQuestions[i].id + "' tabindex='-1' role='dialog' aria-labelledby='chosenModalLabel' aria-hidden='true'>" +
+          "<div class='modal-dialog' role='document'>" +
+          "<div class='modal-content'>" +
+
+          "<div class='modal-body'>" +
+          "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
+          (selectedQuestions[i].questions_options[0] ? "<div style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[0].name) + "</div>" : "") +
+          (selectedQuestions[i].questions_options[1] ? "<div style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[1].name) + "</div>" : "") +
+          (selectedQuestions[i].questions_options[2] ? "<div style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[2].name) + "</div>" : "") +
+          (selectedQuestions[i].questions_options[3] ? "<div style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[3].name) + "</div>" : "") +
+          (selectedQuestions[i].questions_options[4] ? "<div style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[4].name) + "</div>" : "") +
+          "</div>" +
+
+          "</div>" +
+          "</div>" +
+          "</div>")
+
       }
     }
   }
 
+  $('#saveQuestionsBtn').on('click', function () {
+    if (selectedQuestions.length === 0) {
+      alert("Choose Questions First !")
+    }
 
+
+    else {
+
+      var form = new FormData();
+      form.append("test_id", tId);
+      form.append("questions", "[" + selectedQuestionsId.join(',') + "]");
+      form.append("units", "[" + unit + "]")
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
+
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          // alert(result.message);
+          //console.log('4') 
+
+          if (result.status == 200) {
+            alert(result.message)
+
+            //   setInterval(function () {
+            //     window.location.replace('myAssessment.html');
+            //   }, 2000)
+
+          }
+          else {
+            alert("error!")
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+    }
+
+  })
 
 
 
