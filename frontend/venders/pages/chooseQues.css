@@ -36,7 +36,7 @@ scrollbar-width: none;  /* Firefox */
   background-color: #E8EFF3;
 }
 
-.chooseQues :nth-child(4n+2){
+.chooseQues :nth-child(4n+3){
   background-color: #ffffff;
 }
 
