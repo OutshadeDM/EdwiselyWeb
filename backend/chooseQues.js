@@ -40,6 +40,7 @@ $(document).ready(function () {
 
 
   //units fetching
+  let unitsIds = []
 
   getUnits()
   function getUnits() {
@@ -60,6 +61,7 @@ $(document).ready(function () {
           //let div = ""
           $.each(result.data, function (key, value) {
             //console.log(value);
+            unitsIds.push(value.id)
             //$('.getUnits').append(`<div class='unitsDiv' data-id=' ${value.id} ' data-description=' ${value.description} ' data-subject_semester=' ${value.subject_semester} '> ${value.name} </div>`);
             $('.getUnits').append("<li class='getUnitsLi'><input type='radio' class='getUnitsInput' value='" + value.id + "' data-description='" + value.description + "'data-id='" + value.id + "' name='getUnitsAdd' id='getUnitsAdd" + value.id + "' /><label for='getUnitsAdd" + value.id + "' class='getUnitsLabel'>" + value.name + "</label></li>");
 
@@ -71,6 +73,12 @@ $(document).ready(function () {
           //alert("here");
         }
 
+        let first_unit = "getUnitsAdd" + unitsIds[0]
+        console.log(unitsIds)
+        console.log(first_unit)
+        if (unitsIds.length !== 0) {
+          $(first_unit).attr('checked', true)
+        }
 
       },
       error: function (error) {
@@ -319,9 +327,26 @@ $(document).ready(function () {
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
                 "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + displayedQues +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
-                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal' data-question='" + JSON.stringify(value) +
-                "'>viewMore</button></div></li>"
+                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
+                "'>viewMore</button></div></li>" +
 
+
+                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
+                "<div class='modal-dialog' role='document'>" +
+                "<div class='modal-content'>" +
+
+                "<div class='modal-body'>" +
+                "<div class='pb-4'>" + value.name + "</div>" +
+                (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "<div></div>") +
+                (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "<div></div>") +
+                (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "<div></div>") +
+                (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "<div></div>") +
+                (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "<div></div>") +
+
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
               );
             }
           });
@@ -441,11 +466,11 @@ $(document).ready(function () {
 
           "<div class='modal-body'>" +
           "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
-          (selectedQuestions[i].questions_options[0] ? "<div style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[0].name) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[1] ? "<div style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[1].name) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[2] ? "<div style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[2].name) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[3] ? "<div style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[3].name) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[4] ? "<div style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[4].name) + "</div>" : "") +
+          (selectedQuestions[i].questions_options[0] ? "<div style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[0].name) + "</div>" : "<div></div>") +
+          (selectedQuestions[i].questions_options[1] ? "<div style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[1].name) + "</div>" : "<div></div>") +
+          (selectedQuestions[i].questions_options[2] ? "<div style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[2].name) + "</div>" : "<div></div>") +
+          (selectedQuestions[i].questions_options[3] ? "<div style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[3].name) + "</div>" : "<div></div>") +
+          (selectedQuestions[i].questions_options[4] ? "<div style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[4].name) + "</div>" : "<div></div>") +
           "</div>" +
 
           "</div>" +
