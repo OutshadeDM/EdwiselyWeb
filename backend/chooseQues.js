@@ -229,7 +229,7 @@ $(document).ready(function () {
 
             let displayedQues = ""
             if (value.name.length > 110) {
-              displayedQues = value.name.substr(0, 110)
+              displayedQues = value.name
             }
 
             else {
