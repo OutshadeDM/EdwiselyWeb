@@ -882,8 +882,6 @@ $(document).ready(function () {
           alert("Request Failed with status: " + error.status);
         }
       });
-
-
     }
     else if (tId == "0" && sId != "0") {
       window.location.href = 'courseDetails.html?id='+sId;
