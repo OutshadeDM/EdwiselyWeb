@@ -76,3 +76,12 @@ input:checked + .slider:before {
   scroll-snap-align: start;
   scroll-behavior: smooth;
 }
+
+.student-list {
+  overflow: auto;
+  max-height: calc(100vh - 250px);
+}
+
+label {
+  font-weight: 600;
+}
