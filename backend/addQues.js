@@ -1227,6 +1227,7 @@ $(document).ready(function () {
       newQuestion.college_account_id = parseInt(`${$user.user_id}`);
       newQuestion.hint = $('#hintInput').val();
       newQuestion.blooms_level = bloom_level;
+      newQuestion.difficulty_level = difficulty_level;
       newQuestion.name = $('#quesInput').val();
       if(topics.length > 0)
         newQuestion.topics_details = topics;
@@ -1444,7 +1445,6 @@ $(document).ready(function () {
             // alert(result.message);
 
             if (result1.status == 200) {
-              console.log(JSON.stringify(result1.data));
 
               if(question_type1 != newQuestion.question_type){
                 // alert("here");
@@ -1501,9 +1501,9 @@ $(document).ready(function () {
                 clearAll(true);
                 $("#addquesDiv").empty();
                 const foundIndex = questions.findIndex(x => x.id == questionId);
-                console.log(JSON.stringify(questions[foundIndex]));
+                // console.log(JSON.stringify(questions[foundIndex]));
                 questions[foundIndex] = result1.data;
-                console.log(JSON.stringify(questions[foundIndex]));
+                // console.log(JSON.stringify(questions[foundIndex]));
                 // questions = questions.filter(function(e){
                 //   if(e.id == questionId) e = result1.data;
                 //   return e;
