@@ -118,12 +118,18 @@
         </div>
         <!-- Start Page Content -->
 
-        <div class="container-fluid" id="theMainDiv">
+        <div class="container-fluid pb-3" id="theMainDiv">
           <!-- put everything in this div -->
 
           <div class="row" id="abcd">
-            <div class="col-md-3 shadow-sm addques px-4 py-2 addquesDiv" id="addquesDiv">
-              <div class="initData">Add Questions to this Assignment</div>
+            <div class="col-md-3 shadow-sm px-4 py-2" id="questionDisplayDiv">
+              <div class="addques addquesDiv" id="addquesDiv">
+                <div class="initData">Add Questions to this Assignment</div>
+              </div>
+              <div>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                    id="addNewBtn">Add New</button>
+              </div>
             </div>
 
             <div class="col-md-7 shadow-sm addques py-2 pb-5 mb-5" id="createques">
@@ -426,8 +432,6 @@
                   id="plusBtn">+</button>
                 <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
                   id="editBtn">Edit</button>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
-                    id="addNewBtn">Add New</button>
 
 
               </div>

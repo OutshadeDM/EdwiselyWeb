@@ -390,7 +390,6 @@ font-size: 12px;
 /* addques page */
 
 .addques {
-height: 80vh;
 align-items: center;
 }
 
@@ -544,6 +543,17 @@ display: none;
 .addObjQuestions {
 text-align: left;
 font-size: large;
+}
+
+.addquesDiv{
+  max-height: 450px;
+  overflow-y: scroll;
+}
+
+
+.checkedTopic {
+  color: blue;
+  background: lightblue;
 }
 
 /* end addques page */
