@@ -90,25 +90,9 @@ $(async function() {
 			        headers: {
 			            'Authorization': `Bearer ${$user.token}`
 			        },
-			        success: function (result1) {
-						// alert(result.status);
-						$.ajax({
-							url: `https://stagingfacultypython.edwisely.com/college/getPeersDashboardData?from_date=${from_date}&delta_days=${delta_days}`,
-							type: 'GET',
-							contentType: 'application/json',
-							headers: {
-								'Authorization': `Bearer ${$user.token}`
-							},
-							success: function (result2) {
-								// alert(result.status);
-								result = [...result1.college_notifications, ...result2.college_notifications];
-								resolve(result);
-							},
-							error: function (error) {
-								console.log(error);
-								reject(error);
-							}
-						});						
+			        success: function (result) {
+						console.log(result);
+						resolve(result.college_notifications);				
 			        },
 			        error: function (error) {
 			            console.log(error);
@@ -219,23 +203,48 @@ $(async function() {
 
 	const activityTab = async (activities) => {
 		for (let index = 0; index < activities.length; index++) {
-			activity = activities[index];
-			let act = ""
-			console.log(activity.id);
-			if (activity.type == 'Notification') {
-				let pic = "";
-				if (activity.thumb_url.split('.').pop() == 'heic' || activity.thumb_url.split('.').pop() == 'HEIC')
-					pic = await getPngImage(activity.thumb_url);
-				else
-					pic = activity.thumb_url;
-	            act = `<div class=" card px-3 py-3 mt-2">
-	                <div class="row">
-					  <div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`
-				 if (activity.file_url) 
-				  act += `<a href="${activity.file_url}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
-				  act += `</div>
-	                  <div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-	                  <div class="col-auto">${activity.followers.length} followers`
+			try {
+				activity = activities[index];
+				let act = ""
+				console.log(activity.id);
+				if (activity.type == 'Notification') {
+					let pic = "";
+					if (activity.thumb_url && (activity.thumb_url.split('.').pop() == 'heic' || activity.thumb_url.split('.').pop() == 'HEIC'))
+						pic = await getPngImage(activity.thumb_url);
+					else
+						pic = activity.thumb_url;
+					act = `<div class=" card px-3 py-3 mt-2">
+						<div class="row">
+						<div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`
+					if (activity.file_url) 
+					act += `<a href="${activity.file_url}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
+					act += `</div>
+						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-auto">${activity.followers.length} followers`
+						$.each(activity.followers, async (index, follower) => {
+							let fopic = "";
+							if (follower.profile_pic.split('.').pop() == 'heic' || follower.profile_pic.split('.').pop() == 'HEIC')
+								fopic = getPngImage(follower.profile_pic);
+							else
+								fopic = follower.profile_pic;
+							act += `<img src="${fopic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`;
+						});
+						act += `</div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+						<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_counts} Comments</div>					
+					</div>
+				</div>`;
+				} else if (activity.type == 'Test') {
+					let pic = "";
+					if (activity.college_account_details.profile_pic && (activity.college_account_details.profile_pic.split(".").pop() == 'heic' || activity.college_account_details.profile_pic.split(".").pop() == 'HEIC'))
+						pic = await getPngImage(activity.college_account_details.profile_pic);
+					else
+						pic = activity.college_account_details.profile_pic;
+					console.log(pic);
+					act = `<div class=" card px-3 py-3 mt-2">
+					<div class="row">
+						<div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid"></div>
+						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-auto">${activity.followers.length} followers`
 					$.each(activity.followers, async (index, follower) => {
 						let fopic = "";
 						if (follower.profile_pic.split('.').pop() == 'heic' || follower.profile_pic.split('.').pop() == 'HEIC')
@@ -244,76 +253,24 @@ $(async function() {
 							fopic = follower.profile_pic;
 						act += `<img src="${fopic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`;
 					});
-	                act += `</div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-					<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_counts} Comments</div>					
-                  </div>
-               </div>`;
-         	} else if (activity.type == 'Test') {
-				let pic = "";
-				if (activity.college_account_details.profile_pic.split(".").pop() == 'heic' || activity.college_account_details.profile_pic.split(".").pop() == 'HEIC')
-					pic = await getPngImage(activity.college_account_details.profile_pic);
-				else
-					pic = activity.college_account_details.profile_pic;
-				 console.log(pic);
-         		act = `<div class=" card px-3 py-3 mt-2">
-                  <div class="row">
-                    <div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid"></div>
-					<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-					<div class="col-auto">${activity.followers.length} followers`
-				$.each(activity.followers, async (index, follower) => {
-					let fopic = "";
-					if (follower.profile_pic.split('.').pop() == 'heic' || follower.profile_pic.split('.').pop() == 'HEIC')
-						fopic = getPngImage(follower.profile_pic);
+					act += `</div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+						<div class="col-3 mt-3 answered"><i class="far fa-check-square"></i> ${activity.answered} Attempted</div>
+						<div class="col-3 mt-3 unanswered"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</div>
+						<div class="col-3 mt-3 forward"><i class="fas fa-share-square"></i> Forward To</div>					
+					</div>
+				</div>`;
+				} else if (activity.type == 'VideoConference') {
+					let pic = "";
+					if (activity.college_account_details.profile_pic && (activity.college_account_details.profile_pic.split(".").pop() == 'heic' || activity.college_account_details.profile_pic.split(".").pop() == 'HEIC'))
+						pic = await getPngImage(activity.college_account_details.profile_pic);
 					else
-						fopic = follower.profile_pic;
-					act += `<img src="${fopic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`;
-				});
-                act += `</div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-					<div class="col-3 mt-3 answered"><i class="far fa-check-square"></i> ${activity.answered} Attempted</div>
-					<div class="col-3 mt-3 unanswered"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</div>
-					<div class="col-3 mt-3 forward"><i class="fas fa-share-square"></i> Forward To</div>					
-                  </div>
-               </div>`;
-         	} else if (activity.type == 'VideoConference') {
-				let pic = "";
-				if (activity.college_account_details.profile_pic.split(".").pop() == 'heic' || activity.college_account_details.profile_pic.split(".").pop() == 'HEIC')
-					pic = await getPngImage(activity.college_account_details.profile_pic);
-				else
-					pic = activity.college_account_details.profile_pic;
-				 console.log(pic);
-         		act = `<div class=" card px-3 py-3 mt-2">
-                  <div class="row">
-                    <div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid"></div>
-					<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-					<div class="col-auto">${activity.followers.length} followers`
-				$.each(activity.followers, async (index, follower) => {
-					let fopic = "";
-					if (follower.profile_pic.split('.').pop() == 'heic' || follower.profile_pic.split('.').pop() == 'HEIC')
-						fopic = getPngImage(follower.profile_pic);
-					else
-						fopic = follower.profile_pic;
-					act += `<img src="${fopic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`;
-				});
-				act += `</div>
-				<div>The start time of the conference is ${activity.start_time} and end time is ${activity.end_time}</div>
-				<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-				<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_count} Comments</div>					
-			  </div>
-		   </div>`;      		
-         	} else if (activity.type == 'Material') {
-				let pic = "";
-				if (activity.thumb_url.split('.').pop() == 'heic' || activity.thumb_url.split('.').pop() == 'HEIC')
-					pic = await getPngImage(activity.thumb_url);
-				else
-					pic = activity.thumb_url;
-	            act = `<div class=" card px-3 py-3 mt-2">
-	                <div class="row">
-					  <div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`
-				 if (activity.file_url) 
-				  act += `<a href="${activity.file_url}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
-				  act += `</div>
-	                  <div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-	                  <div class="col-auto">${activity.followers.length} followers`
+						pic = activity.college_account_details.profile_pic;
+					console.log(pic);
+					act = `<div class=" card px-3 py-3 mt-2">
+					<div class="row">
+						<div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid"></div>
+						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-auto">${activity.followers.length} followers`
 					$.each(activity.followers, async (index, follower) => {
 						let fopic = "";
 						if (follower.profile_pic.split('.').pop() == 'heic' || follower.profile_pic.split('.').pop() == 'HEIC')
@@ -322,13 +279,45 @@ $(async function() {
 							fopic = follower.profile_pic;
 						act += `<img src="${fopic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`;
 					});
-	                act += `</div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-					<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_counts} Comments</div>					
-                  </div>
-               </div>`;			 
+					act += `</div>
+					<div>The start time of the conference is ${activity.start_time} and end time is ${activity.end_time}</div>
+					<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+					<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_count} Comments</div>					
+				</div>
+			</div>`;      		
+				} else if (activity.type == 'Material') {
+					let pic = "";
+					if (activity.thumb_url && (activity.thumb_url.split('.').pop() == 'heic' || activity.thumb_url.split('.').pop() == 'HEIC'))
+						pic = await getPngImage(activity.thumb_url);
+					else
+						pic = activity.thumb_url;
+					act = `<div class=" card px-3 py-3 mt-2">
+						<div class="row">
+						<div class="col-auto align-self-start"><img src="${pic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`
+					if (activity.file_url) 
+					act += `<a href="${activity.file_url}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
+					act += `</div>
+						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-auto">${activity.followers.length} followers`
+						$.each(activity.followers, async (index, follower) => {
+							let fopic = "";
+							if (follower.profile_pic.split('.').pop() == 'heic' || follower.profile_pic.split('.').pop() == 'HEIC')
+								fopic = getPngImage(follower.profile_pic);
+							else
+								fopic = follower.profile_pic;
+							act += `<img src="${fopic}" style="height: 20px;border-radius: 50%;" class="img-fluid">`;
+						});
+						act += `</div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+						<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_counts} Comments</div>					
+					</div>
+				</div>`;			 
+				}
+				$('#activity').append(act);
+			} catch (error) {
+				console.log(error);
 			}
-         	$('#activity').append(act);
 		}
+		$('#activity').append('<a href="javascript:void(0)" id="viewactivity">View More</a>');
 	}
 
 
@@ -371,7 +360,7 @@ $(async function() {
 			$row = $('<div></div>').addClass('row mb-3').append($col1, $col2);
 			$('#peer').append($row);
 		});
-		$('#peer').append('<a href="javascript:void(0)" id="viewpeer">View More</a>');
+		$('#peer').append('<a href="peerData.html" id="viewpeer">View More</a>');
 	}	
 
 	try {
@@ -386,4 +375,20 @@ $(async function() {
 	} catch (error) {
 		console.log(error);
 	}
+
+	$('#activity').on('click', '#viewactivity', async () => {
+		try {
+			$('#activity #viewactivity').remove();
+			let faculty = {
+				activity_tab: "",
+			}
+			while (!faculty.activity_tab.length) {
+				faculty = await facultyData(30, getFormattedDateTime(new Date(date_lt)));
+				date_lt = faculty.date_lt;
+			}
+			activityTab(faculty.activity_tab);
+		} catch (error) {
+			console.log(error);
+		}
+	});
 });
