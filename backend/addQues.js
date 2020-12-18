@@ -408,8 +408,8 @@ $(document).ready(function () {
   });
 
   $('#opt5Image').on('change', function () {
-    option5_img = $('#opt5Image')[0].files[0]
     if(readURL(this,"5")){
+      option5_img = $('#opt5Image')[0].files[0]
       $('#uploadedoption5').show()
       $('#notUploadedoption5').hide()
       $('#option5ImagePreview').show()
