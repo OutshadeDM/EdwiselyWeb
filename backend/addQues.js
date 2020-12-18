@@ -15,6 +15,7 @@ $(document).ready(function () {
   let tId = "0";
   let unit_id = "0";
   let tname = "";
+  let sId = "0";
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
@@ -22,6 +23,9 @@ $(document).ready(function () {
   }
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
+  }
+  if (searchParams.has('sid')) {
+    sId = searchParams.get('sid');
   }
   if (searchParams.has('tname')) {
     tname = searchParams.get('tname');
@@ -117,37 +121,72 @@ $(document).ready(function () {
   function getTopics() {
     // alert('here');
 
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-        // alert(result.status);
-        //alert(subSemId)
+    if(unit_id == "0"){
 
-        $('#topicTags').empty();
-        if (result.status == 200 && result.data) {
-          $.each(result.data, function (key, value) {
-            // alert(value);
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
+        type: 'GET',
+        contentType: 'application/json',
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          // alert(result.status);
+          //alert(subSemId)
 
-            $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
+          $('#topicTags').empty();
+          if (result.status == 200 && result.data) {
+            $.each(result.data, function (key, value) {
+              // alert(value);
 
-          });
+              $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
+
+            });
+          }
+          else {
+            $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
+            //alert("here");
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
         }
-        else {
-          $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-          //alert("here");
+      });
+    }
+    else{
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnitTopics?unit_ids='+unit_id,
+        type: 'GET',
+        contentType: 'application/json',
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          // alert(result.status);
+          //alert(subSemId)
+
+          $('#topicTags').empty();
+          if (result.status == 200 && result.data) {
+            $.each(result.data, function (key, value) {
+              // alert(value);
+              $.each(value.topic, function (key, value) {
+                $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.topic_id + "' data-type='" + value.type + "' name='topicTagAdd' id='topicTagAdd" + value.topic_id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.topic_name + "</label></li>");
+              });
+            });
+          }
+          else {
+            $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
+            //alert("here");
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
         }
+      });
 
 
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
+    }
   }
 
   let questionsList = [];
@@ -190,6 +229,7 @@ $(document).ready(function () {
 
 
   function loadList() {
+    // alert("load");
     // alert(JSON.stringify(questions));
     $("#addquesDiv").empty();
 
@@ -843,6 +883,7 @@ $(document).ready(function () {
     else if (tId == "0") {
       $('#errorToastBody').text("No test found to add question");
       $('#errorToast').toast('show');
+      window.location.href = 'courseDetails.html?id='+sId;
     }
   });
 
@@ -950,9 +991,10 @@ $(document).ready(function () {
           bloom_level = value.blooms_level;
         }
 
-        // if(value.blooms_level){
-        //   $('#selectLevel').val(value.blooms_level);
-        // }
+        if(value.difficulty_level){
+          $('#selectLevel').val(value.difficulty_level);
+          difficulty_level = value.difficulty_level;
+        }
 
         $.each(value.topics_details, function (key, value) {
           // alert($('#topicTagAdd13779').attr('class'));
@@ -1356,7 +1398,7 @@ $(document).ready(function () {
       if(!question_type1)
         question_type1 = "private";
 
-      console.log(JSON.stringify(newQuestion));
+      // console.log(JSON.stringify(newQuestion));
       // alert(newOptions.length);
 
       if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
@@ -1383,10 +1425,10 @@ $(document).ready(function () {
         form.append("question_id", questionId);
         // $("#courseName").text(JSON.stringify(newOptions));
 
-        for (var key of form.entries()) {
-          // alert(key[1]);
-          console.log(key[1]);
-        }
+        // for (var key of form.entries()) {
+        //   // alert(key[1]);
+        //   console.log(key[1]);
+        // }
       
         $.ajax({
           url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
@@ -1398,10 +1440,11 @@ $(document).ready(function () {
           headers: {
             'Authorization': `Bearer ${$user.token}`
           },
-          success: function (result) {
+          success: function (result1) {
             // alert(result.message);
 
-            if (result.status == 200) {
+            if (result1.status == 200) {
+              console.log(JSON.stringify(result1.data));
 
               if(question_type1 != newQuestion.question_type){
                 // alert("here");
@@ -1430,7 +1473,13 @@ $(document).ready(function () {
                       $("input.custom-control-input").attr("disabled", false);
                       clearAll(true);
                       $("#addquesDiv").empty();
-                      refreshQuestions();
+                      const foundIndex = questions.findIndex(x => x.id == questionId);
+                      questions[foundIndex] = result1.data;
+                      // questions = questions.filter(function(e){
+                      //   if(e.id == questionId) e = result1.data;
+                      //   return e;
+                      // });
+                      loadList();
                     }
                   },
                   error: function (error) {
@@ -1444,14 +1493,22 @@ $(document).ready(function () {
               }
               else{
 
-                $('#successToastBody').text(result.message);
+                $('#successToastBody').text(result1.message);
                 $('#successToast').toast('show');
                 $('#loadingDiv').remove();
                 // $('#abcd').css('position','absolute');
                 $("input.custom-control-input").attr("disabled", false);
                 clearAll(true);
                 $("#addquesDiv").empty();
-                refreshQuestions();
+                const foundIndex = questions.findIndex(x => x.id == questionId);
+                console.log(JSON.stringify(questions[foundIndex]));
+                questions[foundIndex] = result1.data;
+                console.log(JSON.stringify(questions[foundIndex]));
+                // questions = questions.filter(function(e){
+                //   if(e.id == questionId) e = result1.data;
+                //   return e;
+                // });
+                loadList();
 
               }
             }
@@ -1468,9 +1525,9 @@ $(document).ready(function () {
             $('#loadingDiv').remove();
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
-            clearAll(true);
+            // clearAll(true);
             $("#addquesDiv").empty();
-            refreshQuestions();
+            // refreshQuestions();
             alert("Request Failed with status: " + error.status);
           },
           error: function (error) {
