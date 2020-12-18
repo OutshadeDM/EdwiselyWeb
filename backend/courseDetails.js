@@ -659,6 +659,8 @@ $(document).ready(function () {
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        
+        var ext = $(this).val().split('.').pop().toLowerCase();
 
         let type = $('#courseTypeAdd').val();
         let success = true;
@@ -695,6 +697,8 @@ $(document).ready(function () {
         }
 
         if (!success) {
+            $(this).siblings(".custom-file-label").addClass("selected").html("Choose File");
+            $(this).val("");
             $('#errorToastBody').text('Invalid Attachment Type');
             $('#errorToast').toast('show');
         }

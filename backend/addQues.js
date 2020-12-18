@@ -172,7 +172,7 @@ $(document).ready(function () {
           $('.initData').remove();
 
           $.each(result.data, function (key, value) {
-            // alert(value);
+            // alert(value.id);
             questionsList.push(value.id);
             questions.push(value);
           });
@@ -201,7 +201,7 @@ $(document).ready(function () {
 
 
   // radios for selecting
-  $('.tick').hide()
+  $('.tick').hide();
 
 
   $('.radiostest').on('click', function () {
@@ -266,104 +266,36 @@ $(document).ready(function () {
       $('.tick1').hide()
       $('.tick5').show()
     }
-  })
-
-
-
-   //displaying ques image 
-  function readURLques(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#image_preview_ques').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  $("#quesImage").change(function () {
-    readURLques(this);
-    //changing styles
-    $('.uploadedques').show()
-    $('.imgPreviewques').show()
-    $('.notUploadedques').hide()
-    $('#quesLabel').hide()
   });
 
-
-  //displaying hint image
-  function readURLhint(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#image_preview_hint').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  $("#hintImage").change(function () {
-    readURLhint(this);
-    $('.uploadedhint').show()
-    $('.imgPreviewhint').show()
-    $('.notUploadedhint').hide()
-    $('#hintLabel').hide()
-  });
-
-
-
-  //displaying solution image
-  function readURLsolution(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#image_preview_solution').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  $("#solutionImage").change(function () {
-    readURLsolution(this);
-    $('.uploadedsolution').show()
-    $('.imgPreviewsolution').show()
-    $('.notUploadedsolution').hide()
-    $('#solutionLabel').hide()
-  });
 
   //on click of delete image changing the styling again
   $('.uploadedques').on('click', function () {
-    $('.uploadedques').hide()
-    $('.notUploadedques').show()
-    $('.imgPreviewques').hide()
-    $('#quesImage').val('')
-    $('#quesLabel').show()
+    $('.uploadedques').hide();
+    $('.notUploadedques').show();
+    $('.imgPreviewques').hide();
+    $('#quesImage').val('');
+    $('#quesLabel').show();
     question_img = "";
     question_img_url = "";
   })
 
   $('.uploadedhint').on('click', function () {
-    $('.uploadedhint').hide()
-    $('.notUploadedhint').show()
-    $('.imgPreviewhint').hide()
-    $('#hintImage').val('')
-    $('#hintLabel').show()
+    $('.uploadedhint').hide();
+    $('.notUploadedhint').show();
+    $('.imgPreviewhint').hide();
+    $('#hintImage').val('');
+    $('#hintLabel').show();
     hint_img = "";
     hint_img_url = "";
   })
 
   $('.uploadedsolution').on('click', function () {
-    $('.uploadedsolution').hide()
-    $('.notUploadedsolution').show()
-    $('.imgPreviewsolution').hide()
-    $('#solutionImage').val('')
-    $('#solutionLabel').show()
+    $('.uploadedsolution').hide();
+    $('.notUploadedsolution').show();
+    $('.imgPreviewsolution').hide();
+    $('#solutionImage').val('');
+    $('#solutionLabel').show();
     solution_img = "";
     solution_img_url = "";
   });
@@ -406,70 +338,93 @@ $(document).ready(function () {
 
   //images
   $('#quesImage').on('change', function () {
-    //question_img = $('#quesImage').val()
-    question_img = $("#quesImage")[0].files[0];
+    if(readURL(this,"ques")){
+      $('.uploadedques').show();
+      $('.imgPreviewques').show();
+      $('.notUploadedques').hide();
+      $('#quesLabel').hide();
+      question_img = $("#quesImage")[0].files[0];
+    }
+  });
 
-  })
   $('#hintImage').on('change', function () {
-    // hint_img = $('#hintImage').val()
-    hint_img = $("#hintImage")[0].files[0];
+    if(readURL(this,"hint")){
+      $('.uploadedhint').show();
+      $('.imgPreviewhint').show();
+      $('.notUploadedhint').hide();
+      $('#hintLabel').hide();
+      hint_img = $("#hintImage")[0].files[0];
+    }
+  });
 
-  })
   $('#solutionImage').on('change', function () {
-    // solution_img = $('#solutionImage').val()
-    solution_img = $("#solutionImage")[0].files[0];
+    if(readURL(this,"sol")){
+      $('.uploadedsolution').show();
+      $('.imgPreviewsolution').show();
+      $('.notUploadedsolution').hide();
+      $('#solutionLabel').hide();
+      solution_img = $("#solutionImage")[0].files[0];
+    }
+  });
 
-  })
   $('#opt1Image').on('change', function () {
     // option1_img = $('#opt1Image').val()
-    option1_img = $("#opt1Image")[0].files[0];
-    readURLOption(this,"1");
-    $('#uploadedoption1').show()
-    $('#notUploadedoption1').hide()
-    $('#option1ImagePreview').show()
+    if(readURL(this,"1")){
+      option1_img = $("#opt1Image")[0].files[0];
+      $('#uploadedoption1').show()
+      $('#notUploadedoption1').hide()
+      $('#option1ImagePreview').show()
+    }
+  });
 
-  })
   $('#opt2Image').on('change', function () {
     // option2_img = $('#opt2Image').val()
-    option2_img = $("#opt2Image")[0].files[0];
-    readURLOption(this,"2");
-    $('#uploadedoption2').show()
-    $('#notUploadedoption2').hide()
-    $('#option2ImagePreview').show()
+    if(readURL(this,"2")){
+      option2_img = $("#opt2Image")[0].files[0];
+      $('#uploadedoption2').show()
+      $('#notUploadedoption2').hide()
+      $('#option2ImagePreview').show()
+    }
+  });
 
-  })
   $('#opt3Image').on('change', function () {
     // option3_img = $('#opt3Image').val()
-    option3_img = $("#opt3Image")[0].files[0];
-    readURLOption(this,"3");
-    $('#uploadedoption3').show()
-    $('#notUploadedoption3').hide()
-    $('#option3ImagePreview').show()
+    if(readURL(this,"3")){
+      option3_img = $("#opt3Image")[0].files[0];
+      $('#uploadedoption3').show()
+      $('#notUploadedoption3').hide()
+      $('#option3ImagePreview').show()
+    }
+  });
 
-  })
   $('#opt4Image').on('change', function () {
     // option4_img = $('#opt4Image').val()
-    option4_img = $("#opt4Image")[0].files[0];
-    readURLOption(this,"4");
-    $('#notUploadedoption4').hide();
-    $('#uploadedoption4').show();
-    $('#option4ImagePreview').show();
-  })
+    if(readURL(this,"4")){
+      option4_img = $("#opt4Image")[0].files[0];
+      $('#notUploadedoption4').hide();
+      $('#uploadedoption4').show();
+      $('#option4ImagePreview').show();
+    }
+  });
+
   $('#opt5Image').on('change', function () {
     option5_img = $('#opt5Image')[0].files[0]
-    readURLOption(this,"5");
-    $('#uploadedoption5').show()
-    $('#notUploadedoption5').hide()
-    $('#option5ImagePreview').show()
-  })
+    if(readURL(this,"5")){
+      $('#uploadedoption5').show()
+      $('#notUploadedoption5').hide()
+      $('#option5ImagePreview').show()
+    }
+  });
 
 
-  function readURLOption(input,optionNo) {
-    if (input.files && input.files[0]) {
+  function readURL(input,name) {
+    const ext = $(input).val().split('.').pop().toLowerCase();
+    
+    if (input.files && input.files[0] && $.inArray(ext, ['gif','png','jpg','jpeg']) != -1) {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        switch(optionNo){
+        switch(name){
           case "1":
             $('#image_preview_option1').attr('src', e.target.result);
             break;
@@ -485,6 +440,15 @@ $(document).ready(function () {
           case "5":
             $('#image_preview_option5').attr('src', e.target.result);
             break;
+          case "ques":
+            $('#image_preview_ques').attr('src', e.target.result);
+            break;
+          case "sol":
+            $('#image_preview_solution').attr('src', e.target.result);
+            break;
+          case "hint":
+            $('#image_preview_hint').attr('src', e.target.result);
+            break;
           default:
             $('#image_preview_option5').attr('src', e.target.result);
             break;
@@ -492,6 +456,12 @@ $(document).ready(function () {
       }
 
       reader.readAsDataURL(input.files[0]);
+      return true
+    }
+    else{
+      $('#errorToastBody').text('Invalid Image Type');
+      $('#errorToast').toast('show');
+      return false;
     }
   }
 
@@ -564,23 +534,24 @@ $(document).ready(function () {
   $(document).on('click', '.topicTagsInput', function () {
 
     let value = $(this).data('type');
+    let id = parseInt($(this).val());
     // $(this).attr("checked",true);
 
     // let type = value.charAt(0) + value.charAt(1).toUpperCase() + value.slice(2);
 
     if (!topics.includes(value)) {
-      topics.push({ "id": parseInt($(this).val()), "type": value });
+      topics.push({ "id": id, "type": value });
     }
 
     if ($(this).prop('checked') == false) {
-      topics = $.grep(topics, function (e) {
-        return e.id != $(this).val();
+      topics = topics.filter(function (e) {
+        return e.id != id;
       });
     }
-    else{
-      // alert('here');
-      $(this).addClass('checkedTopic');
-    }
+    // else{
+    //   // alert('here');
+    //   $(this).addClass('checkedTopic');
+    // }
 
     // alert(JSON.stringify(topics));
 
@@ -905,7 +876,7 @@ $(document).ready(function () {
     $.each(questions, function (key, value) {
       // alert(questionId);
       if (questionId == value.id) {
-        console.log(value);
+        // console.log(JSON.stringify(value));
         
         $('#addsoln').show();
         $('#topicsDiv').hide();
@@ -1150,6 +1121,7 @@ $(document).ready(function () {
           $('.tick4').hide()
           $('.tick5').show()
         }
+        return false;
       }
     });
 
@@ -1219,6 +1191,7 @@ $(document).ready(function () {
       newQuestion.solution = $('#solutionInput').val();
 
       // alert(question_img_url);
+      // console.log(JSON.stringify(newOptions));
 
       if(newQuestion.question_img && !question_img_url)
         newQuestion.question_img = "";
@@ -1232,12 +1205,11 @@ $(document).ready(function () {
       // newQuestion.question_type = type;
       // console.log(JSON.stringify(newOptions));
 
-      newOptions[0].name = option1;
-      newOptions[1].name = option2;
-
-      if(newOptions[2]) newOptions[2].name = option3;
-      if(newOptions[3]) newOptions[3].name = option4;
-      if(newOptions[4]) newOptions[4].name = option4;
+      if(newOptions[0] && newOptions[0].name) newOptions[0].name = option1;
+      if(newOptions[1] && newOptions[1].name) newOptions[1].name = option2;
+      if(newOptions[2] && newOptions[2].name) newOptions[2].name = option3;
+      if(newOptions[3] && newOptions[3].name) newOptions[3].name = option4;
+      if(newOptions[4] && newOptions[4].name) newOptions[4].name = option4;
 
       if(newOptions[0].option_img && !option1_img_url)
         newOptions[0].option_img = "";
@@ -1330,27 +1302,27 @@ $(document).ready(function () {
         // if(!option1 && !option1_img && newOptions[2]){
 
       newOptions = newOptions.filter(function (e,index) {
-        if(index == 0 && (option1 || option1_img)){
+        if(index == 0 && (option1 || option1_img || option1_img_url)){
           if(answer == "0") e.is_answer = "1";
           else e.is_answer = "0";
           return e;
         }
-        if(index == 1 && (option2 || option2_img)){
+        if(index == 1 && (option2 || option2_img || option2_img_url)){
           if(answer == "1") e.is_answer = "1";
           else e.is_answer = "0";
           return e;
         }
-        if(index == 2 && (option3 || option3_img)){
+        if(index == 2 && (option3 || option3_img || option3_img_url)){
           if(answer == "2") e.is_answer = "1";
           else e.is_answer = "0";
           return e;
         }
-        if(index == 3 && (option4 || option4_img)){
+        if(index == 3 && (option4 || option4_img || option4_img_url)){
           if(answer == "3") e.is_answer = "1";
           else e.is_answer = "0";
           return e;
         }
-        if(index == 4 && (option5 || option5_img)){
+        if(index == 4 && (option5 || option5_img || option5_img_url)){
           if(answer == "4") e.is_answer = "1";
           else e.is_answer = "0";
           return e;
@@ -1384,6 +1356,9 @@ $(document).ready(function () {
       if(!question_type1)
         question_type1 = "private";
 
+      console.log(JSON.stringify(newQuestion));
+      // alert(newOptions.length);
+
       if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
 
         $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -1408,10 +1383,10 @@ $(document).ready(function () {
         form.append("question_id", questionId);
         // $("#courseName").text(JSON.stringify(newOptions));
 
-        // for (var key of form.entries()) {
-        //   // alert(key[1]);
-        //   console.log(key[1]);
-        // }
+        for (var key of form.entries()) {
+          // alert(key[1]);
+          console.log(key[1]);
+        }
       
         $.ajax({
           url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
