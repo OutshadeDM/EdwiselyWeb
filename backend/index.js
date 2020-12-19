@@ -212,7 +212,7 @@ $(async function() {
 						<div class="row">
 						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true" class="img-fluid profile"></div>
 						<div class="col-7 align-items-end"> <h3>${activity.title}`
-						if (activity.file_url) 
+						if (activity.file_url.length) 
 							act += ` <a href="${activity.file_url}" style="font-size: 15px;" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
 						act += `</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
 						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
@@ -246,7 +246,7 @@ $(async function() {
 						<div class="row">
 						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true" class="img-fluid profile"></div>
 						<div class="col-7 align-items-end"> <h3>${activity.title}`
-						if (activity.file_url) 
+						if (activity.file_url.length) 
 							act += ` <a href="${activity.file_url}" style="font-size: 15px;" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
 						act += `</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
 						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
