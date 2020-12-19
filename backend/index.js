@@ -313,7 +313,7 @@ $(async function() {
 		if (faculty.upcoming_events && faculty.upcoming_events.length)
 			createUpcomingTab(faculty.upcoming_events);
 		else
-			$('#upcoming').remove();
+			$('.upcome').remove();
 		activityTab(faculty.activity_tab);
 		let peers = await peerData(10, getFormattedDateTime(new Date()));
 		createPeersTab(peers);
