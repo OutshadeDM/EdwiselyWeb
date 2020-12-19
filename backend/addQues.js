@@ -10,12 +10,17 @@ $(document).ready(function () {
   }
   // alert(`${$user.token}`);
 
+  let questionsList = [];
+  let questions = [];
+
   let searchParams = new URLSearchParams(window.location.search);
   let subSemId = "0";
   let tId = "0";
   let unit_id = "0";
   let tname = "";
   let sId = "0";
+  let editQuesJSON = "";
+  let isCookie = false;
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
@@ -26,6 +31,17 @@ $(document).ready(function () {
   }
   if (searchParams.has('sid')) {
     sId = searchParams.get('sid');
+    if(!!$.cookie('editQues')){
+      editQuesJSON = $.cookie('editQues') ? JSON.parse($.cookie('editQues')) : null;
+      questions.push(editQuesJSON);
+      loadList();
+      isCookie = true;
+      // $('#addquesDiv :first-child')..click();
+      // alert('#p'+editQuesJSON.id);
+      // $('#p'+editQuesJSON.id).click();
+    }
+    
+    console.log(editQuesJSON);
   }
   if (searchParams.has('tname')) {
     tname = searchParams.get('tname');
@@ -193,41 +209,42 @@ $(document).ready(function () {
     }
   }
 
-  let questionsList = [];
-  let questions = [];
 
   refreshQuestions();
 
   function refreshQuestions() {
     // alert("refresh");
-    questions = [];
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-        // alert(result.message);
+    if(tId != "0"){
+      questions = [];
 
-        if (result.status == 200 && result.data) {
-          $('.initData').remove();
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+        type: 'GET',
+        contentType: 'application/json',
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          // alert(result.message);
 
-          $.each(result.data, function (key, value) {
-            // alert(value.id);
-            questionsList.push(value.id);
-            questions.push(value);
-          });
+          if (result.status == 200 && result.data) {
+            $('.initData').remove();
 
-          loadList();
+            $.each(result.data, function (key, value) {
+              // alert(value.id);
+              questionsList.push(value.id);
+              questions.push(value);
+            });
 
+            loadList();
+
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
         }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
+      });
+    }
 
   }
 
@@ -239,10 +256,9 @@ $(document).ready(function () {
 
     $.each(questions, function (key, value) {
       // alert(JSON.stringify(value));
-      $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
+      $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p`+value.id+`' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
     });
   }
-
 
   // radios for selecting
   $('.tick').hide();
@@ -797,6 +813,7 @@ $(document).ready(function () {
     }
     $('#solutionDiv').hide();
     $('#hintDiv').hide();
+    $('#questionId').val("");
 
     $('#uploadedoption1').click();
     $('#uploadedoption2').click();
@@ -865,7 +882,7 @@ $(document).ready(function () {
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             setInterval(function () {
-              window.location.replace('myAssessment.html');
+              window.location.href = 'myAssessment.html';
             }, 2000);
           }
           else {
@@ -902,275 +919,285 @@ $(document).ready(function () {
 
   //clicking questions
   $(document).on('click', '.questions', function () {
-    clearAll(false);
-    $('#deleteBtn').show();
-    $('#plusBtn').hide();
-    $('#editBtn').show();
-    $('#addNewBtn').show();
     // $('#quesInput').val($(this).text());
 
-    let questionId = $(this).data('id');
-    $('#questionId').val(questionId);
     // alert($('#questionId').val());
+    // alert('here');
+    // console.log(JSON.stringify(questions));
 
     //i have question id
     //now using that id, iterate through the questions array questions and find the match the ques.
     //fill uske options in the options inputs.
 
-    $.each(questions, function (key, value) {
-      // alert(questionId);
-      if (questionId == value.id) {
-        // console.log(JSON.stringify(value));
-        
-        $('#addsoln').show();
-        $('#topicsDiv').hide();
+    if($(this).data('id') != $('#questionId').val()){
+      clearAll(false);
+      let questionId = $(this).data('id');
 
-        let question_type1 = value.question_type;
+      $('#questionId').val(questionId);
 
-        if(value.question_type){
+      $.each(questions, function (key, value) {
+        // alert(questionId);
+        if (questionId == value.id) {
+          // console.log(JSON.stringify(value));
+          $('#deleteBtn').show();
+          $('#plusBtn').hide();
+          $('#editBtn').show();
+          if(!isCookie)
+            $('#addNewBtn').show();
+          // alert('here');
+          
+          $('#addsoln').show();
+          $('#topicsDiv').hide();
 
-          if(value.question_type == 'private'){
-            if ($("input[name='public_pvt']:checked").val() === 'public') {
-              $('#customSwitch1').click();
+          let question_type1 = value.question_type;
+
+          if(value.question_type){
+
+            if(value.question_type == 'private'){
+              if ($("input[name='public_pvt']:checked").val() === 'public') {
+                $('#customSwitch1').click();
+              }
             }
-          }
-          else if(value.question_type == 'public'){
-            // alert("here");
-            if ($("input[name='public_pvt']:checked").val() != 'public') {
+            else if(value.question_type == 'public'){
               // alert("here");
-              $('#customSwitch1').click();
+              if ($("input[name='public_pvt']:checked").val() != 'public') {
+                // alert("here");
+                $('#customSwitch1').click();
+              }
             }
-          }
 
-        }
-        else{
-          $('#addsoln').hide();
-          $('#topicsDiv').show();
-          $('#topicsDiv').empty();
-          $('#topicsDiv').append("<p class='font-weight-bold'>Topics</p>");
-        }
-
-        $('#quesInput').val(value.name);
-        question = value.name;
-
-        $('#firstOption').val(value.questions_options[0].name);
-        option1 = value.questions_options[0].name;
-        $('#secondOption').val(value.questions_options[1].name);
-        option2 = value.questions_options[1].name;
-
-        if (value.questions_options[2]){
-          $('#thirdOption').val(value.questions_options[2].name);
-          option3 = value.questions_options[2].name;
-        }
-        if (value.questions_options[3]){
-          $('#fourthOption').val(value.questions_options[3].name);
-          option4 = value.questions_options[3].name;
-        }
-        if (value.questions_options[4]) {
-          $(".fifthOptionBtn").click();
-          $('#fifthOption').val(value.questions_options[4].name);
-          option5 = value.questions_options[4].name;
-        }
-
-        if (value.source) {
-          $('#sourceInput').val(value.source);
-          source = value.source;
-        }
-
-        if (value.solution) {
-          $('#solutionDiv').show();
-          $('#solutionInput').val(value.solution);
-          solution = value.solution;
-        }
-
-        if (value.hint) {
-          $('#hintDiv').show();
-          $('#hintInput').val(value.hint);
-          hint = value.hint;
-        }
-
-        if (value.blooms_level) {
-          $('#selectBloomLevel').val(value.blooms_level);
-          bloom_level = value.blooms_level;
-        }
-
-        // alert(value.difficulty_level);
-
-        if(value.difficulty_level){
-          $('#selectLevel').val(value.difficulty_level);
-          difficulty_level = value.difficulty_level;
-        }
-
-        $.each(value.topics_details, function (key, value) {
-          // alert($('#topicTagAdd13779').attr('class'));
-          if(question_type1){
-            // alert(value.id);
-            $('#topicTagAdd'+value.id).click();
           }
           else{
-            $('#topicsDiv').append("<span class='badge badge-pill'>"+value.id+"</span><br>");
-            $('#addNewBtn').show();
+            $('#addsoln').hide();
+            $('#topicsDiv').show();
+            $('#topicsDiv').empty();
+            $('#topicsDiv').append("<p class='font-weight-bold'>Topics</p>");
           }
-        });
 
-        if(value.question_img && value.question_img != null && value.question_img != " "){
-          // alert('here');
-          $('.uploadedques').show()
-          $('.imgPreviewques').show()
-          $('.notUploadedques').hide()
-          $('#quesLabel').hide()
-          $('#image_preview_ques').attr('src',value.question_img);
-          question_img_url = value.question_img;
-          // alert(question_img_url);
-        }
+          $('#quesInput').val(value.name);
+          question = value.name;
 
-        if(value.hint_image && value.hint_image != null){
-          // alert('here1');
-          $('#hintDiv').show();
-          $('.uploadedhint').show()
-          $('.imgPreviewhint').show()
-          $('.notUploadedhint').hide()
-          $('#hintLabel').hide()
-          $('#image_preview_hint').attr('src',value.hint_image);
-          hint_img_url = value.hint_image;
-          // alert(hint_img_url);
-        }
+          $('#firstOption').val(value.questions_options[0].name);
+          option1 = value.questions_options[0].name;
+          $('#secondOption').val(value.questions_options[1].name);
+          option2 = value.questions_options[1].name;
 
-        if(value.solution_image && value.solution_image != null){
-          // alert('here2');
-          $('#solutionDiv').show();
-          $('.uploadedsolution').show()
-          $('.imgPreviewsolution').show()
-          $('.notUploadedsolution').hide()
-          $('#solutionLabel').hide()
-          $('#image_preview_solution').attr('src',value.solution_image);
-          solution_img_url = value.solution_image;
-          // alert(solution_img_url);
-        }
+          if (value.questions_options[2]){
+            $('#thirdOption').val(value.questions_options[2].name);
+            option3 = value.questions_options[2].name;
+          }
+          if (value.questions_options[3]){
+            $('#fourthOption').val(value.questions_options[3].name);
+            option4 = value.questions_options[3].name;
+          }
+          if (value.questions_options[4]) {
+            $(".fifthOptionBtn").click();
+            $('#fifthOption').val(value.questions_options[4].name);
+            option5 = value.questions_options[4].name;
+          }
 
-        if(value.questions_options[0].option_img){
-          option1_img_url = value.questions_options[0].option_img;
-          // alert(option1_img_url);
-          $('#uploadedoption1').show();
-          $('#notUploadedoption1').hide();
-          $('#option1ImagePreview').show();
-          $('#image_preview_option1').attr('src', option1_img_url);
-        }
+          if (value.source) {
+            $('#sourceInput').val(value.source);
+            source = value.source;
+          }
 
-        if(value.questions_options[1].option_img){
-          option2_img_url = value.questions_options[1].option_img;
-          // alert(option2_img_url);
-          $('#uploadedoption2').show();
-          $('#notUploadedoption2').hide();
-          $('#option2ImagePreview').show();
-          $('#image_preview_option2').attr('src', option2_img_url);
-        }
+          if (value.solution) {
+            $('#solutionDiv').show();
+            $('#solutionInput').val(value.solution);
+            solution = value.solution;
+          }
 
-        if(value.questions_options[2] && value.questions_options[2].option_img){
-          option3_img_url = value.questions_options[2].option_img;
-          // alert(option3_img_url);
-          $('#uploadedoption3').show();
-          $('#notUploadedoption3').hide();
-          $('#option3ImagePreview').show();
-          $('#image_preview_option3').attr('src', option3_img_url);
-        }
+          if (value.hint) {
+            $('#hintDiv').show();
+            $('#hintInput').val(value.hint);
+            hint = value.hint;
+          }
 
-        if(value.questions_options[3] && value.questions_options[3].option_img){
-          option4_img_url = value.questions_options[3].option_img;
-          // alert(option4_img_url);
-          $('#uploadedoption4').show();
-          $('#notUploadedoption4').hide();
-          $('#option4ImagePreview').show();
-          $('#image_preview_option4').attr('src', option4_img_url);
-        }
+          if (value.blooms_level) {
+            $('#selectBloomLevel').val(value.blooms_level);
+            bloom_level = value.blooms_level;
+          }
 
-        if(value.questions_options[4] && value.questions_options[4].option_img){
-          option5_img_url = value.questions_options[4].option_img;
-          // alert(option5_img_url);
-          $('#uploadedoption5').show();
-          $('#notUploadedoption5').hide();
-          $('#option5ImagePreview').show();
-          $('#image_preview_option5').attr('src', option5_img_url);
-        }
+          // alert(value.difficulty_level);
+
+          if(value.difficulty_level){
+            $('#selectLevel').val(value.difficulty_level);
+            difficulty_level = value.difficulty_level;
+          }
+
+          $.each(value.topics_details, function (key, value) {
+            // alert($('#topicTagAdd13779').attr('class'));
+            if(question_type1){
+              // alert(value.id);
+              // $('#topicTagAdd'+value.id).click();
+              $('#topicTagAdd'+value.id).prop('checked',true);
+            }
+            else{
+              $('#topicsDiv').append("<span class='badge badge-pill'>"+value.id+"</span><br>");
+              $('#addNewBtn').show();
+            }
+          });
+          topics = value.topics_details;
+
+          if(value.question_img && value.question_img != null && value.question_img != " "){
+            // alert('here');
+            $('.uploadedques').show()
+            $('.imgPreviewques').show()
+            $('.notUploadedques').hide()
+            $('#quesLabel').hide()
+            $('#image_preview_ques').attr('src',value.question_img);
+            question_img_url = value.question_img;
+            // alert(question_img_url);
+          }
+
+          if(value.hint_image && value.hint_image != null){
+            // alert('here1');
+            $('#hintDiv').show();
+            $('.uploadedhint').show()
+            $('.imgPreviewhint').show()
+            $('.notUploadedhint').hide()
+            $('#hintLabel').hide()
+            $('#image_preview_hint').attr('src',value.hint_image);
+            hint_img_url = value.hint_image;
+            // alert(hint_img_url);
+          }
+
+          if(value.solution_image && value.solution_image != null){
+            // alert('here2');
+            $('#solutionDiv').show();
+            $('.uploadedsolution').show()
+            $('.imgPreviewsolution').show()
+            $('.notUploadedsolution').hide()
+            $('#solutionLabel').hide()
+            $('#image_preview_solution').attr('src',value.solution_image);
+            solution_img_url = value.solution_image;
+            // alert(solution_img_url);
+          }
+
+          if(value.questions_options[0].option_img){
+            option1_img_url = value.questions_options[0].option_img;
+            // alert(option1_img_url);
+            $('#uploadedoption1').show();
+            $('#notUploadedoption1').hide();
+            $('#option1ImagePreview').show();
+            $('#image_preview_option1').attr('src', option1_img_url);
+          }
+
+          if(value.questions_options[1].option_img){
+            option2_img_url = value.questions_options[1].option_img;
+            // alert(option2_img_url);
+            $('#uploadedoption2').show();
+            $('#notUploadedoption2').hide();
+            $('#option2ImagePreview').show();
+            $('#image_preview_option2').attr('src', option2_img_url);
+          }
+
+          if(value.questions_options[2] && value.questions_options[2].option_img){
+            option3_img_url = value.questions_options[2].option_img;
+            // alert(option3_img_url);
+            $('#uploadedoption3').show();
+            $('#notUploadedoption3').hide();
+            $('#option3ImagePreview').show();
+            $('#image_preview_option3').attr('src', option3_img_url);
+          }
+
+          if(value.questions_options[3] && value.questions_options[3].option_img){
+            option4_img_url = value.questions_options[3].option_img;
+            // alert(option4_img_url);
+            $('#uploadedoption4').show();
+            $('#notUploadedoption4').hide();
+            $('#option4ImagePreview').show();
+            $('#image_preview_option4').attr('src', option4_img_url);
+          }
+
+          if(value.questions_options[4] && value.questions_options[4].option_img){
+            option5_img_url = value.questions_options[4].option_img;
+            // alert(option5_img_url);
+            $('#uploadedoption5').show();
+            $('#notUploadedoption5').hide();
+            $('#option5ImagePreview').show();
+            $('#image_preview_option5').attr('src', option5_img_url);
+          }
 
 
 
-        if (value.questions_options[0].is_answer == "1") {
-          // alert("here");
-          $("input[name='Radios'][value='0']").prop("checked", true);
-          answer = "0";
-          $('.untick1').hide()
-          $('.untick2').show()
-          $('.untick3').show()
-          $('.untick4').show()
-          $('.untick5').show()
-          $('.tick1').show()
-          $('.tick2').hide()
-          $('.tick3').hide()
-          $('.tick4').hide()
-          $('.tick5').hide()
-          // $("input[name=Radios][value=0]").attr("checked",true);
+          if (value.questions_options[0].is_answer == "1") {
+            // alert("here");
+            $("input[name='Radios'][value='0']").prop("checked", true);
+            answer = "0";
+            $('.untick1').hide()
+            $('.untick2').show()
+            $('.untick3').show()
+            $('.untick4').show()
+            $('.untick5').show()
+            $('.tick1').show()
+            $('.tick2').hide()
+            $('.tick3').hide()
+            $('.tick4').hide()
+            $('.tick5').hide()
+            // $("input[name=Radios][value=0]").attr("checked",true);
+          }
+          else if (value.questions_options[1].is_answer == "1") {
+            $("input[name='Radios'][value='1']").prop("checked", true);
+            answer = "1";
+            $('.untick1').show()
+            $('.untick2').hide()
+            $('.untick3').show()
+            $('.untick4').show()
+            $('.untick5').show()
+            $('.tick1').hide()
+            $('.tick2').show()
+            $('.tick3').hide()
+            $('.tick4').hide()
+            $('.tick5').hide()
+          }
+          else if (value.questions_options[2] && value.questions_options[2].is_answer == "1") {
+            $("input[name='Radios'][value='2']").prop("checked", true);
+            answer = "2";
+            $('.untick1').show()
+            $('.untick2').show()
+            $('.untick3').hide()
+            $('.untick4').show()
+            $('.untick5').show()
+            $('.tick1').hide()
+            $('.tick2').hide()
+            $('.tick3').show()
+            $('.tick4').hide()
+            $('.tick5').hide()
+          }
+          else if (value.questions_options[3] && value.questions_options[3].is_answer == "1") {
+            $("input[name='Radios'][value='3']").prop("checked", true);
+            answer = "3";
+            $('.untick1').show()
+            $('.untick2').show()
+            $('.untick3').show()
+            $('.untick4').hide()
+            $('.untick5').show()
+            $('.tick1').hide()
+            $('.tick2').hide()
+            $('.tick3').hide()
+            $('.tick4').show()
+            $('.tick5').hide()
+          }
+          else if (value.questions_options[4] && value.questions_options[4].is_answer == "1") {
+            // $('.fifthOptionBtn').click();
+            $("input[name='Radios'][value='4']").prop("checked", true);
+            answer = "4";
+            $('.untick1').show()
+            $('.untick2').show()
+            $('.untick3').show()
+            $('.untick4').show()
+            $('.untick5').hide()
+            $('.tick1').hide()
+            $('.tick2').hide()
+            $('.tick3').hide()
+            $('.tick4').hide()
+            $('.tick5').show()
+          }
+          return false;
         }
-        else if (value.questions_options[1].is_answer == "1") {
-          $("input[name='Radios'][value='1']").prop("checked", true);
-          answer = "1";
-          $('.untick1').show()
-          $('.untick2').hide()
-          $('.untick3').show()
-          $('.untick4').show()
-          $('.untick5').show()
-          $('.tick1').hide()
-          $('.tick2').show()
-          $('.tick3').hide()
-          $('.tick4').hide()
-          $('.tick5').hide()
-        }
-        else if (value.questions_options[2] && value.questions_options[2].is_answer == "1") {
-          $("input[name='Radios'][value='2']").prop("checked", true);
-          answer = "2";
-          $('.untick1').show()
-          $('.untick2').show()
-          $('.untick3').hide()
-          $('.untick4').show()
-          $('.untick5').show()
-          $('.tick1').hide()
-          $('.tick2').hide()
-          $('.tick3').show()
-          $('.tick4').hide()
-          $('.tick5').hide()
-        }
-        else if (value.questions_options[3] && value.questions_options[3].is_answer == "1") {
-          $("input[name='Radios'][value='3']").prop("checked", true);
-          answer = "3";
-          $('.untick1').show()
-          $('.untick2').show()
-          $('.untick3').show()
-          $('.untick4').hide()
-          $('.untick5').show()
-          $('.tick1').hide()
-          $('.tick2').hide()
-          $('.tick3').hide()
-          $('.tick4').show()
-          $('.tick5').hide()
-        }
-        else if (value.questions_options[4] && value.questions_options[4].is_answer == "1") {
-          // $('.fifthOptionBtn').click();
-          $("input[name='Radios'][value='4']").prop("checked", true);
-          answer = "4";
-          $('.untick1').show()
-          $('.untick2').show()
-          $('.untick3').show()
-          $('.untick4').show()
-          $('.untick5').hide()
-          $('.tick1').hide()
-          $('.tick2').hide()
-          $('.tick3').hide()
-          $('.tick4').hide()
-          $('.tick5').show()
-        }
-        return false;
-      }
-    });
+      });
+    }
 
   });
 
@@ -1248,7 +1275,7 @@ $(document).ready(function () {
       if(newQuestion.solution_image && !solution_img_url)
         newQuestion.solution_image = "";
 
-      if(newQuestion.hint_image && !solution_img_url)
+      if(newQuestion.hint_image && !hint_img_url)
         newQuestion.hint_image = "";  
 
       // newQuestion.question_type = type;

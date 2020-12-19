@@ -573,15 +573,32 @@ $(document).ready(function () {
 
     $.each(data, function (key, value) {
 
+      let endDateString = "";
+      let endDate = new Date(value.start_time.toLocaleString());
+      // if(value.start_time) console.log(endDate)
+      if(!isObj && value.start_time){
+         endDate.setMinutes(endDate.getMinutes() + value.timelimit);
+         endDateString = endDate.getFullYear() + '-' +('0' + (endDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + endDate.getDate()).slice(-2) + ' '+endDate.getHours()+ ':'+('0' + (endDate.getMinutes())).slice(-2)+ ':'+('0' + (endDate.getSeconds())).slice(-2);
+      }
+      else if(!isObj && value.created_at) endDate.setMinutes(endDate.getMinutes() + value.timelimit);
+
       div = div + "<div class='col-sm-6 assessment condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
       div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
-      if (value.start_time)
-        div = div + "<h6 class='font-weight-bold'>" + value.start_time + " - " + value.doe + "</h6>";
-      else
-        div = div + "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>";
+      if (value.start_time){
+        if(!isObj)
+          div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + endDateString + "</h6>";  
+        else
+          div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + value.doe + "</h6>";
+      }
+      else{
+        if(!isObj)
+          div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + endDateString + "</h6>";  
+        else
+          div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + value.doe + "</h6>";
+      }
       div = div + "</div><div class='px-3 text-muted card-footer'>";
       div = div + "<div class='row'>";
       div = div + "<div class='col-sm-4'>";

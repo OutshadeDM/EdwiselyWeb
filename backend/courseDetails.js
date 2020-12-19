@@ -220,6 +220,10 @@ $(document).ready(function () {
                 // alert(result.status);
                 // $('#courseSyllabus').empty();
                 if (result.status == 200 && result.data != null) {
+
+                    $('#contentMainDiv').show();
+                    $('#contentMainErrorDiv').hide();  
+
                     if (!courseUnits) {
                         let units = [];
                         $('#courseUnits').empty();
@@ -268,6 +272,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     // alert("here1");
+                                    $('#courseFiles').empty();
                                     $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                                 }
                             },
@@ -303,6 +308,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     // alert("here1");
+                                    $('#courseFiles').empty();
                                     $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                                 }
                             },
@@ -351,6 +357,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     // alert("here1");
+                                    $('#courseFiles').empty();
                                     $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                                 }
                             },
@@ -363,7 +370,10 @@ $(document).ready(function () {
 
                 }
                 else {
-                    $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                    $('#contentMainDiv').hide();
+                    $('#contentMainErrorDiv').show();  
+                    $('#contentMainErrorDiv').empty();                    
+                    $('#contentMainErrorDiv').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                     // alert("here");
                 }
             },
@@ -1573,6 +1583,8 @@ $(document).ready(function () {
         }
     }
 
+    let yourQuestions = [];
+
     function processObjQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {
         let questions = [];
         $.each(result.data, function (key, value) {
@@ -1608,6 +1620,7 @@ $(document).ready(function () {
                 }
             }
             else {
+                yourQuestions = [];
                 if ((questionBloomsLevel == value.blooms_level || questionBloomsLevel == "0") &&
                     (questionTopics == value.type_code || questionTopics == "0") &&
                     ((questionCatagory == "bookmarked" && value.bookmarked == "1") ||
@@ -1633,7 +1646,8 @@ $(document).ready(function () {
                             "media": value.media,
                             "question_img": value.question_img
                         },
-                        "options": options
+                        "options": options,
+                        'value':value
                     });
                 }
             }
@@ -1642,7 +1656,8 @@ $(document).ready(function () {
         if (Array.isArray(questions) && questions.length) {
             let div = "";
             // alert(questions[0].question.name);
-            let i = 1;
+            let i = 0;
+            let j = 1;
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
                 div = div + "<div class='row py-2 px-3 p-2'>";
@@ -1650,16 +1665,33 @@ $(document).ready(function () {
                 // if (value.question.name.length > 100)
                 //     div = div + "<p class='question'>" + value.question.name.substr(0, 100) + " ...</p>";
                 // else
-                div = div + "<p class='question'>Q." + i + " " + value.question.name + "</p>";
+                div = div + "<p class='question'>Q." + j + " " + value.question.name + "</p>";
                 div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level " + value.blooms_level + "</p>";
                 div = div + "</div>";
                 div = div + "<div class='col-sm-1 text-center d-flex align-items-center justify-content-start'>";
-                if (value.bookmarked == 1)
-                    div = div + "<a class='unbookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'><i class='fas fa-bookmark'></i></a>";
-                else
-                    div = div + "<a class='bookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'><i class='far fa-bookmark'></i></a>";
+                if(yourContent){
+                    yourQuestions.push(value);
+                    div = div + "<div class='dropdown pr-1'>";
+                    div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+                    div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
+                    div = div + "</button>";
+                    div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+                    div = div + "<a class='dropdown-item editYourQuestion' style='cursor:pointer;' data-index='"+i+"' data-qid='"+value.id+"'>Edit</a>";
+                    if (value.bookmarked == 1)
+                        div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'>Bookmark</a>";
+                    else
+                        div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'>Unbookmark</a>";
+                    div = div + "</div></div>";
+                }
+                else{
+                    if (value.bookmarked == 1)
+                        div = div + "<a class='unbookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'><i class='fas fa-bookmark'></i></a>";
+                    else
+                        div = div + "<a class='bookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'><i class='far fa-bookmark'></i></a>";
+                }
                 div = div + "</div></div></div>";
                 i++;
+                j++;
             });
             // alert(div); 
             $('#objQuestions').append(div);
@@ -1812,7 +1844,7 @@ $(document).ready(function () {
 
     });
 
-    $('#courseObjQuestionModal').on('hide.bs.modal', function (event) {
+    $('#courseObjQuestionModal').on('hide.bs.modal', function () {
         $('#questionModalQuestion').html("");
         $('#questionModalOptionA').html("");
         $('#questionModalOptionB').html("");
@@ -1862,5 +1894,29 @@ $(document).ready(function () {
         $("#modalImage").attr("src", image);
 
     });
+
+    $(document).on('click', '.editYourQuestion', function () {
+        // alert("here1");
+        let index = $(this).data('index');
+        let qId = $(this).data('qid');
+        let url = $('#addQuestion').attr('href');
+
+        let newQuestion = yourQuestions[index].value;
+        if(newQuestion.id == qId){
+            redirectUsingCookie(url,newQuestion);
+            // console.log(JSON.stringify(newQuestion));
+        }
+
+    });
+    
+
+    function redirectUsingCookie(url, data) {
+        if(!!$.cookie('editQues'))
+            $.removeCookie('editQues', { path: '/' });
+
+        $.cookie('editQues', JSON.stringify(data), {expires: 1});
+        window.location.href = url;
+    }
+    
 
 });
