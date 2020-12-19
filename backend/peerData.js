@@ -108,7 +108,7 @@ $(async function() {
                 college_notifications: ""
             }
             while (!peers.college_notifications.length) {
-                peers = await peerData(10, getFormattedDateTime(new Date(date_lt)));
+                peers = await peerData(30, getFormattedDateTime(new Date(date_lt)));
                 date_lt = peers.date_lt;
             }
             createPeersTab(peers.college_notifications);
