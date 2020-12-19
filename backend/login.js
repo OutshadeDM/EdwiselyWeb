@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
   // Login Function
+  let loginToken = "";
   function login (credentials) {
     var form = new  FormData();
     form.append("username", credentials.email);
@@ -16,8 +17,13 @@ $(document).ready(function () {
             // alert(result.status);
             console.log(result, result.token, JSON.stringify(result));
             if (result.token) {
-              $.cookie('user', JSON.stringify(result), {expires: 365});
-              window.location.replace("index.html");
+              if (result.force_password_change) {
+                loginToken = result.token;
+                $('#passwordModal').modal();
+              } else{
+                $.cookie('user', JSON.stringify(result), {expires: 365});
+                window.location.replace("index.html");
+              }
             } else {
               window.location.replace('login.html?status=danger&message=401');
             }
@@ -28,6 +34,65 @@ $(document).ready(function () {
     });
   }
 
+  function forgotPassword (credentials) {
+    var form = new  FormData();
+    form.append("email", credentials.email);
+    $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/user/forgotPassword',
+        type: 'POST',
+        dateType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        success: function (result) {
+            // alert(result.status);
+            console.log(result, result.token, JSON.stringify(result));
+            if (result.status == 200) {
+              window.location.replace('login.html?status=success&message=201');
+            } else {
+              window.location.replace('login.html?status=danger&message=402');
+            }
+        },
+        error: function (error) {
+            alert(error);
+        }
+    });
+  }  
+
+  function updatePassword(credentials) {
+    var form = new  FormData();
+    form.append("user_id", credentials.email);
+    form.append("new_password", credentials.password);
+    // Display the key/value pairs
+for(var pair of form.entries()) {
+  console.log(pair[0]+ ', '+ pair[1]);
+}
+    $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/user/updatePassword',
+        type: 'POST',
+        dateType: 'json',
+        contentType: false,
+        headers: {
+            'Authorization': `Bearer ${loginToken}`
+        },
+        data: form,
+        processData: false,
+        success: function (result) {
+            // alert(result.status);
+            console.log(result, result.token, JSON.stringify(result));
+            if (result.status == 200) {
+              window.location.replace('login.html?status=success&message=202');
+            } else {
+              console.log(result);
+              // window.location.replace('login.html?status=danger&message=402');
+            }
+        },
+        error: function (error) {
+            alert(error);
+        }
+    });    
+  }
+
   var url_string = window.location.href;
   var url = new URL(url_string);
   var status = url.searchParams.get("status");
@@ -35,8 +100,14 @@ $(document).ready(function () {
   if (status) {
     if (message == 401)
       $('.alert strong').text('Wrong Email Id or Password!');
+    else if (message == 402)
+    $('.alert strong').text('No User With Such Email Found');
     else if (message == 200)
-      $('.alert strong').text('Successfully Logged Out');      
+      $('.alert strong').text('Successfully Logged Out');
+    else if (message == 201)
+      $('.alert strong').text('Please Check Your Mail For New Password!');
+      else if (message == 202)
+      $('.alert strong').text('Successfully Updated Password!');            
     $('.alert').addClass(`alert-${status}`);
     $('.alert').removeClass('d-none');
   }
@@ -51,6 +122,27 @@ $(document).ready(function () {
   $('#submit').click(function() {
     const credentials = {email: $('#inputEmail').val(), password: $('#inputPassword').val()};
     login(credentials);
+  });
+
+  $('#forgot').click(function() {
+    const credentials = {email: $('#email').val()};
+    forgotPassword(credentials);
+  });
+
+  $('#forget, #back').click(function() {
+    $('#loginTab, #forgotTab').toggleClass('d-none');
+  });
+
+  $('#update').click(function() {
+    let password = $('#password').val();
+    let rpassword = $('#rpassword').val();
+
+    if (password === rpassword) {
+      const credentials = {email: $('#inputEmail').val(), password: password}
+      updatePassword(credentials);
+    } else {
+      $('.error').text('The password and reenter password must be same');
+    }
   });
   // $('#submit').click(function() {
   //   console.log($('#inputEmail').val());

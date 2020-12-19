@@ -310,7 +310,10 @@ $(async function() {
 		let faculty = await facultyData(30, getFormattedDateTime(new Date()));
 		date_lt = faculty.date_lt;
 		createCoursesTab(faculty.courses);
-		createUpcomingTab(faculty.upcoming_events);
+		if (faculty.upcoming_events && faculty.upcoming_events.length)
+			createUpcomingTab(faculty.upcoming_events);
+		else
+			$('#upcoming').remove();
 		activityTab(faculty.activity_tab);
 		let peers = await peerData(10, getFormattedDateTime(new Date()));
 		createPeersTab(peers);
