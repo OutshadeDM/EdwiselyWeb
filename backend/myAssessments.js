@@ -589,7 +589,7 @@ $(document).ready(function () {
       div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
       if (value.start_time){
         if(!isObj)
-          div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + endDateString + "</h6>";  
+          div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + endDateString + "</h6>";  
         else
           div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + value.doe + "</h6>";
       }
