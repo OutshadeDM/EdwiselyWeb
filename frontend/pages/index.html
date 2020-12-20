@@ -35,6 +35,68 @@
 <body>
   <!-- Bootstrap row -->
   <!-- Bootstrap row -->
+  <div class="modal fade" id="answered" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Answered / Unanswered Students</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+  <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container clearfix">
+            <div class="chat">      
+              <div class="chat-history">
+                <input type="hidden" id="type" value="">
+                <input type="hidden" id="id" value="">
+                <ul class="pl-0">
+                </ul>
+                
+              </div> <!-- end chat-history -->
+              
+              <div class="chat-message clearfix">
+                <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>        
+                <button>Send</button>
+        
+              </div> <!-- end chat-message -->
+              
+            </div> <!-- end chat -->
+            
+          </div> <!-- end container -->
+        
+        <script id="message-template" type="text/x-handlebars-template">
+          <li class="clearfix">
+            <div class="message-data align-right">
+              <time class="timeago" datetime="{{time}}">{{time}}</time> &nbsp; &nbsp;
+              <span class="message-data-name" >You</span> <i class="fa fa-circle me"></i>
+            </div>
+            <div class="message other-message float-right">
+              {{messageOutput}}
+            </div>
+          </li>
+        </script>   
+        </div>
+      </div>
+    </div>
+  </div>   
   <div class="row" id="body-row">
 
     <div style="z-index: 9999;position: fixed; top: 10px; left: 50%; transform: translate(-50%)" class="alert d-none alert-dismissible">
@@ -184,8 +246,10 @@
 <script type="text/javascript" src="https://alexcorvi.github.io/heic2any/dist/heic2any.js"></script>
 <script type="text/javascript" src="../venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="../../backend/cookies.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/initial-js@0.3.4/initial.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
 <script src="../../backend/sidebar.js"></script>
 <script src="../../backend/index.js"></script>
+<script src="../../backend/chat.js"></script>
 
 </html>

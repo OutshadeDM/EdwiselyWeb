@@ -26,10 +26,10 @@ const getPngImage = (heicimage) => {
 		});	
 	});	
 }
-
+$user = "";
 $(async function() {
+	jQuery("time.timeago").timeago();
 	// Check if User is logged in
-	$user = "";
 	if (isLoggedIn()) {
 		$user = JSON.parse(isLoggedIn());
 		$('html').removeClass('d-none');
@@ -103,6 +103,68 @@ $(async function() {
 				console.log(error);
 			}
 		});
+	}
+
+	// Get Answered Students
+	const answeredStudents = (id, type='Answered') => {
+		return new Promise((resolve, reject) => {
+			try {
+			    $.ajax({
+			        url: `https://stagingfacultypython.edwisely.com/questionnaire/get${type}Students?test_id=${id}`,
+			        type: 'GET',
+			        contentType: 'application/json',
+			        headers: {
+			            'Authorization': `Bearer ${$user.token}`
+			        },
+			        success: function (result) {
+						console.log(result);
+						if (result.status == 200) {
+							resolve(result.data);
+						}
+			        },
+			        error: function (error) {
+			            console.log(error);
+			            reject(error);
+			        }
+			    });
+			} catch (error) {
+				console.log(error);
+			}
+		});
+	}
+
+	// Get comments
+	const getComments = (id, type="Notification") => {
+		return new Promise((resolve, reject) => {
+			try {
+				var form = new  FormData();
+				form.append(`${type.toLowerCase()}_id`, id);
+				$.ajax({
+					url: `https://stagingfacultypython.edwisely.com/${type}/getComments`,
+					type: 'POST',
+					dateType: 'json',
+					contentType: false,
+					headers: {
+						'Authorization': `Bearer ${$user.token}`
+					},
+					data: form,
+					processData: false,
+					success: function (result) {
+						// alert(result.status);
+						if (result.status == 200) {
+						  resolve(result.data)
+						} else {
+						  reject(result.message);
+						}
+					},
+					error: function (error) {
+						alert(error);
+					}
+				});	
+			} catch (error) {
+				console.log(error);
+			}
+		});		
 	}
 
 	const createCoursesTab = (courses) => {
@@ -216,7 +278,7 @@ $(async function() {
 							act += ` <a href="${activity.file_url}" style="font-size: 15px;" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
 						act += `</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
 						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-						<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_counts} Comments</div>					
+						<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 					</div>
 				</div>`;
 				} else if (activity.type == 'Test') {
@@ -225,8 +287,8 @@ $(async function() {
 						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true" class="img-fluid profile"></div>
 						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
 						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-						<div class="col-3 mt-3 answered"><i class="far fa-check-square"></i> ${activity.answered} Attempted</div>
-						<div class="col-3 mt-3 unanswered"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</div>
+						<div class="col-3 mt-3 answered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} class="btn btn-light"><i class="far fa-check-square"></i> ${activity.answered} Attempted</button></div>
+						<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>
 						<div class="col-3 mt-3 forward"><i class="fas fa-share-square"></i> Forward To</div>					
 					</div>
 				</div>`;
@@ -238,7 +300,7 @@ $(async function() {
 						<div class="col-auto">${activity.followers.length} followers </div>
 					<div>The start time of the conference is ${activity.start_time} and end time is ${activity.end_time}</div>
 					<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-					<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_count} Comments</div>					
+					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 				</div>
 			</div>`;      		
 				} else if (activity.type == 'Material') {
@@ -250,7 +312,7 @@ $(async function() {
 							act += ` <a href="${activity.file_url}" style="font-size: 15px;" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
 						act += `</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
 						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-						<div class="col-3 mt-3 forward"><i class="fas fa-comments"></i> ${activity.comments_counts} Comments</div>					
+						<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Material" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 					</div>
 				</div>`;		 
 				}
@@ -336,4 +398,67 @@ $(async function() {
 			console.log(error);
 		}
 	});
+
+	$('#answered').on('show.bs.modal', async function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var id = button.data('id');
+		var type = button.data('type'); // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		var modal = $(this);
+		modal.find('.modal-body ul').html("Loading...");
+		const students = await answeredStudents(id, type);
+		let list = ''
+		$.each(students, (index, student) => {
+			list += `<li><strong>${student.student_id}</strong> - ${student.name}</li>`;
+		})
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		modal.find('.modal-title').text(`${type} Students`);
+		list = list ? list : `No ${type} Students Found`
+		modal.find('.modal-body ul').html(list);
+	  });
+
+	  $('#comments').on('show.bs.modal', async function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var id = button.data('id');
+		var type = button.data('type'); // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		var modal = $(this);
+		modal.find('.modal-body .chat-history ul').html("Loading...");
+		const comments = await getComments(id, type);
+		console.log(comments);
+		let list = ''
+		$.each(comments, (index, comment) => {
+			if (comment.college_account_id == $user.user_id || comment.student_id == $user.user_id) {
+				list += `
+				<li class="clearfix">
+					<div class="message-data align-right">
+						<time class="timeago" datetime="${jQuery.timeago(new Date(comment.created_at))}">${jQuery.timeago(new Date(comment.created_at))}</time> &nbsp; &nbsp;
+				  		<span class="message-data-name" >You</span> <i class="fa fa-circle me"></i>
+					</div>
+					<div class="message other-message float-right">
+						${comment.comment}
+					</div>
+			 	</li>				
+				`;
+			} else {
+				list += `
+				<li>
+					<div class="message-data">
+				  		<span class="message-data-name"><i class="fa fa-circle online"></i> ${comment.college_account ? comment.college_account.first_name: comment.student.name} </span>
+				  		<time class="timeago" datetime="${jQuery.timeago(new Date(comment.created_at))}">${jQuery.timeago(new Date(comment.created_at))}</time>
+					</div>
+					<div class="message my-message">
+						${comment.comment}
+					</div>
+				</li>				
+				`;
+			}
+		})
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		modal.find('.modal-title').text(`${type} Comments`);
+		modal.find('input#type').val(type);
+		modal.find('input#id').val(id);
+		list = list ? list : ``;
+		modal.find('.modal-body .chat-history ul').html(list);
+	  });
 });

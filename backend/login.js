@@ -18,7 +18,7 @@ $(document).ready(function () {
             console.log(result, result.token, JSON.stringify(result));
             if (result.token) {
               if (result.force_password_change) {
-                loginToken = result.token;
+                loginToken = result;
                 $('#passwordModal').modal();
               } else{
                 $.cookie('user', JSON.stringify(result), {expires: 365});
@@ -63,17 +63,13 @@ $(document).ready(function () {
     var form = new  FormData();
     form.append("user_id", credentials.email);
     form.append("new_password", credentials.password);
-    // Display the key/value pairs
-for(var pair of form.entries()) {
-  console.log(pair[0]+ ', '+ pair[1]);
-}
     $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/user/updatePassword',
         type: 'POST',
         dateType: 'json',
         contentType: false,
         headers: {
-            'Authorization': `Bearer ${loginToken}`
+            'Authorization': `Bearer ${loginToken.token}`
         },
         data: form,
         processData: false,
@@ -81,10 +77,11 @@ for(var pair of form.entries()) {
             // alert(result.status);
             console.log(result, result.token, JSON.stringify(result));
             if (result.status == 200) {
-              window.location.replace('login.html?status=success&message=202');
+              $.cookie('user', JSON.stringify(loginToken), {expires: 365});
+              window.location.replace("index.html");
             } else {
               console.log(result);
-              // window.location.replace('login.html?status=danger&message=402');
+              window.location.replace('login.html?status=danger&message=402');
             }
         },
         error: function (error) {
