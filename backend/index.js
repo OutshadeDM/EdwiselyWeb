@@ -369,7 +369,7 @@ $(async function() {
 
 	try {
 		console.log(getFormattedDateTime(new Date()));
-		let faculty = await facultyData(1000, getFormattedDateTime(new Date()));
+		let faculty = await facultyData(30, getFormattedDateTime(new Date()));
 		date_lt = faculty.date_lt;
 		createCoursesTab(faculty.courses);
 		if (faculty.upcoming_events && faculty.upcoming_events.length)
