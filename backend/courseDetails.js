@@ -242,6 +242,7 @@ $(document).ready(function () {
                     }
 
                     // 2nd api
+                    getCourseDecks(courseUnits);
 
 
                     let courseType = $('#courseType').val();
@@ -386,6 +387,115 @@ $(document).ready(function () {
             }
         });
     });
+
+    function getCourseDecks(unitId){
+        $('#courseDeckTitle').hide();
+        $('#courseDeckList').empty();
+        // alert('here');
+
+        $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/getCourseDecks?unit_id=723',//+unitId,
+            type: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+                // alert(result.academic_materials);
+                // let div = "";
+                if (result.status == 200 && result.data) {
+                    $('#courseDeckTitle').show();
+
+                    $.each(result.data, (index, course) => {
+                        $img = $('<img>').addClass('card-img-top img-fluid py-2').attr('src', course.image || '../images/onlineCourses.png');
+                        $title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
+                        // $description = $('<p></p>').addClass('py-0 my-0')
+                        // 				.append(
+                        // 					$('<span></span>').addClass('span-heading').text(course.description || "No Description Available")
+                        // 				)
+                        // $sections = $('<div></div>').addClass('row container');
+                        // $.each(course.sections, (i, section) => {
+                        // 	$sectionSpan = $(`<span id="${section.id}" data-faculty="${section.faculty_section_id}" data-depart="${section.department_name}" data-depart-full=${section.department_fullname}></span>`)
+                        // 					.addClass('span-heading span-dept').text(section.name)
+                        // 	$sectionCol = $(`<div></div>`)
+                        // 					.addClass('col-auto')
+                        // 					.append($sectionSpan)
+                        // 	$sections.append($sectionCol);
+                        // });
+                        $cardBody = $('<div></div>').addClass('card-body p-2').append($title);
+                        $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').append($img, $cardBody);
+                        $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').data('id', course.id).append($card);
+                        $course = $('<div></div>').addClass('course col-lg-4 col-md-6 col-12 h-100').append($gotoCard);
+                        $('#courseDeckList').append($course);
+            
+                        if (index == result.data.length - 1) {
+                            // alert(index);
+                            $('#courseDeckList').slick({
+                              infinite: false,
+                              speed: 300,
+                              adaptiveHeight: true,
+                              slidesToShow: 4,
+                              slidesToScroll: 4,
+                              arrows: true,	
+                              responsive: [
+                                {
+                                  breakpoint: 1024,
+                                  settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 3,
+                                    infinite: true
+                                  }
+                                },
+                                {
+                                  breakpoint: 600,
+                                  settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 2
+                                  }
+                                },
+                                {
+                                  breakpoint: 480,
+                                  settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1
+                                  }
+                                }
+                                // You can unslick at a given breakpoint now by adding:
+                                // settings: "unslick"
+                                // instead of a settings object
+                              ]
+                            });				
+                        }
+                    });	
+
+                    // $.each(result.data, function (key, value) {
+                        
+                    //     courses.push({
+                    //         id: value.name,
+                    //         name: value.name,
+                    //         image: value.image,
+                    //         unit_id: value.unit_id
+                    //     });
+
+                        
+                    // });
+
+                    // displayFiles(files, courseType, courseLevel);
+
+                }
+                else {
+                    $('#courseDeckTitle').hide();
+                }
+            },
+            error: function (error) {
+                alert("Request Failed with status: "+error.status);
+            }
+        });
+
+
+
+        
+    }
 
     function processFiles(result = []) {
 
