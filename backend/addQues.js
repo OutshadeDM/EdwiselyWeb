@@ -78,23 +78,6 @@ $(document).ready(function () {
   let type = 'public';
   let answer = '';
 
-  if (searchParams.has('sid')) {
-    sId = searchParams.get('sid');
-    if($.cookie('editQues') && sId){
-      editQuesJSON = $.cookie('editQues') ? JSON.parse($.cookie('editQues')) : null;
-      questions.push(editQuesJSON);
-      isCookie = true;
-      loadList();
-      // $.cookie('editQues', "");
-      autoFill(questions[0]);
-      // $('#addquesDiv :first-child :first-child').click();//.click();
-      // alert('#p'+editQuesJSON.id);
-      // $('#p'+editQuesJSON.id).click();
-      // console.log(editQuesJSON);
-    }
-    else alert('here');
-  }
-
 
   //initially hiding the hint and solution divs
   $('#hintDiv').hide()
@@ -145,7 +128,7 @@ $(document).ready(function () {
   getTopics();
 
   function getTopics() {
-    // alert('here');
+    // alert('topics');
 
     if(unit_id == "0"){
 
@@ -204,6 +187,23 @@ $(document).ready(function () {
           else {
             $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
             //alert("here");
+          }
+          if (searchParams.has('sid')) {
+            // alert('here');
+            sId = searchParams.get('sid');
+            if($.cookie('editQues') && sId){
+              editQuesJSON = $.cookie('editQues') ? JSON.parse($.cookie('editQues')) : null;
+              questions.push(editQuesJSON);
+              isCookie = true;
+              loadList();
+              $.cookie('editQues', "");
+              autoFill(questions[0]);
+              // console.log(editQuesJSON);
+            }
+            else{
+              $('#errorToastBody').text("Cookie Error");
+              $('#errorToast').toast('show');
+            }
           }
         },
         error: function (error) {
@@ -264,12 +264,6 @@ $(document).ready(function () {
       // alert(JSON.stringify(value));
       $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p`+value.id+`' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
     });
-    if(isCookie){
-      alert($('#addquesDiv :first-child').children('p').attr('class'));//.click();
-      $('#addquesDiv :first-child').children('p').click();
-      // alert('here');
-      //  $('.questions').click();
-    }
   }
 
   // radios for selecting
@@ -625,6 +619,7 @@ $(document).ready(function () {
 
   });
 
+
   //on click of + btn(post request)
 
   $('#plusBtn').on('click', function () {
@@ -948,7 +943,7 @@ $(document).ready(function () {
   });
 
   function autoFill(value = []){
-    console.log(JSON.stringify(value));
+    // console.log(JSON.stringify(value));
     $('#deleteBtn').show();
     $('#plusBtn').hide();
     $('#editBtn').show();
@@ -1040,6 +1035,7 @@ $(document).ready(function () {
       if(question_type1){
         // alert(value.id);
         // $('#topicTagAdd'+value.id).click();
+        // $('checkbox[value="'+value.id+'"]').attr('checked',true);
         $('#topicTagAdd'+value.id).prop('checked',true);
       }
       else{
@@ -1048,6 +1044,7 @@ $(document).ready(function () {
       }
     });
     topics = value.topics_details;
+    // alert(JSON.stringify(topics));
 
     if(value.question_img && value.question_img != null && value.question_img != " "){
       // alert('here');
