@@ -29,12 +29,17 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .chooseQues :nth-child(4n+0){
-  background-color: #E8EFF3;
+  background-color: transparent;
 }
 
 .chooseQues :nth-child(4n+1){
   background-color: #E8EFF3;
 }
+
+.chooseQues :nth-child(4n+2){
+  background-color: transparent;
+}
+
 
 .chooseQues :nth-child(4n+3){
   background-color: #ffffff;
@@ -103,3 +108,8 @@ pre {
 }
 
 /* choose questions end */
+
+
+.viewMoreModal{
+  background-color: transparent;
+}

@@ -225,7 +225,7 @@ $(document).ready(function () {
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tname="+value.name+"&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
+      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tname=" + value.name + "&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
@@ -234,7 +234,7 @@ $(document).ready(function () {
       if (!value.questions_count)
         div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
       else
-        div = div + "<a href='../pages/sendQuestionsPage.html?subSemId=" + value.subject_id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+        div = div + "<a href='../pages/sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       div = div + "</div></div></div>";
 
     });
@@ -245,8 +245,8 @@ $(document).ready(function () {
       $('#subjectiveassessmentList').append(div)
   }
 
-  
-  
+
+
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id=' + `${$user.university_degree_department_id}`,
     type: 'GET',
@@ -684,7 +684,7 @@ $(document).ready(function () {
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     $("#condSubDate").val(fullDate);
     $('#condSubDate').datepicker('setDate', date);
-      // $("#condSubDate").val(fullDate);
+    // $("#condSubDate").val(fullDate);
 
   });
 
