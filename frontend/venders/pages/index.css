@@ -16,6 +16,10 @@
     width: auto;
 }
 
+.linkwrap { position:relative; display:inline-block; }
+.blocker { position:absolute; height:100%; width:100%; z-index:1; background:rgba(255,0,0,0.5);  }
+.linkwrap iframe { z-index: 2; }
+
 
 .chat {
     width: 100%;

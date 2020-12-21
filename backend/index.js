@@ -26,6 +26,33 @@ const getPngImage = (heicimage) => {
 		});	
 	});	
 }
+
+const releaseResult = (id) => {
+	try {
+		$.ajax({
+			url: `https://stagingfacultypython.edwisely.com/questionnaire/releaseSubjectiveResults?test_id=${id}`,
+			type: 'GET',
+			contentType: 'application/json',
+			headers: {
+				'Authorization': `Bearer ${$user.token}`
+			},
+			success: function (result) {
+				// alert(result.status);
+				if (result.status == 200) {
+					window.location.replace('index.html?status=success&message=Successfully released the result')
+				} else {
+					console.log(result.message);
+				}
+			},
+			error: function (error) {
+				console.log(error);
+			}
+		});
+	} catch (error) {
+		console.log(error);
+	}			
+}
+
 $user = "";
 $(async function() {
 	jQuery("time.timeago").timeago();
@@ -74,7 +101,9 @@ $(async function() {
 	  if (message == "notify")
 		$('.alert strong').text('Successfully added Notification!');
 	  else if (message == "liveclass")
-		$('.alert strong').text('Successfully added Live Class');      
+		$('.alert strong').text('Successfully added Live Class');  
+	  else
+		$('alert strong').text(message);
 	  $('.alert').addClass(`alert-${status}`);
 	  $('.alert').removeClass('d-none');
 	}
@@ -165,6 +194,32 @@ $(async function() {
 				console.log(error);
 			}
 		});		
+	}
+
+	const startP2p = (id, endDate) => {
+		try {
+			$.ajax({
+				url: `https://stagingfacultypython.edwisely.com/questionnaire/startStudentEvaluation?test_id=${id}&evaluation_end_time=${endDate}`,
+				type: 'GET',
+				contentType: 'application/json',
+				headers: {
+					'Authorization': `Bearer ${$user.token}`
+				},
+				success: function (result) {
+					// alert(result.status);
+					if (result.status == 200) {
+						window.location.replace('index.html?status=success&message=Successfully Started P2P Evaluation')
+					} else {
+						console.log(result.message);
+					}
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+		} catch (error) {
+			console.log(error);
+		}		
 	}
 
 	const createCoursesTab = (courses) => {
@@ -272,21 +327,45 @@ $(async function() {
 				if (activity.type == 'Notification') {
 					act = `<div class=" card px-3 py-3 mt-2">
 						<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true" class="img-fluid profile"></div>
-						<div class="col-7 align-items-end"> <h3>${activity.title}`
-						if (activity.file_url.length) 
-							act += ` <a href="${activity.file_url}" style="font-size: 15px;" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
-						act += `</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-auto">${activity.followers.length} followers </div>`
+						if (activity.file_url.length && ['jpeg', 'png', 'jpg', 'gif'].includes(activity.file_url.split('.').pop()))
+							act += `<div class="col-12 d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img width="300" height="500" src="${activity.file_url}" class="img-fluid"></a></div>`;
+						else if (activity.file_url.length)
+							act += `<div class="col-12 d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><div class="blocker"></div><iframe src="${activity.file_url}"
+							width="300" height="500"></a></div>`;
+						act += `<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
 						<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 					</div>
 				</div>`;
 				} else if (activity.type == 'Test') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true" class="img-fluid profile"></div>
+						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+						<div class="col-auto">${activity.followers.length} followers </div>`;
+					
+					if (new Date(activity.doe) < new Date()) {
+						act += `
+							<div class="row col-12">
+								<div class="col-6">
+									<canvas id="myChart${activity.id}" width="400" height="400"></canvas>
+								</div>
+								<div class="col-6 align-self-center">
+									<a href="https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a>
+								</div>
+							</div>
+						`;
+					} else {
+						act += `
+							<div class="col-12">
+								${activity.role.role_name} - ${activity.college_account_details.faculty_name} has created a ${activity.type} named ${activity.title} - ${activity.description} for ${activity.sent_to} students, with doe ${activity.doe}.
+							</div>
+						`;
+					}
+					
+					act+= `<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
 						<div class="col-3 mt-3 answered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} class="btn btn-light"><i class="far fa-check-square"></i> ${activity.answered} Attempted</button></div>
 						<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>
 						<div class="col-3 mt-3 forward"><i class="fas fa-share-square"></i> Forward To</div>					
@@ -295,30 +374,38 @@ $(async function() {
 				} else if (activity.type == 'VideoConference') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true" class="img-fluid profile"></div>
+						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div>
-					<div>The start time of the conference is ${activity.start_time} and end time is ${activity.end_time}</div>
-					<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+						<div class="col-auto">${activity.followers.length} followers </div>`;
+					if (new Date(activity.end_time) <= new Date())
+						act += `<div class="col-12 text-center font-weight-bold text-danger">Meeting Completed</div>`;
+					else if (Math.abs(new Date(activity.start_time).getTime() - new Date().getTime()) <= 10*60*1000)
+						act += `<div class="col-12 text-success font-weight-bold">The start time of the conference is ${activity.start_time} and end time is ${activity.end_time} <a href="${videoConference.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a></div>`
+					else 
+						act += `<div class="col-12 text-center font-weight-bold">The start time of the conference is ${activity.start_time} and end time is ${activity.end_time} (The link to meeting will activate only 10 mins before it starts)</div>`
+					act += `<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
 					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 				</div>
 			</div>`;      		
 				} else if (activity.type == 'Material') {
 					act = `<div class=" card px-3 py-3 mt-2">
-						<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true" class="img-fluid profile"></div>
-						<div class="col-7 align-items-end"> <h3>${activity.title}`
-						if (activity.file_url.length) 
-							act += ` <a href="${activity.file_url}" style="font-size: 15px;" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
-						act += `</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div><div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
-						<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Material" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
-					</div>
-				</div>`;		 
+					<div class="row">
+					<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+					<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+					<div class="col-auto">${activity.followers.length} followers </div>`
+					if (activity.file_url.length && ['jpeg', 'png', 'jpg', 'gif'].includes(activity.file_url.split('.').pop()))
+						act += `<div class="col-12 d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img width="300" height="500" src="${activity.file_url}" class="img-fluid"></a></div>`;
+					else if (activity.file_url.length)
+						act += `<div class="col-12 d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><div class="blocker"></div><iframe src="${activity.file_url}"
+						width="300" height="500"></a></div>`;
+					act += `<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
+				</div>
+			</div>`;		 
 				} else if (activity.type == 'Subjective') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true" class="img-fluid profile"></div>
+						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Subjective&background=0056b3&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
 						<div class="col-auto">${activity.followers.length} followers </div>`;
 					let starttime = new Date(activity.starttime);
@@ -329,24 +416,74 @@ $(async function() {
 						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and set to start at ${starttime} with a time limit of ${timelimit} minutes.</div>`;
 					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
 						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${endtime}. You can now allow the students to evaluate their peers.</div>`;
-					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) > new Date()) {
-						act += `A subjective test named ${activity.title} created and completed at ${endtime}. The student peer evaluation started at ${new Date(activity.evaluation_started_time)} and will complete at ${new Date(activity.evaluation_end_time)}.`
-					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) <= new Date()) {
-						act += `A subjective test named ${activity.title} created and completed at ${endtime}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.`
 						act += `
-								<div class="col-3 mt-3 answered"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">Start Evaluation</a></div>
-								<div class="col-3 mt-3 answered"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-danger">Release Result</a></div>					
+								<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+								<div class="col-3 mt-3 answered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} class="btn btn-light"><i class="far fa-check-square"></i> ${activity.answered} Attempted</button></div>
+								<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>
+								<div class="col-3 mt-3"><button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>				
+							</div>
+						</div>`;						
+					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) > new Date()) {
+						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${endtime}. The student peer evaluation started at ${new Date(activity.evaluation_started_time)} and will complete at ${new Date(activity.evaluation_end_time)}.</div>`
+					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) <= new Date() && !activity.results_release_time.length) {
+						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${endtime}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.</div>`
+						act += `
+								<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+								<div class="col-3 mt-3 answered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} class="btn btn-light"><i class="far fa-check-square"></i> ${activity.answered} Attempted</button></div>
+								<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>
+								<div class="col-3 mt-3"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">Start Evaluation</a></div>
+								<div class="col-3 mt-3"><a onclick="releaseResult(${activity.id})" target="_blank" type="button" class="btn btn-danger">Release Result</a></div>					
 							</div>
 						</div>`;
-					} else if (results_release_time.length) {
-						act += `A subjective test named ${activity.title} created and completed at ${endtime}. The results are released, you can check them now.`;
+					} else if (activity.results_release_time.length) {
+						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${endtime}. The results are released, you can check them now.</div>`;
 						act += `
-								<div class="col-3 mt-3 answered"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>					
+								<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
+								<div class="col-3 mt-3 answered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} class="btn btn-light"><i class="far fa-check-square"></i> ${activity.answered} Attempted</button></div>
+								<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>
+								<div class="col-3 mt-3"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>					
 							</div>
 						</div>`;
 					}					
 				}
 				$('#activity').append(act);
+				if (activity.type == 'Test') {
+					var ctx = document.getElementById(`myChart${activity.id}`).getContext('2d');
+					var myChart = new Chart(ctx, {
+						type: 'doughnut',
+						data: {
+							labels: ['Attempted', 'Unattempted'],
+							datasets: [{
+								label: 'Test Status',
+								data: [activity.answered, activity.sent_to - activity.answered],
+								backgroundColor: [
+									'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)'
+								],
+								borderColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)'
+								],
+								borderWidth: 1
+							}]
+						},
+						options: {
+							responsive: true,
+							legend: {
+								position: 'top',
+							},
+							title: {
+								display: true,
+								text: 'Test Status'
+							},
+							animation: {
+								animateScale: true,
+								animateRotate: true
+							}
+						}
+					});					
+
+				}
 			} catch (error) {
 				console.log(error);
 			}
@@ -492,4 +629,29 @@ $(async function() {
 		list = list ? list : ``;
 		modal.find('.modal-body .chat-history ul').html(list);
 	  });
+
+	  $('#p2p').on('show.bs.modal', async function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var id = button.data('id');
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		var modal = $(this);
+		modal.find('input#resultId').val(id);
+	  });
+
+	$('#endtime').datetimepicker({
+		minDate: new Date(),
+		dateFormat: 'dd M yy', 
+		timeFormat: 'HH:mm:ss'
+	});
+
+	$('#startP2p').click(function() {
+		let endDate = getFormattedDateTime(new Date($('#endtime').val()));
+		let id = $('#resultId').val();
+		if (endDate.length) {
+			$('#startP2p').remove();
+			startP2p(id, endDate);
+		} else {
+			$('span.errorp2p').text('Please Select End Time');
+		}
+	});
 });
