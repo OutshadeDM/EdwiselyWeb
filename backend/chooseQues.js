@@ -254,7 +254,8 @@ $(document).ready(function () {
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
               "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + value.name +
-              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
+              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer: " + value.questions_options.length +
+              //value.questions_options[0].is_answer==1 ? JSON.stringify(value.questions_options[0].name) : value.questions_options[1].is_answer==1 ? JSON.stringify(value.questions_options[1].name) : value.questions_options[2].is_answer==1 ? JSON.stringify(value.questions_options[2].name) : JSON.stringify(value.questions_options[3].name) +
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
               "'>viewMore</button></div></li>" +
 
@@ -331,12 +332,12 @@ $(document).ready(function () {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
                 "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + value.name +
-                "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answers:  " + value.questions_options.length +
+                "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " + value.questions_options.length +
                 " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
                 "'>viewMore</button></div></li>" +
 
 
-                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
+                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true' style='background-color: transparent;'>" +
                 "<div class='modal-dialog' role='document'>" +
                 "<div class='modal-content'>" +
 
@@ -523,7 +524,7 @@ $(document).ready(function () {
             //   setInterval(function () {
             //     window.location.replace('myAssessment.html');
             //   }, 2000)
-
+            window.location.href = "myAssessment.html"
           }
           else {
             alert("error!")

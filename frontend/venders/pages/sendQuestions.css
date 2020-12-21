@@ -1,0 +1,67 @@
+#testDetails{
+  border: solid black 1px;
+  border-radius: 10px;
+}
+
+
+.selectStudents{
+  overflow-y: scroll;
+  height: 70vh;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.selectStudents::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.selectStudents {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+.selectStudents{
+  list-style: none;
+  border: solid black 1px;
+  border-radius: 10px;
+}
+
+.selectStudents :nth-child(odd){
+  background-color: #E8EFF3;
+}
+
+.profileAvatar{
+  display: inline-block;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  color: white;
+}
+
+.selectAllDiv{
+  background-color: #1B658C;
+  color: white;
+  border-radius: 10px;
+}
+
+#sectionDetails{
+  border: solid black 1px;
+  border-radius: 10px;
+}
+
+.sectionsListLi{
+  list-style: none;
+}
+
+#numberOfStudents{
+  border: solid black 1px;
+  border-radius: 10px;
+
+}
+
+
+.sectionsListInput{
+  display: none;
+}
