@@ -389,7 +389,7 @@ $(document).ready(function() {
 
     $('#errorToast,#successToast').on('show.bs.toast', function () {
         $('#toastDiv').show();
-        setInterval(function () {
+        setTimeout(function () {
             $('#errorToast').toast('hide');
             $('#successToast').toast('hide');
             $('#toastDiv').hide();
