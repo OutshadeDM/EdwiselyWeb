@@ -315,6 +315,36 @@ $(async function() {
 						<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Material" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 					</div>
 				</div>`;		 
+				} else if (activity.type == 'Subjective') {
+					act = `<div class=" card px-3 py-3 mt-2">
+					<div class="row">
+						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true" class="img-fluid profile"></div>
+						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${new Date(activity.created_at).toUTCString()}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-auto">${activity.followers.length} followers </div>`;
+					let starttime = new Date(activity.starttime);
+					let timelimit = activity.timelimit;
+					let endtime = new Date(starttime.setTime(starttime.getTime() + timelimit*60*1000));
+
+					if (endtime >= new Date()) {
+						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and set to start at ${starttime} with a time limit of ${timelimit} minutes.</div>`;
+					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
+						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${endtime}. You can now allow the students to evaluate their peers.</div>`;
+					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) > new Date()) {
+						act += `A subjective test named ${activity.title} created and completed at ${endtime}. The student peer evaluation started at ${new Date(activity.evaluation_started_time)} and will complete at ${new Date(activity.evaluation_end_time)}.`
+					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) <= new Date()) {
+						act += `A subjective test named ${activity.title} created and completed at ${endtime}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.`
+						act += `
+								<div class="col-3 mt-3 answered"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">Start Evaluation</a></div>
+								<div class="col-3 mt-3 answered"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-danger">Release Result</a></div>					
+							</div>
+						</div>`;
+					} else if (results_release_time.length) {
+						act += `A subjective test named ${activity.title} created and completed at ${endtime}. The results are released, you can check them now.`;
+						act += `
+								<div class="col-3 mt-3 answered"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>					
+							</div>
+						</div>`;
+					}					
 				}
 				$('#activity').append(act);
 			} catch (error) {
@@ -371,11 +401,12 @@ $(async function() {
 		console.log(getFormattedDateTime(new Date()));
 		let faculty = await facultyData(30, getFormattedDateTime(new Date()));
 		date_lt = faculty.date_lt;
-		createCoursesTab(faculty.courses);
+		createCoursesTab(faculty.courses, faculty.upcoming_events.length);
 		if (faculty.upcoming_events && faculty.upcoming_events.length)
 			createUpcomingTab(faculty.upcoming_events);
-		else
+		else {
 			$('.upcome').remove();
+		}
 		activityTab(faculty.activity_tab);
 		let peers = await peerData(10, getFormattedDateTime(new Date()));
 		createPeersTab(peers);

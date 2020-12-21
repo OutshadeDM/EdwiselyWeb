@@ -21,97 +21,34 @@ $(async function() {
 		this.setTime(this.getTime() + (h*60*60*1000));
 		return this;
 	}
-	var checkPastTimeS = function(inputDateTime) {
-		if (typeof(inputDateTime) != "undefined" && inputDateTime !== null) {
-			var current = new Date();
-	 
-			//check past year and month
-			if (inputDateTime.getFullYear() < current.getFullYear()) {
-				$('#starttime').datetimepicker('reset');
-				alert("Sorry! Past date time not allow.");
-			} else if ((inputDateTime.getFullYear() == current.getFullYear()) && (inputDateTime.getMonth() < current.getMonth())) {
-				$('#starttime').datetimepicker('reset');
-				alert("Sorry! Past date time not allow.");
-			}
-	 
-			// 'this' is jquery object datetimepicker
-			// check input date equal to todate date
-			if (inputDateTime.getDate() == current.getDate()) {
-				if (inputDateTime.getHours() < current.getHours()) {
-					$('#starttime').datetimepicker('reset');
-				}
-			} else {
-				this.setOptions({
-					minTime: false
-				});
-				// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
-			}
-			// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({minDate: $('#starttime').data('xdsoft_datetimepicker').getValue()});
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxDate: new Date($('#starttime').data('xdsoft_datetimepicker').getValue()).addHours(3)});
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({minTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 'h'});
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 3 + 'h'});
-		}
-	};
 	
-	var checkPastTimeE = function(inputDateTime) {
-		if (typeof(inputDateTime) != "undefined" && inputDateTime !== null) {
-			var current = new Date();
-	 
-			//check past year and month
-			if (inputDateTime.getFullYear() < current.getFullYear()) {
-				$('#starttime').datetimepicker('reset');
-				alert("Sorry! Past date time not allow.");
-			} else if ((inputDateTime.getFullYear() == current.getFullYear()) && (inputDateTime.getMonth() < current.getMonth())) {
-				$('#starttime').datetimepicker('reset');
-				alert("Sorry! Past date time not allow.");
-			}
-	 
-			// 'this' is jquery object datetimepicker
-			// check input date equal to todate date
-			console.log(this);
-			if (inputDateTime.getDate() == current.getDate()) {
-				if (inputDateTime.getHours() < current.getHours()) {
-					$('#starttime').datetimepicker('reset');
-				}
-			} else {
-				this.setOptions({
-					minTime: false
-				});
-				// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
-			}
-			// $('#endtime').datetimepicker('option', 'minDate', $(this).val());
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({minDate: $('#starttime').data('xdsoft_datetimepicker').getValue()});
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxDate: new Date($('#starttime').data('xdsoft_datetimepicker').getValue()).addHours(3)});
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({minTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 'h'});
-			$('#endtime').data('xdsoft_datetimepicker').setOptions({maxTime: $('#starttime').data('xdsoft_datetimepicker').getValue().getHours() + 3 + 'h'});
-		}
-	};
-
-	var currentYear = new Date();
-    var startTime = $('#starttime').datetimepicker({
-		format:'Y-m-d H:i:s',
-		minDate : 0,
-		yearStart : currentYear.getFullYear(), // Start value for current Year selector
-		onChangeDateTime:checkPastTimeS,
-		onShow:checkPastTimeS,	
-    });
-	console.log(startTime.data("datetimepicker"));
-    var endTime = $('#endtime').datetimepicker({
-		format:'Y-m-d H:i:s',
-		minDate: 0,
-		yearStart : currentYear.getFullYear(), // Start value for current Year selector
-		onChangeDateTime:checkPastTimeE,
-		onShow:checkPastTimeE,		
-	});    
+	let startDateTextBox = $('#starttime');
+	let endDateTextBox = $('#endtime');
 	
-	$("#starttime").on("dp.change", function(e) {
-		$('#endtime').data('xdsoft_datetimepicker').setOptions({minDate: $('#starttime').data('xdsoft_datetimepicker').getValue('minDate')});
-	 });
-  
-	 $("#endtime").on("dp.change", function(e) {
-		$('#starttime').data('xdsoft_datetimepicker').setOptions({maxDate: $('#endtime').data('xdsoft_datetimepicker').getValue('maxDate')});
-	 });
+	$.timepicker.datetimeRange(
+		startDateTextBox,
+		endDateTextBox,
+		{
+			maxInterval: (3*1000*60*60), // 1hr
+			dateFormat: 'dd M yy', 
+			timeFormat: 'HH:mm:ss',
+			start: {
+				minDate: 0,
+				onSelect: function (selectedDateTime){
+					endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate') )
+					endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate').addHours(3) );
+				}
+			}, // start picker options
+			end: {
+				minDate: new Date(),
+				maxDate: new Date().addHours(3),
+				// onSelect: function (selectedDateTime){
+				// 	endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate') )
+				// 	endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate').addHours(3) );
+				// }
+			} // end picker options					
+		}
+	);
 
 	let tabNumber = 1;
 	let selectNumber = 0;
