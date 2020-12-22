@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 
 
-  //alert(subSemId)
+  // //alert(subSemId)
   getTopics();
 
   function getTopics() {
@@ -69,93 +69,81 @@ $(document).ready(function () {
       }
     });
   }
-})
-
-let topics = []
 
 
-
-$(document).on('click', '.topicTagsInput', function () {
-
-  let value = $(this).data('type');
-  //alert(value)
-
-  // let type = value.charAt(0) + value.charAt(1).toUpperCase() + value.slice(2);
-
-  if (!topics.includes(value)) {
-    //alert($(this).val())
-    topics.push({ "id": $(this).val(), "type": value });
-  }
-
-  if ($(this).prop('checked') == false) {
-    topics = $.grep(topics, function (e) {
-      return e.id != $(this).val();
-    });
-  }
-
-  //alert(JSON.stringify(topics));
-
-});
+  let topics = []
 
 
-let uploaded_question = ""
+  $(document).on('change', '.topicTagsInput', function (e) {
+    //add Questions to a array which are selected
 
-
-$('.quesUploadFile').on('change', function () {
-  // uploaded_question = $('.quesUploadFile').val()
-  uploaded_question = $(".quesUploadFile")[0].files[0];
-  //console.log(uploaded_question)
-
-})
-
-
-
-
-// Upload api
-$('#uploadBtn').on('click', function () {
-
-  //alert("hello")
-
-  var form = new FormData();
-  form.append("files", uploaded_question);
-  form.append("topics", JSON.stringify(topics));
-  //alert(JSON.stringify(topics))
-  $.ajax({
-    url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
-    type: 'POST',
-    dataType: 'json',
-    data: form,
-    contentType: false,
-    processData: false,
-    headers: {
-      'Authorization': `Bearer ${$user.token}`
-    },
-    success: function (result) {
-      alert(result.status);
-      if (result.status == 200) {
-        // $('#successToastBody').text('Questions Uploaded Successfully');
-        // $('#successToast').toast('show');
-        alert(result.message);
-      }
-      else if (result.status == 500) {
-        // $('#errorToastBody').text(result.message);
-        // $('#errorToast').toast('show');
-        alert(result.message);
-
-      }
-      else {
-        // $('#errorToastBody').text('Request Unsuccessful');
-        // $('#errorToast').toast('show');
-        alert(result.message);
-      }
-    },
-    error: function (error) {
-      alert("Request Failed with status: " + error.status);
-    }
+    (e.target.checked) ? topics.push({ "id": $(this).val(), "type": $(this).data('type') }) : (topics.splice(topics.indexOf({ "id": $(this).val(), "type": $(this).data('type') }), 1));
+    console.log(JSON.stringify(topics))
   });
 
 
+
+  let uploaded_question = ""
+
+
+  $('.quesUploadFile').on('change', function () {
+    // uploaded_question = $('.quesUploadFile').val()
+    uploaded_question = $(".quesUploadFile")[0].files[0];
+    //console.log(uploaded_question)
+
+    // })
+    alert("hello")
+
+
+
+    // Upload api
+    $('#uploadButton').on('click', function () {
+
+      console.log("jndsi")
+      alert("hello")
+
+      var form = new FormData();
+      form.append("files", uploaded_question);
+      form.append("topics", JSON.stringify(topics));
+      //alert(JSON.stringify(topics))
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          //alert(result.status);
+          if (result.status == 200) {
+            // $('#successToastBody').text('Questions Uploaded Successfully');
+            // $('#successToast').toast('show');
+            alert(result.message);
+            window.location.href = "myAssessment.html"
+          }
+          else if (result.status == 500) {
+            // $('#errorToastBody').text(result.message);
+            // $('#errorToast').toast('show');
+            alert(result.message);
+
+          }
+          else {
+            // $('#errorToastBody').text('Request Unsuccessful');
+            // $('#errorToast').toast('show');
+            alert(result.message);
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+
+
+    })
+  })
+
+
 })
-
-
-

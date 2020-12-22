@@ -240,22 +240,20 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
-            // let displayedQues = ""
-            // if (value.name.length > 110) {
-            //   displayedQues = value.name
-            // }
+            console.log(value)
 
-            // else {
-            //   displayedQues = value.name
-            // }
-
-            //console.log(value.name)
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-              "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + value.name +
-              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer: " + value.questions_options.length +
-              //value.questions_options[0].is_answer==1 ? JSON.stringify(value.questions_options[0].name) : value.questions_options[1].is_answer==1 ? JSON.stringify(value.questions_options[1].name) : value.questions_options[2].is_answer==1 ? JSON.stringify(value.questions_options[2].name) : JSON.stringify(value.questions_options[3].name) +
+              "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
+              (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
+              (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
+              (value.questions_options[2] ? value.questions_options[2].is_answer == 1 ? "<span>" + value.questions_options[2].name + "</span>" : "" : "") +
+              (value.questions_options[3] ? value.questions_options[3].is_answer == 1 ? "<span>" + value.questions_options[3].name + "</span>" : "" : "") +
+              (value.questions_options[4] ? value.questions_options[4].is_answer == 1 ? "<span>" + value.questions_options[4].name + "</span>" : "" : "") +
+
+
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
               "'>viewMore</button></div></li>" +
 
@@ -265,12 +263,19 @@ $(document).ready(function () {
               "<div class='modal-content'>" +
 
               "<div class='modal-body'>" +
+              (value.question_img == " " ? "<div style='font-size:12px;'>No Question Image Uploaded</div>" : "<img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
               "<div class='pb-4'>" + value.name + "</div>" +
               (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
               (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
               (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
               (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
               (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
+              //+ (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' alt='img'></img>") +
+
+              //(value.hint_image == "" ? "<div style='font-size:12px;'>No Hint Image Uploaded</div>" : "<img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img>") +
+              (value.hint ? "<div style='font-size:12px;'>No Hint Provided</div>" : "<br>  <div style='font-size:12px;'>Hint :" + value.hint + "</div>") +
+              (value.solution_image == "" ? "<div style='font-size:12px;'>No Solution Image Uploaded</div>" : "<img src='" + value.solution_image + "' alt='img' style='width:100px; height:75px;'></img>") +
+              (value.solution == "" ? "<div style='font-size:12px;'> Solution: <br> No Solution Provided</div>" : "<br> Solution : <div style='font-size:12px;'>" + value.solution + "</div>") +
 
               "</div>" +
               "</div>" +
@@ -331,23 +336,37 @@ $(document).ready(function () {
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/>" + value.name +
-                "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " + value.questions_options.length +
+                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+                "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
+                (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
+                (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
+                (value.questions_options[2] ? value.questions_options[2].is_answer == 1 ? "<span>" + value.questions_options[2].name + "</span>" : "" : "") +
+                (value.questions_options[3] ? value.questions_options[3].is_answer == 1 ? "<span>" + value.questions_options[3].name + "</span>" : "" : "") +
+                (value.questions_options[4] ? value.questions_options[4].is_answer == 1 ? "<span>" + value.questions_options[4].name + "</span>" : "" : "") +
+
+
                 " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
                 "'>viewMore</button></div></li>" +
 
 
-                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true' style='background-color: transparent;'>" +
+                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
                 "<div class='modal-dialog' role='document'>" +
                 "<div class='modal-content'>" +
 
                 "<div class='modal-body'>" +
+                (value.question_img == " " ? "<div style='font-size:12px;'>No Question Image Uploaded</div>" : "<img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
                 "<div class='pb-4'>" + value.name + "</div>" +
-                (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "<div></div>") +
-                (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "<div></div>") +
-                (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "<div></div>") +
-                (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "<div></div>") +
-                (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "<div></div>") +
+                (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
+                (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
+                (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
+                (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
+                (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
+                //+ (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' alt='img'></img>") +
+
+                //(value.hint_image == "" ? "<div style='font-size:12px;'>No Hint Image Uploaded</div>" : "<img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img>") +
+                (value.hint ? "<div style='font-size:12px;'>No Hint Provided</div>" : "<br>  <div style='font-size:12px;'>Hint :" + value.hint + "</div>") +
+                (value.solution_image == "" ? "<div style='font-size:12px;'>No Solution Image Uploaded</div>" : "<img src='" + value.solution_image + "' alt='img' style='width:100px; height:75px;'></img>") +
+                (value.solution == "" ? "<div style='font-size:12px;'> Solution: <br> No Solution Provided</div>" : "<br> Solution : <div style='font-size:12px;'>" + value.solution + "</div>") +
 
                 "</div>" +
                 "</div>" +
