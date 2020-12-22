@@ -36,12 +36,12 @@ $(async function() {
 				minDate: 0,
 				onSelect: function (selectedDateTime){
 					endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate') )
-					endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate').addHours(3) );
+					// endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate').addHours(3) );
 				}
 			}, // start picker options
 			end: {
 				minDate: new Date(),
-				maxDate: new Date().addHours(3),
+				// maxDate: new Date().addHours(3),
 				// onSelect: function (selectedDateTime){
 				// 	endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate') )
 				// 	endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate').addHours(3) );
@@ -196,7 +196,9 @@ $('#formdata').submit(function(e) {
         },	        
         success: function (data) {
 			console.log(data);
-			window.location.replace("index.html?status=success&message=liveclass");
+			$.cookie('status', 'success');
+			$.cookie('message', 'liveclass');
+			window.location.replace("index.html");
         },
         error: function (error) {
             console.log(error);

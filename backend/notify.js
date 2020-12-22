@@ -166,8 +166,10 @@ $('#formdata').submit(function(e) {
             'Authorization': `Bearer ${$user.token}`
         },	        
         success: function (data) {
-            console.log(data);
-            window.location.replace("index.html?status=success&message=notify");
+			console.log(data);
+			$.cookie('status', 'success');
+			$.cookie('message', 'notify');
+            window.location.replace("index.html");
         },
         error: function (error) {
             console.log(error);
