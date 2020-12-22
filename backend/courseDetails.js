@@ -389,8 +389,9 @@ $(document).ready(function () {
     });
 
     function getCourseDecks(unitId){
-        $('#courseDeckTitle').hide();
         $('#courseDeckList').empty();
+        $('#courseDeckList').removeClass('slick-initialized slick-slider');
+        $('#courseDeckTitle').hide();
         // alert('here');
 
         $.ajax({

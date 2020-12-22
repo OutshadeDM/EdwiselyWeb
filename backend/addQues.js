@@ -202,7 +202,7 @@ $(document).ready(function () {
               // console.log(editQuesJSON);
             }
             else {
-              $('#errorToastBody').text("Cookie Error");
+              $('#errorToastBody').text("No question found, try coming back");
               $('#errorToast').toast('show');
             }
           }
