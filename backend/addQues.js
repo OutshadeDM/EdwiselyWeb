@@ -197,6 +197,7 @@ $(document).ready(function () {
               isCookie = true;
               loadList();
               $.cookie('editQues', "");
+              $('#questionId').val(editQuesJSON.id);
               autoFill(questions[0]);
               // console.log(editQuesJSON);
             }
@@ -1245,6 +1246,7 @@ $(document).ready(function () {
     let newOptions = [];
 
     if (questionId && questionId != "0") {
+      // alert('here');
 
       $.each(questions, function (key, value) {
         if (questionId == value.id) {
@@ -1349,26 +1351,31 @@ $(document).ready(function () {
         if (index == 0 && (option1 || option1_img || option1_img_url)) {
           if (answer == "0") e.is_answer = "1";
           else e.is_answer = "0";
+          if(option1_img || option1_img_url) e.media = "1";
           return e;
         }
         if (index == 1 && (option2 || option2_img || option2_img_url)) {
           if (answer == "1") e.is_answer = "1";
           else e.is_answer = "0";
+          if(option2_img || option2_img_url) e.media = "1";
           return e;
         }
         if (index == 2 && (option3 || option3_img || option3_img_url)) {
           if (answer == "2") e.is_answer = "1";
           else e.is_answer = "0";
+          if(option3_img || option3_img_url) e.media = "1";
           return e;
         }
         if (index == 3 && (option4 || option4_img || option4_img_url)) {
           if (answer == "3") e.is_answer = "1";
           else e.is_answer = "0";
+          if(option4_img || option4_img_url) e.media = "1";
           return e;
         }
         if (index == 4 && (option5 || option5_img || option5_img_url)) {
           if (answer == "4") e.is_answer = "1";
           else e.is_answer = "0";
+          if(option5_img || option5_img_url) e.media = "1";
           return e;
         }
       });
@@ -1462,8 +1469,11 @@ $(document).ready(function () {
                       loadList();
 
                       if (tId == "0" && sId != "0") {
-                        window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
+                        setInterval(function () {
+                          window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
+                        }, 2000);
                       }
+                      
                     }
                   },
                   error: function (error) {
@@ -1495,7 +1505,9 @@ $(document).ready(function () {
                 loadList();
 
                 if (tId == "0" && sId != "0") {
-                  window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
+                  setInterval(function () {
+                    window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
+                  }, 2000);
                 }
 
               }

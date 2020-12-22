@@ -1277,7 +1277,7 @@ $(document).ready(function () {
     if(uId){
         setTimeout(function () {
             $("#nav-question-tab").click();
-          }, 1000);
+          }, 250);
     }
 
     $("#nav-question-tab").click(function () {
@@ -1781,10 +1781,10 @@ $(document).ready(function () {
                     div = div + "</button>";
                     div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
                     div = div + "<a class='dropdown-item editYourQuestion' style='cursor:pointer;' data-index='"+i+"' data-qid='"+value.id+"'>Edit</a>";
-                    if (value.bookmarked == 1)
-                        div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'>Bookmark</a>";
+                    if (value.bookmarked == "1")
+                        div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'>Unbookmark</a>";
                     else
-                        div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'>Unbookmark</a>";
+                        div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.id + "' data-type='" + value.type + "' data-content='objQuestion'>Bookmark</a>";
                     div = div + "</div></div>";
                 }
                 else{
