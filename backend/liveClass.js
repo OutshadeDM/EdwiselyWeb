@@ -1,3 +1,12 @@
+const getFormattedDateTime = (dt) => {
+	return `${
+    dt.getFullYear().toString().padStart(4, '0')}-${(dt.getMonth()+1).toString().padStart(2, '0')}-${
+    dt.getDate().toString().padStart(2, '0')} ${
+    dt.getHours().toString().padStart(2, '0')}:${
+    dt.getMinutes().toString().padStart(2, '0')}:${
+    dt.getSeconds().toString().padStart(2, '0')}`;
+}
+
 $(async function() {
 	// Check if User is logged in
 	$user = "";
@@ -176,8 +185,8 @@ $('#formdata').submit(function(e) {
     var formData = new FormData();
     formData.append('title', $('#title').val());
     formData.append('description', $("#description").val());
-    formData.append('start_time', $("#starttime").val());
-    formData.append('end_time', $("#endtime").val());
+    formData.append('start_time', getFormattedDateTime(new Date($("#starttime").val())));
+    formData.append('end_time', getFormattedDateTime(new Date($("#endtime").val())));
     var values = $("input[name='students[]']:checked")
               .map(function(){return $(this).val();}).get();
     formData.append('students', JSON.stringify(values));
