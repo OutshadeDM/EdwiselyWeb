@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 
 
-  //alert(subSemId)
+  // //alert(subSemId)
   getTopics();
 
   function getTopics() {
@@ -91,57 +91,59 @@ $(document).ready(function () {
     uploaded_question = $(".quesUploadFile")[0].files[0];
     //console.log(uploaded_question)
 
-  })
-
-
-
-
-  // Upload api
-  $('#uploadBtn').on('click', function () {
-
+    // })
     alert("hello")
 
-    var form = new FormData();
-    form.append("files", uploaded_question);
-    form.append("topics", JSON.stringify(topics));
-    //alert(JSON.stringify(topics))
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
-      type: 'POST',
-      dataType: 'json',
-      data: form,
-      contentType: false,
-      processData: false,
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-        //alert(result.status);
-        if (result.status == 200) {
-          // $('#successToastBody').text('Questions Uploaded Successfully');
-          // $('#successToast').toast('show');
-          alert(result.message);
-          window.location.href = "myAssessment.html"
-        }
-        else if (result.status == 500) {
-          // $('#errorToastBody').text(result.message);
-          // $('#errorToast').toast('show');
-          alert(result.message);
-
-        }
-        else {
-          // $('#errorToastBody').text('Request Unsuccessful');
-          // $('#errorToast').toast('show');
-          alert(result.message);
-        }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
 
 
+    // Upload api
+    $('#uploadButton').on('click', function () {
+
+      console.log("jndsi")
+      alert("hello")
+
+      var form = new FormData();
+      form.append("files", uploaded_question);
+      form.append("topics", JSON.stringify(topics));
+      //alert(JSON.stringify(topics))
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          //alert(result.status);
+          if (result.status == 200) {
+            // $('#successToastBody').text('Questions Uploaded Successfully');
+            // $('#successToast').toast('show');
+            alert(result.message);
+            window.location.href = "myAssessment.html"
+          }
+          else if (result.status == 500) {
+            // $('#errorToastBody').text(result.message);
+            // $('#errorToast').toast('show');
+            alert(result.message);
+
+          }
+          else {
+            // $('#errorToastBody').text('Request Unsuccessful');
+            // $('#errorToast').toast('show');
+            alert(result.message);
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+
+
+    })
   })
+
+
 })
-
-
