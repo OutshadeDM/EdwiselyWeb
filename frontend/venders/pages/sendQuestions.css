@@ -61,7 +61,14 @@ scrollbar-width: none;  /* Firefox */
 
 }
 
-
 .sectionsListInput{
   display: none;
+}
+
+.durationHours{
+  width: 60px;
+}
+
+.durationMinutes{
+  width: 60px;
 }

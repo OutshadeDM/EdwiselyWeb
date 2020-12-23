@@ -92,15 +92,15 @@ $(document).ready(function () {
     //console.log(uploaded_question)
 
     // })
-    alert("hello")
+    //alert("hello")
 
 
 
     // Upload api
     $('#uploadButton').on('click', function () {
 
-      console.log("jndsi")
-      alert("hello")
+      //console.log("jndsi")
+      //alert("hello")
 
       var form = new FormData();
       form.append("files", uploaded_question);
