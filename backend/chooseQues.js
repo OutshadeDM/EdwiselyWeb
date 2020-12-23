@@ -263,19 +263,23 @@ $(document).ready(function () {
               "<div class='modal-content'>" +
 
               "<div class='modal-body'>" +
-              (value.question_img == " " ? "<div style='font-size:12px;'>No Question Image Uploaded</div>" : "<img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
               "<div class='pb-4'>" + value.name + "</div>" +
-              (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
-              (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
-              (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
-              (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
-              (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
-              //+ (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' alt='img'></img>") +
+              (value.question_img == " " ? "" : "<img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
+              (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
+              (value.questions_options[0] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
+              (value.questions_options[1] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
+              (value.questions_options[2] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
+              (value.questions_options[3] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
+              (value.questions_options[4] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
 
-              //(value.hint_image == "" ? "<div style='font-size:12px;'>No Hint Image Uploaded</div>" : "<img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img>") +
-              (value.hint ? "<div style='font-size:12px;'>No Hint Provided</div>" : "<br>  <div style='font-size:12px;'>Hint :" + value.hint + "</div>") +
-              (value.solution_image == "" ? "<div style='font-size:12px;'>No Solution Image Uploaded</div>" : "<img src='" + value.solution_image + "' alt='img' style='width:100px; height:75px;'></img>") +
-              (value.solution == "" ? "<div style='font-size:12px;'> Solution: <br> No Solution Provided</div>" : "<br> Solution : <div style='font-size:12px;'>" + value.solution + "</div>") +
+              (value.hint ? "<div style='font-size:12px;'>Hint :" + value.hint + "</div>" : "") +
+              (value.hint_image ? "<img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img>" : "") +
+              (value.solution == "" ? "" : "<br> Solution : <div style='font-size:12px;'>" + value.solution + "</div>") +
+              (value.solution_image == "" ? "" : "<img src='" + value.solution_image + "' alt='img' style='width:100px; height:75px;'></img>") +
 
               "</div>" +
               "</div>" +
@@ -354,20 +358,23 @@ $(document).ready(function () {
                 "<div class='modal-content'>" +
 
                 "<div class='modal-body'>" +
-                (value.question_img == " " ? "<div style='font-size:12px;'>No Question Image Uploaded</div>" : "<img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
                 "<div class='pb-4'>" + value.name + "</div>" +
-                (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
-                (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
-                (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
-                (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
-                (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
-                //+ (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' alt='img'></img>") +
+                (value.question_img == " " ? "" : "<img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
+                (value.questions_options[0] ? "<div style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.stringify(value.questions_options[0].name) + "</div>" : "") +
+                (value.questions_options[0] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+                (value.questions_options[1] ? "<div style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.stringify(value.questions_options[1].name) + "</div>" : "") +
+                (value.questions_options[1] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+                (value.questions_options[2] ? "<div style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.stringify(value.questions_options[2].name) + "</div>" : "") +
+                (value.questions_options[2] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+                (value.questions_options[3] ? "<div style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.stringify(value.questions_options[3].name) + "</div>" : "") +
+                (value.questions_options[3] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+                (value.questions_options[4] ? "<div style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.stringify(value.questions_options[4].name) + "</div>" : "") +
+                (value.questions_options[4] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
 
-                //(value.hint_image == "" ? "<div style='font-size:12px;'>No Hint Image Uploaded</div>" : "<img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img>") +
-                (value.hint ? "<div style='font-size:12px;'>No Hint Provided</div>" : "<br>  <div style='font-size:12px;'>Hint :" + value.hint + "</div>") +
-                (value.solution_image == "" ? "<div style='font-size:12px;'>No Solution Image Uploaded</div>" : "<img src='" + value.solution_image + "' alt='img' style='width:100px; height:75px;'></img>") +
-                (value.solution == "" ? "<div style='font-size:12px;'> Solution: <br> No Solution Provided</div>" : "<br> Solution : <div style='font-size:12px;'>" + value.solution + "</div>") +
-
+                (value.hint ? "<div style='font-size:12px;'>Hint :" + value.hint + "</div>" : "") +
+                (value.hint_image ? "<img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img>" : "") +
+                (value.solution == "" ? "" : "<br> Solution : <div style='font-size:12px;'>" + value.solution + "</div>") +
+                (value.solution_image == "" ? "" : "<img src='" + value.solution_image + "' alt='img' style='width:100px; height:75px;'></img>") +
                 "</div>" +
                 "</div>" +
                 "</div>" +
@@ -458,7 +465,6 @@ $(document).ready(function () {
 
   $(document).on('change', '.chooseQuestionsInput', function (e) {
     //add Questions to a array which are selected
-
     (e.target.checked) ? selectedQuestions.push($(this).data('value')) : (selectedQuestions.splice(selectedQuestions.indexOf($(this).data('value')), 1));
     (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
 
@@ -471,7 +477,7 @@ $(document).ready(function () {
 
   function displaySelectedQuestions() {
 
-    console.log(selectedQuestions)
+    //console.log(selectedQuestions)
     if (selectedQuestions.length === 0) {
       $('.addingQues').empty()
       $('.addingQues').append("Add Questions to this Assignment")
@@ -481,7 +487,7 @@ $(document).ready(function () {
       for (let i = 0; i < selectedQuestions.length; i++) {
 
 
-        console.log(selectedQuestions[i].questions_options[0].name)
+        //console.log(selectedQuestions[i].questions_options[0].name)
         $('.addingQues').append("<div class='chosenQuestions my-2 p-2' style='background:#e6e6e6;border-radius: 10px;cursor:pointer;' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
           selectedQuestions[i].name.substr(0, 110) + "</div>" +
 

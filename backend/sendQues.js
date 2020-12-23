@@ -60,16 +60,12 @@ $(document).ready(function () {
         minDate: 0,
         onSelect: function (selectedDateTime) {
           endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'))
-          //endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate'));
         }
-      }, // start picker options
+      },
       end: {
-        minDate: 0,
-        onSelect: function (selectedDateTime) {
-          endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'))
-          //endDateTextBox.datetimepicker('option', 'maxDate', startDateTextBox.datetimepicker('getDate'));
-        }
+        minDate: 0
       }
+
     }
   );
 
@@ -114,12 +110,12 @@ $(document).ready(function () {
 
 
             if (value.id == subSemId) {
-              //console.log(value)
+              console.log(value.id)
 
               for (let i = 0; i < value.sections.length; i++) {
                 sectionIds.push(value.sections[i].id)
                 //console.log(value.sections[i].id)
-                $('.sectionsList').append("<li class='sectionsListLi'><input type='radio' class='sectionsListInput' value='" + value.sections[i].id + "'data-department='" + value.sections[i].department_name + "' data-id='" + value.sections[i].id + "' data-section='" + JSON.stringify(value.sections[i]) + "' name='sectionsListAdd' id='sectionsListAdd" + value.sections[i].id + "' /><label for='sectionsListAdd" + value.sections[i].id + "' class='sectionsListLabel'>" + value.sections[i].name + "</label></li>")
+                $('.sectionsList').append("<li class='sectionsListLi'><strong style='font-size:18px;'>" + value.sections[i].department_name + "  :  </strong><input type='radio' class='sectionsListInput' value='" + value.sections[i].id + "'data-department='" + value.sections[i].department_name + "' data-id='" + value.sections[i].id + "' data-section='" + JSON.stringify(value.sections[i]) + "' name='sectionsListAdd' id='sectionsListAdd" + value.sections[i].id + "' /><label for='sectionsListAdd" + value.sections[i].id + "' class='sectionsListLabel'>" + value.sections[i].name + "</label></li>")
               }
               console.log(sectionIds)
             }
@@ -151,13 +147,15 @@ $(document).ready(function () {
     //alert("hello")
     section = $(".sectionsListInput:checked").val();
     //alert(section)
-    count = 0
-    $('#numberOfStudents').text(count)
+    //count = 0
+    $('#numberOfStudents').text(selectedStudentsId.length)
 
     $('.selectAllDiv').empty();
     getStudents()
   });
 
+
+  //get students
   $('.selectAllDiv').empty();
   getStudents()
   function getStudents() {
@@ -187,7 +185,11 @@ $(document).ready(function () {
 
 
           $.each(result.data, function (key, value) {
-            $('.selectStudents').append(`<li class='py-1 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0]}</div>${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+            if (selectedStudentsId.includes(value.id)) {
+              $('.selectStudents').append(`<li class='py-1 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0]}</div>${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+            } else {
+              $('.selectStudents').append(`<li class='py-1 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0]}</div>${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+            }
             //allStudentsId.push(value.id)
           })
 
@@ -208,15 +210,32 @@ $(document).ready(function () {
   //on click of select all, select all students
 
   $(document).on('click', '#selectAll', function () {
-    count = 0
-    $(".studentsToSelect").prop('checked', $(this).prop('checked'));
-    $('.studentsToSelect').each(function () {
-      selectedStudentsId.push($(this).data('id'))
-      count = count + 1
-    })
-    console.log(selectedStudentsId)
-    console.log(count)
-    $('#numberOfStudents').text(count)
+    if ($(this).is(':checked')) {
+
+      // if (!selectedStudentsId.includes($(this).data('id'))){
+      //   selectedStudentsId.splice(selectedStudentsId.indexOf($(this).data('id')), 1)
+      // }
+
+
+      //selectedStudentsId = []
+      $(".studentsToSelect").prop('checked', true);
+      $('.studentsToSelect').each(function () {
+        if (!selectedStudentsId.includes($(this).data('id'))) {
+          selectedStudentsId.push($(this).data('id'))
+        }
+      })
+      $('#numberOfStudents').text(selectedStudentsId.length)
+    } else {
+
+      $('.studentsToSelect').prop('checked', false);
+      $('.studentsToSelect').each(function () {
+        if (selectedStudentsId.includes($(this).data('id'))) {
+          selectedStudentsId.splice(selectedStudentsId.indexOf($(this).data('id')), 1)
+        }
+      })
+      $('#numberOfStudents').text(selectedStudentsId.length)
+
+    }
   })
 
 
@@ -228,18 +247,18 @@ $(document).ready(function () {
       //selectedStudentsId = []
       if (!selectedStudentsId.includes($(this).data('id'))) {
         selectedStudentsId.push($(this).data('id'))
-        count = count + 1
-        $('#numberOfStudents').text(count)
+        //count = count + 1
+        $('#numberOfStudents').text(selectedStudentsId.length)
       }
     } else {
       $("#selectAll").prop("checked", false);
       selectedStudentsId.splice(selectedStudentsId.indexOf($(this).data('id')), 1)
-      count = count - 1
-      $('#numberOfStudents').text(count)
+      //count = count - 1
+      $('#numberOfStudents').text(selectedStudentsId.length)
     }
-    console.log(selectedStudentsId)
-    console.log(count)
-    $('#numberOfStudents').text(count)
+    //console.log(selectedStudentsId)
+    //console.log(count)
+    $('#numberOfStudents').text(selectedStudentsId.length)
   })
 
 

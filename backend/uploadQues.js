@@ -30,6 +30,59 @@ $(document).ready(function () {
   $('#courseName').append(tname)
 
 
+  //units fetching
+  let unitsIds = []
+
+  getUnits()
+  function getUnits() {
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnits?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        //alert(result.status);
+        //alert(subSemId)
+        //console.log(result.data)
+        $('.getUnits').empty();
+
+        if (result.status == 200 && result.data) {
+          //let div = ""
+          $.each(result.data, function (key, value) {
+            //console.log(value);
+            unitsIds.push(value.id)
+            //$('.getUnits').append(`<div class='unitsDiv' data-id=' ${value.id} ' data-description=' ${value.description} ' data-subject_semester=' ${value.subject_semester} '> ${value.name} </div>`);
+            $('.getUnits').append("<li class='getUnitsLi'><input type='radio' class='getUnitsInput' value='" + value.id + "' data-description='" + value.description + "'data-id='" + value.id + "' name='getUnitsAdd' id='getUnitsAdd" + value.id + "' /><label for='getUnitsAdd" + value.id + "' class='getUnitsLabel'>" + value.name + "</label></li>");
+
+          });
+          //$('.getUnits').append(div)
+        }
+        else {
+          $('#getUnits').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Units in this Course</h5></div</div>");
+          //alert("here");
+        }
+
+        let first_unit = "getUnitsAdd" + unitsIds[0]
+        //console.log(unitsIds)
+        //console.log(first_unit)
+        if (unitsIds.length !== 0) {
+          $("#" + first_unit).attr('checked', true)
+          unit = $(".getUnitsInput:checked").val();
+          subTopicsId = []
+          topicsId = []
+          grandTopicsId = []
+          getTopics()
+        }
+
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
 
   // //alert(subSemId)
   getTopics();
