@@ -351,16 +351,19 @@ $(async function() {
 						<div class="col-auto">${activity.followers.length} followers </div>`;
 					
 					if (new Date(activity.doe) < new Date()) {
-						act += `
-							<div class="row col-12">
-								<div class="col-6">
-									<canvas id="myChart${activity.id}" width="400" height="400"></canvas>
+						if (activity.answered)
+							act += `
+								<div class="row col-12">
+									<div class="col-md-8 col-12">
+										<canvas id="myChart${activity.id}" width="400" height="400"></canvas>
+									</div>
+									<div class="col-md-4 col-12 align-self-center">
+										<a href="https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a>
+									</div>
 								</div>
-								<div class="col-6 align-self-center">
-									<a href="https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a>
-								</div>
-							</div>
-						`;
+							`;
+						else
+							act += `<div class="col-12 text-center"><strong class="text-danger">Teat Expired!</strong></div>`
 					} else {
 						act += `
 							<div class="col-12">
@@ -418,14 +421,15 @@ $(async function() {
 					if (endtime >= new Date()) {
 						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and set to start at ${getFormattedDateTime(starttime)} with a time limit of ${timelimit} minutes.</div>`;
 					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
-						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. You can now allow the students to evaluate their peers.</div>`;
+						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>`;
 						act += `
 								<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
 								<div class="col-3 mt-3 answered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} class="btn btn-light"><i class="far fa-check-square"></i> ${activity.answered} Attempted</button></div>
-								<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>
-								<div class="col-3 mt-3"><button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>				
-							</div>
-						</div>`;						
+								<div class="col-3 mt-3 unanswered"><button type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} class="btn btn-light"><i class="far fa-window-close"></i> ${activity.sent_to - activity.answered} Unattempted</button></div>`;
+						if (activity.answered)
+						act +=	`<div class="col-3 mt-3"><button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>				
+							</div>`
+						act += `</div>`;						
 					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) > new Date()) {
 						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation started at ${new Date(activity.evaluation_started_time)} and will complete at ${new Date(activity.evaluation_end_time)}.</div>`
 					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time) <= new Date() && !activity.results_release_time.length) {
@@ -450,28 +454,26 @@ $(async function() {
 					}					
 				}
 				$('#activity').append(act);
-				if (activity.type == 'Test') {
+				if (activity.type == 'Test' && activity.answered) {
 					var ctx = document.getElementById(`myChart${activity.id}`).getContext('2d');
 					var myChart = new Chart(ctx, {
 						type: 'doughnut',
 						data: {
-							labels: ['Very Good', 'Good', 'Average', 'Below Average', 'Understanding Level'],
+							labels: [`>80 -${activity.results.percentage_very_good}`, `70-80 -${activity.results.percentage_good}`, `60-70 -${activity.results.percentage_average}`, `<60 -${activity.results.percentage_below_average}`],
 							datasets: [{
-								label: 'Test Status (in percentage)',
-								data: [activity.results.percentage_very_good, activity.results.percentage_good, activity.results.percentage_average, activity.results.percentage_below_average, activity.results.understanding_level],
+								label: `Student Understanding Level: ${activity.results.understanding_level}`,
+								data: [activity.results.percentage_very_good, activity.results.percentage_good, activity.results.percentage_average, activity.results.percentage_below_average],
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',
 									'rgba(54, 162, 235, 0.2)',
 									'rgba(255, 206, 86, 0.2)',
-									'rgba(75, 192, 192, 0.2)',
-									'rgba(153, 102, 255, 0.2)'
+									'rgba(75, 192, 192, 0.2)'
 								],
 								borderColor: [
 									'rgba(255, 99, 132, 1)',
 									'rgba(54, 162, 235, 1)',
 									'rgba(255, 206, 86, 1)',
-									'rgba(75, 192, 192, 1)',
-									'rgba(153, 102, 255, 1)'
+									'rgba(75, 192, 192, 1)'
 								],
 								borderWidth: 1
 							}]
@@ -483,7 +485,7 @@ $(async function() {
 							},
 							title: {
 								display: true,
-								text: 'Test Status (in percentage)'
+								text: `Student Understanding Level: ${activity.results.understanding_level}`
 							},
 							animation: {
 								animateScale: true,
