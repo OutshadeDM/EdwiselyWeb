@@ -574,7 +574,7 @@ $(document).ready(function () {
     $.each(data, function (key, value) {
 
       let endDateString = "";
-      let endDate = new Date(value.start_time.toLocaleString());
+      let endDate = new Date(value.start_time.toLocaleString().replace(/\s/, 'T'));
       // if(value.start_time) console.log(endDate)
       if(!isObj && value.start_time){
          endDate.setMinutes(endDate.getMinutes() + value.timelimit);

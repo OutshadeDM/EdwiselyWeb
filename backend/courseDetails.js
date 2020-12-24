@@ -410,23 +410,10 @@ $(document).ready(function () {
                     $.each(result.data, (index, course) => {
                         $img = $('<img>').addClass('card-img-top img-fluid py-2').attr('src', course.image || '../images/onlineCourses.png');
                         $title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
-                        // $description = $('<p></p>').addClass('py-0 my-0')
-                        // 				.append(
-                        // 					$('<span></span>').addClass('span-heading').text(course.description || "No Description Available")
-                        // 				)
-                        // $sections = $('<div></div>').addClass('row container');
-                        // $.each(course.sections, (i, section) => {
-                        // 	$sectionSpan = $(`<span id="${section.id}" data-faculty="${section.faculty_section_id}" data-depart="${section.department_name}" data-depart-full=${section.department_fullname}></span>`)
-                        // 					.addClass('span-heading span-dept').text(section.name)
-                        // 	$sectionCol = $(`<div></div>`)
-                        // 					.addClass('col-auto')
-                        // 					.append($sectionSpan)
-                        // 	$sections.append($sectionCol);
-                        // });
                         $cardBody = $('<div></div>').addClass('card-body p-2').append($title);
                         $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').append($img, $cardBody);
-                        $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').data('id', course.id).append($card);
-                        $course = $('<div></div>').addClass('course col-lg-4 col-md-6 col-12 h-100').append($gotoCard);
+                        $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').append($card);
+                        $course = $("<div data-toggle='modal' data-target='#deckModal' data-id='" + course.id + "'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($gotoCard);
                         $('#courseDeckList').append($course);
             
                         if (index == result.data.length - 1) {
@@ -466,22 +453,7 @@ $(document).ready(function () {
                               ]
                             });				
                         }
-                    });	
-
-                    // $.each(result.data, function (key, value) {
-                        
-                    //     courses.push({
-                    //         id: value.name,
-                    //         name: value.name,
-                    //         image: value.image,
-                    //         unit_id: value.unit_id
-                    //     });
-
-                        
-                    // });
-
-                    // displayFiles(files, courseType, courseLevel);
-
+                    });
                 }
                 else {
                     $('#courseDeckTitle').hide();
@@ -490,12 +462,59 @@ $(document).ready(function () {
             error: function (error) {
                 alert("Request Failed with status: "+error.status);
             }
-        });
-
-
-
-        
+        });        
     }
+
+    $('#deckModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        const deck_id = button.data('id'); // Extract info from data-* attributes
+
+        if(deck_id){
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/deckItems?deck_id='+deck_id,
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': `Bearer ${$user.token}`
+                },
+                success: function (result) {
+                    // alert(result.message);
+                    if (result.status == 200 && result.data) {
+                        let div = "";
+                        $.each(result.data,function(key,value){
+                            if(value.type == "cs" || value.type == "pqp"){
+                                div = div + "<div py-2>";
+                                
+                                $.get( value.url, function( data ) {
+                                    $('#abcd').empty();
+                                    $('#abcd').html(data);
+                                    if(value.type == "pqp")
+                                        div = div + "<p class='text-center'>Previous Year Question</p>";
+                                        div = div + "<div id='"+value.id+"'>";
+                                        div = div + data;
+                                        // MathJax.typeset();
+                                        // console.log(data);
+                                        div = div + "</div>";
+                                        div = div + "</div><hr>";
+                                        $('#deckModalDiv').append(div);
+                                });
+                            }
+                        });
+                        if(!div) div = "<h5 class='text-center'>No data to fetch</h5>";
+                        // alert(div);
+                    }
+                    else {
+                        // $('#courseFiles').empty();
+                        // $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                    }
+                },
+                error: function (error) {
+                    alert("Request Failed with status: "+error.status);
+                }
+            });
+        }
+
+    });
 
     function processFiles(result = []) {
 
