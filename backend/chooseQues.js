@@ -15,11 +15,17 @@ $(document).ready(function () {
   let tId = 0;
   let tname = "";
   let unit_id = "";
+  let description = ""
+  let objective = false
+  let question_count = 0
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
     tname = searchParams.get('tname');
+    question_count = searchParams.get('qc');
+    description = searchParams.get('desc')
+    objective = searchParams.get('isObj')
   }
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
@@ -100,6 +106,10 @@ $(document).ready(function () {
   let topicsId = []
   let grandTopicsId = []
 
+
+  //arrays for selected questions
+  let selectedQuestions = []
+  let selectedQuestionsId = []
 
 
   //changing unit on selecting of radio
@@ -240,7 +250,7 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
-            console.log(value)
+            //console.log(value)
 
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
@@ -289,6 +299,8 @@ $(document).ready(function () {
 
           });
 
+          questionsOfTest()
+
         }
         else {
           $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
@@ -322,20 +334,6 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
-            // let displayedQues = ""
-            // if (value.name.length > 110) {
-            //   displayedQues = value.name
-            // }
-
-            // else {
-            //   displayedQues = value.name
-            // }
-            // let answer;
-            // console.log(value.questions_options.length)
-            // for (let i = 0; i < value.questions_options.length; i++) {
-
-
-            // }
 
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
@@ -451,7 +449,78 @@ $(document).ready(function () {
 
 
 
+  //adding pre addded questions
 
+  function questionsOfTest() {
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        // alert(result.message);
+
+        if (result.status == 200 && result.data) {
+          $('.addingQues').empty()
+
+          $.each(result.data, function (key, value) {
+            // alert(value.id);
+            selectedQuestionsId.push(value.id);
+            selectedQuestions.push(value);
+            //alert(selectedQuestionsId)
+
+            $('.chooseQuestionsInput').each(function () {
+              if (selectedQuestionsId.includes($(this).data('id'))) {
+                $(this).prop('checked', true)
+              }
+            })
+
+          });
+
+
+
+
+
+
+          //displaying the already selected questions
+          for (let i = 0; i < selectedQuestions.length; i++) {
+
+
+            //console.log(selectedQuestions[i].questions_options[0].name)
+            $('.addingQues').append("<div class='chosenQuestions my-2 p-2' style='background:#e6e6e6;border-radius: 10px;cursor:pointer;' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
+              selectedQuestions[i].name + "</div>" +
+
+              "<div class='modal fade chosenQuestionModal" + selectedQuestions[i].id + "' tabindex='-1' role='dialog' aria-labelledby='chosenModalLabel' aria-hidden='true'>" +
+              "<div class='modal-dialog' role='document'>" +
+              "<div class='modal-content'>" +
+
+              "<div class='modal-body'>" +
+              "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
+              (selectedQuestions[i].questions_options[0] ? "<div style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[0].name) + "</div>" : "<div></div>") +
+              (selectedQuestions[i].questions_options[1] ? "<div style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[1].name) + "</div>" : "<div></div>") +
+              (selectedQuestions[i].questions_options[2] ? "<div style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[2].name) + "</div>" : "<div></div>") +
+              (selectedQuestions[i].questions_options[3] ? "<div style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[3].name) + "</div>" : "<div></div>") +
+              (selectedQuestions[i].questions_options[4] ? "<div style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + JSON.stringify(selectedQuestions[i].questions_options[4].name) + "</div>" : "<div></div>") +
+              "</div>" +
+
+              "</div>" +
+              "</div>" +
+              "</div>")
+
+          }
+
+
+          //console.log(selectedQuestions)
+
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
 
 
 
@@ -460,14 +529,13 @@ $(document).ready(function () {
 
   //selecting Questions on checking of checkbox
 
-  let selectedQuestions = []
-  let selectedQuestionsId = []
+
 
   $(document).on('change', '.chooseQuestionsInput', function (e) {
     //add Questions to a array which are selected
     (e.target.checked) ? selectedQuestions.push($(this).data('value')) : (selectedQuestions.splice(selectedQuestions.indexOf($(this).data('value')), 1));
     (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
-
+    console.log(selectedQuestionsId)
   });
 
 
@@ -489,7 +557,7 @@ $(document).ready(function () {
 
         //console.log(selectedQuestions[i].questions_options[0].name)
         $('.addingQues').append("<div class='chosenQuestions my-2 p-2' style='background:#e6e6e6;border-radius: 10px;cursor:pointer;' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
-          selectedQuestions[i].name.substr(0, 110) + "</div>" +
+          selectedQuestions[i].name + "</div>" +
 
           "<div class='modal fade chosenQuestionModal" + selectedQuestions[i].id + "' tabindex='-1' role='dialog' aria-labelledby='chosenModalLabel' aria-hidden='true'>" +
           "<div class='modal-dialog' role='document'>" +

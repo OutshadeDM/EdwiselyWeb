@@ -20,6 +20,7 @@ $(document).ready(function () {
   let objective = false
   let unit_id = "";
   let description = ""
+  let question_count = 0
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
@@ -27,6 +28,7 @@ $(document).ready(function () {
     tname = searchParams.get('tname');
     description = searchParams.get('desc')
     objective = searchParams.get('isObj')
+    question_count = searchParams.get('qc')
   }
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
@@ -212,12 +214,6 @@ $(document).ready(function () {
   $(document).on('click', '#selectAll', function () {
     if ($(this).is(':checked')) {
 
-      // if (!selectedStudentsId.includes($(this).data('id'))){
-      //   selectedStudentsId.splice(selectedStudentsId.indexOf($(this).data('id')), 1)
-      // }
-
-
-      //selectedStudentsId = []
       $(".studentsToSelect").prop('checked', true);
       $('.studentsToSelect').each(function () {
         if (!selectedStudentsId.includes($(this).data('id'))) {
