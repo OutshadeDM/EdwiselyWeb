@@ -15,11 +15,15 @@ $(document).ready(function () {
   let tId = 0;
   let tname = "";
   let unit_id = "";
+  let desc = ""
+  let objective = false
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
     tname = searchParams.get('tname');
+    desc = searchParams.get('desc')
+    objective = searchParams.get('isObj')
   }
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
@@ -175,7 +179,7 @@ $(document).ready(function () {
             // $('#successToastBody').text('Questions Uploaded Successfully');
             // $('#successToast').toast('show');
             alert(result.message);
-            window.location.href = "myAssessment.html"
+            window.location.href = "addQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&desc=" + desc + "&isObj=" + objective + "qc=1"
           }
           else if (result.status == 500) {
             // $('#errorToastBody').text(result.message);
