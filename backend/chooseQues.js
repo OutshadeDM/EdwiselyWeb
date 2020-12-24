@@ -258,8 +258,8 @@ $(document).ready(function () {
 
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-              "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-              "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+              "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value=`" + JSON.stringify(value) +
+              "` name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -341,8 +341,8 @@ $(document).ready(function () {
 
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value=`" + JSON.stringify(value) +
+                "` name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
                 (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
                 (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +

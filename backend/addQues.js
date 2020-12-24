@@ -939,6 +939,7 @@ $(document).ready(function () {
         // alert(questionId);
         if (questionId == value.id) {
           autoFill(value);
+          return false;
         }
       });
     }
@@ -1388,7 +1389,7 @@ $(document).ready(function () {
       if (!question_type1)
         question_type1 = "private";
 
-      console.log(JSON.stringify(newQuestion));
+      // console.log(JSON.stringify(newQuestion));
       // alert(newOptions.length);
 
       if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {

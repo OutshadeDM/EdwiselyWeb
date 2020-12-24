@@ -1707,9 +1707,10 @@ $(document).ready(function () {
     }
 
     let yourQuestions = [];
+    let questions = [];
 
     function processObjQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {
-        let questions = [];
+        questions = [];
         $.each(result.data, function (key, value) {
             // alert(value.name);
             if (!yourContent) {
@@ -1784,7 +1785,7 @@ $(document).ready(function () {
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
                 div = div + "<div class='row py-2 px-3 p-2'>";
-                div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-target='#courseObjQuestionModal' data-whatever='" + JSON.stringify(value) + "'>";
+                div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
                 // if (value.question.name.length > 100)
                 //     div = div + "<p class='question'>" + value.question.name.substr(0, 100) + " ...</p>";
                 // else
@@ -1827,7 +1828,7 @@ $(document).ready(function () {
 
     function processSubQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {
 
-        let questions = [];
+        questions = [];
         $.each(result.data, function (key, value) {
             // alert(value.name);
             if (!yourContent) {
@@ -1900,81 +1901,90 @@ $(document).ready(function () {
 
     $('#courseObjQuestionModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
-        let question = button.data('whatever'); // Extract info from data-* attributes
-        // alert(question.options[0].name);
-        $('#questionModalQuestion').html(question.question.name);
-        $('#questionModalOptionA').html(question.options[0].name);
-        $('#questionModalOptionB').html(question.options[1].name);
-        if(question.options[2])
-            $('#questionModalOptionC').html(question.options[2].name);
-        if(question.options[3])
-            $('#questionModalOptionD').html(question.options[3].name);
-        // alert(question.options[2].is_answer);
+        let questionId = button.data('id'); // Extract info from data-* attributes
+        let question = [];
+        // console.log(JSON.stringify(questions));
+        $.each(questions, function (key, value) {
+            // alert(questionId);
+            if (questionId == value.id) {
+                question = value;
+                // alert(question);
+                $('#questionModalQuestion').html(question.question.name);
+                $('#questionModalOptionA').html(question.options[0].name);
+                $('#questionModalOptionB').html(question.options[1].name);
+                if(question.options[2])
+                    $('#questionModalOptionC').html(question.options[2].name);
+                if(question.options[3])
+                    $('#questionModalOptionD').html(question.options[3].name);
+                // alert(question.options[2].is_answer);
+
+                if (question.question.media == 1) {
+                    $("#questionModalQuestionTd").show();
+                    $("#questionModalQuestionImgA").attr("href", "viewFile.html?url="+question.question.question_img+"&type=img");
+                    $("#questionModalQuestionImgA").attr("target", "_blank");
+                    $("#questionModalQuestionImg").attr("src", question.question.question_img);
+                }
+
+                if (question.options[0].media == 1) {
+                    $("#questionModalOptionATd").show();
+                    $("#questionModalOptionAImgA").attr("href", "viewFile.html?url="+question.options[0].img+"&type=img");
+                    $("#questionModalOptionAImgA").attr("target", "_blank");
+                    $("#questionModalOptionAImg").attr("src", question.options[0].img);
+                }
+                if (question.options[1].media == 1) {
+                    $("#questionModalOptionBTd").show();
+                    $("#questionModalOptionBImgA").attr("href", "viewFile.html?url="+question.options[1].img+"&type=img");
+                    $("#questionModalOptionBImgA").attr("target", "_blank");
+                    $("#questionModalOptionBImg").attr("src", question.options[1].img);
+                }
+                if (question.options[2] && question.options[2].media == 1) {
+                    $("#questionModalOptionCTd").show();
+                    $("#questionModalOptionCImgA").attr("href", "viewFile.html?url="+question.options[2].img+"&type=img");
+                    $("#questionModalOptionCImgA").attr("target", "_blank");
+                    $("#questionModalOptionCImg").attr("src", question.options[2].img);
+                }
+                if (question.options[3] && question.options[3].media == 1) {
+                    $("#questionModalOptionDTd").show();
+                    $("#questionModalOptionDImgA").attr("href", "viewFile.html?url="+question.options[3].img+"&type=img");
+                    $("#questionModalOptionDImgA").attr("target", "_blank");
+                    $("#questionModalOptionDImg").attr("src", question.options[3].img);
+                }
+                if (question.options[4] && question.options[4].media == 1) {
+                    $("#questionModalOptionETd").show();
+                    $("#questionModalOptionEImgA").attr("href", "viewFile.html?url="+question.options[4].img+"&type=img");
+                    $("#questionModalOptionEImgA").attr("target", "_blank");
+                    $("#questionModalOptionEImg").attr("src", question.options[4].img);
+                }
 
 
-        if (question.question.media == 1) {
-            $("#questionModalQuestionTd").show();
-            $("#questionModalQuestionImgA").attr("href", "viewFile.html?url="+question.question.question_img+"&type=img");
-            $("#questionModalQuestionImgA").attr("target", "_blank");
-            $("#questionModalQuestionImg").attr("src", question.question.question_img);
-        }
+                if (question.options[0].is_answer == 1)
+                    $('#questionModalOptionA').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionA').css("color", "black");
 
-        if (question.options[0].media == 1) {
-            $("#questionModalOptionATd").show();
-            $("#questionModalOptionAImgA").attr("href", "viewFile.html?url="+question.options[0].img+"&type=img");
-            $("#questionModalOptionAImgA").attr("target", "_blank");
-            $("#questionModalOptionAImg").attr("src", question.options[0].img);
-        }
-        if (question.options[1].media == 1) {
-            $("#questionModalOptionBTd").show();
-            $("#questionModalOptionBImgA").attr("href", "viewFile.html?url="+question.options[1].img+"&type=img");
-            $("#questionModalOptionBImgA").attr("target", "_blank");
-            $("#questionModalOptionBImg").attr("src", question.options[1].img);
-        }
-        if (question.options[2] && question.options[2].media == 1) {
-            $("#questionModalOptionCTd").show();
-            $("#questionModalOptionCImgA").attr("href", "viewFile.html?url="+question.options[2].img+"&type=img");
-            $("#questionModalOptionCImgA").attr("target", "_blank");
-            $("#questionModalOptionCImg").attr("src", question.options[2].img);
-        }
-        if (question.options[3] && question.options[3].media == 1) {
-            $("#questionModalOptionDTd").show();
-            $("#questionModalOptionDImgA").attr("href", "viewFile.html?url="+question.options[3].img+"&type=img");
-            $("#questionModalOptionDImgA").attr("target", "_blank");
-            $("#questionModalOptionDImg").attr("src", question.options[3].img);
-        }
-        if (question.options[4] && question.options[4].media == 1) {
-            $("#questionModalOptionETd").show();
-            $("#questionModalOptionEImgA").attr("href", "viewFile.html?url="+question.options[4].img+"&type=img");
-            $("#questionModalOptionEImgA").attr("target", "_blank");
-            $("#questionModalOptionEImg").attr("src", question.options[4].img);
-        }
+                if (question.options[1].is_answer == 1)
+                    $('#questionModalOptionB').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionB').css("color", "black");
 
+                if (question.options[2] && question.options[2].is_answer == 1)
+                    $('#questionModalOptionC').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionC').css("color", "black");
 
-        if (question.options[0].is_answer == 1)
-            $('#questionModalOptionA').css("color", "darkgreen");
-        else
-            $('#questionModalOptionA').css("color", "black");
+                if (question.options[3]  && question.options[3].is_answer == 1)
+                    $('#questionModalOptionD').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionD').css("color", "black");
 
-        if (question.options[1].is_answer == 1)
-            $('#questionModalOptionB').css("color", "darkgreen");
-        else
-            $('#questionModalOptionB').css("color", "black");
+                if (question.options[4]  && question.options[4].is_answer == 1)
+                    $('#questionModalOptionE').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionE').css("color", "black");
 
-        if (question.options[2] && question.options[2].is_answer == 1)
-            $('#questionModalOptionC').css("color", "darkgreen");
-        else
-            $('#questionModalOptionC').css("color", "black");
-
-        if (question.options[3]  && question.options[3].is_answer == 1)
-            $('#questionModalOptionD').css("color", "darkgreen");
-        else
-            $('#questionModalOptionD').css("color", "black");
-
-        if (question.options[4]  && question.options[4].is_answer == 1)
-            $('#questionModalOptionE').css("color", "darkgreen");
-        else
-            $('#questionModalOptionE').css("color", "black");
+            return false;
+          }
+        });
 
     });
 
