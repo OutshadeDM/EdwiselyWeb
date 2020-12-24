@@ -235,6 +235,7 @@ $(document).ready(function () {
   getAllQuestions()
   function getAllQuestions() {
     //alert("fnjmf")
+    $('.addingQues').empty()
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=' + grandTopicsId + '&topic_ids=' + topicsId + '&sub_topic_ids=' + subTopicsId,
       type: 'GET',
@@ -247,6 +248,7 @@ $(document).ready(function () {
         //alert(subSemId)
 
         $('.chooseQues').empty();
+        $('.addingQues').empty()
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
@@ -299,8 +301,8 @@ $(document).ready(function () {
 
           });
 
+          $('.addingQues').empty()
           questionsOfTest()
-
         }
         else {
           $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
@@ -380,6 +382,8 @@ $(document).ready(function () {
               );
             }
           });
+          $('.addingQues').empty()
+          questionsOfTest()
 
         }
         else {
@@ -400,6 +404,8 @@ $(document).ready(function () {
 
 
   $('#navAll').on('click', function () {
+    selectedQuestionsId = []
+    selectedQuestions = []
     getAllQuestions()
     $('#navAll').css({ "color": "black", "font-weight": "bolder" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -410,6 +416,8 @@ $(document).ready(function () {
 
 
   $('#navRemember').on('click', function () {
+    selectedQuestionsId = []
+    selectedQuestions = []
     getBloomQuestions(1)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "black", "font-weight": "bolder" })
@@ -419,6 +427,8 @@ $(document).ready(function () {
   })
 
   $('#navUnderstand').on('click', function () {
+    selectedQuestionsId = []
+    selectedQuestions = []
     getBloomQuestions(2)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -428,6 +438,8 @@ $(document).ready(function () {
   })
 
   $('#navApply').on('click', function () {
+    selectedQuestionsId = []
+    selectedQuestions = []
     getBloomQuestions(3)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -437,6 +449,8 @@ $(document).ready(function () {
   })
 
   $('#navAnalyze').on('click', function () {
+    selectedQuestionsId = []
+    selectedQuestions = []
     getBloomQuestions(4)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -467,9 +481,15 @@ $(document).ready(function () {
 
           $.each(result.data, function (key, value) {
             // alert(value.id);
-            selectedQuestionsId.push(value.id);
-            selectedQuestions.push(value);
-            //alert(selectedQuestionsId)
+            //console.log(selectedQuestionsId)
+            if (!selectedQuestionsId.includes(value.id)) {
+              selectedQuestionsId.push(value.id);
+              //console.log(selectedQuestionsId)
+            }
+            if (!selectedQuestions.includes(value)) {
+              selectedQuestions.push(value);
+            }
+            console.log(selectedQuestionsId)
 
             $('.chooseQuestionsInput').each(function () {
               if (selectedQuestionsId.includes($(this).data('id'))) {
@@ -479,13 +499,11 @@ $(document).ready(function () {
 
           });
 
-
-
-
-
-
+          $('.addingQues').empty()
+          //alert("hello")
           //displaying the already selected questions
           for (let i = 0; i < selectedQuestions.length; i++) {
+
 
 
             //console.log(selectedQuestions[i].questions_options[0].name)

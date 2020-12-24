@@ -100,26 +100,58 @@ $(document).ready(function () {
 
   function getTopics() {
 
+    // $.ajax({
+    //   url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   headers: {
+    //     'Authorization': `Bearer ${$user.token}`
+    //   },
+    //   success: function (result) {
+    //     // alert(result.status);
+    //     //alert(subSemId)
+
+    //     $('#topicTags').empty();
+    //     if (result.status == 200 && result.data) {
+    //       $.each(result.data, function (key, value) {
+    //         // alert(value);
+
+    //         $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
+
+    //       });
+
+    //     }
+    //     else {
+    //       $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
+    //       //alert("here");
+    //     }
+
+
+    //   },
+    //   error: function (error) {
+    //     alert("Request Failed with status: " + error.status);
+    //   }
+    // });
+
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
+      url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnitTopics?unit_ids=' + unit,
       type: 'GET',
       contentType: 'application/json',
       headers: {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // alert(result.status);
+        //alert(result.status);
         //alert(subSemId)
 
         $('#topicTags').empty();
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
-            // alert(value);
-
-            $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
-
+            // console.log(value);
+            $.each(value.topic, function (key, unitTopic) {
+              $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "'/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
+            })
           });
-
         }
         else {
           $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
@@ -132,6 +164,10 @@ $(document).ready(function () {
         alert("Request Failed with status: " + error.status);
       }
     });
+
+
+
+
   }
 
 
@@ -168,7 +204,7 @@ $(document).ready(function () {
   $('#uploadBtn').click(function () {
 
     //console.log("jndsi")
-    alert("hello")
+    //alert("hello")
 
     var form = new FormData();
     form.append("files", uploaded_question);
@@ -188,7 +224,7 @@ $(document).ready(function () {
         //alert(result.status);
         if (result.status == 200) {
 
-          alert(result.message);
+          //alert(result.message);
           $.each(result.data, function (key, value) {
             //console.log(value);
             questions.push(value.id)
@@ -201,9 +237,9 @@ $(document).ready(function () {
           form.append("test_id", tId);
           form.append("questions", "[" + questions + "]");
           form.append("units", "[" + unit + "]")
-          for (var key of form.entries()) {
-            alert(key[1]);
-          }
+          // for (var key of form.entries()) {
+          //   alert(key[1]);
+          // }
 
 
           $.ajax({
