@@ -237,7 +237,7 @@ $(document).ready(function () {
   getAllQuestions()
   function getAllQuestions() {
     //alert("fnjmf")
-    $('.addingQues').empty()
+    //$('.addingQues').empty()
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=' + grandTopicsId + '&topic_ids=' + topicsId + '&sub_topic_ids=' + subTopicsId,
       type: 'GET',
@@ -250,7 +250,7 @@ $(document).ready(function () {
         //alert(subSemId)
 
         $('.chooseQues').empty();
-        $('.addingQues').empty()
+        //$('.addingQues').empty()
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
@@ -303,7 +303,7 @@ $(document).ready(function () {
 
           });
 
-          $('.addingQues').empty()
+          //$('.addingQues').empty()
           questionsOfTest()
         }
         else {
@@ -384,7 +384,7 @@ $(document).ready(function () {
               );
             }
           });
-          $('.addingQues').empty()
+          //$('.addingQues').empty()
           questionsOfTest()
 
         }
@@ -501,7 +501,7 @@ $(document).ready(function () {
 
           });
 
-          $('.addingQues').empty()
+          //$('.addingQues').empty()
           //alert("hello")
           //displaying the already selected questions
           for (let i = 0; i < selectedQuestions.length; i++) {
