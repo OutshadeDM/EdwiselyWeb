@@ -117,6 +117,8 @@ $(document).ready(function () {
   $(document).on('click', '.getUnitsInput', function () {
     //alert("hello")
     unit = $(".getUnitsInput:checked").val();
+    selectedQuestionsId = []
+    selectedQuestions = []
     subTopicsId = []
     topicsId = []
     grandTopicsId = []
