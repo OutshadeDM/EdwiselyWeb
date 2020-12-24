@@ -25,7 +25,9 @@ $(document).ready(function () {
                 window.location.replace("index.html");
               }
             } else {
-              window.location.replace('login.html?status=danger&message=401');
+              $.cookie('status', 'danger');
+			        $.cookie('message', '401');
+              window.location.replace('login.html');
             }
         },
         error: function (error) {
@@ -48,9 +50,13 @@ $(document).ready(function () {
             // alert(result.status);
             console.log(result, result.token, JSON.stringify(result));
             if (result.status == 200) {
-              window.location.replace('login.html?status=success&message=201');
+              $.cookie('status', 'success');
+			        $.cookie('message', '201');
+              window.location.replace('login.html');              
             } else {
-              window.location.replace('login.html?status=danger&message=402');
+              $.cookie('status', 'danger');
+			        $.cookie('message', '402');
+              window.location.replace('login.html');              
             }
         },
         error: function (error) {
@@ -81,7 +87,9 @@ $(document).ready(function () {
               window.location.replace("index.html");
             } else {
               console.log(result);
-              window.location.replace('login.html?status=danger&message=402');
+              $.cookie('status', 'danger');
+			        $.cookie('message', '402');
+              window.location.replace('login.html');              
             }
         },
         error: function (error) {
@@ -90,10 +98,10 @@ $(document).ready(function () {
     });    
   }
 
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var status = url.searchParams.get("status");
-  var message = url.searchParams.get("message");
+	var status = $.cookie('status');
+	var message = $.cookie("message");
+	$.removeCookie('status');
+	$.removeCookie('message');
   if (status) {
     if (message == 401)
       $('.alert strong').text('Wrong Email Id or Password!');

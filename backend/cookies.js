@@ -4,5 +4,7 @@ function isLoggedIn() {
 
 function logout() {
 	$.cookie('user', "");
-	window.location.replace('login.html?status=success&message=200');
+	$.cookie('status', 'success');
+	$.cookie('message', '200');
+	window.location.replace('login.html')
 }

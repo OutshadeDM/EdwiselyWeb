@@ -225,16 +225,21 @@ $(document).ready(function () {
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tname=" + value.name + "&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
+      if (value.doe == "") {
+        div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "'><i class='fas fa-pen'></i></a>";
+      }
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
       div = div + "Questions: " + value.questions_count;
       if (!value.questions_count)
-        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
+        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
+      else if (value.doe != "") {
+        div = div + "<div style='float:right;'>Sent</div>";
+      }
       else
-        div = div + "<a href='../pages/sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+        div = div + "<a href='../pages/sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       div = div + "</div></div></div>";
 
     });
@@ -576,26 +581,26 @@ $(document).ready(function () {
       let endDateString = "";
       let endDate = new Date(value.start_time.toLocaleString().replace(/\s/, 'T'));
       // if(value.start_time) console.log(endDate)
-      if(!isObj && value.start_time){
-         endDate.setMinutes(endDate.getMinutes() + value.timelimit);
-         endDateString = endDate.getFullYear() + '-' +('0' + (endDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + endDate.getDate()).slice(-2) + ' '+endDate.getHours()+ ':'+('0' + (endDate.getMinutes())).slice(-2)+ ':'+('0' + (endDate.getSeconds())).slice(-2);
+      if (!isObj && value.start_time) {
+        endDate.setMinutes(endDate.getMinutes() + value.timelimit);
+        endDateString = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2) + ' ' + endDate.getHours() + ':' + ('0' + (endDate.getMinutes())).slice(-2) + ':' + ('0' + (endDate.getSeconds())).slice(-2);
       }
-      else if(!isObj && value.created_at) endDate.setMinutes(endDate.getMinutes() + value.timelimit);
+      else if (!isObj && value.created_at) endDate.setMinutes(endDate.getMinutes() + value.timelimit);
 
       div = div + "<div class='col-sm-6 assessment condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
       div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
-      if (value.start_time){
-        if(!isObj)
-          div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + endDateString + "</h6>";  
+      if (value.start_time) {
+        if (!isObj)
+          div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + endDateString + "</h6>";
         else
           div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + value.doe + "</h6>";
       }
-      else{
-        if(!isObj)
-          div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + endDateString + "</h6>";  
+      else {
+        if (!isObj)
+          div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + endDateString + "</h6>";
         else
           div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + value.doe + "</h6>";
       }

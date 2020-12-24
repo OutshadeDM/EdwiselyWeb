@@ -1,21 +1,30 @@
 $(document).ready(function () {
   //alert("hello")
 
+  $user = "";
+  if (isLoggedIn()) {
+    // console.log(isLoggedIn(), 'yes');
+    $user = JSON.parse(isLoggedIn());
+    $('html').removeClass('d-none');
+  } else {
+    window.location.replace("login.html");
+  }
+
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
     type: 'GET',
     contentType: 'application/json',
     headers: {
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
+      'Authorization': `Bearer ${$user.token}`
     },
     success: function (result) {
-      // alert(result.status);
+      //alert(result.status);
       $('#courseTags').empty();
       if (result.status == 200 && result.data) {
         $.each(result.data, function (key, value) {
           // alert(value);
 
-          $('#courseTags').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='" + value.id + "' data-name='"+value.name+"' name='courseTagAdd' id='courseTagAdd" + value.id + "'/><label for='courseTagAdd" + value.id + "' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
+          $('#courseTags').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='" + value.id + "' data-name='" + value.name + "' name='courseTagAdd' id='courseTagAdd" + value.id + "'/><label for='courseTagAdd" + value.id + "' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
 
         });
 
@@ -28,14 +37,14 @@ $(document).ready(function () {
 
     },
     error: function (error) {
-      alert("Request Failed with status: "+error.status);
+      alert("Request Failed with status: " + error.status);
     }
   });
 
   $('#exampleModal').on('hidden.bs.modal', function (event) {
     let courseTagAdd = $("input[name='courseTagAdd']:checked").val();
     // alert(courseTagAdd);
-    if(courseTagAdd) $('#assessmentSub').text($('#courseTagAdd'+courseTagAdd).data('name'));
+    if (courseTagAdd) $('#assessmentSub').text($('#courseTagAdd' + courseTagAdd).data('name'));
     // else $('#assessmentSub').text("Select a subject");
 
   })
@@ -114,7 +123,7 @@ $(document).ready(function () {
         contentType: false,
         processData: false,
         headers: {
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjc0MjYyMyIsImV4cCI6IjE2MDgwMzg2MjMifQ.74y5dyBOCgwbVs7gUDn2Nn_ZRGrQhUhwD_waW9ialJk'
+          'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
           //alert(result.message);
@@ -122,11 +131,11 @@ $(document).ready(function () {
 
           if (result.status == 200) {
             alert(result.message)
-            window.location.href = "AddQuestionspage.html"
+            window.location.href = "myAssessment.html"
           }
         },
         error: function (error) {
-          alert("Request Failed with status: "+error.status);
+          alert("Request Failed with status: " + error.status);
         }
       });
     }
