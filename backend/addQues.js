@@ -196,6 +196,7 @@ $(document).ready(function () {
               questions.push(editQuesJSON);
               isCookie = true;
               $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
+              $('#questionBankA').text('Question Bank');
               loadList();
               $.cookie('editQues', "");
               $('#questionId').val(editQuesJSON.id);
@@ -881,7 +882,7 @@ $(document).ready(function () {
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             setTimeout(function () {
-              window.location.href = "addQuestionPage.html";
+              window.location.href = "myAssessment.html";
             }, 2000);
           }
           else {
