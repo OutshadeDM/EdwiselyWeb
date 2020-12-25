@@ -111,11 +111,17 @@ $(document).ready(function () {
       $('.alert strong').text('Successfully Logged Out');
     else if (message == 201)
       $('.alert strong').text('Please Check Your Mail For New Password!');
-      else if (message == 202)
-      $('.alert strong').text('Successfully Updated Password!');            
-    $('.alert').addClass(`alert-${status}`);
-    $('.alert').removeClass('d-none');
+    else if (message == 202)
+      $('.alert strong').text('Successfully Updated Password!');    
+    $('.alert').addClass(`alert-${status}`);        
+    $(".alert").fadeTo(2000, 500).slideUp(500, function() {
+      $(".alert").slideUp(500);
+    });
   }
+
+  $(document).click(function (event) {
+    $(".alert").hide();
+  });
 
   // Check if user is already logged in
   if (!isLoggedIn()) {
