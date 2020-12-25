@@ -483,7 +483,10 @@ $(document).ready(function () {
                     if (result.status == 200 && result.data) {
                         // let div = "";
 
-                        $.each(result.data, (index, deck) => {
+                        let index = 0;
+                        while( index < result.data.length){
+                            const deck = result.data[index];
+                            if(){
                             if(deck.type == "cs" || deck.type == "pqp"){
                                 $.get(deck.url, function( data ) {
                                     $optionalP = "";
@@ -492,16 +495,20 @@ $(document).ready(function () {
                                     $mainDiv = $("<div></div>").append(data);
                                     $deckDiv = $("<div></div>").addClass('p-2').append($optionalP).append($mainDiv);
                                     $('#deckModalDiv').append($deckDiv);
-
                                     if (index == result.data.length - 1) {
                                         // alert(index);
-                                        $('#deckModalDiv').slick();				
+                                        $('#deckModalDiv').slick({
+                                            adaptiveHeight: true
+                                        });				
                                     }                                    
                                 });
+                                    // reFormatDocument();
                     
                                 
                             }
-                        });
+                            index++;
+                        }
+                        }
                     }
                     else
                         $('#deckModalDiv').append("<h5 class='text-center'>No data to fetch</h5>");
