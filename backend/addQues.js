@@ -1272,8 +1272,10 @@ $(document).ready(function () {
       // alert(question_img_url);
       // console.log(JSON.stringify(newOptions));
 
-      if (newQuestion.question_img && !question_img_url)
+      if ((newQuestion.question_img && !question_img_url) || question_img){
         newQuestion.question_img = "";
+        newQuestion.media = 1
+      }
 
       if (newQuestion.solution_image && !solution_img_url)
         newQuestion.solution_image = "";
@@ -1352,31 +1354,31 @@ $(document).ready(function () {
 
       newOptions = newOptions.filter(function (e, index) {
         if (index == 0 && (option1 || option1_img || option1_img_url)) {
-          if (answer == "0") e.is_answer = "1";
+          if (answer == "0") e.is_answer = 1;
           else e.is_answer = "0";
           if (option1_img || option1_img_url) e.media = 1;
           return e;
         }
         if (index == 1 && (option2 || option2_img || option2_img_url)) {
-          if (answer == "1") e.is_answer = "1";
+          if (answer == "1") e.is_answer = 1;
           else e.is_answer = "0";
           if (option2_img || option2_img_url) e.media = 1;
           return e;
         }
         if (index == 2 && (option3 || option3_img || option3_img_url)) {
-          if (answer == "2") e.is_answer = "1";
+          if (answer == "2") e.is_answer = 1;
           else e.is_answer = "0";
           if (option3_img || option3_img_url) e.media = 1;
           return e;
         }
         if (index == 3 && (option4 || option4_img || option4_img_url)) {
-          if (answer == "3") e.is_answer = "1";
+          if (answer == "3") e.is_answer = 1;
           else e.is_answer = "0";
           if (option4_img || option4_img_url) e.media = 1;
           return e;
         }
         if (index == 4 && (option5 || option5_img || option5_img_url)) {
-          if (answer == "4") e.is_answer = "1";
+          if (answer == "4") e.is_answer = 1;
           else e.is_answer = "0";
           if (option5_img || option5_img_url) e.media = 1;
           return e;
@@ -1389,7 +1391,7 @@ $(document).ready(function () {
       if (!question_type1)
         question_type1 = "private";
 
-      // console.log(JSON.stringify(newQuestion));
+      console.log(JSON.stringify(newQuestion));
       // alert(newOptions.length);
 
       if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
@@ -1417,8 +1419,8 @@ $(document).ready(function () {
         // $("#courseName").text(JSON.stringify(newOptions));
 
         // for (var key of form.entries()) {
-        //   // alert(key[1]);
-        //   console.log(key[1]);
+        //   alert(key[1]);
+        //   // console.log(key[1]);
         // }
 
         $.ajax({
@@ -1500,7 +1502,7 @@ $(document).ready(function () {
                 const foundIndex = questions.findIndex(x => x.id == questionId);
                 // console.log(JSON.stringify(questions[foundIndex]));
                 questions[foundIndex] = result1.data;
-                // console.log(JSON.stringify(questions[foundIndex]));
+                console.log(JSON.stringify(questions[foundIndex]));
                 // questions = questions.filter(function(e){
                 //   if(e.id == questionId) e = result1.data;
                 //   return e;

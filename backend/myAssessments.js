@@ -672,26 +672,26 @@ $(document).ready(function () {
   });
 
 
-  $("#condObjDate").blur(function () {
-    // alert("here");
-    let date = new Date();
-    date.setMonth(date.getMonth() - 6);
-    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-    // $("#condObjDate").val(fullDate);
-    $('#condObjDate').datepicker('setDate', date);
+  // $("#condObjDate").blur(function () {
+  //   // alert("here");
+  //   // let date = new Date();
+  //   // date.setMonth(date.getMonth() - 6);
+  //   // let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+  //   // // $("#condObjDate").val(fullDate);
+  //   // $('#condObjDate').datepicker('setDate', date);
 
 
-  });
+  // });
 
-  $("#condSubDate").blur(function () {
-    let date = new Date();
-    date.setMonth(date.getMonth() - 6);
-    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-    $("#condSubDate").val(fullDate);
-    $('#condSubDate').datepicker('setDate', date);
-    // $("#condSubDate").val(fullDate);
+  // $("#condSubDate").blur(function () {
+  //   let date = new Date();
+  //   date.setMonth(date.getMonth() - 6);
+  //   let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+  //   $("#condSubDate").val(fullDate);
+  //   $('#condSubDate').datepicker('setDate', date);
+  //   // $("#condSubDate").val(fullDate);
 
-  });
+  // });
 
 
 
