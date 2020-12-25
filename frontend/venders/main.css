@@ -104,6 +104,18 @@ border: none;
   padding-right: 8px;
 }
 
+.saveChooseBtn{
+  background-color: #1B658C;
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  color: white;
+  position: absolute;
+  right: 100px;
+  bottom: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
 
 .mainDiv{
 background: #F9F9F9;
