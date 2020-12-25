@@ -35,6 +35,27 @@ $(document).ready(function () {
 
     });
 
+	const getDeckData = (url) => {
+		return new Promise((resolve, reject) => {
+			try {
+			    $.ajax({
+			        url: url,
+			        type: 'GET',
+			        success: function (result) {
+						console.log(result);
+						resolve(result);				
+			        },
+			        error: function (error) {
+			            console.log(error);
+			            reject(error);
+			        }
+			    });
+			} catch (error) {
+				console.log(error);
+			}
+		});
+	}    
+
     function navAbout(){
         refreshContents();
         refreshQuestions();       
@@ -422,6 +443,7 @@ $(document).ready(function () {
                               infinite: false,
                               speed: 300,
                               adaptiveHeight: true,
+                              lazyLoad: 'ondemand',
                               slidesToShow: 4,
                               slidesToScroll: 4,
                               arrows: true,	
@@ -478,17 +500,17 @@ $(document).ready(function () {
                 headers: {
                     'Authorization': `Bearer ${$user.token}`
                 },
-                success: function (result) {
+                success: async function (result) {
                     // alert(result.message);
                     if (result.status == 200 && result.data) {
                         // let div = "";
-
-                        let index = 0;
-                        while( index < result.data.length){
+                        for(let index = 0; index < result.data.length; index++){
                             const deck = result.data[index];
-                            if(){
                             if(deck.type == "cs" || deck.type == "pqp"){
-                                $.get(deck.url, function( data ) {
+                                try {
+                                    console.log('Here1');
+                                    const data = await getDeckData(deck.url);
+                                    console.log('Here2');
                                     $optionalP = "";
                                     if(deck.type == "pqp")
                                         $optionalP = $("<p></p>").addClass('text-center').append("Previous Year Question</p>");
@@ -500,14 +522,12 @@ $(document).ready(function () {
                                         $('#deckModalDiv').slick({
                                             adaptiveHeight: true
                                         });				
-                                    }                                    
-                                });
-                                    // reFormatDocument();
-                    
-                                
+                                    }                                     
+                                } catch (error) {
+                                    console.log(error);
+                                    // alert('Something Went Wrong!');
+                                }                      
                             }
-                            index++;
-                        }
                         }
                     }
                     else
