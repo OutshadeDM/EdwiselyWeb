@@ -42,7 +42,7 @@ $(document).ready(function () {
   let section = 0
   let sectionIds = []
   let selectedStudentsId = []
-  let count = 0
+  //let count = 0
   let hours = 0
   let mins = 0
   let timelimit_in_secs = 0
@@ -61,7 +61,7 @@ $(document).ready(function () {
       start: {
         minDate: 0,
         onSelect: function (selectedDateTime) {
-          endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'))
+          endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'.replace(/\s/, 'T')))
         }
       },
       end: {
