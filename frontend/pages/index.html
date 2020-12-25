@@ -57,6 +57,36 @@
       </div>
     </div>
   </div> 
+
+  <!-- Bootstrap row -->
+  <div class="modal fade" id="forward" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Answered / Unanswered Students</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="forwardId" value="">
+          <input type="hidden" id="forwardType" value="">
+          <div class="slide-wrap col-12">
+            <ul class="nav nav-pills mb-3 row" id="myTab" role="tablist">
+            </ul>
+          </div>
+          <hr>
+          <div class="col-12">
+            <div class="tab-content" id="myTabContent">
+            </div>
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="forwardBtn" class="btn btn-primary">Start</button>
+        </div>
+      </div>
+    </div>
+  </div>   
   
   <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -127,7 +157,7 @@
 
   <div class="row" id="body-row">
 
-    <div style="z-index: 9999;position: fixed; top: 10px; left: 50%; transform: translate(-50%)" class="alert d-none alert-dismissible">
+    <div style="z-index: 9999;position: fixed; top: 10px; left: 50%; transform: translate(-50%); display: none;" class="alert alert-dismissible">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>Success!</strong>
     </div>  

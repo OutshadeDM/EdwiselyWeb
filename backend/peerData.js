@@ -59,11 +59,11 @@ $(async function() {
 				type = 'subjective test';
 				text = `${role_name} ${faculty_name} has created a ${type} named ${title} - ${description} for ${sent_to} students`;
 				console.log(peer.starttime);
-				if (new Date(peer.starttime) > new Date())
+				if (new Date(peer.starttime.replace(/\s/, 'T')) > new Date())
 					text += `, which starts at ${peer.starttime} and total time is ${peer.timelimit}.`;
-				else if (new Date(peer.results_release_time) < new Date())
+				else if (new Date(peer.results_release_time.replace(/\s/, 'T')) < new Date())
 					text += `, for which results are released at ${peer.results_release_time}`;
-				else if (new Date(peer.evaluation_started_time) < new Date())
+				else if (new Date(peer.evaluation_started_time.replace(/\s/, 'T')) < new Date())
 					text += `, for which evaluation started at ${peer.evaluation_started_time}`;
 		    } else if (peer.type == 'Test') {
 				type = 'test';
@@ -93,7 +93,7 @@ $(async function() {
         peers = await peerData(10, getFormattedDateTime(new Date()));
         date_lt = peers.date_lt;
         while (!peers.college_notifications.length) {
-            peers = await peerData(10, getFormattedDateTime(new Date(date_lt)));
+            peers = await peerData(10, getFormattedDateTime(new Date(date_lt.replace(/\s/, 'T'))));
             date_lt = peers.date_lt;
         }
         createPeersTab(peers.college_notifications);
@@ -108,7 +108,7 @@ $(async function() {
                 college_notifications: ""
             }
             while (!peers.college_notifications.length) {
-                peers = await peerData(30, getFormattedDateTime(new Date(date_lt)));
+                peers = await peerData(30, getFormattedDateTime(new Date(date_lt.replace(/\s/, 'T'))));
                 date_lt = peers.date_lt;
             }
             createPeersTab(peers.college_notifications);
