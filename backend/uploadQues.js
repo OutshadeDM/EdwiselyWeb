@@ -100,38 +100,6 @@ $(document).ready(function () {
 
   function getTopics() {
 
-    // $.ajax({
-    //   url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subSemId + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
-    //   type: 'GET',
-    //   contentType: 'application/json',
-    //   headers: {
-    //     'Authorization': `Bearer ${$user.token}`
-    //   },
-    //   success: function (result) {
-    //     // alert(result.status);
-    //     //alert(subSemId)
-
-    //     $('#topicTags').empty();
-    //     if (result.status == 200 && result.data) {
-    //       $.each(result.data, function (key, value) {
-    //         // alert(value);
-
-    //         $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "'data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
-
-    //       });
-
-    //     }
-    //     else {
-    //       $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-    //       //alert("here");
-    //     }
-
-
-    //   },
-    //   error: function (error) {
-    //     alert("Request Failed with status: " + error.status);
-    //   }
-    // });
 
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnitTopics?unit_ids=' + unit,
@@ -198,6 +166,39 @@ $(document).ready(function () {
     //alert(uploaded_question)
   })
 
+
+  //getting the questions which are already present in the assessment
+
+  function questionsOfTest() {
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        //alert("hello");
+
+        if (result.status == 200 && result.data) {
+          $.each(result.data, function (key, value) {
+
+            if (!questions.includes(value.id)) {
+              questions.push(value.id);
+            }
+            console.log(questions)
+
+          });
+
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+  questionsOfTest()
 
 
   // Upload api

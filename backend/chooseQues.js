@@ -665,6 +665,56 @@ $(document).ready(function () {
   })
 
 
+  //save and send btn
+
+  $('#saveSendBtn').on('click', function () {
+    if (selectedQuestions.length === 0) {
+      alert("Choose Questions First !")
+    }
+    else {
+
+      var form = new FormData();
+      form.append("test_id", tId);
+      form.append("questions", "[" + selectedQuestionsId.join(',') + "]");
+      form.append("units", "[" + unit + "]")
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          // alert(result.message);
+          //console.log('4') 
+
+          if (result.status == 200) {
+            alert(result.message)
+
+            //   setInterval(function () {
+            //     window.location.replace('myAssessment.html');
+            //   }, 2000)
+            window.location.href = `sendQuestionsPage.html?id=${subSemId}&tid=${tId}&tname=${tname}&desc=${description}&isObj=${objective}&qc=${question_count}`
+          }
+          else {
+            alert("error!")
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+    }
+
+  })
+
 
 
 
