@@ -225,16 +225,21 @@ $(document).ready(function () {
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
-      div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tname=" + value.name + "&tid=" + value.id + "'><i class='fas fa-pen'></i></a>";
+      if (value.doe == "") {
+        div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "'><i class='fas fa-pen'></i></a>";
+      }
       div = div + "<div class='card-body pl-0'>";
       div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       div = div + "</div>";
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
       div = div + "Questions: " + value.questions_count;
       if (!value.questions_count)
-        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
+        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
+      else if (value.doe != "") {
+        div = div + "<div style='float:right;'>Sent</div>";
+      }
       else
-        div = div + "<a href='../pages/sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+        div = div + "<a href='../pages/sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       div = div + "</div></div></div>";
 
     });
@@ -574,7 +579,7 @@ $(document).ready(function () {
     $.each(data, function (key, value) {
 
       let endDateString = "";
-      let endDate = new Date(value.start_time.toLocaleString());
+      let endDate = new Date(value.start_time.toLocaleString().replace(/\s/, 'T'));
       // if(value.start_time) console.log(endDate)
       if (!isObj && value.start_time) {
         endDate.setMinutes(endDate.getMinutes() + value.timelimit);
@@ -667,26 +672,26 @@ $(document).ready(function () {
   });
 
 
-  $("#condObjDate").blur(function () {
-    // alert("here");
-    let date = new Date();
-    date.setMonth(date.getMonth() - 6);
-    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-    // $("#condObjDate").val(fullDate);
-    $('#condObjDate').datepicker('setDate', date);
+  // $("#condObjDate").blur(function () {
+  //   // alert("here");
+  //   // let date = new Date();
+  //   // date.setMonth(date.getMonth() - 6);
+  //   // let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+  //   // // $("#condObjDate").val(fullDate);
+  //   // $('#condObjDate').datepicker('setDate', date);
 
 
-  });
+  // });
 
-  $("#condSubDate").blur(function () {
-    let date = new Date();
-    date.setMonth(date.getMonth() - 6);
-    let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-    $("#condSubDate").val(fullDate);
-    $('#condSubDate').datepicker('setDate', date);
-    // $("#condSubDate").val(fullDate);
+  // $("#condSubDate").blur(function () {
+  //   let date = new Date();
+  //   date.setMonth(date.getMonth() - 6);
+  //   let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+  //   $("#condSubDate").val(fullDate);
+  //   $('#condSubDate').datepicker('setDate', date);
+  //   // $("#condSubDate").val(fullDate);
 
-  });
+  // });
 
 
 

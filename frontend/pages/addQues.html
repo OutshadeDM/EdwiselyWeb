@@ -21,6 +21,9 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  
+
   <title>Edwisely - Add Assessment</title>
 
 </head>
@@ -109,7 +112,7 @@
             <hr class="titlehr">
             <p class="list pb-2">
               <span class="list-item"><a href="index.html">Home</a> ></span>
-              <span class="list-item"><a href="courses.html">Question Bank</a> ></span>
+              <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
               <span class="list-item-active"><a href="#">Add Question</a></span>
             </p>
             <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mr-5"><i class="fas fa-save"></i>
@@ -127,8 +130,8 @@
                 <div class="initData">Add Questions</div>
               </div>
               <div>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
-                    id="addNewBtn">Add New</button>
+                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="addNewBtn">Add
+                  New</button>
               </div>
             </div>
 
@@ -142,7 +145,7 @@
                   <i class="fas fa-trash-alt fa-lg px-2 uploadedques"></i>
                   <i class="fas fa-image fa-lg px-2 notUploadedques"></i>
                   <label for="quesImage" id="quesLabel" class="custom-file-upload" id="quesImageLabel">Add Image</label>
-                  <input id="quesImage" type="file" accept="image/*"/>
+                  <input id="quesImage" type="file" accept="image/*" />
                 </div>
               </div>
               <div class="row pt-4">
@@ -191,14 +194,14 @@
                         <i class="fas fa-trash-alt fa-lg pl-2 pt-3" id="uploadedoption1"></i>
                       </label>
                       <label for="opt1Image" class="custom-file-upload optImgs">
-                        <i class="fas fa-image fa-lg pl-2 pt-3" id ="notUploadedoption1"></i>
+                        <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption1"></i>
                       </label>
                       <input id="opt1Image" type="file" accept="image/*" />
                     </div>
                   </div>
                   <div class="row" id="option1ImagePreview">
                     <div class="col-12 text-center">
-                      <img id="image_preview_option1" src="" width="60" alt="No image"/>
+                      <img id="image_preview_option1" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -230,7 +233,7 @@
                   </div>
                   <div class="row" id="option2ImagePreview">
                     <div class="col-12 text-center">
-                      <img id="image_preview_option2" src="" width="60" alt="No image"/>
+                      <img id="image_preview_option2" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -260,7 +263,7 @@
                       <label for="opt3Image" class="custom-file-upload optImgs">
                         <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption3"></i>
                       </label>
-                      <input id="opt3Image" type="file" accept="image/*"/>
+                      <input id="opt3Image" type="file" accept="image/*" />
                     </div>
                   </div>
                   <div class="row" id="option3ImagePreview">
@@ -297,7 +300,7 @@
                   </div>
                   <div class="row" id="option4ImagePreview">
                     <div class="col-12 text-center">
-                      <img id="image_preview_option4" src="" width="60" alt="No image"/>
+                      <img id="image_preview_option4" src="" width="60" alt="No image" />
                     </div>
                   </div>
                 </div>
@@ -329,12 +332,12 @@
                         <label for="opt5Image" class="custom-file-upload optImgs">
                           <i class="fas fa-image fa-lg pl-2 pt-3" id="notUploadedoption5"></i>
                         </label>
-                        <input id="opt5Image" type="file" accept="image/*"/>
+                        <input id="opt5Image" type="file" accept="image/*" />
                       </div>
                     </div>
                     <div class="row" id="option5ImagePreview">
                       <div class="col-12 text-center">
-                        <img id="image_preview_option5" src="" width="60" alt="No image"/>
+                        <img id="image_preview_option5" src="" width="60" alt="No image" />
                       </div>
                     </div>
                   </div>
@@ -350,7 +353,7 @@
                   <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
                   <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
                   <label for="hintImage" id="hintLabel" class="custom-file-upload" id="hintImageLabel">Add Image</label>
-                  <input id="hintImage" type="file" accept="image/*"/>
+                  <input id="hintImage" type="file" accept="image/*" />
                 </div>
               </div>
 
@@ -363,7 +366,7 @@
                   <i class="fas fa-image fa-lg px-2 notUploadedsolution"></i>
                   <label for="solutionImage" id="solutionLabel" class="custom-file-upload" id="solutionImageLabel">Add
                     Image</label>
-                  <input id="solutionImage" type="file" accept="image/*"/>
+                  <input id="solutionImage" type="file" accept="image/*" />
                 </div>
               </div>
 

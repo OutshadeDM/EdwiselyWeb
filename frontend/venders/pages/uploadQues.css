@@ -1,0 +1,28 @@
+.getUnits {
+  border: solid black 2px;
+  border-radius: 5px;
+}
+
+#topicsCol{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.getUnitsInput {
+  display: none;
+}
+
+.getUnitsLi {
+  list-style: none;
+}
+
+.getUnitsLabel{
+  color: gray;
+}
+
+input[type="radio"]:checked+label{
+  color: black;
+  font-size:x-large;
+  font-weight: 400;
+}

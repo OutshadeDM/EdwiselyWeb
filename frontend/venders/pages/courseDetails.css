@@ -77,3 +77,24 @@
     width: 0px;
     background: transparent; smake scrollbar transparent
 } */
+
+
+pre
+{
+  page-break-inside: avoid;
+  display: block;
+  padding: 3px 3px 2px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 20px;
+  word-break: break-all;
+
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+
+
+  padding: 0;
+  color: inherit;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: transparent;
+} 

@@ -410,23 +410,10 @@ $(document).ready(function () {
                     $.each(result.data, (index, course) => {
                         $img = $('<img>').addClass('card-img-top img-fluid py-2').attr('src', course.image || '../images/onlineCourses.png');
                         $title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
-                        // $description = $('<p></p>').addClass('py-0 my-0')
-                        // 				.append(
-                        // 					$('<span></span>').addClass('span-heading').text(course.description || "No Description Available")
-                        // 				)
-                        // $sections = $('<div></div>').addClass('row container');
-                        // $.each(course.sections, (i, section) => {
-                        // 	$sectionSpan = $(`<span id="${section.id}" data-faculty="${section.faculty_section_id}" data-depart="${section.department_name}" data-depart-full=${section.department_fullname}></span>`)
-                        // 					.addClass('span-heading span-dept').text(section.name)
-                        // 	$sectionCol = $(`<div></div>`)
-                        // 					.addClass('col-auto')
-                        // 					.append($sectionSpan)
-                        // 	$sections.append($sectionCol);
-                        // });
                         $cardBody = $('<div></div>').addClass('card-body p-2').append($title);
                         $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').append($img, $cardBody);
-                        $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').data('id', course.id).append($card);
-                        $course = $('<div></div>').addClass('course col-lg-4 col-md-6 col-12 h-100').append($gotoCard);
+                        $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').append($card);
+                        $course = $("<div data-toggle='modal' data-target='#deckModal' data-id='" + course.id + "'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($gotoCard);
                         $('#courseDeckList').append($course);
             
                         if (index == result.data.length - 1) {
@@ -466,22 +453,7 @@ $(document).ready(function () {
                               ]
                             });				
                         }
-                    });	
-
-                    // $.each(result.data, function (key, value) {
-                        
-                    //     courses.push({
-                    //         id: value.name,
-                    //         name: value.name,
-                    //         image: value.image,
-                    //         unit_id: value.unit_id
-                    //     });
-
-                        
-                    // });
-
-                    // displayFiles(files, courseType, courseLevel);
-
+                    });
                 }
                 else {
                     $('#courseDeckTitle').hide();
@@ -490,12 +462,90 @@ $(document).ready(function () {
             error: function (error) {
                 alert("Request Failed with status: "+error.status);
             }
-        });
-
-
-
-        
+        });        
     }
+
+    $('#deckModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        const deck_id = button.data('id'); // Extract info from data-* attributes
+
+        if(deck_id){
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/deckItems?deck_id='+deck_id,
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': `Bearer ${$user.token}`
+                },
+                success: function (result) {
+                    // alert(result.message);
+                    if (result.status == 200 && result.data) {
+                        // let div = "";
+
+                        $.each(result.data, (index, deck) => {
+                            if(deck.type == "cs" || deck.type == "pqp"){
+                                $.get(deck.url, function( data ) {
+                                    $optionalP = "";
+                                    if(deck.type == "pqp")
+                                        $optionalP = $("<p></p>").addClass('text-center').append("Previous Year Question</p>");
+                                    $mainDiv = $("<div></div>").append(data);
+                                    $deckDiv = $("<div></div>").addClass('p-2').append($optionalP).append($mainDiv);
+                                    $('#deckModalDiv').append($deckDiv);
+
+                                    if (index == result.data.length - 1) {
+                                        // alert(index);
+                                        $('#deckModalDiv').slick();				
+                                    }                                    
+                                });
+                    
+                                
+                            }
+                        });
+                    }
+                    else
+                        $('#deckModalDiv').append("<h5 class='text-center'>No data to fetch</h5>");
+
+
+                    //     $.each(result.data,function(key,value){
+                    //         if(value.type == "cs" || value.type == "pqp"){
+                    //             div = div + "<div py-2>";
+                                
+                    //             $.get( value.url, function( data ) {
+                    //                 // $('#abcd').empty();
+                    //                 // $('#abcd').html(data);
+                    //                 if(value.type == "pqp")
+                    //                     div = div + "<p class='text-center'>Previous Year Question</p>";
+                    //                 div = div + "<div id='"+value.id+"'>";
+                    //                 div = div + data;
+                    //                 // MathJax.typeset();
+                    //                 // https://www.mathjax.org/js/main.js
+                    //                 // console.log(data);
+                    //                 div = div + "</div>";
+                    //                 div = div + "</div><hr>";
+                    //                 $('#deckModalDiv').append(div);
+                    //             });
+                    //         }
+                    //     });
+                    //     if(!div) div = "<h5 class='text-center'>No data to fetch</h5>";
+                    //     // alert(div);
+                    // }
+                    // else {
+                    //     // $('#courseFiles').empty();
+                    //     // $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                    // }
+                },
+                error: function (error) {
+                    alert("Request Failed with status: "+error.status);
+                }
+            });
+        }
+
+    });
+
+    $('#deckModal').on('hide.bs.modal', function () {
+        $('#deckModalDiv').empty();
+    });
+    
 
     function processFiles(result = []) {
 
@@ -1688,9 +1738,10 @@ $(document).ready(function () {
     }
 
     let yourQuestions = [];
+    let questions = [];
 
     function processObjQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {
-        let questions = [];
+        questions = [];
         $.each(result.data, function (key, value) {
             // alert(value.name);
             if (!yourContent) {
@@ -1765,7 +1816,7 @@ $(document).ready(function () {
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
                 div = div + "<div class='row py-2 px-3 p-2'>";
-                div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-target='#courseObjQuestionModal' data-whatever='" + JSON.stringify(value) + "'>";
+                div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
                 // if (value.question.name.length > 100)
                 //     div = div + "<p class='question'>" + value.question.name.substr(0, 100) + " ...</p>";
                 // else
@@ -1808,7 +1859,7 @@ $(document).ready(function () {
 
     function processSubQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {
 
-        let questions = [];
+        questions = [];
         $.each(result.data, function (key, value) {
             // alert(value.name);
             if (!yourContent) {
@@ -1881,81 +1932,90 @@ $(document).ready(function () {
 
     $('#courseObjQuestionModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
-        let question = button.data('whatever'); // Extract info from data-* attributes
-        // alert(question.options[0].name);
-        $('#questionModalQuestion').html(question.question.name);
-        $('#questionModalOptionA').html(question.options[0].name);
-        $('#questionModalOptionB').html(question.options[1].name);
-        if(question.options[2])
-            $('#questionModalOptionC').html(question.options[2].name);
-        if(question.options[3])
-            $('#questionModalOptionD').html(question.options[3].name);
-        // alert(question.options[2].is_answer);
+        let questionId = button.data('id'); // Extract info from data-* attributes
+        let question = [];
+        // console.log(JSON.stringify(questions));
+        $.each(questions, function (key, value) {
+            // alert(questionId);
+            if (questionId == value.id) {
+                question = value;
+                // alert(question);
+                $('#questionModalQuestion').html(question.question.name);
+                $('#questionModalOptionA').html(question.options[0].name);
+                $('#questionModalOptionB').html(question.options[1].name);
+                if(question.options[2])
+                    $('#questionModalOptionC').html(question.options[2].name);
+                if(question.options[3])
+                    $('#questionModalOptionD').html(question.options[3].name);
+                // alert(question.options[2].is_answer);
+
+                if (question.question.media == 1) {
+                    $("#questionModalQuestionTd").show();
+                    $("#questionModalQuestionImgA").attr("href", "viewFile.html?url="+question.question.question_img+"&type=img");
+                    $("#questionModalQuestionImgA").attr("target", "_blank");
+                    $("#questionModalQuestionImg").attr("src", question.question.question_img);
+                }
+
+                if (question.options[0].media == 1) {
+                    $("#questionModalOptionATd").show();
+                    $("#questionModalOptionAImgA").attr("href", "viewFile.html?url="+question.options[0].img+"&type=img");
+                    $("#questionModalOptionAImgA").attr("target", "_blank");
+                    $("#questionModalOptionAImg").attr("src", question.options[0].img);
+                }
+                if (question.options[1].media == 1) {
+                    $("#questionModalOptionBTd").show();
+                    $("#questionModalOptionBImgA").attr("href", "viewFile.html?url="+question.options[1].img+"&type=img");
+                    $("#questionModalOptionBImgA").attr("target", "_blank");
+                    $("#questionModalOptionBImg").attr("src", question.options[1].img);
+                }
+                if (question.options[2] && question.options[2].media == 1) {
+                    $("#questionModalOptionCTd").show();
+                    $("#questionModalOptionCImgA").attr("href", "viewFile.html?url="+question.options[2].img+"&type=img");
+                    $("#questionModalOptionCImgA").attr("target", "_blank");
+                    $("#questionModalOptionCImg").attr("src", question.options[2].img);
+                }
+                if (question.options[3] && question.options[3].media == 1) {
+                    $("#questionModalOptionDTd").show();
+                    $("#questionModalOptionDImgA").attr("href", "viewFile.html?url="+question.options[3].img+"&type=img");
+                    $("#questionModalOptionDImgA").attr("target", "_blank");
+                    $("#questionModalOptionDImg").attr("src", question.options[3].img);
+                }
+                if (question.options[4] && question.options[4].media == 1) {
+                    $("#questionModalOptionETd").show();
+                    $("#questionModalOptionEImgA").attr("href", "viewFile.html?url="+question.options[4].img+"&type=img");
+                    $("#questionModalOptionEImgA").attr("target", "_blank");
+                    $("#questionModalOptionEImg").attr("src", question.options[4].img);
+                }
 
 
-        if (question.question.media == 1) {
-            $("#questionModalQuestionTd").show();
-            $("#questionModalQuestionImgA").attr("href", "viewFile.html?url="+question.question.question_img+"&type=img");
-            $("#questionModalQuestionImgA").attr("target", "_blank");
-            $("#questionModalQuestionImg").attr("src", question.question.question_img);
-        }
+                if (question.options[0].is_answer == 1)
+                    $('#questionModalOptionA').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionA').css("color", "black");
 
-        if (question.options[0].media == 1) {
-            $("#questionModalOptionATd").show();
-            $("#questionModalOptionAImgA").attr("href", "viewFile.html?url="+question.options[0].img+"&type=img");
-            $("#questionModalOptionAImgA").attr("target", "_blank");
-            $("#questionModalOptionAImg").attr("src", question.options[0].img);
-        }
-        if (question.options[1].media == 1) {
-            $("#questionModalOptionBTd").show();
-            $("#questionModalOptionBImgA").attr("href", "viewFile.html?url="+question.options[1].img+"&type=img");
-            $("#questionModalOptionBImgA").attr("target", "_blank");
-            $("#questionModalOptionBImg").attr("src", question.options[1].img);
-        }
-        if (question.options[2] && question.options[2].media == 1) {
-            $("#questionModalOptionCTd").show();
-            $("#questionModalOptionCImgA").attr("href", "viewFile.html?url="+question.options[2].img+"&type=img");
-            $("#questionModalOptionCImgA").attr("target", "_blank");
-            $("#questionModalOptionCImg").attr("src", question.options[2].img);
-        }
-        if (question.options[3] && question.options[3].media == 1) {
-            $("#questionModalOptionDTd").show();
-            $("#questionModalOptionDImgA").attr("href", "viewFile.html?url="+question.options[3].img+"&type=img");
-            $("#questionModalOptionDImgA").attr("target", "_blank");
-            $("#questionModalOptionDImg").attr("src", question.options[3].img);
-        }
-        if (question.options[4] && question.options[4].media == 1) {
-            $("#questionModalOptionETd").show();
-            $("#questionModalOptionEImgA").attr("href", "viewFile.html?url="+question.options[4].img+"&type=img");
-            $("#questionModalOptionEImgA").attr("target", "_blank");
-            $("#questionModalOptionEImg").attr("src", question.options[4].img);
-        }
+                if (question.options[1].is_answer == 1)
+                    $('#questionModalOptionB').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionB').css("color", "black");
 
+                if (question.options[2] && question.options[2].is_answer == 1)
+                    $('#questionModalOptionC').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionC').css("color", "black");
 
-        if (question.options[0].is_answer == 1)
-            $('#questionModalOptionA').css("color", "darkgreen");
-        else
-            $('#questionModalOptionA').css("color", "black");
+                if (question.options[3]  && question.options[3].is_answer == 1)
+                    $('#questionModalOptionD').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionD').css("color", "black");
 
-        if (question.options[1].is_answer == 1)
-            $('#questionModalOptionB').css("color", "darkgreen");
-        else
-            $('#questionModalOptionB').css("color", "black");
+                if (question.options[4]  && question.options[4].is_answer == 1)
+                    $('#questionModalOptionE').css("color", "darkgreen");
+                else
+                    $('#questionModalOptionE').css("color", "black");
 
-        if (question.options[2] && question.options[2].is_answer == 1)
-            $('#questionModalOptionC').css("color", "darkgreen");
-        else
-            $('#questionModalOptionC').css("color", "black");
-
-        if (question.options[3]  && question.options[3].is_answer == 1)
-            $('#questionModalOptionD').css("color", "darkgreen");
-        else
-            $('#questionModalOptionD').css("color", "black");
-
-        if (question.options[4]  && question.options[4].is_answer == 1)
-            $('#questionModalOptionE').css("color", "darkgreen");
-        else
-            $('#questionModalOptionE').css("color", "black");
+            return false;
+          }
+        });
 
     });
 
