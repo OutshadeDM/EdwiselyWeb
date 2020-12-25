@@ -529,7 +529,7 @@ $(document).ready(function () {
                                 }                      
                             }
                         }
-                            MathJax.typesetPromise();
+                        MathJax.typesetPromise();
                     }
                     else
                         $('#deckModalDiv').append("<h5 class='text-center'>No data to fetch</h5>");
@@ -1879,6 +1879,7 @@ $(document).ready(function () {
             });
             // alert(div); 
             $('#objQuestions').append(div);
+            MathJax.typesetPromise();
         }
         else
             $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");

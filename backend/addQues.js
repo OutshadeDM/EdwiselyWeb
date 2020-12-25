@@ -246,7 +246,6 @@ $(document).ready(function () {
             });
 
             loadList();
-
           }
         },
         error: function (error) {
@@ -254,6 +253,7 @@ $(document).ready(function () {
         }
       });
     }
+    MathJax.typesetPromise();
 
   }
 
