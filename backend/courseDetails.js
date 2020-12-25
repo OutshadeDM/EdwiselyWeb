@@ -532,35 +532,6 @@ $(document).ready(function () {
                     }
                     else
                         $('#deckModalDiv').append("<h5 class='text-center'>No data to fetch</h5>");
-
-
-                    //     $.each(result.data,function(key,value){
-                    //         if(value.type == "cs" || value.type == "pqp"){
-                    //             div = div + "<div py-2>";
-                                
-                    //             $.get( value.url, function( data ) {
-                    //                 // $('#abcd').empty();
-                    //                 // $('#abcd').html(data);
-                    //                 if(value.type == "pqp")
-                    //                     div = div + "<p class='text-center'>Previous Year Question</p>";
-                    //                 div = div + "<div id='"+value.id+"'>";
-                    //                 div = div + data;
-                    //                 // MathJax.typeset();
-                    //                 // https://www.mathjax.org/js/main.js
-                    //                 // console.log(data);
-                    //                 div = div + "</div>";
-                    //                 div = div + "</div><hr>";
-                    //                 $('#deckModalDiv').append(div);
-                    //             });
-                    //         }
-                    //     });
-                    //     if(!div) div = "<h5 class='text-center'>No data to fetch</h5>";
-                    //     // alert(div);
-                    // }
-                    // else {
-                    //     // $('#courseFiles').empty();
-                    //     // $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
-                    // }
                 },
                 error: function (error) {
                     alert("Request Failed with status: "+error.status);
