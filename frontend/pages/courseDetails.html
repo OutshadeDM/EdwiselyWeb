@@ -30,6 +30,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+  <script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
 
   <title>Edwisely - Your Courses</title>
 
@@ -742,7 +748,14 @@
   <script src="../venders/scripts/katex-render.js"></script>
   <script src="../venders//scripts/katex-auto-render.js"></script>
 <script>
-  reFormatDocument();
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };  
 </script>
 
 <script src="../../backend/courseDetails.js"></script>

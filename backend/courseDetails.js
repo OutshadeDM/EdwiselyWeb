@@ -35,26 +35,7 @@ $(document).ready(function () {
 
     });
 
-	const getDeckData = (url) => {
-		return new Promise((resolve, reject) => {
-			try {
-			    $.ajax({
-			        url: url,
-			        type: 'GET',
-			        success: function (result) {
-						console.log(result);
-						resolve(result);				
-			        },
-			        error: function (error) {
-			            console.log(error);
-			            reject(error);
-			        }
-			    });
-			} catch (error) {
-				console.log(error);
-			}
-		});
-	}    
+	  
 
     function navAbout(){
         refreshContents();
@@ -487,6 +468,27 @@ $(document).ready(function () {
         });        
     }
 
+    const getDeckData = (url) => {
+		return new Promise((resolve, reject) => {
+			try {
+			    $.ajax({
+			        url: url,
+			        type: 'GET',
+			        success: function (result) {
+						// console.log(result);
+						resolve(result);				
+			        },
+			        error: function (error) {
+			            console.log(error);
+			            reject(error);
+			        }
+			    });
+			} catch (error) {
+				console.log(error);
+			}
+		});
+	}  
+
     $('#deckModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         const deck_id = button.data('id'); // Extract info from data-* attributes
@@ -508,9 +510,7 @@ $(document).ready(function () {
                             const deck = result.data[index];
                             if(deck.type == "cs" || deck.type == "pqp"){
                                 try {
-                                    console.log('Here1');
                                     const data = await getDeckData(deck.url);
-                                    console.log('Here2');
                                     $optionalP = "";
                                     if(deck.type == "pqp")
                                         $optionalP = $("<p></p>").addClass('text-center').append("Previous Year Question</p>");
@@ -529,6 +529,7 @@ $(document).ready(function () {
                                 }                      
                             }
                         }
+                            MathJax.typesetPromise();
                     }
                     else
                         $('#deckModalDiv').append("<h5 class='text-center'>No data to fetch</h5>");
