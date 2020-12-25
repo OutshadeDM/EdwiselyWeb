@@ -468,6 +468,7 @@ $(document).ready(function () {
     $('#deckModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         const deck_id = button.data('id'); // Extract info from data-* attributes
+        $('#deckModalDiv').removeClass('slick-initialized slick-slider');
 
         if(deck_id){
             $.ajax({
