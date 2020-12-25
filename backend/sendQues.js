@@ -42,7 +42,7 @@ $(document).ready(function () {
   let section = 0
   let sectionIds = []
   let selectedStudentsId = []
-  let count = 0
+  //let count = 0
   let hours = 0
   let mins = 0
   let timelimit_in_secs = 0
@@ -61,11 +61,11 @@ $(document).ready(function () {
       start: {
         minDate: 0,
         onSelect: function (selectedDateTime) {
-          endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'))
+          endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'.replace(/\s/, 'T')))
         }
       },
       end: {
-        minDate: 0
+        minDate: new Date(),
       }
 
     }
@@ -257,6 +257,16 @@ $(document).ready(function () {
     $('#numberOfStudents').text(selectedStudentsId.length)
   })
 
+  //toasts
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
+    $('#toastDiv').show();
+    setTimeout(function () {
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
+    }, 7000);
+  });
+
 
 
   $('#sendQuestionsBtn').on('click', function () {
@@ -291,10 +301,12 @@ $(document).ready(function () {
           //alert(result.status)
 
           if (result.status == 200) {
-            alert(result.message)
+            $('#successToastBody').text(result.message);
+            $('#successToast').toast('show');
 
-            window.location.href = "myAssessment.html"
-
+            setTimeout(function () {
+              window.location.href = "myAssessment.html";
+            }, 2000);
           }
           else {
             alert("error!")
@@ -335,9 +347,12 @@ $(document).ready(function () {
           //alert(result.status)
 
           if (result.status == 200) {
-            alert(result.message)
+            $('#successToastBody').text(result.message);
+            $('#successToast').toast('show');
 
-            window.location.href = "myAssessment.html"
+            setTimeout(function () {
+              window.location.href = "myAssessment.html";
+            }, 2000);
 
           }
           else {

@@ -598,6 +598,15 @@ background-color: #ffffff;
 background-color: #E8EFF3;
 }
 
+#choosequesdiv{
+  width: 100%;
+  margin: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 6%;
+  padding-right: 10%;
+}
+
 /* choose questions end */
 
 
