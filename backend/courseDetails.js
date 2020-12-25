@@ -505,7 +505,6 @@ $(document).ready(function () {
                 success: async function (result) {
                     // alert(result.message);
                     if (result.status == 200 && result.data) {
-                        // let div = "";
                         for(let index = 0; index < result.data.length; index++){
                             const deck = result.data[index];
                             if(deck.type == "cs" || deck.type == "pqp"){

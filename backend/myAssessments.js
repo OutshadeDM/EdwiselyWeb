@@ -298,7 +298,7 @@ $(document).ready(function () {
     date.setMonth(date.getMonth() - 6);
     let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     if (!condObjDate || condObjDate == null) {
-      condObjDate = fullDate;
+      // condObjDate = fullDate;
       // $('#condObjDate').val(fullDate);
       $('#condObjDate').datepicker('setDate', date);
     }
@@ -308,6 +308,7 @@ $(document).ready(function () {
     // alert(condObjDate);
 
     if (condObjDate && !condObjAssessmentsSection && !condObjAssessmentsSubject) {
+      // alert('here');
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getConductedObjectiveTests?from_date=' + condObjDate,
@@ -317,7 +318,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.status);
+          // alert(result.message);
           $('#condObjAssessmentList').empty();
           if (result.status == 200 && result.data) {
             displayCondCards(result.data, true);
@@ -332,6 +333,7 @@ $(document).ready(function () {
 
     }
     else if (condObjDate && !condObjAssessmentsSection && condObjAssessmentsSubject) {
+      alert('here1');
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectWiseConductedObjectiveTests?subject_id=' + condObjAssessmentsSubject,
@@ -665,7 +667,13 @@ $(document).ready(function () {
   // let month = date1.getMonth();
   // if(month.length == 1) month = "0"+month;
 
-  $('.input-group.date').datepicker({
+  $('#condObjDate').datepicker({
+    format: "yyyy-mm-dd",
+    calendarWeeks: true,
+    autoclose: true
+  });
+
+  $('#condSubDate').datepicker({
     format: "yyyy-mm-dd",
     calendarWeeks: true,
     autoclose: true

@@ -124,6 +124,8 @@ $(document).ready(function () {
   $('#option5ImagePreview').hide();
   $('#uploadedoption5').hide();
 
+  // radios for selecting
+  $('.tick').hide();
 
   getTopics();
 
@@ -191,12 +193,12 @@ $(document).ready(function () {
           if (searchParams.has('sid')) {
             // alert('here');
             sId = searchParams.get('sid');
-            if ($.cookie('editQues') && sId) {
+              $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
+              $('#questionBankA').text('Question Bank');
+            if ($.cookie('editQues')) {
               editQuesJSON = $.cookie('editQues') ? JSON.parse($.cookie('editQues')) : null;
               questions.push(editQuesJSON);
               isCookie = true;
-              $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
-              $('#questionBankA').text('Question Bank');
               loadList();
               $.cookie('editQues', "");
               $('#questionId').val(editQuesJSON.id);
@@ -269,8 +271,6 @@ $(document).ready(function () {
     });
   }
 
-  // radios for selecting
-  $('.tick').hide();
 
 
   $('.radiostest').on('click', function () {
