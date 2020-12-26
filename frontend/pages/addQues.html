@@ -108,7 +108,8 @@
     <div class="col px-0">
       <div class="container-fluid">
         <div class="shadow-sm">
-          <div class="px-4 headerBanner">
+          <div class="px-4 headerBanner row">
+            <div class="col-sm-8">
             <h2 class="mt-1">
               <p class="font-weight-bold" id="courseName"></p>
             </h2>
@@ -118,8 +119,17 @@
               <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
               <span class="list-item-active"><a href="#">Add Question</a></span>
             </p>
-            <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mr-5"><i class="fas fa-save"></i>
-              Save</button>
+            </div>
+            <div class="col-md-4 row">
+              <div class="col-md-4">
+                <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink"><i class="fas fa-save"></i>
+                  Save</button>
+              </div>
+              <div class="col-md-8">
+                <button type="button" id="btnSaveSend" class="BigBtn shadow-sm btnLink"><i class="fas fa-upload"></i>
+                    Save & Send</button>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Start Page Content -->

@@ -22,6 +22,8 @@ $(document).ready(function () {
         // alert("here");
         uId = searchParams.get('uid');
     }
+
+    $.cookie('editQues', "");
     
     let courseBookmarkedFlag = false;
     let courseYourContentFlag = false;
@@ -1399,8 +1401,9 @@ $(document).ready(function () {
         
         // alert(unit_id);
         // alert(unit_id);
-        if(unit_id != "0")
+        if(unit_id != "0"){
             getObjQuestions(unit_id,subject_id);
+        }
         else{
             if(uId){
                 $('button[data-uid="'+uId+'"]').click();
@@ -1459,6 +1462,7 @@ $(document).ready(function () {
                         getObjQuestions(unit_id, subject_id);
                     else
                         getSubQuestions(unit_id, subject_id);
+                    
 
                 }
                 else {
@@ -1486,6 +1490,7 @@ $(document).ready(function () {
             getObjQuestions(unit_id, subject_id);
         else
             getSubQuestions(unit_id, subject_id);
+            
     });
 
     $('#questionTopics').on('change', function () {
@@ -1497,6 +1502,7 @@ $(document).ready(function () {
             getObjQuestions(unit_id, subject_id);
         else
             getSubQuestions(unit_id, subject_id);
+            
     });
 
     $('#questionCatagory').on('change', function () {
@@ -1508,6 +1514,7 @@ $(document).ready(function () {
             getObjQuestions(unit_id, subject_id);
         else
             getSubQuestions(unit_id, subject_id);
+            
     });
 
 
@@ -1552,6 +1559,7 @@ $(document).ready(function () {
                     if (result.status == 200 && Array.isArray(result.data) && result.data.length) {
                         // let div = "";
                         processObjQuestions(result, questionBloomsLevel, questionTopics, questionCatagory, false);
+                        
                         // alert(questions);
                         // alert(JSON.stringify(questions));
                         // $('#courseName').text(JSON.stringify(questions[0]));
@@ -1603,6 +1611,7 @@ $(document).ready(function () {
                     if (result.status == 200 && Array.isArray(result.data) && result.data.length) {
                         // let div = "";
                         processObjQuestions(result, questionBloomsLevel, questionTopics, questionCatagory, true);
+                        
                         // alert(questions);
                         // $("#courseName").text(result.data.subject_name);
                         // $('#courseName').text(questions[0].id);
@@ -1664,6 +1673,7 @@ $(document).ready(function () {
                     if (result.status == 200 && Array.isArray(result.data) && result.data.length) {
                         // let div = "";
                         processSubQuestions(result, questionBloomsLevel, questionTopics, questionCatagory, false);
+                        
                         // alert("here");
                         // alert(JSON.stringify(questions));
                         // $('#courseName').text(JSON.stringify(questions[0]));
@@ -1715,6 +1725,7 @@ $(document).ready(function () {
                     if (result.status == 200 && Array.isArray(result.data) && result.data.length) {
                         // let div = "";
                         processSubQuestions(result, questionBloomsLevel, questionTopics, questionCatagory, true);
+                        
                         // alert("here");
                         // $("#courseName").text(result.data.subject_name);
                         // $('#courseName').text(questions[0].id);
@@ -2016,6 +2027,7 @@ $(document).ready(function () {
             return false;
           }
         });
+        MathJax.typesetPromise();
 
     });
 
