@@ -147,7 +147,7 @@ $('#formdata').submit(function(e) {
     formData.append('description', $("#description").val());
     formData.append('priority', $('#priority').prop('checked')? 1 : 0);   
     formData.append('is_comment_anonymous', $('#is_comment_anonymous').prop('checked')? 1 : 0);  
-    formData.append('file', $('#file').prop('files')[0]);
+    formData.append('file', $('#file')[0].files[0] || '');
     var values = $("input[name='students[]']:checked")
               .map(function(){return $(this).val();}).get();
     console.log(values);
