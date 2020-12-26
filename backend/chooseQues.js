@@ -307,7 +307,7 @@ $(document).ready(function () {
               "</div>"
             );
 
-
+            MathJax.typesetPromise();
 
           });
 
@@ -391,6 +391,7 @@ $(document).ready(function () {
                 "</div>" +
                 "</div>"
               );
+              MathJax.typesetPromise();
             }
           });
           //$('.addingQues').empty()
