@@ -146,29 +146,35 @@ $(document).ready(function () {
 
         $('#topicTags').empty();
         if (result.status == 200 && result.data) {
-          $.each(result.data, function (key, value) {
-            // console.log(value);
-            $.each(value.topic, function (key, unitTopic) {
-              // console.log(unitTopic)
-              if (unitTopic.type === "GSubtopic") {
-                subTopicsId.push(unitTopic.topic_id)
-              }
-              else if (unitTopic.type === "GTopic") {
-                topicsId.push(unitTopic.topic_id)
-              }
-              else {
-                grandTopicsId.push(unitTopic.topic_id)
-              }
-              $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "' checked/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
-            })
-          });
-          // console.log(topicsId)
-          // console.log(subTopicsId)
-          // console.log(grandTopicsId)
 
-          //fillTopics()
-          getAllQuestions()
+          if (result.data == "") {
+            $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
 
+          } else {
+
+            $.each(result.data, function (key, value) {
+              // console.log(value);
+              $.each(value.topic, function (key, unitTopic) {
+                // console.log(unitTopic)
+                if (unitTopic.type === "GSubtopic") {
+                  subTopicsId.push(unitTopic.topic_id)
+                }
+                else if (unitTopic.type === "GTopic") {
+                  topicsId.push(unitTopic.topic_id)
+                }
+                else {
+                  grandTopicsId.push(unitTopic.topic_id)
+                }
+                $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "' checked/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
+              })
+            });
+            // console.log(topicsId)
+            // console.log(subTopicsId)
+            // console.log(grandTopicsId)
+
+            //fillTopics()
+            getAllQuestions()
+          }
         }
         else {
           $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
@@ -307,6 +313,7 @@ $(document).ready(function () {
 
           //$('.addingQues').empty()
           questionsOfTest()
+          MathJax.typesetPromise();
         }
         else {
           $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
@@ -388,6 +395,7 @@ $(document).ready(function () {
           });
           //$('.addingQues').empty()
           questionsOfTest()
+          MathJax.typesetPromise();
 
         }
         else {
@@ -537,6 +545,7 @@ $(document).ready(function () {
           //console.log(selectedQuestions)
 
         }
+        MathJax.typesetPromise();
       },
       error: function (error) {
         alert("Request Failed with status: " + error.status);
@@ -608,6 +617,7 @@ $(document).ready(function () {
           "</div>" +
           "</div>"
         )
+        MathJax.typesetPromise();
 
       }
     }
