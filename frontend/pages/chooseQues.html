@@ -25,8 +25,11 @@
   <title>Edwisely - Add Assessment</title>
 
   <!-- latex -->
-  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  <!-- latex -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
 </head>
 
@@ -225,13 +228,15 @@
 <script type="text/javascript" src="../../backend/cookies.js"></script>
 <script src="../../backend/sidebar.js"></script>
 <script src="../../backend/chooseQues.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
     }
-  });
+  };  
 </script>
 
 

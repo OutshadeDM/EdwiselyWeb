@@ -307,6 +307,7 @@ $(document).ready(function () {
 
           //$('.addingQues').empty()
           questionsOfTest()
+          MathJax.typesetPromise();
         }
         else {
           $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
@@ -388,6 +389,7 @@ $(document).ready(function () {
           });
           //$('.addingQues').empty()
           questionsOfTest()
+          MathJax.typesetPromise();
 
         }
         else {
@@ -537,6 +539,7 @@ $(document).ready(function () {
           //console.log(selectedQuestions)
 
         }
+        MathJax.typesetPromise();
       },
       error: function (error) {
         alert("Request Failed with status: " + error.status);
@@ -608,6 +611,7 @@ $(document).ready(function () {
           "</div>" +
           "</div>"
         )
+        MathJax.typesetPromise();
 
       }
     }
