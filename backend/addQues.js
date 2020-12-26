@@ -205,10 +205,11 @@ $(document).ready(function () {
               autoFill(questions[0]);
               // console.log(editQuesJSON);
             }
-            else {
-              $('#errorToastBody').text("No question found, try coming back");
-              $('#errorToast').toast('show');
-            }
+
+            // else {
+            //   $('#errorToastBody').text("No question found, try coming back");
+            //   $('#errorToast').toast('show');
+            // }
           }
         },
         error: function (error) {
@@ -255,7 +256,6 @@ $(document).ready(function () {
         }
       });
     }
-    MathJax.typesetPromise();
 
   }
 
@@ -269,6 +269,7 @@ $(document).ready(function () {
       // alert(JSON.stringify(value));
       $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
     });
+    MathJax.typesetPromise();
   }
 
 
@@ -841,6 +842,14 @@ $(document).ready(function () {
 
 
   $("#btnSave").click(function () {
+    saveQuestions(false);
+  });
+
+  $("#btnSaveSend").click(function () {
+    saveQuestions(true);
+  });
+
+  function saveQuestions(isSend){
     if (questionsList != null && questionsList.length > 0 && tId != "0") {
       // alert(JSON.stringify(questionsList));
 
@@ -882,7 +891,10 @@ $(document).ready(function () {
             // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             setTimeout(function () {
-              window.location.href = "myAssessment.html";
+              if(!isSend)
+                window.location.href = "myAssessment.html";
+              else
+                window.location.href = "sendQuestionsPage.html?id="+subSemId+"&tid="+tId+"&tname="+tname+"&uid="+unit_id+"&isObj=true&qc="+questions.length;
             }, 2000);
           }
           else {
@@ -905,7 +917,7 @@ $(document).ready(function () {
       // $('#errorToastBody').text("No test found to add question to test");
       // $('#errorToast').toast('show');
     }
-  });
+  }
 
   $('#errorToast,#successToast').on('show.bs.toast', function () {
     $('#toastDiv').show();
