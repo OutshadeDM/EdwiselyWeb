@@ -520,7 +520,7 @@ $(async function() {
 							} else break;
 						}
 						act += '</a></div>'
-					
+					act += `<div class="col-12 align-items-center justify-content-center">A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.</div>`
 					if (new Date(activity.doe.replace(/\s/, 'T')) < new Date()) {
 						if (activity.answered)
 							act += `
@@ -594,6 +594,8 @@ $(async function() {
 					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 				</div>
 			</div>`;		 
+				} else if (activity.type == 'feedback') {
+						
 				} else if (activity.type == 'Subjective') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
