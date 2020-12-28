@@ -111,6 +111,8 @@ $(document).ready(function () {
   let selectedQuestions = []
   let selectedQuestionsId = []
 
+  //for all question values
+  let questions_values = []
 
   //changing unit on selecting of radio
   let unit = 0
@@ -258,14 +260,22 @@ $(document).ready(function () {
         $('.chooseQues').empty();
         //$('.addingQues').empty()
         if (result.status == 200 && result.data) {
+          //questions_values = []
           $.each(result.data, function (key, value) {
 
-            console.log(value)
+
+
+            if (!questions_values.find(x => x.id === value.id)) {
+              questions_values.push(value)
+            }
+
+
+            //console.log(value)
 
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-              "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-              "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+              "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -274,8 +284,8 @@ $(document).ready(function () {
               (value.questions_options[4] ? value.questions_options[4].is_answer == 1 ? "<span>" + value.questions_options[4].name + "</span>" : "" : "") +
 
 
-              " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
-              "'>viewMore</button></div></li>" +
+              " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
+              ">viewMore</button></div></li>" +
 
 
               "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
@@ -319,6 +329,8 @@ $(document).ready(function () {
               $(this).prop('checked', true)
             }
           })
+
+          console.log(questions_values)
         }
         else {
           $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
@@ -355,8 +367,8 @@ $(document).ready(function () {
 
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
-                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
+                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
                 (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
                 (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -365,8 +377,8 @@ $(document).ready(function () {
                 (value.questions_options[4] ? value.questions_options[4].is_answer == 1 ? "<span>" + value.questions_options[4].name + "</span>" : "" : "") +
 
 
-                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' data-question='" + JSON.stringify(value) +
-                "'>viewMore</button></div></li>" +
+                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
+                ">viewMore</button></div></li>" +
 
 
                 "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
@@ -429,6 +441,7 @@ $(document).ready(function () {
   $('#navAll').on('click', function () {
     //selectedQuestionsId = []
     //selectedQuestions = []
+    questions_values = []
     getAllQuestions()
     $('#navAll').css({ "color": "black", "font-weight": "bolder" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -566,23 +579,30 @@ $(document).ready(function () {
 
 
 
-  // $('.chooseQuestionsInput').each(function () {
-  //   if (selectedQuestionsId.includes($(this).data('id'))) {
-  //     $(this).prop('checked', true)
-  //   }
-  // })
-
-
-
-
   //selecting Questions on checking of checkbox
 
 
 
   $(document).on('change', '.chooseQuestionsInput', function (e) {
     //add Questions to a array which are selected
-    (e.target.checked) ? selectedQuestions.push($(this).data('value')) : (selectedQuestions.splice(selectedQuestions.indexOf($(this).data('value')), 1));
+    //work on this part
+    //(e.target.checked) ? selectedQuestions.push($(this).data('value')) : (selectedQuestions.splice(selectedQuestions.indexOf($(this).data('value')), 1));
+    let currQues = {}
+
+    currId = $(this).data('id')
+
+
+    questions_values.forEach(function (ques) {
+      //console.log(ques.id)
+      //console.log($(this).data('id'))
+      if (ques.id == currId) {
+        currQues = ques
+        console.log(ques)
+      }
+    });
+    (e.target.checked) ? selectedQuestions.push(currQues) : (selectedQuestions.splice(selectedQuestions.indexOf(currQues, 1)));
     (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
+    console.log(selectedQuestionsId)
     console.log(selectedQuestions)
   });
 
