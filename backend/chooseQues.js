@@ -117,8 +117,8 @@ $(document).ready(function () {
   $(document).on('click', '.getUnitsInput', function () {
     //alert("hello")
     unit = $(".getUnitsInput:checked").val();
-    selectedQuestionsId = []
-    selectedQuestions = []
+    // selectedQuestionsId = []
+    // selectedQuestions = []
     subTopicsId = []
     topicsId = []
     grandTopicsId = []
@@ -260,7 +260,7 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data, function (key, value) {
 
-            //console.log(value)
+            console.log(value)
 
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
@@ -307,13 +307,18 @@ $(document).ready(function () {
               "</div>"
             );
 
-            MathJax.typesetPromise();
+            //MathJax.typesetPromise();
 
           });
 
           //$('.addingQues').empty()
-          questionsOfTest()
+          //questionsOfTest()
           MathJax.typesetPromise();
+          $('.chooseQuestionsInput').each(function () {
+            if (selectedQuestionsId.includes($(this).data('id'))) {
+              $(this).prop('checked', true)
+            }
+          })
         }
         else {
           $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
@@ -350,8 +355,8 @@ $(document).ready(function () {
 
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value=`" + JSON.stringify(value) +
-                "` name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "' data-value='" + JSON.stringify(value) +
+                "' name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
                 (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
                 (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -391,12 +396,17 @@ $(document).ready(function () {
                 "</div>" +
                 "</div>"
               );
-              MathJax.typesetPromise();
+              //MathJax.typesetPromise();
             }
           });
           //$('.addingQues').empty()
-          questionsOfTest()
+          //questionsOfTest()
           MathJax.typesetPromise();
+          $('.chooseQuestionsInput').each(function () {
+            if (selectedQuestionsId.includes($(this).data('id'))) {
+              $(this).prop('checked', true)
+            }
+          })
 
         }
         else {
@@ -417,8 +427,8 @@ $(document).ready(function () {
 
 
   $('#navAll').on('click', function () {
-    selectedQuestionsId = []
-    selectedQuestions = []
+    //selectedQuestionsId = []
+    //selectedQuestions = []
     getAllQuestions()
     $('#navAll').css({ "color": "black", "font-weight": "bolder" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -429,8 +439,8 @@ $(document).ready(function () {
 
 
   $('#navRemember').on('click', function () {
-    selectedQuestionsId = []
-    selectedQuestions = []
+    //selectedQuestionsId = []
+    //selectedQuestions = []
     getBloomQuestions(1)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "black", "font-weight": "bolder" })
@@ -440,8 +450,8 @@ $(document).ready(function () {
   })
 
   $('#navUnderstand').on('click', function () {
-    selectedQuestionsId = []
-    selectedQuestions = []
+    //selectedQuestionsId = []
+    //selectedQuestions = []
     getBloomQuestions(2)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -451,8 +461,8 @@ $(document).ready(function () {
   })
 
   $('#navApply').on('click', function () {
-    selectedQuestionsId = []
-    selectedQuestions = []
+    //selectedQuestionsId = []
+    //selectedQuestions = []
     getBloomQuestions(3)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -462,8 +472,8 @@ $(document).ready(function () {
   })
 
   $('#navAnalyze').on('click', function () {
-    selectedQuestionsId = []
-    selectedQuestions = []
+    //selectedQuestionsId = []
+    //selectedQuestions = []
     getBloomQuestions(4)
     $('#navAll').css({ "color": "gray", "font-weight": "normal" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
@@ -477,7 +487,7 @@ $(document).ready(function () {
 
 
   //adding pre addded questions
-
+  questionsOfTest()
   function questionsOfTest() {
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
@@ -555,6 +565,12 @@ $(document).ready(function () {
   }
 
 
+
+  // $('.chooseQuestionsInput').each(function () {
+  //   if (selectedQuestionsId.includes($(this).data('id'))) {
+  //     $(this).prop('checked', true)
+  //   }
+  // })
 
 
 
