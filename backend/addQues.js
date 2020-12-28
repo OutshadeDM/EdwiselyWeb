@@ -193,8 +193,9 @@ $(document).ready(function () {
           if (searchParams.has('sid')) {
             // alert('here');
             sId = searchParams.get('sid');
-              $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
-              $('#questionBankA').text('Question Bank');
+            $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
+            $('#questionBankA').text('Question Bank');
+            $('#divSaveSend').hide();
             if ($.cookie('editQues')) {
               editQuesJSON = $.cookie('editQues') ? JSON.parse($.cookie('editQues')) : null;
               questions.push(editQuesJSON);
