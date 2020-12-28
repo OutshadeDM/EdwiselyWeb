@@ -57,6 +57,7 @@ const releaseResult = (id) => {
 }
 
 $user = "";
+let followers = {};
 $(async function() {
 	jQuery("time.timeago").timeago();
 	// Check if User is logged in
@@ -483,13 +484,20 @@ $(async function() {
 			try {
 				activity = activities[index];
 				let act = ""
-				console.log(activity.id);
+				followers[activity.id] = activity.followers;
 				if (activity.type == 'Notification') {
 					act = `<div class=" card px-3 py-3 mt-2">
 						<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div>`
+						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-6">${activity.followers.length} followers <a data-toggle="modal" data-target="#followed" data-id=${activity.id}>`
+						for (let i = 0; i < 5; i++) {
+							if (i < activity.followers.length) {
+								let follower = activity.followers[i];
+								act += `<img src='${follower.profile_pic}' class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">`;
+							} else break;
+						}
+						act += '</a></div>'
 						if (activity.file_url && activity.file_url.length && ['jpeg', 'png', 'jpg', 'gif'].includes(activity.file_url.split('.').pop()))
 							act += `<div class="col-12 d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img width="300" height="500" src="${activity.file_url}" class="img-fluid"></a></div>`;
 						else if (activity.file_url && activity.file_url.length)
@@ -502,10 +510,17 @@ $(async function() {
 				} else if (activity.type == 'Test') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div>`;
-					
+						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-6">${activity.followers.length} followers <a data-toggle="modal" data-target="#followed" data-id=${activity.id}>`
+						for (let i = 0; i < 5; i++) {
+							if (i < activity.followers.length) {
+								let follower = activity.followers[i];
+								act += `<img src='${follower.profile_pic}' class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">`;
+							} else break;
+						}
+						act += '</a></div>'
+					act += `<div class="col-12 align-items-center justify-content-center">A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.</div>`
 					if (new Date(activity.doe.replace(/\s/, 'T')) < new Date()) {
 						if (activity.answered)
 							act += `
@@ -537,9 +552,16 @@ $(async function() {
 				} else if (activity.type == 'VideoConference') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div>`;
+						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-6">${activity.followers.length} followers <a data-toggle="modal" data-target="#followed" data-id=${activity.id}>`
+						for (let i = 0; i < 5; i++) {
+							if (i < activity.followers.length) {
+								let follower = activity.followers[i];
+								act += `<img src='${follower.profile_pic}' class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">`;
+							} else break;
+						}
+						act += '</a></div>'
 					if (new Date(activity.end_time.replace(/\s/, 'T')) <= new Date())
 						act += `<div class="col-12 text-center font-weight-bold text-danger">Meeting Completed</div>`;
 					else if (Math.abs(new Date(activity.start_time.replace(/\s/, 'T')).getTime() - new Date().getTime()) <= 10*60*1000)
@@ -554,9 +576,16 @@ $(async function() {
 					console.log(activity.file_url, activity.file_url.length)
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-					<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Material&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-					<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
-					<div class="col-auto">${activity.followers.length} followers </div>`
+					<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Material&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+					<div class="col-6">${activity.followers.length} followers <a data-toggle="modal" data-target="#followed" data-id=${activity.id}>`
+						for (let i = 0; i < 5; i++) {
+							if (i < activity.followers.length) {
+								let follower = activity.followers[i];
+								act += `<img src='${follower.profile_pic}' class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">`;
+							} else break;
+						}
+						act += '</a></div>'
 					if (activity.file_url && activity.file_url.length && ['jpeg', 'png', 'jpg', 'gif'].includes(activity.file_url.split('.').pop()))
 						act += `<div class="col-12 d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img width="300" height="500" src="${activity.file_url}" class="img-fluid"></a></div>`;
 					else if (activity.file_url && activity.file_url.length)
@@ -565,12 +594,21 @@ $(async function() {
 					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 				</div>
 			</div>`;		 
+				} else if (activity.type == 'feedback') {
+						
 				} else if (activity.type == 'Subjective') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
-						<div class="col-auto align-self-start"><img src="https://ui-avatars.com/api/?name=Subjective&background=0056b3&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-7 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
-						<div class="col-auto">${activity.followers.length} followers </div>`;
+						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Subjective&background=0056b3&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-6">${activity.followers.length} followers <a data-toggle="modal" data-target="#followed" data-id=${activity.id}>`
+						for (let i = 0; i < 5; i++) {
+							if (i < activity.followers.length) {
+								let follower = activity.followers[i];
+								act += `<img src='${follower.profile_pic}' class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">`;
+							} else break;
+						}
+						act += '</a></div>'
 					let starttime = new Date(activity.starttime.replace(/\s/, 'T'));
 					let timelimit = activity.timelimit;
 					let endtime = new Date(starttime.setTime(starttime.getTime() + timelimit*60*1000));
@@ -861,6 +899,19 @@ $(async function() {
 		var modal = $(this);
 		modal.find('input#resultId').val(id);
 	});
+
+	$('#followed').on('show.bs.modal', async function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var id = button.data('id');
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		var modal = $(this);
+		var list = '';
+		$.each(followers[id], (index, follower) => {
+			list += `<li class="mb-3"><img src="${follower.profile_pic}" class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%"> <strong>${follower.role_id}</strong> - ${follower.faculty_name} (${follower.role_name})</li>`
+		});
+		list = list ? list : ``;
+		modal.find('ul').html(list);
+	});	
 
 	$('#endtime').datetimepicker({
 		minDate: new Date(),
