@@ -537,7 +537,7 @@ $(async function() {
 								</div>
 							`;
 						else
-							act += `<div class="col-12 text-center"><strong class="text-danger">Teat Expired!</strong></div>`
+							act += `<div class="col-12 text-center"><strong class="text-danger">Test Expired!</strong></div>`
 					} else {
 						act += `
 							<div class="col-12">
