@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $user = "";
     if (isLoggedIn()) {
-      console.log(isLoggedIn(), 'yes');
+    //   console.log(isLoggedIn(), 'yes');
       $user = JSON.parse(isLoggedIn());
       $('html').removeClass('d-none');
     } else {
@@ -80,7 +80,7 @@ $(document).ready(function() {
                             div = div + "<div class='row'>";
 
                             $.each(value.departments, function (key, value) {
-                                div = div + "<div class='col-sm-3 mb-2'>";
+                                div = div + "<div class='col-sm-3 mb-3'>";
                                 div = div + "<span class='span-heading span-dept p-1'>"+value.name+"</span>";
                                 div = div + "</div>";
                                 dept.push({
@@ -98,7 +98,7 @@ $(document).ready(function() {
                             });
                             
                             div = div + "</div><div class='d-flex py-0 justify-content-end'>";
-                            div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'>+</button>";
+                            div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'><i class='fas fa-plus'></i></button>";
                             div = div + "</div></div></div></div>";
 
                             div1 = div1 + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'>"+value.name+"</li>";
@@ -165,7 +165,7 @@ $(document).ready(function() {
 
                     if(deptArr != null && deptArr.length > 0 && !courseDept){
                         $('#courseSelectDept').empty();
-                        $('#courseSelectDept').append("<option value='0' disabled selected>Select Department</option>");
+                        $('#courseSelectDept').append("<option value='0' disabled selected>Chooses Department</option>");
                         $('#courseSelectDept').append("<option value='all'>All</option>")
                         $.each(deptArr,function(key,value){
                             $('#courseSelectDept').append("<option value='"+value+"'>"+value+"</option>")
@@ -250,7 +250,7 @@ $(document).ready(function() {
 
         $('#courseModalDept').empty();
         $('#modalSaveBtn').data('subject',subject_id);
-        $('#courseModalHeader').html("Finilize '"+subject_name+"' to Your Courses")
+        $('#courseModalHeader').html("Adding '"+subject_name+"' to Your Courses")
 
         $.each(dept, function(key, value){
             $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput courseSelectDept' value='"+value.id+"' data-uid='"+value.uid+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");

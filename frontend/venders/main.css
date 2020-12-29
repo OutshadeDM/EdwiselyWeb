@@ -321,8 +321,8 @@ font-size: 10px;
 }
 
 .addCourseCard{
-height: 425px;
-max-height: 425px;
+/* height: 425px; */
+/* max-height: 425px; */
 }
 
 .home .addCourseCard {
