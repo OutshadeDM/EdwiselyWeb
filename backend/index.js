@@ -43,7 +43,10 @@ const releaseResult = (id) => {
 					$.cookie('status', 'success');
 					$.cookie('message', 'Successfully released the result');
 					window.location.replace('index.html')
-				} else {
+				} else if (result.status == 204) {
+					$.cookie('status', 'failure');
+					$.cookie('message', result.message);
+					window.location.replace('index.html')
 					console.log(result.message);
 				}
 			},
@@ -534,7 +537,7 @@ $(async function() {
 								</div>
 							`;
 						else
-							act += `<div class="col-12 text-center"><strong class="text-danger">Teat Expired!</strong></div>`
+							act += `<div class="col-12 text-center"><strong class="text-danger">Test Expired!</strong></div>`
 					} else {
 						act += `
 							<div class="col-12">
