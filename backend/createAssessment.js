@@ -131,7 +131,7 @@ $(document).ready(function () {
 
           if (result.status == 200) {
             alert(result.message)
-            window.location.href = "myAssessment.html"
+            window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
           }
         },
         error: function (error) {

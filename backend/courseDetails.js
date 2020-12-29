@@ -22,8 +22,6 @@ $(document).ready(function () {
         // alert("here");
         uId = searchParams.get('uid');
     }
-
-    $.cookie('editQues', "");
     
     let courseBookmarkedFlag = false;
     let courseYourContentFlag = false;
@@ -36,8 +34,6 @@ $(document).ready(function () {
         navAbout();
 
     });
-
-	  
 
     function navAbout(){
         refreshContents();
@@ -495,6 +491,16 @@ $(document).ready(function () {
         let button = $(event.relatedTarget) // Button that triggered the modal
         const deck_id = button.data('id'); // Extract info from data-* attributes
         $('#deckModalDiv').removeClass('slick-initialized slick-slider');
+        $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            background: "#fff",
+            opacity: 0.7
+        }).appendTo($("#deckModalLoadingDiv"));
+
+        $('#deckModalDiv').hide();
+        $('#deckModalLoadingDiv').show();
 
         if(deck_id){
             $.ajax({
@@ -507,6 +513,8 @@ $(document).ready(function () {
                 success: async function (result) {
                     // alert(result.message);
                     if (result.status == 200 && result.data) {
+                        $decks = "";
+                        let i = 1;
                         for(let index = 0; index < result.data.length; index++){
                             const deck = result.data[index];
                             if(deck.type == "cs" || deck.type == "pqp"){
@@ -515,15 +523,23 @@ $(document).ready(function () {
                                     $optionalP = "";
                                     if(deck.type == "pqp")
                                         $optionalP = $("<p></p>").addClass('text-center').append("Previous Year Question</p>");
+                                    $index = $("<p>"+i+"/10</p>").addClass('text-center font-weight-bold');
                                     $mainDiv = $("<div></div>").append(data);
-                                    $deckDiv = $("<div></div>").addClass('p-2').append($optionalP).append($mainDiv);
+                                    $deckDiv = $("<div></div>").addClass('p-2').append($index).append($optionalP).append($mainDiv);
+                                    // $decks = $decks + JSON.stringify($deckDiv[0].innerHTML);
                                     $('#deckModalDiv').append($deckDiv);
+                                    // console.log($deckDiv);
                                     if (index == result.data.length - 1) {
                                         // alert(index);
+                                        // console.log($decks);
+                                        $('#deckModalLoadingDiv').hide();
+                                        $('#loadingDiv').remove();
+                                        $('#deckModalDiv').show();
                                         $('#deckModalDiv').slick({
                                             adaptiveHeight: true
                                         });				
-                                    }                                     
+                                    }
+                                    i++;                                     
                                 } catch (error) {
                                     console.log(error);
                                     // alert('Something Went Wrong!');

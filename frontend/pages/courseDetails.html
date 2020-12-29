@@ -684,7 +684,10 @@
           <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content" id="modalDeckContent">
               <div class="modal-body">
-                <div class="m-5" id="deckModalDiv">
+                <div class="mx-5 my-2" id="deckModalDiv">
+
+                </div>
+                <div class="mx-5 my-2" id="deckModalLoadingDiv">
 
                 </div>
                 
@@ -745,6 +748,9 @@
     },
     svg: {
       fontCache: 'global'
+    },
+    options: {
+      skipHtmlTags: {'[-]': ['code', 'pre']}
     }
   };  
 </script>
