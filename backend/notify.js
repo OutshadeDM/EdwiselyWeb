@@ -167,9 +167,15 @@ $('#formdata').submit(function(e) {
         },	        
         success: function (data) {
 			console.log(data);
-			$.cookie('status', 'success');
-			$.cookie('message', 'notify');
-            window.location.replace("index.html");
+			if (data.status == 200) {
+				$.cookie('status', 'success');
+				$.cookie('message', 'notify');
+				window.location.replace("index.html");
+			} else {
+				$.cookie('status', 'failure');
+				$.cookie('message', 'Not a valid file format');
+				window.location.replace("index.html");
+			}
         },
         error: function (error) {
             console.log(error);
