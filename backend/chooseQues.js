@@ -444,7 +444,7 @@ $(document).ready(function () {
   $('#navAll').on('click', function () {
     //selectedQuestionsId = []
     //selectedQuestions = []
-    questions_values = []
+    //questions_values = []
     getAllQuestions()
     $('#navAll').css({ "color": "black", "font-weight": "bolder" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
