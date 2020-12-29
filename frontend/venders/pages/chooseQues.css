@@ -144,3 +144,11 @@ pre
 .viewMoreModal{
   background-color: transparent;
 }
+
+
+#moreQuestions{
+  width: 100%;
+  border: none;
+  background-color: #1B658C;
+  color: white;
+}
