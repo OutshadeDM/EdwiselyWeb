@@ -167,9 +167,9 @@ $('#formdata').submit(function(e) {
         },	        
         success: function (data) {
 			console.log(data);
-			$.cookie('status', 'success');
-			$.cookie('message', 'notify');
-            window.location.replace("index.html");
+			// $.cookie('status', 'success');
+			// $.cookie('message', 'notify');
+            // window.location.replace("index.html");
         },
         error: function (error) {
             console.log(error);

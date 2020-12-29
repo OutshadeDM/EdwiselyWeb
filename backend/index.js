@@ -594,8 +594,20 @@ $(async function() {
 					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} class="btn btn-light"><i class="fas fa-comments"></i> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 				</div>
 			</div>`;		 
-				} else if (activity.type == 'feedback') {
-						
+				} else if (activity.type == 'Feedback') {
+					act = `<div class=" card px-3 py-3 mt-2">
+					<div class="row">
+						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Feedback&background=005663&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+						<div class="col-6">${activity.followers.length} followers <a data-toggle="modal" data-target="#followed" data-id=${activity.id}>`
+						for (let i = 0; i < 5; i++) {
+							if (i < activity.followers.length) {
+								let follower = activity.followers[i];
+								act += `<img src='${follower.profile_pic}' class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">`;
+							} else break;
+						}
+						act += '</a></div>'
+					act += ''					
 				} else if (activity.type == 'Subjective') {
 					act = `<div class=" card px-3 py-3 mt-2">
 					<div class="row">
