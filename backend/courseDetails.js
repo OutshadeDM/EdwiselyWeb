@@ -392,10 +392,10 @@ $(document).ready(function () {
         $('#courseDeckList').empty();
         $('#courseDeckList').removeClass('slick-initialized slick-slider');
         $('#courseDeckTitle').hide();
-        // alert('here');
+        // alert(unitId);
 
         $.ajax({
-            url: 'https://stagingfacultypython.edwisely.com/getCourseDecks?unit_id=723',//+unitId,
+            url: 'https://stagingfacultypython.edwisely.com/getCourseDecks?unit_id='+unitId,
             type: 'GET',
             contentType: 'application/json',
             headers: {

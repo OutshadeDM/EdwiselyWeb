@@ -218,7 +218,6 @@ $(document).ready(function () {
         }
       });
 
-
     }
   }
 
