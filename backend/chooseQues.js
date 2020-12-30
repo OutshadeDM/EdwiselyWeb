@@ -375,6 +375,7 @@ $(document).ready(function () {
             //storing the questions to display in an array
             let more_all_questions = []
             for (let i = 0; i < (moreQues.length < 31 ? moreQues.length : 30); i++) {
+              console.log(more_all_questions)
               more_all_questions.push(moreQues.shift())
             }
             console.log(more_all_questions)
@@ -569,16 +570,16 @@ $(document).ready(function () {
           });
 
           if (blooms_lvl == 1) {
-            $('.chooseQues').append("<button id='moreBloomQues1' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else if (blooms_lvl == 2) {
-            $('.chooseQues').append("<button id='moreBloomQues2' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues2' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else if (blooms_lvl == 3) {
-            $('.chooseQues').append("<button id='moreBloomQues3' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues3' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else {
-            $('.chooseQues').append("<button id='moreBloomQues4' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues4' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
 
 
@@ -595,8 +596,8 @@ $(document).ready(function () {
 
           //on click of view more questoions button
 
-          $(document).on('click', '.moreQuesBloom', function () {
-            $('.moreQuesBloom').remove()
+          $(document).on('click', '.bloomQues', function () {
+            $('.bloomQues').remove()
 
             //storing the questions to display in an array
             let more_bloom_questions = []
@@ -689,16 +690,16 @@ $(document).ready(function () {
 
                   })
                   if (blooms_lvl == 1) {
-                    $('.chooseQues').append("<button id='moreBloomQues1' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+                    $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
                   }
                   else if (blooms_lvl == 2) {
-                    $('.chooseQues').append("<button id='moreBloomQues2' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+                    $('.chooseQues').append("<button id='moreBloomQues2' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
                   }
                   else if (blooms_lvl == 3) {
-                    $('.chooseQues').append("<button id='moreBloomQues3' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+                    $('.chooseQues').append("<button id='moreBloomQues3' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
                   }
                   else {
-                    $('.chooseQues').append("<button id='moreBloomQues4' class='moreQuesBloom py-2 font-weight-bold'> MORE QUESTIONS</button>")
+                    $('.chooseQues').append("<button id='moreBloomQues4' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
                   }
 
                 }
