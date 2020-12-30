@@ -522,19 +522,19 @@ $(document).ready(function () {
 
           if (blooms_lvl == 1) {
             loadQuestions(questionsRem);
-            $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else if (blooms_lvl == 2) {
             loadQuestions(questionsUnder);
-            $('.chooseQues').append("<button id='moreBloomQues2' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues2' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else if (blooms_lvl == 3) {
             loadQuestions(questionsApply);
-            $('.chooseQues').append("<button id='moreBloomQues3' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues3' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else {
             loadQuestions(questionsAnalyze);
-            $('.chooseQues').append("<button id='moreBloomQues4' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues4' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
 
 
@@ -627,19 +627,19 @@ $(document).ready(function () {
 
           if (blooms_lvl == 1) {
             loadQuestions(questionsRem);
-            $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else if (blooms_lvl == 2) {
             loadQuestions(questionsUnder);
-            $('.chooseQues').append("<button id='moreBloomQues2' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues2' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else if (blooms_lvl == 3) {
             loadQuestions(questionsApply);
-            $('.chooseQues').append("<button id='moreBloomQues3' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues3' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
           else {
             loadQuestions(questionsAnalyze);
-            $('.chooseQues').append("<button id='moreBloomQues4' class='bloomQues'py-2 font-weight-bold'> MORE QUESTIONS</button>")
+            $('.chooseQues').append("<button id='moreBloomQues4' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
           }
 
         }
