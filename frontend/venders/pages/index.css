@@ -163,3 +163,15 @@
 .chat li {
     list-style: none;
 }
+
+.slick-initialized .slick-slide, .slick-initialized .slick-slide a {
+    outline: none;
+}
+
+.addCourseCard {
+    outline: none;
+}
+
+.card-img-top {
+    outline: none;
+}

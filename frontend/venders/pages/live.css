@@ -85,3 +85,34 @@ input:checked + .slider:before {
 label {
   font-weight: 600;
 }
+
+
+
+
+
+
+.selectAll {
+  border-radius: 15px 15px 0 0;
+  background: #1b668c;
+  padding: 15px;
+  color: white;
+  font-size: 12px;
+}
+
+.student-list div.single {
+  padding: 15px;
+  font-size: 12px;
+}
+
+.student-list div.single:nth-of-type(even)
+{
+  background-color: #e8eff3;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: none;
+  color: #262626;
+  border-bottom: 4px solid #1b668c;
+  font-weight: 600;
+  font-size: 20px;
+}
