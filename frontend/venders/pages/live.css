@@ -95,11 +95,13 @@ label {
   border-radius: 15px 15px 0 0;
   background: #1b668c;
   padding: 15px;
-  color: white;  
+  color: white;
+  font-size: 12px;
 }
 
 .student-list div.single {
   padding: 15px;
+  font-size: 12px;
 }
 
 .student-list div.single:nth-of-type(even)
