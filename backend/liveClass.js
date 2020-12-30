@@ -123,15 +123,18 @@ $(async function() {
 
 	const createSectionTab = (section) => {
 		$('#myTab').append(`<li class="nav-item my-2 col-md-4 col-6">
-                            <a class="nav-link ${first? 'active':''}" id="t${tabNumber}-tab" data-toggle="tab" href="#t${tabNumber}" role="tab" aria-controls="t${tabNumber}" aria-selected="true">${section.name}</a>
+                            <a class="nav-link text-muted ${first? 'active':''}" id="t${tabNumber}-tab" data-toggle="tab" href="#t${tabNumber}" role="tab" aria-controls="t${tabNumber}" aria-selected="true">${section.name}</a>
                           </li>`);
 		$('#myTabContent').append(`<div class="tab-pane fade ${first? 'show active': ''}" id="t${tabNumber}" role="tabpanel" aria-labelledby="t${tabNumber}-tab"></div>`);
-		$(`#t${tabNumber}`).append(`<div class="form-check border rounded mb-2">
-		<label class="form-check-label" for="select${tabNumber}">SELECT ALL</label>
-		<input style="float: right;right: 10px;" name="selectAll" data-tab=${tabNumber} type="checkbox" class="form-check-input selectAll" id="select${tabNumber}">
-		</div><div class="student-list"></div>`)		
+		$(`#t${tabNumber}`).append(`<div class="border row selectAll">
+		<div class="col-8 border-right">Students</div>
+		<div class="col-4">
+			<label class="form-check-label" for="select${tabNumber}">SELECT ALL</label>
+			<input style="float: right;right: 10px;" name="selectAll" data-tab=${tabNumber} type="checkbox" class="form-check-input selectAll" id="select${tabNumber}">		
+		</div>
+		</div><div class="student-list row"></div>`)		
 		$.each(section.students.data, (index, student) => {
-			$(`#t${tabNumber} .student-list`).append(`<div class="form-check single border rounded mb-2">
+			$(`#t${tabNumber} .student-list`).append(`<div class="form-check col-12 single">
 	                                  <label class="form-check-label" for="exampleCheck${selectNumber}">${student.roll_number} - ${student.name}</label>
 	                                  <input style="float: right;right: 10px;" name="students[]" value="${student.id}" type="checkbox" class="form-check-input" id="exampleCheck${selectNumber++}">
 	                                </div>`);
@@ -179,7 +182,7 @@ $(async function() {
 // 	$('#formdata').submit();
 // })
 
-$('#formdata').submit(function(e) {
+$('#submit').on('click', function(e) {
     e.preventDefault();  
     console.log(this);
     var formData = new FormData();

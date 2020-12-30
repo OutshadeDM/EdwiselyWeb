@@ -570,7 +570,7 @@ $(async function() {
 					if (new Date(activity.end_time.replace(/\s/, 'T')) <= new Date())
 						act += `<div class="col-12 text-center font-weight-bold text-danger">Meeting Completed</div>`;
 					else if (Math.abs(new Date(activity.start_time.replace(/\s/, 'T')).getTime() - new Date().getTime()) <= 10*60*1000)
-						act += `<div class="col-12 text-success font-weight-bold">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} <a href="${videoConference.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a></div>`
+						act += `<div class="col-12 text-success font-weight-bold">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} <a href="${activity.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a></div>`
 					else 
 						act += `<div class="col-12 text-center font-weight-bold">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} (The link to meeting will activate only 10 mins before it starts)</div>`
 					act += `<div class="col-3 mt-3"><i class="fab fa-telegram-plane"></i> ${activity.sent_to} Send To</div>
