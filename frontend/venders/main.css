@@ -316,14 +316,26 @@ border-radius: 10px;
 /* addcourses */
 
 .span-dept{
-background: #f8c6f8;
-border-radius: 10px;
-font-size: 10px;
+  background: #f8c6f8;
+  border-radius: 10px;
+  font-size: 10px;
+  /* height: 25px; */
 }
 
 .addCourseCard{
 /* height: 425px; */
 /* max-height: 425px; */
+}
+
+.addCourseCard h5{
+  font-size: 16px;
+  height: 60px;
+  /* max-height: 425px; */
+}
+
+.addCourseCard .row{
+  /* height: 65px; */
+  /* max-height: 425px; */
 }
 
 .home .addCourseCard {
