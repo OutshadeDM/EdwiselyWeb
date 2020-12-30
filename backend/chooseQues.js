@@ -732,10 +732,10 @@ $(document).ready(function () {
       //console.log($(this).data('id'))
       if (ques.id == currId) {
         currQues = ques
-        console.log(ques)
+        //console.log(ques)
       }
     });
-    (e.target.checked) ? selectedQuestions.push(currQues) : (selectedQuestions.splice(selectedQuestions.indexOf(currQues, 1)));
+    (e.target.checked) ? selectedQuestions.push(currQues) : (selectedQuestions.splice(selectedQuestions.findIndex(function (x) { return x.id == currId }), 1));
     (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
     console.log(selectedQuestionsId)
     console.log(selectedQuestions)
