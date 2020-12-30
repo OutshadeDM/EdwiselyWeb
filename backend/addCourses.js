@@ -165,7 +165,7 @@ $(document).ready(function() {
 
                     if(deptArr != null && deptArr.length > 0 && !courseDept){
                         $('#courseSelectDept').empty();
-                        $('#courseSelectDept').append("<option value='0' disabled selected>Chooses Department</option>");
+                        $('#courseSelectDept').append("<option value='0' disabled selected>Choose Department</option>");
                         $('#courseSelectDept').append("<option value='all'>All</option>")
                         $.each(deptArr,function(key,value){
                             $('#courseSelectDept').append("<option value='"+value+"'>"+value+"</option>")
