@@ -13,9 +13,6 @@ $(document).ready(function () {
   // let university_degree_department_id = "71";
 
 
-  $('#createAssessmentBtn').on('click', function () {
-    window.location.href = "createAssessment.html"
-  })
 
 
   $.ajax({
@@ -78,6 +75,12 @@ $(document).ready(function () {
   });
 
   function getObjAssesments() {
+
+    $('#createAssessmentBtn').on('click', function () {
+      window.location.href = "createAssessment.html?isObj=true"
+    })
+
+
     $('#subjective-assessments').val("0");
     $('#cond-ObjassessmentsSection').val("0");
     let subject = $('#objective-assessments').val()
@@ -163,6 +166,11 @@ $(document).ready(function () {
   });
 
   function getSubAssesments() {
+
+    $('#createAssessmentBtn').on('click', function () {
+      window.location.href = "createAssessment.html?isObj=false"
+    })
+
     let subject = $('#objective-assessments').val()
     // alert(subject)
 
@@ -283,6 +291,9 @@ $(document).ready(function () {
 
   $("#nav-cond-tab").click(function () {
     clearSelections();
+    $('#createAssessmentBtn').on('click', function () {
+      window.location.href = "createAssessment.html?isObj=true"
+    })
     $("#nav-cond-obj-tab").click();
   });
 

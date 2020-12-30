@@ -10,6 +10,19 @@ $(document).ready(function () {
     window.location.replace("login.html");
   }
 
+
+  let searchParams = new URLSearchParams(window.location.search);
+  let objective = false
+  // let units = [];
+  if (searchParams.has('isObj')) {
+    objective = searchParams.get('isObj')
+  }
+
+
+
+
+
+
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
     type: 'GET',
@@ -59,42 +72,10 @@ $(document).ready(function () {
     var title = $('#title-objective').val()
     var desc = $('#desc-objective').val()
     var subject = $("input[name='courseTagAdd']:checked").val();
-    //var subject_id = 0
-
-
-    //to get the subject id
-    // $.ajax({
-    //   url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
-    //   type: 'GET',
-    //   contentType: 'application/json',
-    //   headers: {
-    //     'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTMwLCJlbWFpbCI6InByYWthc2hAZWR3aXNlbHkuY29tIiwiaW5pIjoiMTYwNjIzMjkxOCIsImV4cCI6IjE2MDc1Mjg5MTgifQ.i1TImgHIZx5cP6L7TAYrEwpBVpbsjmsF1mvqmiEolo4'
-    //   },
-    //   success: function (result) {
-    //     // alert(result.status);
-    //     if (result.status == 200 && result.data) {
-    //       $.each(result.data, function (key, value) {
-
-    //         //console.log(value.name)
-    //         if (value.name == subject) {
-
-    //           subject_id = value.id
-    //         }
-    //       });
-
-    //     }
-    //     else {
-    //       subject_id = 0
-    //     }
-
-
-    //   },
-    //   error: function (error) {
-    //     alert(result.message);
-    //   }
-    // });
-
-
+    //alert(objective)
+    // alert(title)
+    // alert(desc)
+    // alert(subject)
 
 
     //to make the post request
@@ -104,40 +85,79 @@ $(document).ready(function () {
     // alert("herer");
     if (title && desc && subject) {
 
-      var form = new FormData();
-      form.append("name", title);
-      form.append("description", desc);
-      form.append("subject_id", subject);
+      //alert(objective)
 
 
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
 
 
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/createObjectiveTest',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          //alert(result.message);
-          //console.log('4') 
 
-          if (result.status == 200) {
-            alert(result.message)
-            window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+      if (objective == 'true') {
+        //alert(objective)
+        var form = new FormData();
+        form.append("name", title);
+        form.append("description", desc);
+        form.append("subject_id", subject);
+        // for (var key of form.entries()) {
+        //   alert(key[1]);
+        // }
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/createObjectiveTest',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            //alert(result.message);
+            //console.log('4') 
+
+            if (result.status == 200) {
+              alert(result.message)
+              window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+            }
+          },
+          error: function (error) {
+            alert("Request Failed with status: " + error.status);
           }
-        },
-        error: function (error) {
-          alert("Request Failed with status: " + error.status);
-        }
-      });
+        });
+      }
+      if (objective == 'false') {
+        var form = new FormData();
+        form.append("name", title);
+        form.append("description", desc);
+        form.append("subject_id", subject);
+        // for (var key of form.entries()) {
+        //   alert(key[1]);
+        // }
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/createSubjectiveTest',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            //alert(result.message);
+            //console.log('4') 
+
+            if (result.status == 200) {
+              alert(result.message)
+              window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+            }
+          },
+          error: function (error) {
+            alert("Request Failed with status: " + error.status);
+          }
+        });
+      }
+
+
     }
 
   })
