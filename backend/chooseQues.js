@@ -305,7 +305,10 @@ $(document).ready(function () {
               questions_values.push(value)
             }
 
-            questionsAll.push(value);
+            if (!questionsAll.find(x => x.id === value.id)) {
+              questionsAll.push(value);
+            }
+
 
             //console.log(value)
             //MathJax.typesetPromise();
