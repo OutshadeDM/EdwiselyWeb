@@ -237,7 +237,12 @@ $(document).ready(function () {
         div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "'><i class='fas fa-pen'></i></a>";
       }
       div = div + "<div class='card-body pl-0'>";
-      div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
+      if (value.description.length > 100) {
+        div = div + "<p class='card-text pl-3'>" + value.description.substr(0, 100) + "...</p>";
+      }
+      else {
+        div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
+      }
       div = div + "</div>";
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
       div = div + "Questions: " + value.questions_count;

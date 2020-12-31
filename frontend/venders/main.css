@@ -656,3 +656,13 @@ pre
   background-color: transparent;
 
 } 
+
+
+.objCard {
+  height: 191px;
+  overflow-y: hidden;
+}
+
+.card-footer {
+  z-index: 10;
+}
