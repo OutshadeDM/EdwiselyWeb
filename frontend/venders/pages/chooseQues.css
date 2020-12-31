@@ -145,6 +145,11 @@ pre
   background-color: transparent;
 }
 
+#questionsToChoose{
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: 0;
+}
 
 #moreQuestions{
   width: 100%;
