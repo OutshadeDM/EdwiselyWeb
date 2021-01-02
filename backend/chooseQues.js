@@ -995,7 +995,7 @@ $(document).ready(function () {
     }
   }
 
-  $('#saveQuestionsBtn').on('click', function () {
+  $('#btnSave').on('click', function () {
     if (selectedQuestions.length === 0) {
       alert("Choose Questions First !")
     }
@@ -1049,7 +1049,7 @@ $(document).ready(function () {
 
   //save and send btn
 
-  $('#saveSendBtn').on('click', function () {
+  $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length === 0) {
       alert("Choose Questions First !")
     }
