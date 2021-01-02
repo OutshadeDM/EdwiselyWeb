@@ -392,7 +392,7 @@ $(async function() {
 
 
 		$.each(courses, (index, course) => {
-			$img = $('<img>').addClass('card-img-top img-fluid py-2').attr('src', course.course_image || '../images/onlineCourses.png');
+			$img = $('<img>').addClass('card-img-top img-fluid').attr('src', course.course_image || '../images/onlineCourses.png');
 			$title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
 			// $description = $('<p></p>').addClass('py-0 my-0')
 			// 				.append(
