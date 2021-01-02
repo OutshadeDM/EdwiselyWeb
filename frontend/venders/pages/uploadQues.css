@@ -19,10 +19,16 @@
 
 .getUnitsLabel{
   color: gray;
+  border-bottom: solid 3px #1B658C;
+  border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
+  border-image-slice: 1;
 }
 
 input[type="radio"]:checked+label{
   color: black;
   font-size:x-large;
   font-weight: 400;
+  border-bottom: solid 3px #1B658C;
+  border-image: linear-gradient(to right, #1B658C 80%, rgba(0,0,0,0) 80%);
+  border-image-slice: 1;
 }
