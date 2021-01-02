@@ -2,7 +2,7 @@
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 23px;
 }
 
 .switch input { 
@@ -26,11 +26,12 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 23px;
+  width: 32px;
+  left: 0px;
+  bottom: 0px;
   background-color: white;
+  border: 1px solid #707070;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -44,18 +45,18 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(28px);
+  -ms-transform: translateX(28px);
+  transform: translateX(28px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 0.5rem;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+  border-radius: 0.5rem;
 }
 
 .sliderr {
@@ -102,6 +103,7 @@ label {
 .student-list div.single {
   padding: 15px;
   font-size: 12px;
+  border-bottom: 1px solid #707070;
 }
 
 .student-list div.single:nth-of-type(even)
@@ -123,4 +125,24 @@ label {
 
 .form-control {
   border-radius: 0.75rem;
+}
+
+
+.slide-wrap .nav-pills .nav-link {
+  font-size: 0.8rem;
+  max-width: fit-content;
+}
+
+.slide-wrap {
+  padding: 10px;
+  border: 1px solid #707070;
+  max-height: 150px;
+  overflow: auto;
+  overflow-x: hidden;
+  border-radius: 0.5rem;
+
+}
+
+.right {
+  border: 1px solid #707070;border-radius: 15px;
 }

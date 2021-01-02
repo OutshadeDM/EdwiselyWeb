@@ -122,7 +122,7 @@ $(async function() {
 	}
 
 	const createSectionTab = (section) => {
-		$('#myTab').append(`<li class="nav-item my-2 col-md-4 col-6">
+		$('#myTab').append(`<li class="nav-item my-2 col-12">
                             <a class="nav-link text-muted ${first? 'active':''}" id="t${tabNumber}-tab" data-toggle="tab" href="#t${tabNumber}" role="tab" aria-controls="t${tabNumber}" aria-selected="true">${section.name}</a>
                           </li>`);
 		$('#myTabContent').append(`<div class="tab-pane fade ${first? 'show active': ''}" id="t${tabNumber}" role="tabpanel" aria-labelledby="t${tabNumber}-tab"></div>`);
