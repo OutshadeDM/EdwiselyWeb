@@ -308,7 +308,7 @@ $(document).ready(function () {
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >Q.) " + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -318,7 +318,7 @@ $(document).ready(function () {
 
 
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-              ">viewMore</button></div></li>" +
+              ">View More</button></div></li>" +
 
 
               "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
@@ -365,11 +365,6 @@ $(document).ready(function () {
               $(this).prop('checked', true)
             }
           })
-
-
-
-
-
 
 
 
@@ -430,7 +425,7 @@ $(document).ready(function () {
 
 
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-              ">viewMore</button></div></li>" +
+              ">View More</button></div></li>" +
 
 
               "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
@@ -525,6 +520,7 @@ $(document).ready(function () {
           bloomlvl4_moreques = bloom_moreques[3]
 
 
+
           $.each(result.data, function (key, value) {
             // if (!questions_values.find(x => x.id === value.id)) {
             //   questions_values.push(value)
@@ -533,7 +529,7 @@ $(document).ready(function () {
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q.) " + value.name +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
                 (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
                 (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -543,7 +539,7 @@ $(document).ready(function () {
 
 
                 " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-                ">viewMore</button></div></li>" +
+                ">View More</button></div></li>" +
 
 
                 "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
@@ -685,7 +681,7 @@ $(document).ready(function () {
 
 
               " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-              ">viewMore</button></div></li>" +
+              ">View More</button></div></li>" +
 
 
               "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
@@ -766,11 +762,11 @@ $(document).ready(function () {
     moreQues = []
     console.log(moreQues)
     getAllQuestions()
-    $('#navAll').css({ "color": "black", "font-weight": "bolder" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAll').css({ "color": "white", "font-weight": "bolder", "background-color": "#1B658C", "border-radius": "10px 0 0 0" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   })
 
 
@@ -781,11 +777,11 @@ $(document).ready(function () {
     console.log(moreQues)
     blooms_lvl = 1
     getBloomQuestions(1)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
-    $('#navRemember').css({ "color": "black", "font-weight": "bolder" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navRemember').css({ "color": "white", "font-weight": "bolder", "background-color": "#1B658C" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   })
 
   $('#navUnderstand').on('click', function () {
@@ -795,11 +791,11 @@ $(document).ready(function () {
     console.log(moreQues)
     blooms_lvl = 2
     getBloomQuestions(2)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
-    $('#navUnderstand').css({ "color": "black", "font-weight": "bolder" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navUnderstand').css({ "color": "white", "font-weight": "bolder", "background-color": "#1B658C" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   })
 
   $('#navApply').on('click', function () {
@@ -809,11 +805,11 @@ $(document).ready(function () {
     console.log(moreQues)
     blooms_lvl = 3
     getBloomQuestions(3)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
-    $('#navApply').css({ "color": "black", "font-weight": "bolder" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal" })
+    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navApply').css({ "color": "white", "font-weight": "bolder", "background-color": "#1B658C" })
+    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   })
 
   $('#navAnalyze').on('click', function () {
@@ -823,11 +819,11 @@ $(document).ready(function () {
     console.log(moreQues)
     blooms_lvl = 4
     getBloomQuestions(4)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal" })
-    $('#navAnalyze').css({ "color": "black", "font-weight": "bolder" })
+    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#navAnalyze').css({ "color": "white", "font-weight": "bolder", "background-color": "#1B658C", "border-radius": "0 10px 0 0" })
   })
 
 
