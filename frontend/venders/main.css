@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Google Sans";
+  src: url('../Google-sans-Font-Family/ProductSans-Regular.ttf');
+}
+
+* {
+  font-family: "Google Sans";
+}
+
 html{
   height: 100%;
   margin: 0;
