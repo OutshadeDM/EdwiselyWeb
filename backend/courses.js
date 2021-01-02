@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    //   alert("ok");
-
     $user = "";
 	if (isLoggedIn()) {
 		// console.log(isLoggedIn(), 'yes');
@@ -10,7 +8,6 @@ $(document).ready(function () {
 		window.location.replace("login.html");
     }
     alert
-
 
     let courses = [];
 
@@ -22,7 +19,6 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-            // alert(result.status);
             $('#courseList').empty();
             $('#courseSelectList').empty();
             let div = '<ul class="list-unstyled">';
@@ -32,7 +28,6 @@ $(document).ready(function () {
                         "subSemId":value.subSemId,
                         "name":value.name
                     });
-                    //  alert(value.name);
                     div = div + "<li class='course' data-subSemId='"+value.subject_semester_id+"'>"+value.name+"</li>";
 
                     if (value.course_image)
@@ -55,25 +50,20 @@ $(document).ready(function () {
         let id = $(this).data('subsemid');
         if (id)
             window.location.href = "courseDetails.html?id=" + id;
-        // alert(id);
     });
 
-    // $('#courseSelectList').select2();
 
     $("#courseSelect").click(function () {
-        // alert("here");
         $("#courseSelectList").show();
     });
 
     $("#courseSelect").keyup(function () {
         let searchTerm = $("#courseSelect").val().toLowerCase();
-        // alert(searchTerm);
         $("#courseSelectList").show();
         if(courses.length > 0){
             let div = "<ul class='list-unstyled'>";
             $('#courseSelectList').empty();
             $.each(courses, function (key, value) {
-                // alert("here");
                 if(value.name.toLowerCase().indexOf(searchTerm) != -1)
                     div = div + "<li class='course' data-subSemId='"+value.subject_semester_id+"'>"+value.name+"</li>";
             });
@@ -83,7 +73,6 @@ $(document).ready(function () {
     });
 
     $("#courseSelect").blur(function () {
-        // alert("here");
         $("#courseSelectList").fadeOut();
     });
 });
