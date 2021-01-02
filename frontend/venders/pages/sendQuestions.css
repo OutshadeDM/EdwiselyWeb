@@ -78,3 +78,9 @@ input[type="radio"]:checked+label{
   font-size:large;
   font-weight: 600;
 }
+
+.spanSelectAll{
+  padding-left: 170px;
+  border-left: white solid 2px;
+  float: right;
+}

@@ -72,17 +72,17 @@ $(document).ready(function() {
                             if (value.course_image)
                                 div = div + "<img class='p-2' style='width:100%' height='250' src='"+value.course_image+"' alt='No Image'>";
                             else
-                                div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
+                                div = div + "<img class='card-img-top py-2' width='200' height='250' style='height: 250px;' src='../images/onlineCourses.png' alt='No Image'>";
                             // div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
                             div = div + "<div class='card-body'>";
                             div = div + "<h5 class='card-title font-weight-bold pb-0 mb-0'>"+value.name+"</h5>";
                             div = div + "<p class='pb-0 my-0 pt-1'><span class='span-heading'>Departments</span></p>";
-                            div = div + "<div class='row'>";
+                            div = div + "<div class='row pl-2'>";
 
                             $.each(value.departments, function (key, value) {
-                                div = div + "<div class='col-sm-3 mb-3'>";
-                                div = div + "<span class='span-heading span-dept p-1'>"+value.name+"</span>";
-                                div = div + "</div>";
+                                // div = div + "<div class='col-sm-2 mb-3'>";
+                                div = div + "<span class='mx-2 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
+                                // div = div + "</div>";
                                 dept.push({
                                     "id":value.subject_semester_id,
                                     "uid":value.university_degree_department_id,
@@ -133,9 +133,9 @@ $(document).ready(function() {
                                 div = div + "<div class='row'>";
 
                                 $.each(value.departments, function (key, value) {
-                                    div = div + "<div class='col-sm-3 mb-2'>";
-                                    div = div + "<span class='span-heading span-dept p-1'>"+value.name+"</span>";
-                                    div = div + "</div>";
+                                    // div = div + "<div class='col-sm-2 mb-2'>";
+                                    div = div + "<span class='mx-2 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
+                                    // div = div + "</div>";
                                     dept.push({
                                         "id":value.subject_semester_id,
                                         "uid":value.university_degree_department_id,

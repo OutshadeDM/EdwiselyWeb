@@ -180,7 +180,7 @@ $(document).ready(function () {
       success: function (result) {
         //alert(result.status)
         $('.selectAllDiv').empty();
-        $('.selectAllDiv').append(`<label for='selectAll'>SELECT ALL</label><input style='float:right;' class='mt-1 mr-3' name='selectAll' type='checkbox' id='selectAll' />`)
+        $('.selectAllDiv').append(`<label for='selectAll'><span class='pl-3 pr-5 mr-5'>Students</span><span class='spanSelectAll ml-5'>SELECT ALL</span></label><input style='float:right;' class='mt-1 mr-3' name='selectAll' type='checkbox' id='selectAll' />`)
 
         if (result.status == 200) {
           //console.log(result.data)
@@ -188,9 +188,9 @@ $(document).ready(function () {
 
           $.each(result.data, function (key, value) {
             if (selectedStudentsId.includes(value.id)) {
-              $('.selectStudents').append(`<li class='py-1 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0]}</div>${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div>${value.roll_number} - ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             } else {
-              $('.selectStudents').append(`<li class='py-1 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0]}</div>${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div>${value.roll_number} - ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             }
             //allStudentsId.push(value.id)
           })
