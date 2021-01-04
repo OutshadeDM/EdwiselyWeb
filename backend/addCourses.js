@@ -2,48 +2,21 @@ $(document).ready(function() {
 
     $user = "";
     if (isLoggedIn()) {
-    //   console.log(isLoggedIn(), 'yes');
       $user = JSON.parse(isLoggedIn());
       $('html').removeClass('d-none');
     } else {
       window.location.replace("login.html");
     }
 
-
-
-    // $.ajax({
-    //     url: 'https://stagingfacultypython.edwisely.com/getCourseDepartmentSections?university_degree_department_id='+`${$user.university_degree_department_id}`,
-    //     type: 'GET',
-    //     contentType: 'application/json',
-    //     headers: {
-    //         'Authorization': `Bearer ${$user.token}`
-    //     },
-    //     success: function (result) {
-    //         // alert(result.status);
-    //         $('#courseModalClass').empty();
-    //         if (result.status == 200) {
-    //             $.each(result.data, function (key, value) {
-    //                 $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
-    //             });
-    //         }
-    //     },
-    //     error: function (error) {
-    //         alert("Request Failed with status: "+error.status);
-    //     }
-    // });
-
     let courses = [];
     let deptArr = [];
     let deptFlag = true;
 
     getCourses();
-    
 
     function getCourses(){
 
         let courseDept = $("#courseSelectDept").val();
-        // alert(courseDept);
-
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourses',
@@ -53,17 +26,13 @@ $(document).ready(function() {
                 'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-                // alert(result.message);
                 $('#courseList').empty();
                 $('#courseSelectList').empty();
                 if (result.status == 200) {
-                    // alert("here");
                     let div1 = '<ul class="list-unstyled">';
                     let div = "";
                     $.each(result.data, function (key, value) {
                         let dept = [];
-                        // alert(value.id);
-                        //  alert(value.name);
 
                         if(!courseDept || courseDept == "0" || courseDept == "all"){
 
@@ -73,16 +42,13 @@ $(document).ready(function() {
                                 div = div + "<img class='p-2' style='width:100%' height='250' src='"+value.course_image+"' alt='No Image'>";
                             else
                                 div = div + "<img class='card-img-top py-2' width='200' height='250' style='height: 250px;' src='../images/onlineCourses.png' alt='No Image'>";
-                            // div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
                             div = div + "<div class='card-body'>";
                             div = div + "<h5 class='card-title font-weight-bold pb-0 mb-0'>"+value.name+"</h5>";
                             div = div + "<p class='pb-0 my-0 pt-1'><span class='span-heading'>Departments</span></p>";
                             div = div + "<div class='row pl-2'>";
 
                             $.each(value.departments, function (key, value) {
-                                // div = div + "<div class='col-sm-2 mb-3'>";
-                                div = div + "<span class='mx-2 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
-                                // div = div + "</div>";
+                                div = div + "<span class='mx-3 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
                                 dept.push({
                                     "id":value.subject_semester_id,
                                     "uid":value.university_degree_department_id,
@@ -91,7 +57,6 @@ $(document).ready(function() {
 
                                 if(deptFlag){
                                     if (!deptArr.includes(value.name)) {
-                                        // alert(value.name);
                                         deptArr.push(value.name);
                                     }
                                 }
@@ -125,17 +90,14 @@ $(document).ready(function() {
                                 if (value.course_image)
                                     div = div + "<img class='card-img-top py-2' width='200' height='200' src='"+value.course_image+"' alt='No Image'>";
                                 else
-                                    div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
-                                // div = div + "<img class='card-img-top py-2' width='200' height='200' src='../images/onlineCourses.png' alt='No Image'>";
+                                div = div + "<img class='card-img-top py-2' width='200' height='250' style='height: 250px;' src='../images/onlineCourses.png' alt='No Image'>";
                                 div = div + "<div class='card-body'>";
                                 div = div + "<h5 class='card-title font-weight-bold pb-0 mb-0'>"+value.name+"</h5>";
                                 div = div + "<p class='pb-0 my-0 pt-1'><span class='span-heading'>Departments</span></p>";
                                 div = div + "<div class='row'>";
 
                                 $.each(value.departments, function (key, value) {
-                                    // div = div + "<div class='col-sm-2 mb-2'>";
-                                    div = div + "<span class='mx-2 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
-                                    // div = div + "</div>";
+                                    div = div + "<span class='mx-3 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
                                     dept.push({
                                         "id":value.subject_semester_id,
                                         "uid":value.university_degree_department_id,
@@ -159,13 +121,12 @@ $(document).ready(function() {
                         
                     });
                     div1 = div1 + "</ul>";
-                    // alert(div1);
                     $('#courseList').append(div);
                     $('#courseSelectList').append(div1);
 
                     if(deptArr != null && deptArr.length > 0 && !courseDept){
                         $('#courseSelectDept').empty();
-                        $('#courseSelectDept').append("<option value='0' disabled selected>Choose Department</option>");
+                        $('#courseSelectDept').append("<option vaue='0' disabled selected>Choose Department</option>");
                         $('#courseSelectDept').append("<option value='all'>All</option>")
                         $.each(deptArr,function(key,value){
                             $('#courseSelectDept').append("<option value='"+value+"'>"+value+"</option>")
@@ -187,19 +148,16 @@ $(document).ready(function() {
     });
 
     $("#courseSelect").click(function () {
-        // alert("here");
         $("#courseSelectList").show();
     });
 
     $("#courseSelect").keyup(function () {
         let searchTerm = $("#courseSelect").val().toLowerCase();
-        // alert(courses);
         $("#courseSelectList").show();
         if(courses.length > 0){
             let div = "<ul class='list-unstyled'>";
             $('#courseSelectList').empty();
             $.each(courses, function (key, value) {
-                // alert(value.name);
                 if(value.name.toLowerCase().indexOf(searchTerm) != -1)
                     div = div + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-dept='" + value.dept + "'>"+value.name+"</li>";
             });
@@ -210,12 +168,10 @@ $(document).ready(function() {
     });
 
     $("#courseSelect").blur(function () {
-        // alert("here");
         $("#courseSelectList").fadeOut();
     });
 
     $(document).on('click', '.show1', function () {
-        // alert("ok");
         $(".show1").children("i").hide();
         $(this).children("i").show();
     });
@@ -227,10 +183,7 @@ $(document).ready(function() {
     let classes = [];
 
     $(document).on('click', 'input[name=courseClass]', function () {
-        // alert($('input[name=courseClass]').val());
-        // classes.push($(this).val());
         var ischecked= $(this).is(':checked');
-        // alert(ischecked);
         if(ischecked){
             $(this).siblings('label').children("i").show();
             classes.push($(this).val());
@@ -259,8 +212,6 @@ $(document).ready(function() {
     });
 
     function getSections(uid){
-        // alert(uid);
-
         $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
             position: "absolute",
             width: "100%",
@@ -277,16 +228,13 @@ $(document).ready(function() {
                 'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-                // alert(result.message);
                 $('#courseModalClass').empty();
                 if (result.status == 200) {
                     $.each(result.data, function (key, value) {
-                        // alert(value.name);
                         $('#courseModalClass').append("<li class='courseTagsLi'><input type='checkbox' class='courseTagsInput' value='"+value.id+"' name='courseClass' id='checkbox"+value.id+"' /><label for='checkbox"+value.id+"' class='courseTagsLabel show2'><i class='fas fa-check' style='display: none;'></i>"+value.name+"</label></li>");
                     });
                     
                     $('#loadingDiv').remove();
-                    // $('#courseModalClass').css('position', 'absolute');
                 }
             },
             error: function (error) {
@@ -295,13 +243,11 @@ $(document).ready(function() {
         });
     }
 
-    $('#courseModal').on('hide.bs.modal', function (event) {
-        // alert("here");
+    $('#courseModal').on('hide.bs.modal', function () {
         $('#courseModalDept').empty();
         $('#courseModalClass').empty();
         $('#courseModalClass').append("<p>Select Department First</p>");
         $('input[name="courseDept"]').prop('checked', false);
-        // $('input:checkbox').removeAttr('checked');
         $('input[name=courseClass]').prop('checked', false)
         $('#modalSaveBtn').removeData('subject');
         classes = [];
@@ -312,7 +258,6 @@ $(document).ready(function() {
     $('#modalSaveBtn').click(function(){
         let courseDept = $("input[name='courseDept']:checked").val();
         let subject_id = $(this).data('subject');
-        // alert(JSON.stringify(classes));
         
         if(courseDept && classes != null && classes.length > 0 && subject_id){
 
@@ -320,10 +265,6 @@ $(document).ready(function() {
             form.append("subject_id", subject_id);
             form.append("subject_semester_id", courseDept);
             form.append("sections", "["+classes.join(",")+"]");
-
-            // for(let key of form.entries()){
-            //     alert(key[1]);
-            // }
 
             $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "absolute",
@@ -344,7 +285,6 @@ $(document).ready(function() {
                     'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
-                    // alert(result.message);
                     if (result.status == 200) {
                         $('#successToastBody').text('Course has been added successfully');
                         $('#successToast').toast('show');
