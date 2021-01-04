@@ -4,7 +4,7 @@
 }
 #sidebar-container {
     min-height: 100vh;   
-    background-color: #333;
+    background-color: #2A2A2A;
     padding: 0;
 }
 
@@ -16,6 +16,22 @@
 /* Menu item*/
 #sidebar-container .list-group a {
     height: 50px;
+    color: #bbb;
+    background-color: #2A2A2A;
+    font-size: 1.1rem;
+    margin: 2px 0;
+}
+#sidebar-container .list-group a:hover,
+#sidebar-container .list-group a:active,
+#sidebar-container .list-group a.active {
+    color: white;
+    background-color: #3f3f3f;
+    border: none;
+}
+
+#sidebar-container .list-group .logout{
+    bottom: 0;
+    background-color: #1b668c;
     color: white;
 }
 
@@ -30,15 +46,15 @@
 
 /* Separators */
 .sidebar-separator-title {
-    background-color: #333;
+    background-color: #2A2A2A;
     height: 35px;
 }
 .sidebar-separator {
-    background-color: #333;
+    background-color: #2A2A2A;
     height: 25px;
 }
 .logo-separator {
-    background-color: #333;    
+    background-color: #2A2A2A;    
     height: 60px;
 }
 
@@ -60,7 +76,7 @@
 }
 
 .sticky-offset {
-    top: 56px;
+    top: 0;
 }
 
 #sidebar-container {

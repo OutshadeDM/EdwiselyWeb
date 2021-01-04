@@ -8,7 +8,6 @@ $(document).ready(function () {
   } else {
     window.location.replace("login.html");
   }
-  // alert(`${$user.token}`);
 
   let questionsList = [];
   let questions = [];
@@ -21,7 +20,6 @@ $(document).ready(function () {
   let sId = "0";
   let editQuesJSON = "";
   let isCookie = false;
-  // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
@@ -34,10 +32,6 @@ $(document).ready(function () {
     if (tname)
       $('#courseName').text(tname);
   }
-  // if(tId == "0"){
-  //   $('#errorToastBody').text("Question will be added to database");
-  //   $('#errorToast').toast('show');
-  // }
 
   //preparing for post api of questions
 
@@ -130,7 +124,6 @@ $(document).ready(function () {
   getTopics();
 
   function getTopics() {
-    // alert('topics');
 
     if (unit_id == "0") {
 
@@ -142,13 +135,10 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.status);
-          //alert(subSemId)
 
           $('#topicTags').empty();
           if (result.status == 200 && result.data) {
             $.each(result.data, function (key, value) {
-              // alert(value);
 
               $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.id + "' data-type='" + value.type + "' data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.id + "'/><label for='topicTagAdd" + value.id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
 
@@ -156,8 +146,7 @@ $(document).ready(function () {
           }
           else {
             $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-            //alert("here");
-          }
+            }
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -174,13 +163,10 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.status);
-          //alert(subSemId)
 
           $('#topicTags').empty();
           if (result.status == 200 && result.data) {
             $.each(result.data, function (key, value) {
-              // alert(value);
               $.each(value.topic, function (key, value) {
                 $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + value.topic_id + "' data-type='" + value.type + "' data-id='" + value.id + "' name='topicTagAdd' id='topicTagAdd" + value.topic_id + "'/><label for='topicTagAdd" + value.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.topic_name + "</label></li>");
               });
@@ -188,10 +174,8 @@ $(document).ready(function () {
           }
           else {
             $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-            //alert("here");
-          }
+            }
           if (searchParams.has('sid')) {
-            // alert('here');
             sId = searchParams.get('sid');
             $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
             $('#questionBankA').text('Question Bank');
@@ -204,13 +188,7 @@ $(document).ready(function () {
               $.cookie('editQues', "");
               $('#questionId').val(editQuesJSON.id);
               autoFill(questions[0]);
-              // console.log(editQuesJSON);
             }
-
-            // else {
-            //   $('#errorToastBody').text("No question found, try coming back");
-            //   $('#errorToast').toast('show');
-            // }
           }
         },
         error: function (error) {
@@ -225,7 +203,6 @@ $(document).ready(function () {
   refreshQuestions();
 
   function refreshQuestions() {
-    // alert("refresh");
     if (tId != "0") {
       questions = [];
 
@@ -237,13 +214,11 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.message);
 
           if (result.status == 200 && result.data) {
             $('.initData').remove();
 
             $.each(result.data, function (key, value) {
-              // alert(value.id);
               questionsList.push(value.id);
               questions.push(value);
             });
@@ -261,12 +236,9 @@ $(document).ready(function () {
 
 
   function loadList() {
-    // alert("load");
-    // alert(JSON.stringify(questions));
     $("#addquesDiv").empty();
 
     $.each(questions, function (key, value) {
-      // alert(JSON.stringify(value));
       $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
     });
     MathJax.typesetPromise();
@@ -275,7 +247,6 @@ $(document).ready(function () {
 
 
   $('.radiostest').on('click', function () {
-    // alert("here");
     if ($('#Radios1').is(':checked') === true) {
       $('.untick1').hide()
       $('.untick2').show()
@@ -337,7 +308,6 @@ $(document).ready(function () {
       $('.tick5').show()
     }
   });
-
 
   //on click of delete image changing the styling again
   $('.uploadedques').on('click', function () {
@@ -563,7 +533,6 @@ $(document).ready(function () {
   });
 
   $('#uploadedoption4').on('click', function () {
-    // alert('here');
     $('#uploadedoption4').hide();
     $('#notUploadedoption4').show();
     $('#option4ImagePreview').hide();
@@ -582,7 +551,6 @@ $(document).ready(function () {
   });
 
   $('#customSwitch1').on('click', function () {
-    // alert("gere");
     if ($("input[name='public_pvt']:checked").val() === 'public') {
       type = "public"
     } else {
@@ -592,7 +560,6 @@ $(document).ready(function () {
 
   $('input[name=Radios]').on('change', function () {
     answer = $('input[name=Radios]:checked').val();
-    // alert(answer);
   })
 
   // //to select multiple values of selected checkboxes
@@ -601,9 +568,6 @@ $(document).ready(function () {
 
     let value = $(this).data('type');
     let id = parseInt($(this).val());
-    // $(this).attr("checked",true);
-
-    // let type = value.charAt(0) + value.charAt(1).toUpperCase() + value.slice(2);
 
     if (!topics.includes(value)) {
       topics.push({ "id": id, "type": value });
@@ -614,12 +578,6 @@ $(document).ready(function () {
         return e.id != id;
       });
     }
-    // else{
-    //   // alert('here');
-    //   $(this).addClass('checkedTopic');
-    // }
-
-    // alert(JSON.stringify(topics));
 
   });
 
@@ -668,10 +626,6 @@ $(document).ready(function () {
       form.append("solution", solution);
       form.append("hint_img", hint_img);
 
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
-
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
         position: "absolute",
         width: "100%",
@@ -693,15 +647,12 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.message);
 
           if (result.status == 200) {
-            // console.log(result.data)
             $('#loadingDiv').remove();
-            // $('#abcd').css('position', 'absolute');
             $('#successToastBody').text('Question Added to Database Successfully');
             $('#successToast').toast('show');
-            // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' data-id='` + result.data.id + `'>` + result.data.name + `</p></div>`)
+            
             questionsList.push(result.data.id);
             questions.push(result.data);
             loadList();
@@ -710,20 +661,17 @@ $(document).ready(function () {
           }
           else {
             $('#loadingDiv').remove();
-            // $('#abcd').css('position', 'absolute');
             $("input.custom-control-input").attr("disabled", false);
           }
         },
         error: function (error) {
           $('#loadingDiv').remove();
-          // $('#abcd').css('position', 'absolute');
           $("input.custom-control-input").attr("disabled", false);
           alert("Request Failed with status: " + error.status);
         }
       });
     }
     else {
-      // alert(topics.length);
       if (topics == null || !topics || topics.length == "0")
         $('#errorToastBody').text("Please Select Topics");
       else if (!option1 || !option2)
@@ -746,7 +694,6 @@ $(document).ready(function () {
   });
 
   function clearAll(updateTopics) {
-    // alert('clearAll');
     $("input[name='Radios']").prop("checked", false);
     $('.untick1').show()
     $('.untick2').show()
@@ -851,7 +798,6 @@ $(document).ready(function () {
 
   function saveQuestions(isSend){
     if (questionsList != null && questionsList.length > 0 && tId != "0") {
-      // alert(JSON.stringify(questionsList));
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
         position: "absolute",
@@ -867,10 +813,6 @@ $(document).ready(function () {
       form.append("questions", "[" + questionsList + "]");
       form.append("units", "[" + unit_id + "]");
 
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
-
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
         type: 'POST',
@@ -882,13 +824,11 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.message);
 
           if (result.status == 200) {
             $('#successToastBody').text(result.message);
             $('#successToast').toast('show');
             $('#loadingDiv').remove();
-            // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             setTimeout(function () {
               if(!isSend)
@@ -899,14 +839,12 @@ $(document).ready(function () {
           }
           else {
             $('#loadingDiv').remove();
-            // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             alert(result.message);
           }
         },
         error: function (error) {
           $('#loadingDiv').remove();
-          // $('#abcd').css('position','absolute');
           $("input.custom-control-input").attr("disabled", false);
           alert("Request Failed with status: " + error.status);
         }
@@ -914,8 +852,6 @@ $(document).ready(function () {
     }
     else if (tId == "0" && sId != "0") {
       window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
-      // $('#errorToastBody').text("No test found to add question to test");
-      // $('#errorToast').toast('show');
     }
   }
 
@@ -931,15 +867,6 @@ $(document).ready(function () {
 
   //clicking questions
   $(document).on('click', '.questions', function () {
-    // $('#quesInput').val($(this).text());
-
-    // alert($('#questionId').val());
-    // alert('here');
-    // console.log(JSON.stringify(questions));
-
-    //i have question id
-    //now using that id, iterate through the questions array questions and find the match the ques.
-    //fill uske options in the options inputs.
 
     if ($(this).data('id') != $('#questionId').val()) {
       clearAll(false);
@@ -948,7 +875,6 @@ $(document).ready(function () {
       $('#questionId').val(questionId);
 
       $.each(questions, function (key, value) {
-        // alert(questionId);
         if (questionId == value.id) {
           autoFill(value);
           return false;
@@ -959,13 +885,11 @@ $(document).ready(function () {
   });
 
   function autoFill(value = []) {
-    // console.log(JSON.stringify(value));
     $('#deleteBtn').show();
     $('#plusBtn').hide();
     $('#editBtn').show();
     if (!isCookie)
       $('#addNewBtn').show();
-    // alert('here');
 
     $('#addsoln').show();
     $('#topicsDiv').hide();
@@ -980,9 +904,7 @@ $(document).ready(function () {
         }
       }
       else if (value.question_type == 'public') {
-        // alert("here");
         if ($("input[name='public_pvt']:checked").val() != 'public') {
-          // alert("here");
           $('#customSwitch1').click();
         }
       }
@@ -1039,19 +961,13 @@ $(document).ready(function () {
       bloom_level = value.blooms_level;
     }
 
-    // alert(value.difficulty_level);
-
     if (value.difficulty_level) {
       $('#selectLevel').val(value.difficulty_level);
       difficulty_level = value.difficulty_level;
     }
 
     $.each(value.topics_details, function (key, value) {
-      // alert($('#topicTagAdd13779').attr('class'));
       if (question_type1) {
-        // alert(value.id);
-        // $('#topicTagAdd'+value.id).click();
-        // $('checkbox[value="'+value.id+'"]').attr('checked',true);
         $('#topicTagAdd' + value.id).prop('checked', true);
       }
       else {
@@ -1060,21 +976,17 @@ $(document).ready(function () {
       }
     });
     topics = value.topics_details;
-    // alert(JSON.stringify(topics));
 
     if (value.question_img && value.question_img != null && value.question_img != " ") {
-      // alert('here');
       $('.uploadedques').show()
       $('.imgPreviewques').show()
       $('.notUploadedques').hide()
       $('#quesLabel').hide()
       $('#image_preview_ques').attr('src', value.question_img);
       question_img_url = value.question_img;
-      // alert(question_img_url);
     }
 
     if (value.hint_image && value.hint_image != null) {
-      // alert('here1');
       $('#hintDiv').show();
       $('.uploadedhint').show()
       $('.imgPreviewhint').show()
@@ -1082,11 +994,9 @@ $(document).ready(function () {
       $('#hintLabel').hide()
       $('#image_preview_hint').attr('src', value.hint_image);
       hint_img_url = value.hint_image;
-      // alert(hint_img_url);
     }
 
     if (value.solution_image && value.solution_image != null) {
-      // alert('here2');
       $('#solutionDiv').show();
       $('.uploadedsolution').show()
       $('.imgPreviewsolution').show()
@@ -1094,12 +1004,10 @@ $(document).ready(function () {
       $('#solutionLabel').hide()
       $('#image_preview_solution').attr('src', value.solution_image);
       solution_img_url = value.solution_image;
-      // alert(solution_img_url);
     }
 
     if (value.questions_options[0].option_img) {
       option1_img_url = value.questions_options[0].option_img;
-      // alert(option1_img_url);
       $('#uploadedoption1').show();
       $('#notUploadedoption1').hide();
       $('#option1ImagePreview').show();
@@ -1108,7 +1016,6 @@ $(document).ready(function () {
 
     if (value.questions_options[1].option_img) {
       option2_img_url = value.questions_options[1].option_img;
-      // alert(option2_img_url);
       $('#uploadedoption2').show();
       $('#notUploadedoption2').hide();
       $('#option2ImagePreview').show();
@@ -1117,7 +1024,6 @@ $(document).ready(function () {
 
     if (value.questions_options[2] && value.questions_options[2].option_img) {
       option3_img_url = value.questions_options[2].option_img;
-      // alert(option3_img_url);
       $('#uploadedoption3').show();
       $('#notUploadedoption3').hide();
       $('#option3ImagePreview').show();
@@ -1126,7 +1032,6 @@ $(document).ready(function () {
 
     if (value.questions_options[3] && value.questions_options[3].option_img) {
       option4_img_url = value.questions_options[3].option_img;
-      // alert(option4_img_url);
       $('#uploadedoption4').show();
       $('#notUploadedoption4').hide();
       $('#option4ImagePreview').show();
@@ -1135,7 +1040,6 @@ $(document).ready(function () {
 
     if (value.questions_options[4] && value.questions_options[4].option_img) {
       option5_img_url = value.questions_options[4].option_img;
-      // alert(option5_img_url);
       $('#uploadedoption5').show();
       $('#notUploadedoption5').hide();
       $('#option5ImagePreview').show();
@@ -1143,7 +1047,6 @@ $(document).ready(function () {
     }
 
     if (value.questions_options[0].is_answer == "1") {
-      // alert("here");
       $("input[name='Radios'][value='0']").prop("checked", true);
       answer = "0";
       $('.untick1').hide()
@@ -1156,7 +1059,6 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').hide()
-      // $("input[name=Radios][value=0]").attr("checked",true);
     }
     else if (value.questions_options[1].is_answer == "1") {
       $("input[name='Radios'][value='1']").prop("checked", true);
@@ -1201,7 +1103,6 @@ $(document).ready(function () {
       $('.tick5').hide()
     }
     else if (value.questions_options[4] && value.questions_options[4].is_answer == "1") {
-      // $('.fifthOptionBtn').click();
       $("input[name='Radios'][value='4']").prop("checked", true);
       answer = "4";
       $('.untick1').show()
@@ -1221,7 +1122,6 @@ $(document).ready(function () {
   $("#deleteBtn").click(function () {
 
     let questionId = $('#questionId').val()
-    // alert(questionId);
 
     if (questionId && questionId != "0") {
 
@@ -1256,12 +1156,10 @@ $(document).ready(function () {
   $("#editBtn").click(function () {
 
     let questionId = $('#questionId').val()
-    // alert(questionId);
     let newQuestion = [];
     let newOptions = [];
 
     if (questionId && questionId != "0") {
-      // alert('here');
 
       $.each(questions, function (key, value) {
         if (questionId == value.id) {
@@ -1275,14 +1173,11 @@ $(document).ready(function () {
       newQuestion.hint = $('#hintInput').val();
       newQuestion.blooms_level = bloom_level;
       newQuestion.difficulty_level = difficulty_level;
-      // alert(difficulty_level);
       newQuestion.name = $('#quesInput').val();
       if (topics.length > 0)
         newQuestion.topics_details = topics;
       newQuestion.solution = $('#solutionInput').val();
 
-      // alert(question_img_url);
-      // console.log(JSON.stringify(newOptions));
 
       if ((newQuestion.question_img && !question_img_url) || question_img){
         newQuestion.question_img = "";
@@ -1295,8 +1190,6 @@ $(document).ready(function () {
       if (newQuestion.hint_image && !hint_img_url)
         newQuestion.hint_image = "";
 
-      // newQuestion.question_type = type;
-      // console.log(JSON.stringify(newOptions));
 
       if (newOptions[0] && newOptions[0].name) newOptions[0].name = option1;
       if (newOptions[1] && newOptions[1].name) newOptions[1].name = option2;
@@ -1404,7 +1297,6 @@ $(document).ready(function () {
         question_type1 = "private";
 
       console.log(JSON.stringify(newQuestion));
-      // alert(newOptions.length);
 
       if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
 
@@ -1428,12 +1320,6 @@ $(document).ready(function () {
         form.append("option4_img", option4_img);
         form.append("option5_img", option5_img);
         form.append("question_id", questionId);
-        // $("#courseName").text(JSON.stringify(newOptions));
-
-        // for (var key of form.entries()) {
-        //   alert(key[1]);
-        //   // console.log(key[1]);
-        // }
 
         $.ajax({
           url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
@@ -1446,12 +1332,10 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
           },
           success: function (result1) {
-            // alert(result.message);
 
             if (result1.status == 200) {
 
               if (question_type1 != newQuestion.question_type) {
-                // alert("here");
                 let form1 = new FormData();
                 form1.append("question_id", newQuestion.id);
                 form1.append("type", question_type1);
@@ -1467,22 +1351,15 @@ $(document).ready(function () {
                     'Authorization': `Bearer ${$user.token}`
                   },
                   success: function (result) {
-                    // alert(result.message);
                     if (result.status == 200 || result.status == 400) {
-                      // alert("here1");
                       $('#successToastBody').text("Question updated Successfully");
                       $('#successToast').toast('show');
                       $('#loadingDiv').remove();
-                      // $('#abcd').css('position','absolute');
                       $("input.custom-control-input").attr("disabled", false);
                       clearAll(true);
                       $("#addquesDiv").empty();
                       const foundIndex = questions.findIndex(x => x.id == questionId);
                       questions[foundIndex] = result1.data;
-                      // questions = questions.filter(function(e){
-                      //   if(e.id == questionId) e = result1.data;
-                      //   return e;
-                      // });
                       loadList();
 
                       if (tId == "0" && sId != "0") {
@@ -1495,7 +1372,6 @@ $(document).ready(function () {
                   },
                   error: function (error) {
                     $('#loadingDiv').remove();
-                    // $('#abcd').css('position','absolute');
                     $("input.custom-control-input").attr("disabled", false);
                     alert("Request Failed with status: " + error.status);
                   }
@@ -1507,18 +1383,12 @@ $(document).ready(function () {
                 $('#successToastBody').text(result1.message);
                 $('#successToast').toast('show');
                 $('#loadingDiv').remove();
-                // $('#abcd').css('position','absolute');
                 $("input.custom-control-input").attr("disabled", false);
                 clearAll(true);
                 $("#addquesDiv").empty();
                 const foundIndex = questions.findIndex(x => x.id == questionId);
-                // console.log(JSON.stringify(questions[foundIndex]));
                 questions[foundIndex] = result1.data;
                 console.log(JSON.stringify(questions[foundIndex]));
-                // questions = questions.filter(function(e){
-                //   if(e.id == questionId) e = result1.data;
-                //   return e;
-                // });
                 loadList();
 
                 if (tId == "0" && sId != "0") {
@@ -1531,32 +1401,25 @@ $(document).ready(function () {
             }
             else {
               $('#loadingDiv').remove();
-              // $('#abcd').css('position','absolute');
               $('#errorToastBody').text(result.message);
               $('#errorToast').toast('show');
               $("input.custom-control-input").attr("disabled", false);
-              // alert(result.message);
             }
           },
           error: function (error) {
             $('#loadingDiv').remove();
-            // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
-            // clearAll(true);
             $("#addquesDiv").empty();
-            // refreshQuestions();
             alert("Request Failed with status: " + error.status);
           },
           error: function (error) {
             $('#loadingDiv').remove();
-            // $('#abcd').css('position','absolute');
             $("input.custom-control-input").attr("disabled", false);
             alert("Request Failed with status: " + error.status);
           }
         });
       }
       else {
-        // alert(topics.length);
         if (topics == null || !topics || topics.length == "0")
           $('#errorToastBody').text("Please Select Topics");
         else if (newOptions.length <= 1)

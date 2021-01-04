@@ -31,9 +31,9 @@ $(document).ready(function () {
                     div = div + "<li class='course' data-subSemId='"+value.subject_semester_id+"'>"+value.name+"</li>";
 
                     if (value.course_image)
-                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3 shadow-sm course-card'><img class='p-1' src='" + value.course_image + "' alt='No Image'><div class='card-body'><h5 class='font-weight-bold'>" + value.name + "</h4></div></div></div>");
+                        $('#courseList').append("<div class='col-md-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3 shadow-sm course-card'><img class='p-1' src='" + value.course_image + "' alt='No Image'><div class='card-body'><h5 class='font-weight-bold'>" + value.name + "</h4></div></div></div>");
                     else
-                        $('#courseList').append("<div class='col-sm-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3 shadow-sm course-card'><img class='p-1' src='../images/onlineCourses.png' alt='No Image'><div class='card-body'><h5 class='font-weight-bold'>" + value.name + "</h4></div></div></div>");
+                        $('#courseList').append("<div class='col-md-4 course' data-subSemId='" + value.subject_semester_id + "'><div class='card mb-3 shadow-sm course-card'><img class='p-1' src='../images/onlineCourses.png' alt='No Image'><div class='card-body'><h5 class='font-weight-bold'>" + value.name + "</h4></div></div></div>");
                 });
                 div = div + "</ul>";
                 $('#courseSelectList').append(div);
