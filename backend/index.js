@@ -491,7 +491,7 @@ $(async function() {
 				let act = ""
 				followers[activity.id] = activity.followers;
 				if (activity.type == 'Notification') {
-					act = `<div class=" card px-3 py-3 mt-2">
+					act = `<div class=" card px-3 py-3 mt-4">
 						<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
@@ -513,7 +513,7 @@ $(async function() {
 					</div>
 				</div>`;
 				} else if (activity.type == 'Test') {
-					act = `<div class=" card px-3 py-3 mt-2">
+					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
@@ -557,7 +557,7 @@ $(async function() {
 					</div>
 				</div>`;
 				} else if (activity.type == 'VideoConference') {
-					act = `<div class=" card px-3 py-3 mt-2">
+					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
@@ -581,7 +581,7 @@ $(async function() {
 			</div>`;      		
 				} else if (activity.type == 'Material') {
 					console.log(activity.file_url, activity.file_url.length)
-					act = `<div class=" card px-3 py-3 mt-2">
+					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 					<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Material&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
@@ -602,7 +602,7 @@ $(async function() {
 				</div>
 			</div>`;		 
 				} else if (activity.type == 'Feedback') {
-					act = `<div class=" card px-3 py-3 mt-2">
+					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Feedback&background=005663&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <!-- <p>${activity.description}</p> --></div>
@@ -620,7 +620,7 @@ $(async function() {
 				</div>
 			</div>`;
 				} else if (activity.type == 'Subjective') {
-					act = `<div class=" card px-3 py-3 mt-2">
+					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Subjective&background=0056b3&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
