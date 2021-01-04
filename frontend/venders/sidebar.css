@@ -87,3 +87,7 @@
 #sidebarChange.closed {
     max-width: fit-content;
 }
+
+#logoImage {
+    width: 70%;
+}
