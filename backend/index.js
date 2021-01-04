@@ -504,9 +504,9 @@ $(async function() {
 						}
 						act += '</a></div>'
 						if (activity.file_url && activity.file_url.length && ['jpeg', 'png', 'jpg', 'gif'].includes(activity.file_url.split('.').pop()))
-							act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img src="${activity.file_url}" class="img-fluid"></a></div>`;
+							act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img src="${activity.file_url}" class="img-fluid"></a></div>`;
 						else if (activity.file_url && activity.file_url.length)
-							act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="text-dark" style="font-size: 30px;" target="_blank"><div class=""></div><i class="fas fa-file-pdf"></i></a></div>`;
+							act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="text-dark" style="font-size: 30px;" target="_blank"><div class=""></div><i class="fas fa-file-pdf"></i></a></div>`;
 						act += `<div class="col-3 mt-3 d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
 						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
@@ -516,7 +516,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
+						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -539,12 +539,12 @@ $(async function() {
 								</div>
 							`;
 						else {
-							act += `<div class="col-6 desc align-items-center justify-content-center">A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.</div>`
+							act += `<div class="col-5 offset-1 desc align-items-center justify-content-center">A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.</div>`
 							act += `<div class="col-6 status text-center align-self-center"><strong>Test Expired!</strong></div>`
 						}
 					} else {
 						act += `
-							<div class="col-12 desc">
+							<div class="col-11 offset-1 desc">
 								${activity.role.role_name} - ${activity.college_account_details.faculty_name} has created a ${activity.type} named ${activity.title} - ${activity.description} for ${activity.sent_to} students, with doe ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}.
 							</div>
 						`;
@@ -560,7 +560,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -570,11 +570,11 @@ $(async function() {
 						}
 						act += '</a></div>'
 					if (new Date(activity.end_time.replace(/\s/, 'T')) <= new Date())
-						act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 text-center font-weight-bold status">Meeting Completed</div>`;
+						act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 text-center font-weight-bold status">Meeting Completed</div>`;
 					else if (Math.abs(new Date(activity.start_time.replace(/\s/, 'T')).getTime() - new Date().getTime()) <= 10*60*1000)
-						act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 text-success font-weight-bold status">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} <a href="${activity.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a></div>`
+						act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 text-success font-weight-bold status">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} <a href="${activity.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a></div>`
 					else 
-						act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 text-center font-weight-bold status">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} (The link to meeting will activate only 10 mins before it starts)</div>`
+						act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 text-center font-weight-bold status">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} (The link to meeting will activate only 10 mins before it starts)</div>`
 					act += `<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 							<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="videoConference" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>			
 				</div>
@@ -584,7 +584,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 					<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Material&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
 					<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -594,9 +594,9 @@ $(async function() {
 						}
 						act += '</a></div>'
 						if (activity.file_url && activity.file_url.length && ['jpeg', 'png', 'jpg', 'gif'].includes(activity.file_url.split('.').pop()))
-							act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img src="${activity.file_url}" class="img-fluid"></a></div>`;
+							act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="linkwrap" target="_blank"><img src="${activity.file_url}" class="img-fluid"></a></div>`;
 						else if (activity.file_url && activity.file_url.length)
-							act += `<div class="col-6 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="text-dark" style="font-size: 30px;" target="_blank"><div class=""></div><i class="fas fa-file-pdf"></i></a></div>`;
+							act += `<div class="col-5 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-6 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="text-dark" style="font-size: 30px;" target="_blank"><div class=""></div><i class="fas fa-file-pdf"></i></a></div>`;
 					act += `<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 					<div class="col-3 mt-3 forward"><button type="button" data-toggle="modal" data-target="#comments" data-type="Material" data-id=${activity.id} class="btn btn-light"><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</button></div>					
 				</div>
@@ -605,7 +605,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Feedback&background=005663&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <!-- <p>${activity.description}</p> --></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -614,7 +614,7 @@ $(async function() {
 							} else break;
 						}
 						act += '</a></div>'
-					act += `<div class="col-12">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
+					act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
 					act += `<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 					<div class="col-3 mt-3 forward"><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</div>					
 				</div>
@@ -623,7 +623,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Subjective&background=0056b3&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
+						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -637,7 +637,7 @@ $(async function() {
 					let endtime = new Date(starttime.setTime(starttime.getTime() + timelimit*60*1000));
 
 					if (endtime >= new Date()) {
-						act += `<div class="col-12 desc mt-3">A subjective test named ${activity.title} created and set to start at ${getFormattedDateTime(starttime)} with a time limit of ${timelimit} minutes.</div>`;
+						act += `<div class="col-11 offset-1 desc mt-3">A subjective test named ${activity.title} created and set to start at ${getFormattedDateTime(starttime)} with a time limit of ${timelimit} minutes.</div>`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
@@ -647,10 +647,10 @@ $(async function() {
 						</div>`;
 					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
 						if (activity.answered)
-							act +=	`<div class="col-8 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>
+							act +=	`<div class="col-7  offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>
 							<div class="col-4 align-self-center d-flex mt-3"><button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>`;
 						else
-							act += `<div class="col-12 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>
+							act += `<div class="col-11 desc offset-1 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>
 							`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
@@ -660,7 +660,7 @@ $(async function() {
 									</div>
 								</div>`;						
 					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) > new Date()) {
-						act += `<div class="col-12 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation started at ${getFormattedDateTime(new Date(activity.evaluation_started_time.replace(/\s/, 'T')))} and will complete at ${getFormattedDateTime(new Date(activity.evaluation_end_time.replace(/\s/, 'T')))}.</div>`;
+						act += `<div class="col-11 offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation started at ${getFormattedDateTime(new Date(activity.evaluation_started_time.replace(/\s/, 'T')))} and will complete at ${getFormattedDateTime(new Date(activity.evaluation_end_time.replace(/\s/, 'T')))}.</div>`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
@@ -669,7 +669,7 @@ $(async function() {
 							</div>
 						</div>`;						
 					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) <= new Date() && !activity.results_release_time.length) {
-						act += `<div class="col-8 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.</div>`;
+						act += `<div class="col-7 mt-3 desc offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.</div>`;
 						act += `<div class="col-4 row align-self-center">
 									<div class="col-12 mt-3"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">Start Evaluation</a></div>
 									<div class="col-12 mt-3"><a onclick="releaseResult(${activity.id})" target="_blank" type="button" class="btn btn-danger">Release Result</a></div>
@@ -682,7 +682,7 @@ $(async function() {
 							</div>
 						</div>`;
 					} else if (activity.results_release_time.length) {
-						act += `<div class="col-8 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The results are released, you can check them now.</div>
+						act += `<div class="col-7 mt-3 desc offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The results are released, you can check them now.</div>
 						<div class="col-4 align-self-center mt-3"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>

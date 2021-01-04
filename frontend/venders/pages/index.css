@@ -1,7 +1,7 @@
 .title {
     color: #363636;
     font-family: "Google Sans bold";
-    font-size: 22px;
+    font-size: 19px;
     font-weight: 700;
     font-style: normal;
     letter-spacing: normal;
@@ -13,7 +13,7 @@
     color: rgba(54, 54, 54, 0.39);
     font-family: "Google Sans thin";
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
@@ -208,7 +208,7 @@
     /* Style for "Meeting Co" */
     color: rgba(0, 0, 0, 0.95);
     font-family: "Google Sans";
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 700;
     font-style: normal;
     letter-spacing: normal;
@@ -218,13 +218,15 @@
 
 .desc {
     color: #363636;
-    font-family: "Google Sans Thin";
-    font-size: 20px;
+    font-family: "Google Sans";
+    font-size: 15px;
     font-weight: 400;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
     text-align: left;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 #activity img.img-fluid.mr-2 {
