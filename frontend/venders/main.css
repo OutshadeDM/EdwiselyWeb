@@ -25,11 +25,18 @@ body{
 #theMainDiv {
   height: 100%;
   width: 100%;
-  margin: 0;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 6%;
-  padding-right: 10%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  text-align: center;
+  margin: auto;
+  /* margin-right: 0; */
+  /* padding-left: 6%;
+  padding-right: 10%; */
+}
+@media(max-width: 767px){
+  #theMainDiv{
+    max-width: 755px;
+  }
 }
 
 .listDiv{
@@ -93,6 +100,11 @@ scrollbar-width: none;  /* Firefox */
 position: relative;
 }
 
+.headerBanner h2 p {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
 .assBtn {
 float: right;
 background-color: #1B658C;
@@ -154,7 +166,7 @@ text-decoration: none;
 
 /* courses.html */
 .titlehr{
-width: 20%;
+width: 10%;
 text-align: start;
 margin-left: 0;
 margin-top: 0;
@@ -164,8 +176,19 @@ border-radius: 5px;
 
 .course-card{
 height: 300px;
-min-height: 300px;
 max-height: 300px;
+}
+
+@media(max-width:767px) and (min-width: 500px){
+  .course-card{
+    /* height: 350px;
+    max-height: 350px; */
+    width: 250px;
+  }
+
+  .col-md-4{
+    width: 250px;
+  }
 }
 
 .course-card img{
@@ -177,6 +200,11 @@ max-height: 200px;
 .course-card .card-body{
 padding: 15px;
 text-align: start;
+font-size: 15px;
+}
+
+.course-card h5{
+  font-size: medium;
 }
 
 .autocomplete-items {
