@@ -499,7 +499,8 @@ $(async function() {
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
-								act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
+									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -521,7 +522,8 @@ $(async function() {
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
-								act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
+									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -565,7 +567,8 @@ $(async function() {
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
-								act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
+									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -589,7 +592,8 @@ $(async function() {
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
-								act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
+									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -610,7 +614,8 @@ $(async function() {
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
-								act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
+									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -628,7 +633,8 @@ $(async function() {
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
-								act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
+									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
