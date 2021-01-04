@@ -15,7 +15,7 @@ $(document).ready(function () {
       $('.menu-collapsed').toggleClass('d-none');
       $('.sidebar-submenu').toggleClass('d-none');
       $('.submenu-icon').toggleClass('d-none');
-      $('#sidebarChange').toggleClass('col-lg-2 col-lg-1 col-md-3 col-md-1');
+      $('#sidebarChange').toggleClass('col-lg-2 col-lg-1 col-md-3 col-md-1 closed');
       $('#mainContentSwitch').toggleClass('col-lg-10 col-lg-11');
       $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
       if($('#logoImage').attr('src') == 'https://www.edwisely.com/assets/images/common/logo.svg'){

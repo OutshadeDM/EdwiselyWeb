@@ -62,3 +62,12 @@
 .sticky-offset {
     top: 56px;
 }
+
+#sidebar-container {
+    position: sticky;
+    top: 0;
+}
+
+#sidebarChange.closed {
+    max-width: fit-content;
+}
