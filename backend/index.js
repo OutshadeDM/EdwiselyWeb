@@ -709,7 +709,7 @@ $(async function() {
 						data: {
 							labels: [`>80 -${activity.results.percentage_very_good}`, `70-80 -${activity.results.percentage_good}`, `60-70 -${activity.results.percentage_average}`, `<60 -${activity.results.percentage_below_average}`],
 							datasets: [{
-								label: `Student Understanding Level: ${activity.results.understanding_level}`,
+								// label: `Student Understanding Level: ${activity.results.understanding_level}`,
 								data: [activity.results.percentage_very_good, activity.results.percentage_good, activity.results.percentage_average, activity.results.percentage_below_average],
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',
@@ -731,10 +731,10 @@ $(async function() {
 							legend: {
 								position: 'top',
 							},
-							title: {
-								display: true,
-								text: `Student Understanding Level: ${activity.results.understanding_level}`
-							},
+							// title: {
+							// 	display: true,
+							// 	text: `Student Understanding Level: ${activity.results.understanding_level}`
+							// },
 							animation: {
 								animateScale: true,
 								animateRotate: true
