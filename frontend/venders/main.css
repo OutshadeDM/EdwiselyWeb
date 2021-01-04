@@ -372,6 +372,10 @@ background: #1b668c;
 border-radius: 10px;
 }
 
+.btn-danger {
+  border-radius: 10px;
+}
+
 /* end courseDetails.html */
 
 /* addcourses */

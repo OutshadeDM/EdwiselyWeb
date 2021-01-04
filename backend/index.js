@@ -392,8 +392,8 @@ $(async function() {
 
 
 		$.each(courses, (index, course) => {
-			$img = $('<img>').addClass('card-img-top img-fluid').attr('src', course.course_image || '../images/onlineCourses.png');
-			$title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
+			$img = $('<img>').addClass('card-img-top d-flex align-items-center justify-content-center img-fluid').attr('src', course.course_image || '../images/onlineCourses.png');
+			$title = $('<h5></h5>').addClass('card-title d-flex align-items-center justify-content-center font-weight-bold pb-0 mb-0').text(course.name);
 			// $description = $('<p></p>').addClass('py-0 my-0')
 			// 				.append(
 			// 					$('<span></span>').addClass('span-heading').text(course.description || "No Description Available")
@@ -500,7 +500,7 @@ $(async function() {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
 								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
-									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+									act += `<img src='${follower.profile_pic}' class="img-fluid ml-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -523,7 +523,7 @@ $(async function() {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
 								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
-									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+									act += `<img src='${follower.profile_pic}' class="img-fluid ml-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -531,7 +531,7 @@ $(async function() {
 						if (activity.answered)
 							act += `
 								<div class="row col-12">
-									<div class="col-md-6 col-12">
+									<div class="col-md-5 offset-1 col-12">
 										<canvas id="myChart${activity.id}" width="400" height="400"></canvas>
 									</div>
 									<div class="col-md-6 col-12 align-self-center">
@@ -562,13 +562,13 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
+						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
 								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
-									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+									act += `<img src='${follower.profile_pic}' class="img-fluid ml-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -593,7 +593,7 @@ $(async function() {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
 								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
-									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+									act += `<img src='${follower.profile_pic}' class="img-fluid ml-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -615,7 +615,7 @@ $(async function() {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
 								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
-									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+									act += `<img src='${follower.profile_pic}' class="img-fluid ml-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -634,7 +634,7 @@ $(async function() {
 							if (i < activity.followers.length) {
 								let follower = activity.followers[i];
 								if (follower.profile_pic && follower.profile_pic.length && ['jpeg', 'png', 'jpg', 'gif'].includes(follower.profile_pic.split('.').pop()))
-									act += `<img src='${follower.profile_pic}' class="img-fluid mr-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
+									act += `<img src='${follower.profile_pic}' class="img-fluid ml-2" style="width: 25px; height: 25px; border-radius: 50%;">`;
 							} else break;
 						}
 						act += '</a></div>'
@@ -653,10 +653,12 @@ $(async function() {
 						</div>`;
 					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
 						if (activity.answered)
-							act +=	`<div class="col-7  offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>
-							<div class="col-4 align-self-center d-flex mt-3"><button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>`;
+							act +=	`<div class="col-7  offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}.</div>
+							<div class="col-4 align-self-center d-flex">
+								${ activity.answered? '': '<strong class="status">Test Expired</strong>'}
+								<button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>`;
 						else
-							act += `<div class="col-11 desc offset-1 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. ${ activity.answered? '': '<strong class="text-danger">(Test Expired)</strong>'}</div>
+							act += `<div class="col-7 desc offset-1 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. </div><div class="col-3 align-self-center">${ activity.answered? '': '<strong class="status">Test Expired</strong>'}</div>
 							`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
@@ -675,9 +677,9 @@ $(async function() {
 							</div>
 						</div>`;						
 					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) <= new Date() && !activity.results_release_time.length) {
-						act += `<div class="col-7 mt-3 desc offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.</div>`;
+						act += `<div class="col-7 mt-3 desc offset-1 align-self-center">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation has been completed. You can now start reviewing the student evaluations and release the results.</div>`;
 						act += `<div class="col-4 row align-self-center">
-									<div class="col-12 mt-3"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">Start Evaluation</a></div>
+									<div class="col-12"><a href="https://develop.createtest.edwisely.com/subjectiveevaluation?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">Start Evaluation</a></div>
 									<div class="col-12 mt-3"><a onclick="releaseResult(${activity.id})" target="_blank" type="button" class="btn btn-danger">Release Result</a></div>
 								</div>`
 						act += `
@@ -688,8 +690,8 @@ $(async function() {
 							</div>
 						</div>`;
 					} else if (activity.results_release_time.length) {
-						act += `<div class="col-7 mt-3 desc offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The results are released, you can check them now.</div>
-						<div class="col-4 align-self-center mt-3"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>`;
+						act += `<div class="col-7 mt-3 desc align-self-center offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The results are released, you can check them now.</div>
+						<div class="col-4 align-self-center"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</button></div>
@@ -783,8 +785,8 @@ $(async function() {
 				type = 'material';
 			}
 			$img = $('<img>').attr('src', peer.college_account_details.profile_pic).addClass('img-fluid');
-			$col1 = $('<div></div>').addClass('col-2').append($img);
-			$col2 = $('<div></div>').addClass('col-10').text(text);
+			$col1 = $('<div></div>').addClass('col-2 mt-1').append($img);
+			$col2 = $('<div></div>').addClass('col-10 pl-0 desc m-0').text(text);
 			$row = $('<div></div>').addClass('row mb-3').append($col1, $col2);
 			$('#peer').append($row);
 		});
