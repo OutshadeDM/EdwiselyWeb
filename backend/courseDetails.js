@@ -85,7 +85,8 @@ $(document).ready(function () {
                         $("#courseClass").append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                 }
                 else {
-                    alert(result.message);
+                    $('#errorToastBody').text('Request Unsuccessful');
+                    $('#errorToast').toast('show');
                 }
             },
             error: function (error) {
@@ -119,7 +120,8 @@ $(document).ready(function () {
                         navAbout();
                     }
                     else {
-                        alert(result.message);
+                        $('#errorToastBody').text('Request Unsuccessful');
+                        $('#errorToast').toast('show');
                     }
                 },
                 error: function (error) {
@@ -1688,12 +1690,12 @@ $(document).ready(function () {
                 j++;
             });
             $('#objQuestions').append(div);
-            MathJax.typesetPromise();
         }
         else
             $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
 
         $("#loadingDiv").remove();
+        MathJax.typesetPromise();
     }
 
     function processSubQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {

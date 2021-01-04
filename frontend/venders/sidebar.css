@@ -18,6 +18,8 @@
     height: 50px;
     color: #bbb;
     background-color: #2A2A2A;
+    font-size: 1.1rem;
+    margin: 2px 0;
 }
 #sidebar-container .list-group a:hover,
 #sidebar-container .list-group a:active,
