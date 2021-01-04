@@ -556,26 +556,35 @@ border-bottom: 1px solid gray;
 .firstOption {
 background-color: #C04DD8;
 color: white;
+max-height: 50px;
 }
 
 .secondOption {
 background-color: #4FB277;
 color: white;
+max-height: 50px;
 }
 
 .thirdOption {
 background-color: #508AE0;
 color: white;
+max-height: 50px;
 }
 
 .fourthOption {
 background-color: #4ED8EA;
 color: white;
+max-height: 50px;
 }
 
 .fifthOption {
 background-color: #FF6B6B;
 color: white;
+max-height: 50px;
+}
+
+.chooseImage {
+  max-height: 50px;
 }
 
 
