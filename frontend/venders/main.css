@@ -1,6 +1,11 @@
 @font-face {
   font-family: "Google Sans";
-  src: url('../Google-sans-Font-Family/ProductSans-light.ttf');
+  src: url('../Google-sans-Font-Family/ProductSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: "Google Sans Light";
+  src: url('../Google-sans-Font-Family/ProductSans-Light.ttf');
 }
 
 * {

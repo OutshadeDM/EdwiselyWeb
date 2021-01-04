@@ -180,3 +180,51 @@
 .addCourseCard h5 {
     color: white;
 }
+
+.status {
+    color: rgba(0, 0, 0, 0.95);
+    font-size: 20px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    /* Text style for "No Student" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;    
+}
+
+.desc {
+    color: #363636;
+    font-family: "Google Sans light";
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    /* Text style for "A question" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+#activity img.img-fluid.mr-2 {
+    width: 1.1rem;
+}
+
+#viewpeer {
+    background-color: rgba(24, 102, 138, 0.13);
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    border-radius: 0px 0px 15px 15px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    color: black;    
+}
