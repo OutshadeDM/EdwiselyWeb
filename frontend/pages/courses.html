@@ -39,58 +39,59 @@
         </a>
         <ul class="list-group">
             <!-- Menu -->
-            <a href="index.html" class="bg-dark list-group-item list-group-item-action">
+            <a href="index.html" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fa fa-home fa-fw mr-3"></span>
                   <span class="menu-collapsed">Home</span>
                 </div>
               </a>
-              <a href="courses.html" class="bg-dark list-group-item list-group-item-action">
+              <a href="courses.html" class="list-group-item list-group-item-action active">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fas fa-book fa-fw mr-3"></span>
                   <span class="menu-collapsed">All Courses</span>
                 </div>
               </a>
-              <a href="addCourses.html" class="bg-dark list-group-item list-group-item-action">
+              <a href="addCourses.html" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fas fa-bookmark fa-fw mr-3"></span>
                   <span class="menu-collapsed">Add Courses</span>
                 </div>
               </a>
-              <a href="myAssessment.html" class="bg-dark list-group-item list-group-item-action">
+              <a href="myAssessment.html" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fas fa-chart-bar fa-fw mr-3"></span>
                   <span class="menu-collapsed">Assessments</span>
                 </div>
               </a>
-              <a href="liveClass.html" class="bg-dark list-group-item list-group-item-action">
+              <a href="liveClass.html" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fas fa-tv fa-fw mr-3"></span>
                   <span class="menu-collapsed">Live Class</span>
                 </div>
               </a>
-              <a href="notify.html" class="bg-dark list-group-item list-group-item-action">
+              <a href="notify.html" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                   <span class="fas fa-envelope fa-fw mr-3"></span>
                   <span class="menu-collapsed">Notify</span>
                 </div>
               </a>
               <li class="list-group-item sidebar-separator menu-collapsed"></li>
-              <a href="#" onclick="logout();" data-toggle="sidebar-collapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+              <a href="#top" data-toggle="sidebar-colapse" class="list-group-item list-group-item-action d-flex align-items-center">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
+                </div>
+              </a>
+
+              <li class="list-group-item sidebar-separator menu-collapsed"></li>
+              <a href="#" onclick="logout();" data-toggle="sidebar-collapse" class="list-group-item list-group-item-action d-flex align-items-center logout">
                   <div class="d-flex w-100 justify-content-start align-items-center">
                       <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
                       <span id="collapse-text" class="menu-collapsed">Logout</span>
                   </div>
               </a>
-
-              <li class="list-group-item sidebar-separator menu-collapsed"></li>
-            <a href="#top" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
-                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
-                </div>
-            </a>
         </ul>
+
         <!-- List Group END-->
       </div>
     </div>

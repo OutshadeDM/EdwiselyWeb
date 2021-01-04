@@ -1,6 +1,11 @@
 @font-face {
   font-family: "Google Sans";
-  src: url('../Google-sans-Font-Family/ProductSans-light.ttf');
+  src: url('../Google-sans-Font-Family/ProductSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: "Google Sans Light";
+  src: url('../Google-sans-Font-Family/ProductSans-Light.ttf');
 }
 
 * {
@@ -26,8 +31,6 @@ body{
   height: 100%;
   width: 100%;
   max-width: 1000px;
-  box-sizing: border-box;
-  text-align: center;
   margin: auto;
   /* margin-right: 0; */
   /* padding-left: 6%;
