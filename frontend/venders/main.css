@@ -4,8 +4,29 @@
 }
 
 @font-face {
-  font-family: "Google Sans Light";
-  src: url('../Google-sans-Font-Family/ProductSans-Light.ttf');
+  font-family: "Google Sans Bold";
+  src: url('../Google-sans-Font-Family/ProductSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: "Google Sans Thin";
+  src: url('../Google-sans-Font-Family/ProductSans-Thin.ttf');
+}
+
+.font-regular {
+  font-family: "Google Sans";
+}
+
+.font-bold {
+  font-family: "Google Sans Bold";
+}
+
+.font-thin {
+  font-family: "Google Sans Thin";
+}
+
+.grey-back {
+  background: #f9f9f9;
 }
 
 * {
