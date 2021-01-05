@@ -115,7 +115,7 @@
                   <p class="font-weight-bold" id="courseName">My Assessments</p>
                 </h2>
                 <hr class="titlehr">
-                <p class="list">
+                <p class="list mb-0">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
                   <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
                   <span class="list-item-active"><a href="#">Add Question</a></span>
@@ -159,7 +159,7 @@
               <div class="divInput row">
                 <div class="col-sm-8">
                   <input class="form-control form-control-lg" type="textarea" style="width: 100%;"
-                    placeholder="Start Typing your question" id="quesInput">
+                    placeholder="Start typing your question" id="quesInput">
                 </div>
                 <div class="col-sm-4 titleImg py-3">
                   <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
@@ -200,7 +200,7 @@
                   <div class="row">
                     <div class="col-2 p-1 firstOption">
                       <div class="form-check p-0">
-                        <label class="radiolabel">
+                        <label class="radiolabel pl-1 pt-1">
                           <input type="radio" class="radiostest" name="Radios" id="Radios1" value="0">
                           <i class="far fa-square fa-2x untick untick1"></i>
                           <i class="fas fa-check-square fa-2x tick tick1"></i>
@@ -232,7 +232,7 @@
                   <div class="row">
                     <div class="col-2 mx-0 p-1 secondOption">
                       <div class="form-check p-0">
-                        <label class="radiolabel">
+                        <label class="radiolabel pl-1 pt-1">
                           <input type="radio" class="radiostest" name="Radios" id="Radios2" value="1">
                           <i class="far fa-square fa-2x untick untick2" style="width: 100%;"></i>
                           <i class="fas fa-check-square fa-2x tick tick2"></i>
@@ -267,7 +267,7 @@
                   <div class="row">
                     <div class="col-2 mx-0 p-1 thirdOption">
                       <div class="form-check p-0">
-                        <label class="radiolabel">
+                        <label class="radiolabel pl-1 pt-1">
                           <input type="radio" class="radiostest" name="Radios" id="Radios3" value="2">
                           <i class="far fa-square fa-2x untick untick3" style="width: 80%;height: 80%;"></i>
                           <i class="fas fa-check-square fa-2x tick tick3"></i>
@@ -298,7 +298,7 @@
                 <div class="col-6">
                   <div class="row">
                     <div class="col-2 mx-0 p-1 fourthOption">
-                      <div class="form-check p-0">
+                      <div class="form-check pl-1 pt-1">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios4" value="3">
                           <i class="far fa-square fa-2x untick untick4" style="width: 100%;"></i>
@@ -330,12 +330,12 @@
               </div>
               <div class="row pt-4">
 
-                <div class="col-12 px-0">
+                <div class="col-6 px-0">
                   <button class="btn btn-lg fifthOptionBtn">Add Option</button>
-                  <div class="col-6">
+                  <div class="col-12">
                     <div class="row options" id="fifth">
                       <div class="col-2 mx-0 p-1 fifthOption">
-                        <div class="form-check p-0">
+                        <div class="form-check pl-1 pt-1">
                           <label class="radiolabel">
                             <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4">
                             <i class="far fa-square fa-2x untick untick5" style="width: 100%;"></i>
@@ -363,6 +363,12 @@
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <div class="col-6">
+                  <!-- <button class="btn  fifthOptionBtn">Add Option</button> -->
+                  <button class="btn btn-lg btn-primary btn-block mx-auto p-1 py-0 shadow-sm font-weight-bold"
+                  id="plusBtn" style="width: 50%; height: 90%;"><i class="fas fa-plus"></i></button>
                 </div>
 
               </div>
@@ -401,7 +407,7 @@
 
             <div class="col-md-2 shadow-sm addques pl-4 pr-0 mr-0 py-2" id="addsoln">
               <div class="form-group">
-                <div class="form-group">
+                <div class="form-group mb-0 pb-0">
                   <div class="onoffswitch">
                     <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch1" value="public"
                       tabindex="0" checked name="public_pvt">
@@ -420,7 +426,7 @@
 
                 <!-- Button trigger modal -->
 
-                <div class="py-3 my-1 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
+                <div class="py-3 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
                   data-target="#exampleModal">
 
                   <i class="fas fa-bars pl-2 pr-0"></i>
@@ -454,16 +460,14 @@
                   </div>
                 </div>
 
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add
+                <button class="btn btn-primary btn-block mt-2 p-1 py-0 shadow-sm font-weight-bold" id="hintBtn">Add
                   Hint</button>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add
+                <button class="btn btn-primary btn-block mt-2 p-1 py-0 shadow-sm font-weight-bold" id="solutionBtn">Add
                   Solution</button>
                 <input type="hidden" value="0" id="questionId">
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="deleteBtn"
+                <button class="btn btn-primary btn-block mt-2 p-1 py-0 shadow-sm font-weight-bold" id="deleteBtn"
                   style="display: none;">Delete</button>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
-                  id="plusBtn">+</button>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold"
+                <button class="btn btn-primary btn-block mt-2 p-1 py-0 shadow-sm font-weight-bold"
                   id="editBtn">Edit</button>
 
 
