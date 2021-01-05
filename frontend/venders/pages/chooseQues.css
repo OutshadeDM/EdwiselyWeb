@@ -3,13 +3,15 @@
 .chooseQues{
   overflow-y: scroll;
   height: 60vh;
+  border-top: solid 1px rgb(206, 206, 206);
+
 }
 
 .chosenQuestions{
   height: 84px;
   overflow: hidden;
   cursor: pointer;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px rgb(206, 206, 206);
 }
 
 
@@ -25,10 +27,10 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .addingQues{
-  border: solid 1px black;
-  border-radius: 5px;
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 10px;
   overflow-y: scroll;
-  height: 65vh;
+  height: 75vh;
   background-color: white;
 }
 
@@ -41,6 +43,11 @@ scrollbar-width: none;  /* Firefox */
 .addingQues {
 -ms-overflow-style: none;  /* IE and Edge */
 scrollbar-width: none;  /* Firefox */
+}
+
+input[type="checkbox"]{
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
 }
 
 
@@ -112,8 +119,8 @@ width: 100%;
 }
 
 .getUnits {
-  border: solid black 2px;
-  border-radius: 5px;
+  border: solid  rgb(206, 206, 206) 1px;
+  border-radius: 10px;
   background-color: white;
 }
 
@@ -176,7 +183,7 @@ pre
 }
 
 #questionsToChoose{
-  border: solid black 1px;
+  border: solid gray 1px;
   border-radius: 10px;
   padding: 0;
   background-color: white;
