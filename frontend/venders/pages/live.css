@@ -107,7 +107,7 @@ label {
 .student-list div.single {
   padding: 15px;
   font-size: 12px;
-  border-bottom: 1px solid #707070;
+  border-top: 1px solid #707070;
 }
 
 .student-list div.single:nth-of-type(even)
