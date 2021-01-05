@@ -51,8 +51,7 @@ body{
 #theMainDiv {
   height: 100%;
   width: 100%;
-  max-width: 1000px;
-  margin: auto;
+  background-color: #f9f9f9;
   /* margin-right: 0; */
   /* padding-left: 6%;
   padding-right: 10%; */
@@ -64,7 +63,7 @@ body{
 }
 
 .listDiv{
-  background: #fff;
+  background: #f9f9f9;
 }
 .card{
   max-width: 300;
@@ -86,12 +85,14 @@ color: rgb(81 84 205) !important;
 color: #4c768b;
 cursor: pointer;
 background: #fff;
+font-size: medium;
 }
 
 .list-item-active a{
 color: #5F93AE;
 cursor: pointer;
 background: #fff;
+font-size: medium;
 }
 
 #password {
@@ -139,14 +140,13 @@ border: none;
 .BigBtn {
   background-color: #1B658C;
   border: none;
-  border-radius: 10px;
-  font-size: 24px;
+  border-radius: 12px;
+  font-size: 18px;
   color: white;
   position: absolute;
-  right: 100px;
-  bottom: 60px;
-  padding-left: 8px;
-  padding-right: 8px;
+  right: 0;
+  bottom: 50%;
+  padding: 3px 8px;
 }
 
 .saveChooseBtn{
@@ -261,6 +261,7 @@ background-color: #e9e9e9;
  position: relative;
  width: 250px;
  border: 1px solid gray;
+ border-radius: 18px;
  padding: 5px;
 }
 
@@ -501,7 +502,7 @@ height: 50px;
 width: 100px;
 }
 #quesInput {
-height: 80px;
+height: 100px;
 width: 60%;
 background-color: transparent;
 border: none;
@@ -561,6 +562,8 @@ color: white;
 
 .titleImg {
 display: inline-block;
+text-align: center;
+margin: auto auto;
 }
 
 .levelSelect{
@@ -628,11 +631,20 @@ border: none;
 height: 50px;
 background-color: transparent;
 border: none;
+opacity: 0.5;
+color: black;
 }
 
 .radiostest {
 display: none;
 } 
+
+.fa-square,
+.fa-check-square{
+  width: 100%;
+  height: 100%;
+  margin: auto auto;
+}
 
 
 .addObjQuestions {

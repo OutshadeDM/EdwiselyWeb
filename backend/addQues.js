@@ -550,8 +550,10 @@ $(document).ready(function () {
     option5_img_url = "";
   });
 
-  $('#customSwitch1').on('click', function () {
-    if ($("input[name='public_pvt']:checked").val() === 'public') {
+  $('.onoffswitch-label').on('click', function () {
+    const val = $("input[name='public_pvt']:checked").val();
+    // alert(val);
+    if (val !== 'public') {
       type = "public"
     } else {
       type = "private"
@@ -916,6 +918,8 @@ $(document).ready(function () {
       $('#topicsDiv').empty();
       $('#topicsDiv').append("<p class='font-weight-bold'>Topics</p>");
     }
+
+    console.log(JSON.stringify(value));
 
     $('#quesInput').val(value.name);
     question = value.name;
@@ -1336,6 +1340,7 @@ $(document).ready(function () {
             if (result1.status == 200) {
 
               if (question_type1 != newQuestion.question_type) {
+                alert(question_type1);
                 let form1 = new FormData();
                 form1.append("question_id", newQuestion.id);
                 form1.append("type", question_type1);
@@ -1359,6 +1364,7 @@ $(document).ready(function () {
                       clearAll(true);
                       $("#addquesDiv").empty();
                       const foundIndex = questions.findIndex(x => x.id == questionId);
+                      questions[foundIndex].question_type = question_type1;
                       questions[foundIndex] = result1.data;
                       loadList();
 

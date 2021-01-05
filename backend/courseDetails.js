@@ -1361,8 +1361,8 @@ $(document).ready(function () {
             }
         });
 
-        $(".btnQuestionClick").removeClass('btnQuestionClick bg-secondary').addClass('btnQuestion bg-light');
-        $(this).removeClass('btnQuestion bg-light').addClass('btnQuestionClick bg-secondary');
+        $(".btnQuestionClick").removeClass('btnQuestionClick').addClass('btnQuestion bg-light');
+        $(this).removeClass('btnQuestion bg-light').addClass('btnQuestionClick');
 
     });
 

@@ -101,11 +101,11 @@
       <div class="container-fluid">
         <div class="shadow-sm">
           <div class="px-5 headerBanner">
-            <h2 class="mt-1">
-              <p class="font-weight-bold" id="courseName">Your Courses</p>
+            <h2 class="mt-3">
+              <p class="font-weight-bold my-0" id="courseName">Your Courses</p>
             </h2>
             <hr class="titlehr">
-            <p class="list pb-2">
+            <p class="list pb-2 mb-0">
               <span class="list-item"><a href="index.html"l>Home</a> ></span>
               <span class="list-item-active"><a href="#">Your Courses</a></span>
             </p>
@@ -114,19 +114,20 @@
         <!-- Start Page Content -->
 
         <!-- put everything in this div -->
-        <div class="container px-5" id="theMainDiv">
+        <div class="px-5 py-2 form-body" id="theMainDiv">
 
-          <div class="form-group pl-5" style="max-width: 350px;line-height: 40px;">
+          <div class="form-group pl-5 mx-5" style="max-width: 350px;line-height: 40px;">
             <div class="fake-input">
               <input type="text" autocomplete="off" placeholder="Search Courses" id="courseSelect"
-                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Courses'" class="single-input">
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Courses'" class="single-input"
+                style="background-color: #f9f9f9;">
               <i class="fas fa-search" aria-hidden="true"></i>
             </div>
             <div id="courseSelectList" class="autocomplete-items"></div>
           </div>
           <!--Courses List-->
           <div class="container-fluid pt-1 px-5 listDiv">
-            <div class="row text-center" id="courseList">
+            <div class="row text-center px-5" id="courseList">
 
             </div>
           </div>
