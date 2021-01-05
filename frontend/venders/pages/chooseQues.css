@@ -27,6 +27,7 @@ scrollbar-width: none;  /* Firefox */
   border-radius: 5px;
   overflow-y: scroll;
   height: 65vh;
+  background-color: white;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -109,6 +110,7 @@ overflow-x: hidden;
 .getUnits {
   border: solid black 2px;
   border-radius: 5px;
+  background-color: white;
 }
 
 .getUnitsInput {
@@ -135,15 +137,10 @@ input[type="radio"]:checked+label{
   border-image-slice: 1;
 }
 
-/* .getUnitsLabel:after{
-  content: "";
-  background: black;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  width: 1px;
-} */
+#subject-modal-div{
+  background-color: white;
+}
+
 
 pre
 {
@@ -178,6 +175,7 @@ pre
   border: solid black 1px;
   border-radius: 10px;
   padding: 0;
+  background-color: white;
 }
 
 #moreQuestions{

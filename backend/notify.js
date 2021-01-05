@@ -88,7 +88,7 @@ $(async function() {
 		$('#myTabContent').append(`<div class="tab-pane fade ${first? 'show active': ''}" id="t${tabNumber}" role="tabpanel" aria-labelledby="t${tabNumber}-tab"></div>`);
 		$(`#t${tabNumber}`).append(`<div class="border row selectAll">
 		<div class="col-8 border-right">Students</div>
-		<div class="col-4">
+		<div class="col-4 align-self-center">
 			<label class="form-check-label" for="select${tabNumber}">SELECT ALL</label>
 			<input style="float: right;right: 10px;" name="selectAll" data-tab=${tabNumber} type="checkbox" class="form-check-input selectAll" id="select${tabNumber}">		
 		</div>

@@ -15,13 +15,13 @@ $(document).ready(function () {
       $('.sidebar-submenu').toggleClass('d-none');
       $('.submenu-icon').toggleClass('d-none');
       $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
-      if($('#logoImage').attr('src') == 'https://www.edwisely.com/assets/images/common/logo.svg'){
+      if($('#logoImage').attr('src') == '../images/Org_White.svg'){
         $('#logoImage').attr('src','https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png');
         $('#logoImage').attr('width','60');
-        $('#logoImage').attr('height','60');
+        $('#logoImage').attr('height','auto');
       }
       else{
-        $('#logoImage').attr('src','https://www.edwisely.com/assets/images/common/logo.svg');
+        $('#logoImage').attr('src','../images/Org_White.svg');
         $('#logoImage').attr('width','200');
         $('#logoImage').attr('height','75');
       }

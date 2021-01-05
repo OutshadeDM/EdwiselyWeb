@@ -1,9 +1,32 @@
+.title {
+    color: #363636;
+    font-family: "Google Sans bold";
+    font-size: 19px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+}
+
+.date {
+    color: rgba(54, 54, 54, 0.39);
+    font-family: "Google Sans thin";
+    font-size: 13px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;    
+}
+
+
 .addCourseCard .card-body {
     position: absolute;
     bottom: 0;
     width: 100%;
     background-color: rgba(24, 102, 138, 0.64);
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 15px 15px;
 }
 
 .card-img-top {
@@ -182,32 +205,28 @@
 }
 
 .status {
+    /* Style for "Meeting Co" */
     color: rgba(0, 0, 0, 0.95);
-    font-size: 20px;
+    font-family: "Google Sans";
+    font-size: 25px;
     font-weight: 700;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
-    text-align: left;
-    /* Text style for "No Student" */
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: normal;    
+    text-align: left; 
 }
 
 .desc {
     color: #363636;
-    font-family: "Google Sans light";
+    font-family: "Google Sans";
     font-size: 15px;
     font-weight: 400;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
     text-align: left;
-    /* Text style for "A question" */
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: normal;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 #activity img.img-fluid.mr-2 {
@@ -227,6 +246,42 @@
     line-height: 30px;
     text-decoration: none;
     color: black;    
+}
+
+#viewactivity {
+    background-color: rgba(24, 102, 138, 0.13);
+    display: block;
+    width: 100%;
+    left: 0;
+    border-radius: 0px 0px 15px 15px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    color: black;
+    position: relative;    
+}
+
+#viewactivity:before {
+    content: ' ';
+    width: 15px;
+    height: 15px;
+    background: rgba(24, 102, 138, 0.13);
+    position: absolute;
+    left: 0;
+    top: -15px;
+    z-index: -1;    
+}
+
+#viewactivity:after {
+    content: ' ';
+    width: 15px;
+    height: 15px;
+    background: rgba(24, 102, 138, 0.13);
+    position: absolute;
+    right: 0;
+    top: -15px;
+    z-index: -1;    
 }
 
 .slick-prev:before {

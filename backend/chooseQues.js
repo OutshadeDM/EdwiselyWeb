@@ -132,6 +132,8 @@ $(document).ready(function () {
     topicsId = []
     grandTopicsId = []
     getTopics()
+    $('.chooseQues').empty();
+    $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");
   });
 
 
