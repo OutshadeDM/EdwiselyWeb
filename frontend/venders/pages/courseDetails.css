@@ -116,4 +116,31 @@ pre
   white-space: pre;
   white-space: pre-wrap;
   background-color: transparent;
-} 
+}
+
+.getUnits {
+    /* border: solid black 2px; */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: large;
+  }
+  
+  .getUnitsInput {
+    display: none;
+  }
+  
+  .getUnitsLi {
+    list-style: none;
+  }
+  
+  .getUnitsLabel{
+    color: gray;
+    border-bottom: solid 3px #1B658C;
+    border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
+    border-image-slice: 1;
+  }
+
+  radio .getUnitsInput:checked,
+  .getUnitsLabel:active{
+      font-size: xx-large;
+  }
