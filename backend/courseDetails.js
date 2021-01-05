@@ -152,13 +152,13 @@ $(document).ready(function () {
                         div = div + "<div class='row p-3 mb-2'>";
                         div = div + "<div class='col-sm-8'>";
                         div = div + "<p class='mt-1'><strong>" + value.name + "</strong></p>";
-                        div = div + "<div class='my-auto'>";
-                        div = div + "<p><span class='span-heading'>Objectives</span><ul class='list-unstyled'>";
+                        div = div + "<div>";
+                        div = div + "<p class='mb-0'><span class='span-heading'>Objectives</span><ul class='list-unstyled'>";
                         $.each(value.objectives, function (key, value) {
                             div = div + "<li>" + value + "</li>";
                         });
                         div = div + "</ul></p>";
-                        div = div + "<p class='mt-2'><span class='span-heading'>Outcome</span><ul class='list-unstyled'>";
+                        div = div + "<p class='mt-2 mb-0'><span class='span-heading'>Outcome</span><ul class='list-unstyled'>";
                         $.each(value.outcomes, function (key, value) {
                             div = div + "<li>" + value + "</li>";
                         });
@@ -1361,8 +1361,8 @@ $(document).ready(function () {
             }
         });
 
-        $(".btnQuestionClick").removeClass('btnQuestionClick bg-secondary').addClass('btnQuestion bg-light');
-        $(this).removeClass('btnQuestion bg-light').addClass('btnQuestionClick bg-secondary');
+        $(".btnQuestionClick").removeClass('btnQuestionClick').addClass('btnQuestion bg-light');
+        $(this).removeClass('btnQuestion bg-light').addClass('btnQuestionClick');
 
     });
 

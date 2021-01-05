@@ -90,4 +90,5 @@
 
 #logoImage {
     width: 70%;
+    max-width: 110px;
 }

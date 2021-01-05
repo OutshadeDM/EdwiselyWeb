@@ -112,14 +112,14 @@
     <!-- sidebar-container END -->
     <!-- MAIN -->
     <div class="col px-0">
-      <div class="container-fluid mx-0">  
+      <div class="container-fluid mx-0 px-0">  
         <div class="shadow-sm">
           <div class="px-5 headerBanner">
           <h2 class="mt-1">
             <p class="font-weight-bold" id="courseName">Your Courses</p>
           </h2>
           <hr class="titlehr">
-          <p class="list pb-2">
+          <p class="list pb-2 mb-0">
             <span class="list-item"><a href=index.html>Home</a> ></span>
             <span class="list-item"><a href=courses.html>Your Courses</a> ></span>
             <span class="list-item-active"><a href="#">Course Details</a></span>
@@ -128,7 +128,7 @@
         </div>
         <!-- Start Page Content -->
 
-        <div class="container" id="theMainDiv"><!-- put everything in this div -->
+        <div class="pt-2 px-5 container" id="theMainDiv"><!-- put everything in this div -->
 
           <section class="px-0">
             <div class="container mb-5">
@@ -210,17 +210,17 @@
                     <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
                       <div id="contentMainErrorDiv"></div>
                       <div class="container my-2 px-5" id="contentMainDiv">
-                        <div class="form-group px-3 py-auto coursetab" style="max-width: 200px;">
-                          <select class="form-control" id="courseUnits">
+                        <div class="form-group py-auto coursetab" style="max-width: 200px;">
+                          <select class="form-control" id="courseUnits" style="border-radius: 18px;width: 100%;outline: none; appearance: none;">
                           </select>
                         </div>
-                          <p class="d-flex-start" id="courseDeckTitle"><strong>Learning Content</strong></p>
+                          <p class="d-flex-start ml-3" id="courseDeckTitle"><strong>Learning Snippets</strong></p>
                           <div class="row text-center" id="courseDeckList">
                           <!-- ================================= COURSES =================================== -->
                           </div>
                         
                         <div class="container p-3 coursetab scrollDiv">
-                          <div class="row my-2">
+                          <div class="row my-2 px-3">
                             <div class="col-sm-8">
                               <p class="d-flex-start"><strong>Curated Content</strong></p>
                             </div>
@@ -333,14 +333,14 @@
                                           aria-controls="nav-question-sub" aria-selected="false">Subjective</a>
                                       </div>
                                     </nav>
-                                    <table class="table table-borderless table-sm text-center mt-2">
+                                    <table class="table table-borderless table-sm mt-2">
                                       <tr>
                                         <td class="px-3">Bloom Level</td>
                                         <td class="px-3">Topic</td>
                                         <td class="px-3">Questions</td>
                                       </tr>
                                       <tr>
-                                        <td class="px-2">
+                                        <td class="px-2" style="width: 30%;">
                                           <div class="form-group">
                                             <select class="form-control" id="questionBloomsLevel"
                                               style="max-width: 300px;">
@@ -352,7 +352,7 @@
                                             </select>
                                           </div>
                                         </td>
-                                        <td class="px-2">
+                                        <td class="px-2" style="width: 40%;">
                                           <div class="form-group" style="max-width: 300px;">
                                             <select class="form-control" id="questionTopics">
                                               <!-- <option value="0">ALL</option>
@@ -362,7 +362,7 @@
                                             </select>
                                           </div>
                                         </td>
-                                        <td class="px-2">
+                                        <td class="px-2" style="width: 30%;">
                                           <div class="form-group" style="max-width: 300px;">
                                             <select class="form-control" id="questionCatagory">
                                               <option value="0" selected>ALL</option>

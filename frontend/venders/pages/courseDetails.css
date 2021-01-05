@@ -9,11 +9,14 @@
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
     color: #1b668c;
+    border-bottom: 1px solid #f9f9f9;
 }
 
 .onoffswitch {
     position: relative; width: 90px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    -webkit-user-select:none;
+    -moz-user-select:none; 
+    -ms-user-select: none;
 }
 .onoffswitch-checkbox {
     position: absolute;
@@ -21,27 +24,41 @@
     pointer-events: none;
 }
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    display: block; 
+    overflow: hidden; 
+    cursor: pointer;
+    border: 2px solid #999999; 
+    border-radius: 20px;
 }
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block; 
+    width: 200%; 
+    margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    display: block; 
+    float: left; 
+    width: 50%; 
+    height: 30px; 
+    padding: 0; 
+    line-height: 30px;
+    font-size: 14px; 
+    color: white; 
+    font-weight: bold;
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
     content: "Yes";
     padding-left: 10px;
-    background-color: #FFFFFF; color: #000000;
+    background-color: #85e085; 
+    color: #000000;
 }
 .onoffswitch-inner:after {
     content: "No";
     padding-right: 10px;
-    background-color: #828282; color: #FFFFFF;
+    background-color: #828282; 
+    color: #FFFFFF;
     text-align: right;
 }
 .onoffswitch-switch {
@@ -71,6 +88,8 @@
 .btnQuestionClick{
     opacity: 1;
     font-size: 20px;
+    /* background-color: #E3EAEE; */
+    background-color: #ccd3d6;
 }
 
 /* ::-webkit-scrollbar {
