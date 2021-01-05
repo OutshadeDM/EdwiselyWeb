@@ -122,6 +122,8 @@ scrollbar-width: none;  /* Firefox */
 
 .headerBanner {
 position: relative;
+padding-top: 20px;
+padding-bottom: 20px;
 }
 
 .headerBanner a {
@@ -138,6 +140,7 @@ position: relative;
 .headerBanner h2 p {
   font-size: 1.8rem;
   font-weight: 900;
+
 }
 
 .assBtn {
