@@ -2,7 +2,7 @@
 
 .chooseQues{
   overflow-y: scroll;
-  height: 68vh;
+  height: 60vh;
 }
 
 .chosenQuestions{
@@ -79,6 +79,8 @@ scrollbar-width: none;  /* Firefox */
 .chooseQuestionsLi{
 list-style: none;
 overflow-x: hidden;
+display: inline-block;
+width: 100%;
 }
 
 
