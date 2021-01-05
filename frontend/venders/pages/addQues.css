@@ -47,3 +47,7 @@
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
+
+.btn-block{
+    font-size: 14px;
+}

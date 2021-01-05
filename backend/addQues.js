@@ -916,7 +916,7 @@ $(document).ready(function () {
       $('#addsoln').hide();
       $('#topicsDiv').show();
       $('#topicsDiv').empty();
-      $('#topicsDiv').append("<p class='font-weight-bold'>Topics</p>");
+      $('#topicsDiv').append("<p class='font-weight-bold'>This question is not editable - it belongs to Edwisely repo</p>");
     }
 
     console.log(JSON.stringify(value));
@@ -975,7 +975,7 @@ $(document).ready(function () {
         $('#topicTagAdd' + value.id).prop('checked', true);
       }
       else {
-        $('#topicsDiv').append("<span class='badge badge-pill'>" + value.id + "</span><br>");
+        // $('#topicsDiv').append("<span class='badge badge-pill'>" + value.id + "</span><br>");
         $('#addNewBtn').show();
       }
     });

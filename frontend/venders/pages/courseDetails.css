@@ -116,4 +116,38 @@ pre
   white-space: pre;
   white-space: pre-wrap;
   background-color: transparent;
-} 
+}
+
+.getUnits {
+    /* border: solid black 2px; */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 18px;
+  }
+  
+  .getUnitsInput {
+    display: none;
+  }
+  
+  .getUnitsLi {
+    list-style: none;
+  }
+  
+  .getUnitsLabel{
+    width: 100%;
+    color: gray;
+    border-bottom: solid 3px #1B658C;
+    border-image: linear-gradient(to right, #1B658C 25%, rgba(0,0,0,0) 25%);
+    border-image-slice: 1;
+    text-align: end;
+    display: flex;
+    align-content: flex-end;
+    font-size: 18px;
+  }
+
+  .selected{
+    border-bottom: solid 3px #1B658C;
+    border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
+    border-image-slice: 1;
+    font-size: 25px;
+  }

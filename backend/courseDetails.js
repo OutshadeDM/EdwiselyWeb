@@ -1265,7 +1265,8 @@ $(document).ready(function () {
                         success: function (result) {
                             if (result.status == 200) {
                                 $.each(units, function (key, value) {
-                                    $('#courseQuestionUnits').append("<button type='button' data-uid='" + value.id + "' data-sid='" + result.data.subject_id + "' id='courseUnitBtn' value='"+value.id+"' class='btn btnQuestion'>" + value.name + "</button>");
+                                    // $('#courseQuestionUnits').append("<button type='button' data-uid='" + value.id + "' data-sid='" + result.data.subject_id + "' id='courseUnitBtn' value='"+value.id+"' class='btn btnQuestion'>" + value.name + "</button>");
+                                    $('#courseQuestionUnits').append("<li class='getUnitsLi'><input type='radio' class='getUnitsInput' value='" + value.id + "' data-sid='" + result.data.subject_id + "' data-uid='" + value.id + "' name='getUnitsAdd' id='getUnitsAdd" + value.id + "' /><label for='getUnitsAdd" + value.id + "' id='getUnitsLabel"+value.id+"' class='getUnitsLabel'>" + value.name + "</label></li>");
                                 });
                                 $("#nav-question-obj-tab").click();
 
@@ -1302,18 +1303,26 @@ $(document).ready(function () {
                 $('button[data-uid="'+uId+'"]').click();
             }
             else
-                $('#courseQuestionUnits :first-child').click();
+                $('#courseQuestionUnits :first-child :first-child').click();
         }
     });
 
     $("#nav-question-sub-tab").click(function () {
         $("#questionSwitch").val("1");
-        $('#courseQuestionUnits :first-child').click();
+        $('#courseQuestionUnits :first-child :first-child').click();
     });
 
-    $(document).on('click', '#courseUnitBtn', function () {
+    $(document).on('click', '.getUnitsInput', function () {
+        // alert($(".getUnitsInput:checked").val())
         let unit_id = $(this).data('uid');
         let subject_id = $(this).data('sid');
+        // $('.getUnitsLabel').css('font-size','18px');
+        // $('.getUnitsLabel').css('border-image','linear-gradient(to right, #1B658C 25%, rgba(0,0,0,0) 25%)');
+        // $('#getUnitsLabel'+unit_id).css('font-size', '25px')
+        // $('#getUnitsLabel'+unit_id).css('border-image', 'linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%)')
+        // alert('.getUnitsLabel'+unit_id);
+        $('.getUnitsLabel').removeClass('selected');
+        $('#getUnitsLabel'+unit_id).addClass('selected');
 
         $("#addQuestion").attr('href','addQues.html?id='+subject_id+'&tid=0&tname=Add%20New%20Questions&uid='+unit_id+'&sid='+subSemId);
         
