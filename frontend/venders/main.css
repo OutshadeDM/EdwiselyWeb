@@ -124,7 +124,8 @@ scrollbar-width: none;  /* Firefox */
 
 .headerBanner {
 position: relative;
-padding-top: 15px;
+padding-top: 20px;
+padding-bottom: 20px;
 background-color: white;
 margin-bottom: 10px;
 }
@@ -211,7 +212,7 @@ text-decoration: none;
   text-align: start;
   margin-left: 0;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background: #1b668c;
   border-radius: 5px;
 }
