@@ -393,7 +393,7 @@ $(async function() {
 
 		$.each(courses, (index, course) => {
 			$img = $('<img>').addClass('card-img-top d-flex align-items-center justify-content-center img-fluid').attr('src', course.course_image || '../images/onlineCourses.png');
-			$title = $('<h5></h5>').addClass('card-title d-flex align-items-center justify-content-center font-weight-bold pb-0 mb-0').text(course.name);
+			$title = $('<h5></h5>').addClass('card-title d-flex align-items-center justify-content-center pb-0 mb-0').text(course.name);
 			// $description = $('<p></p>').addClass('py-0 my-0')
 			// 				.append(
 			// 					$('<span></span>').addClass('span-heading').text(course.description || "No Description Available")
