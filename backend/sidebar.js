@@ -18,7 +18,7 @@ $(document).ready(function () {
       if($('#logoImage').attr('src') == '../images/Org_White.svg'){
         $('#logoImage').attr('src','https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png');
         $('#logoImage').attr('width','60');
-        $('#logoImage').attr('height','auto');
+        $('#logoImage').attr('height','45');
       }
       else{
         $('#logoImage').attr('src','../images/Org_White.svg');

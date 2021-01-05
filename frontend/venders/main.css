@@ -320,7 +320,7 @@ select:focus{
 }
 
 .coursetab{
-border: 2px solid gray;
+border: 1px solid gray;
 border-radius: 20px;
 background: white;
 }
@@ -342,21 +342,25 @@ border-spacing: 1em;
 
 .questionTab{
 background: white;
-border-radius: 25px;
+border-radius: 18px;
 width: 100%;
-overflow-y: scroll;
-overflow-x: hidden;
+/* overflow-y: scroll;
+overflow-x: hidden; */
 /* max-height: 300px; */
-margin-right: -15px;
+/* margin-right: -15px; */
 }
 
 .questionHeading{
 background: #E3EAEE;
 color: black;
+/* border-radius: 18px; */
+border-top-left-radius: 18px;
+border-top-right-radius: 18px;
 }
 
 .objQuestionTab{
 border-bottom: 1px solid black;
+background-color: white;
 }
 
 .question{
@@ -399,8 +403,9 @@ padding-bottom: 0;
 }
 
 .syllabusHr{
-border: 1px solid gray;
-
+/* border: 0.1rem solid gray; */
+background-color: gray;
+height: 0.01rem;
 }
 
 .btn-primary{

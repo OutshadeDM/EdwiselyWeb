@@ -1668,7 +1668,7 @@ $(document).ready(function () {
             let j = 1;
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
-                div = div + "<div class='row py-2 px-3 p-2'>";
+                div = div + "<div class='row py-2'>";
                 div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
                 div = div + "<p class='question'>Q." + j + " " + value.question.name + "</p>";
                 div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level " + value.blooms_level + "</p>";
