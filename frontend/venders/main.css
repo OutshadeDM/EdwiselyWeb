@@ -123,10 +123,6 @@ scrollbar-width: none;  /* Firefox */
 
 .headerBanner {
 position: relative;
-<<<<<<< HEAD
-background-color: white;
-margin-bottom: 30px;
-=======
 padding-top: 20px;
 padding-bottom: 20px;
 background-color: white;
@@ -143,7 +139,6 @@ margin-bottom: 30px;
   line-height: normal;
   text-align: left;  
 
->>>>>>> ui
 }
 
 .headerBanner h2 p {
@@ -499,6 +494,10 @@ text-decoration: none;
 
 .condCardDesc{
 font-size: 12px;
+}
+
+.nav-link {
+  color: #1B658C;
 }
 
 /* end my assessments */
