@@ -2,12 +2,14 @@
 
 .chooseQues{
   overflow-y: scroll;
-  height: 68vh;
+  height: 60vh;
 }
 
 .chosenQuestions{
   height: 84px;
   overflow: hidden;
+  cursor: pointer;
+  border-bottom: solid 1px black;
 }
 
 
@@ -79,6 +81,8 @@ scrollbar-width: none;  /* Firefox */
 .chooseQuestionsLi{
 list-style: none;
 overflow-x: hidden;
+display: inline-block;
+width: 100%;
 }
 
 
@@ -208,4 +212,47 @@ pre
   border: none;
   background-color: #1B658C;
   color: white;
+}
+
+
+
+
+#all{
+  background: url("../../images/notes.svg") no-repeat center;
+  mask: url("../../images/notes.svg") no-repeat center;
+  -webkit-mask: url("../../images/notes.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
+}
+
+#rem{
+  background: url("../../images/notes.svg") no-repeat center;
+  mask: url("../../images/notes.svg") no-repeat center;
+  -webkit-mask: url("../../images/notes.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
+}
+
+#und{
+  background: url("../../images/Page-1.svg") no-repeat center;
+  mask: url("../../images/Page-1.svg") no-repeat center;
+  -webkit-mask: url("../../images/Page-1.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
+}
+
+#app{
+  background: url("../../images/startup.svg") no-repeat center;
+  mask: url("../../images/startup.svg") no-repeat center;
+  -webkit-mask: url("../../images/startup.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
+}
+
+#ana{
+  background: url("../../images/electric-light-bulb.svg") no-repeat center;
+  mask: url("../../images/electric-light-bulb.svg") no-repeat center;
+  -webkit-mask: url("../../images/electric-light-bulb.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
 }

@@ -161,10 +161,14 @@
                                 <span class="slider round"></span>
                               </label>
                             </div>
-                            </div>
-                          <div class="col-6 align-self-center">
-                            <label>Select Attachments</label>
-                            <input type="file" id="file" name="file">
+                          </div>
+                          <div class="col-6 mt-4 align-self-center form-group files">
+                            <label for="file">Select Attachments</label>
+                            <label for="file" class="file form-control p-3">
+                              <img src="../images/attachment.svg" class="img-fluid" alt="">
+                              <span class="text text-center d-block"></span>
+                            </label>
+                            <input type="file" id="file" onchange="fileUpload();" name="file">
                           </div>
                         </div>
                         <br>

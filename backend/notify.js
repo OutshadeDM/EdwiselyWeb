@@ -185,3 +185,13 @@ $('#submit').on('click', function(e) {
         }        
     });		
 });
+
+function fileUpload() {
+	$file = $('#file')[0].files[0];
+	if ($file) {
+		$name = $file.name.length > 15 ? `${$file.name.slice(0, 15)}...`: $file.name;
+		$('label.file .text').text($name);
+	} else {
+		$('label.file .text').text("");
+	}
+}
