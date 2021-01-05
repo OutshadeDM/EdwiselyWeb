@@ -78,8 +78,8 @@ $(async function() {
 				type = 'material';
 			}
 			$img = $('<img style="width: 3rem; height: 3rem">').attr('src', peer.college_account_details.profile_pic).addClass('img-fluid');
-			$col1 = $('<div></div>').addClass('col-2').append($img);
-			$col2 = $('<div></div>').addClass('col-10').text(text);
+			$col1 = $('<div></div>').addClass('col-2 d-flex align-items-center justify-content-center').append($img);
+			$col2 = $('<div></div>').addClass('col-10 desc').text(text);
 			$row = $('<div></div>').addClass('row my-5 pb-2 border-bottom').append($col1, $col2);
 			$('#peer').append($row);
 		});
