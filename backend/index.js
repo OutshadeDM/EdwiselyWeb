@@ -517,7 +517,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
+						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -531,10 +531,11 @@ $(async function() {
 						if (activity.answered)
 							act += `
 								<div class="row col-12">
-									<div class="col-md-5 offset-1 col-12">
+									<div class="col-md-7 mt-3 desc offset-1 col-12">
+										A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.
 										<canvas id="myChart${activity.id}" width="400" height="400"></canvas>
 									</div>
-									<div class="col-md-6 col-12 align-self-center">
+									<div class="col-md-4 col-12 mt-3 align-self-center">
 										<h4 class="status">Student Understanding Level: ${activity.results.understanding_level}</h4>
 										<a href="https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a>
 									</div>
@@ -547,7 +548,7 @@ $(async function() {
 					} else {
 						act += `
 							<div class="col-11 offset-1 desc">
-								${activity.role.role_name} - ${activity.college_account_details.faculty_name} has created a ${activity.type} named ${activity.title} - ${activity.description} for ${activity.sent_to} students, with doe ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}.
+							A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.
 							</div>
 						`;
 					}
@@ -587,7 +588,7 @@ $(async function() {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 					<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Material&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
-					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <p>${activity.description}</p></div>
+					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 					<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
 							if (i < activity.followers.length) {
@@ -619,10 +620,19 @@ $(async function() {
 							} else break;
 						}
 						act += '</a></div>'
-					act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
+					if (new Date(activity.doe.replace(/\s/, 'T')) > new Date())
+						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
+					else {
+						act += `<div class="col-5 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
+						act += `<div class="col-6 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`
+					}
 					act += `<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-					<div class="col-3 mt-3 forward"><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</div>					
-				</div>
+					<div class="col-3 mt-3 forward"><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</div>`				
+					if (Number(activity.answered)) {
+						act += `<div class="col-3 mt-3 unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="questionnaire" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>`
+					}
+				act += `</div>
 			</div>`;
 				} else if (activity.type == 'Subjective') {
 					act = `<div class=" card px-3 py-3 mt-4">
@@ -883,6 +893,10 @@ $(async function() {
 		modal.find('#forwardType').val(type);
 	});	  
 
+	$('#comments').on('shown.bs.modal', function (event) {
+		$(this).animate({ scrollTop: $(this).find('.modal-content').height() }, 'slow');
+	});	
+
 	$('#comments').on('show.bs.modal', async function (event) {
 		var button = $(event.relatedTarget) // Button that triggered the modal
 		var id = button.data('id');
@@ -927,6 +941,7 @@ $(async function() {
 		list = list ? list : ``;
 		modal.find('.modal-body .chat-history ul').html(list);
 	});
+
 
 	$('#p2p').on('show.bs.modal', async function (event) {
 		var button = $(event.relatedTarget) // Button that triggered the modal

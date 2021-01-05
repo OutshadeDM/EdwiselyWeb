@@ -41,6 +41,9 @@
                         // alert(result.status);
                         console.log(result);
                         if (result.status == 200) {
+                            let total = Number($(`a[data-target="#comments"][data-id="${id}"]`).text().split(' ')[1]);
+                            $(`a[data-target="#comments"][data-id="${id}"]`).text(` ${++total} comments`);
+                            $('#comments').animate({ scrollTop: $('#comments .modal-content').height() }, 'slow');
                             resolve(false, result);
                         } else {
                             reject(true)
