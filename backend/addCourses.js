@@ -117,8 +117,7 @@ $(document).ready(function() {
                                     "dept":JSON.stringify(dept)
                                 });
                             }
-                        }
-                        
+                        }                        
                     });
                     div1 = div1 + "</ul>";
                     $('#courseList').append(div);
@@ -159,7 +158,7 @@ $(document).ready(function() {
             $('#courseSelectList').empty();
             $.each(courses, function (key, value) {
                 if(value.name.toLowerCase().indexOf(searchTerm) != -1)
-                    div = div + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-dept='" + value.dept + "'>"+value.name+"</li>";
+                    div = div + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-dept='" + value.dept + "' data-name='"+value.name+"'>"+value.name+"</li>";
             });
             div = div + "</ul>";
             $("#courseSelectList").append(div);

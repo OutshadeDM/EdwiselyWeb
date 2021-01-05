@@ -25,7 +25,7 @@ $(document).ready(function () {
             if (result.status == 200) {
                 $.each(result.data, function (key, value) {
                     courses.push({
-                        "subSemId":value.subSemId,
+                        "subSemId":value.subject_semester_id,
                         "name":value.name
                     });
                     div = div + "<li class='course' data-subSemId='"+value.subject_semester_id+"'>"+value.name+"</li>";
@@ -64,8 +64,9 @@ $(document).ready(function () {
             let div = "<ul class='list-unstyled'>";
             $('#courseSelectList').empty();
             $.each(courses, function (key, value) {
+                // console.log(value);
                 if(value.name.toLowerCase().indexOf(searchTerm) != -1)
-                    div = div + "<li class='course' data-subSemId='"+value.subject_semester_id+"'>"+value.name+"</li>";
+                    div = div + "<li class='course' data-subSemId='"+value.subSemId+"'>"+value.name+"</li>";
             });
             div = div + "</ul>";
             $("#courseSelectList").append(div);
