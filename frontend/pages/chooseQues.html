@@ -1,5 +1,5 @@
-<!DOCTYPE <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="d-none" lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -14,8 +14,9 @@
   <!-- add custom stylesheet here -->
   <link href="../venders/main.css" rel="stylesheet">
   <link href="../venders/sidebar.css" rel="stylesheet">
-  <link href="../venders/pages/chooseQues.css" rel="stylesheet">
   <link rel="stylesheet" href="../venders/radiostyle.css">
+  <link href="../venders/pages/chooseQues.css" rel="stylesheet">
+
 
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -24,7 +25,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <title>Edwisely - Add Assessment</title>
 
-  <!-- latex -->
   <!-- latex -->
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -42,63 +42,65 @@
       <!-- Bootstrap List Group -->
       <div class="sticky-top sticky-offset">
         <a href="index.html" class="bg-dark my-4 mx-2">
-            <div class="d-flex justify-content-center align-items-center">
-              <img id="logoImage" src="https://www.edwisely.com/assets/images/common/logo.svg" alt="No Image">
-            </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <img id="logoImage" src="https://www.edwisely.com/assets/images/common/logo.svg" alt="No Image">
+          </div>
         </a>
         <ul class="list-group">
-            <!-- Menu -->
-            <a href="index.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fa fa-home fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Home</span>
-                </div>
-              </a>
-              <a href="courses.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-book fa-fw mr-3"></span>
-                  <span class="menu-collapsed">All Courses</span>
-                </div>
-              </a>
-              <a href="addCourses.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-bookmark fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Add Courses</span>
-                </div>
-              </a>
-              <a href="myAssessment.html" class="list-group-item list-group-item-action active">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-chart-bar fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Assessments</span>
-                </div>
-              </a>
-              <a href="liveClass.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-tv fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Live Class</span>
-                </div>
-              </a>
-              <a href="notify.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-envelope fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Notify</span>
-                </div>
-              </a>
-              <li class="list-group-item sidebar-separator menu-collapsed"></li>
-              <a href="#" data-toggle="sidebar-colapse" class="list-group-item list-group-item-action d-flex align-items-center">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
-                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
-                </div>
-              </a>
+          <!-- Menu -->
+          <a href="index.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-home fa-fw mr-3"></span>
+              <span class="menu-collapsed">Home</span>
+            </div>
+          </a>
+          <a href="courses.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-book fa-fw mr-3"></span>
+              <span class="menu-collapsed">All Courses</span>
+            </div>
+          </a>
+          <a href="addCourses.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-bookmark fa-fw mr-3"></span>
+              <span class="menu-collapsed">Add Courses</span>
+            </div>
+          </a>
+          <a href="myAssessment.html" class="list-group-item list-group-item-action active">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-chart-bar fa-fw mr-3"></span>
+              <span class="menu-collapsed">Assessments</span>
+            </div>
+          </a>
+          <a href="liveClass.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-tv fa-fw mr-3"></span>
+              <span class="menu-collapsed">Live Class</span>
+            </div>
+          </a>
+          <a href="notify.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-envelope fa-fw mr-3"></span>
+              <span class="menu-collapsed">Notify</span>
+            </div>
+          </a>
+          <li class="list-group-item sidebar-separator menu-collapsed"></li>
+          <a href="#" data-toggle="sidebar-colapse"
+            class="list-group-item list-group-item-action d-flex align-items-center">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+              <span id="collapse-text" class="menu-collapsed">Collapse</span>
+            </div>
+          </a>
 
-              <li class="list-group-item sidebar-separator menu-collapsed"></li>
-              <a href="#" onclick="logout();" data-toggle="sidebar-collapse" class="list-group-item list-group-item-action d-flex align-items-center logout">
-                  <div class="d-flex w-100 justify-content-start align-items-center">
-                      <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
-                      <span id="collapse-text" class="menu-collapsed">Logout</span>
-                  </div>
-              </a>
+          <li class="list-group-item sidebar-separator menu-collapsed"></li>
+          <a href="#" onclick="logout();" data-toggle="sidebar-collapse"
+            class="list-group-item list-group-item-action d-flex align-items-center logout">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
+              <span id="collapse-text" class="menu-collapsed">Logout</span>
+            </div>
+          </a>
         </ul>
 
         <!-- List Group END-->
@@ -106,38 +108,20 @@
     </div>
     <!-- sidebar-container END -->
     <!-- MAIN -->
-    <!-- <div class="col-lg-10 col-md-9 px-0" id="mainContentSwitch">
-      <div class="container-fluid mx-0"> -->
-    <!-- <div class="shadow-sm">
-          <div class="px-4 headerBanner">
-            <h2 class="mt-1">
-              <p class="font-weight-bold" id="courseName"></p>
-            </h2>
-            <hr class="titlehr">
-            <p class="list pb-2">
-              <span class="list-item"><a href=index.html>Home</a> ></span>
-              <span class="list-item"><a href=myAssessment.html>Assessments</a> ></span>
-              <span class="list-item-active"><a href="#">Choose Questions </a></span>
-            </p>
-            <button type="button" id="saveQuestionsBtn" class="saveChooseBtn shadow-sm btnLink"><i
-                class="fas fa-save pr-2"></i>Save</button>
-            <button type="button" id="saveSendBtn" class="BigBtn shadow-sm btnLink"><i
-                class="fas fa-upload pr-2"></i>Save and Send</button>
-          </div>
-        </div> -->
     <div class="col px-0">
       <div class="container-fluid">
         <div class="shadow-sm">
-          <div class="px-5 headerBanner mb-4 row">
-            <div class="col-sm-8">
+          <div class="px-5 headerBanner">
+            <div class="col-8">
               <h2 class="mt-1">
                 <p class="font-weight-bold" id="courseName"></p>
               </h2>
               <hr class="titlehr">
               <p class="list pb-2">
                 <span class="list-item"><a href="index.html">Home</a> ></span>
-                <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
-                <span class="list-item-active"><a href="#">Add Question</a></span>
+                <span class="list-item-active"><a href="myAssessment.html">Assessments</a> ></span>
+                <span class="list-item-active"><a href="#">Choose Question</a></span>
+
               </p>
             </div>
             <div class="col-sm-4 row">
@@ -146,18 +130,15 @@
                   Save</button>
               </div>
               <div class="col-sm-8" id="divSaveSend">
-                <button type="button" id="btnSaveSend" class="BigBtn shadow-sm btnLink"><i
-                    class="fab fa-telegram-plane"></i>
+                <button type="button" id="btnSaveSend" class="BigBtn shadow-sm btnLink"><i class="fas fa-upload"></i>
                   Save & Send</button>
               </div>
             </div>
           </div>
         </div>
-
-
         <!-- Start Page Content -->
 
-        <div class="px-5">
+        <div class="container" id="theMainDiv">
           <!-- put everything in this div -->
 
           <div class="row">
@@ -256,7 +237,5 @@
     }
   };  
 </script>
-
-
 
 </html>
