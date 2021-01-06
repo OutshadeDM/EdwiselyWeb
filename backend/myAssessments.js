@@ -609,7 +609,7 @@ $(document).ready(function () {
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
-      div = div + "<div class='card-body pl-1 pb-0 align-bottom'>";
+      div = div + "<div class='card-body pl-1 pb-0 align-bottom pl-3'>";
       if (value.start_time) {
         if (!isObj)
           div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + endDateString + "</h6>";
