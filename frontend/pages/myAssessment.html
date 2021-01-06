@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <!-- font-awesome -->
@@ -15,6 +16,7 @@
   <link href="../venders/main.css" rel="stylesheet">
   <link href="../venders/sidebar.css" rel="stylesheet">
   <link rel="stylesheet" href="../venders/radiostyle.css">
+  <link rel="stylesheet" href="../venders/pages/courseDetails.css">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
     integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
@@ -114,7 +116,7 @@
             <div class="row">
               <div class="col-sm-8">
                 <h2 class="mt-1">
-                  <p class="font-weight-bold" id="courseName">My Assessments</p>
+                  <p class="font-weight-bold" id="courseName">Assessments</p>
                 </h2>
                 <hr class="titlehr">
                 <p class="list">
@@ -125,10 +127,10 @@
               <div class="col-sm-4">
                 <div class="d-flex flex-row-reverse bd-highlight justify-content-center">
                   <div class="p-2 bd-highlight align-self-center">
-                    <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink"><i
-                      class="fas fa-save pr-2"></i>Create New Assessment</button>
+                    <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink mt-3 px-4 py-2">
+                      <i class="fas fa-laptop-code pr-2"></i>Create New Assessment</button>
                   </div>
-                
+
                 </div>
               </div>
             </div>
@@ -141,7 +143,7 @@
 
           <div class="row">
             <div class="col-md-12">
-              <nav class="col-md-6">
+              <nav class="col-md-6 px-5">
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                   <a class="nav-item nav-link active font-weight-bold" id="nav-obj-tab" data-toggle="tab"
                     href="#nav-obj" role="tab" aria-controls="nav-obj" aria-selected="true">Objective</a>
@@ -223,9 +225,9 @@
                             <div class="row text-center">
                               <div class="pt-5">
                                 <div class="row">
-                                  <div class="col-lg-3 pl-2">
+                                  <div class="col-lg-3">
                                     <div class="row">
-                                      <div class="col-md-3">
+                                      <div class="col-md-3 justify-content-end">
                                         <label for="condObjDate">From: </label>
                                       </div>
                                       <div class="col-md-9">
@@ -255,7 +257,7 @@
                               </div>
 
                               <!-- subjective-assessments List-->
-                              <div class="container-fluid pt-5 px-5">
+                              <div class="container-fluid pt-5">
                                 <div class="row" id="condObjAssessmentList">
 
 
@@ -275,10 +277,10 @@
                           <div class="container-fluid px-5">
                             <div class="row text-center">
                               <div class="pt-5">
-                                <div class="row">
-                                  <div class="col-lg-3 pl-2">
+                                <div class="row text-center">
+                                  <div class="col-lg-3">
                                     <div class="row">
-                                      <div class="col-md-3">
+                                      <div class="col-md-3 justify-content-end">
                                         <label for="condObjDate">From: </label>
                                       </div>
                                       <div class="col-md-9">
@@ -308,7 +310,7 @@
                               </div>
 
                               <!-- subjective-assessments List-->
-                              <div class="container-fluid pt-5 px-5">
+                              <div class="container-fluid pt-5">
                                 <div class="row" id="condSubAssessmentList">
 
 

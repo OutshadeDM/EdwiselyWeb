@@ -180,7 +180,7 @@ $(document).ready(function () {
       success: function (result) {
         //alert(result.status)
         $('.selectAllDiv').empty();
-        $('.selectAllDiv').append(`<label for='selectAll'><span class='pl-3 pr-5 mr-5'>Students</span><span class='spanSelectAll ml-5'>SELECT ALL</span></label><input style='float:right;' class='mt-1 mr-3' name='selectAll' type='checkbox' id='selectAll' />`)
+        $('.selectAllDiv').append(`<label for='selectAll'><span class='pl-3 pr-4 '>STUDENTS</span><span class='spanSelectAll'>SELECT ALL</span></label><input style='float:right;' class='mt-1 mr-3' name='selectAll' type='checkbox' id='selectAll' />`)
 
         if (result.status == 200) {
           //console.log(result.data)

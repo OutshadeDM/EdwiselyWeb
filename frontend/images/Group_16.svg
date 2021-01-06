@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="73" viewBox="0 0 56 73">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #000;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #363636;
+        font-size: 55px;
+        font-family: SegoeUI, Segoe UI;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_16" data-name="Group 16" transform="translate(-868 -368)">
+    <g id="Ellipse_18" data-name="Ellipse 18" class="cls-1" transform="translate(868 385)">
+      <circle class="cls-3" cx="28" cy="28" r="28"/>
+      <circle class="cls-4" cx="28" cy="28" r="26.5"/>
+    </g>
+    <text id="_" data-name="+" class="cls-2" transform="translate(877 427)"><tspan x="0" y="0">+</tspan></text>
+  </g>
+</svg>
