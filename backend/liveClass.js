@@ -185,11 +185,26 @@ $(async function() {
 $('#submit').on('click', function(e) {
     e.preventDefault();  
     console.log(this);
-    var formData = new FormData();
-    formData.append('title', $('#title').val());
-    formData.append('description', $("#description").val());
-    formData.append('start_time', getFormattedDateTime(new Date($("#starttime").val())));
-    formData.append('end_time', getFormattedDateTime(new Date($("#endtime").val())));
+	var formData = new FormData();
+	let title = $('#title').val();
+	formData.append('title', title);
+	if (!title.length) {
+		$('.error.title').text('*Please Enter A Title');
+		return;
+	}
+	formData.append('description', $("#description").val());
+	let starttime = $("#starttime").val();
+	let endtime = $("#endtime").val();
+	if (!starttime.length) {
+		$('.error.starttime').text('*Please Enter A Start Time');
+		return;
+	}
+	if (!endtime.length) {
+		$('.error.endtime').text('*Please Enter A End Time');
+		return;
+	}
+    formData.append('start_time', getFormattedDateTime(new Date(starttime)));
+    formData.append('end_time', getFormattedDateTime(new Date(endtime)));
     var values = $("input[name='students[]']:checked")
               .map(function(){return $(this).val();}).get();
     formData.append('students', JSON.stringify(values));

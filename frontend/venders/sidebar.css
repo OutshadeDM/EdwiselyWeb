@@ -26,6 +26,10 @@
 #sidebar-container .list-group a.active {
     color: white;
     background-color: #3f3f3f;
+}
+
+#sidebar-container .list-group a:active,
+#sidebar-container .list-group a.active {
     border: none;
 }
 

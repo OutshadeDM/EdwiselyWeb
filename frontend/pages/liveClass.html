@@ -129,7 +129,7 @@
                   <span class="list-item"><a href=index.html>Home</a> > <a href="liveClass.html">Live Class</a></span>
                 </p>                               
               </div>
-              <div class="col-6 pr-5 d-flex justify-content-end align-self-end "><button id="submit" type="submit" class="submit btn btn-lg btn-primary"><i class="fas fa-laptop-code"></i> Create</button></div>
+              <div class="col-6 pr-5 d-flex justify-content-end align-self-center "><button id="submit" type="submit" class="submit btn btn-lg btn-primary"><i class="fas fa-laptop-code"></i> Create</button></div>
             </div>            
 
           </div>
@@ -145,18 +145,19 @@
                   <form id="formdata" method="POST" enctype="multipart/form-data">
                     <div class="row px-4">
                       <div class="col-md-5 col-12">
-                        <label class="mb-1 mt-4">Title</label><br>
-                        <input name="title" id="title" class="form-control" type="text">
+                        <label class="mb-1">Title</label><br>
+                        <input name="title" id="title" placeholder="Enter Title" class="form-control" type="text" required>
+                        <span class="error text-danger d-block title"></span>
                         <label class="mb-1 mt-4">Description</label><br>
-                        <textarea name="description" rows="4" id="description" class="form-control" col="4"></textarea>
+                        <textarea name="description" rows="4" placeholder="Enter Description" id="description" class="form-control" col="4"></textarea>
                         <label class="mb-1 mt-4">Class Details</label><br>
                         <div class="row mb-3 pl-1">
                           <div class="col-6 align-self-center">Start Date and Time : </div>
-                          <div class="col-6"><input type='text' id="starttime" class="form-control" /></div>
+                          <div class="col-6"><input type='text' id="starttime" placeholder="07 Jan 2021 00:35:20" class="form-control" requried /><span class="error text-danger d-block starttime"></span></div>
                         </div>
                         <div class="row pl-1">
                           <div class="col-6 align-self-center">Expiry Date and Time :</div>
-                          <div class="col-6"><input type='text' id="endtime" class="form-control" /></div> 
+                          <div class="col-6"><input type='text' id="endtime" placeholder="07 Jan 2021 00:35:20" class="form-control" required /><span class="error text-danger d-block endtime"></span></div>
                         </div>
                         <label class="mt-4 mb-1">Select Class</label>
                         <div class="slide-wrap col-12">
