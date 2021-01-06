@@ -119,9 +119,9 @@ pre
 }
 
 .getUnits {
-    border: 1px solid black ;
+    border: 1px solid gray;
     border-radius: 12px;
-    background-color: #f9f9f9;
+    background-color: white;
     font-size: 18px;
   }
   
@@ -158,4 +158,8 @@ pre
 
   .slick-next{
     right: -25px !important;
+}
+
+#objQuestions{
+    width: 100%;
 }

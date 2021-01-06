@@ -1254,6 +1254,11 @@ $(document).ready(function () {
                     $.each(result.data, function (key, value) {
                         units.push({ "id": value.id, "name": value.name });
                     });
+                    
+                    if(units.length == 0){
+                        alert('here');
+                        $('#courseQuestionUnits').hide();
+                    }
 
                     $.ajax({
                         url: 'https://stagingfacultypython.edwisely.com/getCourseDetails?subject_semester_id=' + subSemId,
@@ -1269,10 +1274,12 @@ $(document).ready(function () {
                                     $('#courseQuestionUnits').append("<li class='getUnitsLi'><input type='radio' class='getUnitsInput' value='" + value.id + "' data-sid='" + result.data.subject_id + "' data-uid='" + value.id + "' name='getUnitsAdd' id='getUnitsAdd" + value.id + "' /><label for='getUnitsAdd" + value.id + "' id='getUnitsLabel"+value.id+"' class='getUnitsLabel'>" + value.name + "</label></li>");
                                 });
                                 $("#nav-question-obj-tab").click();
+                                
 
                             }
                             else {
                                 alert(result.message);
+                                $('#courseQuestionUnits').hide();
                             }
                         },
                         error: function (error) {
@@ -1669,11 +1676,11 @@ $(document).ready(function () {
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
                 div = div + "<div class='row py-2'>";
-                div = div + "<div class='col-sm-11' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
+                div = div + "<div class='col-sm-11 px-0' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
                 div = div + "<p class='question'>Q." + j + " " + value.question.name + "</p>";
                 div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level " + value.blooms_level + "</p>";
                 div = div + "</div>";
-                div = div + "<div class='col-sm-1 text-center d-flex align-items-center justify-content-start'>";
+                div = div + "<div class='col-sm-1 px-0 text-center d-flex align-items-center justify-content-start'>";
                 if(yourContent){
                     yourQuestions.push(value);
                     div = div + "<div class='dropdown pr-1'>";
