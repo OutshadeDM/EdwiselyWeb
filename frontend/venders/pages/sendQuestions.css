@@ -1,6 +1,15 @@
 #testDetails{
-  border: solid black 1px;
+  border: solid rgb(206, 206, 206) 1px;
   border-radius: 10px;
+  background-color: white;
+}
+
+#starttime{
+  border: solid gray 1px;
+}
+
+#endtime{
+  border: solid gray 1px;
 }
 
 
@@ -23,8 +32,8 @@ scrollbar-width: none;  /* Firefox */
 
 .selectStudents{
   list-style: none;
-  border: solid black 1px;
-  border-radius: 10px;
+  border: solid rgb(206, 206, 206) 1px;
+  border-radius: 0 0 5px 5px;
 }
 
 .selectStudents :nth-child(odd){
@@ -43,22 +52,29 @@ scrollbar-width: none;  /* Firefox */
 .selectAllDiv{
   background-color: #1B658C;
   color: white;
-  border-radius: 10px;
+  border-radius: 5px 5px 0 0;
 }
 
 #sectionDetails{
-  border: solid black 1px;
-  border-radius: 10px;
+  border: solid rgb(206, 206, 206) 1px;
+  border-radius: 5px;
 }
 
 .sectionsListLi{
   list-style: none;
+  background-color: white;
 }
 
 #numberOfStudents{
-  border: solid black 1px;
-  border-radius: 10px;
+  border: solid rgb(206, 206, 206) 1px;
+  border-radius: 5px;
+  background-color: white;
 
+}
+
+input[type="checkbox"]{
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
 }
 
 .sectionsListInput{

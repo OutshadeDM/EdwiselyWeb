@@ -49,6 +49,7 @@ $(document).ready(function () {
 
   //initial styling
   $('#navAll').css({ "background-color": "#1B658C", "border-radius": "10px 0 0 0", "color": "white" })
+  $('#all').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
   $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
@@ -772,10 +773,15 @@ $(document).ready(function () {
     console.log(moreQues)
     getAllQuestions()
     $('#navAll').css({ "color": "white", "background-color": "#1B658C", "border-radius": "10px 0 0 0" })
+    $('#all').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
   })
 
 
@@ -787,10 +793,15 @@ $(document).ready(function () {
     blooms_lvl = 1
     getBloomQuestions(1)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "white", "background-color": "#1B658C" })
+    $('#rem').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
   })
 
   $('#navUnderstand').on('click', function () {
@@ -801,10 +812,15 @@ $(document).ready(function () {
     blooms_lvl = 2
     getBloomQuestions(2)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "white", "background-color": "#1B658C" })
+    $('#und').css({ "background": "url('../images/Page-1white.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
   })
 
   $('#navApply').on('click', function () {
@@ -815,10 +831,15 @@ $(document).ready(function () {
     blooms_lvl = 3
     getBloomQuestions(3)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "white", "background-color": "#1B658C" })
+    $('#app').css({ "background": "url('../images/startupwhite.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
   })
 
   $('#navAnalyze').on('click', function () {
@@ -829,10 +850,15 @@ $(document).ready(function () {
     blooms_lvl = 4
     getBloomQuestions(4)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
+    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "white", "background-color": "#1B658C", "border-radius": "0 10px 0 0" })
+    $('#ana').css({ "background": "url('../images/electric-light-bulbwhite.svg') no-repeat center" })
   })
 
 

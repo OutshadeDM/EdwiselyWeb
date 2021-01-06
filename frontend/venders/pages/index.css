@@ -330,3 +330,8 @@
 .card {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.17);
 }
+
+.btn-primary, .btn-danger {
+    min-width: 135px;
+    max-width: 150px;
+}
