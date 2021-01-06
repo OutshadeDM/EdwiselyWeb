@@ -158,11 +158,11 @@
 
             <div class="col-md-7 shadow-sm addques pt-2 pb-5 mb-5" id="createques">
               <div class="divInput row">
-                <div class="col-sm-8">
-                  <input class="form-control form-control-lg" type="textarea" style="width: 100%;"
-                    placeholder="Start typing your question" id="quesInput">
+                <div class="col-sm-9">
+                  <textarea class="form-control form-control-lg" style="width: 100%;" cols="50"
+                    placeholder="Start typing your question" id="quesInput"></textarea>
                 </div>
-                <div class="col-sm-4 titleImg py-3">
+                <div class="col-sm-3 titleImg py-3">
                   <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
                   <!-- <i class="fas fa-edit fa-lg px-2 uploaded"></i> -->
                   <i class="fas fa-trash-alt fa-lg px-2 uploadedques"></i>
@@ -201,7 +201,7 @@
                   <div class="row">
                     <div class="col-2 p-1 firstOption">
                       <div class="form-check p-0">
-                        <label class="radiolabel pl-2 pt-1">
+                        <label class="radiolabel pl-2 pt-1" id="option1Label">
                           <input type="radio" class="radiostest" name="Radios" id="Radios1" value="0">
                           <i class="far fa-square fa-2x untick untick1"></i>
                           <i class="fas fa-check-square fa-2x tick tick1"></i>
@@ -233,7 +233,7 @@
                   <div class="row">
                     <div class="col-2 mx-0 p-1 secondOption">
                       <div class="form-check p-0">
-                        <label class="radiolabel pl-2 pt-1">
+                        <label class="radiolabel pl-2 pt-1" id="option2Label">
                           <input type="radio" class="radiostest" name="Radios" id="Radios2" value="1">
                           <i class="far fa-square fa-2x untick untick2" style="width: 100%;"></i>
                           <i class="fas fa-check-square fa-2x tick tick2"></i>
@@ -268,7 +268,7 @@
                   <div class="row">
                     <div class="col-2 mx-0 p-1 thirdOption">
                       <div class="form-check p-0">
-                        <label class="radiolabel pl-2 pt-1">
+                        <label class="radiolabel pl-2 pt-1" id="option3Label">
                           <input type="radio" class="radiostest" name="Radios" id="Radios3" value="2">
                           <i class="far fa-square fa-2x untick untick3" style="width: 80%;height: 80%;"></i>
                           <i class="fas fa-check-square fa-2x tick tick3"></i>
@@ -299,7 +299,7 @@
                 <div class="col-6 pl-4">
                   <div class="row">
                     <div class="col-2 mx-0 p-1 fourthOption">
-                      <div class="form-check pl-2 pt-1">
+                      <div class="form-check pl-2 pt-1" id="option4Label">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios4" value="3">
                           <i class="far fa-square fa-2x untick untick4" style="width: 100%;"></i>
@@ -336,7 +336,7 @@
                   <div class="col-12">
                     <div class="row options" id="fifth">
                       <div class="col-2 mx-0 p-1 fifthOption">
-                        <div class="form-check pl-2 pt-1">
+                        <div class="form-check pl-2 pt-1" id="option5Label">
                           <label class="radiolabel">
                             <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4">
                             <i class="far fa-square fa-2x untick untick5" style="width: 100%;"></i>

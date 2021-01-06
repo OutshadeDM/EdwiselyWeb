@@ -783,6 +783,12 @@ $(document).ready(function () {
     $('.uploadedques').click();
     $('.uploadedhint').click();
     $('.uploadedsolution').click();
+    
+    $('#option1Label').show();
+    $('#option2Label').show();
+    $('#option3Label').show();
+    $('#option4Label').show();
+    $('#option5Label').show();
 
     if (updateTopics)
       getTopics();
@@ -910,6 +916,12 @@ $(document).ready(function () {
           $('#customSwitch1').click();
         }
       }
+      
+      $('#option1Label').show();
+      $('#option2Label').show();
+      $('#option3Label').show();
+      $('#option4Label').show();
+      $('#option5Label').show();
 
     }
     else {
@@ -917,6 +929,11 @@ $(document).ready(function () {
       $('#topicsDiv').show();
       $('#topicsDiv').empty();
       $('#topicsDiv').append("<p class='font-weight-bold'>This question is not editable - it belongs to Edwisely repo</p>");
+      $('#option1Label').hide();
+      $('#option2Label').hide();
+      $('#option3Label').hide();
+      $('#option4Label').hide();
+      $('#option5Label').hide();
     }
 
     console.log(JSON.stringify(value));
