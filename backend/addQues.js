@@ -936,7 +936,7 @@ $(document).ready(function () {
       $('#option5Label').hide();
     }
 
-    console.log(JSON.stringify(value));
+    // console.log(JSON.stringify(value));
 
     $('#quesInput').val(value.name);
     question = value.name;
@@ -1080,6 +1080,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').hide()
+      $('#option1Label').show();
     }
     else if (value.questions_options[1].is_answer == "1") {
       $("input[name='Radios'][value='1']").prop("checked", true);
@@ -1094,6 +1095,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').hide()
+      $('#option2Label').show();
     }
     else if (value.questions_options[2] && value.questions_options[2].is_answer == "1") {
       $("input[name='Radios'][value='2']").prop("checked", true);
@@ -1108,6 +1110,7 @@ $(document).ready(function () {
       $('.tick3').show()
       $('.tick4').hide()
       $('.tick5').hide()
+      $('#option3Label').show();
     }
     else if (value.questions_options[3] && value.questions_options[3].is_answer == "1") {
       $("input[name='Radios'][value='3']").prop("checked", true);
@@ -1122,6 +1125,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').show()
       $('.tick5').hide()
+      $('#option4Label').show();
     }
     else if (value.questions_options[4] && value.questions_options[4].is_answer == "1") {
       $("input[name='Radios'][value='4']").prop("checked", true);
@@ -1136,6 +1140,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').show()
+      $('#option5Label').show();
     }
   }
 

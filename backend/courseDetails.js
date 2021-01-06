@@ -180,7 +180,7 @@ $(document).ready(function () {
 
                 }
                 else {
-                    $('#courseSyllabus').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                    $('#courseSyllabus').append("<div class='row'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -335,7 +335,7 @@ $(document).ready(function () {
                     $('#contentMainDiv').hide();
                     $('#contentMainErrorDiv').show();  
                     $('#contentMainErrorDiv').empty();                    
-                    $('#contentMainErrorDiv').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                    $('#contentMainErrorDiv').append("<div class='row coursetab mt-2'><div class='col-sm-12'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -1238,6 +1238,8 @@ $(document).ready(function () {
 
     $("#nav-question-tab").click(function () {
         refreshContents();
+        $('#questionBankMainDiv').show();
+        $('#questionBankErrorDiv').hide();
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id=' + subSemId,
@@ -1254,11 +1256,6 @@ $(document).ready(function () {
                     $.each(result.data, function (key, value) {
                         units.push({ "id": value.id, "name": value.name });
                     });
-
-                    if(units.length == 0){
-                        alert('here');
-                        $('#courseQuestionUnits').hide();
-                    }
 
                     $.ajax({
                         url: 'https://stagingfacultypython.edwisely.com/getCourseDetails?subject_semester_id=' + subSemId,
@@ -1288,6 +1285,13 @@ $(document).ready(function () {
                     });
 
 
+                }
+                else{
+                    $('#courseQuestionUnits').hide();
+                        $('#questionBankMainDiv').hide();
+                        $('#questionBankErrorDiv').show();
+                        $('#questionBankErrorDiv').empty();
+                        $('#questionBankErrorDiv').append("<div class='mt-2 row coursetab'><div class='col-sm-12'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
                 }
             },
             error: function (error) {
