@@ -1,6 +1,7 @@
 .getUnits {
-  border: solid gray 1px;
+  border: solid #c0c0c0 1px;
   border-radius: 5px;
+  background-color: white;
 }
 
 #topicsCol{
@@ -40,7 +41,8 @@ input[type="radio"]:checked+label{
 .quesUploadLink{
   height: 205px;
   border-radius: 5px;
-  border: solid 1px gray;
+  border: solid 1px #C0C0C0;
+  background-color: white;
 }
 
 .quesUploadLabel {
@@ -94,6 +96,9 @@ input[type="radio"]:checked+label{
   .choose-subject{
     height: 205px;
     padding-top: 84px;
+    background-color: white;
+    border: solid 1px gray;
+    border-radius: 5px;
   }
 
   .choose-subject span{
