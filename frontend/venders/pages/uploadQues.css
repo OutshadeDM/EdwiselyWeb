@@ -1,5 +1,5 @@
 .getUnits {
-  border: solid black 2px;
+  border: solid gray 1px;
   border-radius: 5px;
 }
 
@@ -32,3 +32,71 @@ input[type="radio"]:checked+label{
   border-image: linear-gradient(to right, #1B658C 80%, rgba(0,0,0,0) 80%);
   border-image-slice: 1;
 }
+
+.quesUploadFile{
+  display: none;
+}
+
+.quesUploadLink{
+  height: 205px;
+  border-radius: 5px;
+  border: solid 1px gray;
+}
+
+.quesUploadLabel {
+  height: 187px;
+  text-align: center;
+}
+
+
+.downloadTemplateBtn{
+  background-color: #1B658C;
+  border: none;
+  color: white  ;
+  border-radius: 10px;
+}
+
+
+
+#inputUpload {
+  display: none;
+  }
+  
+  .custom-file-upload {
+  cursor: pointer;
+  font-size: large;
+  color: gray;
+  }
+  
+  .custom-file-upload:hover {
+  text-decoration: none;
+  font-size: large;
+  color: black;
+  }
+  
+  .uploadques{
+  text-align: center;
+  height: 100vh;
+  line-height: 100vh;
+  font-size: large;
+  }
+  
+  .uploadLinks {
+  color: white;
+  text-decoration: none;
+  }
+  
+  .uploadLinks:hover {
+  color: white;
+  text-decoration: none;
+  }
+
+  .choose-subject{
+    height: 205px;
+    padding-top: 84px;
+  }
+
+  .choose-subject span{
+    font-size: large;
+  }
+  
