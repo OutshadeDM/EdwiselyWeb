@@ -343,7 +343,6 @@ border-spacing: 1em;
 .questionTab{
 background: white;
 border-radius: 18px;
-width: 100%;
 /* overflow-y: scroll;
 overflow-x: hidden; */
 /* max-height: 300px; */
@@ -354,8 +353,8 @@ overflow-x: hidden; */
 background: #E3EAEE;
 color: black;
 /* border-radius: 18px; */
-border-top-left-radius: 18px;
-border-top-right-radius: 18px;
+/* border-top-left-radius: 18px;
+border-top-right-radius: 18px; */
 }
 
 .objQuestionTab{
