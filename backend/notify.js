@@ -146,7 +146,12 @@ $('#submit').on('click', function(e) {
     e.preventDefault();  
     console.log(this);
     var formData = new FormData();
-    formData.append('title', $('#title').val());
+	let title = $('#title').val();
+	formData.append('title', title);
+	if (!title.length) {
+		$('.error.title').text('*Please Enter A Title');
+		return;
+	}
     formData.append('description', $("#description").val());
     formData.append('priority', $('#priority').prop('checked')? 1 : 0);   
     formData.append('is_comment_anonymous', $('#is_comment_anonymous').prop('checked')? 1 : 0);  

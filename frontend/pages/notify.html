@@ -29,7 +29,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <title>Send Notification | Edwisely</title>
-
+  <style>
+    .student-list {
+      max-height: 567px;
+    }
+  </style>
 
 </head>
 
@@ -125,7 +129,7 @@
                   <span class="list-item"><a href=index.html>Home</a> > <a href="notify.html">Notification</a></span>
                 </p>                               
               </div>
-              <div class="col-6 pr-5 d-flex justify-content-end align-self-end "><button id="submit" type="submit" class="submit btn btn-lg btn-primary"><i class="fab fa-telegram-plane"></i> Send</button></div>
+              <div class="col-6 pr-5 d-flex justify-content-end align-self-center "><button id="submit" type="submit" class="submit btn btn-lg btn-primary"><i class="fab fa-telegram-plane"></i> Send</button></div>
             </div>            
 
           </div>
@@ -141,10 +145,11 @@
                   <form id="formdata" method="POST" enctype="multipart/form-data">
                     <div class="row px-4">
                       <div class="col-md-5 col-12">
-                        <label class="mb-1 mt-4">Title</label><br>
-                        <input name="title" id="title" class="form-control" type="text">
+                        <label class="mb-1">Title</label><br>
+                        <input name="title" id="title" placeholder="Enter Title" class="form-control" type="text" required >
+                        <span class="error text-danger d-block title"></span>
                         <label class="mb-1 mt-4">Description</label><br>
-                        <textarea name="description" id="description" class="form-control" col="4" rows="4"></textarea>
+                        <textarea name="description" id="description" placeholder="Enter Description" class="form-control" col="4" rows="4"></textarea>
                         <div class="row">
                           <div class="col-6 pt-3 mb-1 mt-4 row">
                             <label class="col-6">Priority</label>
@@ -154,8 +159,8 @@
                                 <span class="slider round"></span>
                               </label>
                             </div>
-                            <label class="col-6 align-self-center">Anonymous Comments</label>
-                            <div class="col-6 align-self-center">
+                            <label class="col-6">Anonymous Comments</label>
+                            <div class="col-6">
                               <label class="switch">
                                 <input name="is_comment_anonymous" id="is_comment_anonymous" type="checkbox" checked>
                                 <span class="slider round"></span>

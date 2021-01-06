@@ -80,7 +80,7 @@ input:checked + .slider:before {
 
 .student-list {
   overflow: auto;
-  max-height: calc(100vh - 220px);
+  max-height: 513px;
 }
 
 label {
