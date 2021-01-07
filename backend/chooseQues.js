@@ -56,6 +56,17 @@ $(document).ready(function () {
   $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white", "border-radius": "0 10px 0 0" })
 
 
+  //toasts
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
+    $('#toastDiv').show();
+    setTimeout(function () {
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
+    }, 7000);
+  });
+
+
   let blooms_lvl = 0
 
 
@@ -1047,8 +1058,9 @@ $(document).ready(function () {
   }
 
   $('#btnSave').on('click', function () {
-    if (selectedQuestions.length === 0) {
-      alert("Choose Questions First !")
+    if (selectedQuestions.length == 0) {
+      $('#errorToastBody').text("Choose Questions First");
+      $('#errorToast').toast('show');
     }
 
 
@@ -1078,15 +1090,19 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            alert(result.message)
+            $('#successToastBody').text("Questions Updates Successfully");
+            $('#successToast').toast('show');
 
             //   setInterval(function () {
             //     window.location.replace('myAssessment.html');
             //   }, 2000)
-            window.location.href = "myAssessment.html"
+            setTimeout(() => {
+              window.location.href = "myAssessment.html"
+            }, 2000)
           }
           else {
-            alert("error!")
+            $('#errorToastBody').text("Error");
+            $('#errorToast').toast('show');
           }
         },
         error: function (error) {
@@ -1102,7 +1118,8 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length === 0) {
-      alert("Choose Questions First !")
+      $('#errorToastBody').text("Choose Questions First");
+      $('#errorToast').toast('show');
     }
     else {
 
@@ -1129,12 +1146,15 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            alert(result.message)
+            $('#errorToastBody').text("Successfully Updated the Questions");
+            $('#errorToast').toast('show');
 
             //   setInterval(function () {
             //     window.location.replace('myAssessment.html');
             //   }, 2000)
-            window.location.href = `sendQuestionsPage.html?id=${subSemId}&tid=${tId}&tname=${tname}&desc=${description}&isObj=${objective}&qc=${question_count}`
+            setTimeout(() => {
+              window.location.href = `sendQuestionsPage.html?id=${subSemId}&tid=${tId}&tname=${tname}&desc=${description}&isObj=${objective}&qc=${question_count}`
+            }, 2000)
           }
           else {
             alert("error!")

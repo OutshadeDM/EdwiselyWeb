@@ -18,7 +18,15 @@ $(document).ready(function () {
     objective = searchParams.get('isObj')
   }
 
-
+  //toasts
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
+    $('#toastDiv').show();
+    setTimeout(function () {
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
+    }, 7000);
+  });
 
 
 
@@ -66,15 +74,6 @@ $(document).ready(function () {
     $('#exampleModal').modal('toggle');
   });
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
 
 
 
@@ -126,7 +125,7 @@ $(document).ready(function () {
             //console.log('4') 
 
             if (result.status == 200) {
-              $('#successToastBody').text("Successfully sent the Test");
+              $('#successToastBody').text("Successfully created the Test");
               $('#successToast').toast('show');
               setTimeout(() => {
                 window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
@@ -163,7 +162,7 @@ $(document).ready(function () {
             //console.log('4') 
 
             if (result.status == 200) {
-              $('#successToastBody').text("Successfully sent the Test");
+              $('#successToastBody').text("Successfully created the Test");
               $('#successToast').toast('show');
               setTimeout(() => {
                 window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id

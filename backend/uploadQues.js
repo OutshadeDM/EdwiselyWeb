@@ -33,6 +33,16 @@ $(document).ready(function () {
 
 
 
+  //toasts
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
+    $('#toastDiv').show();
+    setTimeout(function () {
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
+    }, 7000);
+  });
+
   //variables
   let unit = 0
   let topics = []
@@ -176,6 +186,7 @@ $(document).ready(function () {
   })
 
 
+
   //getting the questions which are already present in the assessment
 
   function questionsOfTest() {
@@ -216,82 +227,95 @@ $(document).ready(function () {
     //console.log("jndsi")
     //alert("hello")
 
-    var form = new FormData();
-    form.append("files", uploaded_question);
-    form.append("topics", JSON.stringify(topics));
-    //alert(JSON.stringify(topics))
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
-      type: 'POST',
-      dataType: 'json',
-      data: form,
-      contentType: false,
-      processData: false,
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-        //alert(result.status);
-        if (result.status == 200) {
-
-          //alert(result.message);
-          $.each(result.data, function (key, value) {
-            //console.log(value);
-            questions.push(value.id)
-
-          });
+    if (uploaded_question && topics.length != 0) {
 
 
-          //saving questions
-          var form = new FormData();
-          form.append("test_id", tId);
-          form.append("questions", "[" + questions + "]");
-          form.append("units", "[" + unit + "]")
-          // for (var key of form.entries()) {
-          //   alert(key[1]);
-          // }
+
+      var form = new FormData();
+      form.append("files", uploaded_question);
+      form.append("topics", JSON.stringify(topics));
+      //alert(JSON.stringify(topics))
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/uploadObjectiveQuestions',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          //alert(result.status);
+          if (result.status == 200) {
+
+            //alert(result.message);
+            $.each(result.data, function (key, value) {
+              //console.log(value);
+              questions.push(value.id)
+
+            });
 
 
-          $.ajax({
-            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
-            type: 'POST',
-            dataType: 'json',
-            data: form,
-            contentType: false,
-            processData: false,
-            headers: {
-              'Authorization': `Bearer ${$user.token}`
-            },
-            success: function (result) {
-              // alert(result.message);
+            //saving questions
+            var form = new FormData();
+            form.append("test_id", tId);
+            form.append("questions", "[" + questions + "]");
+            form.append("units", "[" + unit + "]")
+            // for (var key of form.entries()) {
+            //   alert(key[1]);
+            // }
 
-              if (result.status == 200) {
-                alert(result.message)
 
-                window.location.href = "addQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&desc=" + desc + "&isObj=" + objective + "&qc=" + questions.length
+            $.ajax({
+              url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
+              type: 'POST',
+              dataType: 'json',
+              data: form,
+              contentType: false,
+              processData: false,
+              headers: {
+                'Authorization': `Bearer ${$user.token}`
+              },
+              success: function (result) {
+                // alert(result.message);
+
+                if (result.status == 200) {
+                  $('#successToastBody').text("Questions Uploaded Successfully");
+                  $('#successToast').toast('show');
+
+                  setTimeout(() => {
+                    window.location.href = "addQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&desc=" + desc + "&isObj=" + objective + "&qc=" + questions.length
+                  }, 2000)
+                }
+                else {
+                  alert("error!")
+                }
+              },
+              error: function (error) {
+                alert("Request Failed with status: " + error.status);
               }
-              else {
-                alert("error!")
-              }
-            },
-            error: function (error) {
-              alert("Request Failed with status: " + error.status);
-            }
-          });
+            });
 
+          }
+          else if (result.status == 500) {
+            $('#errorToastBody').text("Fill the Details");
+            $('#errorToast').toast('show');
+          }
+          else {
+            $('#errorToastBody').text("Fill the Details");
+            $('#errorToast').toast('show');
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
         }
-        else if (result.status == 500) {
-          alert(result.message);
-        }
-        else {
-          alert(result.message);
-        }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
-
+      });
+    }
+    else {
+      $('#errorToastBody').text("Fill the Details");
+      $('#errorToast').toast('show');
+    }
 
   })
 
