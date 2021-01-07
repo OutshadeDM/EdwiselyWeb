@@ -183,7 +183,7 @@ pre
 }
 
 #questionsToChoose{
-  border: solid gray 1px;
+  border: solid rgb(206, 206, 206) 1px;
   border-radius: 10px;
   padding: 0;
   background-color: white;
@@ -226,30 +226,30 @@ pre
 
 #all{
   background: url("../../images/notes.svg") no-repeat center;
-  height: 30px;
+  height: 35px;
   width: 30px;
 }
 
 #rem{
   background: url("../../images/notes.svg") no-repeat center;
-  height: 30px;
+  height: 35px;
   width: 30px;
 }
 
 #und{
   background: url("../../images/Page-1.svg") no-repeat center;
-  height: 30px;
+  height: 35px;
   width: 30px;
 }
 
 #app{
   background: url("../../images/startup.svg") no-repeat center;
-  height: 30px;
+  height: 35px;
   width: 30px;
 }
 
 #ana{
   background: url("../../images/electric-light-bulb.svg") no-repeat center;
-  height: 30px;
+  height: 35px;
   width: 30px;
 }
