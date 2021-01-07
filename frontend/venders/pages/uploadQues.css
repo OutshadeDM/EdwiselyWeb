@@ -1,6 +1,6 @@
 .getUnits {
   border: solid #c0c0c0 1px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: white;
 }
 
@@ -42,7 +42,7 @@ input[type="radio"]:checked+label{
 
 .quesUploadLink{
   height: 205px;
-  border-radius: 5px;
+  border-radius: 15px;
   border: solid 1px #C0C0C0;
   background-color: white;
   cursor: pointer;
@@ -99,10 +99,15 @@ input[type="radio"]:checked+label{
 
   .choose-subject{
     height: 205px;
-    padding-top: 84px;
+    padding-top: 65px;
     background-color: white;
     border: solid 1px rgb(206, 206, 206);
-    border-radius: 5px;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  #subject-modal-div{
+    border-radius: 15px;
   }
 
   #subject-modal-div:hover {
@@ -111,4 +116,10 @@ input[type="radio"]:checked+label{
   
   .choose-subject span{
     font-size: large;
+  }
+
+
+  .fa-bars{
+    width: 80px;
+    color: rgb(34, 34, 34);
   }
