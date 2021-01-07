@@ -122,7 +122,7 @@
               <div class="col-sm-4">
                 <div class="d-flex flex-row-reverse justify-content-center bd-highlight">
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
-                    <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mt-3 px-4 py-2"><img
+                    <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink mt-3 px-4 py-2"><img
                         src="../images/save.svg" alt="abc" class="pr-1" height="20px" />
                       Continue</button>
                   </div>
@@ -185,6 +185,36 @@
             </div>
 
           </div>
+
+          <!-- toasts -->
+          <div id="toastDiv" style="display: none;">
+            <!-- start error toast -->
+            <div class="toast fade" data-autohide="false" id="errorToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-danger">Error !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="errorToastBody">All fields are mandatory to save.</p>
+              </div>
+            </div>
+            <!-- end error toast -->
+
+            <!-- start success toast -->
+            <div class="toast fade" data-autohide="false" id="successToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-success">Success !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="successToastBody">Content has been saved successfully.</p>
+              </div>
+            </div>
+            <!-- end success toast -->
+
+          </div>
+
+          <!-- end toasts -->
 
 
           <!-- End Page Content -->

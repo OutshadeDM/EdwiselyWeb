@@ -66,6 +66,17 @@ $(document).ready(function () {
     $('#exampleModal').modal('toggle');
   });
 
+  //toasts
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
+    $('#toastDiv').show();
+    setTimeout(function () {
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
+    }, 7000);
+  });
+
+
 
   $('#createAssessmentBtn').on('click', function () {
 
@@ -115,12 +126,17 @@ $(document).ready(function () {
             //console.log('4') 
 
             if (result.status == 200) {
-              alert(result.message)
-              window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+              $('#successToastBody').text("Successfully sent the Test");
+              $('#successToast').toast('show');
+              setTimeout(() => {
+                window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+              }, 2000)
             }
           },
           error: function (error) {
-            alert("Request Failed with status: " + error.status);
+            $('#errorToastBody').text(error.message);
+            $('#errorToast').toast('show');
+            //alert("Request Failed with status: " + error.status);
           }
         });
       }
@@ -147,17 +163,25 @@ $(document).ready(function () {
             //console.log('4') 
 
             if (result.status == 200) {
-              alert(result.message)
-              window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+              $('#successToastBody').text("Successfully sent the Test");
+              $('#successToast').toast('show');
+              setTimeout(() => {
+                window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+              }, 2000)
             }
           },
           error: function (error) {
-            alert("Request Failed with status: " + error.status);
+            $('#errorToastBody').text(error.message);
+            $('#errorToast').toast('show');
           }
         });
       }
 
 
+    }
+    else {
+      $('#errorToastBody').text("Fill all fields");
+      $('#errorToast').toast('show');
     }
 
   })
