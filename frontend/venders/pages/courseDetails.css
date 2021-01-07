@@ -160,6 +160,6 @@ pre
     right: -25px !important;
 }
 
-#objQuestions{
-    width: 100%;
+.addCourseCard .card-body {
+    height: 40%;
 }

@@ -1240,6 +1240,8 @@ $(document).ready(function () {
         refreshContents();
         $('#questionBankMainDiv').show();
         $('#questionBankErrorDiv').hide();
+        $("#questionSelectedUnitId").val("0");
+        $("#questionSelectedSubjectId").val("0");
 
         $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/getCourseSyllabus?subject_semester_id=' + subSemId,
@@ -1271,8 +1273,6 @@ $(document).ready(function () {
                                     $('#courseQuestionUnits').append("<li class='getUnitsLi'><input type='radio' class='getUnitsInput' value='" + value.id + "' data-sid='" + result.data.subject_id + "' data-uid='" + value.id + "' name='getUnitsAdd' id='getUnitsAdd" + value.id + "' /><label for='getUnitsAdd" + value.id + "' id='getUnitsLabel"+value.id+"' class='getUnitsLabel'>" + value.name + "</label></li>");
                                 });
                                 $("#nav-question-obj-tab").click();
-                                
-
                             }
                             else {
                                 alert(result.message);
