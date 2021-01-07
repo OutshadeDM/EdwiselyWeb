@@ -5,11 +5,11 @@
 }
 
 #starttime{
-  border: solid gray 1px;
+  border: solid rgb(206, 206, 206) 1px;
 }
 
 #endtime{
-  border: solid gray 1px;
+  border: solid rgb(206, 206, 206) 1px;
 }
 
 
@@ -83,10 +83,14 @@ input[type="checkbox"]{
 
 .durationHours{
   width: 60px;
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 5px;
 }
 
 .durationMinutes{
   width: 60px;
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 5px;
 }
 
 .sectionsListLabel{
