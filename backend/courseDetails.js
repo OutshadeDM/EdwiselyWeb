@@ -1288,10 +1288,10 @@ $(document).ready(function () {
                 }
                 else{
                     $('#courseQuestionUnits').hide();
-                        $('#questionBankMainDiv').hide();
-                        $('#questionBankErrorDiv').show();
-                        $('#questionBankErrorDiv').empty();
-                        $('#questionBankErrorDiv').append("<div class='mt-2 row coursetab'><div class='col-sm-12'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
+                    $('#questionBankMainDiv').hide();
+                    $('#questionBankErrorDiv').show();
+                    $('#questionBankErrorDiv').empty();
+                    $('#questionBankErrorDiv').append("<div class='mt-2 row coursetab'><div class='col-sm-12'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -1310,9 +1310,8 @@ $(document).ready(function () {
             getObjQuestions(unit_id,subject_id);
         }
         else{
-            if(uId){
-                $('button[data-uid="'+uId+'"]').click();
-            }
+            if(uId)
+                $('input:radio[data-uid="'+uId+'"]').click();
             else
                 $('#courseQuestionUnits :first-child :first-child').click();
         }
@@ -1327,11 +1326,7 @@ $(document).ready(function () {
         // alert($(".getUnitsInput:checked").val())
         let unit_id = $(this).data('uid');
         let subject_id = $(this).data('sid');
-        // $('.getUnitsLabel').css('font-size','18px');
-        // $('.getUnitsLabel').css('border-image','linear-gradient(to right, #1B658C 25%, rgba(0,0,0,0) 25%)');
-        // $('#getUnitsLabel'+unit_id).css('font-size', '25px')
-        // $('#getUnitsLabel'+unit_id).css('border-image', 'linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%)')
-        // alert('.getUnitsLabel'+unit_id);
+        
         $('.getUnitsLabel').removeClass('selected');
         $('#getUnitsLabel'+unit_id).addClass('selected');
 
@@ -1801,6 +1796,8 @@ $(document).ready(function () {
                     $('#questionModalOptionC').html(question.options[2].name);
                 if(question.options[3])
                     $('#questionModalOptionD').html(question.options[3].name);
+                if(question.options[4])
+                    $('#questionModalOptionETr').show();
 
                 if (question.question.media == 1) {
                     $("#questionModalQuestionTd").show();
@@ -1887,6 +1884,8 @@ $(document).ready(function () {
         $('#questionModalOptionCTd').hide();
         $('#questionModalOptionDTd').hide();
         $('#questionModalOptionETd').hide();
+
+        $('#questionModalOptionETr').hide();
 
         $("#questionModalQuestionImgA").attr("href", "#");
         $("#questionModalQuestionImgA").attr("target", "");

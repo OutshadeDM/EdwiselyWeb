@@ -58,13 +58,13 @@
           <a href="index.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fa fa-home fa-fw mr-3"></span>
-              <span class="menu-collapsed">Home</span>
+              <span class="menu-collapsed">Dashboard</span>
             </div>
           </a>
           <a href="courses.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fas fa-book fa-fw mr-3"></span>
-              <span class="menu-collapsed">All Courses</span>
+              <span class="menu-collapsed">Your Courses</span>
             </div>
           </a>
           <a href="addCourses.html" class="list-group-item list-group-item-action">
@@ -588,16 +588,11 @@
               <div class="modal-body" style="overflow-x: auto;">
                 <table class="table table-bordered text-center">
                   <tr>
-                    <th>Question</th>
-                    <td>
+                    <th style="width: 30%;">Question</th>
+                    <td style="width: 50%;">
                       <span id="questionModalQuestion"></span>
                     </td>
-                    <!-- <td>
-                      <a href="#" id="questionModalQuestionImgA">
-                        <img src="" width="100"id="questionModalQuestionImg" alt="No Image">
-                      </a>
-                    </td> -->
-                    <td id="questionModalQuestionTd" style="display: none;">
+                    <td id="questionModalQuestionTd" style="display: none;width: 20%;">
                       <a href='#' id='questionModalQuestionImgA'>
                         <img src='' width='100' id='questionModalQuestionImg' alt='No Image'>
                       </a>
@@ -647,7 +642,7 @@
                       </a>
                     </td>
                   </tr>
-                  <tr>
+                  <tr id="questionModalOptionETr" style="display: none;">
                     <th>Option 5</th>
                     <td>
                       <p id="questionModalOptionE"></p>

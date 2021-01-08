@@ -93,8 +93,8 @@ $(document).ready(function () {
   })
 
   //onclick of add option btn
-  $('.fifthOptionBtn').on('click', function () {
-    $('.fifthOptionBtn').hide();
+  $('#fifthOptionBtn').on('click', function () {
+    $('#fifthOptionBtn').hide();
     $('#fifth').show();
   })
 
@@ -772,7 +772,7 @@ $(document).ready(function () {
     $('#uploadedoption5').click();
 
     $('#fifth').hide();
-    $('.fifthOptionBtn').show();
+    $('#fifthOptionBtn').show();
 
     $('#deleteBtn').hide();
     $('#editBtn').hide();
@@ -955,7 +955,7 @@ $(document).ready(function () {
       option4 = value.questions_options[3].name;
     }
     if (value.questions_options[4]) {
-      $(".fifthOptionBtn").click();
+      $("#fifthOptionBtn").click();
       $('#fifthOption').val(value.questions_options[4].name);
       option5 = value.questions_options[4].name;
     }

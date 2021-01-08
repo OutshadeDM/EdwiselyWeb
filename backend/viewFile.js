@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     $user = "";
     if (isLoggedIn()) {
-    //   console.log(isLoggedIn(), 'yes');
       $user = JSON.parse(isLoggedIn());
       $('html').removeClass('d-none');
     } else {
@@ -12,17 +11,13 @@ $(document).ready(function () {
     let searchParams = new URLSearchParams(window.location.search);
     let url = "";
     let type = "";
-    // let units = [];
     if (searchParams.has('url') && searchParams.has('type')) {
         url = searchParams.get('url');
         type = searchParams.get('type');
 
-        // alert(url);
-
         if(type == "doc" || type == "pdf" || type == "ppt")
             $('#mainiFrame').attr('src',"https://drive.google.com/viewerng/viewer?embedded=true&url="+url.split('?')[0]);
         else if(type == "mp4" || type == "video"){
-            // console.log(linkifyYouTubeURLs(url));
             if(url.includes("youtube"))
                 $('#mainiFrame').attr('src',"https://www.youtube.com/embed/"+linkifyYouTubeURLs(url)+"?autoplay=1&mute=1");
         }
@@ -32,7 +27,15 @@ $(document).ready(function () {
           $('#mainImg').attr('src',url);
         }
         else{
+          $('#mainImg').show();
+          $('#mainiFrame').hide();
+          $('#mainImg').attr('src','../images/page-not-found.png');
         }
+    }
+    else{
+      $('#mainImg').show();
+      $('#mainiFrame').hide();
+      $('#mainImg').attr('src','../images/page-not-found.png');
     }
 
     function linkifyYouTubeURLs(text) {
