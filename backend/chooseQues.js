@@ -1146,8 +1146,8 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            $('#errorToastBody').text("Successfully Updated the Questions");
-            $('#errorToast').toast('show');
+            $('#successToastBody').text("Successfully Updated the Questions");
+            $('#successToast').toast('show');
 
             //   setInterval(function () {
             //     window.location.replace('myAssessment.html');

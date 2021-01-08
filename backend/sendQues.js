@@ -302,7 +302,7 @@ $(document).ready(function () {
             //alert(result.status)
 
             if (result.status == 200) {
-              $('#successToastBody').text("Successfully creates the Test");
+              $('#successToastBody').text("Test Successfully Sent");
               $('#successToast').toast('show');
 
               setTimeout(function () {
@@ -346,7 +346,7 @@ $(document).ready(function () {
             //alert(result.status)
 
             if (result.status == 200) {
-              $('#successToastBody').text("Successfully creates the Test");
+              $('#successToastBody').text("Test Successfully Sent");
               $('#successToast').toast('show');
 
               setTimeout(function () {
