@@ -70,7 +70,7 @@ $(document).ready(function() {
 
                             $deptTitleSpan = $('<span></span>').addClass('span-heading').text('Departments');
                             $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1').append($deptTitleSpan);
-                            $dept = $('<span></span>').addClass('pl-2 py-1').text(departments);
+                            $dept = $('<span></span>').addClass('py-1').text(departments);
 
                             // div = div + "</div><div class='d-flex py-0 justify-content-end'>";
                             // div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'><i class='fas fa-plus'></i></button>";
@@ -87,8 +87,8 @@ $(document).ready(function() {
                                 "dept":JSON.stringify(dept)
                             });
                             
-                            $cardBody = $('<div></div>').addClass('card-body p-2').css('height','40%').append($title,$deptTitle,$dept,$buttonDiv);
-                            $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').css('cursor','default').append($img, $cardBody);
+                            $cardBody = $('<div></div>').addClass('card-body p-2 pl-3').css('height','40%').append($title,$deptTitle,$dept,$buttonDiv);
+                            $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').append($img, $cardBody);
                             // $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').append($card);
                             $course = $("<div data-subSemId='" + course.subject_semester_id + "'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($card);
                             $('#courseList').append($course);
@@ -132,7 +132,7 @@ $(document).ready(function() {
 
                                 $deptTitleSpan = $('<span></span>').addClass('span-heading').text('Departments');
                                 $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1').append($deptTitleSpan);
-                                $dept = $('<span></span>').addClass('pl-2 py-1').text(departments);
+                                $dept = $('<span></span>').addClass('py-1').text(departments);
                                 
                                 // div = div + "</div><div class='d-flex py-0 justify-content-end'>";
                                 // div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'><img src='../images/plus-circle.svg' /></button>";
@@ -149,8 +149,8 @@ $(document).ready(function() {
                                     "dept":JSON.stringify(dept)
                                 });
                                 
-                                $cardBody = $('<div></div>').addClass('card-body p-2').css('height','40%').append($title,$deptTitle,$dept,$buttonDiv);
-                                $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').css('cursor','default').append($img, $cardBody);
+                                $cardBody = $('<div></div>').addClass('card-body p-3').css('height','40%').append($title,$deptTitle,$dept,$buttonDiv);
+                                $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').append($img, $cardBody);
                                 // $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').append($card);
                                 $course = $("<div data-subSemId='" + course.subject_semester_id + "'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($card);
                                 $('#courseList').append($course);
