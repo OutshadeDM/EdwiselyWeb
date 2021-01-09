@@ -56,13 +56,13 @@
           <a href="index.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fa fa-home fa-fw mr-3"></span>
-              <span class="menu-collapsed">Home</span>
+              <span class="menu-collapsed">Dashboard</span>
             </div>
           </a>
           <a href="courses.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fas fa-book fa-fw mr-3"></span>
-              <span class="menu-collapsed">All Courses</span>
+              <span class="menu-collapsed">Your Courses</span>
             </div>
           </a>
           <a href="addCourses.html" class="list-group-item list-group-item-action">
@@ -126,7 +126,7 @@
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
                   <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
-                  <span class="list-item-active"><a href="#">Upload Questions</a></span>
+                  <span class="list-item-active"><a href="#">Send Questions</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
@@ -158,18 +158,21 @@
 
                     <strong>Test Details</strong>
                     <div class="col-12 py-2" id="testDetails">
-                      Start Date and Time : <input type='text' id="starttime" class="form-control" /> <br>
-                      End Date and Time : <input type='text' id="endtime" class="form-control" /> <br>
+                      Start Date and Time : <input type='text' id="starttime" placeholder="07 Jan 2021 00:35:20"
+                        class="form-control" /> <br>
+                      End Date and Time : <input type='text' id="endtime" placeholder="07 Jan 2021 00:35:20"
+                        class="form-control" /> <br>
                       Duration :<br>
-                      <label class="px-2">Hours</label><input class="durationHours" type="number" min="0" />
-                      <label class="px-2">Minutes</label><input class="durationMinutes" type="number" max="59"
+                      <label class="px-2">Hours</label><input class="durationHours pl-1" type="number" placeholder="0"
                         min="0" />
+                      <label class="px-2">Minutes</label><input class="durationMinutes pl-1" type="number"
+                        placeholder="0" max="59" min="0" />
                     </div>
 
                     <br>
                     <strong class="mt-3">Class Select</strong>
-                    <div class="col-12 py-2" id="sectionDetails">
-                      <ul class="sectionsList p-0" id="sections"></ul>
+                    <div class="col-12 py-3" id="sectionDetails">
+                      <ul class="sectionsList p-0 m-0" id="sections"></ul>
                     </div>
                     <br>
                     <strong class="mt-3">Total Selected Students</strong>

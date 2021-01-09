@@ -88,13 +88,13 @@ $(document).ready(function() {
                                 div = div + "<div class='col-sm-4 course'>";
                                 div = div + "<div class='card mb-3 shadow-sm addCourseCard'>";
                                 if (value.course_image)
-                                    div = div + "<img class='card-img-top py-2' width='200' height='200' src='"+value.course_image+"' alt='No Image'>";
+                                    div = div + "<img class='p-2' style='width:100%' height='250' src='"+value.course_image+"' alt='No Image'>";
                                 else
-                                div = div + "<img class='card-img-top py-2' width='200' height='250' style='height: 250px;' src='../images/onlineCourses.png' alt='No Image'>";
+                                    div = div + "<img class='card-img-top py-2' width='200' height='250' style='height: 250px;' src='../images/onlineCourses.png' alt='No Image'>";
                                 div = div + "<div class='card-body'>";
                                 div = div + "<h5 class='card-title font-weight-bold pb-0 mb-0'>"+value.name+"</h5>";
                                 div = div + "<p class='pb-0 my-0 pt-1'><span class='span-heading'>Departments</span></p>";
-                                div = div + "<div class='row'>";
+                                div = div + "<div class='row pl-2'>";
 
                                 $.each(value.departments, function (key, value) {
                                     div = div + "<span class='mx-3 mb-2 span-heading span-dept p-1'>"+value.name+"</span>";
@@ -106,7 +106,7 @@ $(document).ready(function() {
                                 });
                                 
                                 div = div + "</div><div class='d-flex py-0 justify-content-end'>";
-                                div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'>+</button>";
+                                div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'><i class='fas fa-plus'></i></button>";
                                 div = div + "</div></div></div></div>";
 
                                 div1 = div1 + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'>"+value.name+"</li>";

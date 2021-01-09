@@ -1,6 +1,6 @@
 .getUnits {
   border: solid #c0c0c0 1px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: white;
 }
 
@@ -20,6 +20,7 @@
 
 .getUnitsLabel{
   color: gray;
+  cursor: pointer;
   border-bottom: solid 3px #1B658C;
   border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
   border-image-slice: 1;
@@ -29,6 +30,7 @@ input[type="radio"]:checked+label{
   color: black;
   font-size:x-large;
   font-weight: 400;
+  cursor: pointer;
   border-bottom: solid 3px #1B658C;
   border-image: linear-gradient(to right, #1B658C 80%, rgba(0,0,0,0) 80%);
   border-image-slice: 1;
@@ -40,14 +42,16 @@ input[type="radio"]:checked+label{
 
 .quesUploadLink{
   height: 205px;
-  border-radius: 5px;
+  border-radius: 15px;
   border: solid 1px #C0C0C0;
   background-color: white;
+  cursor: pointer;
 }
 
 .quesUploadLabel {
   height: 187px;
   text-align: center;
+  cursor: pointer;
 }
 
 
@@ -95,13 +99,27 @@ input[type="radio"]:checked+label{
 
   .choose-subject{
     height: 205px;
-    padding-top: 84px;
+    padding-top: 65px;
     background-color: white;
-    border: solid 1px gray;
-    border-radius: 5px;
+    border: solid 1px rgb(206, 206, 206);
+    border-radius: 15px;
+    text-align: center;
   }
 
+  #subject-modal-div{
+    border-radius: 15px;
+  }
+
+  #subject-modal-div:hover {
+    background-color: white;
+  }
+  
   .choose-subject span{
     font-size: large;
   }
-  
+
+
+  .fa-bars{
+    width: 80px;
+    color: rgb(34, 34, 34);
+  }

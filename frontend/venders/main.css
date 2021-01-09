@@ -189,6 +189,7 @@ position: fixed;
 top: 5%;
 right: 1%;
 z-index: 999999;
+background-color: white;
 /* display: none; */
 }
 
@@ -347,12 +348,12 @@ overflow-x: hidden; */
 background: #E3EAEE;
 color: black;
 /* border-radius: 18px; */
-/* border-top-left-radius: 18px;
-border-top-right-radius: 18px; */
+border-top-left-radius: 18px;
+border-top-right-radius: 18px;
 }
 
 .objQuestionTab{
-border-bottom: 1px solid black;
+border-bottom: 1px solid gray;
 background-color: white;
 }
 
@@ -476,6 +477,7 @@ text-align: center;
 vertical-align: middle;
 line-height: 1.5;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.17);
+background-color: white;
 
 }
 
@@ -667,6 +669,7 @@ max-height: 50px;
 .fifthOptionBtn {
 color: white;
 background-color: #FF6B6B;
+font-size: medium;
 }
 
 #hintBtn {

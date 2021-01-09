@@ -244,7 +244,7 @@ $(document).ready(function () {
         div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
       }
       div = div + "</div>";
-      div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer'>";
+      div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer' style='height:45px'>";
       div = div + "Questions: " + value.questions_count;
       if (!value.questions_count)
         div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
@@ -421,7 +421,7 @@ $(document).ready(function () {
                   "<div class='card-body pl-1 pb-0 align-bottom'>" +
                   "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
                   "</div>" +
-                  "<div class='px-3 text-muted card-footer'>" +
+                  "<div class='px-3 text-muted card-footer' style='height:45px'>" +
                   "<div class='row'>" +
                   "<div class='col-sm-4'>" +
                   "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
@@ -564,7 +564,7 @@ $(document).ready(function () {
                   "<div class='card-body pl-1 pb-0 align-bottom'>" +
                   "<h6 class='font-weight-bold'>" + value.created_at + " - " + value.doe + "</h6>" +
                   "</div>" +
-                  "<div class='px-3 text-muted card-footer'>" +
+                  "<div class='px-3 text-muted card-footer' style='height:45px'>" +
                   "<div class='row'>" +
                   "<div class='col-sm-4'>" +
                   "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>" +
@@ -622,7 +622,7 @@ $(document).ready(function () {
         else
           div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + value.doe + "</h6>";
       }
-      div = div + "</div><div class='px-3 text-muted card-footer'>";
+      div = div + "</div><div class='px-3 text-muted card-footer' style='height:45px'>";
       div = div + "<div class='row'>";
       div = div + "<div class='col-sm-4'>";
       div = div + "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>";

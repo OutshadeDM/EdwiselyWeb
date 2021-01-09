@@ -188,9 +188,9 @@ $(document).ready(function () {
 
           $.each(result.data, function (key, value) {
             if (selectedStudentsId.includes(value.id)) {
-              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div>${value.roll_number} - ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             } else {
-              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div>${value.roll_number} - ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             }
             //allStudentsId.push(value.id)
           })
@@ -270,101 +270,104 @@ $(document).ready(function () {
 
 
   $('#sendQuestionsBtn').on('click', function () {
+    timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
 
-    if (objective) {
+    if (doe && starttime && timelimit_in_secs && selectedStudentsId.length != 0) {
 
-      timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
+      if (objective) {
 
-      var form = new FormData();
-      form.append("name", tname)
-      form.append("description", description)
-      form.append("doe", doe)
-      form.append("timelimit", timelimit_in_secs)
-      form.append("students", "[" + selectedStudentsId + "]")
-      form.append("test_id", tId)
-      form.append("starttime", starttime)
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
+        var form = new FormData();
+        form.append("name", tname)
+        form.append("description", description)
+        form.append("doe", doe)
+        form.append("timelimit", timelimit_in_secs)
+        form.append("students", "[" + selectedStudentsId + "]")
+        form.append("test_id", tId)
+        form.append("starttime", starttime)
+        // for (var key of form.entries()) {
+        //   alert(key[1]);
+        // }
 
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTest',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          //alert(result.status)
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTest',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            //alert(result.status)
 
-          if (result.status == 200) {
-            $('#successToastBody').text("Successfully sent the Test");
-            $('#successToast').toast('show');
+            if (result.status == 200) {
+              $('#successToastBody').text("Test Successfully Sent");
+              $('#successToast').toast('show');
 
-            setTimeout(function () {
-              window.location.href = "myAssessment.html";
-            }, 2000);
+              setTimeout(function () {
+                window.location.href = "myAssessment.html";
+              }, 2000);
+            }
+            else {
+              alert("error!")
+            }
+          },
+          error: function (error) {
+            alert("Request Failed with status: " + error.status);
           }
-          else {
-            alert("error!")
+        });
+      }
+
+      else {
+
+        var form = new FormData();
+        form.append("name", tname)
+        form.append("description", description)
+        form.append("timelimit", timelimit_in_secs)
+        form.append("students", "[" + selectedStudentsId + "]")
+        form.append("test_id", tId)
+        form.append("starttime", starttime)
+        // for (var key of form.entries()) {
+        //   alert(key[1]);
+        // }
+
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editSubjectiveTest',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            //alert(result.status)
+
+            if (result.status == 200) {
+              $('#successToastBody').text("Test Successfully Sent");
+              $('#successToast').toast('show');
+
+              setTimeout(function () {
+                window.location.href = "myAssessment.html";
+              }, 2000);
+
+            }
+            else {
+              alert("error!")
+            }
+          },
+          error: function (error) {
+            alert("Request Failed with status: " + error.status);
           }
-        },
-        error: function (error) {
-          alert("Request Failed with status: " + error.status);
-        }
-      });
+        });
+      }
     }
-
     else {
-
-      timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
-
-      var form = new FormData();
-      form.append("name", tname)
-      form.append("description", description)
-      form.append("timelimit", timelimit_in_secs)
-      form.append("students", "[" + selectedStudentsId + "]")
-      form.append("test_id", tId)
-      form.append("starttime", starttime)
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
-
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editSubjectiveTest',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          //alert(result.status)
-
-          if (result.status == 200) {
-            $('#successToastBody').text("Successfully sent the Test");
-            $('#successToast').toast('show');
-
-            setTimeout(function () {
-              window.location.href = "myAssessment.html";
-            }, 2000);
-
-          }
-          else {
-            alert("error!")
-          }
-        },
-        error: function (error) {
-          alert("Request Failed with status: " + error.status);
-        }
-      });
+      $('#errorToastBody').text("Fill All Details");
+      $('#errorToast').toast('show');
     }
-
   })
 
 

@@ -9,6 +9,16 @@ $(document).ready(function () {
   }
 
 
+  //toasts
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
+    $('#toastDiv').show();
+    setTimeout(function () {
+      $('#errorToast').toast('hide');
+      $('#successToast').toast('hide');
+      $('#toastDiv').hide();
+    }, 7000);
+  });
+
 
   let searchParams = new URLSearchParams(window.location.search);
 
@@ -21,6 +31,9 @@ $(document).ready(function () {
     let uid = 0;
     let question_count = 0
     //alert(tid)
+
+
+
 
     //getting the values from the getObjective tests api
     $.ajax({
@@ -65,7 +78,8 @@ $(document).ready(function () {
 
           $(document).on('click', '#sendAssBtn', function () {
             if (question_count == 0) {
-              alert("Please Add Questions")
+              $('#errorToastBody').text("Please Add Questions");
+              $('#errorToast').toast('show');
             } else {
               window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tid + "&tname=" + tname + "&uid=" + uid + "&desc=" + description + "&isObj=" + objective + "&qc=" + question_count;
             }
@@ -73,11 +87,16 @@ $(document).ready(function () {
 
 
         }
-        else
-          alert("Request Failed")
+        else {
+          $('#errorToastBody').text("Request Failed");
+          $('#errorToast').toast('show');
+        }
+        //alert("Request Failed")
       },
       error: function (error) {
-        alert("Request Failed with status: " + error.status);
+        $('#errorToastBody').text(error.message);
+        $('#errorToast').toast('show');
+        //alert("Request Failed with status: " + error.status);
       }
     });
   }
@@ -125,7 +144,9 @@ $(document).ready(function () {
 
     $(document).on('click', '#sendAssBtn', function () {
       if (question_count == 0) {
-        alert("Please Add Questions")
+        $('#errorToastBody').text("Please Add Questions");
+        $('#errorToast').toast('show');
+        //alert("Please Add Questions")
       } else {
         window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tid + "&tname=" + tname + "&uid=" + uid + "&desc=" + description + "&isObj=" + objective + "&qc=" + question_count;
       }

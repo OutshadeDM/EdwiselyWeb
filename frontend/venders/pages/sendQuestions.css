@@ -1,15 +1,15 @@
 #testDetails{
   border: solid rgb(206, 206, 206) 1px;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: white;
 }
 
 #starttime{
-  border: solid gray 1px;
+  border: solid rgb(206, 206, 206) 1px;
 }
 
 #endtime{
-  border: solid gray 1px;
+  border: solid rgb(206, 206, 206) 1px;
 }
 
 
@@ -33,7 +33,7 @@ scrollbar-width: none;  /* Firefox */
 .selectStudents{
   list-style: none;
   border: solid rgb(206, 206, 206) 1px;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 15px 15px;
 }
 
 .selectStudents :nth-child(odd){
@@ -52,23 +52,24 @@ scrollbar-width: none;  /* Firefox */
 .selectAllDiv{
   background-color: #1B658C;
   color: white;
-  border-radius: 5px 5px 0 0;
+  border-radius: 15px 15px 0 0;
 }
 
 #sectionDetails{
   border: solid rgb(206, 206, 206) 1px;
-  border-radius: 5px;
+  border-radius: 15px;
+  background-color: white;
 }
 
 .sectionsListLi{
   list-style: none;
-  background-color: white;
 }
 
 #numberOfStudents{
   border: solid rgb(206, 206, 206) 1px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: white;
+  margin-top: 8px;
 
 }
 
@@ -83,10 +84,14 @@ input[type="checkbox"]{
 
 .durationHours{
   width: 60px;
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 5px;
 }
 
 .durationMinutes{
   width: 60px;
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 5px;
 }
 
 .sectionsListLabel{

@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png"
+    type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <!-- font-awesome -->
@@ -45,13 +46,13 @@
           <a href="index.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fa fa-home fa-fw mr-3"></span>
-              <span class="menu-collapsed">Home</span>
+              <span class="menu-collapsed">Dashboard</span>
             </div>
           </a>
           <a href="courses.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fas fa-book fa-fw mr-3"></span>
-              <span class="menu-collapsed">All Courses</span>
+              <span class="menu-collapsed">Your Courses</span>
             </div>
           </a>
           <a href="addCourses.html" class="list-group-item list-group-item-action">
@@ -121,7 +122,7 @@
               <div class="col-sm-4">
                 <div class="d-flex flex-row-reverse justify-content-center bd-highlight">
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
-                    <button type="button" id="btnSave" class="BigBtn shadow-sm btnLink mt-3 px-4 py-2"><img
+                    <button type="button" id="createAssessmentBtn" class="BigBtn shadow-sm btnLink mt-3 px-4 py-2"><img
                         src="../images/save.svg" alt="abc" class="pr-1" height="20px" />
                       Continue</button>
                   </div>
@@ -148,8 +149,9 @@
 
             <!-- Button trigger modal -->
 
-            <div class="py-3 my-3 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
-              data-target="#exampleModal">
+            <div class="py-3 my-3 px-2 choose-subject"
+              style="background-color: white; border: solid 1px rgb(206,206,206);" id="subject-modal-div"
+              data-toggle="modal" data-target="#exampleModal">
 
               <i class="fas fa-bars pl-2 pr-0"></i>
 
@@ -183,6 +185,36 @@
             </div>
 
           </div>
+
+          <!-- toasts -->
+          <div id="toastDiv" style="display: none;">
+            <!-- start error toast -->
+            <div class="toast fade" data-autohide="false" id="errorToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-danger">Error !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="errorToastBody">All fields are mandatory to save.</p>
+              </div>
+            </div>
+            <!-- end error toast -->
+
+            <!-- start success toast -->
+            <div class="toast fade" data-autohide="false" id="successToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-success">Success !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="successToastBody">Content has been saved successfully.</p>
+              </div>
+            </div>
+            <!-- end success toast -->
+
+          </div>
+
+          <!-- end toasts -->
 
 
           <!-- End Page Content -->

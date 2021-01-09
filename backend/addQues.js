@@ -93,8 +93,8 @@ $(document).ready(function () {
   })
 
   //onclick of add option btn
-  $('.fifthOptionBtn').on('click', function () {
-    $('.fifthOptionBtn').hide();
+  $('#fifthOptionBtn').on('click', function () {
+    $('#fifthOptionBtn').hide();
     $('#fifth').show();
   })
 
@@ -772,7 +772,7 @@ $(document).ready(function () {
     $('#uploadedoption5').click();
 
     $('#fifth').hide();
-    $('.fifthOptionBtn').show();
+    $('#fifthOptionBtn').show();
 
     $('#deleteBtn').hide();
     $('#editBtn').hide();
@@ -783,6 +783,12 @@ $(document).ready(function () {
     $('.uploadedques').click();
     $('.uploadedhint').click();
     $('.uploadedsolution').click();
+    
+    $('#option1Label').show();
+    $('#option2Label').show();
+    $('#option3Label').show();
+    $('#option4Label').show();
+    $('#option5Label').show();
 
     if (updateTopics)
       getTopics();
@@ -910,6 +916,12 @@ $(document).ready(function () {
           $('#customSwitch1').click();
         }
       }
+      
+      $('#option1Label').show();
+      $('#option2Label').show();
+      $('#option3Label').show();
+      $('#option4Label').show();
+      $('#option5Label').show();
 
     }
     else {
@@ -917,9 +929,14 @@ $(document).ready(function () {
       $('#topicsDiv').show();
       $('#topicsDiv').empty();
       $('#topicsDiv').append("<p class='font-weight-bold'>This question is not editable - it belongs to Edwisely repo</p>");
+      $('#option1Label').hide();
+      $('#option2Label').hide();
+      $('#option3Label').hide();
+      $('#option4Label').hide();
+      $('#option5Label').hide();
     }
 
-    console.log(JSON.stringify(value));
+    // console.log(JSON.stringify(value));
 
     $('#quesInput').val(value.name);
     question = value.name;
@@ -938,7 +955,7 @@ $(document).ready(function () {
       option4 = value.questions_options[3].name;
     }
     if (value.questions_options[4]) {
-      $(".fifthOptionBtn").click();
+      $("#fifthOptionBtn").click();
       $('#fifthOption').val(value.questions_options[4].name);
       option5 = value.questions_options[4].name;
     }
@@ -1063,6 +1080,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').hide()
+      $('#option1Label').show();
     }
     else if (value.questions_options[1].is_answer == "1") {
       $("input[name='Radios'][value='1']").prop("checked", true);
@@ -1077,6 +1095,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').hide()
+      $('#option2Label').show();
     }
     else if (value.questions_options[2] && value.questions_options[2].is_answer == "1") {
       $("input[name='Radios'][value='2']").prop("checked", true);
@@ -1091,6 +1110,7 @@ $(document).ready(function () {
       $('.tick3').show()
       $('.tick4').hide()
       $('.tick5').hide()
+      $('#option3Label').show();
     }
     else if (value.questions_options[3] && value.questions_options[3].is_answer == "1") {
       $("input[name='Radios'][value='3']").prop("checked", true);
@@ -1105,6 +1125,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').show()
       $('.tick5').hide()
+      $('#option4Label').show();
     }
     else if (value.questions_options[4] && value.questions_options[4].is_answer == "1") {
       $("input[name='Radios'][value='4']").prop("checked", true);
@@ -1119,6 +1140,7 @@ $(document).ready(function () {
       $('.tick3').hide()
       $('.tick4').hide()
       $('.tick5').show()
+      $('#option5Label').show();
     }
   }
 
