@@ -21,6 +21,7 @@
     font-size: 1.1rem;
     margin: 2px 0;
 }
+
 #sidebar-container .list-group a:hover,
 #sidebar-container .list-group a:active,
 #sidebar-container .list-group a.active {
@@ -37,6 +38,8 @@
     bottom: 0;
     background-color: #1b668c;
     color: white;
+    background: #81FBB8;
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
 }
 
 /* Submenu item*/

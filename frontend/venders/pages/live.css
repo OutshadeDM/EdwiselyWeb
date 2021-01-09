@@ -94,9 +94,10 @@ label {
 
 .selectAll {
   border-radius: 15px 15px 0 0;
-  background: #1b668c;
+  background-image: linear-gradient(-43deg, #FF723B 0%, #FFDF57 84%, #FFED5B 100%);
+  background-image: linear-gradient(-34deg, #FF723B 5%, #FFDF57 85%, #FFED5B 100%);  
   padding: 15px;
-  color: white;
+  color: #191648;
   font-size: 12px;
 }
 
@@ -112,7 +113,7 @@ label {
 
 .student-list div.single:nth-of-type(even)
 {
-  background-color: #e8eff3;
+  background: #F2F2F2;
 }
 
 .slide-wrap .nav-pills .nav-link {

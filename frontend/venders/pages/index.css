@@ -1,8 +1,8 @@
 .title {
-    color: #363636;
-    font-family: "Google Sans bold";
+    font-family: "Source Sans Pro";
+    color: #191648;
+    font-weight: 600;
     font-size: 19px;
-    font-weight: 700;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
@@ -10,8 +10,9 @@
 }
 
 .date {
-    color: rgba(54, 54, 54, 0.39);
-    font-family: "Google Sans thin";
+    font-family: "Source Sans Pro";
+    color: #909090;
+    font-weight: 300;
     font-size: 13px;
     font-weight: 600;
     font-style: normal;
@@ -25,8 +26,12 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: rgba(24, 102, 138, 0.64);
+    background-image: linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);
     border-radius: 0 0 15px 15px;
+}
+
+.addCourseCard h5 {
+    text-align: left;
 }
 
 .card-img-top {
@@ -206,7 +211,6 @@
 .status {
     /* Style for "Meeting Co" */
     color: rgba(0, 0, 0, 0.95);
-    font-family: "Google Sans";
     font-size: 25px;
     font-weight: 700;
     font-style: normal;
@@ -217,7 +221,6 @@
 
 .desc {
     color: #363636;
-    font-family: "Google Sans";
     font-size: 15px;
     font-weight: 400;
     font-style: normal;
@@ -233,7 +236,7 @@
 }
 
 #viewpeer {
-    background-color: rgba(24, 102, 138, 0.13);
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
     display: block;
     position: absolute;
     bottom: 0;
@@ -244,11 +247,11 @@
     height: 30px;
     line-height: 30px;
     text-decoration: none;
-    color: black;    
+    color: #FFFFFF;  
 }
 
 #viewactivity {
-    background-color: rgba(24, 102, 138, 0.13);
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
     display: block;
     width: 100%;
     left: 0;
@@ -257,7 +260,7 @@
     height: 30px;
     line-height: 30px;
     text-decoration: none;
-    color: black;
+    color: #FFFFFF;
     position: relative;    
 }
 
@@ -265,7 +268,7 @@
     content: ' ';
     width: 15px;
     height: 15px;
-    background: rgba(24, 102, 138, 0.13);
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
     position: absolute;
     left: 0;
     top: -15px;
@@ -276,7 +279,7 @@
     content: ' ';
     width: 15px;
     height: 15px;
-    background: rgba(24, 102, 138, 0.13);
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
     position: absolute;
     right: 0;
     top: -15px;
@@ -328,10 +331,20 @@
 }
 
 .card {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.17);
+    border: 1px solid #DDDDDD;
 }
 
 .btn-primary, .btn-danger {
     min-width: 135px;
     max-width: 150px;
+}
+
+.btn-primary {
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+    border-radius: 56px;    
+}
+
+.btn-danger {
+    background: #fff;
+    border-radius: 56px;
 }

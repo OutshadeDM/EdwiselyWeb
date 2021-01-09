@@ -535,7 +535,9 @@ $(async function() {
 								<div class="row col-12">
 									<div class="col-md-7 mt-3 desc offset-1 col-12">
 										A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.
-										<canvas id="myChart${activity.id}" width="400" height="400"></canvas>
+										<div style="max-height: 300px;">
+											<canvas id="myChart${activity.id}"></canvas>
+										</div>
 									</div>
 									<div class="col-md-4 col-12 mt-3 align-self-center">
 										<h4 class="status">Student Understanding Level: ${activity.results.understanding_level}</h4>
@@ -741,7 +743,7 @@ $(async function() {
 						options: {
 							responsive: true,
 							legend: {
-								position: 'top',
+								position: 'right',
 							},
 							// title: {
 							// 	display: true,

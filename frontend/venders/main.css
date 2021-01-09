@@ -1,28 +1,21 @@
-@font-face {
-  font-family: "Google Sans";
-  src: url('../Google-sans-Font-Family/ProductSans-Regular.ttf');
-}
-
-@font-face {
-  font-family: "Google Sans Bold";
-  src: url('../Google-sans-Font-Family/ProductSans-Bold.ttf');
-}
-
-@font-face {
-  font-family: "Google Sans Thin";
-  src: url('../Google-sans-Font-Family/ProductSans-Thin.ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
 .font-regular {
-  font-family: "Google Sans";
+  font-family: "Source Sans Pro";
+  font-weight: 400;
+  color: #191648;
 }
 
 .font-bold {
-  font-family: "Google Sans Bold";
+  font-family: "Source Sans Pro";
+  color: #191648;
+  font-weight: 600;
 }
 
 .font-thin {
-  font-family: "Google Sans Thin";
+  font-family: "Source Sans Pro";
+  color: #909090;
+  font-weight: 300;
 }
 
 .grey-back {
@@ -30,7 +23,8 @@
 }
 
 * {
-  font-family: "Google Sans";
+  font-family: "Source Sans Pro";
+  font-weight: 400;
 }
 
 html{
@@ -139,7 +133,7 @@ margin-bottom: 10px;
 
 .headerBanner a {
   color: #585858;
-  font-family: "Google Sans";
+  font-family: "Source Sans Pro";
   font-size: 16px;
   font-weight: 400;
   font-style: normal;
@@ -407,9 +401,15 @@ background-color: gray;
 height: 0.01rem;
 }
 
-.btn-primary{
-background: #1b668c;
-border-radius: 10px;
+.btn-primary {
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  border-radius: 56px; 
+  color: #FFFFFF !important;   
+}
+
+.btn-danger {
+  background: #fff;
+  border-radius: 56px;
 }
 
 .btn-danger {
