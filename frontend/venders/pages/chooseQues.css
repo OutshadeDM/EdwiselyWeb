@@ -135,7 +135,8 @@ width: 100%;
 .getUnitsLabel{
   color: gray;
   border-bottom: solid 3px #1B658C;
-  border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
+  border-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 30%);
+  /* border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%); */
   border-image-slice: 1;
 }
 
@@ -144,7 +145,8 @@ input[type="radio"]:checked+label{
   font-size:x-large;
   font-weight: 400;
   border-bottom: solid 3px #1B658C;
-  border-image: linear-gradient(to right, #1B658C 80%, rgba(0,0,0,0) 80%);
+  border-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  /* border-image: linear-gradient(to right, #1B658C 80%, rgba(0,0,0,0) 100%); */
   border-image-slice: 1;
 }
 
@@ -192,32 +194,37 @@ pre
 #moreQuestions{
   width: 100%;
   border: none;
-  background-color: #1B658C;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  color: #FFFFFF !important;   
   color: white;
 }
 
 #moreBloomQues1{
   width: 100%;
   border: none;
-  background-color: #1B658C;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  color: #FFFFFF !important;   
   color: white;
 }
 #moreBloomQues2{
   width: 100%;
   border: none;
-  background-color: #1B658C;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  color: #FFFFFF !important;   
   color: white;
 }
 #moreBloomQues3{
   width: 100%;
   border: none;
-  background-color: #1B658C;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  color: #FFFFFF !important;   
   color: white;
 }
 #moreBloomQues4{
   width: 100%;
   border: none;
-  background-color: #1B658C;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+  color: #FFFFFF !important;   
   color: white;
 }
 

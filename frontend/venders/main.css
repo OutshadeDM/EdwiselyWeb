@@ -215,7 +215,7 @@ text-decoration: none;
   margin-left: 0;
   margin-top: 0;
   margin-bottom: 15px;
-  background: #1b668c;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
   border-radius: 5px;
 }
 
