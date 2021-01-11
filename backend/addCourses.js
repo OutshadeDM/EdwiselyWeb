@@ -69,15 +69,17 @@ $(document).ready(function() {
                             });
 
                             $deptTitleSpan = $('<span></span>').addClass('span-heading').text('Departments');
-                            $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1').append($deptTitleSpan);
+                            $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1 text-start').append($deptTitleSpan);
                             $dept = $('<span></span>').addClass('py-1').text(departments);
+                            $deptdiv1 = $('<div></div>').addClass('col-8 justify-content-start px-0').append($deptTitle,$dept);
 
                             // div = div + "</div><div class='d-flex py-0 justify-content-end'>";
                             // div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'><i class='fas fa-plus'></i></button>";
                             // div = div + "</div></div></div></div>";
 
-                            $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn px-0').prop('type','button').css('cursor', 'pointer').css('border', "none").html("Add <img src='../images/plus-circle.svg' />");
-                            $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').append($button);
+                            $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='../images/plus-circle.svg' />");
+                            $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','flex-end').append($button);
+                            $deptdiv2 = $('<div></div>').addClass('col-4 px-0').append($buttonDiv);
 
                             div1 = div1 + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'>"+course.name+"</li>";
 
@@ -86,11 +88,13 @@ $(document).ready(function() {
                                 "name":course.name,
                                 "dept":JSON.stringify(dept)
                             });
+
+                            $deptDiv = $('<div></div>').addClass('row mx-0 px-0').append($deptdiv1,$deptdiv2);
                             
-                            $cardBody = $('<div></div>').addClass('card-body p-2 pl-3').css('height','40%').append($title,$deptTitle,$dept,$buttonDiv);
-                            $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').append($img, $cardBody);
+                            $cardBody = $('<div></div>').addClass('card-body p-3').css('height','40%').append($title,$deptDiv);
+                            $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').css('color','white').append($img, $cardBody);
                             // $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').append($card);
-                            $course = $("<div data-subSemId='" + course.subject_semester_id + "'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($card);
+                            $course = $("<div'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($card);
                             $('#courseList').append($course);
 
                         }
@@ -131,15 +135,17 @@ $(document).ready(function() {
                                 });
 
                                 $deptTitleSpan = $('<span></span>').addClass('span-heading').text('Departments');
-                                $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1').append($deptTitleSpan);
+                                $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1 text-start').append($deptTitleSpan);
                                 $dept = $('<span></span>').addClass('py-1').text(departments);
+                                $deptdiv1 = $('<div></div>').addClass('col-8 justify-content-start px-0').append($deptTitle,$dept);
                                 
                                 // div = div + "</div><div class='d-flex py-0 justify-content-end'>";
                                 // div = div + "<button type='button' class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+value.id+"' data-name='"+value.name+"' data-dept='" + JSON.stringify(dept) + "'><img src='../images/plus-circle.svg' /></button>";
                                 // div = div + "</div></div></div></div>";
 
-                                $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn px-0').prop('type','button').css('cursor', 'pointer').css('border', "none").html("Add <img src='../images/plus-circle.svg' />");
-                                $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').append($button);
+                                $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='../images/plus-circle.svg' />");
+                                $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','flex-end').append($button);
+                                $deptdiv2 = $('<div></div>').addClass('col-4 px-0').append($buttonDiv);
 
                                 div1 = div1 + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'>"+course.name+"</li>";
 
@@ -148,11 +154,13 @@ $(document).ready(function() {
                                     "name":course.name,
                                     "dept":JSON.stringify(dept)
                                 });
+
+                                $deptDiv = $('<div></div>').addClass('row mx-0 px-0').append($deptdiv1,$deptdiv2);
                                 
-                                $cardBody = $('<div></div>').addClass('card-body p-3').css('height','40%').append($title,$deptTitle,$dept,$buttonDiv);
-                                $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').append($img, $cardBody);
+                                $cardBody = $('<div></div>').addClass('card-body p-3').css('height','40%').append($title,$deptDiv);
+                                $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').css('color','white').append($img, $cardBody);
                                 // $gotoCard = $("<a href='#'></a>").addClass('courseDeckItem').append($card);
-                                $course = $("<div data-subSemId='" + course.subject_semester_id + "'></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($card);
+                                $course = $("<div></div>").addClass('course col-lg-4 col-md-6 col-12 h-100').append($card);
                                 $('#courseList').append($course);
                             }
                         }                        
