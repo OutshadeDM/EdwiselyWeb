@@ -185,12 +185,12 @@ $(document).ready(function () {
         if (result.status == 200) {
           //console.log(result.data)
 
-
+          // background-image: linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);
           $.each(result.data, function (key, value) {
             if (selectedStudentsId.includes(value.id)) {
-              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-image:linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             } else {
-              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-color:#1B658C;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-image:linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             }
             //allStudentsId.push(value.id)
           })
