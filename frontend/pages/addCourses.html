@@ -9,9 +9,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <!-- add custom stylesheet here -->
-  <link href="../venders/main.css" rel="stylesheet">
   <link href="../venders/sidebar.css" rel="stylesheet">
   <link href="../venders/radiostyle.css" rel="stylesheet">
+  <link href="../venders/pages/index.css" rel="stylesheet">
+  <link href="../venders/main.css" rel="stylesheet">
 
   <!-- font-awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -126,7 +127,7 @@
 
         <!-- put everything in this div -->
         <div class="container px-5" id="theMainDiv">
-          <div class="d-flex mb-3">
+          <div class="d-flex mb-3 px-5">
             <div class="form-group px-5 mr-auto p-2" style="max-width: 350px;line-height: 40px;">
               <div class="fake-input">
                 <input type="text" autocomplete="off" placeholder="Search Courses" id="courseSelect"
@@ -150,7 +151,7 @@
           </div> -->
           <!--Courses List-->
           <div class="container-fluid pt-1 px-5 listDiv">
-            <div class="row" id="courseList">
+            <div class="row px-5" id="courseList">
 
               <!-- <div class='col-sm-4 course'>
                 <div class='card mb-3 shadow-sm addCourseCard'>
@@ -238,12 +239,10 @@
           </div>
           <div class="row pt-3 text-center">
             <div class="col-sm-6">
-              <button type="button" class="btn btn-primary" id="modalSaveBtn"><i class="fas fa-plus"></i>
-                Add</button>
+              <button type="button" class="btn btn-primary" id="modalSaveBtn"><i class="fas fa-plus"></i> Add</button>
             </div>
             <div class="col-sm-6">
-              <button type="button" class="btn btn-secondary" style="border-radius: 10px;"
-                data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
