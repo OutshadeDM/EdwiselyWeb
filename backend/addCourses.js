@@ -70,7 +70,7 @@ $(document).ready(function() {
 
                             $deptTitleSpan = $('<span></span>').addClass('span-heading').text('Departments');
                             $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1 text-start').append($deptTitleSpan);
-                            $dept = $('<span></span>').addClass('py-1').text(departments);
+                            $dept = $('<span></span>').addClass('py-1 font-weight-weight').text(departments);
                             $deptdiv1 = $('<div></div>').addClass('col-8 justify-content-start px-0').append($deptTitle,$dept);
 
                             // div = div + "</div><div class='d-flex py-0 justify-content-end'>";
