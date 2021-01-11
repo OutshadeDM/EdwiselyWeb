@@ -26,8 +26,24 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-image: linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);
     border-radius: 0 0 15px 15px;
+}
+
+.course:nth-of-type(4n + 1) .card-body {
+    background-image: linear-gradient(144deg, #F38FA2 0%, #EB5C6F 41%, #F1825C 100%);
+}
+
+.course:nth-of-type(4n + 2) .card-body {
+    background-image: linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);
+}
+
+.course:nth-of-type(4n + 3) .card-body {
+    background-image: linear-gradient(-43deg, #FF723B 0%, #FFDF57 84%, #FFED5B 100%);
+    background-image: linear-gradient(-34deg, #FF723B 5%, #FFDF57 85%, #FFED5B 100%);
+}
+
+.course:nth-of-type(4n) .card-body {
+    background-image: linear-gradient(136deg, #DCFF73 0%, #8ECA6B 100%);
 }
 
 .addCourseCard h5 {

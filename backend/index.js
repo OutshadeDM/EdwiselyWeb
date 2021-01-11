@@ -393,7 +393,7 @@ $(async function() {
 
 		$.each(courses, (index, course) => {
 			$img = $('<img>').addClass('card-img-top d-flex align-items-center justify-content-center img-fluid').attr('src', course.course_image || '../images/onlineCourses.png');
-			$title = $('<h5></h5>').addClass('card-title d-flex align-items-center justify-content-center pb-0 mb-0').text(course.name);
+			$title = $('<h5></h5>').addClass('card-title d-flex align-items-center justify-content-start pb-0 mb-0').text(course.name);
 			// $description = $('<p></p>').addClass('py-0 my-0')
 			// 				.append(
 			// 					$('<span></span>').addClass('span-heading').text(course.description || "No Description Available")
@@ -535,7 +535,7 @@ $(async function() {
 								<div class="row col-12">
 									<div class="col-md-7 mt-3 desc offset-1 col-12">
 										A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.
-										<div style="max-height: 300px;">
+										<div class="mt-3" style="max-height: 300px;">
 											<canvas id="myChart${activity.id}"></canvas>
 										</div>
 									</div>
