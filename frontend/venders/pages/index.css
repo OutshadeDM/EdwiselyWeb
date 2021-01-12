@@ -284,7 +284,7 @@
     content: ' ';
     width: 15px;
     height: 15px;
-    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+    background: #7175E0;
     position: absolute;
     left: 0;
     top: -15px;
@@ -295,11 +295,16 @@
     content: ' ';
     width: 15px;
     height: 15px;
-    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+    background: #E25BC8;
     position: absolute;
     right: 0;
     top: -15px;
     z-index: -1;    
+}
+
+.linkwrap img {
+    height: 100px;
+    width: auto;
 }
 
 .slick-prev:before {
@@ -353,14 +358,20 @@
 .btn-primary, .btn-danger {
     min-width: 135px;
     max-width: 150px;
+    border-radius: 56px;
 }
 
 .btn-primary {
     background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
-    border-radius: 56px;    
 }
 
 .btn-danger {
+    position: relative;
     background: #fff;
-    border-radius: 56px;
+    border: 1px solid #191648;;
+    color: #191648;
+}
+
+.btn-danger:hover {
+    background-image: linear-gradient(144deg, #F38FA2 0%, #EB5C6F 41%, #F1825C 100%);
 }

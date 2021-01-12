@@ -493,7 +493,7 @@ $(async function() {
 				if (activity.type == 'Notification') {
 					act = `<div class=" card px-3 py-3 mt-4">
 						<div class="row">
-						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Notification&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="../images/notification.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -518,7 +518,7 @@ $(async function() {
 				} else if (activity.type == 'Test') {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Test&background=ff3d00&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="../images/Test.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -533,8 +533,10 @@ $(async function() {
 						if (activity.answered)
 							act += `
 								<div class="row col-12">
-									<div class="col-md-7 mt-3 desc offset-1 col-12">
+									<div class="col-md-11 mt-3 desc offset-1 col-12">
 										A test name ${activity.title} was created on ${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))} and set to be expired on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}. The time duration of the test is ${activity.timelimit / 60} mins.
+									</div>
+									<div class="col-md-7 mt-3 desc offset-1 col-12">
 										<div class="mt-3" style="max-height: 300px;">
 											<canvas id="myChart${activity.id}"></canvas>
 										</div>
@@ -566,7 +568,7 @@ $(async function() {
 				} else if (activity.type == 'VideoConference') {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Video+Conference&background=aa00ff&length=2&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="../images/Virtualclass.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -591,7 +593,7 @@ $(async function() {
 					console.log(activity.file_url, activity.file_url.length)
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
-					<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Material&background=81d4fa&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+					<div class="col-1 align-self-start"><img src="../images/Material.svg" class="img-fluid profile"></div>
 					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 					<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -613,7 +615,7 @@ $(async function() {
 				} else if (activity.type == 'Feedback') {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Feedback&background=005663&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="../images/Feedback.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -641,7 +643,7 @@ $(async function() {
 				} else if (activity.type == 'Subjective') {
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="https://ui-avatars.com/api/?name=Subjective&background=0056b3&length=1&size=40&rounded=true&color=fff" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="../images/Test.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
