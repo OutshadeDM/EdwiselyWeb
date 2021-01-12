@@ -295,8 +295,10 @@ background-color: #e9e9e9;
  border-radius: 20px;
 }
 
-.fake-input input:active + .fake-input {
-border:1px solid lightblue;
+.fake-input input:focus,
+.fake-input input:active {
+border:none;
+outline: none;
 }
 
 .fake-input i {
@@ -392,7 +394,6 @@ list-style-type: none;
 
 .span-heading{
 font-size: 14px;
-font-weight: bold;
 margin-bottom: 0;
 padding-bottom: 0;
 }
@@ -429,8 +430,12 @@ height: 0.01rem;
   /* height: 25px; */
 }
 
+.deptDiv{
+  height: 80px;
+}
+
 .addCourseCard{
-height: 300px;
+height: 350px;
 /* max-height: 425px; */
 }
 
@@ -454,6 +459,12 @@ max-height: max-content;
 
 .addCourseCard .card-body{
 padding: 15px;
+}
+
+.courseDept{
+  width: 75px;
+  max-width: 75px;
+  text-align: center;
 }
 
 /* end addcourses */

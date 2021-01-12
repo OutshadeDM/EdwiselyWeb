@@ -52,7 +52,7 @@ $(document).ready(function() {
 
                             let departments = "";
                             $.each(course.departments, (index,department) => {
-                                if(index != 0) departments = departments + ",";
+                                if(index != 0) departments = departments + ", ";
                                 departments = departments + department.name;
                                 // div = div + "<span class='mx-3 mb-2 span-heading span-dept p-1'>"+department.name+"</span>";
                                 dept.push({
@@ -70,7 +70,7 @@ $(document).ready(function() {
 
                             $deptTitleSpan = $('<span></span>').addClass('span-heading').text('Departments');
                             $deptTitle = $('<p></p>').addClass('pb-0 my-0 pt-1 text-start').append($deptTitleSpan);
-                            $dept = $('<span></span>').addClass('py-1').text(departments);
+                            $dept = $('<span></span>').addClass('py-1').css('font-weight','bold').text(departments);
                             $deptdiv1 = $('<div></div>').addClass('col-8 justify-content-start px-0').append($deptTitle,$dept);
 
                             // div = div + "</div><div class='d-flex py-0 justify-content-end'>";
@@ -78,7 +78,7 @@ $(document).ready(function() {
                             // div = div + "</div></div></div></div>";
 
                             $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='../images/plus-circle.svg' />");
-                            $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','flex-end').append($button);
+                            $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','center').append($button);
                             $deptdiv2 = $('<div></div>').addClass('col-4 px-0').append($buttonDiv);
 
                             div1 = div1 + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'>"+course.name+"</li>";
@@ -89,7 +89,7 @@ $(document).ready(function() {
                                 "dept":JSON.stringify(dept)
                             });
 
-                            $deptDiv = $('<div></div>').addClass('row mx-0 px-0').append($deptdiv1,$deptdiv2);
+                            $deptDiv = $('<div></div>').addClass('row mx-0 px-0 deptDiv').append($deptdiv1,$deptdiv2);
                             
                             $cardBody = $('<div></div>').addClass('card-body p-3').css('height','40%').append($title,$deptDiv);
                             $card = $('<div></div>').addClass('card position-relative mb-4 shadow-sm addCourseCard').css('cursor','default').css('color','white').append($img, $cardBody);
@@ -124,7 +124,7 @@ $(document).ready(function() {
 
                                 let departments = "";
                                 $.each(course.departments, (index,department) => {
-                                    if(index != 0) departments = departments + ",";
+                                    if(index != 0) departments = departments + ", ";
                                     departments = departments + department.name;
                                     // div = div + "<span class='mx-3 mb-2 span-heading span-dept p-1'>"+department.name+"</span>";
                                     dept.push({
@@ -144,8 +144,8 @@ $(document).ready(function() {
                                 // div = div + "</div></div></div></div>";
 
                                 $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='../images/plus-circle.svg' />");
-                                $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','flex-end').append($button);
-                                $deptdiv2 = $('<div></div>').addClass('col-4 px-0').append($buttonDiv);
+                                $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','center').append($button);
+                                $deptdiv2 = $('<div></div>').addClass('col-4 px-0 deptDiv').append($buttonDiv);
 
                                 div1 = div1 + "<li class='course' style='cursor:pointer;' data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'>"+course.name+"</li>";
 
@@ -251,7 +251,7 @@ $(document).ready(function() {
         $('#courseModalHeader').html("Adding '"+subject_name+"' to Your Courses")
 
         $.each(dept, function(key, value){
-            $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput courseSelectDept' value='"+value.id+"' data-uid='"+value.uid+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
+            $('#courseModalDept').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput courseSelectDept' value='"+value.id+"' data-uid='"+value.uid+"' name='courseDept' id='radio"+value.id+"' /><label for='radio"+value.id+"' class='courseTagsLabel courseDept show1'><i class='fas fa-check' style='display: none;'></i> "+value.name+"</label></li>");
         });
 
     });
