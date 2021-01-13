@@ -71,7 +71,7 @@ $(document).ready(function () {
 
 
   let blooms_lvl = 0
-
+  let i = 0;
 
 
   //units fetching
@@ -332,7 +332,7 @@ $(document).ready(function () {
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >Q.) " + value.name +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >Q " + i + ".) " + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -374,7 +374,7 @@ $(document).ready(function () {
               "</div>"
             );
 
-
+            i++;
             //MathJax.typesetPromise();
 
           });
@@ -408,6 +408,8 @@ $(document).ready(function () {
     });
   }
 
+  i++;
+
   //on click of the view more ques button
   $(document).on('click', '.moreQuesAll', function () {
     $('.moreQuesAll').remove()
@@ -439,7 +441,7 @@ $(document).ready(function () {
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q " + i + ".) " + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -480,6 +482,8 @@ $(document).ready(function () {
               "</div>" +
               "</div>"
             );
+
+            i++;
 
           })
           if (moreQues.length > 0) {
@@ -553,7 +557,7 @@ $(document).ready(function () {
             if (value.blooms_level == blooms_lvl) {
               $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q.) " + value.name +
+                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q " + i + ".)  " + value.name +
                 "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
                 (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
                 (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -594,7 +598,10 @@ $(document).ready(function () {
                 "</div>"
               );
               //MathJax.typesetPromise();
+              i++;
             }
+
+
           });
 
           if (blooms_lvl == 1) {
@@ -695,7 +702,7 @@ $(document).ready(function () {
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >" + value.name +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q " + i + " .)  " + value.name +
               "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
@@ -737,6 +744,7 @@ $(document).ready(function () {
               "</div>"
             );
 
+            i++;
           })
           if (blooms_lvl == 1) {
             $('.chooseQues').append("<button id='moreBloomQues1' class='bloomQues py-2 font-weight-bold'> MORE QUESTIONS</button>")
@@ -785,6 +793,7 @@ $(document).ready(function () {
     //questions_values = []
     moreQues = []
     console.log(moreQues)
+    i = 1
     getAllQuestions()
     $('#navAll').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "10px 0 0 0" })
     $('#all').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
@@ -805,6 +814,7 @@ $(document).ready(function () {
     moreQues = []
     console.log(moreQues)
     blooms_lvl = 1
+    i = 1
     getBloomQuestions(1)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
     $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
@@ -824,6 +834,7 @@ $(document).ready(function () {
     moreQues = []
     console.log(moreQues)
     blooms_lvl = 2
+    i = 1
     getBloomQuestions(2)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
     $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
@@ -843,6 +854,7 @@ $(document).ready(function () {
     moreQues = []
     console.log(moreQues)
     blooms_lvl = 3
+    i = 1
     getBloomQuestions(3)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
     $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
@@ -862,6 +874,7 @@ $(document).ready(function () {
     moreQues = []
     console.log(moreQues)
     blooms_lvl = 4
+    i = 1
     getBloomQuestions(4)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
     $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
@@ -936,17 +949,17 @@ $(document).ready(function () {
 
               "<div class='modal-body'>" +
               "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
-              (selectedQuestions[i].question_img == "" ? "" : "<img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
+              (selectedQuestions[i].question_img == " " ? "" : "<img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
               (selectedQuestions[i].questions_options[0] ? "<div style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[0].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
               (selectedQuestions[i].questions_options[1] ? "<div style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[1].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
               (selectedQuestions[i].questions_options[2] ? "<div style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[2].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
               (selectedQuestions[i].questions_options[3] ? "<div style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[3].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
               (selectedQuestions[i].questions_options[4] ? "<div style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[4].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
 
               (selectedQuestions[i].hint ? "<div style='font-size:12px;'>Hint :" + selectedQuestions[i].hint + "</div>" : "") +
               (selectedQuestions[i].hint_image ? "<img src='" + selectedQuestions[i].hint_image + "' alt='img' style='width:100px; height:75px;'></img>" : "") +
@@ -1032,17 +1045,17 @@ $(document).ready(function () {
 
           "<div class='modal-body'>" +
           "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
-          (selectedQuestions[i].question_img == "" ? "" : "<img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
+          (selectedQuestions[i].question_img == " " ? "" : "<img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img>") +
           (selectedQuestions[i].questions_options[0] ? "<div style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[0].name)) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+          (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
           (selectedQuestions[i].questions_options[1] ? "<div style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[1].name)) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+          (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
           (selectedQuestions[i].questions_options[2] ? "<div style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[2].name)) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+          (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
           (selectedQuestions[i].questions_options[3] ? "<div style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[3].name)) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+          (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
           (selectedQuestions[i].questions_options[4] ? "<div style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[4].name)) + "</div>" : "") +
-          (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+          (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
 
           (selectedQuestions[i].hint ? "<div style='font-size:12px;'>Hint :" + selectedQuestions[i].hint + "</div>" : "") +
           (selectedQuestions[i].hint_image ? "<img src='" + selectedQuestions[i].hint_image + "' alt='img' style='width:100px; height:75px;'></img>" : "") +
