@@ -49,9 +49,6 @@ body{
   background-color: #f9f9f9;
   justify-content: center;
   margin: auto;
-  /* margin-right: 0; */
-  /* padding-left: 6%;
-  padding-right: 10%; */
 }
 @media(max-width: 767px){
   #theMainDiv{
@@ -226,8 +223,6 @@ max-height: 300px;
 
 @media(max-width:767px) and (min-width: 500px){
   .course-card{
-    /* height: 350px;
-    max-height: 350px; */
     width: 250px;
   }
 
@@ -341,10 +336,6 @@ border-spacing: 1em;
 .questionTab{
 background: white;
 border-radius: 18px;
-/* overflow-y: scroll;
-overflow-x: hidden; */
-/* max-height: 300px; */
-/* margin-right: -15px; */
 }
 
 .questionHeading{
@@ -374,7 +365,6 @@ margin-top: 0;
 
 .scrollDiv{
 height: auto;
-/* max-height: 450px; */
 width: 100%;
 overflow-x: hidden;
 height: 100%;
@@ -427,7 +417,6 @@ height: 0.01rem;
   background: #f8c6f8;
   border-radius: 10px;
   font-size: 10px;
-  /* height: 25px; */
 }
 
 .deptDiv{
@@ -436,20 +425,12 @@ height: 0.01rem;
 
 .addCourseCard{
 height: 350px;
-/* max-height: 425px; */
 }
 
 .addCourseCard h5{
   font-size: 16px;
   height: 40px;
-  /* max-height: 40px; */
   padding-bottom: 10px;
-  /* max-height: 425px; */
-}
-
-.addCourseCard .row{
-  /* height: 65px; */
-  /* max-height: 425px; */
 }
 
 .home .addCourseCard {
