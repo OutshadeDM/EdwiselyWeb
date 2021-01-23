@@ -102,7 +102,7 @@
     </div>
     <!-- sidebar-container END -->
     <!-- MAIN -->
-    <div class="right-div">
+    <div class="col px-0">
       <div class="container-fluid px-0">
         <div class="shadow-sm">
           <div class="px-5 headerBanner">
@@ -122,29 +122,29 @@
           </div>
         </div>
         <!-- Start Page Content -->
+        <div class="container px-0" id="theMainDiv">
+          <!-- put everything in this div -->
+          <div class="row form-body">
 
-        <!-- put everything in this div -->
-        <div class="internal-padding form-body">
-
-          <div class="form-group px-5" style="width: 350px;line-height: 40px;">
-            <div class="px-5">
-              <div class="fake-input">
-                <input type="text" autocomplete="off" placeholder="Search Courses" id="courseSelect"
-                  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Courses'" class="single-input" >
-                <i class="fas fa-search" aria-hidden="true"></i>
+            <div class="form-group px-0" style="width: 350px;line-height: 40px;">
+              <div class="px-5">
+                <div class="fake-input">
+                  <input type="text" autocomplete="off" placeholder="Search Courses" id="courseSelect"
+                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Courses'" class="single-input">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </div>
+                <div id="courseSelectList" class="autocomplete-items"></div>
               </div>
-              <div id="courseSelectList" class="autocomplete-items"></div>
             </div>
-          </div>
-          <!--Courses List-->
-          <div class="container pt-1 px-5 mx-0 listDiv">
-            <div class="row text-center px-5" id="courseList">
+            <!--Courses List-->
+            <div class="container pt-1 px-0 mx-0 listDiv">
+              <div class="row text-center px-5" id="courseList">
 
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
-
         <!-- End Page Content -->
       </div>
     </div>

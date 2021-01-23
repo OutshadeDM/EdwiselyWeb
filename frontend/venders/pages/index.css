@@ -214,6 +214,7 @@
 
 .addCourseCard {
     outline: none;
+    height: 300px;
 }
 
 .card-img-top {
