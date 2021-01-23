@@ -410,8 +410,16 @@ $(async function() {
 				  slidesToScroll: 3,
 				  arrows: true,	
 				  responsive: [
+					{
+						breakpoint: 1920,
+						settings: {
+							slidesToShow: 4,
+							slidesToScroll: 4,
+							infinite: true
+						}
+					},
 				    {
-				      breakpoint: 1024,
+				      breakpoint: 1680,
 				      settings: {
 				        slidesToShow: 3,
 				        slidesToScroll: 3,
