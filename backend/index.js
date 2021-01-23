@@ -771,6 +771,7 @@ $(async function() {
 		} else {
 			$("#activity").html("<div class='bg-white p-3'>No Activities Found!</div>");
 		}
+		$(".loader-wrapper").addClass("d-none");
 	}
 
 
