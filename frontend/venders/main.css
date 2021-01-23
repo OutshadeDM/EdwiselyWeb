@@ -812,11 +812,11 @@ pre
   overflow: hidden;
 }
 
-#sidebar-container.collapse {
+#sidebar-container.shrink {
   width: 4% !important;
 }
 
-.right-div.collapse {
+.right-div.shrink {
   width: 96% !important;
 }
 

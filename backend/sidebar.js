@@ -11,8 +11,8 @@ $(document).ready(function () {
   });
 
   function SidebarCollapse () {
-      $('#sidebar-container').toggleClass("collapse");
-      $(".right-div").toggleClass("collapse");
+      $('#sidebar-container').toggleClass("shrink");
+      $(".right-div").toggleClass("shrink");
       $('.menu-collapsed').toggleClass('d-none');
       $('.sidebar-submenu').toggleClass('d-none');
       $('.submenu-icon').toggleClass('d-none');
