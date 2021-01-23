@@ -799,3 +799,26 @@ pre
   z-index: 10;
 }
 
+
+/* Amit Added Styles for adaptive width */
+#sidebar-container {
+  width: 15%;
+  float: left;
+}
+
+.right-div {
+  width: 85%;
+  overflow: hidden;
+}
+
+#sidebar-container.shrink {
+  width: 4% !important;
+}
+
+.right-div.shrink {
+  width: 96% !important;
+}
+
+.internal-padding {
+  padding: 2rem 5rem;
+}
