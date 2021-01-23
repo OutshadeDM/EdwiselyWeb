@@ -11,7 +11,7 @@
 }
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 3px solid #828282; border-radius: 20px;
 }
 .onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
@@ -24,13 +24,16 @@
 }
 .onoffswitch-inner:before {
     content: "Public";
-    padding-left: 10px;
-    background-color: #FFFFFF; color: #000000;
+    /* padding-left: 10px; */
+    background-color: #FFFFFF; 
+    color: #000000;
 }
 .onoffswitch-inner:after {
     content: "Private";
     padding-right: 10px;
-    background-color: #828282; color: #FFFFFF;
+    background-color: #828282; 
+    color: #FFFFFF;
+    border: 1px solid #828282;
     text-align: right;
 }
 .onoffswitch-switch {
@@ -58,42 +61,47 @@
 }
 
 .tabLabels{
-    background-color: #F9F9F9;
+    background-color: white;
 }
 
 .addingQues{
     overflow-y: scroll;
-    height: 80vh;
-  }
+    height: 70vh;
+}
   
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .addingQues::-webkit-scrollbar {
+/* Hide scrollbar for Chrome, Safari and Opera */
+.addingQues::-webkit-scrollbar {
     display: none;
-  }
+}
   
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .addingQues {
+/* Hide scrollbar for IE, Edge and Firefox */
+.addingQues {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  }
+}
   
-  .chosenQuestions{
+.chosenQuestions{
     height: 84px;
     overflow: hidden;
     cursor: pointer;
     border-bottom: solid 1px rgb(206, 206, 206);
-  }
+}
 
-  .hyperlinkUl{
+.hyperlinkUl{
     list-style: none;
     padding: 0;
     text-align: center;
-  }
+}
 
-  .hyperlinkUl li{
+.hyperlinkUl li{
       margin: 6px 0;
-  }
+}
 
-  .hyperlinkUl li a {
-      font-weight: bold;
-  }
+.whiteBack{
+    background-color: white;
+    border-radius: 18px;
+}
+
+.hyperlinkUl li button {
+    font-weight: bold;
+}
