@@ -24,7 +24,7 @@
 }
 .onoffswitch-inner:before {
     content: "Public";
-    /* padding-left: 10px; */
+    padding-left: 10px;
     background-color: #FFFFFF; 
     color: #000000;
 }
