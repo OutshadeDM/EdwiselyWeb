@@ -801,3 +801,25 @@ pre
 
 /* from choose questions */
 
+/* Amit Added Styles for adaptive width */
+#sidebar-container {
+  width: 15%;
+  float: left;
+}
+
+.right-div {
+  width: 85%;
+  overflow: hidden;
+}
+
+#sidebar-container.collapse {
+  width: 4% !important;
+}
+
+.right-div.collapse {
+  width: 96% !important;
+}
+
+.internal-padding {
+  padding: 2rem 5rem;
+}
