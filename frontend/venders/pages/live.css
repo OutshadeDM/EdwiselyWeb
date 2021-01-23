@@ -216,3 +216,18 @@ input#file:before {
   display: block;
   margin: 0 auto;
 }
+
+/* Amit Added Styles for adaptive width */
+#sidebar-container {
+  width: 15%;
+  float: left;
+}
+
+.right-div {
+  width: 85%;
+  overflow: hidden;
+}
+
+.internal-padding {
+  padding: 2rem 5rem;
+}

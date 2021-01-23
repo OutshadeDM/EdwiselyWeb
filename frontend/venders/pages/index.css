@@ -375,3 +375,18 @@
 .btn-danger:hover {
     background-image: linear-gradient(144deg, #F38FA2 0%, #EB5C6F 41%, #F1825C 100%);
 }
+
+/* Amit Added Styles for adaptive width */
+#sidebar-container {
+    width: 15%;
+    float: left;
+}
+
+.right-div {
+    width: 85%;
+    overflow: hidden;
+}
+
+.internal-padding {
+    padding: 2rem 5rem;
+}
