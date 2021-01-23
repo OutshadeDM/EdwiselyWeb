@@ -808,7 +808,7 @@ $(document).ready(function () {
     $('#solutionInput').prop('disabled',false);
     $('#hintInput').prop('disabled',false);
     $('#sourceInput').prop('disabled',false);
-    $('.chooseImage').show();
+    $('.chooseImage').css('pointer-events','auto').css('cursor','auto');
 
     if (updateTopics)
       getTopics();
@@ -951,7 +951,7 @@ $(document).ready(function () {
       $('#solutionInput').prop('disabled',false);
       $('#hintInput').prop('disabled',false);
       $('#sourceInput').prop('disabled',false);
-      $('.chooseImage').show();
+      $('.chooseImage').css('pointer-events','auto').css('cursor','auto');
 
     }
     else {
@@ -974,7 +974,7 @@ $(document).ready(function () {
       $('#solutionInput').prop('disabled',true);
       $('#hintInput').prop('disabled',true);
       $('#sourceInput').prop('disabled',true);
-      $('.chooseImage').hide();
+      $('.chooseImage').css('pointer-events','none').css('cursor','not-allowed');
     }
 
     // console.log(JSON.stringify(value));

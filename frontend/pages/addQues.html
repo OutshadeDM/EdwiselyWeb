@@ -154,18 +154,19 @@
           <!-- put everything in this div -->
 
           <div class="row" id="abcd">
-            <div class="col-md-3 px-4 py-2" id="questionDisplayDiv">
-              <div class="addingQues pr-2" id="addquesDiv">
-                <div class="initData">Add Questions</div>
-              </div>
-              <div>
-                <button class="btn btn-primary btn-block mt-3 p-1 py-0 shadow-sm font-weight-bold" id="addNewBtn">Add
-                  New</button>
+            <div class="col-md-3 px-4" id="questionDisplayDiv">
+              <div class="whiteBack h-100">
+                <div class="addingQues pr-2" id="addquesDiv">
+                  <div class="initData">Add Questions</div>
+                </div>
+                <div>
+                  <button class="btn btn-primary" id="addNewBtn">Add New</button>
+                </div>
               </div>
             </div>
 
-            <div class="col-md-7 addques pt-2 pb-5 mb-5" id="createques">
-              <div class="divInput row">
+            <div class="col-md-7 whiteBack addques pt-2 pb-5" id="createques">
+              <div class="divInput row no-gutters">
                 <div class="col-sm-9">
                   <textarea class="form-control form-control-lg w-100" cols="50"
                     placeholder="Start typing your question" id="quesInput"></textarea>
@@ -173,10 +174,10 @@
                 <div class="col-sm-3 titleImg py-3">
                   <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
                   <!-- <i class="fas fa-edit fa-lg px-2 uploaded"></i> -->
-                  <div class="chooseImage">
+                  <div class="chooseImage d-inline">
                     <i class="fas fa-trash-alt fa-lg px-2 uploadedques"></i>
                     <i class="fas fa-image fa-lg px-2 notUploadedques"></i>
-                    <label for="quesImage" id="quesLabel" class="custom-file-upload" id="quesImageLabel">Add Image</label>
+                    <label for="quesImage" id="quesLabel" class="custom-file-upload">Add Image</label>
                     <input id="quesImage" type="file" accept="image/*" />
                   </div>
                 </div>
@@ -339,16 +340,16 @@
                 </div>
 
               </div>
-              <div class="row pt-4 text-center px-0 mx-0">
+              <div class="row py-4 text-center">
 
-                <div class="col-6 mx-0 pl-0 pr-4">
-                  <a href="#" id="fifthOptionBtn"><i class="fas fa-plus"></i> Add
-                    Option</a>
+                <div class="col-6 mx-0 pr-4">
+                  <a href="#" id="fifthOptionBtn"><i class="fas fa-plus"></i> Add Option</a>
 
 
                   <div class="row" id="fifth">
+
                     <div class="col-2 mx-0 p-1 fifthOption">
-                      <div class="form-check pl-1 pt-1" id="option5Label">
+                      <div class="form-check pl-2 pt-1" id="option5Label">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4">
                           <i class="far fa-square fa-2x untick untick5" style="width: 100%;"></i>
@@ -375,62 +376,82 @@
                       <img id="image_preview_option5" src="" width="60" alt="No image" />
                     </div>
                   </div>
-
-
-
-
-
-
-
-
-
-
                 </div>
 
               </div>
 
-              <div class="divInput row no-gutters my-3" id="hintDiv">
+              
+              <a href="#" id="hintBtn"><i class="fas fa-plus"></i> Add Hint</a><br>
+
+              <div class="row divInput mx-1 my-3" id="hintDiv">
                 <label for="hintInput" class="w-100 tabLabels">Hint</label>
                 <div class="col-sm-9">
                   <textarea class="form-control form-control-lg w-100" type="text" placeholder="Hint" id="hintInput" cols="50"></textarea>
                 </div>
                 <div class="col-sm-3 titleImg py-3">
                   <img id="image_preview_hint" class="imgPreviewhint" src="" alt="your image" />
-                    <div class="chooseImage">
+                    <div class="chooseImage d-inline">
                       <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
                       <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
-                      <label for="hintImage" id="hintLabel" class="custom-file-upload" id="hintImageLabel">Add Image</label>
+                      <label for="hintImage" id="hintLabel" class="custom-file-upload">Add Image</label>
                     </div>
                     <input id="hintImage" type="file" accept="image/*" />
                 </div>
               </div>
 
-              <div class="divInput row no-gutters my-3" id="solutionDiv">
+              
+              <a href="#" id="solutionBtn"><i class="fas fa-plus"></i> Add Solution</a>
+
+              <!-- <div class="row divInput my-3">
                 <label for="solutionInput" class="w-100 tabLabels">Solution</label>
                 <div class="col-sm-9">
                   <textarea class="form-control form-control-lg w-100" type="text" placeholder="Solution" id="solutionInput" cols="50"></textarea>
                 </div>
                 <div class="col-sm-3 titleImg py-3">
                   <img id="image_preview_solution" class="imgPreviewsolution" src="" alt="your image" />
-                  <div class="chooseImage">
+                  <div class="chooseImage d-inline">
                     <i class="fas fa-trash-alt fa-lg px-2 uploadedsolution"></i>
                     <i class="fas fa-image fa-lg px-2 notUploadedsolution"></i>
-                    <label for="solutionImage" class="custom-file-upload" id="solutionImageLabel">Add Image</label>
+                    <label for="solutionImage" class="custom-file-upload" id="solutionLabel">Add Image</label>
+                  </div>
+                  <input id="solutionImage" type="file" accept="image/*" />
+                </div> 
+               </div> -->
+
+              <div class="divInput row mx-1 my-3" id="solutionDiv">
+                <label for="solutionInput" class="w-100 tabLabels">Solution</label>
+                <div class="col-sm-9">
+                  <textarea class="form-control form-control-lg w-100" type="text" placeholder="Solution" id="solutionInput" cols="50"></textarea>
+                </div>
+                <div class="col-sm-3 titleImg py-3">
+                  <img id="image_preview_solution" class="imgPreviewsolution" src="" alt="your image" />
+                  <div class="chooseImage d-inline">
+                    <i class="fas fa-trash-alt fa-lg px-2 uploadedsolution"></i>
+                    <i class="fas fa-image fa-lg px-2 notUploadedsolution"></i>
+                    <label for="solutionImage" class="custom-file-upload" id="solutionLabel">Add Image</label>
                   </div>
                   <input id="solutionImage" type="file" accept="image/*" />
                 </div>
               </div>
 
-              <div class="divInput mt-3 mb-5">
+              <!-- <div class="row divInput mt-3 mb-5">
+                <div class="col-12 px-0">
+                  <label for="sourceInput" class="w-100 tabLabels">Source</label>
+                  <textarea class="form-control form-control-lg w-100" type="text" placeholder="Source (if any)" id="sourceInput" cols="50"></textarea>
+                </div>
+              </div> -->
+
+              <div class="divInput mt-3 mb-5 mx-1">
                 <label for="sourceInput" class="w-100 tabLabels">Source</label>
                 <textarea class="form-control form-control-lg w-100" type="text" placeholder="Source (if any)" id="sourceInput" cols="50"></textarea>
               </div>
             </div>
 
-            <div class="col-md-2 addques pl-4 pr-0 mr-0 py-2" id="addsoln">
-              <div class="form-group">
+            <div class="col-md-2 addques pl-4 pr-0 mr-0" id="addsoln">
+              <div class="whiteBack h-100">
+              <div class="form-group pt-2">
                 <div class="form-group mb-0 pb-0">
-                  <div class="onoffswitch">
+                  <div class="onoffswitch mx-auto">
                     <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch1" value="public" tabindex="0"
                       checked name="public_pvt">
                     <label class="onoffswitch-label" id="customSwitch1Label" for="customSwitch1">
@@ -439,11 +460,6 @@
                     </label>
                   </div>
                 </div>
-                <!-- <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" name="public_pvt" value="public"
-                    id="customSwitch1" checked>
-                  <label class="custom-control-label" for="customSwitch1">Public</label>
-                </div> -->
 
 
                 <!-- Button trigger modal -->
@@ -482,21 +498,17 @@
                   </div>
                 </div>
 
-                <ul class="hyperlinkUl">
+                <ul class="hyperlinkUl pt-1">
                   <li>
-                    <a href="#" id="hintBtn">Add Hint</a>
+                    <button class="btn btn-primary w-100" id="deleteBtn" style="display: none;">Delete</button>
+                    <!-- <a href="#" id="deleteBtn" style="display: none;">Delete</a> -->
                   </li>
                   <li>
-                    <a href="#" id="solutionBtn">Add Solution</a>
+                    <button class="btn btn-primary w-100" id="editBtn">Edit</button>
+                    <!-- <a href="#" id="editBtn">Edit</a> -->
                   </li>
                   <li>
-                    <a href="#" id="deleteBtn" style="display: none;">Delete</a>
-                  </li>
-                  <li>
-                    <a href="#" id="editBtn">Edit</a>
-                  </li>
-                  <li>
-                    <button class="btn btn-lg btn-primary fifthOptionBtn w-100" id="plusBtn">Done</button>
+                    <button class="btn btn-primary w-100" id="plusBtn">Done</button>
                     <!-- <a href="#" id="plusBtn">Done</a> -->
                   </li>
                 </ul>
@@ -504,8 +516,9 @@
                 <input type="hidden" value="0" id="questionId">
                 
               </div>
+              </div>
             </div>
-            <div class="col-md-2 addques px-4 py-2" id="topicsDiv" style="display: none;"></div>
+            <div class="col-md-2 whiteBack addques px-4 py-2" id="topicsDiv" style="display: none;"></div>
           </div>
 
           <!-- toasts -->
