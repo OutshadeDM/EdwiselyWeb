@@ -531,7 +531,7 @@ align-items: center;
 text-align: center;
 }
 .divInput {
-background-color: #EEEEEE;
+background-color: #f9f9f9;
 }
 
 .imgPreviewques {
@@ -679,7 +679,7 @@ border: none;
 
 #sourceInput {
 height: 50px;
-background-color: transparent;
+background-color: #f9f9f9;
 border: none;
 opacity: 0.5;
 color: black;
