@@ -74,9 +74,11 @@ $(document).ready(function () {
 
 
   //initially hiding the hint and solution divs
-  $('#hintDiv').hide()
-  $('#solutionDiv').hide()
-  $('#fifth').hide()
+  $('#hintDiv').hide();
+  $('#hintBtn').show();
+  $('#solutionDiv').hide();
+  $('#solutionBtn').show();
+  $('#fifth').hide();
 
   //hiding edit btn
   $('#editBtn').hide();
@@ -84,12 +86,14 @@ $(document).ready(function () {
 
   //on click of hint btn
   $('#hintBtn').on('click', function () {
-    $('#hintDiv').show()
+    $('#hintDiv').show();
+    $('#hintBtn').hide();
   })
 
   //on click of solution btn
   $('#solutionBtn').on('click', function () {
     $('#solutionDiv').show();
+    $('#solutionBtn').hide();
   })
 
   //onclick of add option btn
@@ -239,7 +243,10 @@ $(document).ready(function () {
     $("#addquesDiv").empty();
 
     $.each(questions, function (key, value) {
-      $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
+      // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
+      $('#addquesDiv').append("<div class='row m-0'>" +
+      "<div class='col-1 pl-2 pt-4 chosenQuestions'>Q).</div>" +
+      "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
     });
     MathJax.typesetPromise();
   }
@@ -763,6 +770,8 @@ $(document).ready(function () {
     }
     $('#solutionDiv').hide();
     $('#hintDiv').hide();
+    $('#solutionBtn').show();
+    $('#hintBtn').show()
     $('#questionId').val("");
 
     $('#uploadedoption1').click();
@@ -789,6 +798,17 @@ $(document).ready(function () {
     $('#option3Label').show();
     $('#option4Label').show();
     $('#option5Label').show();
+    
+    $('#quesInput').prop('disabled',false);
+    $('#firstOption').prop('disabled',false);
+    $('#secondOption').prop('disabled',false);
+    $('#thirdOption').prop('disabled',false);
+    $('#fourthOption').prop('disabled',false);
+    $('#fifthOption').prop('disabled',false);
+    $('#solutionInput').prop('disabled',false);
+    $('#hintInput').prop('disabled',false);
+    $('#sourceInput').prop('disabled',false);
+    $('.chooseImage').show();
 
     if (updateTopics)
       getTopics();
@@ -922,6 +942,16 @@ $(document).ready(function () {
       $('#option3Label').show();
       $('#option4Label').show();
       $('#option5Label').show();
+      $('#quesInput').prop('disabled',false);
+      $('#firstOption').prop('disabled',false);
+      $('#secondOption').prop('disabled',false);
+      $('#thirdOption').prop('disabled',false);
+      $('#fourthOption').prop('disabled',false);
+      $('#fifthOption').prop('disabled',false);
+      $('#solutionInput').prop('disabled',false);
+      $('#hintInput').prop('disabled',false);
+      $('#sourceInput').prop('disabled',false);
+      $('.chooseImage').show();
 
     }
     else {
@@ -934,6 +964,17 @@ $(document).ready(function () {
       $('#option3Label').hide();
       $('#option4Label').hide();
       $('#option5Label').hide();
+
+      $('#quesInput').prop('disabled',true);
+      $('#firstOption').prop('disabled',true);
+      $('#secondOption').prop('disabled',true);
+      $('#thirdOption').prop('disabled',true);
+      $('#fourthOption').prop('disabled',true);
+      $('#fifthOption').prop('disabled',true);
+      $('#solutionInput').prop('disabled',true);
+      $('#hintInput').prop('disabled',true);
+      $('#sourceInput').prop('disabled',true);
+      $('.chooseImage').hide();
     }
 
     // console.log(JSON.stringify(value));
@@ -967,12 +1008,14 @@ $(document).ready(function () {
 
     if (value.solution) {
       $('#solutionDiv').show();
+      $('#solutionBtn').hide();
       $('#solutionInput').val(value.solution);
       solution = value.solution;
     }
 
     if (value.hint) {
       $('#hintDiv').show();
+      $('#hintBtn').hide();
       $('#hintInput').val(value.hint);
       hint = value.hint;
     }
@@ -1009,6 +1052,7 @@ $(document).ready(function () {
 
     if (value.hint_image && value.hint_image != null) {
       $('#hintDiv').show();
+      $('#hintBtn').hide();
       $('.uploadedhint').show()
       $('.imgPreviewhint').show()
       $('.notUploadedhint').hide()
@@ -1019,6 +1063,7 @@ $(document).ready(function () {
 
     if (value.solution_image && value.solution_image != null) {
       $('#solutionDiv').show();
+      $('#solutionBtn').hide();
       $('.uploadedsolution').show()
       $('.imgPreviewsolution').show()
       $('.notUploadedsolution').hide()
