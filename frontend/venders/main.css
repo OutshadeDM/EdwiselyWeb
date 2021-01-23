@@ -37,12 +37,12 @@ body{
   padding: 0;
   background-color: #f9f9f9;
 }
-.container-fluid{
-  /* height: 100%; */
+/* .container-fluid{
+  align-items: center;
   padding-right: 0;
   padding-left: 0;
   margin: 0;
-}
+} */
 #theMainDiv {
   height: 100%;
   width: 100%;
@@ -50,7 +50,7 @@ body{
   justify-content: center;
   margin: auto;
 }
-@media(max-width: 767px){
+/* @media(max-width: 767px){
   #theMainDiv{
     max-width: 755px;
   }
@@ -59,7 +59,7 @@ body{
   #theMainDiv{
     max-width: 1100px;
   }
-}
+} */
 
 .listDiv{
   background: #f9f9f9;
@@ -798,3 +798,6 @@ pre
 .card-footer {
   z-index: 10;
 }
+
+/* from choose questions */
+

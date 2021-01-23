@@ -206,8 +206,8 @@ $(document).ready(function() {
     });
 
     $('#courseModal').on('show.bs.modal', function (event) {
-        let button = $(event.relatedTarget) // Button that triggered the modal
-        let dept = button.data('dept'); // Extract info from data-* attributes
+        let button = $(event.relatedTarget)
+        let dept = button.data('dept');
         let subject_id = button.data('subject');
         let subject_name = button.data('name');
 
