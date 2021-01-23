@@ -629,7 +629,7 @@ $(async function() {
 						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
 					else if (Number(activity.results.answered)) {
 						act += `<div class="col-6 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
-						act += `<div class="col-5 status text-center align-self-center"><strong>View Res</strong></div>`;
+						act += `<div class="col-5 status text-center align-self-center"><strong>View Result</strong></div>`;
 					} else {
 						act += `<div class="col-6 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
 						act += `<div class="col-5 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
