@@ -26,7 +26,7 @@ $(document).ready(function() {
                 'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-                $('#loadingDiv').remove();
+                $(".loader-wrapper").addClass("d-none");
                 $('#courseList').empty();
                 $('#courseSelectList').empty();
                 if (result.status == 200) {
@@ -150,7 +150,7 @@ $(document).ready(function() {
                     $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
             },
             error: function (error) {
-                $('#loadingDiv').remove();
+                $(".loader-wrapper").addClass("d-none");
                 alert("Request Failed with status: "+error.status);
             }
         });
