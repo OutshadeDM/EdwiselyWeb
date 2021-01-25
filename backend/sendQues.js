@@ -519,7 +519,7 @@ $(document).ready(function () {
         timeFormat: 'HH:mm:ss',
         start: {
           minDate: 0,
-          onSelect: function (selectedDateTime) {
+          onChange: function (selectedDateTime) {
             endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'.replace(/\s/, 'T')))
           }
         },
@@ -541,12 +541,31 @@ $(document).ready(function () {
 
 
     $('.durationHours').on('change', function () {
-      hours = $('.durationHours').val()
+      if ($('.durationHours').val() > 100) {
+        $('.durationHours').val('99')
+      }
+
+      if ($('.durationHours').val() < 0) {
+        $('.durationHours').val('0')
+      }
+
+      $('.durationHours').val(parseInt($('.durationHours').val()))
+      hours = parseInt($('.durationHours').val())
     })
 
     $('.durationMinutes').on('change', function () {
-      mins = $('.durationMinutes').val()
+      if ($('.durationMinutes').val() > 59) {
+        $('.durationMinutes').val('59')
+      }
+
+      if ($('.durationMinutes').val() < 0) {
+        $('.durationMinutes').val('0')
+      }
+
+      $('.durationMinutes').val(parseInt($('.durationMinutes').val()))
+      mins = parseInt($('.durationMinutes').val())
     })
+
 
 
 
