@@ -32,6 +32,7 @@ $(document).ready(function () {
     let section = 0
     let sectionIds = []
     let selectedStudentsId = []
+    let preSelectedStudentsIds = []
     let hours = 0
     let mins = 0
     let timelimit_in_secs = 0
@@ -62,6 +63,34 @@ $(document).ready(function () {
 
 
 
+    //initializing the values
+
+    $('#starttime').val(starttime)
+    $('#endtime').val(doe)
+    hours = parseInt(timelimit / 3600)
+    $('.durationHours').val(parseInt(timelimit / 3600))
+    mins = (timelimit / 60) % 60
+    $('.durationMinutes').val((timelimit / 60) % 60)
+
+    temp = students.split(',')
+    temp.map((x) => {
+      selectedStudentsId.push(parseInt(x))
+    })
+    temp.map((x) => {
+      preSelectedStudentsIds.push(parseInt(x))
+    })
+
+
+
+
+    $('#numberOfStudents').text(selectedStudentsId.length)
+
+
+
+
+
+
+
     let startDateTextBox = $('#starttime');
     let endDateTextBox = $('#endtime');
 
@@ -74,7 +103,7 @@ $(document).ready(function () {
         timeFormat: 'HH:mm:ss',
         start: {
           minDate: 0,
-          onSelect: function (selectedDateTime) {
+          onChange: function (selectedDateTime) {
             endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'.replace(/\s/, 'T')))
           }
         },
@@ -84,29 +113,6 @@ $(document).ready(function () {
 
       }
     );
-
-
-
-
-    //initializing the values
-
-    $('#starttime').val(starttime)
-    $('#endtime').val(doe)
-    hours = timelimit / 3600
-    $('.durationHours').val(timelimit / 3600)
-    mins = timelimit % 3600
-    $('.durationMinutes').val(timelimit % 3600)
-
-    temp = students.split(',')
-    temp.map((x) => {
-      selectedStudentsId.push(parseInt(x))
-    })
-    $('#numberOfStudents').text(selectedStudentsId.length)
-
-
-
-    //console.log(selectedStudentsId)
-
 
 
 
@@ -121,11 +127,29 @@ $(document).ready(function () {
 
 
     $('.durationHours').on('change', function () {
-      hours = $('.durationHours').val()
+      if ($('.durationHours').val() > 100) {
+        $('.durationHours').val('99')
+      }
+
+      if ($('.durationHours').val() < 0) {
+        $('.durationHours').val('0')
+      }
+
+      $('.durationHours').val(parseInt($('.durationHours').val()))
+      hours = parseInt($('.durationHours').val())
     })
 
     $('.durationMinutes').on('change', function () {
-      mins = $('.durationMinutes').val()
+      if ($('.durationMinutes').val() > 59) {
+        $('.durationMinutes').val('59')
+      }
+
+      if ($('.durationMinutes').val() < 0) {
+        $('.durationMinutes').val('0')
+      }
+
+      $('.durationMinutes').val(parseInt($('.durationMinutes').val()))
+      mins = parseInt($('.durationMinutes').val())
     })
 
 
@@ -226,9 +250,13 @@ $(document).ready(function () {
 
             // background-image: linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);
             $.each(result.data, function (key, value) {
-              if (selectedStudentsId.includes(value.id)) {
+              if (preSelectedStudentsIds.includes(value.id)) {
+                $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-image:linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' disabled data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
+              }
+              else if (selectedStudentsId.includes(value.id)) {
                 $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-image:linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
-              } else {
+              }
+              else {
                 $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-image:linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:60px;'>${value.roll_number}</div>   ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
               }
               //allStudentsId.push(value.id)
@@ -246,6 +274,15 @@ $(document).ready(function () {
         }
       });
     }
+
+
+
+
+    //working for the already selected students
+
+
+
+
 
 
     //on click of select all, select all students
@@ -405,7 +442,7 @@ $(document).ready(function () {
         }
       }
       else {
-        $('#errorToastBody').text("Fill All Details");
+        $('#errorToastBody').text("Fill All Details Carefully");
         $('#errorToast').toast('show');
       }
     })
