@@ -1,4 +1,4 @@
-    .switch {
+  .switch {
   position: relative;
   display: inline-block;
   width: 60px;
@@ -162,7 +162,7 @@ label {
 
 .slide-wrap .nav-pills .nav-link:after {
   content: ' ';
-  width: 50%;
+  width: 50px;
   height: 3px;
   background-color: #1b668c;
   border-radius: 1px;
@@ -172,7 +172,7 @@ label {
 }
 
 .nav-pills .nav-link.active:after, .nav-pills .show>.nav-link:after {
-  width: 100%;
+  width: 100px;
 }
 
 

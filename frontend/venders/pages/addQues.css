@@ -105,3 +105,13 @@
 .hyperlinkUl li button {
     font-weight: bold;
 }
+
+.left-radius{
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.right-radius{
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

@@ -195,7 +195,7 @@
 
                 <div class="col-6" id="levelDropDiv">
 
-                  <select class="levelSelect mx-2 float-right" id="selectLevel">
+                  <select class="bloomSelect mx-2 float-right" id="selectLevel">
                     <option value="1" selected>Level 1</option>
                     <option value="2">Level 2</option>
                     <option value="3">Level 3</option>
@@ -210,7 +210,7 @@
 
                 <div class="col-6 pr-4">
                   <div class="row">
-                    <div class="col-2 p-1 firstOption">
+                    <div class="col-2 p-1 firstOption left-radius">
                       <div class="form-check p-0">
                         <label class="radiolabel pl-2 pt-1" id="option1Label">
                           <input type="radio" class="radiostest" name="Radios" id="Radios1" value="0">
@@ -223,7 +223,7 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option" id="firstOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage firstOption px-0">
+                    <div class="col-2 chooseImage firstOption px-0 right-radius">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption1"></i>
                       </label>
@@ -242,7 +242,7 @@
 
                 <div class="col-6 pl-4">
                   <div class="row">
-                    <div class="col-2 mx-0 p-1 secondOption">
+                    <div class="col-2 mx-0 p-1 secondOption left-radius">
                       <div class="form-check p-0">
                         <label class="radiolabel pl-2 pt-1" id="option2Label">
                           <input type="radio" class="radiostest" name="Radios" id="Radios2" value="1">
@@ -255,7 +255,7 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option" id="secondOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage secondOption px-0">
+                    <div class="col-2 chooseImage secondOption px-0 right-radius">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption2"></i>
                       </label>
@@ -277,7 +277,7 @@
 
                 <div class="col-6 pr-4">
                   <div class="row">
-                    <div class="col-2 mx-0 p-1 thirdOption">
+                    <div class="col-2 mx-0 p-1 thirdOption left-radius">
                       <div class="form-check p-0">
                         <label class="radiolabel pl-2 pt-1" id="option3Label">
                           <input type="radio" class="radiostest" name="Radios" id="Radios3" value="2">
@@ -290,7 +290,7 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option (Optional)" id="thirdOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage thirdOption px-0">
+                    <div class="col-2 chooseImage thirdOption px-0 right-radius">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption3"></i>
                       </label>
@@ -309,7 +309,7 @@
 
                 <div class="col-6 pl-4">
                   <div class="row">
-                    <div class="col-2 mx-0 p-1 fourthOption">
+                    <div class="col-2 mx-0 p-1 fourthOption left-radius">
                       <div class="form-check pl-2 pt-1" id="option4Label">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios4" value="3">
@@ -322,7 +322,7 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option (Optional)" id="fourthOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage fourthOption px-0">
+                    <div class="col-2 chooseImage fourthOption px-0 right-radius">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption4"></i>
                       </label>
@@ -348,8 +348,8 @@
 
                   <div class="row" id="fifth">
 
-                    <div class="col-2 mx-0 p-1 fifthOption">
-                      <div class="form-check pl-2 pt-1" id="option5Label">
+                    <div class="col-2 mx-0 p-1 fifthOption left-radius">
+                      <div class="form-check pl-1 pt-1" id="option5Label">
                         <label class="radiolabel">
                           <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4">
                           <i class="far fa-square fa-2x untick untick5" style="width: 100%;"></i>
@@ -361,12 +361,12 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option (Optional)" id="fifthOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage fifthOption px-0">
+                    <div class="col-2 chooseImage fifthOption px-0 right-radius">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-1" id="uploadedoption5"></i>
                       </label>
                       <label for="opt5Image" class="custom-file-upload optImgs">
-                        <i class="fas fa-image fa-2x pt-1" id="notUploadedoption5"></i>
+                        <i class="fas fa-image fa-2x pt-2" id="notUploadedoption5"></i>
                       </label>
                       <input id="opt5Image" type="file" accept="image/*" />
                     </div>
@@ -389,19 +389,21 @@
               
               <a href="#" id="hintBtn" class="pl-1 mb-5"><i class="fas fa-plus"></i> Add Hint<br><br></a>
 
-              <div class="row divInput mx-1 my-3" id="hintDiv">
+              <div class="my-3" id="hintDiv">
                 <label for="hintInput" class="w-100 tabLabels">Hint</label>
-                <div class="col-sm-9">
-                  <textarea class="form-control form-control-lg w-100" type="text" placeholder="Hint" id="hintInput" cols="50"></textarea>
-                </div>
-                <div class="col-sm-3 titleImg py-3">
-                  <img id="image_preview_hint" class="imgPreviewhint" src="" alt="your image" />
-                    <div class="chooseImage d-inline">
-                      <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
-                      <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
-                      <label for="hintImage" id="hintLabel" class="custom-file-upload">Add Image</label>
-                    </div>
-                    <input id="hintImage" type="file" accept="image/*" />
+                <div class="row divInput mx-1">
+                  <div class="col-sm-9">
+                    <textarea class="form-control form-control-lg w-100" type="text" placeholder="Hint" id="hintInput" cols="50"></textarea>
+                  </div>
+                  <div class="col-sm-3 titleImg py-3">
+                    <img id="image_preview_hint" class="imgPreviewhint" src="" alt="your image" />
+                      <div class="chooseImage d-inline">
+                        <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
+                        <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
+                        <label for="hintImage" id="hintLabel" class="custom-file-upload">Add Image</label>
+                      </div>
+                      <input id="hintImage" type="file" accept="image/*" />
+                  </div>
                 </div>
               </div>
 
@@ -424,19 +426,21 @@
                 </div> 
                </div> -->
 
-              <div class="divInput row mx-1 my-3" id="solutionDiv">
+              <div class="my-3" id="solutionDiv">
                 <label for="solutionInput" class="w-100 tabLabels">Solution</label>
-                <div class="col-sm-9">
-                  <textarea class="form-control form-control-lg w-100" type="text" placeholder="Solution" id="solutionInput" cols="50"></textarea>
-                </div>
-                <div class="col-sm-3 titleImg py-3">
-                  <img id="image_preview_solution" class="imgPreviewsolution" src="" alt="your image" />
-                  <div class="chooseImage d-inline">
-                    <i class="fas fa-trash-alt fa-lg px-2 uploadedsolution"></i>
-                    <i class="fas fa-image fa-lg px-2 notUploadedsolution"></i>
-                    <label for="solutionImage" class="custom-file-upload" id="solutionLabel">Add Image</label>
+                <div class="row divInput mx-1">
+                  <div class="col-sm-9">
+                    <textarea class="form-control form-control-lg w-100" type="text" placeholder="Solution" id="solutionInput" cols="50"></textarea>
                   </div>
-                  <input id="solutionImage" type="file" accept="image/*" />
+                  <div class="col-sm-3 titleImg py-3">
+                    <img id="image_preview_solution" class="imgPreviewsolution" src="" alt="your image" />
+                    <div class="chooseImage d-inline">
+                      <i class="fas fa-trash-alt fa-lg px-2 uploadedsolution"></i>
+                      <i class="fas fa-image fa-lg px-2 notUploadedsolution"></i>
+                      <label for="solutionImage" class="custom-file-upload" id="solutionLabel">Add Image</label>
+                    </div>
+                    <input id="solutionImage" type="file" accept="image/*" />
+                  </div>
                 </div>
               </div>
 
