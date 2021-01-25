@@ -532,6 +532,7 @@ text-align: center;
 }
 .divInput {
 background-color: #f9f9f9;
+border-radius: 18px;
 }
 
 .imgPreviewques {
@@ -548,12 +549,15 @@ width: 100px;
 height: 50px;
 width: 100px;
 }
+
 #quesInput {
 height: 100px;
 width: 60%;
 background-color: #f9f9f9;
 border: none;
 display: inline-block;
+border-bottom-left-radius: 18px;
+border-top-left-radius: 18px;
 }
 
 #hintInput {
@@ -683,6 +687,9 @@ background-color: #f9f9f9;
 border: none;
 opacity: 0.5;
 color: black;
+-webkit-border-radius: 18px;
+-moz-border-radius: 18px;
+border-radius: 18px;
 }
 
 .radiostest {
@@ -831,18 +838,25 @@ pre
   width: 120px;
   height: 120px;
   position: absolute;
-  left: 50%;
-  top: 50vh;
+  /* left: 50%;
+  top: 50vh; */
   z-index: 9999999;
   animation: spin 2s linear infinite;
 }
 
 .loader-wrapper {
-  position: absolute;
+  /* position: absolute; */
+  min-width: 150px;
+  min-height: 150px;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* top: 0; */
+  /* left: 50%; */
   z-index: 9999999;
-  background: #fff;
+  background: #f9f9f9;
 }
 
 @keyframes spin {

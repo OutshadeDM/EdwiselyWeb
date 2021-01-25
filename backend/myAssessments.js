@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // alert("ok");
 
   $user = "";
   if (isLoggedIn()) {
@@ -10,11 +9,7 @@ $(document).ready(function () {
     window.location.replace("login.html");
   }
 
-  // let university_degree_department_id = "71";
-
-
-
-
+  
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
     type: 'GET',

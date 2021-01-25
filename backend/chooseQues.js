@@ -330,10 +330,11 @@ $(document).ready(function () {
             //console.log(value)
 
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11'>Q " + i + ".) " + value.name +
+              "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >Q " + i + ".) " + value.name +
-              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
+              "</div><div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
               (value.questions_options[2] ? value.questions_options[2].is_answer == 1 ? "<span>" + value.questions_options[2].name + "</span>" : "" : "") +
@@ -439,10 +440,11 @@ $(document).ready(function () {
               questions_values.push(value)
             }
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11'> Q " + i + ".) " + value.name +
+              "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q " + i + ".) " + value.name +
-              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
+              "</div><div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
               (value.questions_options[2] ? value.questions_options[2].is_answer == 1 ? "<span>" + value.questions_options[2].name + "</span>" : "" : "") +
@@ -555,10 +557,11 @@ $(document).ready(function () {
             // }
 
             if (value.blooms_level == blooms_lvl) {
-              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11'>Q " + i + ".)  " + value.name +
+                "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput mx-3' value='" + value.id +
                 "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q " + i + ".)  " + value.name +
-                "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
+                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
+                "</div><div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
                 (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
                 (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
                 (value.questions_options[2] ? value.questions_options[2].is_answer == 1 ? "<span>" + value.questions_options[2].name + "</span>" : "" : "") +
@@ -700,10 +703,12 @@ $(document).ready(function () {
               questions_values.push(value)
             }
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'> " +
+                "<div class='col-11'> Q " + i + " .)  " + value.name +
+              "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput mx-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.type_code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ > Q " + i + " .)  " + value.name +
-              "<div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ >"+
+              "</div></div><div class='answers pt-2 pl-4' style='background-color: transparent;'>Answer:  " +
               (value.questions_options[0] ? value.questions_options[0].is_answer == 1 ? "<span>" + value.questions_options[0].name + "</span>" : "" : "") +
               (value.questions_options[1] ? value.questions_options[1].is_answer == 1 ? "<span>" + value.questions_options[1].name + "</span>" : "" : "") +
               (value.questions_options[2] ? value.questions_options[2].is_answer == 1 ? "<span>" + value.questions_options[2].name + "</span>" : "" : "") +

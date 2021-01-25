@@ -510,9 +510,9 @@ $(async function() {
 							act += `<div class="col-7 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-4 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="text-dark" style="font-size: 30px;" target="_blank"><div class=""></div><i class="fas fa-file-pdf"></i></a></div>`;
 						else
 							act += `<div class="col-11 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div>`;
-						act += `<div class="col-3 mt-3 d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
+						act += `<div class="col-3 mt-3 d-flex align-items-center justify-content-center"><a type="button"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</a></div>
 						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
-						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
+						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>
 					</div>
 				</div>`;
 				} else if (activity.type == 'Test') {
@@ -559,10 +559,10 @@ $(async function() {
 						`;
 					}
 					
-					act+= `<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-						<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-						<div class="col-3 mt-3 unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-						<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="questionnaire" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>				
+					act+= `<div class="col-3 mt-3 align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
+						<div class="col-3 mt-3 answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
+						<div class="col-3 mt-3 unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+						<div class="col-3 mt-3 forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="questionnaire" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>				
 					</div>
 				</div>`;
 				} else if (activity.type == 'VideoConference') {
@@ -590,7 +590,7 @@ $(async function() {
 				</div>
 			</div>`;      		
 				} else if (activity.type == 'Material') {
-					console.log(activity);
+					// console.log(activity);
 					act = `<div class=" card px-3 py-3 mt-4">
 					<div class="row">
 					<div class="col-1 align-self-start"><img src="../images/Material.svg" class="img-fluid profile"></div>
@@ -674,14 +674,14 @@ $(async function() {
 						act += `<div class="col-11 offset-1 desc mt-3">A subjective test named ${activity.title} created and set to start at ${getFormattedDateTime(starttime)} with a time limit of ${timelimit} minutes.</div>`;
 						act += `
 								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-3 mt-3 unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
+								<div class="col-3 mt-3 answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-3 mt-3 unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-3 mt-3 forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
 							</div>
 						</div>`;
 					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
 						if (activity.answered)
-							act +=	`<div class="col-7  offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}.</div>
+							act +=	`<div class="col-7 offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}.</div>
 							<div class="col-4 align-self-center d-flex">
 								${ activity.answered? '': '<strong class="status">Test Expired</strong>'}
 								<button type="button" data-toggle="modal" data-target="#p2p" data-id=${activity.id} class="btn btn-primary">Start P2P Evaluation</button></div>`;
@@ -689,19 +689,19 @@ $(async function() {
 							act += `<div class="col-7 desc offset-1 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. </div><div class="col-3 align-self-center">${ activity.answered? '': '<strong class="status">Test Expired</strong>'}</div>
 							`;
 						act += `
-								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-3 mt-3 unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>
+								<div class="col-3 mt-3 align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-3 mt-3 answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-3 mt-3 unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-3 mt-3 forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>
 									</div>
 								</div>`;						
 					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) > new Date()) {
 						act += `<div class="col-11 offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation started at ${getFormattedDateTime(new Date(activity.evaluation_started_time.replace(/\s/, 'T')))} and will complete at ${getFormattedDateTime(new Date(activity.evaluation_end_time.replace(/\s/, 'T')))}.</div>`;
 						act += `
-								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-3 mt-3 unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
+								<div class="col-3 mt-3 align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-3 mt-3 answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-3 mt-3 unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-3 mt-3 forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
 							</div>
 						</div>`;						
 					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) <= new Date() && !activity.results_release_time.length) {
@@ -721,10 +721,10 @@ $(async function() {
 						act += `<div class="col-7 mt-3 desc align-self-center offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The results are released, you can check them now.</div>
 						<div class="col-4 align-self-center"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>`;
 						act += `
-								<div class="col-3 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-3 mt-3 answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</button></div>
-								<div class="col-3 mt-3 unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</button></div>
-								<div class="col-3 mt-3 forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</button></div>
+								<div class="col-3 mt-3 align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-3 mt-3 answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</button></div>
+								<div class="col-3 mt-3 unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</button></div>
+								<div class="col-3 mt-3 forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</button></div>
 							</div>
 						</div>`;
 					}					
@@ -898,10 +898,11 @@ $(async function() {
 		var modal = $(this);
 		modal.find('.modal-body ul').html("Loading...");
 		const students = await answeredStudents(id, type);
-		let list = ''
+		let list = "<table class='table table-bordered'><tr><th>Roll No.</th><th>Student Name</th></tr>"
 		$.each(students, (index, student) => {
-			list += `<li><strong>${student.roll_number}</strong> - ${student.name}</li>`;
+			list += `<tr><td>${student.roll_number}</td><td>${student.name}</td><tr>`;
 		})
+		list += "</table>";
 		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 		modal.find('.modal-title').text(`${type} Students`);
 		list = list ? list : `No ${type.replace(/([A-Z])/g, ' $1')} Students Found`

@@ -82,7 +82,7 @@ $(document).ready(function () {
                         $("#courseClass").append("</ul>");
                     }
                     else
-                        $("#courseClass").append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $("#courseClass").append("<div class='row py-5><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                 }
                 else {
                     $('#errorToastBody').text('Request Unsuccessful');
@@ -180,7 +180,7 @@ $(document).ready(function () {
 
                 }
                 else {
-                    $('#courseSyllabus').append("<div class='row'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
+                    $('#courseSyllabus').append("<div class='row py-5'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>Sorry your syllabus isn't updated yet</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -335,7 +335,7 @@ $(document).ready(function () {
                     $('#contentMainDiv').hide();
                     $('#contentMainErrorDiv').show();  
                     $('#contentMainErrorDiv').empty();                    
-                    $('#contentMainErrorDiv').append("<div class='row coursetab mt-2'><div class='col-sm-12'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
+                    $('#contentMainErrorDiv').append("<div class='row py-5 coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -1291,7 +1291,7 @@ $(document).ready(function () {
                     $('#questionBankMainDiv').hide();
                     $('#questionBankErrorDiv').show();
                     $('#questionBankErrorDiv').empty();
-                    $('#questionBankErrorDiv').append("<div class='mt-2 row coursetab'><div class='col-sm-12'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
+                    $('#questionBankErrorDiv').append("<div class='row py-5 coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
                 }
             },
             error: function (error) {
