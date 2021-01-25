@@ -896,9 +896,9 @@ $(async function() {
 		var type = button.data('type'); // Extract info from data-* attributes
 		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 		var modal = $(this);
-		modal.find('.modal-body ul').html("Loading...");
+		modal.find('.modal-body').html("Loading...");
 		const students = await answeredStudents(id, type);
-		let list = "<table class='table table-bordered'><tr><th>Roll No.</th><th>Student Name</th></tr>"
+		let list = "<table class='table table-bordered'><thead class='thead-dark'><tr><th>Roll No.</th><th>Student Name</th></tr></thead>"
 		$.each(students, (index, student) => {
 			list += `<tr><td>${student.roll_number}</td><td>${student.name}</td><tr>`;
 		})
@@ -906,7 +906,7 @@ $(async function() {
 		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 		modal.find('.modal-title').text(`${type} Students`);
 		list = list ? list : `No ${type.replace(/([A-Z])/g, ' $1')} Students Found`
-		modal.find('.modal-body ul').html(list);
+		modal.find('.modal-body').html(list);
 	});
 
 	$('#forward').on('show.bs.modal', async function (event) {

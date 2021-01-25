@@ -751,12 +751,12 @@ color: black;
 }
 
 
-.chooseQues :nth-child(even){
+/* .chooseQues :nth-child(even){
 background-color: #ffffff;
 }
 .chooseQues :nth-child(odd){
 background-color: #E8EFF3;
-}
+} */
 
 #choosequesdiv{
   width: 100%;

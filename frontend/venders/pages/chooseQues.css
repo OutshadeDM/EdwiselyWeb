@@ -67,21 +67,33 @@ input[type="checkbox"]{
   color: black;
 }
 
-.chooseQues :nth-child(4n+0){
+/* .chooseQues :nth-child(6n+0){
   background-color: transparent;
 }
 
-.chooseQues :nth-child(4n+1){
+.chooseQues :nth-child(6n+1){
   background-color: #E8EFF3;
 }
 
-.chooseQues :nth-child(4n+2){
+.chooseQues :nth-child(6n+2){
   background-color: transparent;
 }
 
 
-.chooseQues :nth-child(4n+3){
+.chooseQues :nth-child(6n+3){
   background-color: #ffffff;
+} */
+
+/* .chooseQues li{
+  background-color: red;
+} */
+
+.chooseQues li:nth-child(4n+1){
+  background-color: white;
+}
+
+.chooseQues li:nth-child(4n+3){
+  background-color:  #E8EFF3;
 }
 
 
