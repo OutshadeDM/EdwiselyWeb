@@ -228,13 +228,69 @@ $(document).ready(function () {
   function displayCards(data = [], isObj) {
     let div = "";
 
+
+
+    let currDate = new Date().getDate() < 10 ? "0" + new Date().getDate() : new Date().getDate().toString()
+    let currMonth = new Date().getMonth() + 1 < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1).toString()
+    let currYear = new Date().getFullYear().toString()
+    let currHours = new Date().getHours() < 10 ? "0" + new Date().getHours() : new Date().getHours().toString()
+    let currMins = new Date().getMinutes() < 10 ? "0" + new Date().getMinutes() : new Date().getMinutes().toString()
+    let currSecs = new Date().getSeconds() < 10 ? "0" + new Date().getSeconds() : new Date().getSeconds().toString()
+
+
     $.each(data, function (key, value) {
+
+      let startTime = value.start_time;
+      let testDate = startTime.substr(8, 10) < 10 ? "0" + startTime.substr(8, 10) : startTime.substr(8, 10)
+      let testMonth = startTime.substr(5, 7) < 10 ? "0" + startTime.substr(5, 7) : startTime.substr(5, 7)
+      let testYear = startTime.substr(0, 4)
+      let testHours = startTime.substr(11, 13) < 10 ? "0" + startTime.substr(11, 13) : startTime.substr(11, 13)
+      let testMins = startTime.substr(14, 16) < 10 ? "0" + startTime.substr(14, 16) : startTime.substr(14, 16)
+      let testSecs = startTime.substr(17, 19) < 10 ? "0" + startTime.substr(17, 19) : startTime.substr(17, 19)
+
+
+
+      //comparing date logic
+      isSmall = false;
+
+      if (testYear == currYear) {
+        if (testMonth > currMonth) {
+          isSmall = true;
+        }
+        else if (testMonth == currMonth) {
+          if (testdate > currDate) {
+            isSmall = true;
+          }
+          else if (testDate == currDate) {
+            if (testHours > currHours) {
+              isSmall = true;
+            }
+            else if (testHours == currHours) {
+              if (testMins > currMins) {
+                isSmall = true;
+              }
+              else {
+                isSmall = false;
+              }
+            }
+          }
+        }
+      }
+      else if (testYear > currYear) {
+        isSmall = true;
+      }
+
+      console.log(isSmall)
+      console.log(value)
 
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-5'>" + value.name + "</h5>";
       if (value.doe == "") {
         div = div + "<a class='btn editBtn' href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "'><i class='fas fa-pen'></i></a>";
+      }
+      else if (isSmall) {
+        div = div + "<a class='btn editBtn' href='sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "&doe=" + value.doe + "&timelimit=" + value.timelimit + "&start_time=" + value.start_time + "&students=" + value.student_ids + "&edit=true' ><i class='fas fa-pen'></i></a>";
       }
       div = div + "<div class='card-body pl-0'>";
       if (value.description.length > 100) {
