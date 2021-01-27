@@ -241,11 +241,12 @@ $(document).ready(function () {
 
   function loadList() {
     $("#addquesDiv").empty();
+    let i = 1;
 
     $.each(questions, function (key, value) {
       // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
       $('#addquesDiv').append("<div class='row m-0'>" +
-      "<div class='col-1 pl-2 pt-4 chosenQuestions'>Q).</div>" +
+      "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q"+ i++ +").</div>" +
       "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
     });
     MathJax.typesetPromise();

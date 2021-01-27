@@ -425,6 +425,7 @@ height: 0.01rem;
 
 .addCourseCard{
 height: 350px;
+cursor: pointer;
 }
 
 .addCourseCard h5{

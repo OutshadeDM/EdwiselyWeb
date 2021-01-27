@@ -354,7 +354,6 @@
 
 .card {
     border: 1px solid #DDDDDD;
-    cursor: auto;
 }
 
 .btn-primary, .btn-danger {
@@ -376,4 +375,16 @@
 
 .btn-danger:hover {
     background-image: linear-gradient(144deg, #F38FA2 0%, #EB5C6F 41%, #F1825C 100%);
+}
+
+.col-lg-3 a {
+    white-space:nowrap
+}
+
+.no-pointer{
+    cursor: none;
+}
+
+.col-6.d-flex.justify-content-end a{
+    cursor: pointer;
 }

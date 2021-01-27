@@ -162,3 +162,9 @@ pre
 .addCourseCard .card-body {
     height: 40%;
 }
+
+.no-data{
+    height: 70vh;
+    max-height: 70vh;
+    align-items: center;
+}
