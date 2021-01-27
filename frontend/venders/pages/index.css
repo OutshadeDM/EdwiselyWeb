@@ -57,8 +57,9 @@
 }
 
 .addCourseCard {
-    height: 250px;
     width: auto;
+    outline: none;
+    height: 225px
 }
 
 .linkwrap { position:relative; display:inline-block; }
@@ -212,10 +213,6 @@
     outline: none;
 }
 
-.addCourseCard {
-    outline: none;
-    height: 250px;
-}
 
 .card-img-top {
     outline: none;
