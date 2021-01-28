@@ -649,18 +649,8 @@ $(async function() {
 						act += `<div class="col-7 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
 						act += `<div class="col-4 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
 					}
-<<<<<<< HEAD
-					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-					<div class="col-lg-3 col-md-6 mt-3 forward d-flex align-items-center justify-content-center"><a style='white-space:nowrap'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments<a></div>`				
-					if (Number(activity.results.answered)) {
-						act += `<div class="col-lg-3 col-md-6 mt-3 answered d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.results.answered} Answered</a></div>
-						<div class="col-lg-3 col-md-6 mt-3 unanswered d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.results.unanswered} Unanswered</a></div>`
-					}
-				act += `</div>
-=======
 					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
 					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</div></div>
->>>>>>> 6b6f4875c9f1c2ca67bbfcf8d0b160e66dfa239c
 			</div>`;
 				} else if (activity.type == 'Subjective') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
