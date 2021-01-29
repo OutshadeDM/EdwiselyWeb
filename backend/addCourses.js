@@ -177,7 +177,7 @@ $(document).ready(function() {
             div = div + "</ul>";
             $("#courseSelectList").append(div);
         }
-        else alert("oops");
+        else $('#courseSelectList').append("<div class='col-sm-12 mb-5'><h5>No courses found</h5></div>");
     });
 
     $("#courseSelect").blur(function () {
