@@ -335,7 +335,7 @@ $(document).ready(function () {
                     $('#contentMainDiv').hide();
                     $('#contentMainErrorDiv').show();  
                     $('#contentMainErrorDiv').empty();                    
-                    $('#contentMainErrorDiv').append("<div class='row no-data coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
+                    $('#contentMainErrorDiv').append("<div class='row no-data coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'><i>He who learns but doesn't not think is lost.<br> He who thinks but doesn't not learn is in Danger  - Confucius</i> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -1291,7 +1291,7 @@ $(document).ready(function () {
                     $('#questionBankMainDiv').hide();
                     $('#questionBankErrorDiv').show();
                     $('#questionBankErrorDiv').empty();
-                    $('#questionBankErrorDiv').append("<div class='row no-data coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'>No data to fetch</h5></div</div>");
+                    $('#questionBankErrorDiv').append("<div class='row no-data coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'><i>Assessment is the engine that drives student learning. Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -1455,7 +1455,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1495,7 +1495,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1546,7 +1546,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1586,7 +1586,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1707,7 +1707,7 @@ $(document).ready(function () {
             $('#objQuestions').append(div);
         }
         else
-            $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+            $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
 
         $("#loadingDiv").remove();
         MathJax.typesetPromise();
@@ -1777,7 +1777,7 @@ $(document).ready(function () {
             $('#subQuestions').append(div);
         }
         else
-            $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+            $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
 
         $("#loadingDiv").remove();
     }

@@ -98,7 +98,7 @@ $(document).ready(function () {
             displayCards(result.data, true);
           }
           else
-            $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#objectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -121,7 +121,7 @@ $(document).ready(function () {
             displayCards(result.data, true);
           }
           else
-            $('#objectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#objectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -186,7 +186,7 @@ $(document).ready(function () {
             displayCards(result.data, false)
           }
           else
-            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#subjectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert(result.message);
@@ -210,7 +210,7 @@ $(document).ready(function () {
 
           }
           else
-            $('#subjectiveassessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#subjectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -275,8 +275,8 @@ $(document).ready(function () {
         isSmall = true;
       }
 
-      console.log(isSmall)
-      console.log(value)
+      // console.log(isSmall)
+      // console.log(value)
 
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left'>";
@@ -391,7 +391,7 @@ $(document).ready(function () {
             displayCondCards(result.data, true);
           }
           else
-            $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners</h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -400,7 +400,6 @@ $(document).ready(function () {
 
     }
     else if (condObjDate && !condObjAssessmentsSection && condObjAssessmentsSubject) {
-      alert('here1');
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectWiseConductedObjectiveTests?subject_id=' + condObjAssessmentsSubject,
@@ -416,7 +415,7 @@ $(document).ready(function () {
             displayCondCards(result.data, true);
           }
           else
-            $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners</h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -440,7 +439,7 @@ $(document).ready(function () {
             displayCondCards(result.data, true);
           }
           else
-            $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -461,10 +460,11 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condObjAssessmentList').empty();
           if (result.status == 200) {
+            let div = "";
             $.each(result.data, function (key, value) {
 
               if (value.subject_id == condObjAssessmentsSubject) {
-                $('#condObjAssessmentList').append(
+                div = div +
                   "<div class='col-sm-6 assessment'>" +
                   "<div class='card mb-3 objCard text-left'>" +
                   "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
@@ -482,13 +482,16 @@ $(document).ready(function () {
                   "</div>" +
                   "<div class='col-sm-4'>" +
                   "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
-                  "</div></div></div></div></div>"
-                );
+                  "</div></div></div></div></div>";
               }
             });
+            if(div)
+              $('#condObjAssessmentList').append(div);
+            else 
+              $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
           }
           else
-            $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -535,7 +538,7 @@ $(document).ready(function () {
             displayCondCards(result.data, false);
           }
           else
-            $('#condSubAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condSubAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -559,7 +562,7 @@ $(document).ready(function () {
             displayCondCards(result.data, false);
           }
           else
-            $('#condSubAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condSubAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -583,7 +586,7 @@ $(document).ready(function () {
             displayCondCards(result.data, false);
           }
           else
-            $('#condSubAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condSubAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -604,10 +607,11 @@ $(document).ready(function () {
           // alert(result.status);
           $('#condSubAssessmentList').empty();
           if (result.status == 200) {
+            let div = "";
             $.each(result.data, function (key, value) {
 
               if (value.subject_id == condSubAssessmentsSubject) {
-                $('#condSubAssessmentList').append(
+                div = div +
                   "<div class='col-sm-6 assessment'>" +
                   "<div class='card mb-3 objCard text-left'>" +
                   "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>" +
@@ -625,13 +629,17 @@ $(document).ready(function () {
                   "</div>" +
                   "<div class='col-sm-4'>" +
                   "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>" +
-                  "</div></div></div></div></div>"
-                );
+                  "</div></div></div></div></div>";
               }
             });
+            
+            if(div)
+              $('#condObjAssessmentList').append(div);
+            else 
+              $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
           }
           else
-            $('#condObjAssessmentList').append("<div class='col-sm-12 mb-5'><h5>No Assessments Found</h5></div>");
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);

@@ -147,7 +147,7 @@ $(document).ready(function() {
                     }
                 }
                 else
-                    $('#courseList').append("<div class='col-sm-12 mb-5'><h5>No Courses Found</h5></div>");
+                    $('#courseList').append("<div class='col-sm-12 mb-5'><h5><i>Education is the most powerful weapon which you can use to change the world</i>- Nelson Mandela <br><br> Please add courses that you Educate</h5></div>");
             },
             error: function (error) {
                 $(".loader-wrapper").addClass("d-none");
@@ -166,8 +166,8 @@ $(document).ready(function() {
 
     $("#courseSelect").keyup(function () {
         let searchTerm = $("#courseSelect").val().toLowerCase();
-        $("#courseSelectList").show();
         if(courses.length > 0){
+            $("#courseSelectList").show();
             let div = "<ul class='list-unstyled'>";
             $('#courseSelectList').empty();
             $.each(courses, function (key, value) {
