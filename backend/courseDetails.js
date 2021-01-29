@@ -62,6 +62,7 @@ $(document).ready(function () {
                     }
 
                     if (result.data.outcomes != "" && result.data.outcomes) {
+                        alert(result.data.outcomes);
                         $("#courseOutc").empty();
                         $("#courseOutc").append("<ul>");
                         $.each(result.data.outcomes, function (key, value) {
@@ -153,16 +154,26 @@ $(document).ready(function () {
                         div = div + "<div class='col-sm-8'>";
                         div = div + "<p class='mt-1'><strong>" + value.name + "</strong></p>";
                         div = div + "<div>";
-                        div = div + "<p class='mb-0'><span class='span-heading'>Objectives</span><ul class='list-unstyled'>";
-                        $.each(value.objectives, function (key, value) {
-                            div = div + "<li>" + value + "</li>";
-                        });
-                        div = div + "</ul></p>";
-                        div = div + "<p class='mt-2 mb-0'><span class='span-heading'>Outcome</span><ul class='list-unstyled'>";
-                        $.each(value.outcomes, function (key, value) {
-                            div = div + "<li>" + value + "</li>";
-                        });
-                        div = div + "</ul></p>";
+                        div = div + "<p class='mb-0'><span class='span-heading'>Objectives</span>";
+                        if(value.objectives.length > 0){
+                            div = div + "<ul class='list-unstyled'>";
+                            $.each(value.objectives, function (key, value) {
+                                div = div + "<li>" + value + "</li>";
+                            });
+                            div = div + "</ul>";
+                        }
+                        else div = div + "<br><span>No Objectives Added Yet</span>"
+                        div = div + "</p>";
+                        div = div + "<p class='mt-2 mb-0'><span class='span-heading'>Outcome</span>";
+                        if(value.outcomes.length > 0){
+                            div = div + "<ul class='list-unstyled'>";
+                            $.each(value.outcomes, function (key, value) {
+                                div = div + "<li>" + value + "</li>";
+                            });
+                            div = div + "</ul>";
+                        }
+                        else div += "<br><span>No Outcomes Added Yet</span>"
+                        div = div + "</p>";
                         div = div + "</div></div>";
                         div = div + "<div class='col-sm-4'>";
                         div = div + "<p><strong>Topics Covered</strong></p>";
@@ -223,7 +234,7 @@ $(document).ready(function () {
                     // 2nd api
                     getCourseDecks(courseUnits);
 
-
+                    //3rd api
                     let courseType = $('#courseType').val();
                     let courseLevel = $('#courseLevel').val();
 
@@ -248,7 +259,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     $('#courseFiles').empty();
-                                    $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                                    $('#courseFiles').append("<div class='row'><div class='col-sm-12 py-5'><h5 class='text-center'><i>He who learns but doesn't not think is lost. He who thinks but doesn't not learn is in Danger</i>  - Confucius <br><br> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
                                 }
                             },
                             error: function (error) {
@@ -277,7 +288,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     $('#courseFiles').empty();
-                                    $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                                    $('#courseFiles').append("<div class='row'><div class='col-sm-12 py-5'><h5 class='text-center'><i>He who learns but doesn't not think is lost. He who thinks but doesn't not learn is in Danger</i>  - Confucius <br><br> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
                                 }
                             },
                             error: function (error) {
@@ -320,7 +331,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     $('#courseFiles').empty();
-                                    $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                                    $('#courseFiles').append("<div class='row'><div class='col-sm-12 py-5'><h5 class='text-center'><i>He who learns but doesn't not think is lost. He who thinks but doesn't not learn is in Danger</i>  - Confucius <br><br> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
                                 }
                             },
                             error: function (error) {
@@ -335,7 +346,7 @@ $(document).ready(function () {
                     $('#contentMainDiv').hide();
                     $('#contentMainErrorDiv').show();  
                     $('#contentMainErrorDiv').empty();                    
-                    $('#contentMainErrorDiv').append("<div class='row no-data coursetab mt-2'><div class='col-sm-12 align-items-center'><h5 class='text-center m-0'><i>He who learns but doesn't not think is lost.<br> He who thinks but doesn't not learn is in Danger  - Confucius</i> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
+                    $('#contentMainErrorDiv').append("<div class='row no-data coursetab mt-2'><div class='col-sm-12 py-5 align-items-center'><h5 class='text-center m-0'><i>He who learns but doesn't not think is lost.<br> He who thinks but doesn't not learn is in Danger  - Confucius</i> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
                 }
             },
             error: function (error) {
@@ -615,10 +626,10 @@ $(document).ready(function () {
             if (div)
                 $('#courseFiles').append(div);
             else
-                $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+                $('#courseFiles').append("<div class='row'><div class='col-sm-12 py-5'><h5 class='text-center'><i>He who learns but doesn't not think is lost. He who thinks but doesn't not learn is in Danger</i>  - Confucius <br><br> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
         }
         else
-            $('#courseFiles').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+            $('#courseFiles').append("<div class='row'><div class='col-sm-12 py-5'><h5 class='text-center'><i>He who learns but doesn't not think is lost. He who thinks but doesn't not learn is in Danger</i>  - Confucius <br><br> Edwisely SME's are working hard to provide the best content for you.</h5></div</div>");
     }
 
     $('#courseType').on('change', function () {
@@ -1455,7 +1466,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
+                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12 py-5'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1495,7 +1506,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
+                        $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12 py-5'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1546,7 +1557,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
+                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12 py-5'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1586,7 +1597,7 @@ $(document).ready(function () {
                         
                     }
                     else {
-                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
+                        $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12 py-5'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
                         $("#loadingDiv").remove();
                     }
 
@@ -1707,7 +1718,7 @@ $(document).ready(function () {
             $('#objQuestions').append(div);
         }
         else
-            $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
+            $('#objQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12 py-5'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
 
         $("#loadingDiv").remove();
         MathJax.typesetPromise();
@@ -1777,7 +1788,7 @@ $(document).ready(function () {
             $('#subQuestions').append(div);
         }
         else
-            $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
+            $('#subQuestions').append("<div class='row py-2 px-3 p-2'><div class='col-sm-12 py-5'><h5 class='text-center'><i>Assessment is the engine that drives student learning.Assessment is today's means of modifying tomorrows instructions</i> -Carol Ann Tomlinson.<br><br> Edwisely will provide you blooms assessment framework to support your analysis</h5></div</div>");
 
         $("#loadingDiv").remove();
     }

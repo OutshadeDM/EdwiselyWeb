@@ -98,7 +98,7 @@ $(document).ready(function () {
             displayCards(result.data, true);
           }
           else
-            $('#objectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#objectiveassessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -121,7 +121,7 @@ $(document).ready(function () {
             displayCards(result.data, true);
           }
           else
-            $('#objectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#objectiveassessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -161,12 +161,11 @@ $(document).ready(function () {
   });
 
   function getSubAssesments() {
-
     $('#createAssessmentBtn').on('click', function () {
       window.location.href = "createAssessment.html?isObj=false"
     })
 
-    let subject = $('#objective-assessments').val()
+    let subject = $('#subjective-assessments').val()
     // alert(subject)
 
     if (subject == "0") {
@@ -186,10 +185,10 @@ $(document).ready(function () {
             displayCards(result.data, false)
           }
           else
-            $('#subjectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#subjectiveassessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
-          alert(result.message);
+          alert("Request Failed with status: " + error.status);
         }
       });
     }
@@ -203,14 +202,14 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // alert(result.status);
+          // alert(result.data);
           $('#subjectiveassessmentList').empty();
           if (result.status == 200 && result.data) {
             displayCards(result.data, false);
 
           }
           else
-            $('#subjectiveassessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#subjectiveassessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -391,7 +390,7 @@ $(document).ready(function () {
             displayCondCards(result.data, true);
           }
           else
-            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners</h5></div>`);
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners</h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -415,7 +414,7 @@ $(document).ready(function () {
             displayCondCards(result.data, true);
           }
           else
-            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners</h5></div>`);
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners</h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -439,7 +438,7 @@ $(document).ready(function () {
             displayCondCards(result.data, true);
           }
           else
-            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -488,10 +487,10 @@ $(document).ready(function () {
             if(div)
               $('#condObjAssessmentList').append(div);
             else 
-              $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+              $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
           }
           else
-            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -538,7 +537,7 @@ $(document).ready(function () {
             displayCondCards(result.data, false);
           }
           else
-            $('#condSubAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#condSubAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -562,7 +561,7 @@ $(document).ready(function () {
             displayCondCards(result.data, false);
           }
           else
-            $('#condSubAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#condSubAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -586,7 +585,7 @@ $(document).ready(function () {
             displayCondCards(result.data, false);
           }
           else
-            $('#condSubAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#condSubAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -636,10 +635,10 @@ $(document).ready(function () {
             if(div)
               $('#condObjAssessmentList').append(div);
             else 
-              $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+              $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
           }
           else
-            $('#condObjAssessmentList').append(`<div class='col-sm-12 mb-5'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            $('#condObjAssessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);

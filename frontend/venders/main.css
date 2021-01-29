@@ -456,6 +456,8 @@ padding: 15px;
 .objCard {
 position: relative;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.17);
+height: 191px;
+overflow-y: hidden;
 }
 
 .editBtn {
@@ -793,11 +795,6 @@ pre
 
 } 
 
-
-.objCard {
-  height: 191px;
-  overflow-y: hidden;
-}
 
 .card-footer {
   z-index: 10;
