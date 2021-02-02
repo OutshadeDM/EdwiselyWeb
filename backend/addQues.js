@@ -1454,7 +1454,6 @@ $(document).ready(function () {
 
               }
               else {
-
                 $('#successToastBody').text(result1.message);
                 $('#successToast').toast('show');
                 $('#loadingDiv').remove();

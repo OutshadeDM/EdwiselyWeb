@@ -379,7 +379,9 @@
 }
 
 .no-pointer{
-    cursor: none;
+    cursor: default;
+    pointer-events: none;
+    color: black;
 }
 
 .col-6.d-flex.justify-content-end a{

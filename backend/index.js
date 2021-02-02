@@ -560,7 +560,7 @@ $(async function() {
 					}
 					
 					act+= `<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-						<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
+						<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" class='no-pointer' data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
 						<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
 						<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="questionnaire" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>				
 					</div>
@@ -795,6 +795,7 @@ $(async function() {
 							responsive: true,
 							legend: {
 								position: 'left',
+								onClick: (e) => e.stopPropagation()
 							},
 							// title: {
 							// 	display: true,
