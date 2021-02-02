@@ -650,7 +650,7 @@ $(async function() {
 						act += `<div class="col-4 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
 					}
 					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</div></div>
+					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div></div>
 			</div>`;
 				} else if (activity.type == 'Subjective') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
