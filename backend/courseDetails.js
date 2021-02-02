@@ -62,7 +62,7 @@ $(document).ready(function () {
                     }
 
                     if (result.data.outcomes != "" && result.data.outcomes) {
-                        alert(result.data.outcomes);
+                        // alert(result.data.outcomes);
                         $("#courseOutc").empty();
                         $("#courseOutc").append("<ul>");
                         $.each(result.data.outcomes, function (key, value) {
@@ -350,7 +350,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert(result.message);
+                alert("Request Failed with status: "+error.status);
             }
         });
     });
@@ -715,7 +715,7 @@ $(document).ready(function () {
                 }
                 else {
                     $('#courseTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
-                    alert("here");
+                    // alert("here");
                 }
 
                 if (material_id) {
@@ -742,17 +742,14 @@ $(document).ready(function () {
 
                     $("#courseTitleAdd").val(title);
                     // $("input[name='courseTagAdd']").val(topic_code);
-                    // alert(topic_code);
                     $("input[name='courseTagAdd'][value='" + topic_code + "']").prop("checked", true);
                     $("input[name='courseTagAdd']:checked").siblings(".show1").click();
                     // alert($("input[name='courseTagAdd']:checked").val());
-                    // alert(topic_code);
                     $("#courseFileAddATag").show();
                     $('#courseFileAddATag').attr('href', "viewFile.html?url="+url+"&type="+fileType);
                     $("#contentModalSmall").show();
 
                     $('#courseAddSave').data('id', material_id);
-                    // alert($("#courseAddSave").data('id'));
 
                     editCourseContentFlag = true;
 
@@ -1196,7 +1193,7 @@ $(document).ready(function () {
                         'Authorization': `Bearer ${$user.token}`
                     },
                     success: function (result) {
-                        alert(result.message);
+                        // alert(result.message);
                         if (result.status == 200) {
                             $("#courseAddSave").removeData("id");
                         }
@@ -1286,7 +1283,8 @@ $(document).ready(function () {
                                 $("#nav-question-obj-tab").click();
                             }
                             else {
-                                alert(result.message);
+                                $('#errorToastBody').text(result.message);
+                                $('#errorToast').toast('show');
                                 $('#courseQuestionUnits').hide();
                             }
                         },
@@ -1379,7 +1377,8 @@ $(document).ready(function () {
 
                 }
                 else {
-                    alert(result.message);
+                    $('#errorToastBody').text(result.message);
+                    $('#errorToast').toast('show');
                 }
             },
             error: function (error) {
@@ -1524,7 +1523,6 @@ $(document).ready(function () {
         let questionBloomsLevel = $('#questionBloomsLevel').val();
         let questionTopics = $('#questionTopics').val();
         let questionCatagory = $('#questionCatagory').val();
-        // alert("here");
 
         if (unit_id && subject_id && questionBloomsLevel && questionTopics && questionCatagory && questionCatagory != "yourContent") {
 

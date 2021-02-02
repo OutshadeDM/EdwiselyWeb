@@ -869,7 +869,8 @@ $(document).ready(function () {
           else {
             $('#loadingDiv').remove();
             $("input.custom-control-input").attr("disabled", false);
-            alert(result.message);
+            $('#errorToastBody').text(result.message);
+            $('#errorToast').toast('show');
           }
         },
         error: function (error) {
@@ -1408,7 +1409,7 @@ $(document).ready(function () {
             if (result1.status == 200) {
 
               if (question_type1 != newQuestion.question_type) {
-                alert(question_type1);
+                // alert(question_type1);
                 let form1 = new FormData();
                 form1.append("question_id", newQuestion.id);
                 form1.append("type", question_type1);

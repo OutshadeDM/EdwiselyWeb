@@ -7,7 +7,6 @@ $(document).ready(function () {
 	} else {
 		window.location.replace("login.html");
     }
-    alert
 
     let courses = [];
 

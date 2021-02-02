@@ -82,7 +82,6 @@ $(document).ready(function () {
     // alert(subject)
 
     if (subject == 0) {
-      // alert("here");
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTests',
@@ -374,7 +373,6 @@ $(document).ready(function () {
     // alert(condObjDate);
 
     if (condObjDate && !condObjAssessmentsSection && !condObjAssessmentsSubject) {
-      // alert('here');
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getConductedObjectiveTests?from_date=' + condObjDate,
@@ -725,7 +723,6 @@ $(document).ready(function () {
   });
 
   $(document).on('click', '.condLink', function () {
-    //alert("sent")
     let test_id = $(this).data('id');
     let test_completed = $(this).data('test');
     if (test_completed > 0) {
@@ -752,29 +749,6 @@ $(document).ready(function () {
     calendarWeeks: true,
     autoclose: true
   });
-
-
-  // $("#condObjDate").blur(function () {
-  //   // alert("here");
-  //   // let date = new Date();
-  //   // date.setMonth(date.getMonth() - 6);
-  //   // let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-  //   // // $("#condObjDate").val(fullDate);
-  //   // $('#condObjDate').datepicker('setDate', date);
-
-
-  // });
-
-  // $("#condSubDate").blur(function () {
-  //   let date = new Date();
-  //   date.setMonth(date.getMonth() - 6);
-  //   let fullDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-  //   $("#condSubDate").val(fullDate);
-  //   $('#condSubDate').datepicker('setDate', date);
-  //   // $("#condSubDate").val(fullDate);
-
-  // });
-
 
 
 });

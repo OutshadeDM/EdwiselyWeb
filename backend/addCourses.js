@@ -313,12 +313,11 @@ $(document).ready(function() {
                         $('#modalContent').css('position', 'absolute');
                     }
                     else {
-                        $('#errorToastBody').text('Error Occurred');
+                        $('#errorToastBody').text('Error Occurred: '+result.message);
                         $('#errorToast').toast('show');
                         $("#loadingDiv").remove();
                         $('#modalContent').css('position', 'absolute');
                         $('courseModal').modal('toggle');
-                        alert(result.message);
                     }
 
                 },
