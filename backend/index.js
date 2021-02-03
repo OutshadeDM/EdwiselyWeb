@@ -130,7 +130,7 @@ $(async function() {
 						}
 					},
 					error: function (error) {
-						alert(error);
+						alert(error.message);
 					}
 				});	
 			} catch (error) {
@@ -164,7 +164,7 @@ $(async function() {
 						}
 					},
 					error: function (error) {
-						alert(error);
+						alert(error.message);
 					}
 				});	
 			} catch (error) {
@@ -252,7 +252,8 @@ $(async function() {
 	}
 
 	// Get comments
-	const getComments = (id, type="Notification") => {
+	const getComments = (id, type) => {
+		// if(type != "Notification") type="Notification";
 		return new Promise((resolve, reject) => {
 			try {
 				var form = new  FormData();
@@ -276,7 +277,7 @@ $(async function() {
 						}
 					},
 					error: function (error) {
-						alert(error);
+						alert(error.message);
 					}
 				});	
 			} catch (error) {
@@ -367,7 +368,7 @@ $(async function() {
 						}
 					},
 					error: function (error) {
-						alert(error);
+						alert(error.message);
 					}
 				});	
 			} catch (error) {
@@ -650,7 +651,7 @@ $(async function() {
 						act += `<div class="col-4 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
 					}
 					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div></div>
+					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' data-toggle="modal" data-target="#comments" data-type="survey" data-id=${activity.id} style='white-space:nowrap'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div></div>
 			</div>`;
 				} else if (activity.type == 'Subjective') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
@@ -969,6 +970,8 @@ $(async function() {
 		var modal = $(this);
 		modal.find('.modal-body .chat-history ul').html("Loading...");
 		const comments = await getComments(id, type);
+		// if(type != 'survey') comments = await getComments(id, type);
+		// else comments = await getFeedbackComments(id,type);
 		let list = ''
 		$.each(comments, (index, comment) => {
 			if (comment.college_account_id == $user.user_id || comment.student_id == $user.user_id) {
