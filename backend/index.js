@@ -375,7 +375,33 @@ $(async function() {
 				console.log(error);
 			}
 		});
+	}
+	
+	// Survey Results
+	const getSurveyResults = (survey) => {
+		return new Promise((resolve, reject) => {
+			try {
+			    $.ajax({
+			        url: `https://stagingfacultypython.edwisely.com/survey/getSurveyStats?survey_id=${survey}`,
+			        type: 'GET',
+			        contentType: 'application/json',
+			        headers: {
+			            'Authorization': `Bearer ${$user.token}`
+			        },
+			        success: function (result) {
+			            resolve(result);
+			        },
+			        error: function (error) {
+			            console.log(error);
+			            reject(error);
+			        }
+			    });
+			} catch (error) {
+				console.log(error);
+			}
+		});
 	}	
+
 
 	const createCoursesTab = (courses) => {
 
@@ -605,7 +631,7 @@ $(async function() {
 							} else break;
 						}
 						act += '</a></div>'
-						let file_urls = JSON.parse(activity.file_url);
+						let file_urls = $.parseJSON(activity.file_url.replace(/'/g, '"'));
 						if (file_urls.length === 0)
 							act += `<div class="col-11 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div>`;
 						else
@@ -637,17 +663,19 @@ $(async function() {
 						}
 						act += '</a></div>'
 					if (new Date(activity.doe.replace(/\s/, 'T')) > new Date())
-						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
+						act += `<div class="col-11 desc offset-1"><a type='button' href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
 					else if (Number(activity.results.answered)) {					
-						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>
+						act += `<div class="col-11 desc offset-1"><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>
 						<div class="col-md-7 offset-3 mt-3 desc offset-1 col-12">
-							<div class="mt-3" style="max-height: 300px;">
-								<canvas id="myChart${activity.id}"></canvas>
-							</div>
+							<a type='button' href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>
+								<div class="mt-3" style="max-height: 300px;">
+									<canvas id="myChart${activity.id}"></canvas>
+								</div>
+							</a>
 						</div>`;
 						// act += `<div class="col-4 status text-center align-self-center"><strong>View Result</strong></div>`;
 					} else {
-						act += `<div class="col-7 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}</div>`;
+						act += `<div class="col-7 desc offset-1"><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
 						act += `<div class="col-4 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
 					}
 					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
@@ -1029,6 +1057,80 @@ $(async function() {
 		list = list ? list : ``;
 		modal.find('div.row').html(list);
 	});	
+
+	$('#survey').on('show.bs.modal', async function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var id = button.data('id');
+		var type = button.data('type'); // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		var modal = $(this);
+		modal.find('.modal-body .chat-history ul').html("Loading...");
+		const surveyResults = await getSurveyResults(id);
+		// if(type != 'survey') comments = await getComments(id, type);
+		// else comments = await getFeedbackComments(id,type);
+		$col1 = $('<div></div>').addClass('col-2 mt-1').append($img);
+		$col2 = $('<div></div>').addClass('col-10 pl-0 desc m-0').text(text);
+		$row = $('<div></div>').addClass('row my-3 survey-charts');
+		modal.find('.modal-body').append($row);
+		console.log(surveyResults);
+		$.each(surveyResults.data, (index, surveyResult) => {
+			const col = `
+				<div class="col-12 mt-2">
+					<div class="mt-3">
+						<canvas id="surveyChart${surveyResult.id}"></canvas>
+					</div>
+				</div>
+			`;
+			modal.find('.modal-body .row.survey-charts').append(col);
+			let option_names = []
+			let data = [];
+			let colors = [
+				'#4D4D4D',
+				'#5DA5DA',
+				'#FAA43A',
+				'#60BD68',
+				'#F17CB0',
+				'#B2912F',
+				'#B276B2',
+				'#DECF3F',
+				'#F15854'
+			];
+			$.each(surveyResult.options, (index, option) => {
+				option_names.push(option.name);
+				data.push(option.selected_count);
+			});
+			var ctx = document.getElementById(`surveyChart${surveyResult.id}`).getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'doughnut',
+				data: {
+					labels: option_names,
+					datasets: [{
+						label: surveyResult.name,
+						data: data,
+						backgroundColor: colors.splice(0, surveyResult.options.length),
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					legend: {
+						position: 'left',
+					},
+					title: {
+						display: true,
+						fontSize: 15,
+						fontStyle: 'bold',
+						text: surveyResult.name
+					},
+					animation: {
+						animateScale: true,
+						animateRotate: true
+					}
+				}
+			});			
+		});
+		
+	});		
 
 	$('#endtime').datetimepicker({
 		minDate: new Date(),
