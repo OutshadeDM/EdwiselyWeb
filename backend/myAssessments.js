@@ -661,8 +661,9 @@ $(document).ready(function () {
       }
       else if (!isObj && value.created_at) endDate.setMinutes(endDate.getMinutes() + value.timelimit);
 
-      div = div + "<div class='col-sm-6 assessment condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>";
-      div = div + "<div class='card mb-3 objCard text-left'>";
+      
+      div = div + "<div class='col-sm-6 assessment'>";
+      div = div + "<div class='card mb-3 objCard text-left' style='cursor:auto;'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
       div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
       div = div + "<div class='card-body pl-1 pb-0 align-bottom pl-3'>";
@@ -678,6 +679,8 @@ $(document).ready(function () {
         else
           div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + value.doe + "</h6>";
       }
+      if(endDate < new Date())
+        div += "<button class='btn btn-primary text-white pl-4 pr-4 assBtn condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>View Result</button>";
       div = div + "</div><div class='px-3 text-muted card-footer' style='height:45px'>";
       div = div + "<div class='row'>";
       div = div + "<div class='col-sm-4'>";
@@ -689,7 +692,6 @@ $(document).ready(function () {
       div = div + "<div class='col-sm-4'>";
       div = div + "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>";
       div = div + "</div></div></div></div></div>";
-
     });
 
     if (isObj)

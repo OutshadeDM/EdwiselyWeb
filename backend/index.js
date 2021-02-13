@@ -457,15 +457,15 @@ $(async function() {
 		let text = "";		
 		$.each(upcomings.objective_tests, (index, objective) => {
 			if (objective.start_time)
-				text = `Objective Test named ${objective.title} - ${objective.description} is going to start at ${objective.start_time}`;
+				text = `Objective Test named ${objective.name} - ${objective.description} is going to start at ${objective.start_time}`;
 			else 
-				text = `Objective Test named ${objective.title} - ${objective.description} is going to end at ${objective.end_time}`;
+				text = `Objective Test named ${objective.name} - ${objective.description} is going to end at ${objective.doe}`;
 		});
 		$.each(upcomings.subjective_tests, (index, subjective) => {
 			if (subjective.start_time)
-				text = `Subjective Test named ${subjective.title} - ${subjective.description} is going to start at ${subjective.start_time}`;
+				text = `Subjective Test named ${subjective.name} - ${subjective.description} is going to start at ${subjective.start_time}`;
 			else 
-				text = `Subjective Test named ${subjective.title} - ${subjective.description} is going to end at ${subjective.end_time}`;	
+				text = `Subjective Test named ${subjective.name} - ${subjective.description} is going to end at ${subjective.doe}`;	
 		});
 		$.each(upcomings.vc, (index, videoConference) => {
 			if (videoConference.start_time && new Date(videoConference.start_time.replace(/\s/, 'T')).getTime() - new Date().getTime() <= 5*60*1000)
@@ -873,7 +873,8 @@ $(async function() {
 		let faculty = await facultyData(30, getFormattedDateTime(new Date()));
 		date_lt = faculty.date_lt;
 		createCoursesTab(faculty.courses, faculty.upcoming_events.length);
-		if (faculty.upcoming_events && faculty.upcoming_events.length)
+		// console.log(faculty.upcoming_events);
+		if (faculty.upcoming_events && (faculty.upcoming_events.objective_tests.length > 0 || faculty.upcoming_events.subjective_tests.length > 0))
 			createUpcomingTab(faculty.upcoming_events);
 		else {
 			$('.upcome').remove();
