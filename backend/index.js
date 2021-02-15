@@ -480,7 +480,7 @@ $(async function() {
 	}
 
 	const createUpcomingTab = (upcomings) => {
-		$('#upcoming').append('<ul></ul>');
+		$('#upcoming').append('<ul></ul>').addClass("mb-2");
 		let text = "";		
 		$.each(upcomings.objective_tests, (index, objective) => {
 			if (objective.start_time)
