@@ -653,7 +653,9 @@ $(document).ready(function () {
     $.each(data, function (key, value) {
 
       let endDateString = "";
-      let endDate = new Date(value.start_time.toLocaleString().replace(/\s/, 'T'));
+      let endDate;
+      if (value.start_time) endDate = new Date(value.start_time.toLocaleString().replace(/\s/, 'T'));
+      else endDate = new Date(value.created_at.toLocaleString().replace(/\s/, 'T'));
       // if(value.start_time) console.log(endDate)
       if (!isObj && value.start_time) {
         endDate.setMinutes(endDate.getMinutes() + value.timelimit);
@@ -661,7 +663,6 @@ $(document).ready(function () {
       }
       else if (!isObj && value.created_at) endDate.setMinutes(endDate.getMinutes() + value.timelimit);
 
-      
       div = div + "<div class='col-sm-6 assessment'>";
       div = div + "<div class='card mb-3 objCard text-left' style='cursor:auto;'>";
       div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
@@ -679,8 +680,12 @@ $(document).ready(function () {
         else
           div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + value.doe + "</h6>";
       }
-      if(endDate < new Date())
+      if(endDate < new Date()){
         div += "<button class='btn btn-primary text-white pl-4 pr-4 assBtn condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>View Result</button>";
+      }
+      else{
+        console.log(endDate);
+      }
       div = div + "</div><div class='px-3 text-muted card-footer' style='height:45px'>";
       div = div + "<div class='row'>";
       div = div + "<div class='col-sm-4'>";
@@ -693,6 +698,7 @@ $(document).ready(function () {
       div = div + "Answered: <span class='font-weight-bold'>" + value.test_completed + "</span>";
       div = div + "</div></div></div></div></div>";
     });
+    console.log(new Date());
 
     if (isObj)
       $('#condObjAssessmentList').append(div);

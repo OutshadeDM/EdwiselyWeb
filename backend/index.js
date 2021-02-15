@@ -186,6 +186,7 @@ $(async function() {
 			        },
 			        success: function (result) {
 			            // alert(result.status);
+						console.log(result);
 			            resolve(result);
 			        },
 			        error: function (error) {
