@@ -617,7 +617,7 @@ $(document).ready(function () {
 
         },
         error: function (error) {
-          alert("Request Failed with status: " + error.status);
+          //alert("Request Failed with status: " + error.status);
         }
       });
     }
@@ -677,11 +677,11 @@ $(document).ready(function () {
 
           }
           else {
-            alert("error!")
+            //alert("error!")
           }
         },
         error: function (error) {
-          alert("Request Failed with status: " + error.status);
+          //alert("Request Failed with status: " + error.status);
         }
       });
     }
@@ -788,11 +788,11 @@ $(document).ready(function () {
                 }, 2000);
               }
               else {
-                alert("error!")
+                //alert("error!")
               }
             },
             error: function (error) {
-              alert("Request Failed with status: " + error.status);
+              //alert("Request Failed with status: " + error.status);
             }
           });
         }
@@ -833,7 +833,7 @@ $(document).ready(function () {
 
               }
               else {
-                alert("error!")
+                //alert("error!")
               }
             },
             error: function (error) {

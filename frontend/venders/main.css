@@ -37,6 +37,9 @@ body{
   padding: 0;
   background-color: #f9f9f9;
 }
+#body-row{
+  padding-top: 76px;
+}
 /* .container-fluid{
   align-items: center;
   padding-right: 0;
@@ -124,7 +127,7 @@ scrollbar-width: none;  /* Firefox */
 position: relative;
 padding-top: 20px;
 padding-bottom: 20px;
-background-color: white;
+background-color: #f9f9f9;
 margin-bottom: 10px;
 }
 

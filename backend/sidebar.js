@@ -1,34 +1,88 @@
 $(document).ready(function () {
-  // Hide submenus
-  $('#body-row .collapse').collapse('hide'); 
 
-  // Collapse/Expand icon
-  $('#collapse-icon').addClass('fa-angle-double-left'); 
-
-  // Collapse click
-  $('[data-toggle=sidebar-colapse]').click(function() {
-      SidebarCollapse();
-  });
-
-  function SidebarCollapse () {
-      $('#sidebar-container').toggleClass("shrink");
-      $(".right-div").toggleClass("shrink");
-      $('.menu-collapsed').toggleClass('d-none');
-      $('.sidebar-submenu').toggleClass('d-none');
-      $('.submenu-icon').toggleClass('d-none');
-      $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
-      if($('#logoImage').attr('src') == '../images/Org_White.svg'){
-        $('#logoImage').attr('src','https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png');
-        $('#logoImage').attr('width','60');
-        $('#logoImage').attr('height','45');
-      }
-      else{
-        $('#logoImage').attr('src','../images/Org_White.svg');
-        $('#logoImage').attr('width','200');
-        $('#logoImage').attr('height','75');
-      }
-    
-    // Collapse/Expand icon
-    $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/courses.html') {
+    $('#allCourseNav').addClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').removeClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
   }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/addCourses.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').addClass('selectedNav')
+    $('#assessmentNav').removeClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/myAssessment.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').addClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/liveClass.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').removeClass('selectedNav')
+    $('#liveClassNav').addClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/sendQuestionsPage.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').removeClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').addClass('selectedNav')
+  }
+
+
+
+
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/addQues.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').addClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/addQuestionsPage.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').addClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/chooseQues.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').addClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/uploadQues.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').addClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/courseDetails.html') {
+    $('#allCourseNav').addClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').removeClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+  if (window.location.href == window.location.protocol + '//' + window.location.host + '/frontend/pages/createAssessment.html') {
+    $('#allCourseNav').removeClass('selectedNav')
+    $('#addCourseNav').removeClass('selectedNav')
+    $('#assessmentNav').addClass('selectedNav')
+    $('#liveClassNav').removeClass('selectedNav')
+    $('#sendAssessmentNav').removeClass('selectedNav')
+  }
+
+
+
+
 });

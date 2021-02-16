@@ -1,101 +1,48 @@
-#body-row {
-    margin-left:0;
-    margin-right:0;
-}
-#sidebar-container {
-    min-height: 100vh;   
-    background-color: #2A2A2A;
-    padding: 0;
+.navbar {
+    background-image: linear-gradient(144deg, #F38FA2 0%, #EB5C6F 41%, #F1825C 100%); 
+    position: fixed;
+    z-index: 10;
+    width: 100%;
 }
 
-/* Sidebar sizes when expanded and expanded */
-.sidebar-collapsed {
-    width: 60px;
+.navContainer{
+    height: 85vh; background-color: white;
 }
 
-/* Menu item*/
-#sidebar-container .list-group a {
-    height: 50px;
-    color: #bbb;
-    background-color: #2A2A2A;
-    font-size: 1.1rem;
-    margin: 2px 0;
+#greetingNav{
+    font-size:large ;
 }
 
-#sidebar-container .list-group a:hover,
-#sidebar-container .list-group a:active,
-#sidebar-container .list-group a.active {
-    color: white;
-    background-color: #3f3f3f;
+#logoutNav{
+    cursor: pointer;
 }
 
-#sidebar-container .list-group a:active,
-#sidebar-container .list-group a.active {
-    border: none;
+.navbarhr{
+    width: 5rem;
+    height: 4px;
+    text-align: start;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    margin-left: 60px; 
+    background-color: black; 
+    background-image: none;
 }
 
-/* #sidebar-container .list-group .logout{
-    bottom: 0;
-    background-color: #1b668c;
-    color: white;
-    background: #81FBB8;
-    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
-} */
-
-/* Submenu item*/
-#sidebar-container .list-group .sidebar-submenu a {
-    height: 45px;
-    padding-left: 30px;
-}
-.sidebar-submenu {
-    font-size: 0.9rem;
+.sidebarLinks{
+    border-bottom: 1px solid #ebebeb;
 }
 
-/* Separators */
-.sidebar-separator-title {
-    background-color: #2A2A2A;
-    height: 35px;
-}
-.sidebar-separator {
-    background-color: #2A2A2A;
-    height: 25px;
-}
-.logo-separator {
-    background-color: #2A2A2A;    
-    height: 60px;
+.sidebarNav{
+    color: black;
 }
 
-/* Closed submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
-  content: " \f0d7";
-  font-family: FontAwesome;
-  display: inline;
-  text-align: right;
-  padding-left: 10px;
-}
-/* Opened submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
-  content: " \f0da";
-  font-family: FontAwesome;
-  display: inline;
-  text-align: right;
-  padding-left: 10px;
+.sidebarNav:hover{
+    color: black;
+    text-decoration: none;
 }
 
-.sticky-offset {
-    top: 0;
-}
-
-#sidebar-container {
-    position: sticky;
-    top: 0;
-}
-
-#sidebarChange.closed {
-    max-width: fit-content;
-}
-
-#logoImage {
-    width: 70%;
-    max-width: 110px;
+.selectedNav{
+    font-size: larger;
 }

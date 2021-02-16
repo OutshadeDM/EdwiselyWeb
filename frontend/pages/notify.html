@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png"
+    type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <!-- add custom stylesheet here -->
@@ -42,95 +43,60 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Success!</strong> Notification Successfully Added
   </div>
-  <!-- Bootstrap row -->
+  <nav class="navbar">
+    <a class="navbar-brand pl-5" href="./index.html">
+      <img src="../images/LOGO.png" height="50px" />
+    </a>
+  </nav>
   <!-- Bootstrap row -->
   <div class="row" id="body-row">
-    <!-- Sidebar -->
-    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
-      <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
-      <!-- Bootstrap List Group -->
-      <div class="sticky-top sticky-offset">
-        <a href="index.html" class="bg-dark my-4 mx-2">
-            <div class="d-flex justify-content-center align-items-center">
-              <img id="logoImage" src="../images/Org_White.svg" alt="No Image">
-            </div>
-        </a>
-        <ul class="list-group">
-            <!-- Menu -->
-            <a href="index.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fa fa-home fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Dashboard</span>
-                </div>
-              </a>
-              <a href="courses.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-book fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Your Courses</span>
-                </div>
-              </a>
-              <a href="addCourses.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-bookmark fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Add Courses</span>
-                </div>
-              </a>
-              <a href="myAssessment.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-chart-bar fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Assessments</span>
-                </div>
-              </a>
-              <a href="liveClass.html" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-tv fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Live Class</span>
-                </div>
-              </a>
-              <a href="notify.html" class="list-group-item list-group-item-action active">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fas fa-envelope fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Notify</span>
-                </div>
-              </a>
-              <li class="list-group-item sidebar-separator menu-collapsed"></li>
-              <a href="#" data-toggle="sidebar-colapse" class="list-group-item list-group-item-action d-flex align-items-center">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
-                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
-                </div>
-              </a>
+    <!-- top nav -->
 
-              <li class="list-group-item sidebar-separator menu-collapsed"></li>
-              <a href="#" onclick="logout();" data-toggle="sidebar-collapse" class="list-group-item list-group-item-action d-flex align-items-center logout">
-                  <div class="d-flex w-100 justify-content-start align-items-center">
-                      <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
-                      <span id="collapse-text" class="menu-collapsed">Logout</span>
-                  </div>
-              </a>
-        </ul>
-
-        <!-- List Group END-->
+    <div class="col-2" style="height: 100vh; position: fixed;">
+      <div class="p-3">
+        <div class="shadow-sm navContainer">
+          <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
+          </div>
+          <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="../images/logout.png"
+                class="px-2" />Logout
+            </b></div>
+          <hr class="navbarhr" />
+          <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
+              Courses</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
+              Courses</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
+              href="myAssessment.html">Assessments</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
+              Class</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
+              href="sendQuestionsPage.html">Send
+              Assignment</a></div>
+        </div>
       </div>
     </div>
+    <div class="col-2" style="z-index: -8;"></div>
+    <!-- Sidebar -->
+
     <!-- sidebar-container END -->
     <!-- MAIN -->
-    <div class="right-div">
+    <div class="col-10 px-0">
       <div class="container-fluid px-0">
-        <div class="shadow-sm">
+        <div class="">
           <div class="px-5 headerBanner">
             <div class="row">
               <div class="col-5">
                 <h2 class="mt-1">
                   <p class="font-weight-bold" id="courseName">Send Notification</p>
-                </h2> 
+                </h2>
                 <hr class="titlehr">
                 <p class="list pb-0 mb-0">
                   <span class="list-item"><a href=index.html>Home</a> > <a href="notify.html">Notification</a></span>
-                </p>                               
+                </p>
               </div>
-              <div class="col-6 pr-5 d-flex justify-content-end align-self-center "><button id="submit" type="submit" class="submit btn btn-lg btn-primary"><i class="fab fa-telegram-plane"></i> Send</button></div>
-            </div>            
+              <div class="col-6 pr-5 d-flex justify-content-end align-self-center "><button id="submit" type="submit"
+                  class="submit btn btn-lg btn-primary"><i class="fab fa-telegram-plane"></i> Send</button></div>
+            </div>
 
           </div>
         </div>
@@ -146,10 +112,12 @@
                     <div class="row px-4">
                       <div class="col-md-5 col-12">
                         <label class="mb-1">Title</label><br>
-                        <input name="title" id="title" placeholder="Enter Title" class="form-control" type="text" required >
+                        <input name="title" id="title" placeholder="Enter Title" class="form-control" type="text"
+                          required>
                         <span class="error text-danger d-block title"></span>
                         <label class="mb-1 mt-4">Description</label><br>
-                        <textarea name="description" id="description" placeholder="Enter Description" class="form-control" col="4" rows="4"></textarea>
+                        <textarea name="description" id="description" placeholder="Enter Description"
+                          class="form-control" col="4" rows="4"></textarea>
                         <div class="row">
                           <div class="col-6 pt-3 mb-1 mt-4 row">
                             <label class="col-6">Priority</label>
@@ -181,13 +149,13 @@
                         <div class="slide-wrap col-12">
                           <ul class="nav nav-pills mb-3 row" id="myTab" role="tablist">
                           </ul>
-                        </div>                        
+                        </div>
                       </div>
                       <div class="col-md-6 col-12 right">
                         <div class="tab-content" id="myTabContent">
                         </div>
                       </div>
-                    </div>                    
+                    </div>
                   </form>
                 </div>
               </div>

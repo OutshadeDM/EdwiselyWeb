@@ -35,83 +35,46 @@
 </head>
 
 <body>
+  <nav class="navbar">
+    <a class="navbar-brand pl-5" href="./index.html">
+      <img src="../images/LOGO.png" height="50px" />
+    </a>
+  </nav>
   <!-- Bootstrap row -->
   <div class="row" id="body-row">
-    <!-- Sidebar -->
-    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
-      <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
-      <!-- Bootstrap List Group -->
-      <div class="sticky-top sticky-offset">
-        <a href="index.html" class="bg-dark my-4 mx-2">
-          <div class="d-flex justify-content-center align-items-center">
-            <img id="logoImage" src="../images/Org_White.svg" alt="No Image">
+    <!-- top nav -->
+
+    <div class="col-2" style="height: 100vh; position: fixed;">
+      <div class="p-3">
+        <div class="shadow-sm navContainer">
+          <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
           </div>
-        </a>
-        <ul class="list-group">
-          <!-- Menu -->
-          <a href="index.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fa fa-home fa-fw mr-3"></span>
-              <span class="menu-collapsed">Dashboard</span>
-            </div>
-          </a>
-          <a href="courses.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-book fa-fw mr-3"></span>
-              <span class="menu-collapsed">Your Courses</span>
-            </div>
-          </a>
-          <a href="addCourses.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-bookmark fa-fw mr-3"></span>
-              <span class="menu-collapsed">Add Courses</span>
-            </div>
-          </a>
-          <a href="myAssessment.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-chart-bar fa-fw mr-3"></span>
-              <span class="menu-collapsed">Assessments</span>
-            </div>
-          </a>
-          <a href="liveClass.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-tv fa-fw mr-3"></span>
-              <span class="menu-collapsed">Live Class</span>
-            </div>
-          </a>
-          <a href="notify.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-envelope fa-fw mr-3"></span>
-              <span class="menu-collapsed">Notify</span>
-            </div>
-          </a>
-          <li class="list-group-item sidebar-separator menu-collapsed"></li>
-          <a href="#top" data-toggle="sidebar-colapse"
-            class="list-group-item list-group-item-action d-flex align-items-center">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span id="collapse-icon" class="fa fa-2x mr-3"></span>
-              <span id="collapse-text" class="menu-collapsed">Collapse</span>
-            </div>
-          </a>
-
-          <li class="list-group-item sidebar-separator menu-collapsed"></li>
-          <a href="#" onclick="logout();" data-toggle="sidebar-collapse"
-            class="list-group-item list-group-item-action d-flex align-items-center logout">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-sign-out-alt fa-fw mr-3"></span>
-              <span id="collapse-text" class="menu-collapsed">Logout</span>
-            </div>
-          </a>
-        </ul>
-
-        <!-- List Group END-->
+          <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="../images/logout.png"
+                class="px-2" />Logout
+            </b></div>
+          <hr class="navbarhr" />
+          <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
+              Courses</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
+              Courses</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
+              href="myAssessment.html">Assessments</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
+              Class</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
+              href="sendQuestionsPage.html">Send
+              Assignment</a></div>
+        </div>
       </div>
     </div>
+    <div class="col-2" style="z-index: -8;"></div>
+    <!-- Sidebar -->
+
     <!-- sidebar-container END -->
     <!-- MAIN -->
-    <div class="right-div">
+    <div class="col-10 px-0">
       <div class="container-fluid px-0">
-        <div class="shadow-sm">
+        <div class="">
           <div class="px-5 headerBanner">
             <div class="row">
               <div class="col-sm-8">
@@ -223,7 +186,8 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option" id="firstOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage firstOption px-0 right-radius d-flex justify-content-center align-items-center">
+                    <div
+                      class="col-2 chooseImage firstOption px-0 right-radius d-flex justify-content-center align-items-center">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption1"></i>
                       </label>
@@ -255,7 +219,8 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option" id="secondOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage secondOption px-0 right-radius d-flex justify-content-center align-items-center">
+                    <div
+                      class="col-2 chooseImage secondOption px-0 right-radius d-flex justify-content-center align-items-center">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption2"></i>
                       </label>
@@ -290,7 +255,8 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option (Optional)" id="thirdOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage thirdOption px-0 right-radius d-flex justify-content-center align-items-center">
+                    <div
+                      class="col-2 chooseImage thirdOption px-0 right-radius d-flex justify-content-center align-items-center">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption3"></i>
                       </label>
@@ -322,7 +288,8 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option (Optional)" id="fourthOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage fourthOption px-0 right-radius d-flex justify-content-center align-items-center">
+                    <div
+                      class="col-2 chooseImage fourthOption px-0 right-radius d-flex justify-content-center align-items-center">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-2" id="uploadedoption4"></i>
                       </label>
@@ -342,7 +309,7 @@
               </div>
               <div class="row py-4 text-center mx-1">
 
-                  <a href="#" id="fifthOptionBtn"><i class="fas fa-plus"></i> Add Option</a>
+                <a href="#" id="fifthOptionBtn"><i class="fas fa-plus"></i> Add Option</a>
                 <div class="col-6 mx-0 pr-4">
 
 
@@ -361,7 +328,8 @@
                       <textarea type="text" class="form-control" placeholder="Enter Option (Optional)" id="fifthOption"
                         style="height: 50px;"></textarea>
                     </div>
-                    <div class="col-2 chooseImage fifthOption px-0 right-radius d-flex justify-content-center align-items-center">
+                    <div
+                      class="col-2 chooseImage fifthOption px-0 right-radius d-flex justify-content-center align-items-center">
                       <label class="custom-file-upload optImgs">
                         <i class="fas fa-trash-alt fa-2x pt-2 pl-1" id="uploadedoption5"></i>
                       </label>
@@ -380,34 +348,36 @@
 
               </div>
 
-              
+
               <div class="divInput my-3 mx-1">
                 <label for="sourceInput" class="w-100 tabLabels">Source</label>
-                <textarea class="form-control form-control-lg w-100" type="text" placeholder="Source (if any)" id="sourceInput" cols="50"></textarea>
+                <textarea class="form-control form-control-lg w-100" type="text" placeholder="Source (if any)"
+                  id="sourceInput" cols="50"></textarea>
               </div>
 
-              
+
               <a href="#" id="hintBtn" class="pl-1 mb-5"><i class="fas fa-plus"></i> Add Hint<br><br></a>
 
               <div class="my-3" id="hintDiv">
                 <label for="hintInput" class="w-100 tabLabels">Hint</label>
                 <div class="row divInput mx-1">
                   <div class="col-sm-9">
-                    <textarea class="form-control form-control-lg w-100" type="text" placeholder="Hint" id="hintInput" cols="50"></textarea>
+                    <textarea class="form-control form-control-lg w-100" type="text" placeholder="Hint" id="hintInput"
+                      cols="50"></textarea>
                   </div>
                   <div class="col-sm-3 titleImg py-3">
                     <img id="image_preview_hint" class="imgPreviewhint" src="" alt="your image" />
-                      <div class="chooseImage d-inline">
-                        <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
-                        <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
-                        <label for="hintImage" id="hintLabel" class="custom-file-upload">Add Image</label>
-                      </div>
-                      <input id="hintImage" type="file" accept="image/*" />
+                    <div class="chooseImage d-inline">
+                      <i class="fas fa-trash-alt fa-lg px-2 uploadedhint"></i>
+                      <i class="fas fa-image fa-lg px-2 notUploadedhint"></i>
+                      <label for="hintImage" id="hintLabel" class="custom-file-upload">Add Image</label>
+                    </div>
+                    <input id="hintImage" type="file" accept="image/*" />
                   </div>
                 </div>
               </div>
 
-              
+
               <a href="#" id="solutionBtn" class="pl-1"><i class="fas fa-plus"></i> Add Solution</a>
 
               <!-- <div class="row divInput my-3">
@@ -430,7 +400,8 @@
                 <label for="solutionInput" class="w-100 tabLabels">Solution</label>
                 <div class="row divInput mx-1">
                   <div class="col-sm-9">
-                    <textarea class="form-control form-control-lg w-100" type="text" placeholder="Solution" id="solutionInput" cols="50"></textarea>
+                    <textarea class="form-control form-control-lg w-100" type="text" placeholder="Solution"
+                      id="solutionInput" cols="50"></textarea>
                   </div>
                   <div class="col-sm-3 titleImg py-3">
                     <img id="image_preview_solution" class="imgPreviewsolution" src="" alt="your image" />
@@ -455,73 +426,73 @@
 
             <div class="col-md-2 addques pl-2 pr-0 mr-0" id="addsoln">
               <div class="whiteBack h-100 px-2">
-              <div class="form-group pt-2">
-                <div class="form-group mb-0 pb-0">
-                  <div class="onoffswitch mx-auto">
-                    <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch1" value="public" tabindex="0"
-                      checked name="public_pvt">
-                    <label class="onoffswitch-label" id="customSwitch1Label" for="customSwitch1">
-                      <span class="onoffswitch-inner"></span>
-                      <span class="onoffswitch-switch"></span>
-                    </label>
-                  </div>
-                </div>
-
-
-                <!-- Button trigger modal -->
-
-                <div class="py-3 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
-                  data-target="#exampleModal">
-
-                  <i class="fas fa-bars pl-2 pr-0"></i>
-
-                  <span class=" pl-2 pr-2">Topics</span>
-                  <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 10px;"></i>
-
-
-                </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="form-group">
-                          <ul class="courseTopics" id="topicTags">
-
-                          </ul>
-                        </div>
-                      </div>
-
+                <div class="form-group pt-2">
+                  <div class="form-group mb-0 pb-0">
+                    <div class="onoffswitch mx-auto">
+                      <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch1" value="public" tabindex="0"
+                        checked name="public_pvt">
+                      <label class="onoffswitch-label" id="customSwitch1Label" for="customSwitch1">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
                     </div>
                   </div>
+
+
+                  <!-- Button trigger modal -->
+
+                  <div class="py-3 px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
+                    data-target="#exampleModal">
+
+                    <i class="fas fa-bars pl-2 pr-0"></i>
+
+                    <span class=" pl-2 pr-2">Topics</span>
+                    <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 10px;"></i>
+
+
+                  </div>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <ul class="courseTopics" id="topicTags">
+
+                            </ul>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul class="hyperlinkUl pt-1">
+                    <li>
+                      <button class="btn btn-primary w-100" id="deleteBtn" style="display: none;">Delete</button>
+                      <!-- <a href="#" id="deleteBtn" style="display: none;">Delete</a> -->
+                    </li>
+                    <li>
+                      <button class="btn btn-primary w-100" id="editBtn">Edit</button>
+                      <!-- <a href="#" id="editBtn">Edit</a> -->
+                    </li>
+                    <li>
+                      <button class="btn btn-primary w-100" id="plusBtn">Done</button>
+                      <!-- <a href="#" id="plusBtn">Done</a> -->
+                    </li>
+                  </ul>
+
+                  <input type="hidden" value="0" id="questionId">
+
                 </div>
-
-                <ul class="hyperlinkUl pt-1">
-                  <li>
-                    <button class="btn btn-primary w-100" id="deleteBtn" style="display: none;">Delete</button>
-                    <!-- <a href="#" id="deleteBtn" style="display: none;">Delete</a> -->
-                  </li>
-                  <li>
-                    <button class="btn btn-primary w-100" id="editBtn">Edit</button>
-                    <!-- <a href="#" id="editBtn">Edit</a> -->
-                  </li>
-                  <li>
-                    <button class="btn btn-primary w-100" id="plusBtn">Done</button>
-                    <!-- <a href="#" id="plusBtn">Done</a> -->
-                  </li>
-                </ul>
-
-                <input type="hidden" value="0" id="questionId">
-                
-              </div>
               </div>
             </div>
             <div class="col-md-2 whiteBack addques px-4 py-2" id="topicsDiv" style="display: none;"></div>
