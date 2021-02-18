@@ -14,10 +14,10 @@
     crossorigin="anonymous" />
 
   <!-- add custom stylesheet here -->
-  <link href="../venders/main.css" rel="stylesheet">
-  <link href="../venders/sidebar.css" rel="stylesheet">
-  <link rel="stylesheet" href="../venders/radiostyle.css">
-  <link href="../venders/pages/chooseQues.css" rel="stylesheet">
+  <link href="frontend/venders/main.css" rel="stylesheet">
+  <link href="frontend/venders/sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" href="frontend/venders/radiostyle.css">
+  <link href="frontend/venders/pages/chooseQues.css" rel="stylesheet">
 
 
   <!-- jquery -->
@@ -38,7 +38,7 @@
 <body>
   <nav class="navbar">
     <a class="navbar-brand pl-5" href="./index.html">
-      <img src="../images/LOGO.png" height="50px" />
+      <img src="frontend/images/LOGO.png" height="50px" />
     </a>
   </nav>
   <!-- Bootstrap row -->
@@ -50,7 +50,7 @@
         <div class="navContainer">
           <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
           </div>
-          <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="../images/logout.png"
+          <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="frontend/images/logout.png"
                 class="px-2" />Logout
             </b></div>
           <hr class="navbarhr" />
@@ -94,13 +94,13 @@
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
                     <div id="divSaveSend">
                       <button type="button" id="btnSaveSend" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
-                        <img src="../images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
+                        <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
                         Save & Send</button>
                     </div>
                   </div>
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
                     <button type="button" id="btnSave" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2"><img
-                        src="../images/save.svg" alt="abc" class="pr-1" height="20px" />
+                        src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
                       Save</button>
                   </div>
 
@@ -258,10 +258,10 @@
     <!-- body-row END -->
 </body>
 <!-- add extra js files here -->
-<script type="text/javascript" src="../venders/scripts/cookies.js"></script>
-<script type="text/javascript" src="../../backend/cookies.js"></script>
-<script src="../../backend/sidebar.js"></script>
-<script src="../../backend/chooseQues.js"></script>
+<script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
+<script type="text/javascript" src="backend/cookies.js"></script>
+<script src="backend/sidebar.js"></script>
+<script src="backend/chooseQues.js"></script>
 <script>
   MathJax = {
     tex: {

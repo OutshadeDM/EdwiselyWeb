@@ -52,7 +52,7 @@ $(document).ready(function () {
   // color: #FFFFFF !important;   
   //initial styling
   $('#navAll').css({ "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "10px 0 0 0", "color": "white" })
-  $('#all').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
+  $('#all').css({ "background": "url('frontend/images/noteswhite.svg') no-repeat center" })
   $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
   $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
@@ -801,15 +801,15 @@ $(document).ready(function () {
     i = 1
     getAllQuestions()
     $('#navAll').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "10px 0 0 0" })
-    $('#all').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
+    $('#all').css({ "background": "url('frontend/images/noteswhite.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
+    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
+    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
+    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
   })
 
 
@@ -822,15 +822,15 @@ $(document).ready(function () {
     i = 1
     getBloomQuestions(1)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)" })
-    $('#rem').css({ "background": "url('../images/noteswhite.svg') no-repeat center" })
+    $('#rem').css({ "background": "url('frontend/images/noteswhite.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
+    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
+    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
+    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
   })
 
   $('#navUnderstand').on('click', function () {
@@ -842,15 +842,15 @@ $(document).ready(function () {
     i = 1
     getBloomQuestions(2)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)" })
-    $('#und').css({ "background": "url('../images/Page-1white.svg') no-repeat center" })
+    $('#und').css({ "background": "url('frontend/images/Page-1white.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
+    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
+    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
   })
 
   $('#navApply').on('click', function () {
@@ -862,15 +862,15 @@ $(document).ready(function () {
     i = 1
     getBloomQuestions(3)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
+    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)" })
-    $('#app').css({ "background": "url('../images/startupwhite.svg') no-repeat center" })
+    $('#app').css({ "background": "url('frontend/images/startupwhite.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('../images/electric-light-bulb.svg') no-repeat center" })
+    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
   })
 
   $('#navAnalyze').on('click', function () {
@@ -882,15 +882,15 @@ $(document).ready(function () {
     i = 1
     getBloomQuestions(4)
     $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('../images/notes.svg') no-repeat center" })
+    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
     $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('../images/Page-1.svg') no-repeat center" })
+    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
     $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('../images/startup.svg') no-repeat center" })
+    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
     $('#navAnalyze').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "0 10px 0 0" })
-    $('#ana').css({ "background": "url('../images/electric-light-bulbwhite.svg') no-repeat center" })
+    $('#ana').css({ "background": "url('frontend/images/electric-light-bulbwhite.svg') no-repeat center" })
   })
 
 

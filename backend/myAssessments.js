@@ -296,12 +296,12 @@ $(document).ready(function () {
       div = div + "<div class='p-1 pl-3 pr-3 text-muted card-footer' style='height:45px'>";
       div = div + "Questions: " + value.questions_count;
       if (!value.questions_count)
-        div = div + "<a href='../pages/addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
+        div = div + "<a href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a>";
       else if (value.doe != "") {
         div = div + "<div style='float:right;'>Sent</div>";
       }
       else
-        div = div + "<a href='../pages/sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
+        div = div + "<a href='sendQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=" + isObj + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send</a>";
       div = div + "</div></div></div>";
 
     });

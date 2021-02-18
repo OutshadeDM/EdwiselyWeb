@@ -36,7 +36,7 @@ $(document).ready(function() {
 
                         if(!courseDept || courseDept == "0" || courseDept == "all"){
 
-                            $img = $('<img>').addClass('card-img-top img-fluid p-0 h-75').attr('src', course.course_image || '../images/onlineCourses.png');
+                            $img = $('<img>').addClass('card-img-top img-fluid p-0 h-75').attr('src', course.course_image || 'frontend/images/onlineCourses.png');
                             $title = $('<h5></h5>').addClass('card-title font-weight-bold mb-0').text(course.name);
 
                             let departments = "";
@@ -62,7 +62,7 @@ $(document).ready(function() {
                             $dept = $('<span></span>').addClass('py-1').css('font-weight','bold').text(departments);
                             $deptdiv1 = $('<div></div>').addClass('col-8 justify-content-start px-0').append($deptTitle,$dept);
 
-                            $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='../images/plus-circle.svg' />");
+                            $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='frontend/images/plus-circle.svg' />");
                             $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','center').append($button);
                             $deptdiv2 = $('<div></div>').addClass('col-4 px-0').append($buttonDiv);
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
                             if(courseAddFlag){
 
-                                $img = $('<img>').addClass('card-img-top img-fluid p-0 h-75').attr('src', course.course_image || '../images/onlineCourses.png');
+                                $img = $('<img>').addClass('card-img-top img-fluid p-0 h-75').attr('src', course.course_image || 'frontend/images/onlineCourses.png');
                                 $title = $('<h5></h5>').addClass('card-title font-weight-bold mb-0').text(course.name);
 
                                 let departments = "";
@@ -112,7 +112,7 @@ $(document).ready(function() {
                                 $dept = $('<span></span>').addClass('py-1').text(departments);
                                 $deptdiv1 = $('<div></div>').addClass('col-8 justify-content-start px-0').append($deptTitle,$dept);
                                 
-                                $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='../images/plus-circle.svg' />");
+                                $button = $("<button data-toggle='modal' data-target='#courseModal' data-subject='"+course.id+"' data-name='"+course.name+"' data-dept='" + JSON.stringify(dept) + "'></button>").addClass('btn p-0').prop('type','button').css('cursor', 'pointer').css('border', "none").css('color','white  ').html("Add <img src='frontend/images/plus-circle.svg' />");
                                 $buttonDiv = $('<div></div>').addClass('d-flex py-0 px-0 justify-content-end').css('height','100%').css('align-items','center').append($button);
                                 $deptdiv2 = $('<div></div>').addClass('col-4 px-0 deptDiv').append($buttonDiv);
 
@@ -224,7 +224,7 @@ $(document).ready(function() {
     });
 
     function getSections(uid){
-        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
             position: "absolute",
             width: "100%",
             height: "100%",
@@ -278,7 +278,7 @@ $(document).ready(function() {
             form.append("subject_semester_id", courseDept);
             form.append("sections", "["+classes.join(",")+"]");
 
-            $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "absolute",
                 width: "100%",
                 height: "100%",

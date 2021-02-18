@@ -372,7 +372,7 @@ $(document).ready(function () {
                     $('#courseDeckTitle').show();
 
                     $.each(result.data, (index, course) => {
-                        $img = $('<img>').addClass('card-img-top img-fluid py-2').attr('src', course.image || '../images/onlineCourses.png');
+                        $img = $('<img>').addClass('card-img-top img-fluid py-2').attr('src', course.image || 'frontend/images/onlineCourses.png');
                         $title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
                         $cardBody = $('<div></div>').addClass('card-body p-2').append($title);
                         $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').append($img, $cardBody);
@@ -450,7 +450,7 @@ $(document).ready(function () {
         let button = $(event.relatedTarget) // Button that triggered the modal
         const deck_id = button.data('id'); // Extract info from data-* attributes
         $('#deckModalDiv').removeClass('slick-initialized slick-slider');
-        $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+        $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
             position: "relative",
             width: "100%",
             height: "100%",
@@ -677,7 +677,7 @@ $(document).ready(function () {
         
         let courseUnits = $('#courseUnits').val();
 
-        $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+        $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
             position: "relative",
             width: "100%",
             height: "100%",
@@ -1053,7 +1053,7 @@ $(document).ready(function () {
             form.append("name", courseTitleAdd);
             form.append("display_type", courseDisplayTypeAdd);
 
-            $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "absolute",
                 width: "100%",
                 height: "100%",
@@ -1443,7 +1443,7 @@ $(document).ready(function () {
             form.append("unit_id", unit_id);
             form.append("subject_id", subject_id);
 
-            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "relative",
                 width: "100%",
                 height: "100%",
@@ -1483,7 +1483,7 @@ $(document).ready(function () {
             var form = new FormData();
             form.append("unit_id", unit_id);
 
-            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "raltive",
                 width: "100%",
                 height: "100%",
@@ -1533,7 +1533,7 @@ $(document).ready(function () {
             form.append("unit_id", unit_id);
             form.append("subject_id", subject_id);
 
-            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "relative",
                 width: "100%",
                 height: "100%",
@@ -1573,7 +1573,7 @@ $(document).ready(function () {
             var form = new FormData();
             form.append("unit_id", unit_id);
 
-            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            $("<div id='loadingDiv' class='mt-3 d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
                 position: "raltive",
                 width: "100%",
                 height: "100%",

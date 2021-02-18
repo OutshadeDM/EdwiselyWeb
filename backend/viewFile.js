@@ -29,13 +29,13 @@ $(document).ready(function () {
         else{
           $('#mainImg').show();
           $('#mainiFrame').hide();
-          $('#mainImg').attr('src','../images/page-not-found.png');
+          $('#mainImg').attr('src','frontend/images/page-not-found.png');
         }
     }
     else{
       $('#mainImg').show();
       $('#mainiFrame').hide();
-      $('#mainImg').attr('src','../images/page-not-found.png');
+      $('#mainImg').attr('src','frontend/images/page-not-found.png');
     }
 
     function linkifyYouTubeURLs(text) {

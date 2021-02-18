@@ -30,7 +30,7 @@ $(document).ready(function () {
                     });
                     div = div + "<li class='course' data-subSemId='"+course.subject_semester_id+"'>"+course.name+"</li>";
                     
-                    $img = $('<img>').addClass('card-img-top img-fluid pb-2').attr('src', course.course_image || '../images/onlineCourses.png');
+                    $img = $('<img>').addClass('card-img-top img-fluid pb-2').attr('src', course.course_image || 'frontend/images/onlineCourses.png');
                     $title = $('<h5></h5>').addClass('card-title font-weight-bold pb-0 mb-0').text(course.name);
                     $cardBody = $('<div></div>').addClass('card-body p-2').css('height','25%').append($title);
                     $card = $('<div></div>').addClass('card position-relative mb-3 shadow-sm addCourseCard').append($img, $cardBody);
