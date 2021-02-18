@@ -408,7 +408,7 @@ $(async function() {
 
 
 		$.each(courses, (index, course) => {
-			$img = $('<img>').addClass('card-img-top d-flex align-items-center justify-content-center img-fluid').attr('src', course.course_image || '../images/onlineCourses.png');
+			$img = $('<img>').addClass('card-img-top d-flex align-items-center justify-content-center img-fluid').attr('src', course.course_image || 'frontend/images/onlineCourses.png');
 			$title = $('<h5></h5>').addClass('card-title d-flex align-items-center justify-content-start pb-0 mb-0').text(course.name);
 			// $description = $('<p></p>').addClass('py-0 my-0')
 			// 				.append(
@@ -521,7 +521,7 @@ $(async function() {
 				if (activity.type == 'Notification') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
 						<div class="row">
-						<div class="col-1 align-self-start"><img src="../images/notification.svg" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="frontend/images/notification.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -538,15 +538,15 @@ $(async function() {
 							act += `<div class="col-7 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-4 align-self-center d-flex align-items-center justify-content-center"><a href="${activity.file_url}" class="text-dark" style="font-size: 30px;" target="_blank"><div class=""></div><i class="fas fa-file-pdf"></i></a></div>`;
 						else
 							act += `<div class="col-11 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div>`;
-						act += `<div class="col-lg-3 col-md-6 mt-3 align-self-end d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-						<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} style='white-space:nowrap;'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
-						<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>
+						act += `<div class="col-lg-3 col-md-6 mt-3 align-self-end d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+						<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#comments" data-type="Notification" data-id=${activity.id} style='white-space:nowrap;'><img class="img-fluid mr-2" src="frontend/images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
+						<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Notification" data-id=${activity.id}><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>
 					</div>
 				</div>`;
 				} else if (activity.type == 'Test') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="../images/Test.svg" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="frontend/images/Test.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -587,16 +587,16 @@ $(async function() {
 						`;
 					}
 					
-					act+= `<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-						<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-						<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-						<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="questionnaire" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>				
+					act+= `<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+						<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Answered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/tick.svg"> ${activity.answered} Attempted</a></div>
+						<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="Unanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+						<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="questionnaire" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>				
 					</div>
 				</div>`;
 				} else if (activity.type == 'VideoConference') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="../images/Virtualclass.svg" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="frontend/images/Virtualclass.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3 class="title">${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -613,15 +613,15 @@ $(async function() {
 						act += `<div class="col-12 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-11 offset-1 desc">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} <a href="${activity.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a></div>`
 					else 
 						act += `<div class="col-12 offset-1 d-flex align-self-center"><p class="desc">${activity.description}</p></div><div class="col-11 offset-1 desc">The start time of the conference is ${getFormattedDateTime(new Date(activity.start_time.replace(/\s/, 'T')))} and end time is ${getFormattedDateTime(new Date(activity.end_time.replace(/\s/, 'T')))} (The link to meeting will activate only 10 mins before it starts)</div>`
-					act += `<div class="col-lg-3 col-md-6 align-self-end mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-							<div class="col-lg-3 col-md-6 align-self-end mt-3 forward d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="videoConference" data-id=${activity.id}><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>			
+					act += `<div class="col-lg-3 col-md-6 align-self-end mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+							<div class="col-lg-3 col-md-6 align-self-end mt-3 forward d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="videoConference" data-id=${activity.id}><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>			
 				</div>
 			</div>`;      		
 				} else if (activity.type == 'Material') {
 					// console.log(activity);
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
 					<div class="row">
-					<div class="col-1 align-self-start"><img src="../images/Material.svg" class="img-fluid profile"></div>
+					<div class="col-1 align-self-start"><img src="frontend/images/Material.svg" class="img-fluid profile"></div>
 					<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small></div>
 					<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -645,14 +645,14 @@ $(async function() {
 							if (file_urls.length - 1 === index)
 								act += `</div>`;
 						});
-					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-					<div class="col-lg-3 col-md-6 mt-3 forward d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#comments" data-type="Material" data-id=${activity.id} style='white-space:nowrap'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>					
+					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+					<div class="col-lg-3 col-md-6 mt-3 forward d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#comments" data-type="Material" data-id=${activity.id} style='white-space:nowrap'><img class="img-fluid mr-2" src="frontend/images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>					
 				</div>
 			</div>`;		 
 				} else if (activity.type == 'Feedback') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="../images/Feedback.svg" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="frontend/images/Feedback.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br> <!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -679,15 +679,15 @@ $(async function() {
 						act += `<div class="col-7 desc offset-1"><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
 						act += `<div class="col-4 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
 					}
-					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' data-toggle="modal" data-target="#comments" data-type="survey" data-id=${activity.id} style='white-space:nowrap'><img class="img-fluid mr-2" src="../images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
+					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' data-toggle="modal" data-target="#comments" data-type="survey" data-id=${activity.id} style='white-space:nowrap'><img class="img-fluid mr-2" src="frontend/images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
 					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}><i class="fas fa-poll mr-2"></i>Survey Result</a></div>
 					</div>
 			</div>`;
 				} else if (activity.type == 'Subjective') {
 					act = `<div class="card px-3 py-3 mt-4" style='cursor:auto;'>
 					<div class="row">
-						<div class="col-1 align-self-start"><img src="../images/Test.svg" class="img-fluid profile"></div>
+						<div class="col-1 align-self-start"><img src="frontend/images/Test.svg" class="img-fluid profile"></div>
 						<div class="col-5 align-items-end"> <h3>${activity.title}</h3><small class="text-muted date">${getFormattedDateTime(new Date(activity.created_at.replace(/\s/, 'T')))}</small> <br><!-- <p>${activity.description}</p> --></div>
 						<div class="col-6 d-flex justify-content-end"><a data-toggle="modal" data-target="#followed" data-id=${activity.id}> ${activity.followers.length} followers `
 						for (let i = 0; i < 5; i++) {
@@ -705,10 +705,10 @@ $(async function() {
 					if (endtime >= new Date()) {
 						act += `<div class="col-11 offset-1 desc mt-3">A subjective test named ${activity.title} created and set to start at ${getFormattedDateTime(starttime)} with a time limit of ${timelimit} minutes.</div>`;
 						act += `
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><imgclass="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><imgclass="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>					
 							</div>
 						</div>`;
 					} else if (endtime < new Date() && !activity.evaluation_end_time.length) {
@@ -721,19 +721,19 @@ $(async function() {
 							act += `<div class="col-7 desc offset-1 mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. </div><div class="col-3 align-self-center">${ activity.answered? '': '<strong class="status">Test Expired</strong>'}</div>
 							`;
 						act += `
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>
 									</div>
 								</div>`;						
 					} else if (endtime < new Date() && activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) > new Date()) {
 						act += `<div class="col-11 offset-1 desc mt-3">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The student peer evaluation started at ${getFormattedDateTime(new Date(activity.evaluation_started_time.replace(/\s/, 'T')))} and will complete at ${getFormattedDateTime(new Date(activity.evaluation_end_time.replace(/\s/, 'T')))}.</div>`;
 						act += `
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>					
 							</div>
 						</div>`;						
 					} else if (activity.evaluation_end_time.length && new Date(activity.evaluation_end_time.replace(/\s/, 'T')) <= new Date() && !activity.results_release_time.length) {
@@ -743,20 +743,20 @@ $(async function() {
 									<div class="col-12 mt-3"><a onclick="releaseResult(${activity.id})" target="_blank" type="button" class="btn btn-danger">Release Result</a></div>
 								</div>`
 						act += `
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</a></div>					
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end  align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/tick.svg"> ${activity.answered} Attempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</a></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</a></div>					
 							</div>
 						</div>`;
 					} else if (activity.results_release_time.length) {
 						act += `<div class="col-7 mt-3 desc align-self-center offset-1">A subjective test named ${activity.title} created and completed at ${getFormattedDateTime(endtime)}. The results are released, you can check them now.</div>
 						<div class="col-4 align-self-center"><a href="https://develop.createtest.edwisely.com/facultysubjectivetestdashboard?test_id=${activity.id}&token=${$user.token}" target="_blank" type="button" class="btn btn-primary">View Result</a></div>`;
 						act += `
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="../images/send.svg"> ${activity.sent_to} Send To</div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/tick.svg"> ${activity.answered} Attempted</button></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</button></div>
-								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="../images/share.svg"> Forward To</button></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end answered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveAnswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/tick.svg"> ${activity.answered} Attempted</button></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end unanswered align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#answered" data-type="SubjectiveUnanswered" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/cross.svg"> ${activity.sent_to - activity.answered} Unattempted</button></div>
+								<div class="col-lg-3 col-md-6 mt-3 align-self-end forward align-self-center d-flex align-items-center justify-content-center"><a type="button" data-toggle="modal" data-target="#forward" data-type="Subjective" data-id=${activity.id} ><img class="img-fluid mr-2" src="frontend/images/share.svg"> Forward To</button></div>
 							</div>
 						</div>`;
 					}					

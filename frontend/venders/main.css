@@ -38,6 +38,7 @@ body{
   background-color: #f9f9f9;
 }
 #body-row{
+  margin: 0;
   padding-top: 76px;
 }
 /* .container-fluid{
