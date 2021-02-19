@@ -1,34 +1,38 @@
 $(document).ready(function () {
 
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/courses.html') {
+  let page = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+
+
+
+  if (page == 'courses.html') {
     $('#allCourseNav').addClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').removeClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/addCourses.html') {
+  if (page == 'addCourses.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').addClass('selectedNav')
     $('#assessmentNav').removeClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/myAssessment.html') {
+  if (page == 'myAssessment.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').addClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/liveClass.html') {
+  if (page == 'liveClass.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').removeClass('selectedNav')
     $('#liveClassNav').addClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/sendQuestionsPage.html') {
+  if (page == 'sendQuestionsPage.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').removeClass('selectedNav')
@@ -39,42 +43,42 @@ $(document).ready(function () {
 
 
 
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/addQues.html') {
+  if (page == 'addQues.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').addClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/addQuestionsPage.html') {
+  if (page == 'addQuestionsPage.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').addClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/chooseQues.html') {
+  if (page == 'chooseQues.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').addClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/uploadQues.html') {
+  if (page == 'uploadQues.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').addClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/courseDetails.html') {
+  if (page == 'courseDetails.html') {
     $('#allCourseNav').addClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').removeClass('selectedNav')
     $('#liveClassNav').removeClass('selectedNav')
     $('#sendAssessmentNav').removeClass('selectedNav')
   }
-  if (window.location.href == window.location.protocol + '//' + window.location.host + '/EdwiselyWeb/createAssessment.html') {
+  if (page == 'createAssessment.html') {
     $('#allCourseNav').removeClass('selectedNav')
     $('#addCourseNav').removeClass('selectedNav')
     $('#assessmentNav').addClass('selectedNav')
