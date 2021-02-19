@@ -7,3 +7,25 @@
     background: #fff;
     border-radius: 56px;
 }
+
+/* LOGIN PAGE STYLES */
+
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url('../../images/janko-ferlic-sfL_QOnmy00-unsplash.jpg');
+  background-size: cover;
+  background-position: center center;
+  opacity: 0.9;
+  position: relative;
+}
+
+.image-text {
+  padding: 6%;
+  position: absolute;
+  top: 55%;
+  font-weight: 600;
+}
