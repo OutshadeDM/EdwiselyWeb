@@ -409,6 +409,7 @@ $(document).ready(function () {
     });
   }
 
+  //updating the index of the question
   i++;
 
   //on click of the view more ques button
