@@ -17,9 +17,11 @@
 
 #logoutNav{
     cursor: pointer;
+    bottom: 0;
+    top: 100%;
 }
 
-.navbarhr{
+/* .navbarhr{
     width: 5rem;
     height: 4px;
     text-align: start;
@@ -29,10 +31,18 @@
     margin-left: 70px; 
     background-color: black; 
     background-image: none;
-}
+} */
 
 .sidebarLinks{
     border-bottom: 1px solid #ebebeb;
+}
+
+.sidebarLinks.active{
+    background: linear-gradient(136deg ,#DCFF73 0%, #8ECA6B 100%);
+}
+
+.fas.fa-caret-right{
+    right: 20px;
 }
 
 .sidebarNav{

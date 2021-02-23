@@ -861,3 +861,20 @@ pre
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.navbarIcon{
+  cursor: pointer;
+}
+
+.btn-white {
+  background: white;
+  border-radius: 56px;
+  /* border: 1px solid linear-gradient(#7175E0 0%, #4D50CB 33%, #E25BC8 100%);   */
+  border: 1px solid #717ED2;
+  color: black !important;
+  min-width: 130px;
+}
+
+.btn-white:hover{
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+}
