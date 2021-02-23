@@ -35,88 +35,88 @@
 </head>
 
 <body>
-    <nav class="navbar">
-      <a class="navbar-brand pl-5" href="./index.html">
-        <img src="frontend/images/LOGO.png" height="50px" />
-      </a>
-    </nav>
-    <!-- Bootstrap row -->
-    <div class="row" id="body-row">
-      <!-- top nav -->
+  <nav class="navbar">
+    <a class="navbar-brand pl-5" href="./index.html">
+      <img src="frontend/images/LOGO.png" height="50px" />
+    </a>
+  </nav>
+  <!-- Bootstrap row -->
+  <div class="row" id="body-row">
+    <!-- top nav -->
 
-      <div style="z-index: 9999;position: fixed; top: 10px; left: 50%; transform: translate(-50%)"
-        class="alert d-none alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Success!</strong>
-      </div>      
+    <div style="z-index: 9999;position: fixed; top: 10px; left: 50%; transform: translate(-50%)"
+      class="alert d-none alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Success!</strong>
+    </div>
 
-      <div class="col-2 pr-0" style="height: 100vh; position: fixed;">
-        <div class="pl-4 py-3 pr-0">
-          <div class="navContainer">
-            <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
-            </div>
-            <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="frontend/images/logout.png"
-                  class="px-2" />Logout
-              </b></div>
-            <hr class="navbarhr" />
-            <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-                Courses</a></div>
-            <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
-                Courses</a></div>
-            <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
-                href="myAssessment.html">Assessments</a></div>
-            <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
-                Class</a></div>
-            <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
-                href="sendQuestionsPage.html">Send
-                Assignment</a></div>
+    <div class="col-2 pr-0" style="height: 100vh; position: fixed;">
+      <div class="pl-4 py-3 pr-0">
+        <div class="navContainer">
+          <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
           </div>
+          <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="frontend/images/logout.png"
+                class="px-2" />Logout
+            </b></div>
+          <hr class="navbarhr" />
+          <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
+              Courses</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
+              Courses</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
+              href="myAssessment.html">Assessments</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
+              Class</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
+              href="sendQuestionsPage.html">Send
+              Assessment</a></div>
         </div>
       </div>
-      <div class="col-2" style="z-index: -8;"></div>
-      <!-- Sidebar -->
+    </div>
+    <div class="col-2" style="z-index: -8;"></div>
+    <!-- Sidebar -->
 
-      <!-- sidebar-container END -->
-      <!-- MAIN -->
-      <div class="col-10 pr-0">
-        <div class="container-fluid px-0">
-          <div class="">
-            <div class="px-5 headerBanner">
-              <div class="row">
-                <div class="col-5">
-                  <h2 class="mt-1">
-                    <p class="font-weight-bold" id="courseName">Peer Activity</p>
-                  </h2>
-                  <hr class="titlehr">
-                  <p class="list pb-0 mb-0">
-                    <span class="list-item"><a href=index.html>Home</a> > <a href="peerData.html">Peer
-                        Activity</a></span>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <!-- Start Page Content -->
-
-          <div class="px-5 mb-5">
-            <!-- put everything in this div -->
-
+    <!-- sidebar-container END -->
+    <!-- MAIN -->
+    <div class="col-10 pr-0">
+      <div class="container-fluid px-0">
+        <div class="">
+          <div class="px-5 headerBanner">
             <div class="row">
-              <div class="col-sm-12">
-                <div class="card px-3 py-3 mt-3">
-                  <h3 class="title">Peer Activity</h3>
-                  <div id="peer" class="h-100">
-                  </div>
-                </div>
+              <div class="col-5">
+                <h2 class="mt-1">
+                  <p class="font-weight-bold" id="courseName">Peer Activity</p>
+                </h2>
+                <hr class="titlehr">
+                <p class="list pb-0 mb-0">
+                  <span class="list-item"><a href=index.html>Home</a> > <a href="peerData.html">Peer
+                      Activity</a></span>
+                </p>
               </div>
             </div>
 
-
-            <!-- End Page Content -->
           </div>
         </div>
-        <!-- Main Col END -->
+        <!-- Start Page Content -->
+
+        <div class="px-5 mb-5">
+          <!-- put everything in this div -->
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card px-3 py-3 mt-3">
+                <h3 class="title">Peer Activity</h3>
+                <div id="peer" class="h-100">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- End Page Content -->
+        </div>
+      </div>
+      <!-- Main Col END -->
 </body>
 <!-- add extra js files here -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
