@@ -17,6 +17,7 @@
   <link href="frontend/venders/main.css" rel="stylesheet">
   <link href="frontend/venders/sidebar.css" rel="stylesheet">
   <link rel="stylesheet" href="frontend/venders/radiostyle.css">
+  <link href="frontend/venders/pages/chooseQues.css" rel="stylesheet">
 
 
   <!-- jquery -->
@@ -24,7 +25,13 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <title>Edwisely - Feedback Questions</title>
+  <title>Edwisely - Choose Feedback</title>
+
+  <!-- latex -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
 </head>
 
@@ -73,21 +80,27 @@
             <div class="row">
               <div class="col-sm-8">
                 <h2 class="mt-1">
-                  <p class="font-weight-bold" id="feedbackName">Feedback Title</p>
+                  <p class="font-weight-bold" id="courseName">Choose From Existing</p>
                 </h2>
                 <hr class="titlehr">
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
-                  <span class="list-item-active"><a href="#">Add Questions</a></span>
+                  <span class="list-item-active"><a href="#">Choose From Existing</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
-                <div class="d-flex flex-row-reverse justify-content-center bd-highlight">
+                <div class="d-flex flex-row-reverse bd-highlight">
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
-                    <button type="button" id="sendFeedbackBtn"
-                      class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2"><img
-                        src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
-                      Send</button>
+                    <button type="button" id="btnSaveSend" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2"><img
+                        src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
+                      Save & Send</button>
+                  </div>
+                  <div class="p-2 bd-highlight justify-content-center align-self-center">
+                    <div id="divSaveSend">
+                      <button type="button" id="btnSend" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                        <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
+                        Send</button>
+                    </div>
                   </div>
 
                 </div>
@@ -96,25 +109,56 @@
 
 
           </div>
-
-
         </div>
         <!-- Start Page Content -->
 
         <div class="container" id="theMainDiv">
           <!-- put everything in this div -->
 
-          <h5>Create Questions</h5>
+          <div class="row pb-4">
+            <div class="col-3">
+              <h4>Selected Questions</h4>
+            </div>
+            <div class="col-3">
+              <h4>Questions</h4>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-2">
+              <select class="form-control" id="feedbackTemplate"
+                style="border-radius: 18px;width: 100%;outline: none;appearance: none;">
+                <option value="none" selected disabled hidden>Template</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <select class="form-control" id="feedbackCategory"
+                style="border-radius: 18px;width: 100%;outline: none;appearance: none;">
+                <option value="none" selected disabled hidden>Category</option>
+                <option class="feedbackCategoryOption" value="1">Academic</option>
+                <option class="feedbackCategoryOption" value="2">Non - Academic</option>
+              </select>
+            </div>
 
+
+          </div>
           <div class="row">
-            <div class=" col-md-2 mx-4 my-4 createQuestions " id="addques" style="cursor: pointer;">
-              <div><img src="frontend/images/addFeedbackQuestions.svg" alt="abc" height="40px" class="pr-1" /> </div>
-              <div class="pt-2">Add Questions</div>
+            <div class="col-3">
+              <div class="addingQues px-0">
+                <div class="px-2 text-center">Add Questions </div>
+              </div>
             </div>
-            <div class=" col-md-2 mx-4 my-4 createQuestions" id="chooseques" style="cursor: pointer;">
-              <div><img src="frontend/images/chooseFeedbackQuestions.svg" alt="abc" height="40px" class="pr-1" /> </div>
-              <div class="pt-2">Choose Questions</div>
+
+
+            <div class="col-9" id="questionsToChoose">
+
+
+              <ul class="chooseQues p-0">
+
+              </ul>
             </div>
+
+
           </div>
 
 
@@ -148,6 +192,7 @@
 
           <!-- end toasts -->
 
+
           <!-- End Page Content -->
         </div>
       </div>
@@ -159,6 +204,19 @@
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="backend/cookies.js"></script>
 <script src="backend/sidebar.js"></script>
-<script src="backend/feedbackQuestions.js"></script>
+<script src="backend/chooseFeedQues.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    },
+    options: {
+      skipHtmlTags: { '[-]': ['code', 'pre'] }
+    }
+  };  
+</script>
 
 </html>

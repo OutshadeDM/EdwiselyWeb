@@ -61,7 +61,7 @@ $(document).ready(function () {
             $('#successToastBody').text(result.message);
             $('#successToast').toast('show');
             setTimeout(() => {
-              window.location.href = "feedbackQuestions.html?fname=" + title + "&feedback_id=" + result.survey_id + "&cf=1"
+              window.location.href = "feedbackQuestions.html?fname=" + title + "&id=" + result.survey_id + "&cf=1"
             }, 2000)
           }
           else {
