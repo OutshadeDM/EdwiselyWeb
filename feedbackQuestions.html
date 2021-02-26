@@ -111,10 +111,60 @@
               <div><img src="frontend/images/addFeedbackQuestions.svg" alt="abc" height="40px" class="pr-1" /> </div>
               <div class="pt-2">Add Questions</div>
             </div>
-            <div class=" col-md-2 mx-4 my-4 createQuestions" id="chooseques" style="cursor: pointer;">
-              <div><img src="frontend/images/chooseFeedbackQuestions.svg" alt="abc" height="40px" class="pr-1" /> </div>
+
+
+            <!-- trigger modal -->
+
+            <div class=" col-md-2 mx-4 my-4 createQuestions" id="chooseques" style="cursor: pointer;"
+              data-toggle="modal" data-target="#chooseCategoryModal">
+              <div><img src="frontend/images/chooseFeedbackQuestions.svg" alt="abc" height="40px" class="pr-1" />
+              </div>
               <div class="pt-2">Choose Questions</div>
             </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="chooseCategoryModal" tabindex="-1" aria-labelledby="chooseCategoryModal"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="chooseCategoryModal">Choose Category and Template</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body pt-2 pb-5 mb-5" id="modalBody">
+
+                    <h5 class="py-2">Category: </h5>
+                    <div class="text-center">
+                      <select class="form-control" id="feedbackCategory"
+                        style="border-radius: 18px;width: 50%;outline: none;appearance: none;">
+                        <option value="none" selected disabled hidden>Category</option>
+                        <option class="feedbackCategoryOption" value="1">Academic</option>
+                        <option class="feedbackCategoryOption" value="2">Non - Academic</option>
+                      </select>
+                    </div>
+                    <h5 class="py-2">Template: </h5>
+                    <div class="text-center">
+                      <select class="form-control" id="feedbackTemplate"
+                        style="border-radius: 18px;width: 50%;outline: none;appearance: none;">
+                        <option value="none" selected disabled hidden>Template</option>
+                      </select>
+                    </div>
+
+
+
+
+
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
           </div>
 
 
