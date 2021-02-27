@@ -31,8 +31,55 @@ $(document).ready(function () {
       window.location.href = "addFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=0";
     })
 
+
     $(document).on('click', '#chooseques', function () {
-      window.location.href = "chooseFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=0";
+      let category = null;
+      let template = null;
+
+      $('#feedbackCategory').on('change', function () {
+        category = this.value;
+
+        //getting templates based on the category
+        if (category != null) {
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/survey/getFeedbackTemplates?survey_category_id=' + category,
+            type: 'GET',
+            contentType: 'application/json',
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              console.log(result.message);
+
+              if (result.status == 200 && result.data) {
+
+                $.each(result.data, function (key, value) {
+                  //console.log(value)
+                  $('#feedbackTemplate').append('<option value=' + value.id + '>' + value.name + '</option>');
+
+                });
+
+              }
+            },
+            error: function (error) {
+              alert("Request Failed with status: " + error.status);
+            }
+          });
+        }
+
+      });
+
+      $('#feedbackTemplate').on('change', function () {
+        template = this.value;
+        console.log(template)
+        $('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
+      })
+
+      $(document).on('click', '.continueBtn', function () {
+        window.location.href = "chooseFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=0&category=" + category + "&template=" + template;
+      })
+
+
     })
 
 
@@ -61,8 +108,55 @@ $(document).ready(function () {
       window.location.href = "addFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
     })
 
+
     $(document).on('click', '#chooseques', function () {
-      window.location.href = "chooseQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
+      let category = null;
+      let template = null;
+
+      $('#feedbackCategory').on('change', function () {
+        category = this.value;
+
+        //getting templates based on the category
+        if (category != null) {
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/survey/getFeedbackTemplates?survey_category_id=' + category,
+            type: 'GET',
+            contentType: 'application/json',
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              console.log(result.message);
+
+              if (result.status == 200 && result.data) {
+
+                $.each(result.data, function (key, value) {
+                  //console.log(value)
+                  $('#feedbackTemplate').append('<option value=' + value.id + '>' + value.name + '</option>');
+
+                });
+
+              }
+            },
+            error: function (error) {
+              alert("Request Failed with status: " + error.status);
+            }
+          });
+        }
+
+      });
+
+      $('#feedbackTemplate').on('change', function () {
+        template = this.value;
+        console.log(template)
+        $('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
+      })
+
+      $(document).on('click', '.continueBtn', function () {
+        window.location.href = "chooseFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=0&category=" + category + "&template=" + template;
+      })
+
+
     })
 
     $(document).on('click', '#sendFeedbackBtn', function () {
