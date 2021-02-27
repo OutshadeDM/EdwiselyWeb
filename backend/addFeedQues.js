@@ -211,7 +211,7 @@ $(document).ready(function () {
     const isSend = $(this).data('send') == "1" ? true : false;
     console.log(isSend);
     if(isSend && questionsList.length > 0){
-      window.location.href = "sendFeedback.html?id="+sId+"&tname="+tname+"&isObj=true&qc="+questions.length;
+      window.location.href = "sendFeedback.html?id="+sId+"&tname="+tname+"&qc="+questions.length;
     }
     else if(!isSend){
       window.location.href = "feedbackQuestionsPage.html?fname="+sName+"&id="+sId+"&qc="+questions.length;
@@ -239,25 +239,15 @@ $(document).ready(function () {
 
       if(isTemplate){
 
-        // const newOptions = [];
-        // newOptions.push("\""+option1+"\"","\""+option2+"\"");
-        // if(option3) newOptions.push("\""+option3+"\"");
-        // if(option4) newOptions.push("\""+option4+"\"");
-        // if(option5) newOptions.push("\""+option5+"\"");
-
         const oldOptions = questions.filter(question1 => questionId == question1.id)[0].questions_options;
         let newOptions = [];
 
         newOptions[0] = createOption(oldOptions[0].id,option1,questionId);
         newOptions[1] = createOption(oldOptions[1].id,option2,questionId);
         if(option3) newOptions[2] = createOption(oldOptions[2] ? newOptions[2].id : null,option3,questionId);
-        // else if(option3 && !oldOptions[2]) newOptions[2] = createOption(null)
         if(option4) newOptions[3] = createOption(oldOptions[3] ? newOptions[3].id : null,option4,questionId);
         if(option5) newOptions[4] = createOption(oldOptions[4] ? newOptions[4].id : null,option5,questionId);
         newOptions = newOptions.filter(option => option.name !== "" || !option.name);
-
-        // console.log("old",oldOptions);
-        // console.log("new",newOptions);
 
         const newQuestion = {
           id: Number.parseInt(questionId),
@@ -318,8 +308,7 @@ $(document).ready(function () {
         });
 
       }
-      else{
-        
+      else{        
         const newOptions = [];
         newOptions.push("\""+option1+"\"","\""+option2+"\"");
         if(option3) newOptions.push("\""+option3+"\"");
