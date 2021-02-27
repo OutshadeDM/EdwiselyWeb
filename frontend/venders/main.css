@@ -870,7 +870,7 @@ pre
   background: white;
   border-radius: 56px;
   /* border: 1px solid linear-gradient(#7175E0 0%, #4D50CB 33%, #E25BC8 100%);   */
-  border: 1px solid #717ED2;
+  border: 1px solid #717ED2 !important;
   color: black !important;
   min-width: 130px;
 }

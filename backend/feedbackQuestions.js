@@ -16,7 +16,7 @@ $(document).ready(function () {
       $('#errorToast').toast('hide');
       $('#successToast').toast('hide');
       $('#toastDiv').hide();
-    }, 7000);
+    }, 5000);
   });
 
 
@@ -58,7 +58,7 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '#addques', function () {
-      window.location.href = "addQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
+      window.location.href = "addFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
     })
 
     $(document).on('click', '#chooseques', function () {

@@ -636,7 +636,7 @@ $(document).ready(function () {
       form.append("solution", solution);
       form.append("hint_img", hint_img);
 
-      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
         position: "absolute",
         width: "100%",
         height: "100%",
@@ -828,7 +828,7 @@ $(document).ready(function () {
   function saveQuestions(isSend){
     if (questionsList != null && questionsList.length > 0 && tId != "0") {
 
-      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
         position: "absolute",
         width: "100%",
         height: "100%",
@@ -1369,11 +1369,11 @@ $(document).ready(function () {
       if (!question_type1)
         question_type1 = "private";
 
-      console.log(JSON.stringify(newQuestion));
+      // console.log(JSON.stringify(newQuestion));
 
       if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
 
-        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='../images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
           position: "absolute",
           width: "100%",
           height: "100%",
