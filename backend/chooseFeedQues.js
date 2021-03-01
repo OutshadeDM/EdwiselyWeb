@@ -73,6 +73,7 @@ $(document).ready(function () {
   $('#feedbackTemplate').on('change', function () {
     template = this.value;
     console.log(template)
+    i = 1;
     getTemplateQuestions(template)
   })
 
@@ -126,7 +127,7 @@ $(document).ready(function () {
 
   function preAddedFeedbackQuestions() {
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/survey/getSurveyQuestions?survey_id=673',
+      url: 'https://stagingfacultypython.edwisely.com/survey/getSurveyQuestions?survey_id=' + feedback_id,
       type: 'GET',
       contentType: 'application/json',
       headers: {
@@ -153,11 +154,11 @@ $(document).ready(function () {
               preAddedQuestions.push(value);
             }
 
-            // $('.chooseQuestionsInput').each(function () {
-            //   if (preAddedQuestionsId.includes($(this).data('id'))) {
-            //     $(this).prop('checked', true)
-            //   }
-            // })
+            $('.chooseQuestionsInput').each(function () {
+              if (preAddedQuestionsId.includes($(this).data('id'))) {
+                $(this).prop('checked', true)
+              }
+            })
 
           });
 
@@ -222,7 +223,7 @@ $(document).ready(function () {
               questions_values.push(value)
             }
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11'>Q " + i + ".) " + value.name +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11 pb-2'>Q " + i + ".) " + value.name +
               "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "'data-id='" + value.id + "' " +
               " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +

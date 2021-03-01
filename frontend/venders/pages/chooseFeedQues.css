@@ -1,0 +1,144 @@
+/* choose3 questions start */
+
+.chooseQues{
+  overflow-y: scroll;
+  height: 60vh;
+  border-top: solid 1px rgb(206, 206, 206);
+
+}
+
+.chosenQuestions{
+  height: 84px;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: solid 1px rgb(206, 206, 206);
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chooseQues::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chooseQues {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+.addingQues{
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 10px;
+  overflow-y: scroll;
+  height: 75vh;
+  background-color: white;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.addingQues::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.addingQues {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+input[type="checkbox"]{
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+}
+
+
+.chooseQuesNavs div {
+  color: gray;
+  cursor: pointer;
+  font-size: large;
+  display: inline-block;
+}
+
+.nav-link{
+  width: 20%;
+  text-align: center;
+}
+
+.chooseQuesNavs a .active {
+  color: black;
+}
+
+
+.chooseQues li:nth-child(4n+1){
+  background-color: white;
+}
+
+.chooseQues li:nth-child(4n+3){
+  background-color:  #E8EFF3;
+}
+
+
+.chooseQuestionsLi{
+list-style: none;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+
+
+.chooseQuestionsInput {
+  float: right;
+}
+
+
+.viewMoreBtn{
+  float: right;
+  border: none;
+  font-size: 16px;
+}
+
+.viewMoreBtn :hover {
+  font-weight: 600;
+}
+
+
+#subject-modal-div{
+  background-color: white;
+}
+
+
+pre
+{
+  page-break-inside: avoid;
+  display: block;
+  padding: 3px 3px 2px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 20px;
+  word-break: break-all;
+
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+
+
+  padding: 0;
+  color: inherit;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: transparent;
+
+} 
+
+
+/* choose questions end */
+
+
+.viewMoreModal{
+  background-color: transparent;
+}
+
+#questionsToChoose{
+  border: solid rgb(206, 206, 206) 1px;
+  border-radius: 10px;
+  padding: 0;
+  background-color: white;
+}
+
