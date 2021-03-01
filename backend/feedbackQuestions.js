@@ -23,8 +23,8 @@ $(document).ready(function () {
   let searchParams = new URLSearchParams(window.location.search);
 
   if (searchParams.get('cf') == 1) {
-    let feedback_name = searchParams.get('fname');
-    let feedback_id = searchParams.get('id');
+    const feedback_name = searchParams.get('fname');
+    const feedback_id = searchParams.get('id');
 
 
     $(document).on('click', '#addques', function () {
@@ -49,12 +49,12 @@ $(document).ready(function () {
               'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-              console.log(result.message);
+              // console.log(result.message);
 
               if (result.status == 200 && result.data) {
 
                 $.each(result.data, function (key, value) {
-                  //console.log(value)
+                  console.log(value)
                   $('#feedbackTemplate').append('<option value=' + value.id + '>' + value.name + '</option>');
 
                 });
@@ -71,7 +71,7 @@ $(document).ready(function () {
 
       $('#feedbackTemplate').on('change', function () {
         template = this.value;
-        console.log(template)
+        // console.log(template)
         $('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
       })
 
@@ -80,12 +80,6 @@ $(document).ready(function () {
       })
 
 
-    })
-
-
-    $('#sendFeedbackBtn').click(function () {
-      $('#errorToastBody').text("Please Add Questions");
-      $('#errorToast').toast('show');
     })
 
   }
@@ -102,6 +96,7 @@ $(document).ready(function () {
       feedback_name = searchParams.get('fname');
       feedback_id = searchParams.get('id');
       question_count = searchParams.get('qc');
+      $('#feedbackName').text(feedback_name);
     }
 
     $(document).on('click', '#addques', function () {
@@ -126,7 +121,7 @@ $(document).ready(function () {
               'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-              console.log(result.message);
+              // console.log(result.message);
 
               if (result.status == 200 && result.data) {
 
@@ -148,7 +143,7 @@ $(document).ready(function () {
 
       $('#feedbackTemplate').on('change', function () {
         template = this.value;
-        console.log(template)
+        // console.log(template)
         $('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
       })
 
@@ -164,7 +159,7 @@ $(document).ready(function () {
         $('#errorToastBody').text("Please Add Questions");
         $('#errorToast').toast('show');
       } else {
-        window.location.href = "sendFeedbackPage.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
+        window.location.href = "sendFeedback.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
       }
     })
   }

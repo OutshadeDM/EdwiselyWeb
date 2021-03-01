@@ -70,7 +70,7 @@ $(document).ready(function () {
               div = div + "<div class='card mb-3 objCard text-left'>";
               div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-5'>" + value.name + "</h5>";
               if (!value.sent)
-                div = div + "<a class='btn editBtn' href='feedbackQuestions.html?id=" + value.id + "&tname=" + value.name + "&qc=" + value.questions_count + "'><i class='fas fa-pen'></i></a>";
+                div = div + "<a class='btn editBtn' href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "'><i class='fas fa-pen'></i></a>";
               div = div + "<div class='card-body pl-0'>";
               div = div + "<p class='card-text pl-3'>" + value.description + "</p>";
               div = div + "</div>";
@@ -82,9 +82,9 @@ $(document).ready(function () {
               div = div + "Sent To: " + value.students_count;
               div += "</div>";
               if (!value.questions_count)
-                div = div + "<div class='col-4'><a href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a></div>";
+                div = div + "<div class='col-4'><a href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a></div>";
               else if (value.questions_count > 0 && !value.sent)
-                div += "<div class='col-4'><a class='btn btn-primary text-white px-4 assBtn' href='sendFeedback.html?id=" + value.id + "&tname=" + value.name + "&qc=" + value.questions_count + "'>Send</a></div>";
+                div += "<div class='col-4'><a class='btn btn-primary text-white px-4 assBtn' href='sendFeedback.html?id=" + value.id+ ">Send</a></div>";
               else
                 div += "<div class='col-4'><button class='btn btn-primary text-white px-4 assBtn' data-id='" + value.id + "' data-toggle='modal' data-target='#statModal'>View Stats</button></div>";
               div = div + "</div></div></div>";

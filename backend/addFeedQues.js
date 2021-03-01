@@ -174,7 +174,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          console.log(result);
+          // console.log(result);
           if (result.status == 200) {
             $('#successToastBody').text(result.message);
             $('#successToast').toast('show');
@@ -209,12 +209,11 @@ $(document).ready(function () {
 
   $('#btnSave,#btnSaveSend').click(function(){
     const isSend = $(this).data('send') == "1" ? true : false;
-    console.log(isSend);
     if(isSend && questionsList.length > 0){
       window.location.href = "sendFeedback.html?id="+sId+"&tname="+tname+"&qc="+questions.length;
     }
     else if(!isSend){
-      window.location.href = "feedbackQuestionsPage.html?fname="+sName+"&id="+sId+"&qc="+questions.length;
+      window.location.href = "myFeedbaacks.html";
     }
     else{
       $('#errorToastBody').text("Please Add Questions");
@@ -235,10 +234,8 @@ $(document).ready(function () {
     const questionId = $('#questionId').val();
     const isTemplate = questions.filter(question1 => questionId == question1.id)[0].has_template_id == 1 ? true : false;
     if(questionId && question && option1 && option2 && catagory != "0" && catagory){
-      console.log(isTemplate);
 
       if(isTemplate){
-
         const oldOptions = questions.filter(question1 => questionId == question1.id)[0].questions_options;
         let newOptions = [];
 
@@ -257,8 +254,8 @@ $(document).ready(function () {
           questions_options: newOptions
         }
         
-        console.log("old",questions.filter(question1 => questionId == question1.id)[0]);
-        console.log("new",JSON.stringify(newQuestion));
+        // console.log("old",questions.filter(question1 => questionId == question1.id)[0]);
+        // console.log("new",JSON.stringify(newQuestion));
 
         const form = new FormData();
         form.append("survey_id", sId);
@@ -287,7 +284,7 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
           },
           success: function (result) {
-            console.log(result);
+            // console.log(result);
             if (result.status == 200) {
               $('#successToastBody').text(result.message);
               $('#successToast').toast('show');
@@ -345,7 +342,7 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
           },
           success: function (result) {
-            console.log(result);
+            // console.log(result);
             if (result.status == 200) {
               $('#successToastBody').text(result.message);
               $('#successToast').toast('show');
