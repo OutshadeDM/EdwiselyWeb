@@ -23,15 +23,23 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <title>Edwisely - Add Assessment</title>
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js'></script>
+  <title>Edwisely - Feedback</title>
 
 </head>
 
 <body>
   <nav class="navbar">
-    <a class="navbar-brand pl-5" href="./index.html">
-      <img src="frontend/images/LOGO.png" height="50px" />
-    </a>
+    <div class="row w-100">
+      <a class="col-10" href="./index.html">
+        <img src="frontend/images/LOGO.png" class="ml-4" height="50px" />
+      </a>
+      <div class="col-2 d-flex justify-content-between align-items-center">
+        <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+        <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+        <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+      </div>
+    </div>
   </nav>
   <!-- Bootstrap row -->
   <div class="row" id="body-row">
@@ -42,12 +50,8 @@
         <div class="navContainer">
           <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
           </div>
-          <div class="text-center py-3" id="logoutNav" onclick="logout();"><b><img src="frontend/images/logout.png"
-                class="px-2" />Logout
-            </b></div>
-          <hr class="navbarhr" />
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-              Courses</a></div>
+            Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
@@ -57,6 +61,18 @@
           <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
               href="sendQuestionsPage.html">Send
               Assessment</a></div>
+          <div class="pl-4 py-3 sidebarLinks active">
+            <a class="sidebarNav" href="myFeedbacks.html">
+              <div class="row no-gutters">
+                <div class="col-10">Feedbacks</div>
+                <div class="col-2"><i class="fas fa-caret-right"></i></div>
+              </div>
+            </a>
+          </div>
+          <div class="text-center h-100 pt-5 mt-5" id="logoutNav" onclick="logout();">
+            <b><img src="frontend/images/logout.png" class="px-2" />Logout
+            </b>
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +88,7 @@
             <div class="row">
               <div class="col-sm-8">
                 <h2 class="mt-1">
-                  <p class="font-weight-bold" id="courseName">Assessments</p>
+                  <p class="font-weight-bold" id="courseName">Feedbacks</p>
                 </h2>
                 <hr class="titlehr">
                 <p class="list">
@@ -84,7 +100,7 @@
                 <div class="d-flex flex-row-reverse bd-highlight justify-content-center">
                   <div class="p-2 bd-highlight align-self-center">
                     <button type="button" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
-                      <a href="createFeedback.html"><i class="fas fa-laptop-code pr-2"></i>Create Feedback</a></button>
+                      <a href="createFeedback.html" class="text-white"><i class="fas fa-laptop-code pr-2"></i>Create Feedback</a></button>
                   </div>
 
                 </div>
@@ -99,7 +115,7 @@
 
           <div class="row">
             <div class="col-md-12 px-0">
-                <div class="container-fluid pt-5 px-5">
+                <div class="container-fluid px-5">
                     <div class="row text-center" id="feedbackList">
                       <div class="loader-wrapper">
                         <div class="loader"></div>
@@ -113,6 +129,27 @@
           <!-- End Page Content -->
         </div>
       </div>
+      <!-- modal -->
+      <div class="modal fade" id="statModal" tabindex="-1" aria-labelledby="statModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="statModalLabel">Feedback Stats</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end modal -->
+
+
+      
       <!-- Main Col END -->
     </div>
     <!-- body-row END -->
