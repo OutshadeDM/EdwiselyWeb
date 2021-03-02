@@ -39,8 +39,14 @@ $(document).ready(function () {
       // console.log(result.data);
       $('#feedbackList').empty();
       if (result.status == 200 && result.data) {
-        survery = result.data.filter(survery1 => sId == survery1.id)[0];
-        console.log(survery);
+        survey = result.data.filter(survery1 => sId == survery1.id)[0];
+        console.log(survey);
+
+        survey.student_ids.forEach(function (id) {
+          preSelectedStudentsIds.push(id)
+        })
+
+        console.log(preSelectedStudentsIds)
 
       }
     },

@@ -353,7 +353,6 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //console.log('4') 
 
         if (result.status == 200) {
           $('#successToastBody').text("Questions Added Successfully");
@@ -362,15 +361,15 @@ $(document).ready(function () {
 
           if (redirect == 0) {
             //redirect to home screen
-            // setTimeout(() => {
-            //   window.location.href = ""
-            // }, 2000)
+            setTimeout(() => {
+              window.location.href = "myFeedbacks.html"
+            }, 2000)
           }
           else {
             //redirect to send page
-            // setTimeout(() => {
-            //   window.location.href = `sendQuestionsPage.html?id=${subSemId}&tid=${tId}&tname=${tname}&desc=${description}&isObj=${objective}&qc=${question_count}`
-            // }, 2000)
+            setTimeout(() => {
+              window.location.href = `sendFeedback.html?id=${feedback_id}`
+            }, 2000)
 
           }
 
