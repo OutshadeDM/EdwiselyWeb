@@ -84,17 +84,18 @@ height: auto;
 color: rgb(81 84 205) !important;
 }
 
+
 .list-item a{
 color: #4c768b;
 cursor: pointer;
-background: #fff;
+background: #f9f9f9;
 font-size: medium;
 }
 
 .list-item-active a{
 color: #5F93AE;
 cursor: pointer;
-background: #fff;
+background: #f9f9f9;
 font-size: medium;
 }
 
@@ -877,4 +878,8 @@ pre
 
 .btn-white:hover{
   background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+}
+
+.form-control{
+  border-radius: 12px;
 }

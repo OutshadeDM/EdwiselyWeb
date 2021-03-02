@@ -43,13 +43,22 @@
 <body>
   <nav class="navbar">
     <div class="row w-100">
-      <a class="col-10" href="./index.html">
-        <img src="frontend/images/LOGO.png" class="ml-4" height="50px" />
-      </a>
-      <div class="col-2 d-flex justify-content-between align-items-center">
-        <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-        <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-        <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+      <div class="col-9 d-flex align-items-center">
+        <a href="./index.html">
+          <img src="frontend/images/LOGO.png" class="ml-4" height="50px" />
+        </a>
+        <div class="text-center pl-3" id="greetingNav">Greetings, <b>Mr. Harsha</b></div>
+      </div>
+      <div class="col-2 ">
+        <div class="row h-100 no-gutters">
+          <div class="col-2"></div>
+          <div class="col-8 d-flex justify-content-between align-items-center">
+            <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+            </div>
+          <div class="col-2"></div>
+        </div>
       </div>
     </div>
   </nav>
@@ -60,8 +69,6 @@
     <div class="col-2 pr-0" style="height: 100vh; position: fixed;">
       <div class="pl-4 py-3 pr-0">
         <div class="navContainer">
-          <div class="text-center pt-5 pb-3" id="greetingNav">Greetings, <b>Mr. Harsha</b>
-          </div>
           <div class="pl-4 py-3 sidebarLinks active">
             <a class="sidebarNav" href="courses.html">
               <div class="row no-gutters">
