@@ -84,7 +84,7 @@ $(document).ready(function () {
               if (!value.questions_count)
                 div = div + "<div class='col-4'><a href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add</a></div>";
               else if (value.questions_count > 0 && !value.sent)
-                div += "<div class='col-4'><a class='btn btn-primary text-white px-4 assBtn' href='sendFeedback.html?id=" + value.id+ ">Send</a></div>";
+                div += "<div class='col-4'><a class='btn btn-primary text-white px-4 assBtn' href='sendFeedback.html?id=" + value.id + "'>Send</a></div>";
               else
                 div += "<div class='col-4'><button class='btn btn-primary text-white px-4 assBtn' data-id='" + value.id + "' data-toggle='modal' data-target='#statModal'>View Stats</button></div>";
               div = div + "</div></div></div>";
@@ -123,8 +123,8 @@ $(document).ready(function () {
               modal.find('.modal-body').html($row);
               $.each(result.data, (index, surveyResult) => {
                 const col = `
-                  <div class="col-12 mt-2">
-                    <div class="mt-3 position-relative">
+                  <div class="col-12 mb-4 d-flex justify-content-center">
+                    <div class="mt-3 position-relative mb-4" style='height:300px;width:600px'>
                       <canvas id="surveyChart${surveyResult.id}"></canvas>
                       <div id="no-data${surveyResult.id}" style="text-align: center; display: none; width: 100%; height: 100%; position: absolute; right: 0; top: 100px; z-index: 20;">
                         <b>No One Voted Till Now</b>
@@ -165,11 +165,11 @@ $(document).ready(function () {
                   options: {
                     responsive: true,
                     legend: {
-                      position: 'left',
+                      position: 'bottom',
                     },
                     title: {
                       display: true,
-                      fontSize: 15,
+                      fontSize: 20,
                       fontStyle: 'bold',
                       text: surveyResult.name
                     },
@@ -180,8 +180,9 @@ $(document).ready(function () {
                         var firstSet = animation.chart.config.data.datasets[0].data,
                           dataSum = firstSet.reduce((accumulator, currentValue) => accumulator + currentValue);
                       
-                        if (typeof firstSet !== "object" || dataSum === 0) {
+                        if (typeof firstSet !== "object" || dataSum === 0){
                           document.getElementById(`no-data${surveyResult.id}`).style.display = 'block';
+                          // document.getElementById(`surveyChart${surveyResult.id}`).style.display = 'none';
                         }
                       }
                     }
