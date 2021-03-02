@@ -39,9 +39,9 @@ $(document).ready(function () {
       var form = new FormData();
       form.append("title", title);
       form.append("description", desc);
-      for (var key of form.entries()) {
-        alert(key[1]);
-      }
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/survey/createSurvey',
         type: 'POST',
