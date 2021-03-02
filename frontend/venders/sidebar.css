@@ -16,22 +16,14 @@
 }
 
 #logoutNav{
+    position: absolute;
     cursor: pointer;
-    bottom: 0;
-    top: 100%;
+    left: 6vw;
+    top: 45vh;
+    z-index: 40;
+    margin-top: 36vh;
 }
 
-/* .navbarhr{
-    width: 5rem;
-    height: 4px;
-    text-align: start;
-    margin-top: 0;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    margin-left: 70px; 
-    background-color: black; 
-    background-image: none;
-} */
 
 .sidebarLinks{
     border-bottom: 1px solid #ebebeb;
