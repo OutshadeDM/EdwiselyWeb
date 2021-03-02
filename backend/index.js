@@ -186,7 +186,7 @@ $(async function() {
 			        },
 			        success: function (result) {
 			            // alert(result.status);
-						console.log(result);
+						// console.log(result);
 			            resolve(result);
 			        },
 			        error: function (error) {
@@ -1078,8 +1078,8 @@ $(async function() {
 		modal.find('.modal-body').html($row);
 		$.each(surveyResults.data, (index, surveyResult) => {
 			const col = `
-				<div class="col-12 mt-2">
-					<div class="mt-3 position-relative">
+				<div class="col-12 mb-4 d-flex justify-content-center">
+					<div class="mt-3 position-relative mb-4" style='height:300px;width:600px'">
 						<canvas id="surveyChart${surveyResult.id}"></canvas>
 						<div id="no-data${surveyResult.id}" style="text-align: center; display: none; width: 100%; height: 100%; position: absolute; right: 0; top: 100px; z-index: 20;">
 							<b>No One Voted Till Now</b>
@@ -1120,11 +1120,11 @@ $(async function() {
 				options: {
 					responsive: true,
 					legend: {
-						position: 'left',
+						position: 'bottom',
 					},
 					title: {
 						display: true,
-						fontSize: 15,
+						fontSize: 20,
 						fontStyle: 'bold',
 						text: surveyResult.name
 					},

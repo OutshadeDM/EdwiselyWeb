@@ -114,6 +114,12 @@
 .right-radius{
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.no-radius{
+    border-radius: 0px;
 }
 
 .btnLink{
