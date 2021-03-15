@@ -764,8 +764,6 @@ $(document).ready(function () {
     $('#sourceInput').val("");
     $('#solutionInput').val("");
     $('#hintInput').val("");
-    $('#hintInput').val("");
-    $('#hintInput').val("");
     if ($("input[name='public_pvt']:checked").val() != 'public') {
       $('#customSwitch1').click();
     }
@@ -891,7 +889,7 @@ $(document).ready(function () {
       $('#errorToast').toast('hide');
       $('#successToast').toast('hide');
       $('#toastDiv').hide();
-    }, 7000);
+    }, 5000);
   });
 
 

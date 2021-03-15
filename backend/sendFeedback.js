@@ -46,7 +46,7 @@ $(document).ready(function () {
           preSelectedStudentsIds.push(id)
         })
 
-        console.log(preSelectedStudentsIds)
+        // console.log(preSelectedStudentsIds)
 
       }
     },
@@ -82,7 +82,7 @@ $(document).ready(function () {
             }
 
           });
-          console.log(sectionIds)
+          // console.log(sectionIds)
         }
         else {
           $('.sectionsList').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Sections</h5></div</div>");

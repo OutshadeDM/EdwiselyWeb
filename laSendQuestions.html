@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="d-none" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://space.edwisely.com/content/images/size/w100/2020/07/webpage_200x200-2.png"
+    type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- font-awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+
+  <!-- add custom stylesheet here -->
+  <link href="frontend/venders/main.css" rel="stylesheet">
+  <link href="frontend/venders/sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" href="frontend/venders/radiostyle.css">
+  <link rel="stylesheet" href="frontend/venders//pages//addQues.css">
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- latex -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <title>Edwisely - Add Assessment</title>
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="row w-100">
+      <div class="col-9 d-flex align-items-center">
+        <a href="./index.html">
+          <img src="frontend/images/LOGO.png" class="ml-4" height="50px" />
+        </a>
+        <div class="text-center pl-3" id="greetingNav">Greetings, <b>Mr. Harsha</b></div>
+      </div>
+      <div class="col-2 ">
+        <div class="row h-100 no-gutters">
+          <div class="col-2"></div>
+          <div class="col-8 d-flex justify-content-between align-items-center">
+            <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30" alt="No Image" /></a>
+            </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Bootstrap row -->
+  <div class="row" id="body-row">
+    <!-- Sidebar -->
+
+    <!-- sidebar-container END -->
+    <!-- MAIN -->
+    <div class="col-1 d-flex justify-content-end" style="margin-top: 30px;">
+      <a href="#"><i class="fas fa-arrow-left fa-2x"></i></a>
+    </div>
+    <div class="col-11 pr-0">
+      <div class="container-fluid px-0">
+        <div class="">
+          <div class="px-5 headerBanner">
+            <div class="row">
+              <div class="col-sm-8">
+                <h2 class="mt-1">
+                  <p class="font-weight-bold" id="courseName">Send Questions</p>
+                </h2>
+                <hr class="titlehr">
+                <p class="list">
+                  <span class="list-item"><a href="index.html">Home</a> ></span>
+                  <span class="list-item"><a href="myAssessment.html">Assessment</a> ></span>
+                  <span class="list-item-active"><a href="#">Send Questions</a></span>
+                </p>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+        <!-- Start Page Content -->
+
+        <div class="container-fluid pb-3 px-5">
+          <!-- put everything in this div -->
+
+          <div class="row" id="abcd">
+            <div class="col-md-3 pr-2" id="questionDisplayDiv">
+              <div class="whiteBack h-100">
+                <div class="addingQues pr-2" id="addquesDiv">
+                  <div class="initData text-center pt-2">No Questions</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-7 whiteBack addques pt-2 pb-5" id="createques">
+              <div class="divInput row no-gutters">
+                <div class="col-sm-9">
+                  <textarea class="form-control form-control-lg w-100" cols="50"
+                    placeholder="Start typing your question" id="quesInput" disabled></textarea>
+                </div>
+                <div class="col-sm-3 titleImg py-3">
+                  <img id="image_preview_ques" class="imgPreviewques" src="" alt="your image" />
+                </div>
+              </div>
+
+              <div class="row pt-4 mx-1">
+
+                <div class="col-6 pr-4">
+                  <div class="row">
+                    <div class="col-2 p-1 firstOption left-radius">
+                      <div class="form-check p-0">
+                        <label class="radiolabel pl-2 pt-1" id="option1Label">
+                          <i class="fas fa-check-square fa-2x"></i>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <textarea type="text" class="form-control no-radius" placeholder="Enter Option" id="firstOption"
+                        style="height: 50px;" disabled></textarea>
+                    </div>
+                    <div
+                      class="col-2 chooseImage firstOption px-0 right-radius d-flex justify-content-center align-items-center">
+                      <img id="image_preview_option1" src="" width="30" alt="No image" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6 pl-4">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 secondOption left-radius">
+                      <div class="form-check p-0">
+                        <label class="radiolabel pl-2 pt-1" id="option2Label">
+                          <i class="fas fa-check-square fa-2x"></i>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <textarea type="text" class="form-control no-radius" placeholder="Enter Option" id="secondOption"
+                        style="height: 50px;" disabled></textarea>
+                    </div>
+                    <div
+                      class="col-2 chooseImage secondOption px-0 right-radius d-flex justify-content-center align-items-center">
+                      <img id="image_preview_option2" src="" width="30" alt="No image" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row pt-4 mx-1">
+
+                <div class="col-6 pr-4">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 thirdOption left-radius">
+                      <div class="form-check p-0">
+                        <label class="radiolabel pl-2 pt-1" id="option3Label">
+                          <i class="fas fa-check-square fa-2x tick tick3"></i>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <textarea type="text" class="form-control no-radius" placeholder="Enter Option (Optional)" id="thirdOption"
+                        style="height: 50px;" disabled></textarea>
+                    </div>
+                    <div
+                      class="col-2 chooseImage thirdOption px-0 right-radius d-flex justify-content-center align-items-center">
+                      <img id="image_preview_option3" src="" width="30" alt="No image" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6 pl-4">
+                  <div class="row">
+                    <div class="col-2 mx-0 p-1 fourthOption left-radius">
+                      <div class="form-check pl-2 pt-1" id="option4Label">
+                        <label class="radiolabel">
+                          <i class="fas fa-check-square fa-2x"></i>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <textarea type="text" class="form-control no-radius" placeholder="Enter Option (Optional)" id="fourthOption"
+                        style="height: 50px;" disabled></textarea>
+                    </div>
+                    <div
+                      class="col-2 chooseImage fourthOption px-0 right-radius d-flex justify-content-center align-items-center">
+                      <img id="image_preview_option4" src="" width="30" alt="No image" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row py-4 text-center mx-1">
+                <div class="col-6 mx-0 pr-4">
+
+                  <div class="row" id="fifth">
+                    <div class="col-2 mx-0 p-1 fifthOption left-radius">
+                      <div class="form-check pl-1 pt-1" id="option5Label">
+                        <label class="radiolabel">
+                          <!-- <input type="radio" class="radiostest" name="Radios" id="Radios5" value="4"> -->
+                          <i class="fas fa-check-square fa-2x"></i>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-8 inputOption px-0" style="width: 100%;">
+                      <textarea type="text" class="form-control no-radius" placeholder="Enter Option (Optional)" id="fifthOption"
+                        style="height: 50px;" disabled></textarea>
+                    </div>
+                    <div class="col-2 chooseImage fifthOption px-0 right-radius d-flex justify-content-center align-items-center">              
+                      <img id="image_preview_option5" src="" width="30" alt="No image" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-md-2 addques pl-3 pr-0 mr-0 ">
+              <div class="d-flex justify-content-center align-items-center whiteBack h-100 ml-3">
+                <div class="px-4 py-3">
+                  <h6>Set Timer</h6>
+                  <input type="time" class="timer text-center" value="59:00"/>
+                  <h6 class="mt-2">Result Layout</h6>
+                  <div class="row no-gutters">
+                    <div class="col-5 graph"><img src="frontend/images/graph1.svg" alt="Error" width="30" height="30"></div>
+                    <div class="col-2"></div>
+                    <div class="col-5 graph"><img src="frontend/images/graph1.svg" alt="Error" width="30" height="30"></div>
+                  </div>
+                  <div class="row no-gutters mt-3">
+                    <div class="col-5 graph"><img src="frontend/images/graph3.svg" alt="Error" width="30" height="30"></div>
+                    <div class="col-2"></div>
+                    <div class="col-5 graph"><img src="frontend/images/graph4.svg" alt="Error" width="30" height="30"></div>
+                  </div>
+                  <button type="button" id="btnSaveSend" class="btn btn-primary shadow-sm btnLink mt-5 px-4 py-2">
+                    <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
+                    Send</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <!-- toasts -->
+          <div id="toastDiv" style="display: none;">
+            <!-- start error toast -->
+            <div class="toast fade" data-autohide="false" id="errorToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-danger">Error !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="errorToastBody">All fields are mandatory to save.</p>
+              </div>
+            </div>
+            <!-- end error toast -->
+
+            <!-- start success toast -->
+            <div class="toast fade" data-autohide="false" id="successToast">
+              <div class="toast-header">
+                <strong class="mr-auto text-success">Success !!!</strong>
+                <small class="text-muted">Just Now</small>
+              </div>
+              <div class="toast-body">
+                <p id="successToastBody">Content has been saved successfully.</p>
+              </div>
+            </div>
+            <!-- end success toast -->
+
+          </div>
+
+          <!-- end toasts -->
+
+          <!-- End Page Content -->
+        </div>
+      </div>
+      <!-- Main Col END -->
+    </div>
+    <!-- body-row END -->
+</body>
+<!-- add extra js files here -->
+<script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
+<script type="text/javascript" src="backend/cookies.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };  
+</script>
+<script src="backend/laSendQuestions.js"></script>
+
+</html>

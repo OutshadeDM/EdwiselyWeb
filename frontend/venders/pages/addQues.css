@@ -125,3 +125,26 @@
 .btnLink{
     white-space: nowrap;
 }
+
+.graph{
+    padding: 5px;
+    border: 2px solid #e9e9e9;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.graph:hover{
+    background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
+}
+
+.timer{
+    width: 100px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #e9e9e9;
+    font-size: 20px;
+}

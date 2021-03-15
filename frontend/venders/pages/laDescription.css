@@ -1,0 +1,17 @@
+.left-color-border{
+    border-radius: 18px;
+}
+  
+.list-group-item{
+    border-radius: 18px;
+    width: 100%;
+    margin: 10px 0;
+}
+  
+.left-color-border:nth-child(n) .list-group-item{
+    border-left: 10px solid #E25BC8;
+}
+  
+.left-color-border:nth-child(n + 1) .list-group-item{
+    border-left: 10px solid #75b1e8;
+}

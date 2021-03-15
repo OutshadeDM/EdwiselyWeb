@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   $user = "";
   if (isLoggedIn()) {
-    // console.log(isLoggedIn(), 'yes');
+    console.log(isLoggedIn(), 'yes');
     $user = JSON.parse(isLoggedIn());
     $('html').removeClass('d-none');
   } else {
