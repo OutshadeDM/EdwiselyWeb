@@ -132,11 +132,11 @@ $(document).ready(function () {
     $('#plusBtn').show();
   }
 
-  $('#addNewBtn').click(function() {
+  $('#addNewBtn').on('click', function() {
     clearAll();
   });
 
-  $('#plusBtn').click(function(){
+  $('#plusBtn').on('click', function(){
     if(question && option1 && option2 && catagory != "0" && catagory){
 
       const newOptions = [];
@@ -469,15 +469,15 @@ $(document).ready(function () {
         }
         
       }
-    });
+  });
 
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
+  $('#errorToast,#successToast').on('show.bs.toast', function () {
       $('#toastDiv').show();
       setTimeout(function () {
         $('#errorToast').toast('hide');
         $('#successToast').toast('hide');
         $('#toastDiv').hide();
       }, 5000);
-    });
+  });
 
 });

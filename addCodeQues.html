@@ -11,7 +11,7 @@
   <!-- add custom stylesheet here -->
   <link href="frontend/venders/main.css" rel="stylesheet">
   <link href="frontend/venders/sidebar.css" rel="stylesheet">
-  <link href="frontend/venders/radiostyle.css" rel="stylesheet">
+  <link rel="stylesheet" href="frontend/venders/pages/live.css">
   <link rel="stylesheet" href="frontend/venders/pages/addQues.css">
 
   <!-- font-awesome -->
@@ -162,10 +162,11 @@
                     <div class="row" id="abcd">
                       <div class="col-md-3 pr-2" id="questionDisplayDiv">
                         <div class="whiteBack h-100">
-                          <div class="addingQues pr-2" id="addquesDiv">
-                            <div class="initData text-center pt-2">Added Questions</div>
+                          <div class="initData text-center pt-2"><h5 class="font-weight-bold">Added Questions</h5></div>
+                          <div class="addingQues pr-2" id="addquesDiv" style="height: 120vh;">
                           </div>
                           <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary w-50 text-center" id="addNewBtn">Add New</button>
                           </div>
                         </div>
                       </div>
@@ -175,13 +176,9 @@
                             <div class="col-6">
                                 <select class="bloomSelect mx-2 float-right" id="selectTopic">
                                     <option value="0" selected disabled>Topic</option>
-                                    <option value="1">Academic</option>
-                                    <option value="2">Non-Academic</option>
                                 </select>
                                 <select class="bloomSelect mx-2 float-right" id="selectUnit">
                                     <option value="0" selected disabled>Unit</option>
-                                    <option value="1">Academic</option>
-                                    <option value="2">Non-Academic</option>
                                 </select>
                             </div>
                         </div>
@@ -189,7 +186,7 @@
                             <div class="col-6">
                                 <label>Title</label>
                                 <input type="text" class="form-control form-control-lg w-100"
-                                    placeholder="Enter your title here" id="titleInput"/>
+                                    placeholder="Enter your title here" id="title" value="test"/>
                             </div>
                             <div class="col-3">
                                 <select class="bloomSelect mx-2 mt-4 " id="selectLang" style="height: 40px;">
@@ -199,16 +196,16 @@
                                 </select>
                             </div>
                             <div class="col-3">
-                                <label>Title</label>
+                                <label>Marks</label>
                                 <input type="text" class="form-control form-control-lg w-100"
-                                    placeholder="Enter Marks" id="markInput"/>
+                                    placeholder="Enter Marks" id="marks" value="10"/>
                             </div>
                         </div>
                         <div class="divInput row no-gutters mt-3">
-                            <label>Title</label>
+                            <label>Description</label>
                             <div class="col-sm-12">
                                 <textarea class="form-control form-control-lg w-100" cols="50" rows="8"
-                                placeholder="Enter your description here" id="descInput"></textarea>
+                                placeholder="Enter your description here" id="descInput">test</textarea>
                             </div>
                         </div>
 
@@ -230,125 +227,98 @@
                                 <div class="col-1">1)</div>
                                 <div class="col-5">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="test1Input"/>
+                                        id="input1" value="test"/>
                                 </div>
                                 <div class="col-4">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="output1Input"/>
+                                        id="output1" value="test"/>
                                 </div>
                                 <div class="col-2">
-                                    <div class="form-group mb-0 pb-0">
-                                        <div class="onoffswitch mx-auto">
-                                        <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch1" value="0" tabindex="0"
-                                            checked name="public_pvt">
-                                        <label class="onoffswitch-label" id="customSwitch1Label" for="customSwitch1">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                        </div>
-                                    </div>
+                                  <label class="switch">
+                                    <input name="priority" id="status1" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                  </label>
                                 </div>
                             </div>
                             <div class="row mt-2 d-flex justify-content-center align-items-center">
                                 <div class="col-1">2)</div>
                                 <div class="col-5">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="test2Input"/>
+                                        id="input2" value="test2"/>
                                 </div>
                                 <div class="col-4">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="output2Input"/>
+                                        id="output2" value="test2"/>
                                 </div>
                                 <div class="col-2">
-                                    <div class="form-group mb-0 pb-0">
-                                        <div class="onoffswitch mx-auto">
-                                        <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch2" value="0" tabindex="0"
-                                            checked name="public_pvt">
-                                        <label class="onoffswitch-label" id="customSwitch2Label" for="customSwitch2">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                        </div>
-                                    </div>
+                                  <label class="switch">
+                                    <input name="priority" id="status2" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                  </label>
                                 </div>
                             </div>
                             <div class="row mt-2 d-flex justify-content-center align-items-center">
                                 <div class="col-1">3)</div>
                                 <div class="col-5">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="test3Input"/>
+                                        id="input3" value="test3"/>
                                 </div>
                                 <div class="col-4">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="output3Input"/>
+                                        id="output3" value="test3"/>
                                 </div>
                                 <div class="col-2">
-                                    <div class="form-group mb-0 pb-0">
-                                        <div class="onoffswitch mx-auto">
-                                        <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch3" value="0" tabindex="0"
-                                            checked name="public_pvt">
-                                        <label class="onoffswitch-label" id="customSwitch3Label" for="customSwitch3">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                        </div>
-                                    </div>
+                                  <label class="switch">
+                                    <input name="priority" id="status3" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                  </label>
                                 </div>
                             </div>
                             <div class="row mt-2 d-flex justify-content-center align-items-center">
                                 <div class="col-1">4)</div>
                                 <div class="col-5">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="test4Input"/>
+                                        id="input4"/>
                                 </div>
                                 <div class="col-4">
                                     <input type="text" class="form-control form-control-lg w-100"
-                                        id="output4Input"/>
+                                        id="output4"/>
                                 </div>
                                 <div class="col-2">
-                                    <div class="form-group mb-0 pb-0">
-                                        <div class="onoffswitch mx-auto">
-                                        <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch4" value="0" tabindex="0"
-                                            checked name="public_pvt">
-                                        <label class="onoffswitch-label" id="customSwitch4Label" for="customSwitch4">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                        </div>
-                                    </div>
+                                  <label class="switch">
+                                    <input name="priority" id="status4" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                  </label>
                                 </div>
                             </div>
-                            <div class="row mt-2 d-flex justify-content-center align-items-center">
-                                <div class="col-1">5)</div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="test5Input"/>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="output5Input"/>
-                                </div>
-                                <div class="col-2">
-                                    <div class="form-group mb-0 pb-0">
-                                        <div class="onoffswitch mx-auto">
-                                        <input type="checkbox" class="onoffswitch-checkbox" id="customSwitch5" value="0" tabindex="0"
-                                            checked name="public_pvt">
-                                        <label class="onoffswitch-label" id="customSwitch5Label" for="customSwitch5">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="fifthOption">
+                              <div class="row mt-2 d-flex justify-content-center align-items-center">
+                                  <div class="col-1">5)</div>
+                                  <div class="col-5">
+                                      <input type="text" class="form-control form-control-lg w-100"
+                                          id="input5"/>
+                                  </div>
+                                  <div class="col-4">
+                                      <input type="text" class="form-control form-control-lg w-100"
+                                          id="output5"/>
+                                  </div>
+                                  <div class="col-2">
+                                    <label class="switch">
+                                      <input name="priority" id="status5" type="checkbox" checked>
+                                      <span class="slider round"></span>
+                                    </label>
+                                  </div>
+                              </div>
                             </div>
 
                             <div class="container mt-3 d-flex justify-content-end align-items-center">
-                                <button class="btn" id="editBtn" style="color: blue;">+ Edit</button>
+                                <button class="btn" id="addBtn" style="color: blue;">+ Add</button>
                             </div>                            
 
                         </div>
                         <div class="container d-flex justify-content-end align-items-center">
-                            <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="plusBtn">Done</button>
+                          <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="doneBtn">Done</button>
+                          <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="editBtn">Edit</button>
                         </div>
                         
                         <input type="hidden" value="0" id="questionId">

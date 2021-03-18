@@ -18,13 +18,34 @@ $(document).ready(function () {
         $('#toastDiv').hide();
       }, 7000);
     });
+
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        // alert(result.status);
+        $('#selectSub').empty();
+        if (result.status == 200 && result.data) {
+          $('#selectSub').append("<option value='0' selected disabled>Choose Subject</option>");
+          $.each(result.data, function (key, value) {
+            $('#selectSub').append("<option value='" + value.id + "'>" + value.name + "</option>");
+          });  
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
   
     $('#createFeedbackBtn').on('click', function () {
   
       const name = $('#name').val()
       const desc = $('#desc').val()
       const subject = $('#selectSub').val()
-      console.log(name,desc,subject);
   
       if (name && desc && subject && subject != "0") {
   
