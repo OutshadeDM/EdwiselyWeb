@@ -665,7 +665,6 @@ $(document).ready(function () {
 
           if (result.status == 200) {
             $('#loadingDiv').remove();
-<<<<<<< HEAD
             new Notify ({
               title: 'Success',
               text : "Question Added to Database Successfully",
@@ -676,11 +675,6 @@ $(document).ready(function () {
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
             
-=======
-            $('#successToastBody').text('Question Added to Database Successfully');
-            $('#successToast').toast('show');
-
->>>>>>> 59880986b5b44aefd86628bbc7f8ec1ed371b6bd
             questionsList.push(result.data.id);
             questions.push(result.data);
             loadList();

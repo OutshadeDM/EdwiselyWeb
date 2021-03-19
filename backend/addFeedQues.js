@@ -249,7 +249,6 @@ $(document).ready(function () {
     else if (!isSend) {
       window.location.href = "myFeedbacks.html";
     }
-<<<<<<< HEAD
     else{
       new Notify ({
           title: 'Error',
@@ -258,11 +257,6 @@ $(document).ready(function () {
           status: 'error',
           autotimeout: 3000
       });
-=======
-    else {
-      $('#errorToastBody').text("Please Add Questions");
-      $('#errorToast').toast('show');
->>>>>>> 59880986b5b44aefd86628bbc7f8ec1ed371b6bd
     }
   });
 
@@ -574,16 +568,5 @@ $(document).ready(function () {
     }
   });
 
-<<<<<<< HEAD
-=======
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 5000);
-  });
->>>>>>> 59880986b5b44aefd86628bbc7f8ec1ed371b6bd
 
 });
