@@ -88,8 +88,13 @@ $(document).ready(function () {
                 }
                 else {
                     window.location.replace("courses.html");
-                    $('#errorToastBody').text('Request Unsuccessful');
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                        title: 'Error',
+                        text : 'Request Unsuccessful',
+                        autoclose: true,
+                        status: 'error',
+                        autotimeout: 3000
+                    });
                 }
             },
             error: function (error) {
@@ -118,13 +123,23 @@ $(document).ready(function () {
                 },
                 success: function (result) {
                     if (result.status == 200) {
-                        $('#successToastBody').text('Section Unassigned to Subject');
-                        $('#successToast').toast('show');
+                        new Notify ({
+                            title: 'Success',
+                            text : 'Section Unassigned to Subject',
+                            autoclose: true,
+                            status: 'success',
+                            autotimeout: 3000
+                        });
                         navAbout();
                     }
                     else {
-                        $('#errorToastBody').text('Request Unsuccessful');
-                        $('#errorToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Request Unsuccessful',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                     }
                 },
                 error: function (error) {
@@ -823,8 +838,13 @@ $(document).ready(function () {
         if (!success) {
             $(this).siblings(".custom-file-label").addClass("selected").html("Choose File");
             $(this).val("");
-            $('#errorToastBody').text('Invalid Attachment Type');
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : 'Invalid Attachment Type',
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
         }
 
     });
@@ -885,15 +905,6 @@ $(document).ready(function () {
         $(this).val(value1);
     });
 
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
-        $('#toastDiv').show();
-        setTimeout(function () {
-            $('#errorToast').toast('hide');
-            $('#successToast').toast('hide');
-            $('#toastDiv').hide();
-        }, 7000);
-    });
-
     $(document).on('click', '.bookmark', function () {
         let material_id = $(this).data('id');
         let type = $(this).data('type');
@@ -918,8 +929,13 @@ $(document).ready(function () {
                 },
                 success: function (result) {
                     if (result.status == 200) {
-                        $('#successToastBody').text('Bookmarked SuccessFully');
-                        $('#successToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Bookmarked SuccessFully',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                         if (content == "nav")
                             $("#nav-content-tab").click();
                         else if (content == "objQuestion")
@@ -928,12 +944,22 @@ $(document).ready(function () {
                             $("#nav-question-sub-tab").click();
                     }
                     else if (result.status == 500) {
-                        $('#errorToastBody').text('Already bookmarked');
-                        $('#errorToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Already bookmarked',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                     }
                     else {
-                        $('#errorToastBody').text('Request Unsuccessful');
-                        $('#errorToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Request Unsuccessful',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                         alert(result.message);
                     }
                 },
@@ -968,8 +994,13 @@ $(document).ready(function () {
                 },
                 success: function (result) {
                     if (result.status == 200) {
-                        $('#successToastBody').text('Bookmarked Removed SuccessFully');
-                        $('#successToast').toast('show');
+                        new Notify ({
+                            title: 'Success',
+                            text : 'Bookmarked Removed SuccessFully',
+                            autoclose: true,
+                            status: 'success',
+                            autotimeout: 3000
+                        });
                         if (content == "nav")
                             $("#nav-content-tab").click();
                         else if (content == "objQuestion")
@@ -978,13 +1009,22 @@ $(document).ready(function () {
                             $("#nav-question-sub-tab").click();
                     }
                     else if (result.status == 500) {
-                        $('#errorToastBody').text('Already Not Bookmarked');
-                        $('#errorToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Already Not Bookmarked',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                     }
                     else {
-                        $('#errorToastBody').text('Request Unsuccessful');
-                        $('#errorToast').toast('show');
-                        alert(result.message);
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Request Unsuccessful',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                     }
                 },
                 error: function (error) {
@@ -1017,14 +1057,23 @@ $(document).ready(function () {
                 },
                 success: function (result) {
                     if (result.status == 200) {
-                        $('#successToastBody').text('Material Content Deleted SuccessFully');
-                        $('#successToast').toast('show');
+                        new Notify ({
+                            title: 'Success',
+                            text : 'Material Content Deleted SuccessFully',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                         $("#nav-content-tab").click();
                     }
                     else {
-                        $('#errorToastBody').text('Request Unsuccessful');
-                        $('#errorToast').toast('show');
-                        alert(result.message);
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Request Unsuccessful',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                     }
                 },
                 error: function (error) {
@@ -1092,8 +1141,13 @@ $(document).ready(function () {
                             $('#modalContent').css('position', 'absolute');
                             editCourseContentFlag = false;
                             if (result.status == 200) {
-                                $('#successToastBody').text('Content has been updated successfully');
-                                $('#successToast').toast('show');
+                                new Notify ({
+                                    title: 'Success',
+                                    text : 'Content has been updated successfully',
+                                    autoclose: true,
+                                    status: 'success',
+                                    autotimeout: 3000
+                                });
 
                                 clearModal();
                                 $(".custom-file-label").removeClass("selected").html("Choose file");
@@ -1107,8 +1161,13 @@ $(document).ready(function () {
                                 $("#nav-content-tab").click();
                             }
                             else {
-                                $('#errorToastBody').text('Request Unsuccesful');
-                                $('#errorToast').toast('show');
+                                new Notify ({
+                                    title: 'Error',
+                                    text : 'Request Unsuccesful',
+                                    autoclose: true,
+                                    status: 'error',
+                                    autotimeout: 3000
+                                });
 
                                 clearModal();
 
@@ -1148,8 +1207,13 @@ $(document).ready(function () {
                     success: function (result) {
                         $('#courseContentModal').modal('toggle');
                         if (result.status == 200 && result.material_id) {
-                            $('#successToastBody').text('Content has been saved successfully');
-                            $('#successToast').toast('show');
+                            new Notify ({
+                                title: 'Success',
+                                text : 'Content has been saved successfully',
+                                autoclose: true,
+                                status: 'success',
+                                autotimeout: 3000
+                            });
 
                             clearModal();
                             $(".custom-file-label").removeClass("selected").html("Choose File");
@@ -1160,12 +1224,14 @@ $(document).ready(function () {
                             $("#nav-content-tab").click();
                         }
                         else {
-                            $('#errorToastBody').text('Request Unsuccesful');
-                            $('#errorToast').toast('show');
-
+                            new Notify ({
+                                title: 'Error',
+                                text : 'Request Unsuccesful',
+                                autoclose: true,
+                                status: 'error',
+                                autotimeout: 3000
+                            });
                             clearModal();
-
-                            alert(result.message);
                         }
 
                     },
@@ -1200,8 +1266,13 @@ $(document).ready(function () {
                             $("#courseAddSave").removeData("id");
                         }
                         else {
-                            $('#errorToastBody').text(result.message);
-                            $('#errorToast').toast('show');
+                            new Notify ({
+                                title: 'Error',
+                                text : result.message,
+                                autoclose: true,
+                                status: 'error',
+                                autotimeout: 3000
+                            });
                         }
                     },
                     error: function (error) {
@@ -1215,8 +1286,13 @@ $(document).ready(function () {
 
         }
         else {
-            $('#errorToastBody').text('All fields are mandatory for upload.');
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : 'All fields are mandatory for upload.',
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
         }
     });
 
@@ -1285,8 +1361,13 @@ $(document).ready(function () {
                                 $("#nav-question-obj-tab").click();
                             }
                             else {
-                                $('#errorToastBody').text(result.message);
-                                $('#errorToast').toast('show');
+                                new Notify ({
+                                    title: 'Error',
+                                    text : result.message,
+                                    autoclose: true,
+                                    status: 'error',
+                                    autotimeout: 3000
+                                });
                                 $('#courseQuestionUnits').hide();
                             }
                         },
@@ -1375,12 +1456,15 @@ $(document).ready(function () {
                         getObjQuestions(unit_id, subject_id);
                     else
                         getSubQuestions(unit_id, subject_id);
-                    
-
                 }
                 else {
-                    $('#errorToastBody').text(result.message);
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                        title: 'Error',
+                        text : result.message,
+                        autoclose: true,
+                        status: 'error',
+                        autotimeout: 3000
+                    });
                 }
             },
             error: function (error) {

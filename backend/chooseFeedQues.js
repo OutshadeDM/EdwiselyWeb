@@ -14,15 +14,6 @@ $(document).ready(function () {
     $('#myInput').trigger('focus')
   })
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
 
 
   let searchParams = new URLSearchParams(window.location.search);
@@ -311,8 +302,13 @@ $(document).ready(function () {
 
   $('#btnSave').on('click', function () {
     if (selectedQuestions.length == 0) {
-      $('#errorToastBody').text("Choose Questions First");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Choose Questions First",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
     else {
       saveQuestions(0)
@@ -322,8 +318,13 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length == 0) {
-      $('#errorToastBody').text("Choose Questions First");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Choose Questions First",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
     else {
       saveQuestions(1)
@@ -355,8 +356,13 @@ $(document).ready(function () {
       success: function (result) {
 
         if (result.status == 200) {
-          $('#successToastBody').text("Questions Added Successfully");
-          $('#successToast').toast('show');
+          new Notify ({
+              title: 'Success',
+              text : "Questions Added Successfully",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
+          });
 
 
           if (redirect == 0) {
@@ -375,8 +381,13 @@ $(document).ready(function () {
 
         }
         else {
-          $('#errorToastBody').text("Error");
-          $('#errorToast').toast('show');
+          new Notify ({
+              title: 'Error',
+              text : "Error",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
         }
       },
       error: function (error) {

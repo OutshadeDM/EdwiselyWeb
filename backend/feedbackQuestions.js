@@ -10,16 +10,6 @@ $(document).ready(function () {
 
   $('.continueBtn').hide()
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 5000);
-  });
-
 
   let searchParams = new URLSearchParams(window.location.search);
 
@@ -159,8 +149,13 @@ $(document).ready(function () {
 
     $(document).on('click', '#sendFeedbackBtn', function () {
       if (question_count == 0) {
-        $('#errorToastBody').text("Please Add Questions");
-        $('#errorToast').toast('show');
+        new Notify ({
+            title: 'Error',
+            text : "Please Add Questions",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       } else {
         window.location.href = "sendFeedback.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
       }

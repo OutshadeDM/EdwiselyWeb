@@ -18,18 +18,6 @@ $(document).ready(function () {
     objective = searchParams.get('isObj')
   }
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
-
-
-
 
   $.ajax({
     url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
@@ -125,17 +113,20 @@ $(document).ready(function () {
             //console.log('4') 
 
             if (result.status == 200) {
-              $('#successToastBody').text("Successfully created the Test");
-              $('#successToast').toast('show');
+              new Notify ({
+                  title: 'Success',
+                  text : "Successfully created the Test",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+              });
               setTimeout(() => {
                 window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
               }, 2000)
             }
           },
           error: function (error) {
-            $('#errorToastBody').text(error.message);
-            $('#errorToast').toast('show');
-            //alert("Request Failed with status: " + error.status);
+            alert("Request Failed with status: " + error.status);
           }
         });
       }
@@ -162,16 +153,26 @@ $(document).ready(function () {
             //console.log('4') 
 
             if (result.status == 200) {
-              $('#successToastBody').text("Successfully created the Test");
-              $('#successToast').toast('show');
+              new Notify ({
+                  title: 'Success',
+                  text : "Successfully created the Test",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+              });
               setTimeout(() => {
                 window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
               }, 2000)
             }
           },
           error: function (error) {
-            $('#errorToastBody').text(error.message);
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
         });
       }
@@ -179,8 +180,13 @@ $(document).ready(function () {
 
     }
     else {
-      $('#errorToastBody').text("Fill all fields");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Fill all fields",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
 
   })

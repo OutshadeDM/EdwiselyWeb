@@ -32,14 +32,6 @@ $(document).ready(function () {
 
 
   //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
 
 
   let i = 0;
@@ -97,9 +89,13 @@ $(document).ready(function () {
 
         }
         else {
-
-          $('#errorToastBody').text(result.message);
-          $('#errorToast').toast('show');
+          new Notify ({
+              title: 'Error',
+              text : result.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
         }
       },
       error: function (error) {
@@ -155,8 +151,13 @@ $(document).ready(function () {
           });
         }
         else {
-          $('#errorToastBody').text(result.message);
-          $('#errorToast').toast('show');
+          new Notify ({
+              title: 'Error',
+              text : result.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
         }
 
         //$("#selectUnit").val($("#selectUnit option:first").val());
@@ -423,8 +424,13 @@ $(document).ready(function () {
     })
 
     if (selectedQuestions.length == 0) {
-      $('#errorToastBody').text("Choose Questions First");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Choose Questions First",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
 
 
@@ -455,16 +461,26 @@ $(document).ready(function () {
 
 
           if (result.status == 200) {
-            $('#successToastBody').text("Questions Updated Successfully");
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : "Questions Updated Successfully",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
 
             setTimeout(() => {
               window.location.href = `codingQuestions.html?id=${test_id}&fname=${test_name}`
             }, 2000)
           }
           else {
-            $('#errorToastBody').text("Error");
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : "Error",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
         },
         error: function (error) {
@@ -480,11 +496,15 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length === 0) {
-      $('#errorToastBody').text("Choose Questions First");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Choose Questions First",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
     else {
-
       var form = new FormData();
       form.append("test_id", test_d);
       form.append("problems", JSON.stringify(selectedQuestions));
@@ -506,8 +526,13 @@ $(document).ready(function () {
 
 
           if (result.status == 200) {
-            $('#successToastBody').text("Successfully Updated the Questions");
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Success',
+                text : "Successfully Updated the Questions",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
             setTimeout(() => {
               window.location.href = `sendCodingAssessment.html?test_id=${test_id}&test_name=${test_name}`
             }, 2000)

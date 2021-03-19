@@ -59,15 +59,6 @@ $(document).ready(function () {
   $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white", "border-radius": "0 10px 0 0" })
 
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
 
 
   let blooms_lvl = 0
@@ -1084,13 +1075,17 @@ $(document).ready(function () {
 
   $('#btnSave').on('click', function () {
     if (selectedQuestions.length == 0) {
-      $('#errorToastBody').text("Choose Questions First");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Choose Questions First",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
 
 
     else {
-
       var form = new FormData();
       form.append("test_id", tId);
       form.append("questions", "[" + selectedQuestionsId.join(',') + "]");
@@ -1115,8 +1110,13 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            $('#successToastBody').text("Questions Updates Successfully");
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Success',
+                text : "Questions Updates Successfully",
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
+            });
 
             //   setInterval(function () {
             //     window.location.replace('myAssessment.html');
@@ -1126,8 +1126,13 @@ $(document).ready(function () {
             }, 2000)
           }
           else {
-            $('#errorToastBody').text("Error");
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : "Error",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
         },
         error: function (error) {
@@ -1143,8 +1148,13 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length === 0) {
-      $('#errorToastBody').text("Choose Questions First");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Choose Questions First",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
     else {
 
@@ -1171,8 +1181,13 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            $('#successToastBody').text("Successfully Updated the Questions");
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Success',
+                text : "Successfully Updated the Questions",
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
+            });
 
             //   setInterval(function () {
             //     window.location.replace('myAssessment.html');

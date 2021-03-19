@@ -8,16 +8,6 @@ $(document).ready(function () {
     } else {
       window.location.replace("login.html");
     } 
-  
-    //toasts
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
-      $('#toastDiv').show();
-      setTimeout(function () {
-        $('#errorToast').toast('hide');
-        $('#successToast').toast('hide');
-        $('#toastDiv').hide();
-      }, 7000);
-    });
 
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/getFacultyCourses',
@@ -69,15 +59,25 @@ $(document).ready(function () {
           success: function (result) {  
             console.log(result);
             if (result.status == 200) {
-              $('#successToastBody').text(result.message);
-              $('#successToast').toast('show');
+              new Notify ({
+                  title: 'Success',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+              });
               setTimeout(() => {
                 window.location.href = "codingQuestions.html?fname=" + name + "&id=" + result.test_id + "&qc=0";
               }, 1500)
             }
             else {
-              $('#errorToastBody').text(result.message);
-              $('#errorToast').toast('show');
+              new Notify ({
+                  title: 'Error',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+              });
             }
           },
           error: function (error) {
@@ -86,8 +86,13 @@ $(document).ready(function () {
         });
       }
       else {
-        $('#errorToastBody').text("Fill all fields");
-        $('#errorToast').toast('show');
+        new Notify ({
+            title: 'Error',
+            text : "Fill all fields",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       }
   
     })

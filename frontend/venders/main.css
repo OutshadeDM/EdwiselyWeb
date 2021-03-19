@@ -885,6 +885,15 @@ pre
   border-radius: 12px;
 }
 
+@keyframes example {
+  0%   {width: 100%;}
+  25%  {width: 105%;}
+  50%  {width: 110%;}
+  75%  {width: 105%;}
+  100% {width: 100%;}
+}
+
+
 /* @keyframes slideInFromLeft {
   0% {
     transform:translate(-20px);
@@ -904,6 +913,8 @@ pre
 .toast{
   margin: 10px;
   border-radius: 12px;
+  animation-name: example;
+  animation-duration: 2s;
 }
 .toast-header{
   border-top-left-radius: 12px;

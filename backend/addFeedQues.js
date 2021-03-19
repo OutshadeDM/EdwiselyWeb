@@ -176,16 +176,26 @@ $(document).ready(function () {
         success: function (result) {
           // console.log(result);
           if (result.status == 200) {
-            $('#successToastBody').text(result.message);
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Success',
+                text : result.message,
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
+            });
             $('#loadingDiv').remove();
             clearAll();
             getQuestions();
           }
           else {
+            new Notify ({
+                title: 'Error',
+                text : result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
             $('#loadingDiv').remove();
-            $('#errorToastBody').text(result.message);
-            $('#errorToast').toast('show');
           }
         },
         error: function (error) {
@@ -196,14 +206,37 @@ $(document).ready(function () {
     }
     else {
       if (!option1 || !option2)
-        $('#errorToastBody').text("2 Options are Mandatory");
+        new Notify ({
+            title: 'Error',
+            text : "2 Options are Mandatory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       else if (!catagory)
-        $('#errorToastBody').text("Please Select Catagory");
+        new Notify ({
+            title: 'Error',
+            text : "Please Select Catagory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       else if (!question)
-        $('#errorToastBody').text("Please enter Question");
+        new Notify ({
+            title: 'Error',
+            text : "Please enter Question",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       else if (!option1 || !option2 || !catagory || !question)
-        $('#errorToastBody').text("Some fields are mandatory");
-      $('#errorToast').toast('show');
+        new Notify ({
+            title: 'Error',
+            text : "Some fields are mandatory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
     }
   });
 
@@ -217,8 +250,13 @@ $(document).ready(function () {
       window.location.href = "myFeedbacks.html";
     }
     else{
-      $('#errorToastBody').text("Please Add Questions");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Please Add Questions",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
   });
 
@@ -287,16 +325,26 @@ $(document).ready(function () {
           success: function (result) {
             // console.log(result);
             if (result.status == 200) {
-              $('#successToastBody').text(result.message);
-              $('#successToast').toast('show');
+              new Notify ({
+                  title: 'Success',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+              });
               $('#loadingDiv').remove();
               getQuestions();
               clearAll();
             }
             else {
               $('#loadingDiv').remove();
-              $('#errorToastBody').text(result.message);
-              $('#errorToast').toast('show');
+              new Notify ({
+                  title: 'Error',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+              });
             }
           },
           error: function (error) {
@@ -345,16 +393,26 @@ $(document).ready(function () {
           success: function (result) {
             // console.log(result);
             if (result.status == 200) {
-              $('#successToastBody').text(result.message);
-              $('#successToast').toast('show');
+              new Notify ({
+                  title: 'Success',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+              });
               $('#loadingDiv').remove();
               getQuestions();
               clearAll();
             }
             else {
               $('#loadingDiv').remove();
-              $('#errorToastBody').text(result.message);
-              $('#errorToast').toast('show');
+              new Notify ({
+                  title: 'Error',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+              });
             }
           },
           error: function (error) {
@@ -366,14 +424,37 @@ $(document).ready(function () {
     }
     else {
       if (!option1 || !option2)
-        $('#errorToastBody').text("2 Options are Mandatory");
+        new Notify ({
+            title: 'Error',
+            text : "2 Options are Mandatory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       else if (!catagory)
-        $('#errorToastBody').text("Please Select Catagory");
+        new Notify ({
+            title: 'Error',
+            text : "Please Select Catagory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       else if (!question)
-        $('#errorToastBody').text("Please enter Question");
+        new Notify ({
+            title: 'Error',
+            text : "Please enter Question",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       else if (!option1 || !option2 || !catagory || !question)
-        $('#errorToastBody').text("Some fields are mandatory");
-      $('#errorToast').toast('show');
+        new Notify ({
+            title: 'Error',
+            text : "Some fields are mandatory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
     }
   });
 
@@ -405,16 +486,26 @@ $(document).ready(function () {
         success: function (result) {
           console.log(result);
           if (result.status == 200) {
-            $('#successToastBody').text(result.message);
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Success',
+                text : result.message,
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
+            });
             $('#loadingDiv').remove();
             getQuestions();
             clearAll();
           }
           else {
             $('#loadingDiv').remove();
-            $('#errorToastBody').text(result.message);
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
         },
         error: function (error) {
@@ -424,8 +515,13 @@ $(document).ready(function () {
       });
     }
     else {
-      $('#errorToastBody').text("Error, try again later");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Error, try again later",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
   });
 
@@ -472,13 +568,5 @@ $(document).ready(function () {
       }
   });
 
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-      $('#toastDiv').show();
-      setTimeout(function () {
-        $('#errorToast').toast('hide');
-        $('#successToast').toast('hide');
-        $('#toastDiv').hide();
-      }, 5000);
-  });
 
 });

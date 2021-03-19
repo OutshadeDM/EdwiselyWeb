@@ -274,17 +274,6 @@ $(document).ready(function () {
     $('#numberOfStudents').text(selectedStudentsId.length)
   })
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 5000);
-  });
-
-
 
   $('#sendQuestionsBtn').on('click', function () {
 
@@ -317,8 +306,13 @@ $(document).ready(function () {
           //alert(result.status)
 
           if (result.status == 200) {
-            $('#successToastBody').text("Survey Successfully Sent");
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : "Survey Successfully Sent",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
 
             setTimeout(function () {
               window.location.href = "myFeedbacks.html";
@@ -337,8 +331,13 @@ $(document).ready(function () {
 
     }
     else {
-      $('#errorToastBody').text("Fill All Details Carefully");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Fill Valid Details",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
   });
 

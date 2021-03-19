@@ -237,17 +237,6 @@ $(document).ready(function () {
     $('#numberOfStudents').text(selectedStudentsId.length)
   })
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 5000);
-  });
-
-
 
   $('#sendQuestionsBtn').on('click', function () {
 

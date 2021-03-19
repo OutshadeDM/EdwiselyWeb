@@ -53,8 +53,13 @@ $(document).ready(function () {
                     loadList();
                 }
                 else {
-                    $('#errorToastBody').text(result.message);
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                      title: 'Error',
+                      text : result.message,
+                      autoclose: true,
+                      status: 'error',
+                      autotimeout: 3000
+                    });
                 }
             },
             error: function (error) {
@@ -92,8 +97,13 @@ $(document).ready(function () {
                     });
                 }
                 else {
-                    $('#errorToastBody').text(result.message);
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                      title: 'Error',
+                      text : result.message,
+                      autoclose: true,
+                      status: 'error',
+                      autotimeout: 3000
+                    });
                 }
             },
             error: function (error) {
@@ -304,16 +314,25 @@ $(document).ready(function () {
                 headers: {
                   'Authorization': `Bearer ${$user.token}`
                 },
-                success: function (result) {  
-                  console.log(result);
+                success: function (result) {
                   if (result.status == 200) {
-                    $('#successToastBody').text(result.message);
-                    $('#successToast').toast('show');
+                    new Notify ({
+                      title: 'Success',
+                      text : result.message,
+                      autoclose: true,
+                      status: 'success',
+                      autotimeout: 3000
+                    });
                     getQuestions(false);
                   }
                   else {
-                    $('#errorToastBody').text(result.message);
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                      title: 'Error',
+                      text : result.message,
+                      autoclose: true,
+                      status: 'error',
+                      autotimeout: 3000
+                    });
                   }
                 },
                 error: function (error) {
@@ -324,13 +343,37 @@ $(document).ready(function () {
         }
         else{
             if (!title)
-                $('#errorToastBody').text("Please enter valid title, marks and description");
+                new Notify ({
+                    title: 'Error',
+                    text : "Please enter valid title, marks and description",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
             else if (!input1 || !output1 || !input2 || output2)
-                $('#errorToastBody').text("2 test cases are mandatory");
+                new Notify ({
+                    title: 'Error',
+                    text : "2 test cases are mandatory",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
             else if (!unit || unit == '0' || !topic || topic == '0')
-                $('#errorToastBody').text("Plese Select Unit and Topic");
-            else $('#errorToastBody').text("Plese enter valid details");
-            $('#errorToast').toast('show');
+                new Notify ({
+                    title: 'Error',
+                    text : "Plese Select Unit and Topic",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
+            else 
+                new Notify ({
+                    title: 'Error',
+                    text : "Plese enter valid details",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
         }
     });
 
@@ -364,14 +407,24 @@ $(document).ready(function () {
                 success: function (result) {  
                 //   console.log(result);
                   if (result.status == 200) {
-                    $('#successToastBody').text(result.message);
-                    $('#successToast').toast('show');
+                    new Notify ({
+                        title: 'Success',
+                        text : result.message,
+                        autoclose: true,
+                        status: 'success',
+                        autotimeout: 3000
+                    });
                     clearAll();
                     getQuestions(false);                    
                   }
                   else {
-                    $('#errorToastBody').text(result.message);
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                        title: 'Error',
+                        text : result.message,
+                        autoclose: true,
+                        status: 'error',
+                        autotimeout: 3000
+                    });
                   }
                 },
                 error: function (error) {
@@ -415,13 +468,23 @@ $(document).ready(function () {
                 success: function (result) {  
                   console.log(result);
                   if (result.status == 200) {
-                    $('#successToastBody').text(result.message);
-                    $('#successToast').toast('show');
+                    new Notify ({
+                        title: 'Success',
+                        text : result.message,
+                        autoclose: true,
+                        status: 'success',
+                        autotimeout: 3000
+                    });
                     getQuestions(false);
                   }
                   else {
-                    $('#errorToastBody').text(result.message);
-                    $('#errorToast').toast('show');
+                    new Notify ({
+                        title: 'Error',
+                        text : result.message,
+                        autoclose: true,
+                        status: 'error',
+                        autotimeout: 3000
+                    });
                   }
                 },
                 error: function (error) {
@@ -431,23 +494,38 @@ $(document).ready(function () {
         }
         else{
             if (!title)
-                $('#errorToastBody').text("Please enter valid title, marks and description");
+                new Notify ({
+                    title: 'Error',
+                    text : "Please enter valid title, marks and description",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
             else if (!input1 || !output1 || !input2 || output2)
-                $('#errorToastBody').text("2 test cases are mandatory");
+                new Notify ({
+                    title: 'Error',
+                    text : "2 test cases are mandatory",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
             else if (!unit || unit == '0' || !topic || topic == '0')
-                $('#errorToastBody').text("Plese Select Unit and Topic");
-            else $('#errorToastBody').text("Plese enter valid details");
-            $('#errorToast').toast('show');
+                new Notify ({
+                    title: 'Error',
+                    text : "Plese Select Unit and Topic",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
+            else 
+                new Notify ({
+                    title: 'Error',
+                    text : "Plese enter valid details",
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
         }
-    });
-
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
-        $('#toastDiv').show(1000);
-        setTimeout(function () {
-          $('#errorToast').toast('hide');
-          $('#successToast').toast('hide');
-          $('#toastDiv').hide();
-        }, 5000);
     });
 
     $('btnSave').on('click', function(){

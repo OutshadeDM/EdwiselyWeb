@@ -31,18 +31,6 @@ $(document).ready(function () {
     unit_id = searchParams.get('uid');
   }
 
-
-
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
-
   //variables
   let unit = 0
   let topics = []
@@ -281,8 +269,13 @@ $(document).ready(function () {
                 // alert(result.message);
 
                 if (result.status == 200) {
-                  $('#successToastBody').text("Questions Uploaded Successfully");
-                  $('#successToast').toast('show');
+                  new Notify ({
+                      title: 'Success',
+                      text : "Questions Uploaded Successfully",
+                      autoclose: true,
+                      status: 'success',
+                      autotimeout: 3000
+                  });
 
                   setTimeout(() => {
                     window.location.href = "addQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&desc=" + desc + "&isObj=" + objective + "&qc=" + questions.length
@@ -299,12 +292,22 @@ $(document).ready(function () {
 
           }
           else if (result.status == 500) {
-            $('#errorToastBody').text("Fill the Details");
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
           else {
-            $('#errorToastBody').text("Fill the Details");
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : "Fill the Details",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
         },
         error: function (error) {
@@ -313,8 +316,13 @@ $(document).ready(function () {
       });
     }
     else {
-      $('#errorToastBody').text("Fill the Details");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Fill the Details",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
 
   })

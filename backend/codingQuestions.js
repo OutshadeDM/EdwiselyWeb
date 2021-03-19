@@ -8,15 +8,6 @@ $(document).ready(function () {
       window.location.replace("login.html");
     }
   
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
-      $('#toastDiv').show();
-      setTimeout(function () {
-        $('#errorToast').toast('hide');
-        $('#successToast').toast('hide');
-        $('#toastDiv').hide();
-      }, 5000);
-    });
-  
     const searchParams = new URLSearchParams(window.location.search);
     let id = 0, qc = 0, title = "";
   
@@ -41,8 +32,13 @@ $(document).ready(function () {
         // window.location.href = "addFeedQues.html?id=" + id + "&fname=" + title;
       }
       else{
-        $('#errorToastBody').text("Please add questions to assesment first");
-        $('#errorToast').toast('show');
+        new Notify ({
+            title: 'Error',
+            text : "Please add questions to assesment first",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       }
     })
 

@@ -298,8 +298,13 @@ $(document).ready(function() {
                 },
                 success: function (result) {
                     if (result.status == 200) {
-                        $('#successToastBody').text('Course has been added successfully');
-                        $('#successToast').toast('show');
+                        new Notify ({
+                            title: 'Success',
+                            text : "Course has been added successfully",
+                            autoclose: true,
+                            status: 'success',
+                            autotimeout: 3000
+                        });
 
                         $("#loadingDiv").remove();
                         $('#modalContent').css('position', 'absolute');
@@ -307,14 +312,24 @@ $(document).ready(function() {
                         $('#courseModal').modal('toggle');
                     }
                     else if(result.status == 500){
-                        $('#errorToastBody').text(result.message);
-                        $('#errorToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : result.message,
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                         $("#loadingDiv").remove();
                         $('#modalContent').css('position', 'absolute');
                     }
                     else {
-                        $('#errorToastBody').text('Error Occurred: '+result.message);
-                        $('#errorToast').toast('show');
+                        new Notify ({
+                            title: 'Error',
+                            text : result.message,
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
                         $("#loadingDiv").remove();
                         $('#modalContent').css('position', 'absolute');
                         $('courseModal').modal('toggle');
@@ -332,19 +347,15 @@ $(document).ready(function() {
 
         }
         else{
-            $('#errorToastBody').text('Department and Class are mandatory');
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : "Department and Class are mandatory",
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
         }
 
-    });
-
-    $('#errorToast,#successToast').on('show.bs.toast', function () {
-        $('#toastDiv').show();
-        setTimeout(function () {
-            $('#errorToast').toast('hide');
-            $('#successToast').toast('hide');
-            $('#toastDiv').hide();
-        }, 7000);
     });
 
 });

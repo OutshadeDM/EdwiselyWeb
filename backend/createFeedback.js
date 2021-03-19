@@ -13,18 +13,6 @@ $(document).ready(function () {
   //let searchParams = new URLSearchParams(window.location.search);
 
 
-  //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
-
-
-
 
   $('#createFeedbackBtn').on('click', function () {
 
@@ -53,25 +41,36 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-
-          console.log(result);
-
-
           if (result.status == 200) {
-            $('#successToastBody').text(result.message);
-            $('#successToast').toast('show');
+            new Notify ({
+                title: 'Success',
+                text : result.message,
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
+            });
             setTimeout(() => {
               window.location.href = "feedbackQuestions.html?fname=" + title + "&id=" + result.survey_id + "&cf=1"
             }, 2000)
           }
           else {
-            $('#errorToastBody').text(error.message);
-            $('#errorToast').toast('show');
+            new Notify ({
+                title: 'Error',
+                text : result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+            });
           }
         },
         error: function (error) {
-          $('#errorToastBody').text(error.message);
-          $('#errorToast').toast('show');
+          new Notify ({
+              title: 'Error',
+              text : error.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
         }
       });
 
@@ -80,8 +79,13 @@ $(document).ready(function () {
 
     }
     else {
-      $('#errorToastBody').text("Fill all fields");
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : "Fill all fields",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
     }
 
   })

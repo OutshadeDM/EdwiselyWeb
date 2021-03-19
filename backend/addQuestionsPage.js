@@ -10,14 +10,6 @@ $(document).ready(function () {
 
 
   //toasts
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 7000);
-  });
 
 
   let searchParams = new URLSearchParams(window.location.search);
@@ -78,8 +70,13 @@ $(document).ready(function () {
 
           $(document).on('click', '#sendAssBtn', function () {
             if (question_count == 0) {
-              $('#errorToastBody').text("Please Add Questions");
-              $('#errorToast').toast('show');
+              new Notify ({
+                  title: 'Error',
+                  text : "Please Add Questions",
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+              });
             } else {
               window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tid + "&tname=" + tname + "&uid=" + uid + "&desc=" + description + "&isObj=" + objective + "&qc=" + question_count;
             }
@@ -88,15 +85,18 @@ $(document).ready(function () {
 
         }
         else {
-          $('#errorToastBody').text("Request Failed");
-          $('#errorToast').toast('show');
+          new Notify ({
+              title: 'Error',
+              text : "Request Failed",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
         }
         //alert("Request Failed")
       },
       error: function (error) {
-        $('#errorToastBody').text(error.message);
-        $('#errorToast').toast('show');
-        //alert("Request Failed with status: " + error.status);
+        alert("Request Failed with status: " + error.status);
       }
     });
   }
@@ -144,9 +144,13 @@ $(document).ready(function () {
 
     $(document).on('click', '#sendAssBtn', function () {
       if (question_count == 0) {
-        $('#errorToastBody').text("Please Add Questions");
-        $('#errorToast').toast('show');
-        //alert("Please Add Questions")
+        new Notify ({
+            title: 'Error',
+            text : "Please Add Questions",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
       } else {
         window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tid + "&tname=" + tname + "&uid=" + uid + "&desc=" + description + "&isObj=" + objective + "&qc=" + question_count;
       }

@@ -174,8 +174,13 @@ $(document).ready(function () {
       return true;
     }
     else {
-      $('#errorToastBody').text('Invalid Image Type');
-      $('#errorToast').toast('show');
+      new Notify ({
+          title: 'Error',
+          text : 'Invalid Image Type',
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
       return false;
     }
   }
@@ -219,15 +224,6 @@ $(document).ready(function () {
     $('#option5Label').show();
 
   }
-
-  $('#errorToast,#successToast').on('show.bs.toast', function () {
-    $('#toastDiv').show();
-    setTimeout(function () {
-      $('#errorToast').toast('hide');
-      $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 5000);
-  });
 
 
   //clicking questions
