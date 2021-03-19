@@ -36,6 +36,12 @@
   <title>Edwisely - Send Questions</title>
 
 
+  <!-- editor -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -145,10 +151,19 @@
                   <div class="col-md-6 col-12">
 
                     <label class="" for="descSendCodingAss"><strong>Description</strong></label>
-                    <textarea class="form-control" id="descSendCodingAss" rows="3" maxlength="200"
-                      style="margin-top: 0px; margin-bottom: 0px; height: 96px; resize: none;"></textarea>
+                    <!-- <textarea class="form-control" id="descSendCodingAss" rows="3" maxlength="200"
+                      style="margin-top: 0px; margin-bottom: 0px; height: 96px; resize: none;"></textarea> -->
+
+                    <!-- <div class="container mt-4 mb-4">
+                      <div class="row justify-content-md-center">
+                        <div class="form-group col-12 p-0">
+                          <textarea id="editor"></textarea>
+                        </div>
+                      </div>
+                    </div> -->
 
 
+                    <div id="summernote"></div>
 
                     <br>
                     <strong class="mt-3">Class Select</strong>
@@ -221,5 +236,12 @@
 <script type="text/javascript"
   src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js'></script>
 <script src="backend/sendCodingAssessment.js"></script>
+<script>
+  $('#summernote').summernote({
+    placeholder: 'Description',
+    tabsize: 2,
+    height: 100
+  });
+</script>
 
 </html>

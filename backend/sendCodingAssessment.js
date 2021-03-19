@@ -27,6 +27,12 @@ $(document).ready(function () {
   }
 
 
+  $('#summerNote').on('change', function () {
+    console.log($('#summerNote').text())
+  })
+
+
+
 
   // $.ajax({
   //   url: 'https://stagingfacultypython.edwisely.com/survey/getSurveys',
@@ -245,58 +251,59 @@ $(document).ready(function () {
 
   $('#sendQuestionsBtn').on('click', function () {
 
+    console.log($($("#summernote").summernote("code")).text())
 
-    if (doe && starttime && selectedStudentsId.length != 0) {
-
-
-
-      var form = new FormData();
-      form.append("doe", doe)
-      form.append("students", "[" + selectedStudentsId + "]")
-      form.append("survey_id", sId)
-      form.append("start_time", starttime)
-      form.append('is_comment_anonymous', $('#is_comment_anonymous').prop('checked') ? 1 : 0);
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
-
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/survey/sendSurveyToStudents',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          //alert(result.status)
-
-          if (result.status == 200) {
-            $('#successToastBody').text("Survey Successfully Sent");
-            $('#successToast').toast('show');
-
-            setTimeout(function () {
-              window.location.href = "myFeedbacks.html";
-            }, 3000);
-          }
-          else {
-            alert("error!")
-          }
-        },
-        error: function (error) {
-          alert("Request Failed with status: " + error.status);
-        }
-      });
+    // if (doe && starttime && selectedStudentsId.length != 0) {
 
 
 
-    }
-    else {
-      $('#errorToastBody').text("Fill All Details Carefully");
-      $('#errorToast').toast('show');
-    }
+    //   var form = new FormData();
+    //   form.append("doe", doe)
+    //   form.append("students", "[" + selectedStudentsId + "]")
+    //   form.append("survey_id", sId)
+    //   form.append("start_time", starttime)
+    //   form.append('is_comment_anonymous', $('#is_comment_anonymous').prop('checked') ? 1 : 0);
+    //   // for (var key of form.entries()) {
+    //   //   alert(key[1]);
+    //   // }
+
+    //   $.ajax({
+    //     url: 'https://stagingfacultypython.edwisely.com/survey/sendSurveyToStudents',
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     data: form,
+    //     contentType: false,
+    //     processData: false,
+    //     headers: {
+    //       'Authorization': `Bearer ${$user.token}`
+    //     },
+    //     success: function (result) {
+    //       //alert(result.status)
+
+    //       if (result.status == 200) {
+    //         $('#successToastBody').text("Survey Successfully Sent");
+    //         $('#successToast').toast('show');
+
+    //         setTimeout(function () {
+    //           window.location.href = "myFeedbacks.html";
+    //         }, 3000);
+    //       }
+    //       else {
+    //         alert("error!")
+    //       }
+    //     },
+    //     error: function (error) {
+    //       alert("Request Failed with status: " + error.status);
+    //     }
+    //   });
+
+
+
+    // }
+    // else {
+    //   $('#errorToastBody').text("Fill All Details Carefully");
+    //   $('#errorToast').toast('show');
+    // }
   });
 
 })
