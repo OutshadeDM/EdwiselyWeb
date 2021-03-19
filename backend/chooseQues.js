@@ -343,17 +343,17 @@ $(document).ready(function () {
 
               "<div class='modal-body'>" +
               "<div class='pb-1'>" + value.name + "</div>" +
-              (value.question_img == " " ? "" : "<div class='text-center py-2'><img src='" + value.question_img + "' alt='img' style='width:100px; height:75px;'></img></div>") +
+              (value.question_img == " " ? "" : "<div class='text-center py-2'><img src='" + value.question_img + "' alt='img' style='width:200px;'></img></div>") +
               (value.questions_options[0] ? "<div class='py-1' style='" + (value.questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.parse(JSON.stringify(value.questions_options[0].name)) + "</div>" : "") +
-              (value.questions_options[0] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[0] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:150px;' alt='img'></img>") : "") +
               (value.questions_options[1] ? "<div class='py-1' style='" + (value.questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.parse(JSON.stringify(value.questions_options[1].name)) + "</div>" : "") +
-              (value.questions_options[1] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[1] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:150px;' alt='img'></img>") : "") +
               (value.questions_options[2] ? "<div class='py-1' style='" + (value.questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.parse(JSON.stringify(value.questions_options[2].name)) + "</div>" : "") +
-              (value.questions_options[2] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[2] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:150px;' alt='img'></img>") : "") +
               (value.questions_options[3] ? "<div class='py-1' style='" + (value.questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.parse(JSON.stringify(value.questions_options[3].name)) + "</div>" : "") +
-              (value.questions_options[3] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[3] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:150px;' alt='img'></img>") : "") +
               (value.questions_options[4] ? "<div class='py-1' style='" + (value.questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.parse(JSON.stringify(value.questions_options[4].name)) + "</div>" : "") +
-              (value.questions_options[4] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img>") : "") +
+              (value.questions_options[4] ? (value.questions_options[0].option_img == " " ? "" : "<img src='" + value.questions_options[0].option_img + "' style='width:150px;' alt='img'></img>") : "") +
 
               (value.hint ? "<div style='font-size:12px;'>Hint :" + value.hint + "</div>" : "") +
               (value.hint_image ? "<div class='text-center py-2'><img src='" + value.hint_image + "' alt='img' style='width:100px; height:75px;'></img></div>" : "") +
@@ -937,7 +937,7 @@ $(document).ready(function () {
 
 
             //console.log(selectedQuestions[i].questions_options[0].name)
-            $('.addingQues').append("<div class='row m-0'>" +
+            $('.addingQues').append("<div class='row'>" +
               "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q).</div>" +
 
               "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
@@ -1033,7 +1033,7 @@ $(document).ready(function () {
 
 
         //console.log(selectedQuestions[i].questions_options[0].name)
-        $('.addingQues').append("<div class='row m-0'>" +
+        $('.addingQues').append("<div class='row'>" +
           "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q).</div>" +
 
           "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +

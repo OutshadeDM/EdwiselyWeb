@@ -34,7 +34,7 @@ $(document).ready(function () {
     $('#createFeedbackBtn').on('click', function () {
   
       const name = $('#name').val()
-      const desc = $('#desc').val()
+      const desc = $($("#summernote").summernote("code")).text()
       const subject = $('#selectSub').val()
   
       if (name && desc && subject && subject != "0") {

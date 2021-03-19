@@ -17,7 +17,7 @@ $(document).ready(function () {
   $('#createFeedbackBtn').on('click', function () {
 
     var title = $('#title-feedback').val()
-    var desc = $('#desc-feedback').val()
+    var desc = $($("#summernote").summernote("code")).text()
 
 
     //to make the post request

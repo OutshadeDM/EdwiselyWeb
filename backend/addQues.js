@@ -150,7 +150,7 @@ $(document).ready(function () {
           }
           else {
             $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-            }
+          }
         },
         error: function (error) {
           alert("Request Failed with status: " + error.status);
@@ -178,10 +178,10 @@ $(document).ready(function () {
           }
           else {
             $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-            }
+          }
           if (searchParams.has('sid')) {
             sId = searchParams.get('sid');
-            $('#questionBankA').attr('href','courseDetails.html?id=' + sId + '&uid=' + unit_id);
+            $('#questionBankA').attr('href', 'courseDetails.html?id=' + sId + '&uid=' + unit_id);
             $('#questionBankA').text('Question Bank');
             $('#divSaveSend').hide();
             if ($.cookie('editQues')) {
@@ -245,9 +245,9 @@ $(document).ready(function () {
 
     $.each(questions, function (key, value) {
       // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
-      $('#addquesDiv').append("<div class='row m-0'>" +
-      "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q"+ i++ +").</div>" +
-      "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
+      $('#addquesDiv').append("<div class='row'>" +
+        "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+        "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
     });
     MathJax.typesetPromise();
   }
@@ -665,6 +665,7 @@ $(document).ready(function () {
 
           if (result.status == 200) {
             $('#loadingDiv').remove();
+<<<<<<< HEAD
             new Notify ({
               title: 'Success',
               text : "Question Added to Database Successfully",
@@ -675,6 +676,11 @@ $(document).ready(function () {
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
             
+=======
+            $('#successToastBody').text('Question Added to Database Successfully');
+            $('#successToast').toast('show');
+
+>>>>>>> 59880986b5b44aefd86628bbc7f8ec1ed371b6bd
             questionsList.push(result.data.id);
             questions.push(result.data);
             loadList();
@@ -850,23 +856,23 @@ $(document).ready(function () {
     $('.uploadedques').click();
     $('.uploadedhint').click();
     $('.uploadedsolution').click();
-    
+
     $('#option1Label').show();
     $('#option2Label').show();
     $('#option3Label').show();
     $('#option4Label').show();
     $('#option5Label').show();
-    
-    $('#quesInput').prop('disabled',false);
-    $('#firstOption').prop('disabled',false);
-    $('#secondOption').prop('disabled',false);
-    $('#thirdOption').prop('disabled',false);
-    $('#fourthOption').prop('disabled',false);
-    $('#fifthOption').prop('disabled',false);
-    $('#solutionInput').prop('disabled',false);
-    $('#hintInput').prop('disabled',false);
-    $('#sourceInput').prop('disabled',false);
-    $('.chooseImage').css('pointer-events','auto').css('cursor','auto');
+
+    $('#quesInput').prop('disabled', false);
+    $('#firstOption').prop('disabled', false);
+    $('#secondOption').prop('disabled', false);
+    $('#thirdOption').prop('disabled', false);
+    $('#fourthOption').prop('disabled', false);
+    $('#fifthOption').prop('disabled', false);
+    $('#solutionInput').prop('disabled', false);
+    $('#hintInput').prop('disabled', false);
+    $('#sourceInput').prop('disabled', false);
+    $('.chooseImage').css('pointer-events', 'auto').css('cursor', 'auto');
 
     if (updateTopics)
       getTopics();
@@ -882,8 +888,8 @@ $(document).ready(function () {
     saveQuestions(true);
   });
 
-  function saveQuestions(isSend){
-    if(!unit_id || unit_id == "0") unit_id = subSemId;
+  function saveQuestions(isSend) {
+    if (!unit_id || unit_id == "0") unit_id = subSemId;
     if (questionsList != null && questionsList.length > 0 && tId != "0") {
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -930,10 +936,10 @@ $(document).ready(function () {
             $('#loadingDiv').remove();
             $("input.custom-control-input").attr("disabled", false);
             setTimeout(function () {
-              if(!isSend)
+              if (!isSend)
                 window.location.href = "myAssessment.html";
               else
-                window.location.href = "sendQuestionsPage.html?id="+subSemId+"&tid="+tId+"&tname="+tname+"&uid="+unit_id+"&isObj=true&qc="+questions.length;
+                window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&uid=" + unit_id + "&isObj=true&qc=" + questions.length;
             }, 2000);
           }
           else {
@@ -1015,22 +1021,22 @@ $(document).ready(function () {
           $('#customSwitch1').click();
         }
       }
-      
+
       $('#option1Label').show();
       $('#option2Label').show();
       $('#option3Label').show();
       $('#option4Label').show();
       $('#option5Label').show();
-      $('#quesInput').prop('disabled',false);
-      $('#firstOption').prop('disabled',false);
-      $('#secondOption').prop('disabled',false);
-      $('#thirdOption').prop('disabled',false);
-      $('#fourthOption').prop('disabled',false);
-      $('#fifthOption').prop('disabled',false);
-      $('#solutionInput').prop('disabled',false);
-      $('#hintInput').prop('disabled',false);
-      $('#sourceInput').prop('disabled',false);
-      $('.chooseImage').css('pointer-events','auto').css('cursor','auto');
+      $('#quesInput').prop('disabled', false);
+      $('#firstOption').prop('disabled', false);
+      $('#secondOption').prop('disabled', false);
+      $('#thirdOption').prop('disabled', false);
+      $('#fourthOption').prop('disabled', false);
+      $('#fifthOption').prop('disabled', false);
+      $('#solutionInput').prop('disabled', false);
+      $('#hintInput').prop('disabled', false);
+      $('#sourceInput').prop('disabled', false);
+      $('.chooseImage').css('pointer-events', 'auto').css('cursor', 'auto');
 
     }
     else {
@@ -1044,16 +1050,16 @@ $(document).ready(function () {
       $('#option4Label').hide();
       $('#option5Label').hide();
 
-      $('#quesInput').prop('disabled',true);
-      $('#firstOption').prop('disabled',true);
-      $('#secondOption').prop('disabled',true);
-      $('#thirdOption').prop('disabled',true);
-      $('#fourthOption').prop('disabled',true);
-      $('#fifthOption').prop('disabled',true);
-      $('#solutionInput').prop('disabled',true);
-      $('#hintInput').prop('disabled',true);
-      $('#sourceInput').prop('disabled',true);
-      $('.chooseImage').css('pointer-events','none').css('cursor','not-allowed');
+      $('#quesInput').prop('disabled', true);
+      $('#firstOption').prop('disabled', true);
+      $('#secondOption').prop('disabled', true);
+      $('#thirdOption').prop('disabled', true);
+      $('#fourthOption').prop('disabled', true);
+      $('#fifthOption').prop('disabled', true);
+      $('#solutionInput').prop('disabled', true);
+      $('#hintInput').prop('disabled', true);
+      $('#sourceInput').prop('disabled', true);
+      $('.chooseImage').css('pointer-events', 'none').css('cursor', 'not-allowed');
     }
 
     // console.log(JSON.stringify(value));
@@ -1329,7 +1335,7 @@ $(document).ready(function () {
       newQuestion.solution = $('#solutionInput').val();
 
 
-      if ((newQuestion.question_img && !question_img_url) || question_img){
+      if ((newQuestion.question_img && !question_img_url) || question_img) {
         newQuestion.question_img = "";
         newQuestion.media = 1
       }

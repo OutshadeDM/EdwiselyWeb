@@ -42,6 +42,11 @@
   <title>Coding Assessment | Edwisely</title>
 
 
+  <!-- editor -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
 </head>
 
 <body>
@@ -57,10 +62,13 @@
         <div class="row h-100 no-gutters">
           <div class="col-2"></div>
           <div class="col-8 d-flex justify-content-between align-items-center">
-            <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-            <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-            <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-            </div>
+            <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30"
+                alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30"
+                alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30"
+                alt="No Image" /></a>
+          </div>
           <div class="col-2"></div>
         </div>
       </div>
@@ -80,7 +88,7 @@
         <div class="navContainer">
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-            Courses</a></div>
+              Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
@@ -113,293 +121,289 @@
       <div class="container-fluid">
         <!-- Start Page Content -->
         <!-- <div class="internal-padding"> -->
-          <!-- put everything in this div -->
-          <div class="row">
-            <div class="col-12 pr-0">
-                <div class="container-fluid px-0">
-                  <div class="">
-                    <div class="px-5 headerBanner">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <h2 class="mt-1">
-                            <p class="font-weight-bold" id="courseName">Add Questions</p>
-                          </h2>
-                          <hr class="titlehr">
-                          <p class="list">
-                            <span class="list-item"><a href="index.html">Home</a> ></span>
-                            <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
-                            <span class="list-item-active"><a href="#">Add Question</a></span>
-                          </p>
+        <!-- put everything in this div -->
+        <div class="row">
+          <div class="col-12 pr-0">
+            <div class="container-fluid px-0">
+              <div class="">
+                <div class="px-5 headerBanner">
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <h2 class="mt-1">
+                        <p class="font-weight-bold" id="courseName">Add Questions</p>
+                      </h2>
+                      <hr class="titlehr">
+                      <p class="list">
+                        <span class="list-item"><a href="index.html">Home</a> ></span>
+                        <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
+                        <span class="list-item-active"><a href="#">Add Question</a></span>
+                      </p>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight justify-content-center align-self-center">
+                          <div id="divSaveSend">
+                            <button type="button" id="btnSaveSend" data-send="1"
+                              class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                              <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
+                              Save & Send
+                            </button>
+                          </div>
                         </div>
-                        <div class="col-sm-4">
-                          <div class="d-flex flex-row-reverse bd-highlight">
-                            <div class="p-2 bd-highlight justify-content-center align-self-center">
-                              <div id="divSaveSend">
-                                <button type="button" id="btnSaveSend" data-send="1" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
-                                  <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" /> 
-                                  Save & Send
+                        <div class="p-2 bd-highlight justify-content-center align-self-center">
+                          <button type="button" id="btnSave" data-send="0"
+                            class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                            <img src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
+                            Save
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+              <!-- Start Page Content -->
+
+              <div class="container-fluid pb-3 px-5">
+                <!-- put everything in this div -->
+
+                <div class="row" id="abcd">
+                  <div class="col-md-3 pr-2" id="questionDisplayDiv">
+                    <div class="whiteBack h-100">
+                      <div class="initData text-center pt-2">
+                        <h5 class="font-weight-bold">Added Questions</h5>
+                      </div>
+                      <div class="addingQues pr-2" id="addquesDiv" style="height: 120vh;">
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary w-50 text-center" id="addNewBtn">Add New</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-9 whiteBack addques pt-2 pb-5" id="createques">
+                    <div class="row">
+                      <div class="col-8"></div>
+                      <div class="col-2">
+                        <select class="bloomSelect mx-2 float-right" id="selectUnit">
+                          <option value="0" selected disabled>Unit</option>
+                        </select>
+                      </div>
+                      <div class="col-2">
+                        <div class="px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
+                          data-target="#exampleModal">
+
+
+                          <span class=" pl-2 pr-2">Topics</span>
+                          <i class="fas fa-chevron-right" style="position: absolute; top: 5px; right: 10px;"></i>
+
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
+                              <div class="modal-body">
+                                <div class="form-group">
+                                  <ul class=" courseTopics" id="topicTags">
+                                    Select Unit First
+                                  </ul>
+                                </div>
+                              </div>
+
                             </div>
-                            <div class="p-2 bd-highlight justify-content-center align-self-center">
-                              <button type="button" id="btnSave" data-send="0" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
-                                  <img src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
-                                  Save
-                              </button>
-                            </div>
-          
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-6">
+                        <label>Title</label>
+                        <input type="text" class="form-control form-control-lg w-100"
+                          placeholder="Enter your title here" id="title" />
+                      </div>
+                      <div class="col-3">
+                        <select class="bloomSelect mx-2 mt-4 " id="selectLang" style="height: 40px;">
+                          <option value="0" selected disabled>Language Select</option>
+                          <option value="1">Academic</option>
+                          <option value="2">Non-Academic</option>
+                        </select>
+                      </div>
+                      <div class="col-3">
+                        <label>Marks</label>
+                        <input type="text" class="form-control form-control-lg w-100" placeholder="Enter Marks"
+                          id="marks" />
+                      </div>
+                    </div>
+                    <div class="divInput row no-gutters mt-3">
+                      <label>Description</label>
+                      <div class="col-sm-12">
+                        <!-- <textarea class="form-control form-control-lg w-100" cols="50" rows="8"
+                                placeholder="Enter your description here" id="descInput"></textarea> -->
+                        <div id="summernote"></div>
+                      </div>
+                    </div>
+
+                    <label class="mt-4">Test Cases</label>
+                    <div class="container mt-2">
+                      <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-5">
+                          <label>Give Input</label>
+                        </div>
+                        <div class="col-4">
+                          <label>Excepted Output</label>
+                        </div>
+                        <div class="col-2">
+                          <label>Status</label>
+                        </div>
+                      </div>
+                      <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-1">1)</div>
+                        <div class="col-5">
+                          <input type="text" class="form-control form-control-lg w-100" id="input1" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control form-control-lg w-100" id="output1" />
+                        </div>
+                        <div class="col-2">
+                          <label class="switch">
+                            <input name="priority" id="status1" type="checkbox" checked>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row mt-2 d-flex justify-content-center align-items-center">
+                        <div class="col-1">2)</div>
+                        <div class="col-5">
+                          <input type="text" class="form-control form-control-lg w-100" id="input2" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control form-control-lg w-100" id="output2" />
+                        </div>
+                        <div class="col-2">
+                          <label class="switch">
+                            <input name="priority" id="status2" type="checkbox" checked>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row mt-2 d-flex justify-content-center align-items-center">
+                        <div class="col-1">3)</div>
+                        <div class="col-5">
+                          <input type="text" class="form-control form-control-lg w-100" id="input3" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control form-control-lg w-100" id="output3" />
+                        </div>
+                        <div class="col-2">
+                          <label class="switch">
+                            <input name="priority" id="status3" type="checkbox" checked>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row mt-2 d-flex justify-content-center align-items-center">
+                        <div class="col-1">4)</div>
+                        <div class="col-5">
+                          <input type="text" class="form-control form-control-lg w-100" id="input4" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control form-control-lg w-100" id="output4" />
+                        </div>
+                        <div class="col-2">
+                          <label class="switch">
+                            <input name="priority" id="status4" type="checkbox" checked>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div id="fifthOption">
+                        <div class="row mt-2 d-flex justify-content-center align-items-center">
+                          <div class="col-1">5)</div>
+                          <div class="col-5">
+                            <input type="text" class="form-control form-control-lg w-100" id="input5" />
+                          </div>
+                          <div class="col-4">
+                            <input type="text" class="form-control form-control-lg w-100" id="output5" />
+                          </div>
+                          <div class="col-2">
+                            <label class="switch">
+                              <input name="priority" id="status5" type="checkbox" checked>
+                              <span class="slider round"></span>
+                            </label>
                           </div>
                         </div>
                       </div>
-          
-          
+
+                      <div class="container mt-3 d-flex justify-content-end align-items-center">
+                        <button class="btn" id="addBtn" style="color: blue;">+ Add</button>
+                      </div>
+
                     </div>
-          
+                    <div class="container d-flex justify-content-end align-items-center">
+                      <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="doneBtn">Done</button>
+                      <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="editBtn">Edit</button>
+                      <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="deleteBtn">Delete</button>
+                    </div>
+
+                    <input type="hidden" value="0" id="questionId">
+
                   </div>
-                  <!-- Start Page Content -->
-          
-                  <div class="container-fluid pb-3 px-5">
-                    <!-- put everything in this div -->
-          
-                    <div class="row" id="abcd">
-                      <div class="col-md-3 pr-2" id="questionDisplayDiv">
-                        <div class="whiteBack h-100">
-                          <div class="initData text-center pt-2"><h5 class="font-weight-bold">Added Questions</h5></div>
-                          <div class="addingQues pr-2" id="addquesDiv" style="height: 120vh;">
-                          </div>
-                          <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary w-50 text-center" id="addNewBtn">Add New</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-9 whiteBack addques pt-2 pb-5" id="createques">                    
-                        <div class="row">
-                            <div class="col-8"></div>
-                            <div class="col-2">
-                                <select class="bloomSelect mx-2 float-right" id="selectUnit">
-                                    <option value="0" selected disabled>Unit</option>
-                                </select>
-                            </div>
-                            <div class="col-2">
-                              <div class="px-2 choose-subject" id="subject-modal-div" data-toggle="modal" data-target="#exampleModal">
 
-
-                                <span class=" pl-2 pr-2">Topics</span>
-                                <i class="fas fa-chevron-right" style="position: absolute; top: 5px; right: 10px;"></i>
-                
-                              </div>
-                
-                              <!-- Modal -->
-                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <div class="form-group">
-                                        <ul class=" courseTopics" id="topicTags">
-                                          Select Unit First
-                                        </ul>
-                                      </div>
-                                    </div>
-                
-                                  </div>
-                                </div>
-                              </div>
-                              
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <label>Title</label>
-                                <input type="text" class="form-control form-control-lg w-100"
-                                    placeholder="Enter your title here" id="title"/>
-                            </div>
-                            <div class="col-3">
-                                <select class="bloomSelect mx-2 mt-4 " id="selectLang" style="height: 40px;">
-                                    <option value="0" selected disabled>Language Select</option>
-                                    <option value="1">Academic</option>
-                                    <option value="2">Non-Academic</option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <label>Marks</label>
-                                <input type="text" class="form-control form-control-lg w-100"
-                                    placeholder="Enter Marks" id="marks"/>
-                            </div>
-                        </div>
-                        <div class="divInput row no-gutters mt-3">
-                            <label>Description</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control form-control-lg w-100" cols="50" rows="8"
-                                placeholder="Enter your description here" id="descInput"></textarea>
-                            </div>
-                        </div>
-
-                        <label class="mt-4">Test Cases</label>
-                        <div class="container mt-2">
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-5">
-                                    <label>Give Input</label>
-                                </div>
-                                <div class="col-4">
-                                    <label>Excepted Output</label>
-                                </div>
-                                <div class="col-2">
-                                    <label>Status</label>
-                                </div>
-                            </div>
-                            <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-1">1)</div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="input1"/>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="output1"/>
-                                </div>
-                                <div class="col-2">
-                                  <label class="switch">
-                                    <input name="priority" id="status1" type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                  </label>
-                                </div>
-                            </div>
-                            <div class="row mt-2 d-flex justify-content-center align-items-center">
-                                <div class="col-1">2)</div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="input2"/>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="output2"/>
-                                </div>
-                                <div class="col-2">
-                                  <label class="switch">
-                                    <input name="priority" id="status2" type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                  </label>
-                                </div>
-                            </div>
-                            <div class="row mt-2 d-flex justify-content-center align-items-center">
-                                <div class="col-1">3)</div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="input3"/>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="output3"/>
-                                </div>
-                                <div class="col-2">
-                                  <label class="switch">
-                                    <input name="priority" id="status3" type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                  </label>
-                                </div>
-                            </div>
-                            <div class="row mt-2 d-flex justify-content-center align-items-center">
-                                <div class="col-1">4)</div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="input4"/>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control form-control-lg w-100"
-                                        id="output4"/>
-                                </div>
-                                <div class="col-2">
-                                  <label class="switch">
-                                    <input name="priority" id="status4" type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                  </label>
-                                </div>
-                            </div>
-                            <div id="fifthOption">
-                              <div class="row mt-2 d-flex justify-content-center align-items-center">
-                                  <div class="col-1">5)</div>
-                                  <div class="col-5">
-                                      <input type="text" class="form-control form-control-lg w-100"
-                                          id="input5"/>
-                                  </div>
-                                  <div class="col-4">
-                                      <input type="text" class="form-control form-control-lg w-100"
-                                          id="output5"/>
-                                  </div>
-                                  <div class="col-2">
-                                    <label class="switch">
-                                      <input name="priority" id="status5" type="checkbox" checked>
-                                      <span class="slider round"></span>
-                                    </label>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <div class="container mt-3 d-flex justify-content-end align-items-center">
-                                <button class="btn" id="addBtn" style="color: blue;">+ Add</button>
-                            </div>                            
-
-                        </div>
-                        <div class="container d-flex justify-content-end align-items-center">
-                          <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="doneBtn">Done</button>
-                          <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="editBtn">Edit</button>
-                          <button class="btn btn-white shadow-sm btnLink mt-3 mr-3 px-2 py-2" id="deleteBtn">Delete</button>
-                        </div>
-                        
-                        <input type="hidden" value="0" id="questionId">
-          
-                      </div>
-                      
-                    </div>
-          
-                    <!-- toasts -->
-                    <div id="toastDiv" style="display: none;">
-                      <!-- start error toast -->
-                      <div class="toast fade" data-autohide="false" id="errorToast">
-                        <div class="toast-header">
-                          <strong class="mr-auto text-danger">Error !!!</strong>
-                          <small class="text-muted">Just Now</small>
-                        </div>
-                        <div class="toast-body">
-                          <p id="errorToastBody">All fields are mandatory to save.</p>
-                        </div>
-                      </div>
-                      <!-- end error toast -->
-          
-                      <!-- start success toast -->
-                      <div class="toast fade" data-autohide="false" id="successToast">
-                        <div class="toast-header">
-                          <strong class="mr-auto text-success">Success !!!</strong>
-                          <small class="text-muted">Just Now</small>
-                        </div>
-                        <div class="toast-body">
-                          <p id="successToastBody">Content has been saved successfully.</p>
-                        </div>
-                      </div>
-                      <!-- end success toast -->
-          
-                    </div>
-          
-                    <!-- end toasts -->
-          
-                    <!-- End Page Content -->
-                  </div>
                 </div>
-                <!-- Main Col END -->
+
+                <!-- toasts -->
+                <div id="toastDiv" style="display: none;">
+                  <!-- start error toast -->
+                  <div class="toast fade" data-autohide="false" id="errorToast">
+                    <div class="toast-header">
+                      <strong class="mr-auto text-danger">Error !!!</strong>
+                      <small class="text-muted">Just Now</small>
+                    </div>
+                    <div class="toast-body">
+                      <p id="errorToastBody">All fields are mandatory to save.</p>
+                    </div>
+                  </div>
+                  <!-- end error toast -->
+
+                  <!-- start success toast -->
+                  <div class="toast fade" data-autohide="false" id="successToast">
+                    <div class="toast-header">
+                      <strong class="mr-auto text-success">Success !!!</strong>
+                      <small class="text-muted">Just Now</small>
+                    </div>
+                    <div class="toast-body">
+                      <p id="successToastBody">Content has been saved successfully.</p>
+                    </div>
+                  </div>
+                  <!-- end success toast -->
+
+                </div>
+
+                <!-- end toasts -->
+
+                <!-- End Page Content -->
               </div>
-
-
-
+            </div>
+            <!-- Main Col END -->
           </div>
-          <!-- End Page Content -->
+
+
+
+        </div>
+        <!-- End Page Content -->
         <!-- </div> -->
       </div>
       <!-- Main Col END -->
@@ -410,9 +414,16 @@
 
     <!-- body-row END -->
 </body>
-<!-- add extra js files here --> 
+<!-- add extra js files here -->
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="backend/cookies.js"></script>
 <script src="backend/addCodeQues.js"></script>
+<script>
+  $('#summernote').summernote({
+    placeholder: 'Description',
+    tabsize: 2,
+    height: 100
+  });
+</script>
 
 </html>
