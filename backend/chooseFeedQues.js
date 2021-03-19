@@ -35,7 +35,7 @@ $(document).ready(function () {
   let template = null;
 
   //variables used
-  let i = 0;
+  let j = 0;
   let preAddedQuestions = [];
   let preAddedQuestionsId = [];
   let questions_values = []
@@ -73,7 +73,7 @@ $(document).ready(function () {
   $('#feedbackTemplate').on('change', function () {
     template = this.value;
     console.log(template)
-    i = 1;
+    j = 1;
     getTemplateQuestions(template)
   })
 
@@ -165,7 +165,7 @@ $(document).ready(function () {
           for (let i = 0; i < preAddedQuestions.length; i++) {
 
             $('.addingQues').append("<div class='row m-0'>" +
-              "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q).</div>" +
+              "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + (i + 1) + ").</div>" +
 
               "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + preAddedQuestions[i].id + "' data-question='" + preAddedQuestions[i] + "'>" +
               preAddedQuestions[i].name + "</div>" +
@@ -223,8 +223,8 @@ $(document).ready(function () {
               questions_values.push(value)
             }
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11 pb-2'>Q " + i + ".) " + value.name +
-              "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-11 pb-2'>Q " + j + ".) " + value.name +
+              "</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3 mr-4' value='" + value.id +
               "'data-id='" + value.id + "' " +
               " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
 
@@ -248,7 +248,7 @@ $(document).ready(function () {
               "</div>"
             );
 
-            i++;
+            j++;
             //MathJax.typesetPromise();
 
           });

@@ -41,10 +41,13 @@
         <div class="row h-100 no-gutters">
           <div class="col-2"></div>
           <div class="col-8 d-flex justify-content-between align-items-center">
-            <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-            <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-            <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30" alt="No Image" /></a>
-            </div>
+            <a href="index.html"><img src="frontend/images/dashboard.svg" class="navbarIcon" width="30"
+                alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/analytics.svg" class="navbarIcon" width="30"
+                alt="No Image" /></a>
+            <a href="index.html"><img src="frontend/images/notifications.svg" class="navbarIcon" width="30"
+                alt="No Image" /></a>
+          </div>
           <div class="col-2"></div>
         </div>
       </div>
@@ -59,7 +62,7 @@
         <div class="navContainer">
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-            Courses</a></div>
+              Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
@@ -175,56 +178,58 @@
                     </div>
 
 
+                    <div class='text-center pt-5'>
+                      <button class='btn btn-primary continueBtn'>Continue</button>
+                      <div>
 
 
 
 
+                      </div>
 
+                    </div>
                   </div>
-
                 </div>
-              </div>
-            </div>
 
+              </div>
+
+
+              <!-- toasts -->
+              <div id="toastDiv" style="display: none;">
+                <!-- start error toast -->
+                <div class="toast fade" data-autohide="false" id="errorToast">
+                  <div class="toast-header">
+                    <strong class="mr-auto text-danger">Error !!!</strong>
+                    <small class="text-muted">Just Now</small>
+                  </div>
+                  <div class="toast-body">
+                    <p id="errorToastBody">All fields are mandatory to save.</p>
+                  </div>
+                </div>
+                <!-- end error toast -->
+
+                <!-- start success toast -->
+                <div class="toast fade" data-autohide="false" id="successToast">
+                  <div class="toast-header">
+                    <strong class="mr-auto text-success">Success !!!</strong>
+                    <small class="text-muted">Just Now</small>
+                  </div>
+                  <div class="toast-body">
+                    <p id="successToastBody">Content has been saved successfully.</p>
+                  </div>
+                </div>
+                <!-- end success toast -->
+
+              </div>
+
+              <!-- end toasts -->
+
+              <!-- End Page Content -->
+            </div>
           </div>
-
-
-          <!-- toasts -->
-          <div id="toastDiv" style="display: none;">
-            <!-- start error toast -->
-            <div class="toast fade" data-autohide="false" id="errorToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-danger">Error !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="errorToastBody">All fields are mandatory to save.</p>
-              </div>
-            </div>
-            <!-- end error toast -->
-
-            <!-- start success toast -->
-            <div class="toast fade" data-autohide="false" id="successToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-success">Success !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="successToastBody">Content has been saved successfully.</p>
-              </div>
-            </div>
-            <!-- end success toast -->
-
-          </div>
-
-          <!-- end toasts -->
-
-          <!-- End Page Content -->
+          <!-- Main Col END -->
         </div>
-      </div>
-      <!-- Main Col END -->
-    </div>
-    <!-- body-row END -->
+        <!-- body-row END -->
 </body>
 <!-- add extra js files here -->
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>

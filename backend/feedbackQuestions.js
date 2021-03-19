@@ -8,6 +8,7 @@ $(document).ready(function () {
     window.location.replace("login.html");
   }
 
+  $('.continueBtn').hide()
 
   //toasts
   $('#errorToast,#successToast').on('show.bs.toast', function () {
@@ -72,7 +73,8 @@ $(document).ready(function () {
       $('#feedbackTemplate').on('change', function () {
         template = this.value;
         // console.log(template)
-        $('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
+        //$('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
+        $('.continueBtn').show()
       })
 
       $(document).on('click', '.continueBtn', function () {
@@ -144,7 +146,8 @@ $(document).ready(function () {
       $('#feedbackTemplate').on('change', function () {
         template = this.value;
         // console.log(template)
-        $('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
+        //$('#modalBody').append("<div class='text-center pt-5'><button class='btn btn-primary continueBtn'>Continue</button><div>")
+        $('.continueBtn').show()
       })
 
       $(document).on('click', '.continueBtn', function () {
