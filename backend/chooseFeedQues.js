@@ -28,11 +28,7 @@ $(document).ready(function () {
   let searchParams = new URLSearchParams(window.location.search);
 
   //basic paarmeters
-  let feedback_id = 0
-  let feedback_name = ""
-  let question_count = 0
-  let category = null;
-  let template = null;
+
 
   //variables used
   let j = 0;
@@ -48,14 +44,14 @@ $(document).ready(function () {
 
 
   //assigning values
-  feedback_name = searchParams.get('fname');
-  feedback_id = searchParams.get('id');
-  question_count = searchParams.get('qc');
-  category = searchParams.get('category');
-  template = searchParams.get('template');
+  let feedback_name = searchParams.get('fname');
+  let feedback_id = searchParams.get('id');
+  let question_count = searchParams.get('qc');
+  let category = searchParams.get('category');
+  let template = searchParams.get('template');
 
 
-
+  console.log(feedback_name)
 
   //selecting the category
   $('#feedbackCategory option[value=' + category + ']').prop('selected', true)
@@ -142,17 +138,11 @@ $(document).ready(function () {
           $.each(result.data, function (key, value) {
             console.log(value)
 
-            if (!questions_values.find(x => x.id === value.id)) {
-              questions_values.push(value)
-            }
+            preAddedQuestionsId.push(value.id);
+            selectedQuestionsId.push(value.id);
+            preAddedQuestions.push(value);
+            selectedQuestions.push(value)
 
-            if (!preAddedQuestionsId.includes(value.id)) {
-              preAddedQuestionsId.push(value.id);
-            }
-
-            if (!preAddedQuestions.includes(value)) {
-              preAddedQuestions.push(value);
-            }
 
             $('.chooseQuestionsInput').each(function () {
               if (preAddedQuestionsId.includes($(this).data('id'))) {
@@ -180,7 +170,7 @@ $(document).ready(function () {
               (preAddedQuestions[i].questions_options[1] ? "<div class='py-1'>" + "2.) " + JSON.parse(JSON.stringify(preAddedQuestions[i].questions_options[1].name)) + "</div>" : "") +
               (preAddedQuestions[i].questions_options[2] ? "<div class='py-1'>" + "3.) " + JSON.parse(JSON.stringify(preAddedQuestions[i].questions_options[2].name)) + "</div>" : "") +
               "</div>" +
-
+              "<div class='pb-3' style='text-align:center;'><button class='btn btn-primary'><a style='color:white; text-decoration:none' href='addFeedQues.html?id=" + feedback_id + "&fname=" + feedback_name + "'>Edit</a></button></div>" +
               "</div>" +
               "</div>" +
               "</div>" +
@@ -277,14 +267,10 @@ $(document).ready(function () {
 
   }
 
-  //updating the index of the question
-  i++;
-
-
-
 
   //on selecting the questions
   $(document).on('change', '.chooseQuestionsInput', function (e) {
+    console.log("hello")
     //add Questions to a array which are selected
     let currQues = {}
 
