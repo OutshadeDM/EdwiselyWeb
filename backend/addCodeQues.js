@@ -11,7 +11,9 @@ $(document).ready(function () {
 
     let questions = [];
     let questions_id = {}
+    let topics = []
     let subject_id = "0";
+    let test_name = "test";
     // let
 
     const searchParams = new URLSearchParams(window.location.search);
@@ -39,10 +41,10 @@ $(document).ready(function () {
                     questions = []
                     questions_id = []
                     subject_id = result.data.subject_id
-                    $('#courseName').text(result.data.name);
+                    test_name = result.data.name
+                    $('#courseName').text(test_name);
                     if(functionCall){
                         getUnits();
-                        getTopics();
                     }
                     $.each(result.data.problems, function (key, value) {
                         questions.push(value);
@@ -101,29 +103,66 @@ $(document).ready(function () {
 
     }
 
-    function getTopics(){
+    $('#selectUnit').on('change', function () {
+        const unit = $(this).find(':selected').val()
+        // console.log(unit)
+        getTopics(unit)
+    })
+
+    function getTopics(unit) {
         $.ajax({
-            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getSubjectTopics?subject_id=' + subject_id + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
-            type: 'GET',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': `Bearer ${$user.token}`
-            },
-            success: function (result) {
-                if (result.status == 200 && result.data) {
-                    // console.log(result);
-                    $('#selectTopic').empty();
-                    $('#selectTopic').append("<option value='0' selected disabled>Topic</option>");
-                    $.each(result.data, function (key, value) {
-                        $('#selectTopic').append("<option value='" + value.id + "' data-type='"+value.type+"'>" + value.name + "</option>");
-                    });
-                }
-            },
-            error: function (error) {
-                alert("Request Failed with status: " + error.status);
+          url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnitTopics?unit_ids=' + unit,
+          type: 'GET',
+          contentType: 'application/json',
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            $('#topicTags').empty();
+            if (result.status == 200 && result.data) {
+    
+              if (result.data == "") {
+                $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
+    
+              } else {
+    
+                $.each(result.data, function (key, value) {
+                  //console.log(value);
+                  $.each(value.topic, function (key, unitTopic) {
+                    $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "'/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
+                  })
+                });
+              }
             }
+            else {
+              $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
+              //alert("here");
+            }
+    
+    
+          },
+          error: function (error) {
+            alert("Request Failed with status: " + error.status);
+          }
         });
-    }
+      }
+
+    $(document).on('click', '.topicTagsInput', function () {
+
+        let value = $(this).data('type');
+        let id = parseInt($(this).val());
+    
+        if (!topics.includes(value)) {
+          topics.push({ "id": id, "type": value });
+        }
+    
+        if ($(this).prop('checked') == false) {
+          topics = topics.filter(function (e) {
+            return e.id != id;
+          });
+        }
+    
+    });
 
     $('#addBtn').on('click', function () {
         $('#addBtn').hide();
@@ -225,18 +264,15 @@ $(document).ready(function () {
         const marks = $('#marks').val()
         const desc = $('#descInput').val()
         const unit = $("#selectUnit").find(":selected").val()
-        const topic = $("#selectTopic").find(":selected").val()
         const input1 = $("#input1").val()
         const input2 = $("#input2").val()
         const output1 = $("#output1").val()
         const output2 = $("#output2").val()
+        
+        // console.log(topics);
     
-        if (title && desc && marks && unit && unit != "0" && topic && topic != "0" && input1 && input2 && output1 && output2) {
+        if (title && desc && marks && unit && unit != "0" && topics.length > 0 && input1 && input2 && output1 && output2) {
     
-            const finalTopic = [{
-                id : topic,
-                type : $("#selectTopic").find(':selected').data('type')
-            }]
             const test_cases = [];
             test_cases.push(objectCreator(input1,output1))
             test_cases.push(objectCreator(input2,output2))
@@ -245,11 +281,11 @@ $(document).ready(function () {
             if($("#input4").val() && $("#output4").val()) test_cases.push(objectCreator($("#input4").val(),$("#output4").val()))
             if($("#input5").val() && $("#output5").val()) test_cases.push(objectCreator($("#input5").val(),$("#output5").val()))
 
-            // console.log(test_cases)
+            console.log(topics)
             const form = new FormData();
             form.append("name", title);
             form.append("body", desc);
-            form.append("topics", JSON.stringify(finalTopic));
+            form.append("topics", JSON.stringify(topics));
             form.append("test_id",cid);
             form.append("marks",marks);
             form.append("test_cases",JSON.stringify(test_cases))
@@ -326,7 +362,7 @@ $(document).ready(function () {
                   'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {  
-                  console.log(result);
+                //   console.log(result);
                   if (result.status == 200) {
                     $('#successToastBody').text(result.message);
                     $('#successToast').toast('show');
@@ -412,6 +448,14 @@ $(document).ready(function () {
           $('#successToast').toast('hide');
           $('#toastDiv').hide();
         }, 5000);
+    });
+
+    $('btnSave').on('click', function(){
+        window.location.replace("codingQuestions.html?id="+cid+"&fname="+test_name);
+    });
+
+    $('btnSaveSend').on('click', function(){
+        window.location.href = `sendCodingAssessment.html?test_id=${cid}&test_name=${test_name}`
     });
 
 });

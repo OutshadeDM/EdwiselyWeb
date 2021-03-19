@@ -11,6 +11,7 @@
   <!-- add custom stylesheet here -->
   <link href="frontend/venders/main.css" rel="stylesheet">
   <link href="frontend/venders/sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" href="frontend/venders/radiostyle.css">
   <link rel="stylesheet" href="frontend/venders/pages/live.css">
   <link rel="stylesheet" href="frontend/venders/pages/addQues.css">
 
@@ -171,14 +172,44 @@
                       </div>
                       <div class="col-md-9 whiteBack addques pt-2 pb-5" id="createques">                    
                         <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6">
-                                <select class="bloomSelect mx-2 float-right" id="selectTopic">
-                                    <option value="0" selected disabled>Select Unit First</option>
-                                </select>
+                            <div class="col-8"></div>
+                            <div class="col-2">
                                 <select class="bloomSelect mx-2 float-right" id="selectUnit">
                                     <option value="0" selected disabled>Unit</option>
                                 </select>
+                            </div>
+                            <div class="col-2">
+                              <div class="px-2 choose-subject" id="subject-modal-div" data-toggle="modal" data-target="#exampleModal">
+
+
+                                <span class=" pl-2 pr-2">Topics</span>
+                                <i class="fas fa-chevron-right" style="position: absolute; top: 5px; right: 10px;"></i>
+                
+                              </div>
+                
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="form-group">
+                                        <ul class=" courseTopics" id="topicTags">
+                                          Select Unit First
+                                        </ul>
+                                      </div>
+                                    </div>
+                
+                                  </div>
+                                </div>
+                              </div>
+                              
                             </div>
                         </div>
                         <div class="row mt-2">
