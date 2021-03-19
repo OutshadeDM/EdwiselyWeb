@@ -64,29 +64,6 @@
     background-color: white;
 }
 
-.addingQues{
-    overflow-y: scroll;
-    height: 70vh;
-}
-  
-/* Hide scrollbar for Chrome, Safari and Opera */
-.addingQues::-webkit-scrollbar {
-    display: none;
-}
-  
-/* Hide scrollbar for IE, Edge and Firefox */
-.addingQues {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-  
-.chosenQuestions{
-    height: 84px;
-    overflow: hidden;
-    cursor: pointer;
-    border-bottom: solid 1px rgb(206, 206, 206);
-}
-
 .hyperlinkUl{
     list-style: none;
     padding: 0;

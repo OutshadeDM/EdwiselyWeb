@@ -7,44 +7,6 @@
 
 }
 
-.chosenQuestions{
-  height: 84px;
-  overflow: hidden;
-  cursor: pointer;
-  border-bottom: solid 1px rgb(206, 206, 206);
-}
-
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.chooseQues::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.chooseQues {
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
-}
-
-.addingQues{
-  border: solid 1px rgb(206, 206, 206);
-  border-radius: 10px;
-  overflow-y: scroll;
-  height: 75vh;
-  background-color: white;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.addingQues::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.addingQues {
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
-}
-
 input[type="checkbox"]{
   transform: scale(1.5);
   -webkit-transform: scale(1.5);
