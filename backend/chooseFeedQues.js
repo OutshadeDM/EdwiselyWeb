@@ -154,7 +154,7 @@ $(document).ready(function () {
 
           for (let i = 0; i < preAddedQuestions.length; i++) {
 
-            $('.addingQues').append("<div class='row m-0'>" +
+            $('.addingQues').append("<div class='row'>" +
               "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + (i + 1) + ").</div>" +
 
               "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + preAddedQuestions[i].id + "' data-question='" + preAddedQuestions[i] + "'>" +

@@ -917,11 +917,25 @@ pre
 
 /* left pane */
 
-.chosenQuestions{
+#addquesDiv .row{
   height: 84px;
   overflow: hidden;
   cursor: pointer;
-  border-bottom: solid 1px rgb(206, 206, 206);
+  border:none;
+  border-radius: 10px;
+  background-color: rgb(223, 223, 223);
+  margin: 0px 0px 20px 0px;
+}
+
+
+.addingQues .row{
+  height: 84px;
+  overflow: hidden;
+  cursor: pointer;
+  border:none;
+  border-radius: 10px;
+  background-color: rgb(223, 223, 223);
+  margin: 0px 0px 20px 0px;
 }
 
 
@@ -937,11 +951,9 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .addingQues{
-  border: solid 1px rgb(206, 206, 206);
-  border-radius: 10px;
   overflow-y: scroll;
   height: 75vh;
-  background-color: white;
+  background-color: #f9f9f9;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

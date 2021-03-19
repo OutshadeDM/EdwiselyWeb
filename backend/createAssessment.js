@@ -51,7 +51,7 @@ $(document).ready(function () {
 
       }
       else {
-        $('#courseTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
+        $('#courseTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Subjects Added to your List</h5></div</div>");
         //alert("here");
       }
 
@@ -80,7 +80,7 @@ $(document).ready(function () {
   $('#createAssessmentBtn').on('click', function () {
 
     var title = $('#title-objective').val()
-    var desc = $('#desc-objective').val()
+    var desc = $($("#summernote").summernote("code")).text()
     var subject = $("input[name='courseTagAdd']:checked").val();
     //alert(objective)
     // alert(title)
