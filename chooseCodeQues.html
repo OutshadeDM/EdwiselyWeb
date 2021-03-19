@@ -8,39 +8,30 @@
     type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-  <!-- add custom stylesheet here -->
-  <link href="frontend/venders/main.css" rel="stylesheet">
-  <link href="frontend/venders/sidebar.css" rel="stylesheet">
-  <link href="frontend/venders/radiostyle.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="frontend/venders/pages/sendCodingAssessment.css">
-
   <!-- font-awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
     crossorigin="anonymous" />
 
-  <!-- Slick Slider -->
-  <!-- Add the slick-theme.css if you want default styling -->
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-  <!-- Add the slick-theme.css if you want default styling -->
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+  <!-- add custom stylesheet here -->
+  <link href="frontend/venders/main.css" rel="stylesheet">
+  <link href="frontend/venders/sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" href="frontend/venders/radiostyle.css">
+  <link href="frontend/venders/pages/chooseCodeQues.css" rel="stylesheet">
+
+
   <!-- jquery -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css">
-  <title>Edwisely - Send Questions</title>
+  <title>Edwisely - Add Assessment</title>
 
-
-  <!-- editor -->
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-
+  <!-- latex -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
 </head>
 
@@ -76,24 +67,24 @@
     <div class="col-2 pr-0" style="height: 100vh; position: fixed;">
       <div class="pl-4 py-3 pr-0">
         <div class="navContainer">
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
               Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
-          <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
-              href="myAssessment.html">Assessments</a></div>
-          <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
-              Class</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
           <div class="pl-4 py-3 sidebarLinks active">
-            <a class="sidebarNav" href="myFeedbacks.html">
+            <a class="sidebarNav" href="myAssessment.html">
               <div class="row no-gutters">
-                <div class="col-10">Feedbacks</div>
+                <div class="col-10">Assessments</div>
                 <div class="col-2"><i class="fas fa-caret-right"></i></div>
               </div>
             </a>
           </div>
+          <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
+              Class</a></div>
+          <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
+              href="sendQuestionsPage.html">Send
+              Assessment</a></div>
+          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html">Feedback</a></div>
           <div class="text-center py-3" id="logoutNav" onclick="logout();">
             <b><img src="frontend/images/logout.png" class="px-2" />Logout
             </b>
@@ -113,21 +104,28 @@
             <div class="row">
               <div class="col-sm-8">
                 <h2 class="mt-1">
-                  <p class="font-weight-bold" id="courseName">Send Feedback</p>
+                  <p class="font-weight-bold" id="courseName">hello</p>
                 </h2>
                 <hr class="titlehr">
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
-                  <span class="list-item-active"><a href="#">Send Feedback</a></span>
+                  <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
+                  <span class="list-item-active"><a href="#">Add Question</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
-                <div class="d-flex flex-row-reverse justify-content-center bd-highlight">
+                <div class="d-flex flex-row-reverse bd-highlight">
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
-                    <button type="button" id="sendQuestionsBtn"
-                      class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2"><img
-                        src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
-                      Send</button>
+                    <div id="divSaveSend">
+                      <button type="button" id="btnSaveSend" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                        <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
+                        Save & Send</button>
+                    </div>
+                  </div>
+                  <div class="p-2 bd-highlight justify-content-center align-self-center">
+                    <button type="button" id="btnSave" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2"><img
+                        src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
+                      Save</button>
                   </div>
 
                 </div>
@@ -139,53 +137,68 @@
         </div>
         <!-- Start Page Content -->
 
-        <div class="container px-5 pt-3" id="theMainDiv">
+        <div class="container" id="theMainDiv">
           <!-- put everything in this div -->
-          <div class="">
-            <div class="row">
-              <div class="col-sm-12">
+          <div class="row pr-5 pb-3">
+            <div class="col-8"></div>
+            <div class="col-2">
+              <div class="px-2 choose-subject" id="subject-modal-div" data-toggle="modal" data-target="#exampleModal">
 
 
-                <div class="row px-4">
-                  <div class="col-md-6 col-12">
+                <span class=" pl-2 pr-2">Topics</span>
+                <i class="fas fa-chevron-right" style="position: absolute; top: 5px; right: 10px;"></i>
 
-                    <label class="" for="descSendCodingAss"><strong>Description</strong></label>
-                    <!-- <textarea class="form-control" id="descSendCodingAss" rows="3" maxlength="200"
-                      style="margin-top: 0px; margin-bottom: 0px; height: 96px; resize: none;"></textarea> -->
-
-                    <!-- <div class="container mt-4 mb-4">
-                      <div class="row justify-content-md-center">
-                        <div class="form-group col-12 p-0">
-                          <textarea id="editor"></textarea>
-                        </div>
-                      </div>
-                    </div> -->
-
-
-                    <div id="summernote"></div>
-
-                    <br>
-                    <strong class="mt-3">Class Select</strong>
-                    <div class="col-12 py-3" id="sectionDetails">
-                      <ul class="sectionsList p-0 m-0" id="sections"></ul>
-                    </div>
-                    <br>
-                    <strong class="mt-3">Total Selected Students</strong>
-                    <div class="col-12 py-2" id="numberOfStudents">0</div>
-
-                  </div>
-                  <div class="col-md-6 col-12">
-                    <div class="selectAllDiv pt-2 pb-1 px-3" id="SelectAllDIv"></div>
-                    <div>
-                      <ul class="selectStudents p-0"></ul>
-                    </div>
-                  </div>
-                </div>
 
               </div>
 
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Choose Topics</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <ul class=" courseTopics" id="topicTags">
+
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <select class="bloomSelect mx-2 float-right" id="selectUnit">
+                <option value="none" selected disabled hidden>Unit</option>
+              </select>
             </div>
           </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="addingQues px-0">
+                <div class="px-2 text-center">Add Questions to this assessment</div>
+              </div>
+            </div>
+            <div class="col-9" id="questionsToChoose">
+
+              <ul class="chooseQues p-0">
+
+              </ul>
+            </div>
+
+
+
+
+          </div>
+
+
           <!-- toasts -->
           <div id="toastDiv" style="display: none;">
             <!-- start error toast -->
@@ -223,24 +236,23 @@
       <!-- Main Col END -->
     </div>
     <!-- body-row END -->
-
-
-
-    <!-- body-row END -->
 </body>
 <!-- add extra js files here -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="backend/cookies.js"></script>
-<script type="text/javascript"
-  src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js'></script>
-<script src="backend/sendCodingAssessment.js"></script>
+<script src="backend/chooseCodeQues.js"></script>
 <script>
-  $('#summernote').summernote({
-    placeholder: 'Description',
-    tabsize: 2,
-    height: 100
-  });
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    },
+    options: {
+      skipHtmlTags: { '[-]': ['code', 'pre'] }
+    }
+  };
 </script>
 
 </html>

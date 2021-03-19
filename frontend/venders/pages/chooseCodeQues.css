@@ -280,3 +280,9 @@ pre
   width:70%; 
   text-align:center
 }
+
+.bloomSelect{
+  border-radius: 5px;
+  width: 85%;
+  border: solid 1px #c4c3c3;
+}
