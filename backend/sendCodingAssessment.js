@@ -12,54 +12,95 @@ $(document).ready(function () {
   //initializing the page 
   $('.selectAllDiv').empty();
 
-  let sId = 0;
+  let test_id = 0;
   let starttime = ""
+  let test_name = ""
   let doe = ""
   let section = 0
   let sectionIds = []
   let selectedStudentsId = []
   let preSelectedStudentsIds = []
-  let survery = [];
 
   const searchParams = new URLSearchParams(window.location.search);
-  if (searchParams.has('id')) {
-    sId = searchParams.get('id');
+  if (searchParams.has('test_id')) {
+    test_id = searchParams.get('test_id');
+    test_name = searchParams.get('test_name');
+
   }
 
 
-  $('#summerNote').on('change', function () {
-    console.log($('#summerNote').text())
+  // $('#summerNote').on('change', function () {
+  //   console.log($('#summerNote').text())
+  // })
+
+
+
+  let startDateTextBox = $('#starttime');
+  let endDateTextBox = $('#endtime');
+
+  $.timepicker.datetimeRange(
+    startDateTextBox,
+    endDateTextBox,
+    {
+
+      dateFormat: 'yy-mm-dd',
+      timeFormat: 'HH:mm:ss',
+      start: {
+        minDate: 0,
+        onChange: function (selectedDateTime) {
+          endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'.replace(/\s/, 'T')))
+        }
+      },
+      end: {
+        minDate: new Date(),
+      }
+
+    }
+  );
+
+
+
+
+  $('#starttime').on('change', function () {
+    starttime = $('#starttime').val()
+  })
+
+  $('#endtime').on('change', function () {
+    doe = $('#endtime').val()
+  })
+
+
+  $('.durationHours').on('change', function () {
+    if ($('.durationHours').val() > 100) {
+      $('.durationHours').val('99')
+    }
+
+    if ($('.durationHours').val() < 0) {
+      $('.durationHours').val('0')
+    }
+
+    $('.durationHours').val(parseInt($('.durationHours').val()))
+    hours = parseInt($('.durationHours').val())
+  })
+
+  $('.durationMinutes').on('change', function () {
+    if ($('.durationMinutes').val() > 59) {
+      $('.durationMinutes').val('59')
+    }
+
+    if ($('.durationMinutes').val() < 0) {
+      $('.durationMinutes').val('0')
+    }
+
+    $('.durationMinutes').val(parseInt($('.durationMinutes').val()))
+    mins = parseInt($('.durationMinutes').val())
   })
 
 
 
 
-  // $.ajax({
-  //   url: 'https://stagingfacultypython.edwisely.com/survey/getSurveys',
-  //   type: 'GET',
-  //   contentType: 'application/json',
-  //   headers: {
-  //     'Authorization': `Bearer ${$user.token}`
-  //   },
-  //   success: function (result) {
-  //     // console.log(result.data);
-  //     $('#feedbackList').empty();
-  //     if (result.status == 200 && result.data) {
-  //       survey = result.data.filter(survery1 => sId == survery1.id)[0];
-  //       console.log(survey);
 
-  //       survey.student_ids.forEach(function (id) {
-  //         preSelectedStudentsIds.push(id)
-  //       })
 
-  //       console.log(preSelectedStudentsIds)
-
-  //     }
-  //   },
-  //   error: function (error) {
-  //     alert("Request Failed with status: " + error.status);
-  //   }
-  // });
 
   getSections();
   getStudents();
@@ -239,60 +280,63 @@ $(document).ready(function () {
 
 
   $('#sendQuestionsBtn').on('click', function () {
-
-    console.log($($("#summernote").summernote("code")).text())
-
-    // if (doe && starttime && selectedStudentsId.length != 0) {
+    timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
 
 
-
-    //   var form = new FormData();
-    //   form.append("doe", doe)
-    //   form.append("students", "[" + selectedStudentsId + "]")
-    //   form.append("survey_id", sId)
-    //   form.append("start_time", starttime)
-    //   form.append('is_comment_anonymous', $('#is_comment_anonymous').prop('checked') ? 1 : 0);
-    //   // for (var key of form.entries()) {
-    //   //   alert(key[1]);
-    //   // }
-
-    //   $.ajax({
-    //     url: 'https://stagingfacultypython.edwisely.com/survey/sendSurveyToStudents',
-    //     type: 'POST',
-    //     dataType: 'json',
-    //     data: form,
-    //     contentType: false,
-    //     processData: false,
-    //     headers: {
-    //       'Authorization': `Bearer ${$user.token}`
-    //     },
-    //     success: function (result) {
-    //       //alert(result.status)
-
-    //       if (result.status == 200) {
-    //         $('#successToastBody').text("Survey Successfully Sent");
-    //         $('#successToast').toast('show');
-
-    //         setTimeout(function () {
-    //           window.location.href = "myFeedbacks.html";
-    //         }, 3000);
-    //       }
-    //       else {
-    //         alert("error!")
-    //       }
-    //     },
-    //     error: function (error) {
-    //       alert("Request Failed with status: " + error.status);
-    //     }
-    //   });
-
-
-
+    var form = new FormData();
+    form.append("name", test_name)
+    form.append("description", $($("#summernote").summernote("code")).text())
+    form.append("test_id", test_id)
+    form.append("starttime", starttime)
+    form.append("doe", doe)
+    form.append("timelimit", timelimit_in_secs)
+    form.append("students", "[" + selectedStudentsId + "]")
+    // for (var key of form.entries()) {
+    //   alert(key[1]);
     // }
-    // else {
-    //   $('#errorToastBody').text("Fill All Details Carefully");
-    //   $('#errorToast').toast('show');
-    // }
-  });
 
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTest',
+      type: 'POST',
+      dataType: 'json',
+      data: form,
+      contentType: false,
+      processData: false,
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        //alert(result.status)
+
+        if (result.status == 200) {
+          new Notify({
+            title: 'Success',
+            text: "Test Successfully Sent",
+            autoclose: true,
+            status: 'success',
+            autotimeout: 3000
+          });
+
+          setTimeout(function () {
+            window.location.href = "index.html";
+          }, 3000);
+        }
+        else {
+          new Notify({
+            title: 'Error',
+            text: "Fill All Details",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+
+
+
+  })
 })

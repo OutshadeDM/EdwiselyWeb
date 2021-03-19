@@ -120,7 +120,7 @@
                 <hr class="titlehr">
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
-                  <span class="list-item-active"><a href="#">Send Feedback</a></span>
+                  <span class="list-item-active"><a href="#">Send Coding Assessment</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
@@ -155,6 +155,21 @@
 
                     <div id="summernote"></div>
 
+                    <br />
+                    <strong>Test Details</strong>
+                    <div class="col-12 py-2" id="testDetails">
+                      Start Date and Time : <input type='text' id="starttime" placeholder="07 Jan 2021 00:35:20"
+                        class="form-control" /> <br>
+                      End Date and Time : <input type='text' id="endtime" placeholder="07 Jan 2021 00:35:20"
+                        class="form-control" /> <br>
+                      Duration :<br>
+                      <label class="px-2">Hours</label><input class="durationHours pl-1" type="number" placeholder="0"
+                        min="0" />
+                      <label class="px-2">Minutes</label><input class="durationMinutes pl-1" type="number"
+                        placeholder="0" max="59" min="0" />
+                    </div>
+
+
                     <br>
                     <strong class="mt-3">Class Select</strong>
                     <div class="col-12 py-3" id="sectionDetails">
@@ -162,7 +177,7 @@
                     </div>
                     <br>
                     <strong class="mt-3">Total Selected Students</strong>
-                    <div class="col-12 py-2" id="numberOfStudents">0</div>
+                    <div class="col-12 py-2 mb-4" id="numberOfStudents">0</div>
 
                   </div>
                   <div class="col-md-6 col-12">
@@ -176,33 +191,6 @@
               </div>
 
             </div>
-          </div>
-          <!-- toasts -->
-          <div id="toastDiv" style="display: none;">
-            <!-- start error toast -->
-            <div class="toast fade" data-autohide="false" id="errorToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-danger">Error !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="errorToastBody">All fields are mandatory to save.</p>
-              </div>
-            </div>
-            <!-- end error toast -->
-
-            <!-- start success toast -->
-            <div class="toast fade" data-autohide="false" id="successToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-success">Success !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="successToastBody">Content has been saved successfully.</p>
-              </div>
-            </div>
-            <!-- end success toast -->
-
           </div>
 
           <!-- end toasts -->
