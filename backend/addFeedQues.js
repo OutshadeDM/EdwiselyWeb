@@ -207,13 +207,14 @@ $(document).ready(function () {
     }
   });
 
-  $('#btnSave,#btnSaveSend').click(function(){
+  $('#btnSave,#btnSaveSend').on('click', function(){
     const isSend = $(this).data('send') == "1" ? true : false;
+    console.log(isSend)
     if(isSend && questionsList.length > 0){
-      window.location.href = "sendFeedback.html?id="+sId+"&tname="+tname+"&qc="+questions.length;
+      window.location.href = "sendFeedback.html?id="+sId;
     }
     else if(!isSend){
-      window.location.href = "myFeedbaacks.html";
+      window.location.href = "myFeedbacks.html";
     }
     else{
       $('#errorToastBody').text("Please Add Questions");
@@ -376,7 +377,7 @@ $(document).ready(function () {
     }
   });
 
-  $('#deleteBtn').click(function(){
+  $('#deleteBtn').on('click', function(){
     const questionId = $('#questionId').val();
     if(questionId){
       const form = new FormData();

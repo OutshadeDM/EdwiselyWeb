@@ -666,7 +666,7 @@ $(async function() {
 					if (new Date(activity.doe.replace(/\s/, 'T')) > new Date())
 						act += `<div class="col-11 desc offset-1"><a type='button' href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
 					else if (Number(activity.results.answered)) {					
-						act += `<div class="col-11 desc offset-1"><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>
+						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></div>
 						<div class="col-md-7 offset-3 mt-3 desc offset-1 col-12">
 							<a type='button' href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>
 								<div class="mt-3" style="max-height: 300px;">
@@ -676,7 +676,7 @@ $(async function() {
 						</div>`;
 						// act += `<div class="col-4 status text-center align-self-center"><strong>View Result</strong></div>`;
 					} else {
-						act += `<div class="col-7 desc offset-1"><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
+						act += `<div class="col-7 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></div>`;
 						act += `<div class="col-4 status text-center align-self-center"><strong>Feedback Expired!</strong></div>`;
 					}
 					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
@@ -1087,7 +1087,6 @@ $(async function() {
 					</div>
 				</div>
 			`;
-			modal.find('.modal-body .row.survey-charts').append(col);
 			let option_names = []
 			let data = [];
 			let colors = [
@@ -1101,10 +1100,16 @@ $(async function() {
 				'#DECF3F',
 				'#F15854'
 			];
+			let sum = 0;
 			$.each(surveyResult.options, (index, option) => {
+				sum += option.selected_count;
 				option_names.push(`${option.name} - ${option.selected_count}`);
 				data.push(option.selected_count);
 			});
+			if(sum > 0)
+				modal.find('.modal-body .row.survey-charts').append(col);
+			else
+				modal.find('.modal-body .row.survey-charts').append("<p class='text-center w-100'> No one voted till now")
 			var ctx = document.getElementById(`surveyChart${surveyResult.id}`).getContext('2d');
 			var myChart = new Chart(ctx, {
 				type: 'doughnut',

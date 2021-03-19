@@ -2,7 +2,10 @@
     color: black;
     background-color: transparent;
     border-color: transparent transparent #f3f3f3;
-    border-bottom: 3px solid #1b668c!important;
+    /* border-bottom: 3px solid #1b668c!important; */
+    /* border-bottom: 3px solid linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%) !important; */
+    background: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%) left bottom #f9f9f9 no-repeat; 
+    background-size:100% 3px;
     font-size: 16px;
     font-weight: bold;
 }

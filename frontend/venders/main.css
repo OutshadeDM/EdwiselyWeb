@@ -200,6 +200,7 @@ background-color: white;
 color: white;
 text-decoration: none;
 display: inline-block;
+border: none;
 }
 .btnLink:hover {
 color: white;
@@ -882,4 +883,33 @@ pre
 
 .form-control{
   border-radius: 12px;
+}
+
+/* @keyframes slideInFromLeft {
+  0% {
+    transform:translate(-20px);
+  }
+  50%{
+    transform:translate(-30px);
+  }
+  95%{
+    transform:translate(20px);
+  }
+  100% {
+    transform: translateX(0);
+    transform: translateY(0);
+  }
+}
+*/
+.toast{
+  margin: 10px;
+  border-radius: 12px;
+}
+.toast-header{
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: #f9f9f9;
+}
+.text-danger{
+  color: #EB5C6F !important;
 }

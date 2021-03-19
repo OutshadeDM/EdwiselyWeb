@@ -63,6 +63,7 @@
     <div class="col-2 pr-0" style="height: 100vh; position: fixed;">
       <div class="pl-4 py-3 pr-0">
         <div class="navContainer">
+          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
             Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
@@ -77,9 +78,7 @@
           </div>
           <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
               Class</a></div>
-          <div class="pl-4 py-3 sidebarLinks" id="sendAssessmentNav"><a class="sidebarNav"
-              href="sendQuestionsPage.html">Send
-              Assessment</a></div>
+          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav"
               href="myFeedbacks.html">Feedback</a></div>
           <div class="text-center py-3" id="logoutNav" onclick="logout();">
@@ -378,7 +377,8 @@
               </div>
 
 
-              <a href="#" id="hintBtn" class="pl-1 mb-5"><i class="fas fa-plus"></i> Add Hint<br><br></a>
+              <a href="#" id="hintBtn" class="pl-1 mb-5"><i class="fas fa-plus"></i> Add Hint</a>
+              <a href="#" id="solutionBtn" class="pl-1"><i class="fas fa-plus"></i> Add Solution</a>
 
               <div class="my-3" id="hintDiv">
                 <label for="hintInput" class="w-100 tabLabels">Hint</label>
@@ -400,7 +400,6 @@
               </div>
 
 
-              <a href="#" id="solutionBtn" class="pl-1"><i class="fas fa-plus"></i> Add Solution</a>
 
               <!-- <div class="row divInput my-3">
                 <label for="solutionInput" class="w-100 tabLabels">Solution</label>
@@ -525,7 +524,7 @@
             <!-- start error toast -->
             <div class="toast fade" data-autohide="false" id="errorToast">
               <div class="toast-header">
-                <strong class="mr-auto text-danger">Error !!!</strong>
+                <strong class="mr-auto text-danger">Error</strong>
                 <small class="text-muted">Just Now</small>
               </div>
               <div class="toast-body">
@@ -537,7 +536,7 @@
             <!-- start success toast -->
             <div class="toast fade" data-autohide="false" id="successToast">
               <div class="toast-header">
-                <strong class="mr-auto text-success">Success !!!</strong>
+                <strong class="mr-auto text-success">Success</strong>
                 <small class="text-muted">Just Now</small>
               </div>
               <div class="toast-body">

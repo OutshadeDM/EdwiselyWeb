@@ -17,54 +17,13 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          console.log(result.data);
+          // console.log(result.data);
           $('#feedbackList').empty();
           if (result.status == 200 && result.data) {
 
             let div = "";
 
             $.each(result.data, function (key, value) {
-
-            // let endDateString = "";
-            // let endDate = value.doe;
-            // if (value.start_time) endDate = new Date(value.start_time.toLocaleString().replace(/\s/, 'T'));
-            // else endDate = new Date(value.created_at.toLocaleString().replace(/\s/, 'T'));
-            // if(value.start_time) console.log(endDate)
-            // if (!isObj && value.start_time) {
-            //     endDate.setMinutes(endDate.getMinutes() + value.timelimit);
-            //     endDateString = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2) + ' ' + endDate.getHours() + ':' + ('0' + (endDate.getMinutes())).slice(-2) + ':' + ('0' + (endDate.getSeconds())).slice(-2);
-            // }
-            // else if (!isObj && value.created_at) endDate.setMinutes(endDate.getMinutes() + value.timelimit);
-
-            // let endDateString = "";
-            // if(value.doe) 
-
-            // div = div + "<div class='col-sm-6 assessment'>";
-            // div = div + "<div class='card mb-3 objCard text-left' style='cursor:auto;'>";
-            // div = div + "<h5 class='font-weight-bold pl-3 pt-2 pr-3'>" + value.name + "</h5>";
-            // div = div + "<p class='pl-3 condCardDesc'>" + value.description + "</p>";
-            // div = div + "<div class='card-body pl-1 pb-0 align-bottom pl-3'>";
-            // // if (value.start_time) {
-            // //     div = div + "<h6 class='font-weight-bold'>" + value.start_time + "  -  " + value.doe + "</h6>";
-            // // }
-            // // else {
-            // //     div = div + "<h6 class='font-weight-bold'>" + value.created_at + "  -  " + value.doe + "</h6>";
-            // // }
-            // if(value.sent){
-            //     div += "<button class='btn btn-primary text-white px-4 assBtn' data-id='" + value.id + "' data-toggle='modal' data-target='#statModal'>View Stats</button>";
-            // }
-            // else{
-            //   div += "<a class='btn btn-primary text-white px-4 assBtn' href='sendFeedbacks.html?id=" + value.id + "&tname=" + value.name + "&qc=" + value.questions_count + "'>Send</a>";
-            // }
-            // div = div + "</div><div class='px-3 text-muted card-footer' style='height:45px'>";
-            // div = div + "<div class='row'>";
-            // div = div + "<div class='col-sm-4'>";
-            // div = div + "Questions: <span class='font-weight-bold'>" + value.questions_count + "</span>";
-            // div = div + "</div>";
-            // div = div + "<div class='col-sm-4'>";
-            // div = div + "Sent To: <span class='font-weight-bold'>" + value.students_count + "</span>";
-            // div = div + "</div>";
-            // div = div + "</div></div></div></div>";
 
               div = div + "<div class='col-sm-6 assessment'>";
               div = div + "<div class='card mb-3 objCard text-left'>";
@@ -86,7 +45,7 @@ $(document).ready(function () {
               else if (value.questions_count > 0 && !value.sent)
                 div += "<div class='col-4'><a class='btn btn-primary text-white px-4 assBtn' href='sendFeedback.html?id=" + value.id + "'>Send</a></div>";
               else
-                div += "<div class='col-4'><button class='btn btn-primary text-white px-4 assBtn' data-id='" + value.id + "' data-toggle='modal' data-target='#statModal'>View Stats</button></div>";
+                div += "<div class='col-4'><button class='btn btn-primary text-white px-4 assBtn' data-id='" + value.id + "' data-name='"+value.name+"' data-toggle='modal' data-target='#statModal'>View Stats</button></div>";
               div = div + "</div></div></div>";
 
             });
@@ -105,6 +64,8 @@ $(document).ready(function () {
       $('#statModal').on('show.bs.modal', function (event) {
         const button = $(event.relatedTarget); // Button that triggered the modal
         const id = button.data('id'); // Extract info from data-* attributes
+        const name = button.data('name');
+        $('#statModalLabel').text(name);
         const modal = $(this);
 
         $.ajax({
@@ -116,9 +77,6 @@ $(document).ready(function () {
           },
           success: function (result) {
             if (result.status == 200 && result.data) {
-
-              // $col1 = $('<div></div>').addClass('col-2 mt-1').append($img);
-              // $col2 = $('<div></div>').addClass('col-10 pl-0 desc m-0').text(text);
               $row = $('<div></div>').addClass('row my-3 survey-charts');
               modal.find('.modal-body').html($row);
               $.each(result.data, (index, surveyResult) => {
@@ -132,7 +90,6 @@ $(document).ready(function () {
                     </div>
                   </div>
                 `;
-                modal.find('.modal-body .row.survey-charts').append(col);
                 let option_names = []
                 let data = [];
                 let colors = [
@@ -146,10 +103,17 @@ $(document).ready(function () {
                   '#DECF3F',
                   '#F15854'
                 ];
+                let sum = 0;
                 $.each(surveyResult.options, (index, option) => {
+                  sum += option.selected_count;
                   option_names.push(`${option.name} - ${option.selected_count}`);
                   data.push(option.selected_count);
                 });
+                if(sum > 0)
+                  modal.find('.modal-body .row.survey-charts').append(col);
+                else
+                  modal.find('.modal-body .row.survey-charts').append("<p class='text-center w-100'> No one voted till now")
+			          
                 var ctx = document.getElementById(`surveyChart${surveyResult.id}`).getContext('2d');
                 var myChart = new Chart(ctx, {
                   type: 'doughnut',

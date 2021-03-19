@@ -42,7 +42,19 @@ $(document).ready(function () {
             },
             success: function (result) {
                 $('#courseClass').empty();
-                if (result.status == 200) {
+                console.log(result)
+                if (result.status == 200 && result.message != "No data to fetch") {
+
+                    if (result.data.sections != "" && result.data.sections) {
+                        $("#courseClass").empty();
+                        $("#courseClass").append("<ul>");
+                        $.each(result.data.sections, function (key, value) {
+                            $("#courseClass").append("<li><span>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
+                        });
+                        $("#courseClass").append("</ul>");
+                    }
+                    else
+                        window.location.replace("courses.html");
 
                     $("#courseName").text(result.data.subject_name);
                     $("#courseDesc").text("No Description Available");
@@ -73,19 +85,9 @@ $(document).ready(function () {
 
                     if (result.data.image != "" && result.data.image)
                         $("#courseImg").attr("src", result.data.image);
-
-                    if (result.data.sections != "" && result.data.sections) {
-                        $("#courseClass").empty();
-                        $("#courseClass").append("<ul>");
-                        $.each(result.data.sections, function (key, value) {
-                            $("#courseClass").append("<li><span>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
-                        });
-                        $("#courseClass").append("</ul>");
-                    }
-                    else
-                        $("#courseClass").append("<div class='row py-5><div class='col-sm-12'><h5 class='text-center'>No data to fetch</h5></div</div>");
                 }
                 else {
+                    window.location.replace("courses.html");
                     $('#errorToastBody').text('Request Unsuccessful');
                     $('#errorToast').toast('show');
                 }
@@ -490,7 +492,7 @@ $(document).ready(function () {
                                         $('#loadingDiv').remove();
                                         $('#deckModalDiv').show();
                                         $('#deckModalDiv').slick({
-                                            adaptiveHeight: true
+                                            adaptiveHeight: false
                                         });				
                                     }
                                     i++;                                     

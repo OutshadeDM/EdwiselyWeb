@@ -10,6 +10,7 @@ $(document).ready(function () {
     }
 
     let questions = [];
+    let questions_id = {}
     let subject_id = "0";
     // let
 
@@ -21,6 +22,7 @@ $(document).ready(function () {
 
     $('#fifthOption').hide();
     $('#editBtn').hide();
+    $('#deleteBtn').hide();
     getQuestions(true);
 
     function getQuestions(functionCall){
@@ -35,6 +37,7 @@ $(document).ready(function () {
                 // console.log(result)
                 if (result.status == 200) {
                     questions = []
+                    questions_id = []
                     subject_id = result.data.subject_id
                     $('#courseName').text(result.data.name);
                     if(functionCall){
@@ -43,6 +46,7 @@ $(document).ready(function () {
                     }
                     $.each(result.data.problems, function (key, value) {
                         questions.push(value);
+                        questions_id.push({id:value.id,marks:value.marks})
                     });
                     loadList();
                 }
@@ -166,11 +170,11 @@ $(document).ready(function () {
     
             $('#editBtn').show();
             $('#doneBtn').hide();
-            // $('#deleteBtn').show();
+            $('#deleteBtn').show();
             $('#questionId').val(questionId);
     
             const question = questions.filter(question1 => questionId == question1.id)[0];
-            console.log(question);
+            // console.log(question);
     
             $('#title').val(question.name);
             $('#marks').val(question.marks);
@@ -301,6 +305,46 @@ $(document).ready(function () {
         }
     }
 
+    $('#deleteBtn').on('click', function(){
+        // console.log(questions_id);
+        questionId = $('#questionId').val();
+        if(questionId){
+            const updated_questions = questions_id.filter(question=> question.id !=questionId);
+
+            const form = new FormData();
+            form.append("test_id", cid);
+            form.append("problems", JSON.stringify(updated_questions));
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTestProblems',
+                type: 'POST',
+                dataType: 'json',
+                data: form,
+                contentType: false,
+                processData: false,
+                headers: {
+                  'Authorization': `Bearer ${$user.token}`
+                },
+                success: function (result) {  
+                  console.log(result);
+                  if (result.status == 200) {
+                    $('#successToastBody').text(result.message);
+                    $('#successToast').toast('show');
+                    clearAll();
+                    getQuestions(false);                    
+                  }
+                  else {
+                    $('#errorToastBody').text(result.message);
+                    $('#errorToast').toast('show');
+                  }
+                },
+                error: function (error) {
+                  alert("Request Failed with status: " + error.status);
+                }
+            });
+        }
+    })
+
     $('#editBtn').on('click', function() {
         const title = $('#title').val()
         const marks = $('#marks').val()
@@ -362,7 +406,7 @@ $(document).ready(function () {
     });
 
     $('#errorToast,#successToast').on('show.bs.toast', function () {
-        $('#toastDiv').show();
+        $('#toastDiv').show(1000);
         setTimeout(function () {
           $('#errorToast').toast('hide');
           $('#successToast').toast('hide');

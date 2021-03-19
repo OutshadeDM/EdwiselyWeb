@@ -824,6 +824,7 @@ $(document).ready(function () {
   });
 
   function saveQuestions(isSend){
+    if(!unit_id || unit_id == "0") unit_id = subSemId;
     if (questionsList != null && questionsList.length > 0 && tId != "0") {
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
@@ -837,8 +838,13 @@ $(document).ready(function () {
 
       let form = new FormData();
       form.append("test_id", tId);
-      form.append("questions", "[" + questionsList + "]");
+      form.append("questions", JSON.stringify(questionsList));
       form.append("units", "[" + unit_id + "]");
+
+      // console.log(tId,questionsList,unit_id)
+      // for (var key of form.entries()) {
+      //   console.log(key[1]);
+      // }
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
@@ -885,11 +891,13 @@ $(document).ready(function () {
 
   $('#errorToast,#successToast').on('show.bs.toast', function () {
     $('#toastDiv').show();
+    $('#successToast').toast({animation: true});
+    $('#errorToast').toast({animation: true});
     setTimeout(function () {
       $('#errorToast').toast('hide');
       $('#successToast').toast('hide');
-      $('#toastDiv').hide();
-    }, 5000);
+      $('#toastDiv').hide(1000);
+    }, 3000);
   });
 
 
