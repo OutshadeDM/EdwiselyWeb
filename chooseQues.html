@@ -85,8 +85,7 @@
           <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
               Class</a></div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav"
-              href="myFeedbacks.html">Feedback</a></div>
+          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html">Feedback</a></div>
           <div class="text-center py-3" id="logoutNav" onclick="logout();">
             <b><img src="frontend/images/logout.png" class="px-2" />Logout
             </b>
@@ -139,7 +138,7 @@
         </div>
         <!-- Start Page Content -->
 
-        <div class="container" id="theMainDiv">
+        <div class="container pl-0" id="theMainDiv">
           <!-- put everything in this div -->
 
           <div class="row">
@@ -153,40 +152,35 @@
             <div class="col-7" id="questionsToChoose">
 
               <div class="nav chooseQuesNavs">
-                <div class="nav-link px-0 active py-3" id="navAll">
-                  <div id="all">
-                    <!-- <img src="../images/notes.svg" alt="img" id="all" style="height: 27px;" /> -->
-                  </div>
+                <div class="nav-link px-0 active pb-4 pt-0" id="navAll">
                   <br />
-                  All
+                  <div class="px-4" id="divAll">
+                    All
+                  </div>
                 </div>
-                <div class="nav-link px-0 py-3" id="navRemember">
-                  <div id="rem">
-                    <!-- <img src="../images/notes.svg" alt="img" id="rem" style="height: 27px;" /> -->
-                  </div>
+                <div class="nav-link px-0 pb-4 pt-0" id="navRemember">
                   <br />
-                  Remember
+                  <div class="px-4" id="divRemember">
+                    Remember
+                  </div>
                 </div>
-                <div class="nav-link px-0 py-3" id="navUnderstand">
-                  <div id="und">
-                    <!-- <img src="../images/Page-1.svg" alt="img" id="und" style="height: 27px;" /> -->
-                  </div>
+                <div class="nav-link px-0 pb-4 pt-0" id="navUnderstand">
                   <br />
-                  Understand
+                  <div class="px-4" id="divUnderstand">
+                    Understand
+                  </div>
                 </div>
-                <div class="nav-link px-0 py-3" id="navApply">
-                  <div id="app">
-                    <!-- <img src="../images/startup.svg" alt="img" id="app" style="height: 27px;" /> -->
-                  </div>
+                <div class="nav-link px-0 pb-4 pt-0" id="navApply">
                   <br />
-                  Apply
+                  <div class="px-4" id="divApply">
+                    Apply
+                  </div>
                 </div>
-                <div class="nav-link px-0 py-3" id="navAnalyze">
-                  <div id="ana">
-                    <!-- <img src="../images/electric-light-bulb.svg" alt="ana" id="all" style="height: 27px;" /> -->
-                  </div>
+                <div class="nav-link px-0 pb-4 pt-0" id="navAnalyze">
                   <br />
-                  Analyze
+                  <div class="px-4" id="divAnalyze">
+                    Analyze
+                  </div>
                 </div>
               </div>
               <ul class="chooseQues p-0">
@@ -196,11 +190,11 @@
 
 
             <div class="col-2">
-              <button class="btn btn-primary text-white border-0 btn-block addChosenQuestions"><i
-                  class="fas fa-plus pr-2"></i>Add</button>
+              <button class="btn btn-primary text-white border-0 btn-block addChosenQuestions">Update</button>
 
+              <div class="mt-4"><strong>Select Unit</strong></div>
               <!-- units list -->
-              <ul class="getUnits my-4 pl-3 pr-2 py-2">
+              <ul class="getUnits pl-3 pr-2 py-2">
               </ul>
 
               <div><strong>Select Topics</strong></div>

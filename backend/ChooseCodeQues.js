@@ -145,7 +145,6 @@ $(document).ready(function () {
         // console.log(result);
         if (result.status == 200) {
           $('#selectUnit').empty();
-          $('#selectUnit').append("<option value='0' selected disabled>Unit</option>");
           $.each(result.data, function (key, value) {
             $('#selectUnit').append("<option value='" + value.id + "'>" + value.name + "</option>");
           });
@@ -160,8 +159,9 @@ $(document).ready(function () {
           });
         }
 
-        //$("#selectUnit").val($("#selectUnit option:first").val());
-
+        $("#selectUnit").val($("#selectUnit option:first").val());
+        console.log($("#selectUnit option:first").val())
+        getTopics($("#selectUnit option:first").val())
 
       },
       error: function (error) {

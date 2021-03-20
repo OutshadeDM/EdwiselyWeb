@@ -164,7 +164,7 @@ label {
   content: ' ';
   width: 50px;
   height: 3px;
-  background-color: #1b668c;
+  background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
   border-radius: 1px;
   position: absolute;
   bottom: 0px;

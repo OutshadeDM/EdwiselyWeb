@@ -291,9 +291,9 @@ $(document).ready(function () {
     form.append("doe", doe)
     form.append("timelimit", timelimit_in_secs)
     form.append("students", "[" + selectedStudentsId + "]")
-    // for (var key of form.entries()) {
-    //   alert(key[1]);
-    // }
+    for (var key of form.entries()) {
+      alert(key[1]);
+    }
 
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTest',
@@ -320,6 +320,15 @@ $(document).ready(function () {
           setTimeout(function () {
             window.location.href = "index.html";
           }, 3000);
+        }
+        else if (selectedStudentsId.length == 0) {
+          new Notify({
+            title: 'Error',
+            text: "Select atleast one Student",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
         }
         else {
           new Notify({

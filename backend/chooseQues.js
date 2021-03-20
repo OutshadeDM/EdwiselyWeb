@@ -45,18 +45,11 @@ $(document).ready(function () {
     $('#myInput').trigger('focus')
   })
 
-  // $('#all').css({ "background-color": "orange" })
-
-  // background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
-  // border-radius: 56px; 
-  // color: #FFFFFF !important;   
-  //initial styling
-  $('#navAll').css({ "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "10px 0 0 0", "color": "white" })
-  $('#all').css({ "background": "url('frontend/images/noteswhite.svg') no-repeat center" })
-  $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
-  $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
-  $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-color": "white" })
-  $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-color": "white", "border-radius": "0 10px 0 0" })
+  $('#divAll').css({ "color": "black", "border-bottom": "solid 3px #E25BC8", "font-size": "20px", "border-radius": "10px 0 0 0" })
+  $('#divRemember').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+  $('#divUnderstand').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+  $('#divApply').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+  $('#divAnalyze').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
 
 
 
@@ -783,7 +776,7 @@ $(document).ready(function () {
   //CSS styling on click
 
 
-  $('#navAll').css({ "color": "white", })
+  $('#navAll').css({ "color": "gray", })
 
 
 
@@ -795,16 +788,12 @@ $(document).ready(function () {
     console.log(moreQues)
     i = 1
     getAllQuestions()
-    $('#navAll').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "10px 0 0 0" })
-    $('#all').css({ "background": "url('frontend/images/noteswhite.svg') no-repeat center" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
+    $('#divAll').css({ "color": "black", "border-bottom": "solid 3px #E25BC8", "font-size": "20px", "border-radius": "10px 0 0 0" })
+    $('#divRemember').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divUnderstand').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divApply').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divAnalyze').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+
   })
 
 
@@ -816,16 +805,11 @@ $(document).ready(function () {
     blooms_lvl = 1
     i = 1
     getBloomQuestions(1)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navRemember').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)" })
-    $('#rem').css({ "background": "url('frontend/images/noteswhite.svg') no-repeat center" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
+    $('#divAll').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divRemember').css({ "color": "black", "border-bottom": "solid 3px #E25BC8", "font-size": "20px" })
+    $('#divUnderstand').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divApply').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divAnalyze').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
   })
 
   $('#navUnderstand').on('click', function () {
@@ -836,16 +820,11 @@ $(document).ready(function () {
     blooms_lvl = 2
     i = 1
     getBloomQuestions(2)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navUnderstand').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)" })
-    $('#und').css({ "background": "url('frontend/images/Page-1white.svg') no-repeat center" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
+    $('#divAll').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divRemember').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divUnderstand').css({ "color": "black", "border-bottom": "solid 3px #E25BC8", "font-size": "20px" })
+    $('#divApply').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divAnalyze').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
   })
 
   $('#navApply').on('click', function () {
@@ -856,16 +835,11 @@ $(document).ready(function () {
     blooms_lvl = 3
     i = 1
     getBloomQuestions(3)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
-    $('#navApply').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)" })
-    $('#app').css({ "background": "url('frontend/images/startupwhite.svg') no-repeat center" })
-    $('#navAnalyze').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#ana').css({ "background": "url('frontend/images/electric-light-bulb.svg') no-repeat center" })
+    $('#divAll').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divRemember').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divUnderstand').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divApply').css({ "color": "black", "border-bottom": "solid 3px #E25BC8", "font-size": "20px" })
+    $('#divAnalyze').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
   })
 
   $('#navAnalyze').on('click', function () {
@@ -876,16 +850,11 @@ $(document).ready(function () {
     blooms_lvl = 4
     i = 1
     getBloomQuestions(4)
-    $('#navAll').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#all').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navRemember').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#rem').css({ "background": "url('frontend/images/notes.svg') no-repeat center" })
-    $('#navUnderstand').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#und').css({ "background": "url('frontend/images/Page-1.svg') no-repeat center" })
-    $('#navApply').css({ "color": "gray", "font-weight": "normal", "background-image": "none" })
-    $('#app').css({ "background": "url('frontend/images/startup.svg') no-repeat center" })
-    $('#navAnalyze').css({ "color": "white", "background-image": "linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%)", "border-radius": "0 10px 0 0" })
-    $('#ana').css({ "background": "url('frontend/images/electric-light-bulbwhite.svg') no-repeat center" })
+    $('#divAll').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divRemember').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divUnderstand').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divApply').css({ "color": "gray", "font-weight": "normal", "border": "none", "font-size": "18px" })
+    $('#divAnalyze').css({ "color": "black", "border-bottom": "solid 3px #E25BC8", "font-size": "20px" })
   })
 
 
@@ -1075,12 +1044,12 @@ $(document).ready(function () {
 
   $('#btnSave').on('click', function () {
     if (selectedQuestions.length == 0) {
-      new Notify ({
-          title: 'Error',
-          text : "Choose Questions First",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Choose Questions First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
 
@@ -1110,12 +1079,12 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : "Questions Updates Successfully",
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: "Questions Updates Successfully",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
 
             //   setInterval(function () {
@@ -1126,12 +1095,12 @@ $(document).ready(function () {
             }, 2000)
           }
           else {
-            new Notify ({
-                title: 'Error',
-                text : "Error",
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Error',
+              text: "Error",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
             });
           }
         },
@@ -1148,12 +1117,12 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length === 0) {
-      new Notify ({
-          title: 'Error',
-          text : "Choose Questions First",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Choose Questions First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
     else {
@@ -1181,12 +1150,12 @@ $(document).ready(function () {
           //console.log('4') 
 
           if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : "Successfully Updated the Questions",
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: "Successfully Updated the Questions",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
 
             //   setInterval(function () {

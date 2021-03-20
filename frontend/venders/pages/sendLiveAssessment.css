@@ -103,7 +103,7 @@ input[type="checkbox"]{
 
 .sectionsListLabel{
   border-bottom: solid 3px #1B658C;
-  border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
+  border-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);;
   border-image-slice: 1;
 }
 
@@ -112,7 +112,7 @@ input[type="radio"]:checked+label{
   font-size:large;
   font-weight: 600;
   border-bottom: solid 3px #1B658C;
-  border-image: linear-gradient(to right, #1B658C 80%, rgba(0,0,0,0) 80%);
+  border-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);;
   border-image-slice: 1;
 }
 
