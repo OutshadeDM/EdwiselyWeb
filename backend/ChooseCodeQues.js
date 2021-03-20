@@ -52,6 +52,7 @@ $(document).ready(function () {
 
   //for pre Added QUestions
   let preAddedQues = []
+  let preAddedQuestionsId = []
 
 
 
@@ -73,11 +74,10 @@ $(document).ready(function () {
 
           $.each(result.data.problems, function (key, value) {
             preAddedQues.push(value);
+            preAddedQuestionsId.push(value.id)
             let question = {}
             question.id = value.id;
             question.marks = value.marks
-            selectedQuestions.push(question)
-            selectedQuestionsId.push(value.id)
 
           });
 
@@ -89,12 +89,12 @@ $(document).ready(function () {
 
         }
         else {
-          new Notify ({
-              title: 'Error',
-              text : result.message,
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
+          new Notify({
+            title: 'Error',
+            text: result.message,
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
           });
         }
       },
@@ -110,6 +110,9 @@ $(document).ready(function () {
     console.log(preAddedQues)
 
     $.each(preAddedQues, function (key, value) {
+
+
+
       $('.addingQues').append("<div class='row'>" +
         "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
 
@@ -145,23 +148,23 @@ $(document).ready(function () {
         // console.log(result);
         if (result.status == 200) {
           $('#selectUnit').empty();
-          $('#selectUnit').append("<option value='0' selected disabled>Unit</option>");
           $.each(result.data, function (key, value) {
             $('#selectUnit').append("<option value='" + value.id + "'>" + value.name + "</option>");
           });
         }
         else {
-          new Notify ({
-              title: 'Error',
-              text : result.message,
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
+          new Notify({
+            title: 'Error',
+            text: result.message,
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
           });
         }
 
-        //$("#selectUnit").val($("#selectUnit option:first").val());
-
+        $("#selectUnit").val($("#selectUnit option:first").val());
+        console.log($("#selectUnit option:first").val())
+        getTopics($("#selectUnit option:first").val())
 
       },
       error: function (error) {
@@ -300,7 +303,7 @@ $(document).ready(function () {
       success: function (result) {
         $('.chooseQues').empty();
         if (result.status == 200 && result.data) {
-          console.log(result.data)
+          //console.log(result.data)
 
 
 
@@ -319,39 +322,64 @@ $(document).ready(function () {
                 marks = ""
               }
             });
+            console.log(marks)
+
+            if (preAddedQuestionsId.includes(value.id)) {
+              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
+                "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' disabled class='chooseQuestionsInput px-3' value='" + value.id +
+                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
+                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
 
 
+                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
+                ">View More</button></div></li>" +
 
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
-              "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-              "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
-              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
+                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
+                "<div class='modal-dialog' role='document'>" +
+                "<div class='modal-content'>" +
+
+                "<div class='modal-body'>" +
+                "<div class='pb-1'>" + value.name + "</div>" +
+
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
+              );
+
+              i++;
+            }
+            else {
+              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
+                "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
+                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
 
 
-              " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-              ">View More</button></div></li>" +
+                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
+                ">View More</button></div></li>" +
 
 
-              "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
-              "<div class='modal-dialog' role='document'>" +
-              "<div class='modal-content'>" +
+                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
+                "<div class='modal-dialog' role='document'>" +
+                "<div class='modal-content'>" +
 
-              "<div class='modal-body'>" +
-              "<div class='pb-1'>" + value.name + "</div>" +
+                "<div class='modal-body'>" +
+                "<div class='pb-1'>" + value.name + "</div>" +
 
-              "</div>" +
-              "</div>" +
-              "</div>" +
-              "</div>"
-            );
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
+              );
 
-            i++;
-
+              i++;
+            }
           });
 
           $('.chooseQuestionsInput').each(function () {
-            if (selectedQuestionsId.includes($(this).data('id'))) {
+            if (preAddedQuestionsId.includes($(this).data('id'))) {
               $(this).prop('checked', true)
             }
           })
@@ -413,6 +441,8 @@ $(document).ready(function () {
 
 
   $('#btnSave').on('click', function () {
+    let qc = 0;
+    qc = selectedQuestions.length + preAddedQuestions.length
 
     selectedQuestions.forEach(function (ques) {
       if (ques.marks == "None") {
@@ -424,12 +454,12 @@ $(document).ready(function () {
     })
 
     if (selectedQuestions.length == 0) {
-      new Notify ({
-          title: 'Error',
-          text : "Choose Questions First",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Choose Questions First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
 
@@ -461,25 +491,25 @@ $(document).ready(function () {
 
 
           if (result.status == 200) {
-            new Notify ({
-                title: 'Error',
-                text : "Questions Updated Successfully",
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: "Questions Added Successfully",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
 
             setTimeout(() => {
-              window.location.href = `codingQuestions.html?id=${test_id}&fname=${test_name}`
+              window.location.href = `codingQuestions.html?id=${test_id}&fname=${test_name}&qc=${qc}`
             }, 2000)
           }
           else {
-            new Notify ({
-                title: 'Error',
-                text : "Error",
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Error',
+              text: "Error",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
             });
           }
         },
@@ -496,17 +526,17 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length === 0) {
-      new Notify ({
-          title: 'Error',
-          text : "Choose Questions First",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Choose Questions First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
     else {
       var form = new FormData();
-      form.append("test_id", test_d);
+      form.append("test_id", test_id);
       form.append("problems", JSON.stringify(selectedQuestions));
       // for (var key of form.entries()) {
       //   alert(key[1]);
@@ -526,12 +556,12 @@ $(document).ready(function () {
 
 
           if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : "Successfully Updated the Questions",
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: "Successfully Added the Questions",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
             setTimeout(() => {
               window.location.href = `sendCodingAssessment.html?test_id=${test_id}&test_name=${test_name}`
