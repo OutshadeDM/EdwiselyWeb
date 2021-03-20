@@ -110,6 +110,9 @@ $(document).ready(function () {
     console.log(preAddedQues)
 
     $.each(preAddedQues, function (key, value) {
+
+
+
       $('.addingQues').append("<div class='row'>" +
         "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
 
@@ -438,6 +441,8 @@ $(document).ready(function () {
 
 
   $('#btnSave').on('click', function () {
+    let qc = 0;
+    qc = selectedQuestions.length + preAddedQuestions.length
 
     selectedQuestions.forEach(function (ques) {
       if (ques.marks == "None") {
@@ -495,7 +500,7 @@ $(document).ready(function () {
             });
 
             setTimeout(() => {
-              window.location.href = `codingQuestions.html?id=${test_id}&fname=${test_name}`
+              window.location.href = `codingQuestions.html?id=${test_id}&fname=${test_name}&qc=${qc}`
             }, 2000)
           }
           else {
