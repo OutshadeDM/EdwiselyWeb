@@ -402,8 +402,24 @@ height: 0.01rem;
 
 .btn-primary {
   background-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%);
-  border-radius: 56px; 
+  border-radius: 25px; 
   color: #FFFFFF !important;   
+  border: none;
+}
+
+.btn-secondary{
+  border-radius: 25px; 
+  background-color: transparent;
+  color: black !important;   
+  border: solid 1px #E25BC8;
+  
+}
+
+.btn-secondary:hover{
+  border-radius: 25px; 
+  background-color: transparent;
+  color: black !important;   
+  border: solid 1px #E25BC8;
 }
 
 .btn-danger {
