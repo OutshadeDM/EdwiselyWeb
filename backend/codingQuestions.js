@@ -19,7 +19,7 @@ $(document).ready(function () {
     }
   
     $(document).on('click', '#addques', function () {
-      window.location.href = "addCodeQues.html?id=" + id + "&fname=" + title;
+      window.location.href = "addCodeQues.html?id=" + id;
     })
   
     $(document).on('click', '#chooseques', function () {

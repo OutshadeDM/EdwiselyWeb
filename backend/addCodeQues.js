@@ -36,7 +36,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // console.log(result)
+        console.log(result)
         if (result.status == 200) {
           questions = []
           questions_id = []
@@ -80,6 +80,7 @@ $(document).ready(function () {
   }
 
   function getUnits() {
+    console.log('here');
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnits?subject_id=' + subject_id + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
       type: 'GET',
@@ -88,7 +89,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // console.log(result);
+        console.log(result);
         if (result.status == 200) {
           $('#selectUnit').empty();
           $('#selectUnit').append("<option value='0' selected disabled>Unit</option>");
@@ -120,6 +121,7 @@ $(document).ready(function () {
   })
 
   function getTopics(unit) {
+    console.log('here1');
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnitTopics?unit_ids=' + unit,
       type: 'GET',
@@ -180,6 +182,7 @@ $(document).ready(function () {
   });
 
   function clearAll() {
+    $('#addquesDiv').append("<div class='loader-wrapper'><div class='loader'></div></div>");
     $('#title').val("");
     $('#selectUnit').val(0);
     $('#selectTopic').val(0);
@@ -193,7 +196,7 @@ $(document).ready(function () {
     $('#output4').val("");
     $('#input5').val("");
     $('#output5').val("");
-    $($("#summernote").summernote("code")).text("")
+    $("#summernote").summernote("code","")
     $('#marks').val("");
     $('#questionId').val("");
 
@@ -223,11 +226,28 @@ $(document).ready(function () {
       $('#questionId').val(questionId);
 
       const question = questions.filter(question1 => questionId == question1.id)[0];
-      // console.log(question);
+      console.log(question);
+
+      $('selectUnit').val();
+      $('selectUnit').val();
+
+      topics.push({id:question.topic_id,type: question.topic_type});
+      $('#topicTagAdd' + question.topic_id).prop('checked', true);
+
+      // $.each(value.topics_details, function (key, value) {
+      //   if (question_type1) {
+      //     $('#topicTagAdd' + value.id).prop('checked', true);
+      //   }
+      //   else {
+      //     // $('#topicsDiv').append("<span class='badge badge-pill'>" + value.id + "</span><br>");
+      //     $('#addNewBtn').show();
+      //   }
+      // });
+      // topics = value.topics_details;
 
       $('#title').val(question.name);
       $('#marks').val(question.marks);
-      $($("#summernote").summernote("code")).text(question.body)
+      $("#summernote").summernote("code",question.body)
 
       $('#input1').val(question.test_cases[0].input);
       $('#output1').val(question.test_cases[0].output);
@@ -265,14 +285,10 @@ $(document).ready(function () {
     }
   });
 
-  $('#addBtn').on('click', function () {
-    clearAll();
-  });
-
   $('#doneBtn').on('click', function () {
     const title = $('#title').val()
     const marks = $('#marks').val()
-    const desc = $($("#summernote").summernote("code")).text()
+    const desc = $("#summernote").summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
     const unit = $("#selectUnit").find(":selected").val()
     const input1 = $("#input1").val()
     const input2 = $("#input2").val()
@@ -282,7 +298,8 @@ $(document).ready(function () {
     // console.log(topics);
 
     if (title && desc && marks && unit && unit != "0" && topics.length > 0 && input1 && input2 && output1 && output2) {
-
+      
+      $('#doneBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
       const test_cases = [];
       test_cases.push(objectCreator(input1, output1))
       test_cases.push(objectCreator(input2, output2))
@@ -291,7 +308,7 @@ $(document).ready(function () {
       if ($("#input4").val() && $("#output4").val()) test_cases.push(objectCreator($("#input4").val(), $("#output4").val()))
       if ($("#input5").val() && $("#output5").val()) test_cases.push(objectCreator($("#input5").val(), $("#output5").val()))
 
-      console.log(topics)
+      // console.log(topics)
       const form = new FormData();
       form.append("name", title);
       form.append("body", desc);
@@ -315,7 +332,8 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          console.log(result);
+          $('#doneBtn').html('Done');
+          // console.log(result);
           if (result.status == 200) {
             new Notify ({
                 title: 'Success',
@@ -324,6 +342,7 @@ $(document).ready(function () {
                 status: 'success',
                 autotimeout: 3000
             });
+            clearAll();
             getQuestions(false);
           }
           else {
@@ -337,6 +356,7 @@ $(document).ready(function () {
           }
         },
         error: function (error) {
+          $('#doneBtn').html('Done');
           alert("Request Failed with status: " + error.status);
         }
       });
@@ -351,7 +371,7 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!input1 || !output1 || !input2 || output2)
+      else if (!input1 || !output1 || !input2 || !output2)
         new Notify ({
             title: 'Error',
             text : "Min 2 test cases are mandatory",
@@ -359,7 +379,7 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!unit || unit == '0' || !topic || topic == '0')
+      else if (!unit || unit == '0' || topics.length <= 0)
         new Notify ({
             title: 'Error',
             text : "Plese Select Unit and Topic",
@@ -387,10 +407,11 @@ $(document).ready(function () {
 
   $('#deleteBtn').on('click', function () {
     // console.log(questions_id);
-    questionId = $('#questionId').val();
+    const questionId = $('#questionId').val();
     if (questionId) {
       const updated_questions = questions_id.filter(question => question.id != questionId);
 
+      $('#deleteBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
       const form = new FormData();
       form.append("test_id", cid);
       form.append("problems", JSON.stringify(updated_questions));
@@ -407,6 +428,7 @@ $(document).ready(function () {
         },
         success: function (result) {
           //   console.log(result);
+        $('#deleteBtn').html("Delete");
           if (result.status == 200) {
             new Notify ({
                 title: 'Success',
@@ -429,6 +451,7 @@ $(document).ready(function () {
           }
         },
         error: function (error) {
+          $('#deleteBtn').html("Delete");
           alert("Request Failed with status: " + error.status);
         }
       });
@@ -436,28 +459,26 @@ $(document).ready(function () {
   })
 
   $('#editBtn').on('click', function () {
-    const title = $('#title').val()
-    const marks = $('#marks').val()
-    const desc = $($("#summernote").summernote("code")).text()
-    const topic = $("#selectTopic").find(":selected").val()
-    const problem_id = $("'#questionId").val();
+    const title = $('#title').val();
+    const marks = $('#marks').val();
+    const desc = $("#summernote").summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
+    const problem_id = $("#questionId").val();
 
-    if (title && marks && desc && topic && topic != "0" && problem_id) {
-      const finalTopic = [{
-        id: topic,
-        type: $("#selectTopic").find(':selected').data('type')
-      }];
+    if (title && marks && desc && topics.length > 0 && problem_id) {
+      $('#editBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
+      const updated_question = questions_id.filter(question => question.id == problem_id);
+      console.log(updated_question);
 
       const form = new FormData();
       form.append("name", title);
       form.append("body", desc);
-      form.append("topics", JSON.stringify(finalTopic));
+      form.append("topics", JSON.stringify(topics));
       form.append("test_id", cid);
       form.append("marks", marks);
       form.append("problem_id", problem_id);
 
       $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/codeEditor/addCodingProblem',
+        url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblem',
         type: 'POST',
         dataType: 'json',
         data: form,
@@ -467,6 +488,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
+          $('#editBtn').html("Edit");
           console.log(result);
           if (result.status == 200) {
             new Notify ({
@@ -476,6 +498,18 @@ $(document).ready(function () {
                 status: 'success',
                 autotimeout: 3000
             });
+            const test_cases = [];            
+            test_cases.push(objectCreator(input1, output1))
+            test_cases.push(objectCreator(input2, output2))
+
+            if ($("#input3").val() && $("#output3").val()) test_cases.push(objectCreator($("#input3").val(), $("#output3").val()))
+            if ($("#input4").val() && $("#output4").val()) test_cases.push(objectCreator($("#input4").val(), $("#output4").val()))
+            if ($("#input5").val() && $("#output5").val()) test_cases.push(objectCreator($("#input5").val(), $("#output5").val()))
+
+            // test_cases.forEach(function(test_case) {
+            //   updateTestCases(test_case.id,problem_id);
+            // })
+            clearAll();
             getQuestions(false);
           }
           else {
@@ -489,6 +523,7 @@ $(document).ready(function () {
           }
         },
         error: function (error) {
+          $('#editBtn').html("Edit");
           alert("Request Failed with status: " + error.status);
         }
       });
@@ -502,15 +537,15 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!input1 || !output1 || !input2 || output2)
-        new Notify ({
-            title: 'Error',
-            text : "Min 2 test cases are mandatory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
-        });
-      else if (!unit || unit == '0' || !topic || topic == '0')
+      // else if (!input1 || !output1 || !input2 || output2)
+      //   new Notify ({
+      //       title: 'Error',
+      //       text : "Min 2 test cases are mandatory",
+      //       autoclose: true,
+      //       status: 'error',
+      //       autotimeout: 3000
+      //   });
+      else if (!unit || unit == '0' || topics.length <= 0)
         new Notify ({
             title: 'Error',
             text : "Plese Select Unit and Topic",
@@ -528,12 +563,56 @@ $(document).ready(function () {
         });
     }
   });
+
+  function updateTestCases(test_case_id,problem_id){
+    const form = new FormData();
+    form.append("test_id",cid);
+    form.append("problem_id",problem_id);
+    form.append("test_case_id",test_case_id);
+    form.append("input",te)
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblem',
+      type: 'POST',
+      dataType: 'json',
+      data: form,
+      contentType: false,
+      processData: false,
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        $('#editBtn').html("Edit");
+        console.log(result);
+        if (result.status == 200) {
+          clearAll();
+          getQuestions(false);
+        }
+        else {
+          new Notify ({
+              title: 'Error',
+              text : result.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
+        }
+      },
+      error: function (error) {
+        $('#editBtn').html("Edit");
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+  $('#addNewBtn').on('click', function () {
+    clearAll();
+  });
   
-  $('btnSave').on('click', function () {
+  $('#btnSave').on('click', function () {
     window.location.replace("codingQuestions.html?id=" + cid + "&fname=" + test_name);
   });
 
-  $('btnSaveSend').on('click', function () {
+  $('#btnSaveSend').on('click', function () {
     window.location.href = `sendCodingAssessment.html?test_id=${cid}&test_name=${test_name}`
   });
 

@@ -675,11 +675,11 @@ $(document).ready(function () {
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
             
+            clearAll(true);
             questionsList.push(result.data.id);
             questions.push(result.data);
             loadList();
             $("input.custom-control-input").attr("disabled", false);
-            clearAll(true);
           }
           else {
             $('#loadingDiv').remove();
