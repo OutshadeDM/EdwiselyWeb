@@ -932,9 +932,9 @@ pre
   height: 84px;
   overflow: hidden;
   cursor: pointer;
-  border:none;
+  border:solid 1px rgb(223, 223, 223);
   border-radius: 10px;
-  background-color: rgb(223, 223, 223);
+  background-color: white;
   margin: 0px 0px 20px 0px;
 }
 
@@ -943,9 +943,10 @@ pre
   height: 84px;
   overflow: hidden;
   cursor: pointer;
-  border:none;
+  border:solid 2px rgb(223, 223, 223);
   border-radius: 10px;
-  background-color: rgb(223, 223, 223);
+  background-color: white;
+  padding: 0px 10px;
   margin: 0px 0px 20px 0px;
 }
 
