@@ -52,7 +52,7 @@ $(document).ready(function () {
 
   //for pre Added QUestions
   let preAddedQues = []
-  let preAddedQuestionsId = []
+  let preAddedQuesId = []
 
 
 
@@ -74,7 +74,7 @@ $(document).ready(function () {
 
           $.each(result.data.problems, function (key, value) {
             preAddedQues.push(value);
-            preAddedQuestionsId.push(value.id)
+            preAddedQuesId.push(value.id)
             let question = {}
             question.id = value.id;
             question.marks = value.marks
@@ -108,30 +108,33 @@ $(document).ready(function () {
     $(".addingQues").empty();
     let i = 1;
     console.log(preAddedQues)
+    if (preAddedQues.length == 0) {
+      $('.addingQues').append("<div class='text-center'>Add Questions</div>")
+    } else {
+      $.each(preAddedQues, function (key, value) {
 
-    $.each(preAddedQues, function (key, value) {
 
 
+        $('.addingQues').append("<div class='row'>" +
+          "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
 
-      $('.addingQues').append("<div class='row'>" +
-        "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+          "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + value.id + "' data-question='" + value + "'>" +
+          value.name + "</div>" +
 
-        "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + value.id + "' data-question='" + value + "'>" +
-        value.name + "</div>" +
+          "<div class='modal fade chosenQuestionModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='chosenModalLabel' aria-hidden='true'>" +
+          "<div class='modal-dialog' role='document'>" +
+          "<div class='modal-content'>" +
 
-        "<div class='modal fade chosenQuestionModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='chosenModalLabel' aria-hidden='true'>" +
-        "<div class='modal-dialog' role='document'>" +
-        "<div class='modal-content'>" +
+          "<div class='modal-body'>" +
+          "<div class='pb-4'>" + value.name + "</div>" +
+          "</div>" +
 
-        "<div class='modal-body'>" +
-        "<div class='pb-4'>" + value.name + "</div>" +
-        "</div>" +
-
-        "</div>" +
-        "</div>" +
-        "</div>" +
-        "</div>")
-    });
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          "</div>")
+      });
+    }
   }
 
 
@@ -324,62 +327,36 @@ $(document).ready(function () {
             });
             console.log(marks)
 
-            if (preAddedQuestionsId.includes(value.id)) {
-              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
-                "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' disabled class='chooseQuestionsInput px-3' value='" + value.id +
-                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
-                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
+
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
+              "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+              "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
+              " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
 
 
-                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-                ">View More</button></div></li>" +
+              " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
+              ">View More</button></div></li>" +
 
 
-                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
-                "<div class='modal-dialog' role='document'>" +
-                "<div class='modal-content'>" +
+              "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
+              "<div class='modal-dialog' role='document'>" +
+              "<div class='modal-content'>" +
 
-                "<div class='modal-body'>" +
-                "<div class='pb-1'>" + value.name + "</div>" +
+              "<div class='modal-body'>" +
+              "<div class='pb-1'>" + value.name + "</div>" +
 
-                "</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>"
-              );
+              "</div>" +
+              "</div>" +
+              "</div>" +
+              "</div>"
+            );
 
-              i++;
-            }
-            else {
-              $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
-                "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
-                "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
-                " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
+            i++;
 
-
-                " <button class='viewMoreBtn' style='background-color: transparent;' data-toggle='modal' data-target='.viewMoreModal" + value.id + "' " +
-                ">View More</button></div></li>" +
-
-
-                "<div class='modal fade viewMoreModal" + value.id + "' tabindex='-1' role='dialog' aria-labelledby='viewMoreLabel' aria-hidden='true'>" +
-                "<div class='modal-dialog' role='document'>" +
-                "<div class='modal-content'>" +
-
-                "<div class='modal-body'>" +
-                "<div class='pb-1'>" + value.name + "</div>" +
-
-                "</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>"
-              );
-
-              i++;
-            }
           });
 
           $('.chooseQuestionsInput').each(function () {
-            if (preAddedQuestionsId.includes($(this).data('id'))) {
+            if (preAddedQuesId.includes($(this).data('id'))) {
               $(this).prop('checked', true)
             }
           })
@@ -422,6 +399,12 @@ $(document).ready(function () {
     currId = $(this).data('id')
     let marks = $("#marks" + currId).val()
 
+    // preAddedQues.forEach(function(ques){
+    //   if(ques.id==currId){
+    //     editQuestionsId
+    //   }
+    // })
+
 
     questions_values.forEach(function (ques) {
       if (ques.id == currId) {
@@ -442,7 +425,7 @@ $(document).ready(function () {
 
   $('#btnSave').on('click', function () {
     let qc = 0;
-    qc = selectedQuestions.length + preAddedQuestions.length
+    qc = selectedQuestions.length + preAddedQues.length
 
     selectedQuestions.forEach(function (ques) {
       if (ques.marks == "None") {

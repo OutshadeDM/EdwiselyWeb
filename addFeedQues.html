@@ -81,7 +81,7 @@
         <div class="navContainer">
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-            Courses</a></div>
+              Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
@@ -115,201 +115,203 @@
       <div class="container-fluid">
         <!-- Start Page Content -->
         <!-- <div class="internal-padding"> -->
-          <!-- put everything in this div -->
-          <div class="row">
-            <div class="col-12 pr-0">
-                <div class="container-fluid px-0">
-                  <div class="">
-                    <div class="px-5 headerBanner">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <h2 class="mt-1">
-                            <p class="font-weight-bold" id="courseName">Add Questions</p>
-                          </h2>
-                          <hr class="titlehr">
-                          <p class="list">
-                            <span class="list-item"><a href="index.html">Home</a> ></span>
-                            <span class="list-item"><a href="myFeedbacks.html" id="questionBankA">Feedback</a> ></span>
-                            <span class="list-item-active"><a href="#">Add Question</a></span>
-                          </p>
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="d-flex flex-row-reverse bd-highlight">
-                            <div class="p-2 bd-highlight justify-content-center align-self-center">
-                              <div id="divSaveSend">
-                                <button type="button" id="btnSaveSend" data-send="1" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
-                                  <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" /> 
-                                  Save & Send
-                                </button>
-                              </div>
-                            </div>
-                            <div class="p-2 bd-highlight justify-content-center align-self-center">
-                              <button type="button" id="btnSave" data-send="0" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
-                                  <img src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
-                                  Save
-                              </button>
-                            </div>
-          
+        <!-- put everything in this div -->
+        <div class="row">
+          <div class="col-12 pr-0">
+            <div class="container-fluid px-0">
+              <div class="">
+                <div class="px-5 headerBanner">
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <h2 class="mt-1">
+                        <p class="font-weight-bold" id="courseName">Add Questions</p>
+                      </h2>
+                      <hr class="titlehr">
+                      <p class="list">
+                        <span class="list-item"><a href="index.html">Home</a> ></span>
+                        <span class="list-item"><a href="myFeedbacks.html" id="questionBankA">Feedback</a> ></span>
+                        <span class="list-item-active"><a href="#">Add Question</a></span>
+                      </p>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight justify-content-center align-self-center">
+                          <div id="divSaveSend">
+                            <button type="button" id="btnSaveSend" data-send="1"
+                              class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                              <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
+                              Save & Send
+                            </button>
                           </div>
                         </div>
+                        <div class="p-2 bd-highlight justify-content-center align-self-center">
+                          <button type="button" id="btnSave" data-send="0"
+                            class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2">
+                            <img src="frontend/images/save-secondary.png" alt="abc" class="pr-1" height="20px" />
+                            Save
+                          </button>
+                        </div>
+
                       </div>
-          
-          
                     </div>
-          
                   </div>
-                  <!-- Start Page Content -->
-          
-                  <div class="container-fluid pb-3 px-5">
-                    <!-- put everything in this div -->
-          
-                    <div class="row" id="abcd">
-                      <div class="col-md-3 pr-2" id="questionDisplayDiv">
-                        <div class="whiteBack h-100">
-                          <div class="addingQues pr-2" id="addquesDiv">
-                            <div class="initData text-center pt-2">Add Questions</div>
-                          </div>
-                          <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary w-50 text-center" id="addNewBtn">Add New</button>
-                          </div>
-                        </div>
-                      </div>           
-                      <div class="col-md-9 whiteBack addques pt-2 pb-5" id="createques">                    
-                        <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6">        
-                            <select class="bloomSelect mx-2 float-right" id="selectCatagory">
-                                <option value="0" selected disabled>Category</option>
-                                <option value="1">Academic</option>
-                                <option value="2">Non-Academic</option>
-                            </select>
-                            </div>
-                        </div> 
-                        <div class="divInput row no-gutters mt-2">
-                          <div class="col-sm-12">
-                            <textarea class="form-control form-control-lg w-100" cols="50"
-                              placeholder="Start typing your question" id="quesInput"></textarea>
-                          </div>
-                        </div>
-          
-                        <div class="row pt-4 mx-1">
-          
-                          <div class="col-6 pr-4">
-                            <div class="row">
-                              <div class="col-2 p-1 firstOption left-radius">
-                              </div>
-                              <div class="col-10 inputOption px-0" style="width: 100%;">
-                                <textarea type="text" class="form-control right-radius" placeholder="Enter Option" id="firstOption"
-                                  style="height: 50px;"></textarea>
-                              </div>
-                            </div>
-                          </div>
-          
-                          <div class="col-6 pl-4">
-                            <div class="row">
-                              <div class="col-2 mx-0 p-1 secondOption left-radius">
-                              </div>
-                              <div class="col-10 inputOption px-0" style="width: 100%;">
-                                <textarea type="text" class="form-control right-radius" placeholder="Enter Option" id="secondOption"
-                                  style="height: 50px;"></textarea>
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                        <div class="row pt-4 mx-1">
-          
-                          <div class="col-6 pr-4">
-                            <div class="row">
-                              <div class="col-2 mx-0 p-1 thirdOption left-radius">
-                              </div>
-                              <div class="col-10 inputOption px-0" style="width: 100%;">
-                                <textarea type="text" class="form-control right-radius" placeholder="Enter Option (Optional)" id="thirdOption"
-                                  style="height: 50px;"></textarea>
-                              </div>
-                            </div>
-                          </div>
-          
-                          <div class="col-6 pl-4">
-                            <div class="row">
-                              <div class="col-2 mx-0 p-1 fourthOption left-radius">
-                              </div>
-                              <div class="col-10 inputOption px-0" style="width: 100%;">
-                                <textarea type="text" class="form-control right-radius" placeholder="Enter Option (Optional)" id="fourthOption"
-                                  style="height: 50px;"></textarea>
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                        <div class="row py-4 text-center mx-1">
-          
-                          <a href="#" id="fifthOptionBtn"><i class="fas fa-plus"></i> Add Option</a>
-                          <div class="col-6 mx-0 pr-4">
-          
-          
-                            <div class="row" id="fifth">
-          
-                              <div class="col-2 mx-0 p-1 fifthOption left-radius">
-                              </div>
-                              <div class="col-10 inputOption px-0" style="width: 100%;">
-                                <textarea type="text" class="form-control right-radius" placeholder="Enter Option (Optional)" id="fifthOption"
-                                  style="height: 50px;"></textarea>
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                        <button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2" id="plusBtn">Done</button>
-                        <button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2" id="editBtn">Edit</button>
-                        <button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2" id="deleteBtn">Delete</button>
-                        
-                        <input type="hidden" value="0" id="questionId">
-          
-                      </div>
-                      
-                    </div>
-          
-                    <!-- toasts -->
-                    <div id="toastDiv" style="display: none;">
-                      <!-- start error toast -->
-                      <div class="toast fade" data-autohide="false" id="errorToast">
-                        <div class="toast-header">
-                          <strong class="mr-auto text-danger">Error !!!</strong>
-                          <small class="text-muted">Just Now</small>
-                        </div>
-                        <div class="toast-body">
-                          <p id="errorToastBody">All fields are mandatory to save.</p>
-                        </div>
-                      </div>
-                      <!-- end error toast -->
-          
-                      <!-- start success toast -->
-                      <div class="toast fade" data-autohide="false" id="successToast">
-                        <div class="toast-header">
-                          <strong class="mr-auto text-success">Success !!!</strong>
-                          <small class="text-muted">Just Now</small>
-                        </div>
-                        <div class="toast-body">
-                          <p id="successToastBody">Content has been saved successfully.</p>
-                        </div>
-                      </div>
-                      <!-- end success toast -->
-          
-                    </div>
-          
-                    <!-- end toasts -->
-          
-                    <!-- End Page Content -->
-                  </div>
+
+
                 </div>
-                <!-- Main Col END -->
+
               </div>
+              <!-- Start Page Content -->
+
+              <div class="container-fluid pb-3 px-5">
+                <!-- put everything in this div -->
+
+                <div class="row" id="abcd">
+                  <div class="col-md-3 pr-2" id="questionDisplayDiv">
+                    <div class="whiteBack h-100">
+                      <div class="addingQues pr-2" id="addquesDiv">
+                        <div class="initData text-center pt-2">Add Questions</div>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary w-50 text-center" id="addNewBtn">Add New</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-9 whiteBack addques pt-2 pb-5" id="createques">
+                    <div class="row">
+                      <div class="col-6"></div>
+                      <div class="col-6">
+                        <select class="bloomSelect mx-2 float-right" id="selectCatagory">
+                          <option value="0" selected disabled>Category</option>
+                          <option value="1">Academic</option>
+                          <option value="2">Non-Academic</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="divInput row no-gutters mt-2">
+                      <div class="col-sm-12">
+                        <textarea class="form-control form-control-lg w-100" cols="50"
+                          placeholder="Start typing your question" id="quesInput"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="row pt-4 mx-1">
+
+                      <div class="col-6 pr-4">
+                        <div class="row">
+                          <div class="col-2 p-1 firstOption left-radius">
+                          </div>
+                          <div class="col-10 inputOption px-0" style="width: 100%;">
+                            <textarea type="text" class="form-control right-radius" placeholder="Enter Option"
+                              id="firstOption" style="height: 50px;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6 pl-4">
+                        <div class="row">
+                          <div class="col-2 mx-0 p-1 secondOption left-radius">
+                          </div>
+                          <div class="col-10 inputOption px-0" style="width: 100%;">
+                            <textarea type="text" class="form-control right-radius" placeholder="Enter Option"
+                              id="secondOption" style="height: 50px;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row pt-4 mx-1">
+
+                      <div class="col-6 pr-4">
+                        <div class="row">
+                          <div class="col-2 mx-0 p-1 thirdOption left-radius">
+                          </div>
+                          <div class="col-10 inputOption px-0" style="width: 100%;">
+                            <textarea type="text" class="form-control right-radius"
+                              placeholder="Enter Option (Optional)" id="thirdOption" style="height: 50px;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6 pl-4">
+                        <div class="row">
+                          <div class="col-2 mx-0 p-1 fourthOption left-radius">
+                          </div>
+                          <div class="col-10 inputOption px-0" style="width: 100%;">
+                            <textarea type="text" class="form-control right-radius"
+                              placeholder="Enter Option (Optional)" id="fourthOption" style="height: 50px;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row py-4 text-center mx-1">
+
+                      <a href="#" id="fifthOptionBtn"><i class="fas fa-plus"></i> Add Option</a>
+                      <div class="col-6 mx-0 pr-4">
 
 
+                        <div class="row" id="fifth">
 
+                          <div class="col-2 mx-0 p-1 fifthOption left-radius">
+                          </div>
+                          <div class="col-10 inputOption px-0" style="width: 100%;">
+                            <textarea type="text" class="form-control right-radius"
+                              placeholder="Enter Option (Optional)" id="fifthOption" style="height: 50px;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2" id="plusBtn">Done</button>
+                    <button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2" id="editBtn">Edit</button>
+                    <button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2" id="deleteBtn">Delete</button>
+
+                    <input type="hidden" value="0" id="questionId">
+
+                  </div>
+
+                </div>
+
+                <!-- toasts -->
+                <div id="toastDiv" style="display: none;">
+                  <!-- start error toast -->
+                  <div class="toast fade" data-autohide="false" id="errorToast">
+                    <div class="toast-header">
+                      <strong class="mr-auto text-danger">Error !!!</strong>
+                      <small class="text-muted">Just Now</small>
+                    </div>
+                    <div class="toast-body">
+                      <p id="errorToastBody">All fields are mandatory to save.</p>
+                    </div>
+                  </div>
+                  <!-- end error toast -->
+
+                  <!-- start success toast -->
+                  <div class="toast fade" data-autohide="false" id="successToast">
+                    <div class="toast-header">
+                      <strong class="mr-auto text-success">Success !!!</strong>
+                      <small class="text-muted">Just Now</small>
+                    </div>
+                    <div class="toast-body">
+                      <p id="successToastBody">Content has been saved successfully.</p>
+                    </div>
+                  </div>
+                  <!-- end success toast -->
+
+                </div>
+
+                <!-- end toasts -->
+
+                <!-- End Page Content -->
+              </div>
+            </div>
+            <!-- Main Col END -->
           </div>
-          <!-- End Page Content -->
+
+
+
+        </div>
+        <!-- End Page Content -->
         <!-- </div> -->
       </div>
       <!-- Main Col END -->
@@ -320,7 +322,7 @@
 
     <!-- body-row END -->
 </body>
-<!-- add extra js files here --> 
+<!-- add extra js files here -->
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="backend/cookies.js"></script>
 <script src="backend/addFeedQues.js"></script>

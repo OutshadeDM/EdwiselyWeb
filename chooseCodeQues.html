@@ -113,8 +113,8 @@
                 <hr class="titlehr">
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
-                  <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
-                  <span class="list-item-active"><a href="#">Add Question</a></span>
+                  <span class="list-item"><a href="createCoding.html" id="questionBankA">Coding Assessment</a> ></span>
+                  <span class="list-item-active"><a href="#">Choose Question</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
@@ -127,8 +127,8 @@
                     </div>
                   </div>
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
-                    <button type="button" id="btnSave" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2"><img
-                        src="frontend/images/save.svg" alt="abc" class="pr-1" height="20px" />
+                    <button type="button" id="btnSave" class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2"><img
+                        src="frontend/images/save-secondary.png" alt="abc" class="pr-1" height="20px" />
                       Save</button>
                   </div>
 
@@ -195,7 +195,9 @@
             <div class="col-9" id="questionsToChoose">
 
               <ul class="chooseQues p-0">
-
+                <div class="loader-wrapper">
+                  <div class="loader"></div>
+                </div>
               </ul>
             </div>
 
