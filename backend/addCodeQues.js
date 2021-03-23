@@ -5,6 +5,7 @@ $(document).ready(function () {
     // console.log(isLoggedIn(), 'yes');
     $user = JSON.parse(isLoggedIn());
     $('html').removeClass('d-none');
+    $("#greetingNav").html($user.name);
   } else {
     window.location.replace("login.html");
   }
@@ -36,7 +37,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        console.log(result)
+        // console.log(result)
         if (result.status == 200) {
           questions = []
           questions_id = []

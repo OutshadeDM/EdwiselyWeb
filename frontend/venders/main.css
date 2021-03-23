@@ -979,7 +979,27 @@ scrollbar-width: none;  /* Firefox */
 }
 
 #greetingNav{
+  margin-left: 5px;
   color: white;
 }
+
+.sectionDiv{
+  margin: auto 10px;
+  display: inline-block;  
+}
+
+.sectionLabel{
+  margin: auto 10px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sectionLabel.active{
+  background: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%) left bottom #f9f9f9 no-repeat; 
+  background-size:100% 3px;
+}
+
+
 
 
