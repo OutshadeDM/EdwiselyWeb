@@ -141,6 +141,33 @@
         <div class="container pl-0" id="theMainDiv">
           <!-- put everything in this div -->
 
+          <div class="container my-3">
+            <div class="sectionDiv"><label class="sectionLabel active">Section A</label></div>
+            <div class="sectionDiv"><label class="sectionLabel">Section B</label></div>
+            <div class="sectionDiv"><label class="sectionLabel">Section C</label></div>
+          </div>
+
+          <div class="container my-3">
+            <div class="row mt-4 mb-5">
+              <div class="col-2">
+                <div><strong>Filter By Type</strong></div>
+                <select class="typeSelect" id="selectUnit">
+                  <option value="1" selected>Choose Question</option>
+                  <option value="2">Upload Question</option>
+                  <option value="3">Add Question</option>
+                </select>
+              </div>
+              <div class="col-2">
+                <div><strong>Number of Questions</strong></div>
+                <input type="text" class="totalQuestions" style="width: 80%;" disabled>
+              </div>
+              <div class="col-2">
+                <div><strong>Total Marks</strong></div>
+                <input type="text" class="totalMarks" style="width: 80%;" disabled>
+              </div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-3">
               <div class="addingQues px-0">
