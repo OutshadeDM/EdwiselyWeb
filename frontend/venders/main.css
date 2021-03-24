@@ -650,6 +650,13 @@ background-color: white;
 border-radius: 12px;
 }
 
+.typeSelect{
+  border: none;
+border-bottom: 1px solid gray;
+background-color: white;
+border-radius: 12px;
+}
+
 
 .firstOption {
 background-color: #C04DD8;
