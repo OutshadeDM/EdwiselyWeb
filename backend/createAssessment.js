@@ -13,6 +13,7 @@ $(document).ready(function () {
 
   let searchParams = new URLSearchParams(window.location.search);
   let objective = false
+  let i = 1
   // let units = [];
   if (searchParams.has('isObj')) {
     objective = searchParams.get('isObj')
@@ -32,69 +33,66 @@ $(document).ready(function () {
       if (result.status == 200 && result.data) {
         $.each(result.data, function (key, value) {
           // alert(value);
-
-          $('#courseTags').append("<li class='courseTagsLi'><input type='radio' class='courseTagsInput' value='" + value.id + "' data-name='" + value.name + "' name='courseTagAdd' id='courseTagAdd" + value.id + "'/><label for='courseTagAdd" + value.id + "' class='courseTagsLabel show1'><i class='fas fa-check' style='display: none;'></i> " + value.name + "</label></li>");
-
+          $('#subject').append("<option value='" + value.id + "'>" + value.name + "</option>");
         });
 
       }
-      else {
-        $('#courseTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Subjects Added to your List</h5></div</div>");
-        //alert("here");
-      }
-
-
     },
     error: function (error) {
       alert("Request Failed with status: " + error.status);
     }
   });
-
-  $('#exampleModal').on('hidden.bs.modal', function (event) {
-    let courseTagAdd = $("input[name='courseTagAdd']:checked").val();
-    // alert(courseTagAdd);
-    if (courseTagAdd) $('#assessmentSub').text($('#courseTagAdd' + courseTagAdd).data('name'));
-    // else $('#assessmentSub').text("Select a subject");
-
+  
+  $('#btnAdd').on('click',function(){
+    i++;
+    $(".sections").append("<div class='section mt-4'>"+
+    "<div class='row mb-4'>"+
+      "<div class='col-4'>"+
+        "<label>Name</label>"+
+        "<input class='form-control form-control-lg' type='text' id='section_name"+i+"'>"+
+      "</div>"+
+      "<div class='col-4'>"+
+        "<label>Marks</label>"+
+        "<input class='form-control form-control-lg' type='text' id='section_marks"+i+"'>"+
+      "</div>"+
+    "</div>"+
+    "<label>Instructions</label>"+
+    "<div id='summernote"+i+"'></div>"+
+  "</div>");
+    $('#summernote'+i).summernote({
+      placeholder: 'Instruction',
+      tabsize: 2,
+      height: 200
+    });
   })
-
-  $(document).on('click', '.courseTagsLi', function () {
-    $('#exampleModal').modal('toggle');
-  });
-
-
-
 
   $('#createAssessmentBtn').on('click', function () {
 
-    var title = $('#title-objective').val()
-    var desc = $($("#summernote").summernote("code")).text()
-    var subject = $("input[name='courseTagAdd']:checked").val();
-    //alert(objective)
-    // alert(title)
-    // alert(desc)
-    // alert(subject)
+    const title = $('#title-objective').val()
+    const desc = $($("#summernote").summernote("code")).text()
+    const subject = $("#subject").find(":selected").val()
 
+    const section_name1 = $('#section_name1').val();
+    const section_marks1 = $('#section_marks1').val();
+    const section_instr1 = $($("#summernote1").summernote("code")).text();
 
-    //to make the post request
-
-
-    //console.log('1')
-    // alert("herer");
-    if (title && desc && subject) {
-
-      //alert(objective)
-
-
-
-
+    if (title && desc && subject && section_name1 && section_marks1 && section_instr1) {
 
       if (objective == 'true') {
         //alert(objective)
+        const sections = []
+        sections.push({name:section_name1,marks:section_marks1,instructions:section_instr1});
+        let index = 2;
+        while (index <= i){
+          sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).val(),instructions: $($("#summernote"+index).summernote("code")).text()});
+          index++;
+        }
+        console.log(sections);
         var form = new FormData();
         form.append("name", title);
         form.append("description", desc);
         form.append("subject_id", subject);
+        form.append("sections", sections);
         // for (var key of form.entries()) {
         //   alert(key[1]);
         // }

@@ -229,8 +229,7 @@ $(document).ready(function () {
       const question = questions.filter(question1 => questionId == question1.id)[0];
       console.log(question);
 
-      $('selectUnit').val();
-      $('selectUnit').val();
+      $('#selectUnit').val("0");
 
       topics.push({id:question.topic_id,type: question.topic_type});
       $('#topicTagAdd' + question.topic_id).prop('checked', true);

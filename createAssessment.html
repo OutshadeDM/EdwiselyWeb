@@ -18,6 +18,7 @@
   <link href="frontend/venders/main.css" rel="stylesheet">
   <link href="frontend/venders/sidebar.css" rel="stylesheet">
   <link rel="stylesheet" href="frontend/venders/radiostyle.css">
+  <link rel="stylesheet" href="frontend/venders/pages/createAssessment.css">
 
 
   <!-- jquery -->
@@ -109,7 +110,7 @@
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
                   <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
-                  <span class="list-item-active"><a href="#">Create Questions</a></span>
+                  <span class="list-item-active"><a href="#">Create Test</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
@@ -138,76 +139,35 @@
             <input class="form-control form-control-lg" type="text" id="title-objective" maxlength="80">
             <label class="col-form-label col-form-label-lg" for="desc-objective">Description</label>
             <div id="summernote"></div>
+            <label class="col-form-label col-form-label-lg mt-2" for="subject">Subject</label><br>
+            <select id="subject">              
+            </select>
+            <hr>
 
-            <!-- Button trigger modal -->
-
-            <div class="py-3 my-3 px-2 choose-subject"
-              style="background-color: white; border: solid 1px rgb(206,206,206);" id="subject-modal-div"
-              data-toggle="modal" data-target="#exampleModal">
-
-              <i class="fas fa-bars pl-2 pr-0"></i>
-
-              <span class=" pl-2 pr-5" id="assessmentSub">Select a subject</span>
-              <i class="fas fa-chevron-right" style="position: absolute; top: 20px; right: 20px;"></i>
-
-
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose Subject</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <ul class="courseTagsUl" id="courseTags">
-
-                      </ul>
+            <label class="col-form-label col-form-label-lg mt-2">Section Details</label><br>
+            <div class="container">
+              <div class="sections">
+                <div class="section">
+                  <div class="row mb-4">
+                    <div class="col-4">
+                      <label>Name</label>
+                      <input class="form-control form-control-lg" type="text" id="section_name1">
+                    </div>
+                    <div class="col-4">
+                      <label>Marks</label>
+                      <input class="form-control form-control-lg" type="text" id="section_marks1">
                     </div>
                   </div>
-
+                  <label>Instructions</label>
+                  <div id="summernote1"></div>
                 </div>
               </div>
+              <button type="button" id="btnAdd" class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2">Add New Section</button>
+              
             </div>
+
 
           </div>
-
-          <!-- toasts -->
-          <div id="toastDiv" style="display: none;">
-            <!-- start error toast -->
-            <div class="toast fade" data-autohide="false" id="errorToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-danger">Error !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="errorToastBody">All fields are mandatory to save.</p>
-              </div>
-            </div>
-            <!-- end error toast -->
-
-            <!-- start success toast -->
-            <div class="toast fade" data-autohide="false" id="successToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-success">Success !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="successToastBody">Content has been saved successfully.</p>
-              </div>
-            </div>
-            <!-- end success toast -->
-
-          </div>
-
-          <!-- end toasts -->
-
 
           <!-- End Page Content -->
         </div>
@@ -223,6 +183,11 @@
 <script>
   $('#summernote').summernote({
     placeholder: 'Description',
+    tabsize: 2,
+    height: 200
+  });
+  $('#summernote1').summernote({
+    placeholder: 'Instruction',
     tabsize: 2,
     height: 200
   });
