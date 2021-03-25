@@ -56,6 +56,80 @@ $(document).ready(function () {
 
   let blooms_lvl = 0
   let i = 0;
+  let sectionIds = []
+  let section = '';
+  let marks = 0;
+
+
+
+  $('.typeSelect').on('change', function () {
+    const page = $('.typeSelect').val()
+    if (page == 2) {
+      window.location.href = `uploadQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${description}&isObj=true&qc=0`
+    }
+    if (page == 3) {
+      window.location.href = `addQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${description}&isObj=true&qc=0`
+    }
+  })
+
+
+
+
+  //get test details
+
+  getTestDetails(tId)
+  function getTestDetails(id) {
+    $.ajax({
+      url: `https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestDetails?test_id=${id}`,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+
+        console.log(result.data)
+
+        if (result.status == 200 && result.data) {
+          //let div = ""x
+          $.each(result.data.sections, function (key, value) {
+            sectionIds.push(value.id)
+
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '</label></div>')
+          });
+        }
+        // else {
+        //   $('#getUnits').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Units in this Course</h5></div</div>");
+        // }
+
+        section = sectionIds[0]
+        $('#section' + section).addClass('active')
+
+
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+  $(document).on('click', '.sectionLabel', function () {
+    $('#section' + section).removeClass('active')
+    section = $(this).data('id');
+    $('#section' + section).addClass('active')
+
+
+  })
+
+
+
+
+
+
+
+
+
+
 
 
   //units fetching
@@ -268,8 +342,6 @@ $(document).ready(function () {
 
   getAllQuestions()
   function getAllQuestions() {
-    //alert("fnjmf")
-    //$('.addingQues').empty()
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?grand_topic_ids=' + grandTopicsId + '&topic_ids=' + topicsId + '&sub_topic_ids=' + subTopicsId,
       type: 'GET',
@@ -280,7 +352,6 @@ $(document).ready(function () {
       success: function (result) {
         //alert(result.status);
         //alert(subSemId)
-
         $('.chooseQues').empty();
         //$('.addingQues').empty()
         if (result.status == 200 && result.data) {
@@ -986,6 +1057,7 @@ $(document).ready(function () {
 
 
   $('.addChosenQuestions').on('click', function () {
+    $('.totalQuestions').val(selectedQuestionsId.length)
     displaySelectedQuestions()
   })
 
@@ -1076,7 +1148,7 @@ $(document).ready(function () {
         },
         success: function (result) {
           // alert(result.message);
-          //console.log('4') 
+          console.log(result)
 
           if (result.status == 200) {
             new Notify({

@@ -422,6 +422,20 @@ height: 0.01rem;
   border: solid 1px #E25BC8;
 }
 
+.btn-secondary:active {
+  border-radius: 25px !important; 
+  background-color: white !important;
+  color: black !important;   
+  border: solid 1px #E25BC8 !important;
+}
+
+.btn-secondary:focus{
+  border-radius: 25px !important; 
+  background-color: white !important;
+  color: black !important;   
+  border: solid 1px #E25BC8 !important;
+}
+
 .btn-danger {
   background: #fff;
   border-radius: 56px;
@@ -1022,6 +1036,8 @@ scrollbar-width: none;  /* Firefox */
 .sectionLabel.active{
   background: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%) left bottom #f9f9f9 no-repeat; 
   background-size:100% 3px;
+  font-size: larger;
+  color: black;
 }
 
 

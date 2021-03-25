@@ -42,6 +42,76 @@ $(document).ready(function () {
   $('#courseName').append(tname)
 
 
+  let sectionIds = []
+  let section = '';
+
+
+
+  $('.typeSelect').on('change', function () {
+    const page = $('.typeSelect').val()
+    if (page == 1) {
+      window.location.href = `chooseQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${desc}&isObj=true&qc=0`
+    }
+    if (page == 3) {
+      window.location.href = `addQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${desc}&isObj=true&qc=0`
+    }
+  })
+
+
+
+
+  //get test details
+
+  getTestDetails(tId)
+  function getTestDetails(id) {
+    $.ajax({
+      url: `https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestDetails?test_id=${id}`,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+
+        console.log(result.data)
+
+        if (result.status == 200 && result.data) {
+          //let div = ""
+          $.each(result.data.sections, function (key, value) {
+            sectionIds.push(value.id)
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '</label></div>')
+          });
+        }
+        // else {
+        //   $('#getUnits').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Units in this Course</h5></div</div>");
+        // }
+
+        section = sectionIds[0]
+        $('#section' + section).addClass('active')
+
+
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+  $(document).on('click', '.sectionLabel', function () {
+    $('#section' + section).removeClass('active')
+    section = $(this).data('id');
+    $('#section' + section).addClass('active')
+
+
+  })
+
+
+
+
+
+
+
+
   //units fetching
   let unitsIds = []
 
