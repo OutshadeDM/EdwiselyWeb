@@ -45,15 +45,26 @@ $(document).ready(function () {
   
   $('#btnAdd').on('click',function(){
     i++;
-    $(".sections").append("<div class='section mt-4'>"+
+    $(".sections").append("<div class='section mt-4' id='section"+i+"'>"+
     "<div class='row mb-4'>"+
       "<div class='col-4'>"+
         "<label>Name</label>"+
         "<input class='form-control form-control-lg' type='text' id='section_name"+i+"'>"+
       "</div>"+
       "<div class='col-4'>"+
-        "<label>Marks</label>"+
-        "<input class='form-control form-control-lg' type='text' id='section_marks"+i+"'>"+
+        "<label>Marks</label><br>"+
+        "<select id='section_marks"+i+"' class='form-control' style='width=200px'>"+
+          "<option value='0.5'>0.5</option>"+
+          "<option value='1.0'>1.0</option>"+
+          "<option value='1.5'>1.5</option>"+
+          "<option value='2.0'>2.0</option>"+
+          "<option value='2.5'>2.5</option>"+
+          "<option value='3.0'>3.0</option>"+
+          "<option value='3.5'>3.5</option>"+
+          "<option value='4.0'>4.0</option>"+
+          "<option value='4.5'>4.5</option>"+
+          "<option value='5.0'>5.0</option>"+
+        "</select>"+
       "</div>"+
     "</div>"+
     "<label>Instructions</label>"+
@@ -64,7 +75,14 @@ $(document).ready(function () {
       tabsize: 2,
       height: 200
     });
-  })
+  });
+
+  $('#btnDeleteSection').on('click', function(){
+    if(i != 1){
+      $('#section'+i).remove();
+      i--;
+    }
+  });
 
   $('#createAssessmentBtn').on('click', function () {
 
@@ -73,7 +91,7 @@ $(document).ready(function () {
     const subject = $("#subject").find(":selected").val()
 
     const section_name1 = $('#section_name1').val();
-    const section_marks1 = $('#section_marks1').val();
+    const section_marks1 = $('#section_marks1').find(":selected").val();
     const section_instr1 = $($("#summernote1").summernote("code")).text();
 
     if (title && desc && subject && section_name1 && section_marks1 && section_instr1) {
@@ -84,7 +102,7 @@ $(document).ready(function () {
         sections.push({name:section_name1,marks:section_marks1,instructions:section_instr1});
         let index = 2;
         while (index <= i){
-          sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).val(),instructions: $($("#summernote"+index).summernote("code")).text()});
+          sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).find(":selected").val(),instructions: $($("#summernote"+index).summernote("code")).text()});
           index++;
         }
         console.log(sections);
@@ -92,7 +110,7 @@ $(document).ready(function () {
         form.append("name", title);
         form.append("description", desc);
         form.append("subject_id", subject);
-        form.append("sections", sections);
+        form.append("sections", JSON.stringify(sections));
         // for (var key of form.entries()) {
         //   alert(key[1]);
         // }
@@ -107,7 +125,7 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
           },
           success: function (result) {
-            //alert(result.message);
+            console.log(result);
             //console.log('4') 
 
             if (result.status == 200) {

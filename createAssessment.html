@@ -140,7 +140,7 @@
             <label class="col-form-label col-form-label-lg" for="desc-objective">Description</label>
             <div id="summernote"></div>
             <label class="col-form-label col-form-label-lg mt-2" for="subject">Subject</label><br>
-            <select id="subject">              
+            <select id="subject" class="form-control form-control-lg">              
             </select>
             <hr>
 
@@ -154,15 +154,27 @@
                       <input class="form-control form-control-lg" type="text" id="section_name1">
                     </div>
                     <div class="col-4">
-                      <label>Marks</label>
-                      <input class="form-control form-control-lg" type="text" id="section_marks1">
+                      <label>Marks</label><br>
+                      <select id='section_marks1' class="form-control form-control-lg" style="width: 200px;">
+                        <option value='0.5'>0.5</option>
+                        <option value='1.0'>1.0</option>
+                        <option value='1.5'>1.5</option>
+                        <option value='2.0'>2.0</option>
+                        <option value='2.5'>2.5</option>
+                        <option value='3.0'>3.0</option>
+                        <option value='3.5'>3.5</option>
+                        <option value='4.0'>4.0</option>
+                        <option value='4.5'>4.5</option>
+                        <option value='5.0'>5.0</option>
+                      </select>
                     </div>
                   </div>
                   <label>Instructions</label>
                   <div id="summernote1"></div>
                 </div>
               </div>
-              <button type="button" id="btnAdd" class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2">Add New Section</button>
+              <button type="button" id="btnAdd" class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2 mr-2 ">Add New Section</button>
+              <button type="button" id="btnDeleteSection" class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2">Delete Section</button>
               
             </div>
 

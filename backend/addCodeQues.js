@@ -81,7 +81,7 @@ $(document).ready(function () {
   }
 
   function getUnits() {
-    console.log('here');
+    // console.log('here');
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnits?subject_id=' + subject_id + '&university_degree_department_id=' + `${$user.university_degree_department_id}`,
       type: 'GET',
@@ -90,7 +90,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        console.log(result);
+        // console.log(result);
         if (result.status == 200) {
           $('#selectUnit').empty();
           $('#selectUnit').append("<option value='0' selected disabled>Unit</option>");
@@ -227,7 +227,7 @@ $(document).ready(function () {
       $('#questionId').val(questionId);
 
       const question = questions.filter(question1 => questionId == question1.id)[0];
-      console.log(question);
+      // console.log(question);
 
       $('#selectUnit').val("0");
 
@@ -466,8 +466,8 @@ $(document).ready(function () {
 
     if (title && marks && desc && topics.length > 0 && problem_id) {
       $('#editBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
-      const updated_question = questions_id.filter(question => question.id == problem_id);
-      console.log(updated_question);
+      const updated_question = questions.filter(question => question.id == problem_id)[0];
+      // console.log(updated_question);
 
       const form = new FormData();
       form.append("name", title);
@@ -489,7 +489,7 @@ $(document).ready(function () {
         },
         success: function (result) {
           $('#editBtn').html("Edit");
-          console.log(result);
+          // console.log(result);
           if (result.status == 200) {
             new Notify ({
                 title: 'Success',
@@ -498,17 +498,22 @@ $(document).ready(function () {
                 status: 'success',
                 autotimeout: 3000
             });
-            const test_cases = [];            
-            test_cases.push(objectCreator(input1, output1))
-            test_cases.push(objectCreator(input2, output2))
+            
+            if(updated_question.test_cases[0].input != $("#input1").val() || updated_question.test_cases[0].output != $("#output1").val())
+              updateTestCases(updated_question.id,updated_question.test_cases[0].id,$("#input1").val(),$("#output1").val(),$('#status1').prop('checked'))
+            
+            if(updated_question.test_cases[1].input != $("#input2").val() || updated_question.test_cases[1].output != $("#output2").val())
+              updateTestCases(updated_question.id,updated_question.test_cases[1].id,$("#input2").val(),$("#output2").val(),$('#status2').prop('checked'))
+            
+            if(updated_question.test_cases[2] && (updated_question.test_cases[2].input != $("#input3").val() || updated_question.test_cases[2].output != $("#output3").val()))
+              updateTestCases(updated_question.id,updated_question.test_cases[2].id,$("#input3").val(),$("#output3").val(),$('#status3').prop('checked'))
 
-            if ($("#input3").val() && $("#output3").val()) test_cases.push(objectCreator($("#input3").val(), $("#output3").val()))
-            if ($("#input4").val() && $("#output4").val()) test_cases.push(objectCreator($("#input4").val(), $("#output4").val()))
-            if ($("#input5").val() && $("#output5").val()) test_cases.push(objectCreator($("#input5").val(), $("#output5").val()))
-
-            // test_cases.forEach(function(test_case) {
-            //   updateTestCases(test_case.id,problem_id);
-            // })
+            if(updated_question.test_cases[3] && (updated_question.test_cases[3].input != $("#input4").val() || updated_question.test_cases[3].output != $("#output4").val()))
+              updateTestCases(updated_question.id,updated_question.test_cases[3].id,$("#input4").val(),$("#output4").val(),$('#status4').prop('checked'))
+            
+            if(updated_question.test_cases[4] && (updated_question.test_cases[4].input != $("#input5").val() || updated_question.test_cases[4].output != $("#output5").val()))
+              updateTestCases(updated_question.id,updated_question.test_cases[4].id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
+            
             clearAll();
             getQuestions(false);
           }
@@ -564,12 +569,17 @@ $(document).ready(function () {
     }
   });
 
-  function updateTestCases(test_case_id,problem_id){
+  function updateTestCases(problem_id,test_case_id,input,output,active){
     const form = new FormData();
     form.append("test_id",cid);
     form.append("problem_id",problem_id);
     form.append("test_case_id",test_case_id);
-    form.append("input",te)
+    form.append("input",input);
+    form.append("output",output);
+    form.append("active",active ? 1:0);
+    for (var key of form.entries()) {
+        console.log(key[1]);
+      }
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblem',
       type: 'POST',
@@ -581,13 +591,8 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        $('#editBtn').html("Edit");
         console.log(result);
-        if (result.status == 200) {
-          clearAll();
-          getQuestions(false);
-        }
-        else {
+        if (result.status != 200) {
           new Notify ({
               title: 'Error',
               text : result.message,
@@ -598,7 +603,6 @@ $(document).ready(function () {
         }
       },
       error: function (error) {
-        $('#editBtn').html("Edit");
         alert("Request Failed with status: " + error.status);
       }
     });
