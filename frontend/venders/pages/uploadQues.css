@@ -20,9 +20,8 @@
 
 .getUnitsLabel{
   color: gray;
-  cursor: pointer;
   border-bottom: solid 3px #1B658C;
-  border-image: linear-gradient(to right, #1B658C 50%, rgba(0,0,0,0) 50%);
+  border-image: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 30%);
   border-image-slice: 1;
 }
 
@@ -41,7 +40,7 @@ input[type="radio"]:checked+label{
 }
 
 .quesUploadLink{
-  height: 205px;
+  height: 60vh;
   border-radius: 15px;
   border: solid 1px #C0C0C0;
   background-color: white;
@@ -49,7 +48,7 @@ input[type="radio"]:checked+label{
 }
 
 .quesUploadLabel {
-  height: 187px;
+  padding: 190px 0px 0px 200px;
   text-align: center;
   cursor: pointer;
 }
@@ -66,60 +65,58 @@ input[type="radio"]:checked+label{
 
 #inputUpload {
   display: none;
-  }
-  
-  .custom-file-upload {
-  cursor: pointer;
-  font-size: large;
-  color: gray;
-  }
-  
-  .custom-file-upload:hover {
-  text-decoration: none;
-  font-size: large;
-  color: black;
-  }
-  
-  .uploadques{
+}
+
+.custom-file-upload {
+cursor: pointer;
+font-size: large;
+color: gray;
+}
+
+.custom-file-upload:hover {
+text-decoration: none;
+font-size: large;
+color: black;
+}
+
+.uploadques{
+text-align: center;
+height: 100vh;
+line-height: 100vh;
+font-size: large;
+}
+
+.uploadLinks {
+color: black;
+text-decoration: none;
+}
+
+.uploadLinks:hover {
+color: black;
+text-decoration: none;
+}
+
+.choose-subject{
+  height: 10vh;
+  background-color: white;
+  border: solid 1px rgb(206, 206, 206);
+  border-radius: 15px;
   text-align: center;
-  height: 100vh;
-  line-height: 100vh;
+}
+
+#subject-modal-div{
+  border-radius: 15px;
+}
+
+#subject-modal-div:hover {
+  background-color: white;
+}
+  
+.choose-subject span{
   font-size: large;
-  }
-  
-  .uploadLinks {
-  color: white;
-  text-decoration: none;
-  }
-  
-  .uploadLinks:hover {
-  color: white;
-  text-decoration: none;
-  }
+}
 
-  .choose-subject{
-    height: 205px;
-    padding-top: 65px;
-    background-color: white;
-    border: solid 1px rgb(206, 206, 206);
-    border-radius: 15px;
-    text-align: center;
-  }
-
-  #subject-modal-div{
-    border-radius: 15px;
-  }
-
-  #subject-modal-div:hover {
-    background-color: white;
-  }
-  
-  .choose-subject span{
-    font-size: large;
-  }
-
-
-  .fa-bars{
-    width: 80px;
-    color: rgb(34, 34, 34);
-  }
+.fa-bars{
+  width: 80px;
+  color: rgb(34, 34, 34);
+}

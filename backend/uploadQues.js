@@ -35,7 +35,8 @@ $(document).ready(function () {
   let unit = 0
   let topics = []
   let uploaded_question = ""
-  let questions = []
+  let selectedQuestions = []
+  let selectedQuestionsId = []
 
   //setting the name of test
   $('#courseName').append(tname)
@@ -186,19 +187,84 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //alert("hello");
+        //console.log(result);
 
         if (result.status == 200 && result.data) {
-          $.each(result.data, function (key, value) {
+          // $.each(result.data, function (key, value) {
 
-            if (!questions.includes(value.id)) {
-              questions.push(value.id);
+          //   if (!questions.includes(value.id)) {
+          //     questions.push(value.id);
+          //   }
+          //   console.log(questions)
+          // });
+          $('.addingQues').empty()
+
+          $.each(result.data, function (key, value) {
+            // alert(value.id);
+            //console.log(selectedQuestionsId)
+            if (!selectedQuestionsId.includes(value.id)) {
+              selectedQuestionsId.push(value.id);
+              //console.log(selectedQuestionsId)
             }
-            console.log(questions)
+            if (!selectedQuestions.includes(value)) {
+              selectedQuestions.push(value);
+            }
+
+            $('.chooseQuestionsInput').each(function () {
+              if (selectedQuestionsId.includes($(this).data('id'))) {
+                $(this).prop('checked', true)
+              }
+            })
 
           });
 
+          //displaying the already selected questions
+          for (let i = 0; i < selectedQuestions.length; i++) {
+
+
+
+            $('.addingQues').append("<div class='row'>" +
+              "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q).</div>" +
+
+              "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
+              selectedQuestions[i].name + "</div>" +
+
+              "<div class='modal fade chosenQuestionModal" + selectedQuestions[i].id + "' tabindex='-1' role='dialog' aria-labelledby='chosenModalLabel' aria-hidden='true'>" +
+              "<div class='modal-dialog' role='document'>" +
+              "<div class='modal-content'>" +
+
+              "<div class='modal-body'>" +
+              "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
+              (selectedQuestions[i].question_img == " " ? "" : "<div class='text-center py-2'><a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].question_img + "&type=img'><img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img></a></div>") +
+              (selectedQuestions[i].questions_options[0] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[0].name)) + "</div>" : "") +
+              (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[0].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[1] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[1].name)) + "</div>" : "") +
+              (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[1].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[1].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[1].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[2] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[2].name)) + "</div>" : "") +
+              (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[2].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[2].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[2].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[3] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[3].name)) + "</div>" : "") +
+              (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[3].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[3].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[3].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[4] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[4].name)) + "</div>" : "") +
+              (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[4].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[4].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[4].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+
+              (selectedQuestions[i].hint ? "<div style='font-size:12px;'>Hint :" + selectedQuestions[i].hint + "</div>" : "") +
+              (selectedQuestions[i].hint_image ? "<div class='text-center py-2'><a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].hint_image + "&type=img'><img src='" + selectedQuestions[i].hint_image + "' alt='img' style='width:100px; height:75px;'></img></a></div>" : "") +
+              (selectedQuestions[i].solution == "" ? "" : "<br> Solution : <div style='font-size:12px;'>" + selectedQuestions[i].solution + "</div>") +
+              (selectedQuestions[i].solution_image == "" ? "" : "<div class='text-center py-2'><a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].solution_image + "&type=img'><img src='" + selectedQuestions[i].solution_image + "' alt='img' style='width:100px; height:75px;'></img></a></div>") +
+              "</div>" +
+
+              "</div>" +
+              "</div>" +
+              "</div>" +
+              "</div>")
+
+          }
+
+
+          //console.log(selectedQuestions)
+
         }
+
       },
       error: function (error) {
         alert("Request Failed with status: " + error.status);
@@ -269,12 +335,12 @@ $(document).ready(function () {
                 // alert(result.message);
 
                 if (result.status == 200) {
-                  new Notify ({
-                      title: 'Success',
-                      text : "Questions Uploaded Successfully",
-                      autoclose: true,
-                      status: 'success',
-                      autotimeout: 3000
+                  new Notify({
+                    title: 'Success',
+                    text: "Questions Uploaded Successfully",
+                    autoclose: true,
+                    status: 'success',
+                    autotimeout: 3000
                   });
 
                   setTimeout(() => {
@@ -292,21 +358,21 @@ $(document).ready(function () {
 
           }
           else if (result.status == 500) {
-            new Notify ({
-                title: 'Error',
-                text : result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Error',
+              text: result.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
             });
           }
           else {
-            new Notify ({
-                title: 'Error',
-                text : "Fill the Details",
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Error',
+              text: "Fill the Details",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
             });
           }
         },
@@ -316,12 +382,12 @@ $(document).ready(function () {
       });
     }
     else {
-      new Notify ({
-          title: 'Error',
-          text : "Fill the Details",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Fill the Details",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
 
