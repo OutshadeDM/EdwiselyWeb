@@ -12,7 +12,7 @@ $(document).ready(function () {
   let questionsList = [];
   let questions = [];
 
-  let searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(window.location.search);
   let subSemId = "0";
   let tId = "0";
   let unit_id = "0";
@@ -71,11 +71,14 @@ $(document).ready(function () {
 
   let type = 'public';
   let answer = '';
-
-
+  
+  let sectionMarks = 0
+  let section = 0;
   //initially hiding the hint and solution divs
   $('#hintDiv').hide();
   $('#hintBtn').show();
+  $('#sourceBtn').show();
+  $('#sourceDiv').hide();
   $('#solutionDiv').hide();
   $('#solutionBtn').show();
   $('#fifth').hide();
@@ -83,6 +86,11 @@ $(document).ready(function () {
   //hiding edit btn
   $('#editBtn').hide();
   $('#addNewBtn').hide();
+
+  $('#sourceBtn').on('click', function () {
+    $('#sourceDiv').show();
+    $('#sourceBtn').hide();
+  })
 
   //on click of hint btn
   $('#hintBtn').on('click', function () {
@@ -124,6 +132,54 @@ $(document).ready(function () {
 
   // radios for selecting
   $('.tick').hide();
+  
+  getTestDetails()
+  function getTestDetails() {
+    $.ajax({
+      url: `https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestDetails?test_id=${tId}`,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        // console.log(result.data)
+        if (result.status == 200 && result.data) {
+          $.each(result.data.sections, function (key, value) {
+            // sectionIds.push(value.id)
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' data-marks='+value.marks+' id="section' + value.id + '">' + value.name + '</label></div>')
+          });
+          section = result.data.sections[0].id;
+          sectionMarks = result.data.sections[0].marks;
+          // console.log(section)
+          $('#section' + section).addClass('active')
+          refreshQuestions();
+        }        
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+  $(document).on('click', '.sectionLabel', function () {
+    $('#section' + section).removeClass('active')
+    section = $(this).data('id');
+    sectionMarks = $(this).data('marks');
+    $('#section' + section).addClass('active')
+    clearAll(true);
+    refreshQuestions();
+  })
+
+  $('.typeSelect').on('change', function () {
+    const page = $('.typeSelect').val()
+    if (page == 2) {
+      window.location.href = `uploadQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0`
+    }
+    if (page == 1) {
+      window.location.href = `chooseQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0`
+    }
+  })
 
   getTopics();
 
@@ -139,6 +195,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
+          // console.log(result)
 
           $('#topicTags').empty();
           if (result.status == 200 && result.data) {
@@ -204,8 +261,6 @@ $(document).ready(function () {
   }
 
 
-  refreshQuestions();
-
   function refreshQuestions() {
     if (tId != "0") {
       questions = [];
@@ -218,7 +273,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-
+          console.log(result);
           if (result.status == 200 && result.data) {
             $('.initData').remove();
 
@@ -226,6 +281,7 @@ $(document).ready(function () {
               questionsList.push(value.id);
               questions.push(value);
             });
+            // console.log(questions);
 
             loadList();
           }
@@ -235,21 +291,26 @@ $(document).ready(function () {
         }
       });
     }
-
   }
 
-
   function loadList() {
-    $("#addquesDiv").empty();
-    let i = 1;
-
-    $.each(questions, function (key, value) {
-      // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
-      $('#addquesDiv').append("<div class='row'>" +
-        "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
-        "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
-    });
-    MathJax.typesetPromise();
+    console.log(questions);
+    if(questions.length > 0){
+      $("#addquesDiv").empty();
+      let i = 1;
+      $.each(questions, function (key, value) {
+        // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
+        if(value.section_id == section || !value.section_id){
+          $('#addquesDiv').append("<div class='row'>" +
+            "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+            "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
+        }
+      });
+      $("#questionNo").val(i-1);
+      $("#totalMarks").val((i-1)*sectionMarks);
+      // console.log(i,i*sectionMarks)
+      MathJax.typesetPromise();
+    }
   }
 
 
@@ -577,7 +638,7 @@ $(document).ready(function () {
     answer = $('input[name=Radios]:checked').val();
   })
 
-  // //to select multiple values of selected checkboxes
+  //to select multiple values of selected checkboxes
 
   $(document).on('click', '.topicTagsInput', function () {
 
@@ -605,7 +666,7 @@ $(document).ready(function () {
     difficulty_level = $('#selectLevel').val();
 
     if (topics != null && topics.length > 0 && (option1 || option1_img_url) && (option2 || option2_img_url)
-      && bloom_level && difficulty_level && source && answer && question && type) {
+      && bloom_level && difficulty_level && source && answer && question && type && section) {
 
       //saving in array
       options.push("" + option1 + "")
@@ -620,7 +681,7 @@ $(document).ready(function () {
         options.push("" + option5 + "")
       }
 
-      var form = new FormData();
+      const form = new FormData();
       form.append("question", question);
       form.append("topics", JSON.stringify(topics))
       form.append("options", "[" + '"' + options.join('","') + '"' + "]");
@@ -640,6 +701,7 @@ $(document).ready(function () {
       form.append("option5_img", option5_img);
       form.append("solution", solution);
       form.append("hint_img", hint_img);
+      form.append("section_id", section);
 
       $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
         position: "absolute",
@@ -662,7 +724,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-
+          console.log(result);
           if (result.status == 200) {
             $('#loadingDiv').remove();
             new Notify ({
@@ -828,8 +890,10 @@ $(document).ready(function () {
     }
     $('#solutionDiv').hide();
     $('#hintDiv').hide();
+    $('#sourceDiv').hide();
     $('#solutionBtn').show();
     $('#hintBtn').show()
+    $('#sourceBtn').show()
     $('#questionId').val("");
 
     $('#uploadedoption1').click();
@@ -873,13 +937,16 @@ $(document).ready(function () {
 
   }
 
-
-  $("#btnSave").click(function () {
-    saveQuestions(false);
+  $("#btnSave").on('click',function () {
+    window.location.href = 'myAssesments.html';
   });
 
-  $("#btnSaveSend").click(function () {
+  $("#btnSaveSend").on('click',function () {
     saveQuestions(true);
+  });
+
+  $("#saveSection").on('click', function(){
+    saveQuestions(false);
   });
 
   function saveQuestions(isSend) {
@@ -899,6 +966,7 @@ $(document).ready(function () {
       form.append("test_id", tId);
       form.append("questions", JSON.stringify(questionsList));
       form.append("units", "[" + unit_id + "]");
+      form.append("section_id", section);
 
       // console.log(tId,questionsList,unit_id)
       // for (var key of form.entries()) {
@@ -929,12 +997,11 @@ $(document).ready(function () {
             // $('#successToast').toast('show');
             $('#loadingDiv').remove();
             $("input.custom-control-input").attr("disabled", false);
-            setTimeout(function () {
-              if (!isSend)
-                window.location.href = "myAssessment.html";
-              else
+            if (isSend){
+              setTimeout(function () {
                 window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&uid=" + unit_id + "&isObj=true&qc=" + questions.length;
-            }, 2000);
+              }, 2000);
+            }
           }
           else {
             $('#loadingDiv').remove();
@@ -1081,6 +1148,8 @@ $(document).ready(function () {
     }
 
     if (value.source) {
+      $('#sourceDiv').show();
+      $('#sourceBtn').hide();
       $('#sourceInput').val(value.source);
       source = value.source;
     }
@@ -1271,21 +1340,16 @@ $(document).ready(function () {
   //delete btn
   $("#deleteBtn").click(function () {
 
-    let questionId = $('#questionId').val()
+    const questionId = $('#questionId').val()
 
     if (questionId && questionId != "0") {
-
       questions = $.grep(questions, function (e) {
         return e.id != questionId;
       });
-
       questionsList.splice($.inArray("abc", questionsList), 1);
-
       loadList();
       clearAll(true);
-
     }
-
   });
 
   $("#addNewBtn").click(function () {
@@ -1327,7 +1391,6 @@ $(document).ready(function () {
       if (topics.length > 0)
         newQuestion.topics_details = topics;
       newQuestion.solution = $('#solutionInput').val();
-
 
       if ((newQuestion.question_img && !question_img_url) || question_img) {
         newQuestion.question_img = "";
@@ -1592,10 +1655,10 @@ $(document).ready(function () {
         });
       }
       else {
-        if (topics == null || !topics || topics.length == "0")
+        if (!question)
           new Notify ({
             title: 'Error',
-            text : "Please Select Topics",
+            text : "Please enter Question",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -1608,18 +1671,18 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
           });
-        else if (!bloom_level)
+        else if (topics == null || !topics || topics.length == "0")
           new Notify ({
             title: 'Error',
-            text : "Please Select Bloom Level value",
+            text : "Please Select Topics",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
-        else if (!question)
+        else if (!bloom_level)
           new Notify ({
             title: 'Error',
-            text : "Please enter Question",
+            text : "Please Select Bloom Level value",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -1648,8 +1711,7 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
           });
-        else if (topics != null && newOptions.length >= 2 && bloom_level && difficulty_level
-          && answer && question && type)
+        else
           new Notify ({
             title: 'Error',
             text : "Some fields are mandatory",
@@ -1658,9 +1720,7 @@ $(document).ready(function () {
             autotimeout: 3000
           });
       }
-
     }
-
   });
 
 });

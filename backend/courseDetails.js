@@ -42,7 +42,7 @@ $(document).ready(function () {
             },
             success: function (result) {
                 $('#courseClass').empty();
-                console.log(result)
+                // console.log(result)
                 if (result.status == 200 && result.message != "No data to fetch") {
 
                     if (result.data.sections != "" && result.data.sections) {
@@ -587,57 +587,60 @@ $(document).ready(function () {
                     div = div + "<div class='col-sm-1 d-flex justify-content-end'>";
                     switch (value.type) {
                         case "DOCS":
-                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-pdf.svg' width='20'/>";
                             fileType = "doc";
                             break;
                         case "PDF":
-                            div = div + "<i class='fa fa-file-pdf fa-2x' aria-hidden='true'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-pdf.svg' width='20'/>";
                             fileType = "pdf";
                             break;
                         case "VIDEO":
-                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-video.svg' width='20'/>";
                             fileType = "video";
                             break;
                         case "MP4":
-                            div = div + "<i class='fas fa-file-video fa-2x'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-video.svg' width='20'/>";
                             fileType = "mp4";
                             break;
                         case "PPT":
-                            div = div + "<i class='fas fa-file-powerpoint fa-2x'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-pdf.svg' width='20'/>";
                             fileType = "ppt";
                             break;
                         case "URL":
-                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-url.svg' width='20'/>";
                             fileType = "url";
                             break;
                         default:
-                            div = div + "<i class='fas fa-file-alt fa-2x'></i>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-url.svg' width='20'/>";
                             fileType = "url";
                     }
                     div = div + "</div>";
-                    div = div + "<div class='col-sm-9 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-type='"+fileType+"' data-url='" + value.url + "'>";
+                    div = div + "<div class='col-sm-8 d-flex justify-content-start align-middle download' style='cursor:pointer;' data-type='"+fileType+"' data-url='" + value.url + "'>";
                     div = div + "<h6>" + value.title + "</h6>";
                     div = div + "</div>";
-                    div = div + "<div class='col-sm-2 d-flex justify-content-end'>";
+                    div = div + "<div class='col-sm-3 d-flex align-items-center justify-content-end pr-4'>";
                     if(value.learning_content == "1" || value.bookmarked == "0" || value.bookmarked == "1"){
-                        div = div + "<div class='dropdown pr-1'>";
-                        div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-                        div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
-                        div = div + "</button>";
-                        div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-                        if (value.learning_content == "1" && value.display_type == "private")
-                            div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
-
-                        let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
+                        
+                        // div = div + "<div class='dropdown pr-1'>";
+                        // div = div + "<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+                        // div = div + "<i class='fa fa-cog' aria-hidden='true'></i>";
+                        // div = div + "</button>";
+                        // div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+                        if (value.learning_content == "1" && value.display_type == "private"){
+                            div += "<a class='pr-4' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'><i class='fas fa-edit'></i></a>";
+                            // div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
+                            div += "<a class='pr-4 deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'><i class='fas fa-trash-alt'></i></a>";
+                        }
+                
+                            let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
                         if (value.bookmarked == "0")
-                            div = div + "<a class='dropdown-item bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>Bookmark</a>";
+                            div += "<a class='pr-4 bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='far fa-bookmark'></i></a>";
                         else if(value.bookmarked == "1")
-                            div = div + "<a class='dropdown-item unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'>UnBookmark</a>";
-                        if (value.learning_content == "1" && value.display_type == "private")
-                            div = div + "<a class='dropdown-item deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'>Delete</a>";
-                        div = div + "</div></div>";    
+                            div += "<a class='pr-4 unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='fas fa-bookmark'></i></a>";
+                            // div = div + "<a >UnBookmark</a>";
+                        // div = div + "</div></div>";    
                     }
-                    div = div + "</div></div>";
+                    div = div + "</div></div><hr>";
                 }
             });
             if (div)
@@ -930,10 +933,10 @@ $(document).ready(function () {
                 success: function (result) {
                     if (result.status == 200) {
                         new Notify ({
-                            title: 'Error',
+                            title: 'Success',
                             text : 'Bookmarked SuccessFully',
                             autoclose: true,
-                            status: 'error',
+                            status: 'success',
                             autotimeout: 3000
                         });
                         if (content == "nav")
@@ -1061,7 +1064,7 @@ $(document).ready(function () {
                             title: 'Success',
                             text : 'Material Content Deleted SuccessFully',
                             autoclose: true,
-                            status: 'error',
+                            status: 'success',
                             autotimeout: 3000
                         });
                         $("#nav-content-tab").click();
@@ -1537,6 +1540,8 @@ $(document).ready(function () {
                 opacity: 0.7
             }).appendTo($("#objQuestions"));
 
+            console.log(subject_id,unit_id)
+
             $.ajax({
                 url: 'https://stagingfacultypython.edwisely.com/questions/getUnitObjectiveQuestions?subject_id=' + subject_id + '&unit_id=' + unit_id,
                 type: 'GET',
@@ -1545,6 +1550,7 @@ $(document).ready(function () {
                     'Authorization': `Bearer ${$user.token}`
                 },
                 success: function (result) {
+                    console.log(result)
                     if (result.status == 200 && Array.isArray(result.data) && result.data.length) {
 
                         processObjQuestions(result, questionBloomsLevel, questionTopics, questionCatagory, false);
@@ -1698,6 +1704,7 @@ $(document).ready(function () {
     let questions = [];
 
     function processObjQuestions(result = [], questionBloomsLevel, questionTopics, questionCatagory, yourContent) {
+        console.log(result)
         questions = [];
         $.each(result.data, function (key, value) {
             if (!yourContent) {

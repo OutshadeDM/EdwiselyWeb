@@ -111,16 +111,21 @@
         <div class="navContainer">
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-            Courses</a></div>
+              Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
-          <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
-              href="myAssessment.html">Assessments</a></div>
+          <div class="pl-4 py-3 sidebarLinks active">
+            <a class="sidebarNav" href="myAssessment.html">
+              <div class="row no-gutters">
+                <div class="col-10">Assessments</div>
+                <div class="col-2"><i class="fas fa-caret-right"></i></div>
+              </div>
+            </a>
+          </div>
           <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
               Class</a></div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav"
-              href="myAssessment.html">Feedback</a></div>
+          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html">Feedback</a></div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="createCoding.html">Coding Assessment</a></div>
           <div class="text-center py-3" id="logoutNav" onclick="logout();">
             <b><img src="frontend/images/logout.png" class="px-2" />Logout
@@ -162,7 +167,28 @@
                           <div class="col-2">29/08/1654</div>
                           <div class="col-2">Test Name</div>
                           <div class="col-2">Programming Laws  <img src="frontend/images/info.svg" alt="No Image" width="10" /></div>
-                          <div class="col-2 d-flex justify-content-center"><img src="frontend/images/questionmark.svg" alt="No Image" width="10" />&emsp;8</div>
+                          <!-- <div class="col-2 d-flex justify-content-center"><img src="frontend/images/questionmark.svg" alt="No Image" width="10" />&emsp;8</div> -->
+                          <div class="col-2 d-flex justify-content-center">8</div>
+                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-secondary btn-block mt-3 px-4 py-2">edit</button></div>
+                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">Send</button></div>
+                      </div>
+                  </li>
+                  <li class="list-group-item">
+                      <div class="row no-gutters d-flex align-items-center justify-content-center">
+                          <div class="col-2">29/08/1654</div>
+                          <div class="col-2">Test Name</div>
+                          <div class="col-2">Programming Laws  <img src="frontend/images/info.svg" alt="No Image" width="10" /></div>
+                          <div class="col-2 d-flex justify-content-center">8</div>
+                          <div class="col-2 d-flex justify-content-center"><a style="cursor: pointer;color: blue;" id="sourceBtn"><i class="fas fa-edit"></i> edit</a></div>
+                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">Send</button></div>
+                      </div>
+                  </li>
+                  <li class="list-group-item">
+                      <div class="row no-gutters d-flex align-items-center justify-content-center">
+                          <div class="col-2">29/08/1654</div>
+                          <div class="col-2">Test Name</div>
+                          <div class="col-2">Programming Laws  <img src="frontend/images/info.svg" alt="No Image" width="10" /></div>
+                          <div class="col-2 d-flex justify-content-center">8</div>
                           <div class="col-2 d-flex justify-content-center"><button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2">edit</button></div>
                           <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">Send</button></div>
                       </div>
@@ -172,27 +198,7 @@
                           <div class="col-2">29/08/1654</div>
                           <div class="col-2">Test Name</div>
                           <div class="col-2">Programming Laws  <img src="frontend/images/info.svg" alt="No Image" width="10" /></div>
-                          <div class="col-2 d-flex justify-content-center"><img src="frontend/images/questionmark.svg" alt="No Image" width="10" />&emsp;8</div>
-                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2">edit</button></div>
-                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">Send</button></div>
-                      </div>
-                  </li>
-                  <li class="list-group-item">
-                      <div class="row no-gutters d-flex align-items-center justify-content-center">
-                          <div class="col-2">29/08/1654</div>
-                          <div class="col-2">Test Name</div>
-                          <div class="col-2">Programming Laws  <img src="frontend/images/info.svg" alt="No Image" width="10" /></div>
-                          <div class="col-2 d-flex justify-content-center"><img src="frontend/images/questionmark.svg" alt="No Image" width="10" />&emsp;8</div>
-                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2">edit</button></div>
-                          <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">Send</button></div>
-                      </div>
-                  </li>
-                  <li class="list-group-item">
-                      <div class="row no-gutters d-flex align-items-center justify-content-center">
-                          <div class="col-2">29/08/1654</div>
-                          <div class="col-2">Test Name</div>
-                          <div class="col-2">Programming Laws  <img src="frontend/images/info.svg" alt="No Image" width="10" /></div>
-                          <div class="col-2 d-flex justify-content-center"><img src="frontend/images/questionmark.svg" alt="No Image" width="10" />&emsp;8</div>
+                          <div class="col-2 d-flex justify-content-center">8</div>
                           <div class="col-2 d-flex justify-content-center"><button class="btn btn-white shadow-sm btnLink mt-3 px-4 py-2">edit</button></div>
                           <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">Send</button></div>
                       </div>

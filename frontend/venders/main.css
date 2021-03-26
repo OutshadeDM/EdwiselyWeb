@@ -715,13 +715,15 @@ font-size: medium;
 
 #hintBtn {
 border: none;
+color: gray;
 }
 #solutionBtn {
 border: none;
+color: gray;
 }
-#plusBtn {
-border: none;
+/* #plusBtn {
 }
+border: none; */
 
 #sourceInput {
 height: 50px;

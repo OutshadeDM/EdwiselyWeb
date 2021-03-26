@@ -117,7 +117,6 @@ $(document).ready(function () {
 
   $('#selectUnit').on('change', function () {
     const unit = $(this).find(':selected').val()
-    // console.log(unit)
     getTopics(unit)
   })
 
@@ -151,8 +150,6 @@ $(document).ready(function () {
           $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
           //alert("here");
         }
-
-
       },
       error: function (error) {
         alert("Request Failed with status: " + error.status);
