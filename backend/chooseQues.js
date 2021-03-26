@@ -58,7 +58,7 @@ $(document).ready(function () {
   let i = 0;
   let sectionIds = []
   let section = '';
-  let marks = 0;
+  let sectionMarks = 0;
 
 
 
@@ -95,7 +95,7 @@ $(document).ready(function () {
           $.each(result.data.sections, function (key, value) {
             sectionIds.push(value.id)
 
-            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '</label></div>')
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '</label></div>')
           });
         }
         // else {
@@ -103,7 +103,10 @@ $(document).ready(function () {
         // }
 
         section = sectionIds[0]
+        sectionMarks = $('#section' + section).data('marks')
         $('#section' + section).addClass('active')
+        questionsOfTest(section)
+
 
 
       },
@@ -116,7 +119,18 @@ $(document).ready(function () {
   $(document).on('click', '.sectionLabel', function () {
     $('#section' + section).removeClass('active')
     section = $(this).data('id');
+    sectionMarks = $(this).data('marks')
     $('#section' + section).addClass('active')
+
+    selectedQuestionsId = []
+    selectedQuestions = []
+
+    $('.chooseQuestionsInput').each(function () {
+      $(this).prop('checked', false)
+    })
+
+    questionsOfTest(section)
+
 
 
   })
@@ -867,7 +881,6 @@ $(document).ready(function () {
 
   })
 
-
   $('#navRemember').on('click', function () {
     //selectedQuestionsId = []
     //selectedQuestions = []
@@ -933,8 +946,7 @@ $(document).ready(function () {
 
 
   //adding pre addded questions
-  questionsOfTest()
-  function questionsOfTest() {
+  function questionsOfTest(section) {
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
       type: 'GET',
@@ -943,42 +955,42 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // alert(result.message);
+        console.log(result)
+        console.log(section)
+
 
         if (result.status == 200 && result.data) {
           $('.addingQues').empty()
 
           $.each(result.data, function (key, value) {
-            // alert(value.id);
-            //console.log(selectedQuestionsId)
-            if (!selectedQuestionsId.includes(value.id)) {
-              selectedQuestionsId.push(value.id);
-              //console.log(selectedQuestionsId)
-            }
-            if (!selectedQuestions.includes(value)) {
-              selectedQuestions.push(value);
-            }
-            //console.log(selectedQuestionsId)
 
-            $('.chooseQuestionsInput').each(function () {
-              if (selectedQuestionsId.includes($(this).data('id'))) {
-                $(this).prop('checked', true)
+            if (value.section_id == section) {
+
+              if (!selectedQuestionsId.includes(value.id)) {
+                selectedQuestionsId.push(value.id);
               }
-            })
+
+              if (!selectedQuestions.includes(value)) {
+                selectedQuestions.push(value);
+              }
+
+              $('.chooseQuestionsInput').each(function () {
+                if (selectedQuestionsId.includes($(this).data('id'))) {
+                  $(this).prop('checked', true)
+                }
+              })
+
+            }
 
           });
 
-          //$('.addingQues').empty()
-          //alert("hello")
-          //displaying the already selected questions
-          //console.log(selectedQuestions)
+          let num = 1;
           for (let i = 0; i < selectedQuestions.length; i++) {
 
 
 
-            //console.log(selectedQuestions[i].questions_options[0].name)
             $('.addingQues').append("<div class='row'>" +
-              "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q).</div>" +
+              "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + num++ + "</div>" +
 
               "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
               selectedQuestions[i].name + "</div>" +
@@ -989,17 +1001,17 @@ $(document).ready(function () {
 
               "<div class='modal-body'>" +
               "<div class='pb-4'>" + selectedQuestions[i].name + "</div>" +
-              (selectedQuestions[i].question_img == " " ? "" : "<div class='text-center py-2'><a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].question_img + "&type=img'><img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img></a></div>") +
+              (selectedQuestions[i].question_img == "" ? "" : "<div class='text-center py-2'><a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].question_img + "&type=img'><img src='" + selectedQuestions[i].question_img + "' alt='img' style='width:100px; height:75px;'></img></a></div>") +
               (selectedQuestions[i].questions_options[0] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[0].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "1.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[0].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[0].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[0] ? (selectedQuestions[i].questions_options[0].option_img == "" ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[0].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[0].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
               (selectedQuestions[i].questions_options[1] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[1].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "2.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[1].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[1].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[1].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[1].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[1] ? (selectedQuestions[i].questions_options[1].option_img == "" ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[1].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[1].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
               (selectedQuestions[i].questions_options[2] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[2].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "3.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[2].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[2].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[2].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[2].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[2] ? (selectedQuestions[i].questions_options[2].option_img == "" ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[2].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[2].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
               (selectedQuestions[i].questions_options[3] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[3].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "4.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[3].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[3].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[3].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[3].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[3] ? (selectedQuestions[i].questions_options[3].option_img == "" ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[3].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[3].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
               (selectedQuestions[i].questions_options[4] ? "<div class='py-1' style='" + (selectedQuestions[i].questions_options[4].is_answer == 1 ? "background-color:#B4F7D6" : "background-color:#FFFFFF") + "'>" + "5.) " + JSON.parse(JSON.stringify(selectedQuestions[i].questions_options[4].name)) + "</div>" : "") +
-              (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[4].option_img == " " ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[4].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[4].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
+              (selectedQuestions[i].questions_options[4] ? (selectedQuestions[i].questions_options[4].option_img == "" ? "" : "<a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].questions_options[4].option_img + "&type=img'><img src='" + selectedQuestions[i].questions_options[4].option_img + "' style='width:100px; height:75px;' alt='img'></img></a>") : "") +
 
               (selectedQuestions[i].hint ? "<div style='font-size:12px;'>Hint :" + selectedQuestions[i].hint + "</div>" : "") +
               (selectedQuestions[i].hint_image ? "<div class='text-center py-2'><a target='_blank' href='viewFile.html?url=" + selectedQuestions[i].hint_image + "&type=img'><img src='" + selectedQuestions[i].hint_image + "' alt='img' style='width:100px; height:75px;'></img></a></div>" : "") +
@@ -1013,9 +1025,6 @@ $(document).ready(function () {
               "</div>")
 
           }
-
-
-          //console.log(selectedQuestions)
 
         }
         MathJax.typesetPromise();
@@ -1058,6 +1067,7 @@ $(document).ready(function () {
 
   $('.addChosenQuestions').on('click', function () {
     $('.totalQuestions').val(selectedQuestionsId.length)
+    $('.totalMarks').val(selectedQuestionsId.length * sectionMarks)
     displaySelectedQuestions()
   })
 
@@ -1114,7 +1124,7 @@ $(document).ready(function () {
     }
   }
 
-  $('#btnSave').on('click', function () {
+  $('.saveToSectionBtn').on('click', function () {
     if (selectedQuestions.length == 0) {
       new Notify({
         title: 'Error',
@@ -1131,9 +1141,10 @@ $(document).ready(function () {
       form.append("test_id", tId);
       form.append("questions", "[" + selectedQuestionsId.join(',') + "]");
       form.append("units", "[" + unit + "]")
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
+      form.append("section_id", section)
+      for (var key of form.entries()) {
+        alert(key[1]);
+      }
 
 
       $.ajax({
@@ -1159,12 +1170,10 @@ $(document).ready(function () {
               autotimeout: 3000
             });
 
-            //   setInterval(function () {
-            //     window.location.replace('myAssessment.html');
-            //   }, 2000)
-            setTimeout(() => {
-              window.location.href = "myAssessment.html"
-            }, 2000)
+
+            // setTimeout(() => {
+            //   window.location.href = "myAssessment.html"
+            // }, 2000)
           }
           else {
             new Notify({
