@@ -37,7 +37,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // console.log(result)
+        console.log(result)
         if (result.status == 200) {
           questions = []
           questions_id = []

@@ -7,7 +7,7 @@ $(document).ready(function () {
 	} else {
 		window.location.replace("login.html");
     }
-
+    
     $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTests',
         type: 'GET',
@@ -28,7 +28,6 @@ $(document).ready(function () {
           alert("Request Failed with status: " + error.status);
         }
     });
-
 
     function displayCards(data = []){
         let currDate = parseInt(new Date().getDate() < 10 ? "0" + new Date().getDate() : new Date().getDate().toString())
@@ -55,9 +54,7 @@ $(document).ready(function () {
 
             let isEdit = false;
             
-
-            if (testYear == currYear) {
-                
+            if (testYear == currYear) {                
                 if (testMonth > currMonth) {
                     isEdit = true;
                 }
@@ -84,16 +81,19 @@ $(document).ready(function () {
 
             div = div + "<li class='list-group-item objective'>";
             div = div + "<div class='row no-gutters d-flex align-items-center justify-content-center'>";
-            if(startTime)
-                div += "<div class='col-2'>"+startTime+"</div>";
+            if(value.start_time)
+                div += "<div class='col-2'>"+value.start_time.substring(0,10)+"</div>";
             else
-                div += "<div class='col-2'>"+value.created_at+"</div>"
-            div += "<div class='col-2 d-flex justify-content-center'>"+value.name+"</div>"
-            if (value.description.length > 5)
-                div += "<div class='col-2 d-flex justify-content-center'>" + value.description.substr(0, 5) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
+                div += "<div class='col-2'>"+value.created_at.substring(0,10)+"</div>"
+            if(value.name.length > 15)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.name+"'>"+value.name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
+            else
+                div += "<div class='col-2 d-flex justify-content-center'>"+value.name+"</div>"
+            if(value.description.length > 10)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.description+"'>" + value.description.substr(0, 10) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
             else
                 div += "<div class='col-2 d-flex justify-content-center'>" + value.description + "</div>";
-            div += "<div class='col-2 d-flex justify-content-center'>"+value.questions_count+"</div>";
+            div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='No of questions'>"+value.questions_count+"</div>";
             // 5th column
             // console.log(isSmall)
             if (value.doe == "" && !value.sent && !value.questions_count)
@@ -117,6 +117,7 @@ $(document).ready(function () {
         });
 
         $("#assessmentList").append(div);
+        $('[data-toggle="tooltip"]').tooltip();
     }
     
 });

@@ -170,3 +170,8 @@ pre
     max-height: 70vh;
     align-items: center;
 }
+
+.bookmark,.unbookmark,.deleteContent,.openContent{
+    color: black;
+    text-decoration: none !important;
+}

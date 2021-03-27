@@ -627,7 +627,7 @@ $(document).ready(function () {
                         // div = div + "</button>";
                         // div = div + "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
                         if (value.learning_content == "1" && value.display_type == "private"){
-                            div += "<a class='pr-3' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'><i class='fas fa-edit'></i></a>";
+                            div += "<a class='pr-3 openContent' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'><i class='fas fa-edit'></i></a>";
                             // div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
                             div += "<a class='pr-3 deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'><i class='fas fa-trash-alt'></i></a>";
                         }
@@ -638,7 +638,7 @@ $(document).ready(function () {
                         else if(value.bookmarked == "1")
                             div += "<a class='pr-3 unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='fas fa-bookmark'></i>&nbsp;Unbookmark</a>";
                         
-                        div += "<a class='pr-3' href='#' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Open&nbsp;<img class='img-responsive' src='frontend/images/right-arrow.svg' /></a>";
+                        div += "<a class='pr-3 openContent' href='#' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Open&nbsp;<img class='img-responsive' src='frontend/images/right-arrow.svg' /></a>";
                             // div = div + "<a >UnBookmark</a>";
                         // div = div + "</div></div>";    
                     }

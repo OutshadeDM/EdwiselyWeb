@@ -938,7 +938,7 @@ $(document).ready(function () {
   }
 
   $("#btnSave").on('click',function () {
-    window.location.href = 'myAssesments.html';
+    window.location.href = 'myAssessments.html';
   });
 
   $("#btnSaveSend").on('click',function () {
