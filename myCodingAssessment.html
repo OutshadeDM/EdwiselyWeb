@@ -107,32 +107,35 @@
   <div class="row" id="body-row">
     <!-- MAIN -->
     <div class="col-2 pr-0" style="height: 100vh; position: fixed;">
-      <div class="pl-4 py-3 pr-0">
-        <div class="navContainer">
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
-          <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
-              Courses</a></div>
-          <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
-              Courses</a></div>
-          <div class="pl-4 py-3 sidebarLinks active">
-            <a class="sidebarNav" href="myAssessment.html">
-              <div class="row no-gutters">
-                <div class="col-10">Assessments</div>
-                <div class="col-2"><i class="fas fa-caret-right"></i></div>
+        <div class="pl-4 py-3 pr-0">
+          <div class="navContainer">
+            <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="index.html">Dashboard</a></div>
+            <div class="pl-4 py-3 sidebarLinks" id="allCourseNav"><a class="sidebarNav" href="courses.html">All
+                Courses</a></div>
+            <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
+                Courses</a></div>
+            <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
+                href="myAssessment.html">Assessments</a></div>
+            <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
+                Class</a></div>
+            <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
+            <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html"></a>Feedback</div>
+            <div class="pl-4 py-3 sidebarLinks active">
+              <a class="sidebarNav" href="myCodingAssessment.html">
+                <div class="row no-gutters">
+                  <div class="col-10">Coding Assessment</div>
+                  <div class="col-2"><i class="fas fa-caret-right"></i></div>
+                </div>
+              </a>
+            </div>
+            <div class="text-center py-3" id="logoutNav" onclick="logout();">
+              <div class="h-100 d-flex align-items-center justify-content-center">
+                <b><img src="frontend/images/logout.png" class="px-2" />Logout
+                </b>
               </div>
-            </a>
-          </div>
-          <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
-              Class</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html">Feedback</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myCodingAssessment.html">Coding Assessment</a></div>
-          <div class="text-center py-3" id="logoutNav" onclick="logout();">
-            <b><img src="frontend/images/logout.png" class="px-2" />Logout
-            </b>
+            </div>
           </div>
         </div>
-      </div>
     </div>
     <div class="col-2" style="z-index: -8;"></div>
     <div class="right-div col-10 pr-0">
@@ -147,7 +150,7 @@
           <hr class="titlehr">
           <p class="list">
             <span class="list-item"><a href="index.html">Home</a> ></span>
-            <span class="list-item-active"><a href="#">Assessments</a></span>
+            <span class="list-item-active"><a href="#">Coding Assessments</a></span>
           </p>
         </div>
         <!-- Start Page Content -->
@@ -156,10 +159,10 @@
           <!-- put everything in this div -->
 
           <div class="row">
-                <div class="w-100 d-flex justify-content-end align-items-center">
+                <!-- <div class="w-100 d-flex justify-content-end align-items-center">
                   <div class="pr-5 d-flex align-items-center"><div style="background-color: #EB5C6F;border-radius: 50px;margin-right: 10px ; width: 10px;height: 10px;"></div> Objective</div>
-                  <!-- <div class="d-flex align-items-center"><div style="background-color: #75b1e8;border-radius: 50px;margin-right: 10px ; width: 10px;height: 10px;"></div> Subjective</div> -->
-                </div>
+                  <div class="d-flex align-items-center"><div style="background-color: #75b1e8;border-radius: 50px;margin-right: 10px ; width: 10px;height: 10px;"></div> Subjective</div>
+                </div> -->
 
               <ul class="list-group left-color-border w-100" id="assessmentList">
                   <!-- <li class="list-group-item">
@@ -223,6 +226,6 @@
 <!-- add extra js files here -->
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="backend/cookies.js"></script>
-<script type="text/javascript" src="backend/myAssessment.js"></script>
+<script type="text/javascript" src="backend/myCodingAssessment.js"></script>
 
 </html>

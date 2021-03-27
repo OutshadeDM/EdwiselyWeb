@@ -4,6 +4,7 @@ $(document).ready(function () {
 		// console.log(isLoggedIn(), 'yes');
 		$user = JSON.parse(isLoggedIn());
 		$('html').removeClass('d-none');
+        $("#greetingNav").html($user.name);
 	} else {
 		window.location.replace("login.html");
     }

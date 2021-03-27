@@ -231,7 +231,7 @@ $(document).ready(function () {
       $('#topicTags').empty();
       $('#topicTags').html("Select Unit First");
 
-      // topics.push({id:question.topic_id,type: question.topic_type});
+      topics.push({id:question.topic_id,type: question.topic_type});
       // $('#topicTagAdd' + question.topic_id).prop('checked', true);
 
       // $.each(value.topics_details, function (key, value) {
