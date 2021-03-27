@@ -17,8 +17,7 @@ $(document).ready(function () {
   let unit_id = "";
   let desc = ""
   let objective = false
-  let question_count = 0
-  // let units = [];
+
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
@@ -44,6 +43,8 @@ $(document).ready(function () {
 
   let sectionIds = []
   let section = '';
+  let sectionMarks = 0;
+  let marks = []
 
 
 
@@ -79,15 +80,21 @@ $(document).ready(function () {
           //let div = ""
           $.each(result.data.sections, function (key, value) {
             sectionIds.push(value.id)
-            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '</label></div>')
+            marks.push(value.marks)
+
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="/frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
           });
         }
-        // else {
-        //   $('#getUnits').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Units in this Course</h5></div</div>");
-        // }
+
+
+        $('.tick').hide()
 
         section = sectionIds[0]
+
+        sectionMarks = $('#section' + section).data('marks')
         $('#section' + section).addClass('active')
+        questionsOfTest(section)
+        totalQuesMarks()
 
 
       },
@@ -100,7 +107,13 @@ $(document).ready(function () {
   $(document).on('click', '.sectionLabel', function () {
     $('#section' + section).removeClass('active')
     section = $(this).data('id');
+    sectionMarks = $(this).data('marks')
     $('#section' + section).addClass('active')
+
+    selectedQuestionsId = []
+    selectedQuestions = []
+
+    questionsOfTest(section)
 
 
   })
@@ -125,30 +138,24 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //alert(result.status);
-        //alert(subSemId)
+
         //console.log(result.data)
         $('.getUnits').empty();
 
         if (result.status == 200 && result.data) {
           //let div = ""
           $.each(result.data, function (key, value) {
-            //console.log(value);
             unitsIds.push(value.id)
-            //$('.getUnits').append(`<div class='unitsDiv' data-id=' ${value.id} ' data-description=' ${value.description} ' data-subject_semester=' ${value.subject_semester} '> ${value.name} </div>`);
             $('.getUnits').append("<li class='getUnitsLi'><input type='radio' class='getUnitsInput' value='" + value.id + "' data-description='" + value.description + "'data-id='" + value.id + "' name='getUnitsAdd' id='getUnitsAdd" + value.id + "' /><label for='getUnitsAdd" + value.id + "' class='getUnitsLabel'>" + value.name + "</label></li>");
 
           });
-          //$('.getUnits').append(div)
         }
         else {
           $('#getUnits').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Units in this Course</h5></div</div>");
-          //alert("here");
         }
 
         let first_unit = "getUnitsAdd" + unitsIds[0]
-        //console.log(unitsIds)
-        //console.log(first_unit)
+
         if (unitsIds.length !== 0) {
           $("#" + first_unit).attr('checked', true)
           unit = $(".getUnitsInput:checked").val();
@@ -164,7 +171,6 @@ $(document).ready(function () {
   }
 
 
-  // //alert(subSemId)
   getTopics();
 
   function getTopics() {
@@ -178,12 +184,6 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //alert(result.status);
-        //alert(subSemId)
-
-
-
-
 
         $('#topicTags').empty();
         if (result.status == 200 && result.data) {
@@ -192,7 +192,6 @@ $(document).ready(function () {
 
           } else {
             $.each(result.data, function (key, value) {
-              // console.log(value);
               $.each(value.topic, function (key, unitTopic) {
                 $('#topicTags').append("<li class='topicTagsLi'><input type='checkbox' class='topicTagsInput' value='" + unitTopic.topic_id + "' data-type='" + unitTopic.type + "'data-id='" + unitTopic.topic_id + "' data-code='" + unitTopic.topic_code + "' name='topicTagAdd' id='topicTagAdd" + unitTopic.topic_id + "'/><label for='topicTagAdd" + unitTopic.topic_id + "' class='topicTagsLabel show1'><i class='fas fa-check' style='display: none;'></i>" + unitTopic.topic_name + "</label></li>");
               })
@@ -201,7 +200,6 @@ $(document).ready(function () {
         }
         else {
           $('#topicTags').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No topics to fetch</h5></div</div>");
-          //alert("here");
         }
 
 
@@ -218,9 +216,7 @@ $(document).ready(function () {
 
 
   $(document).on('click', '.getUnitsInput', function () {
-    //alert("hello")
     unit = $(".getUnitsInput:checked").val();
-    //console.log(unit)
     getTopics()
   });
 
@@ -239,16 +235,55 @@ $(document).ready(function () {
 
 
   $('.quesUploadFile').on('change', function () {
-    // uploaded_question = $('.quesUploadFile').val()
     uploaded_question = $(".quesUploadFile")[0].files[0];
-    //alert(uploaded_question)
+    console.log(uploaded_question)
   })
+
+
+
+  // total question and marks function 
+  function totalQuesMarks() {
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+
+        let totalMarks = 0;
+        let totalQuestions = 0
+
+        if (result.status == 200 && result.data) {
+
+          $.each(result.data, function (key, value) {
+
+            totalMarks = totalMarks + marks[sectionIds.indexOf(value.section_id)];
+            ++totalQuestions;
+          });
+          console.log(totalMarks)
+          console.log(totalQuestions)
+          $('.totalMarks').val(totalMarks)
+          $('.totalQuestions').val(totalQuestions)
+
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+
+
+
 
 
 
   //getting the questions which are already present in the assessment
 
-  function questionsOfTest() {
+  function questionsOfTest(section) {
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
       type: 'GET',
@@ -260,41 +295,38 @@ $(document).ready(function () {
         //console.log(result);
 
         if (result.status == 200 && result.data) {
-          // $.each(result.data, function (key, value) {
 
-          //   if (!questions.includes(value.id)) {
-          //     questions.push(value.id);
-          //   }
-          //   console.log(questions)
-          // });
           $('.addingQues').empty()
 
           $.each(result.data, function (key, value) {
-            // alert(value.id);
-            //console.log(selectedQuestionsId)
-            if (!selectedQuestionsId.includes(value.id)) {
-              selectedQuestionsId.push(value.id);
-              //console.log(selectedQuestionsId)
-            }
-            if (!selectedQuestions.includes(value)) {
-              selectedQuestions.push(value);
-            }
+            if (value.section_id == section) {
 
-            $('.chooseQuestionsInput').each(function () {
-              if (selectedQuestionsId.includes($(this).data('id'))) {
-                $(this).prop('checked', true)
+              if (!selectedQuestionsId.includes(value.id)) {
+                selectedQuestionsId.push(value.id);
               }
-            })
+
+              if (!selectedQuestions.includes(value)) {
+                selectedQuestions.push(value);
+              }
+
+              $('.chooseQuestionsInput').each(function () {
+                if (selectedQuestionsId.includes($(this).data('id'))) {
+                  $(this).prop('checked', true)
+                }
+              })
+
+            }
 
           });
 
           //displaying the already selected questions
+          let num = 1;
           for (let i = 0; i < selectedQuestions.length; i++) {
 
 
 
             $('.addingQues').append("<div class='row'>" +
-              "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q).</div>" +
+              "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + num++ + "</div>" +
 
               "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
               selectedQuestions[i].name + "</div>" +
@@ -330,9 +362,6 @@ $(document).ready(function () {
 
           }
 
-
-          //console.log(selectedQuestions)
-
         }
 
       },
@@ -346,7 +375,7 @@ $(document).ready(function () {
 
 
   // Upload api
-  $('#uploadBtn').click(function () {
+  $('.saveToSectionBtn').click(function () {
 
     //console.log("jndsi")
     //alert("hello")
@@ -386,9 +415,11 @@ $(document).ready(function () {
             form.append("test_id", tId);
             form.append("questions", "[" + questions + "]");
             form.append("units", "[" + unit + "]")
-            // for (var key of form.entries()) {
-            //   alert(key[1]);
-            // }
+            form.append("section_id", section)
+
+            for (var key of form.entries()) {
+              alert(key[1]);
+            }
 
 
             $.ajax({
@@ -413,13 +444,13 @@ $(document).ready(function () {
                     autotimeout: 3000
                   });
 
-                  setTimeout(() => {
-                    window.location.href = "addQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&desc=" + desc + "&isObj=" + objective + "&qc=" + questions.length
-                  }, 2000)
                 }
                 else {
                   alert("error!")
                 }
+                $('#tick' + section).show()
+                totalQuesMarks()
+
               },
               error: function (error) {
                 alert("Request Failed with status: " + error.status);
@@ -463,6 +494,10 @@ $(document).ready(function () {
 
   })
 
+
+  $('#uploadExitBtn').click(function () {
+    window.location.href = 'myAssessment.html'
+  })
 
 
 })
