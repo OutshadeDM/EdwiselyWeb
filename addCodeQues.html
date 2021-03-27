@@ -178,9 +178,9 @@
                         <h5 class="font-weight-bold">Added Questions</h5>
                       </div>
                       <div class="addingQues pr-2" id="addquesDiv" style="height: 80vh;">
-                        <div class="loader-wrapper">
+                        <!-- <div class="loader-wrapper">
                           <div class="loader"></div>
-                        </div>
+                        </div> -->
                       </div>
                       <div class="d-flex justify-content-center mt-5">
                         <button class="btn btn-primary w-50 text-center" id="addNewBtn">Add New</button>
@@ -191,15 +191,13 @@
                     <div class="row">
                       <div class="col-8"></div>
                       <div class="col-2">
-                        <select class="bloomSelect mx-2 float-right" id="selectUnit">
+                        <select class="bloomSelect mx-2 float-right form-control form-control-sm" id="selectUnit">
                           <option value="0" selected disabled>Unit</option>
                         </select>
                       </div>
                       <div class="col-2">
                         <div class="px-2 choose-subject" id="subject-modal-div" data-toggle="modal"
                           data-target="#exampleModal">
-
-
                           <span class=" pl-2 pr-2">Topics</span>
                           <i class="fas fa-chevron-right" style="position: absolute; top: 5px; right: 10px;"></i>
 
@@ -237,10 +235,37 @@
                           placeholder="Enter your title here" id="title" />
                       </div>
                       <div class="col-3">
-                        <select class="bloomSelect mx-2 mt-4 " id="selectLang" style="height: 40px;">
+                        <select class="bloomSelect mx-2 mt-4 form-control form-control-md" id="selectLang" style="height: 40px;">
                           <option value="0" selected disabled>Language Select</option>
-                          <option value="1">Academic</option>
-                          <option value="2">Non-Academic</option>
+                          <option value="7">Ada (gnat 5.1.1)</option>
+                          <option value="45">Assembler [GCC] (gcc 4.9.3)</option>
+                          <option value="28">Bash (bash 4.3.33) </option>
+                          <option value="27">C# [Mono] (Mono 4.0.2)</option>
+                          <option value="41">C++ 4.3.2 (gcc-4.3.2)</option>
+                          <option value="1">C++ [GCC] (5.1.1)</option>
+                          <option value="44">C++14 {GCC} (gcc-5 5.1.1)</option>
+                          <option value="11">C (gcc 5.1.1)</option>
+                          <option value="118">COBOL (1.1.0)</option>
+                          <option value="32">Common Lisp [CLISP] (click 2.49)</option>
+                          <option value="5">Fortran (5.1.1)</option>
+                          <option value="114">Go (1.4)</option>
+                          <option value="55">Java - legacy (HotSpot 8u181)</option>
+                          <option value="10">Java (jdk 8u51)</option>
+                          <option value="35">JavaScript [Rhino] (rhino 1.7.7)</option>
+                          <option value="112">JavaScript [SpiderMonkey] (24.2.0)</option>
+                          <option value="47">Kotlin (kotlin 1.0.6)</option>
+                          <option value="56">Node.js (node 7.4.0)</option>
+                          <option value="43">Objective-C (gcc-5 5.1.1)</option>
+                          <option value="29">PHP (PHP 5.6.11-1)</option>
+                          <option value="108">Prolog [GNU] (gnu prolog 1.4.5)</option>
+                          <option value="15">Prolog [SWI] (swirl 7.2)</option>
+                          <option value="4">Python 2.x [Pypy] (2.7.13)</option>
+                          <option value="116">Python 3.x (python 3.5.3)</option>
+                          <option value="117">R (3.2.2)</option>
+                          <option value="52">SQLite - queries (sqlite 3.31.1)</option>
+                          <option value="40">SQLite - schema (sqlite3-3.8.7)</option>
+                          <option value="85">Swift (swift 3.0.2)</option>
+                          <option value="57">TypeScript (tsc 3.8.3)</option>
                         </select>
                       </div>
                       <div class="col-3">

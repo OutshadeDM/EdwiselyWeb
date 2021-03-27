@@ -29,6 +29,8 @@ $(document).ready(function () {
   getQuestions(true);
 
   function getQuestions(functionCall) {
+    $("#addquesDiv").empty();
+    $('#addquesDiv').append("<div class='loader-wrapper'><div class='loader'></div></div>");
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/codeEditor/getCodingTestDetails?test_id=' + cid,
       type: 'GET',
@@ -121,7 +123,6 @@ $(document).ready(function () {
   })
 
   function getTopics(unit) {
-    console.log('here1');
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/questionnaire/getUnitTopics?unit_ids=' + unit,
       type: 'GET',
@@ -180,7 +181,6 @@ $(document).ready(function () {
   });
 
   function clearAll() {
-    $('#addquesDiv').append("<div class='loader-wrapper'><div class='loader'></div></div>");
     $('#title').val("");
     $('#selectUnit').val(0);
     $('#selectTopic').val(0);
@@ -227,9 +227,12 @@ $(document).ready(function () {
       // console.log(question);
 
       $('#selectUnit').val("0");
+      $('#selectUnit').prop("disabled",true);
+      $('#topicTags').empty();
+      $('#topicTags').html("Select Unit First");
 
-      topics.push({id:question.topic_id,type: question.topic_type});
-      $('#topicTagAdd' + question.topic_id).prop('checked', true);
+      // topics.push({id:question.topic_id,type: question.topic_type});
+      // $('#topicTagAdd' + question.topic_id).prop('checked', true);
 
       // $.each(value.topics_details, function (key, value) {
       //   if (question_type1) {
@@ -245,6 +248,8 @@ $(document).ready(function () {
       $('#title').val(question.name);
       $('#marks').val(question.marks);
       $("#summernote").summernote("code",question.body)
+
+      $("#selectLang").val(question.language_id)
 
       $('#input1').val(question.test_cases[0].input);
       $('#output1').val(question.test_cases[0].output);
@@ -283,18 +288,19 @@ $(document).ready(function () {
   });
 
   $('#doneBtn').on('click', function () {
-    const title = $('#title').val()
-    const marks = $('#marks').val()
+    const title = $('#title').val();
+    const marks = $('#marks').val();
     const desc = $("#summernote").summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
-    const unit = $("#selectUnit").find(":selected").val()
-    const input1 = $("#input1").val()
-    const input2 = $("#input2").val()
-    const output1 = $("#output1").val()
-    const output2 = $("#output2").val()
+    const unit = $("#selectUnit").find(":selected").val();
+    const language = $("#selectLang").find(":selected").val();
+    const input1 = $("#input1").val();
+    const input2 = $("#input2").val();
+    const output1 = $("#output1").val();
+    const output2 = $("#output2").val();
 
     // console.log(topics);
 
-    if (title && desc && marks && unit && unit != "0" && topics.length > 0 && input1 && input2 && output1 && output2) {
+    if (title && desc && marks && unit && unit != "0" && topics.length > 0 && language && input1 && input2 && output1 && output2) {
       
       $('#doneBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
       const test_cases = [];
@@ -312,6 +318,7 @@ $(document).ready(function () {
       form.append("topics", JSON.stringify(topics));
       form.append("test_id", cid);
       form.append("marks", marks);
+      form.append("language_id", language);
       form.append("test_cases", JSON.stringify(test_cases))
 
       // for (var key of form.entries()) {
@@ -330,7 +337,7 @@ $(document).ready(function () {
         },
         success: function (result) {
           $('#doneBtn').html('Done');
-          // console.log(result);
+          console.log(result);
           if (result.status == 200) {
             new Notify ({
                 title: 'Success',
@@ -376,10 +383,10 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!unit || unit == '0' || topics.length <= 0)
+      else if (!unit || unit == '0' || topics.length <= 0 || !language)
         new Notify ({
             title: 'Error',
-            text : "Plese Select Unit and Topic",
+            text : "Plese Select Unit, Topics and Language",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -459,9 +466,10 @@ $(document).ready(function () {
     const title = $('#title').val();
     const marks = $('#marks').val();
     const desc = $("#summernote").summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
+    const language = $("#selectLang").find(":selected").val()
     const problem_id = $("#questionId").val();
 
-    if (title && marks && desc && topics.length > 0 && problem_id) {
+    if (title && marks && desc && topics.length > 0 && problem_id && language) {
       $('#editBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
       const updated_question = questions.filter(question => question.id == problem_id)[0];
       // console.log(updated_question);
@@ -472,6 +480,7 @@ $(document).ready(function () {
       form.append("topics", JSON.stringify(topics));
       form.append("test_id", cid);
       form.append("marks", marks);
+      form.append("language_id", language);
       form.append("problem_id", problem_id);
 
       $.ajax({
@@ -511,6 +520,15 @@ $(document).ready(function () {
             if(updated_question.test_cases[4] && (updated_question.test_cases[4].input != $("#input5").val() || updated_question.test_cases[4].output != $("#output5").val()))
               updateTestCases(updated_question.id,updated_question.test_cases[4].id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
             
+            if(!updated_question.test_cases[2] && $("#input3").val() && $("#output3").val())
+              addTestCase(updated_question.id,$("#input3").val(),$("#output3").val(),$('#status3').prop('checked'))
+
+            if(!updated_question.test_cases[3] && $("#input4").val() && $("#output4").val())
+              addTestCase(updated_question.id,$("#input4").val(),$("#output4").val(),$('#status4').prop('checked'))
+
+            if(!updated_question.test_cases[4] && $("#input5").val() && $("#output5").val())
+              addTestCase(updated_question.id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
+
             clearAll();
             getQuestions(false);
           }
@@ -547,10 +565,10 @@ $(document).ready(function () {
       //       status: 'error',
       //       autotimeout: 3000
       //   });
-      else if (!unit || unit == '0' || topics.length <= 0)
+      else if (!unit || unit == '0' || topics.length <= 0 || !language)
         new Notify ({
             title: 'Error',
-            text : "Plese Select Unit and Topic",
+            text : "Plese Select Unit,Topic and Language",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -574,11 +592,11 @@ $(document).ready(function () {
     form.append("input",input);
     form.append("output",output);
     form.append("active",active ? 1:0);
-    for (var key of form.entries()) {
-        console.log(key[1]);
-      }
+    // for (var key of form.entries()) {
+    //     console.log(key[1]);
+    //   }
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblem',
+      url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblemTestcase',
       type: 'POST',
       dataType: 'json',
       data: form,
@@ -588,11 +606,49 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        console.log(result);
+        // console.log(result);
         if (result.status != 200) {
           new Notify ({
               title: 'Error',
-              text : result.message,
+              text : "Test Case Updation Failed",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+          });
+        }
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
+
+  function addTestCase(problem_id,input,output,active){
+    const form = new FormData();
+    form.append("test_id",cid);
+    form.append("problem_id",problem_id);
+    form.append("input",input);
+    form.append("output",output);
+    form.append("active",active ? 1:0);
+    // for (var key of form.entries()) {
+    //     console.log(key[1]);
+    //   }
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/codeEditor/addCodingProblemTestcase',
+      type: 'POST',
+      dataType: 'json',
+      data: form,
+      contentType: false,
+      processData: false,
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        // console.log(result);
+        if (result.status != 200) {
+          new Notify ({
+              title: 'Error',
+              text : "Test Case Addition Failed",
               autoclose: true,
               status: 'error',
               autotimeout: 3000
@@ -607,6 +663,7 @@ $(document).ready(function () {
 
   $('#addNewBtn').on('click', function () {
     clearAll();
+    $('#selectUnit').prop("disabled",false);
   });
   
   $('#btnSave').on('click', function () {
