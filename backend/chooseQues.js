@@ -96,9 +96,13 @@ $(document).ready(function () {
             sectionIds.push(value.id)
             marks.push(value.marks)
 
-            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '</label></div>')
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="/frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
           });
         }
+
+
+        $('.tick').hide()
+
 
         section = sectionIds[0]
 
@@ -990,7 +994,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        console.log(result)
+        console.log(result.data)
         console.log(section)
 
 
@@ -1073,8 +1077,6 @@ $(document).ready(function () {
 
 
   //selecting Questions on checking of checkbox
-
-
 
   $(document).on('change', '.chooseQuestionsInput', function (e) {
     //add Questions to a array which are selected
@@ -1176,9 +1178,9 @@ $(document).ready(function () {
       form.append("questions", "[" + selectedQuestionsId.join(',') + "]");
       form.append("units", "[" + unit + "]")
       form.append("section_id", section)
-      for (var key of form.entries()) {
-        alert(key[1]);
-      }
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
 
 
       $.ajax({
@@ -1218,6 +1220,7 @@ $(document).ready(function () {
               autotimeout: 3000
             });
           }
+          $('#tick' + section).show()
 
           totalQuesMarks()
         },
@@ -1227,6 +1230,10 @@ $(document).ready(function () {
       });
     }
 
+  })
+
+  $('#btnSaveExit').on('click', function () {
+    window.location.href = 'myAssessment.html'
   })
 
 
@@ -1243,53 +1250,7 @@ $(document).ready(function () {
       });
     }
     else {
-
-      var form = new FormData();
-      form.append("test_id", tId);
-      form.append("questions", "[" + selectedQuestionsId.join(',') + "]");
-      form.append("units", "[" + unit + "]")
-      // for (var key of form.entries()) {
-      //   alert(key[1]);
-      // }
-
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          // alert(result.message);
-          //console.log('4') 
-
-          if (result.status == 200) {
-            new Notify({
-              title: 'Success',
-              text: "Successfully Updated the Questions",
-              autoclose: true,
-              status: 'success',
-              autotimeout: 3000
-            });
-
-            //   setInterval(function () {
-            //     window.location.replace('myAssessment.html');
-            //   }, 2000)
-            setTimeout(() => {
-              window.location.href = `sendQuestionsPage.html?id=${subSemId}&tid=${tId}&tname=${tname}&desc=${description}&isObj=${objective}&qc=${question_count}`
-            }, 2000)
-          }
-          else {
-            alert("error!")
-          }
-        },
-        error: function (error) {
-          alert("Request Failed with status: " + error.status);
-        }
-      });
+      window.location.href = `sendQuestionsPage.html?id=${subSemId}&tid=${tId}&tname=${tname}&desc=${description}&isObj=${objective}&qc=${question_count}`
     }
 
   })
