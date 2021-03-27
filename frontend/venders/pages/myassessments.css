@@ -1,0 +1,23 @@
+.left-color-border{
+    border-radius: 18px;
+}
+  
+.list-group-item{
+    border-radius: 18px;
+    width: 100%;
+    margin: 10px 0;
+}
+  
+.list-group-item.objective{
+    /* border-left: 10px solid #E25BC8; */
+    /* background: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%) left bottom #f9f9f9 no-repeat; 
+    background-size:30px 100%; */
+    border-width: 0;
+    border-left: 10px solid;
+    border-radius: 18px;
+    border-image: linear-gradient(144deg, #F38FA2 0%, #EB5C6F 41%, #F1825C 100%) 0 100%;
+}
+  
+.left-color-border.list-group-item.subjective{
+    border-left: 10px solid #75b1e8;
+}
