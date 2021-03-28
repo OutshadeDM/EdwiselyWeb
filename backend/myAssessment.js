@@ -17,7 +17,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-        //   console.log(result);
+          console.log(result);
           $('#assessmentList').empty();
           if (result.status == 200 && result.data) {
             displayCards(result.data);
@@ -39,8 +39,10 @@ $(document).ready(function () {
         // let currSecs = new Date().getSeconds() < 10 ? "0" + new Date().getSeconds() : new Date().getSeconds().toString()
 
         let div = ""
-
+        
         $.each(data, function (key, value) {
+            // if(value.id == 2393)
+            //     value.doe = "2020-04-01 12:00:00";
 
             let startTime = value.doe;
             let testDate = parseInt(startTime.substring(8, 10))
@@ -77,22 +79,22 @@ $(document).ready(function () {
             div = div + "<li class='list-group-item objective'>";
             div = div + "<div class='row no-gutters d-flex align-items-center justify-content-center'>";
             if(value.start_time)
-                div += "<div class='col-2'>"+value.start_time.substring(0,10)+"</div>";
+                div += "<div class='col-2'>"+value.start_time+"</div>";
             else
-                div += "<div class='col-2'>"+value.created_at.substring(0,10)+"</div>"
+                div += "<div class='col-2'>"+value.created_at+"</div>"
             if(value.name.length > 15)
                 div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.name+"'>"+value.name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
             else
-                div += "<div class='col-2 d-flex justify-content-center'>"+value.name+"</div>"
+                div += "<div class='col-2 d-flex justify-content-center'>"+value.subject_name+"</div>"
             if(value.description.length > 10)
                 div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.description+"'>" + value.description.substr(0, 10) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
             else
                 div += "<div class='col-2 d-flex justify-content-center'>" + value.description + "</div>";
-            div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='No of questions'>"+value.questions_count+"</div>";
+            div += "<div class='col-2 d-flex justify-content-center'>"+value.questions_count+"&nbsp;<img class='img-responsive' src='frontend/images/info.svg'  data-toggle='tooltip' data-placement='top' title='Sent to - "+value.students_count+"'/></div>";
             // 5th column
             // console.log(isSmall)
             if (value.doe == "" && !value.sent && !value.questions_count)
-                div += "<div class='col-2 d-flex justify-content-center align-items-center' style='color:blue;'><i class='fas fa-plus'></i>&nbsp;Add </div>";
+                div += "<div class='col-2'></div>";
             else if (value.doe == "" && !value.sent && value.questions_count > 0)
                 div += "<div class='col-2 d-flex justify-content-center align-items-center' style='color:blue;'><a href='addQuestionsPage.html?id=" + value.subject_id + "&tid=" + value.id + "&tname=" + value.name + "&desc=" + value.description + "&isObj=true&qc=" + value.questions_count + "'><i class='fas fa-edit'></i>&nbsp;Edit</a></div>";
             else if (value.doe != "" && value.questions_count > 0 && isEdit)
@@ -114,5 +116,17 @@ $(document).ready(function () {
         $("#assessmentList").append(div);
         $('[data-toggle="tooltip"]').tooltip();
     }
+
+    $(document).on('click', '.condLink', function () {
+        let test_id = $(this).data('id');
+        let test_completed = $(this).data('test');
+        console.log(test_completed);
+        if (test_completed > 0) {
+          let link = document.createElement('a');
+          link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=" + test_id + "&token=" + `${$user.token}`;
+          link.target = "_blank";
+          link.dispatchEvent(new MouseEvent('click'));
+        }
+      });
     
 });

@@ -410,6 +410,7 @@ height: 0.01rem;
 .btn-secondary{
   border-radius: 25px; 
   background-color: transparent;
+  background-image: none;
   color: black !important;   
   border: solid 1px #E25BC8;
   
@@ -590,7 +591,7 @@ width: 100px;
 }
 
 #quesInput {
-height: 100px;
+height: 140px;
 width: 60%;
 background-color: #f9f9f9;
 border: none;

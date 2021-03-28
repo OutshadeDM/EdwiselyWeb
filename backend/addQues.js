@@ -303,7 +303,7 @@ $(document).ready(function () {
         // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
         if(value.section_id == section || !value.section_id){
           $('#addquesDiv').append("<div class='row'>" +
-            "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+            "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + i++ + ").</div>" +
             "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
         }
       });
@@ -939,18 +939,18 @@ $(document).ready(function () {
   }
 
   $("#btnSave").on('click',function () {
-    window.location.href = 'myAssessments.html';
+    window.location.href = 'myAssessment.html';
   });
 
   $("#btnSaveSend").on('click',function () {
-    saveQuestions(true);
+    window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&uid=" + unit_id + "&isObj=true&qc=" + questions.length;
   });
-
+  
   $("#saveSection").on('click', function(){
-    saveQuestions(false);
+    saveQuestions();
   });
 
-  function saveQuestions(isSend) {
+  function saveQuestions() {
     if (!unit_id || unit_id == "0") unit_id = subSemId;
     if (questionsList != null && questionsList.length > 0 && tId != "0") {
 
@@ -998,11 +998,11 @@ $(document).ready(function () {
             // $('#successToast').toast('show');
             $('#loadingDiv').remove();
             $("input.custom-control-input").attr("disabled", false);
-            if (isSend){
-              setTimeout(function () {
-                window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&uid=" + unit_id + "&isObj=true&qc=" + questions.length;
-              }, 2000);
-            }
+            // if (isSend){
+            //   setTimeout(function () {
+            //     window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&uid=" + unit_id + "&isObj=true&qc=" + questions.length;
+            //   }, 2000);
+            // }
           }
           else {
             $('#loadingDiv').remove();

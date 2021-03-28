@@ -95,6 +95,8 @@ $(document).ready(function () {
     const section_marks1 = $('#section_marks1').find(":selected").val();
     const section_instr1 = $($("#summernote1").summernote("code")).text();
 
+    // console.log(title,desc,subject,section_name1,section_marks1,section_instr1);
+
     if (title && desc && subject && section_name1 && section_marks1 && section_instr1) {
 
       if (objective == 'true') {

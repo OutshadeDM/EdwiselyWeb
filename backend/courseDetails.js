@@ -50,7 +50,7 @@ $(document).ready(function () {
                         $("#courseClass").empty();
                         $("#courseClass").append("<ul>");
                         $.each(result.data.sections, function (key, value) {
-                            $("#courseClass").append("<li><span>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
+                            $("#courseClass").append("<li class='font-weight-bold'><span class='font-weight-bold'>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
                         });
                         $("#courseClass").append("</ul>");
                     }
@@ -639,7 +639,7 @@ $(document).ready(function () {
                         else if(value.bookmarked == "1")
                             div += "<a class='pr-3 unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='fas fa-bookmark'></i>&nbsp;Unbookmark</a>";
                         
-                        div += "<a class='pr-3 openContent' href='#' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Open&nbsp;<img class='img-responsive' src='frontend/images/right-arrow.svg' /></a>";
+                        div += "<a class='pr-3 openContent download' style='cursor:pointer;' data-type='"+fileType+"' data-url='" + value.url + "'>Open&nbsp;<img class='img-responsive' src='frontend/images/right-arrow.svg' /></a>";
                             // div = div + "<a >UnBookmark</a>";
                         // div = div + "</div></div>";    
                     }
