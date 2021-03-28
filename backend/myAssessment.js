@@ -127,6 +127,6 @@ $(document).ready(function () {
           link.target = "_blank";
           link.dispatchEvent(new MouseEvent('click'));
         }
-      });
+    });
     
 });

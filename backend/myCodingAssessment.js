@@ -17,7 +17,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-        //   console.log(result);
+          console.log(result);
           $('#assessmentList').empty();
           if (result.status == 200 && result.data) {
             displayCards(result.data);
@@ -104,14 +104,26 @@ $(document).ready(function () {
                 div += "<div class='col-2 d-flex justify-content-center'><a href='codingQuestions.html?id=" + value.id + "&fname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
             else if (value.doe == "" && !value.sent && value.questions_count > 0)
                 div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
-            else if (value.doe != "" && value.questions_count > 0 && isEdit)
-                div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Re-Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
-            else if (value.doe != "" && value.questions_count > 0 && !isEdit)
+            // else if (value.doe != "" && value.questions_count > 0 && isEdit)
+            //     div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Re-Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
+            else if (value.doe != "" && value.questions_count > 0)
                 div += "<div class='col-2 d-flex justify-content-center'><button class='btn btn-primary text-white pl-4 pr-4 assBtn condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>View Result&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></button></div>";
         });
 
         $("#assessmentList").append(div);
         $('[data-toggle="tooltip"]').tooltip();
     }
+
+    $(document).on('click', '.condLink', function () {
+        let test_id = $(this).data('id');
+        let test_completed = $(this).data('test');
+        console.log(test_completed);
+        if (test_completed > 0) {
+          let link = document.createElement('a');
+          link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=" + test_id + "&token=" + `${$user.token}`;
+          link.target = "_blank";
+          link.dispatchEvent(new MouseEvent('click'));
+        }
+    });
     
 });
