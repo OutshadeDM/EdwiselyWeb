@@ -18,7 +18,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          // console.log(result.data);
+          console.log(result.data);
           $('#feedbackList').empty();
           if (result.status == 200 && result.data) {
 

@@ -26,6 +26,9 @@ $(document).ready(function () {
   $('#fifthOption').hide();
   $('#editBtn').hide();
   $('#deleteBtn').hide();
+  $('#status3').prop('checked', false);
+  $('#status4').prop('checked', false);
+  $('#status5').prop('checked', false);
   getQuestions(true);
 
   function getQuestions(functionCall) {
@@ -184,6 +187,7 @@ $(document).ready(function () {
     $('#title').val("");
     $('#selectUnit').val(0);
     $('#selectTopic').val(0);
+    $('#selectLang').val(0);
     $('#input1').val("");
     $('#output1').val("");
     $('#input2').val("");
@@ -200,9 +204,9 @@ $(document).ready(function () {
 
     $('#status1').prop('checked', true);
     $('#status2').prop('checked', true);
-    $('#status3').prop('checked', true);
-    $('#status4').prop('checked', true);
-    $('#status5').prop('checked', true);
+    $('#status3').prop('checked', false);
+    $('#status4').prop('checked', false);
+    $('#status5').prop('checked', false);
 
     $('#fifthOption').hide();
     $('#addBtn').show();
@@ -383,10 +387,26 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!unit || unit == '0' || topics.length <= 0 || !language)
+      else if (!unit || unit == '0')
         new Notify ({
             title: 'Error',
-            text : "Plese Select Unit, Topics and Language",
+            text : "Plese Select Unit",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
+      else if (topics.length <= 0)
+        new Notify ({
+            title: 'Error',
+            text : "Plese Select Topics",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
+      else if (!!language)
+        new Notify ({
+            title: 'Error',
+            text : "Plese Select Language",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -565,10 +585,26 @@ $(document).ready(function () {
       //       status: 'error',
       //       autotimeout: 3000
       //   });
-      else if (!unit || unit == '0' || topics.length <= 0 || !language)
+      else if (!unit || unit == '0')
         new Notify ({
             title: 'Error',
-            text : "Plese Select Unit,Topic and Language",
+            text : "Plese Select Unit",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
+      else if (topics.length <= 0)
+        new Notify ({
+            title: 'Error',
+            text : "Plese Select Topics",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+        });
+      else if (!!language)
+        new Notify ({
+            title: 'Error',
+            text : "Plese Select Language",
             autoclose: true,
             status: 'error',
             autotimeout: 3000

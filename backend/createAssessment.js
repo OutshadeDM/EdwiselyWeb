@@ -97,7 +97,7 @@ $(document).ready(function () {
 
     // console.log(title,desc,subject,section_name1,section_marks1,section_instr1);
 
-    if (title && desc && subject && section_name1 && section_marks1 && section_instr1) {
+    if (title && desc && subject && section_name1 && section_marks1) {
 
       if (objective == 'true') {
         //alert(objective)
@@ -105,8 +105,10 @@ $(document).ready(function () {
         sections.push({name:section_name1,marks:section_marks1,instructions:section_instr1});
         let index = 2;
         while (index <= i){
-          sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).find(":selected").val(),instructions: $($("#summernote"+index).summernote("code")).text()});
-          index++;
+          if($('#section_name'+index).val() && $('#section_marks'+index).find(":selected").val()){
+            sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).find(":selected").val(),instructions: $($("#summernote"+index).summernote("code")).text()});
+            index++;
+          }
         }
         console.log(sections);
         var form = new FormData();
