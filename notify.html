@@ -30,11 +30,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <title>Send Notification | Edwisely</title>
-  <style>
-    .student-list {
-      max-height: 567px;
-    }
-  </style>
+
 
   <!-- editor -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -96,7 +92,8 @@
             </a>
           </div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html">Feedback</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myCodingAssessment.html">Coding Assessment</a></div>
+          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myCodingAssessment.html">Coding Assessment</a>
+          </div>
           <div class="text-center py-3" id="logoutNav" onclick="logout();">
             <b><img src="frontend/images/logout.png" class="px-2" />Logout
             </b>
@@ -139,7 +136,7 @@
                 <div class="px-3 py-3 mt-2">
                   <form id="formdata" method="POST" enctype="multipart/form-data">
                     <div class="row px-4">
-                      <div class="col-md-5 col-12">
+                      <div class="col-6">
                         <label class="mb-1">Title</label><br>
                         <input name="title" id="title" placeholder="Enter Title" class="form-control" type="text"
                           required>
@@ -179,8 +176,8 @@
                           </ul>
                         </div>
                       </div>
-                      <div class="col-md-6 col-12 right">
-                        <div class="tab-content" id="myTabContent" style="height: 850px;">
+                      <div class="col-6 right" style="height: auto;">
+                        <div class="tab-content" id="myTabContent">
                         </div>
                       </div>
                     </div>

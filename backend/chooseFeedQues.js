@@ -23,7 +23,7 @@ $(document).ready(function () {
 
 
   //variables used
-  let j = 0;
+  let j = 1;
   let preAddedQuestions = [];
   let preAddedQuestionsId = [];
   let questions_values = []
@@ -289,12 +289,12 @@ $(document).ready(function () {
 
   $('#btnSave').on('click', function () {
     if (selectedQuestions.length == 0) {
-      new Notify ({
-          title: 'Error',
-          text : "Choose Questions First",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Choose Questions First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
     else {
@@ -305,12 +305,12 @@ $(document).ready(function () {
 
   $('#btnSaveSend').on('click', function () {
     if (selectedQuestions.length == 0) {
-      new Notify ({
-          title: 'Error',
-          text : "Choose Questions First",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Choose Questions First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
     else {
@@ -343,12 +343,12 @@ $(document).ready(function () {
       success: function (result) {
 
         if (result.status == 200) {
-          new Notify ({
-              title: 'Success',
-              text : "Questions Added Successfully",
-              autoclose: true,
-              status: 'success',
-              autotimeout: 3000
+          new Notify({
+            title: 'Success',
+            text: "Questions Added Successfully",
+            autoclose: true,
+            status: 'success',
+            autotimeout: 3000
           });
 
 
@@ -368,12 +368,12 @@ $(document).ready(function () {
 
         }
         else {
-          new Notify ({
-              title: 'Error',
-              text : "Error",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
+          new Notify({
+            title: 'Error',
+            text: "Error",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
           });
         }
       },
