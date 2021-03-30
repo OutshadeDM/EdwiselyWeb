@@ -665,11 +665,11 @@ $(async function() {
 						}
 						act += '</a></div>'
 					if (new Date(activity.doe.replace(/\s/, 'T')) > new Date())
-						act += `<div class="col-11 desc offset-1"><a type='button' href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
+						act += `<div class="col-11 desc offset-1"><a type='button' href="javascript:void(0)">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
 					else if (Number(activity.results.answered)) {					
 						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></div>
 						<div class="col-md-7 offset-3 mt-3 desc offset-1 col-12">
-							<a type='button' href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}>
+							<a type='button' href="javascript:void(0)">
 								<div class="mt-3" style="max-height: 300px;">
 									<canvas id="myChart${activity.id}"></canvas>
 								</div>
