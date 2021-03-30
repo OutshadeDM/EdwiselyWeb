@@ -96,17 +96,19 @@ $(document).ready(function () {
                 div += "<div class='col-2 d-flex justify-content-center align-items-center' style='color:blue;'><a href='codingQuestions.html?id=" + value.id + "&fname=" + value.name + "'><i class='fas fa-edit'></i>&nbsp;Edit</a></div>";
             else if (value.doe != "" && value.questions_count > 0 && isEdit)
                 div += "<div class='col-2 d-flex justify-content-center' style='color:blue;'>Awaiting Result</div>";
+            // else if (value.doe != "" && value.questions_count > 0 && !isEdit)
+            //     div += "<div class='col-2 d-flex justify-content-center' style='color:blue;'><img class='img-responsive' src='frontend/images/assessment-result.svg'/>&nbsp;Result</div>";
             else if (value.doe != "" && value.questions_count > 0 && !isEdit)
-                div += "<div class='col-2 d-flex justify-content-center' style='color:blue;'><img class='img-responsive' src='frontend/images/assessment-result.svg'/>&nbsp;Result</div>";
-            
+                div += "<div class='col-2 d-flex justify-content-center'></div>";
             // 6th column
             if (value.doe == "" && !value.sent && !value.questions_count)
                 div += "<div class='col-2 d-flex justify-content-center'><a href='codingQuestions.html?id=" + value.id + "&fname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
             else if (value.doe == "" && !value.sent && value.questions_count > 0)
                 div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
-            // else if (value.doe != "" && value.questions_count > 0 && isEdit)
-            //     div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Re-Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
-            else if (value.doe != "" && value.questions_count > 0)
+            else if (value.doe != "" && value.questions_count > 0 && isEdit)
+            div += "<div class='col-2 d-flex justify-content-center'></div>";
+                // div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Re-Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
+            else if (value.doe != "" && value.questions_count > 0 && !isEdit)
                 div += "<div class='col-2 d-flex justify-content-center'><button class='btn btn-primary text-white pl-4 pr-4 assBtn condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>View Result&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></button></div>";
         });
 

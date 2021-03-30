@@ -42,7 +42,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        console.log(result)
+        // console.log(result)
         if (result.status == 200) {
           questions = []
           questions_id = []
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
     $.each(questions, function (key, value) {
       $('#addquesDiv').append("<div class='row'>" +
-        "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+        "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + i++ + ").</div>" +
         "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
     });
   }
@@ -187,6 +187,9 @@ $(document).ready(function () {
     $('#title').val("");
     $('#selectUnit').val(0);
     $('#selectTopic').val(0);
+    topics = []
+    $('#topicTags').empty();
+    $('#topicTags').append("Select Unit First");
     $('#selectLang').val(0);
     $('#input1').val("");
     $('#output1').val("");
@@ -302,9 +305,7 @@ $(document).ready(function () {
     const output1 = $("#output1").val();
     const output2 = $("#output2").val();
 
-    // console.log(topics);
-
-    if (title && desc && marks && unit && unit != "0" && topics.length > 0 && language && input1 && input2 && output1 && output2) {
+    if (title && desc && marks && unit && unit != "0" && topics.length > 0 && language && language != "0" && input1 && input2 && output1 && output2) {
       
       $('#doneBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
       const test_cases = [];
@@ -601,7 +602,7 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!!language)
+      else if (!language)
         new Notify ({
             title: 'Error',
             text : "Plese Select Language",
