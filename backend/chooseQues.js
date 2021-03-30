@@ -97,7 +97,7 @@ $(document).ready(function () {
             sectionIds.push(value.id)
             marks.push(value.marks)
 
-            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="/frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
           });
         }
 
@@ -1045,7 +1045,7 @@ $(document).ready(function () {
 
 
             $('.addingQues').append("<div class='row'>" +
-              "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + num++ + "</div>" +
+              "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + num++ + ")</div>" +
 
               "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + selectedQuestions[i].id + "' data-question='" + selectedQuestions[i] + "'>" +
               selectedQuestions[i].name + "</div>" +

@@ -17,6 +17,7 @@ $(document).ready(function () {
   if (searchParams.get('cf') == 1) {
     const feedback_name = searchParams.get('fname');
     const feedback_id = searchParams.get('id');
+    $('#feedbackName').text(feedback_name);
 
 
     $(document).on('click', '#addques', function () {
@@ -150,12 +151,12 @@ $(document).ready(function () {
 
     $(document).on('click', '#sendFeedbackBtn', function () {
       if (question_count == 0) {
-        new Notify ({
-            title: 'Error',
-            text : "Please Add Questions",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Please Add Questions",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       } else {
         window.location.href = "sendFeedback.html?id=" + feedback_id + "&fname=" + feedback_name + "&qc=" + question_count;
