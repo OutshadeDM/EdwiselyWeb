@@ -234,9 +234,9 @@ $(document).ready(function () {
                     status: 'success',
                     autotimeout: 3000
                 });
-                // setTimeout(() => {
-                //   window.location.href = "addQuestionsPage.html?tid=" + result.tId
-                // }, 2000)
+                setTimeout(() => {
+                  window.location.href = "addQuestionsPage.html?tid=" + result.tId
+                }, 2000)
               }
             },
             error: function (error) {
