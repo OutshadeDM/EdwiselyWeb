@@ -148,7 +148,7 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data.sections, function (key, value) {
             // sectionIds.push(value.id)
-            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' data-marks=' + value.marks + ' id="section' + value.id + '">' + value.name + '</label></div>')
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
 
           });
           $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
@@ -156,6 +156,7 @@ $(document).ready(function () {
           sectionMarks = result.data.sections[0].marks;
           // console.log(section)
           $('#section' + section).addClass('active')
+          $('.tick').hide()
           refreshQuestions();
         }
       },
@@ -748,6 +749,7 @@ $(document).ready(function () {
             questionsList.push(result.data.id);
             questions.push(result.data);
             loadList();
+            $('#tick' + section).show()
             $("input.custom-control-input").attr("disabled", false);
           }
           else {
@@ -1589,7 +1591,9 @@ $(document).ready(function () {
                       const foundIndex = questions.findIndex(x => x.id == questionId);
                       questions[foundIndex].question_type = question_type1;
                       questions[foundIndex] = result1.data;
+                      $('#tick' + section).show()
                       loadList();
+
 
                       if (tId == "0" && sId != "0") {
                         setInterval(function () {

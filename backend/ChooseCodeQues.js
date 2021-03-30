@@ -149,7 +149,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // console.log(result);
+        console.log(result);
         if (result.status == 200) {
           $('#selectUnit').empty();
           $.each(result.data, function (key, value) {
