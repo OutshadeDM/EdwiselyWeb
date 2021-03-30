@@ -117,7 +117,7 @@ $(document).ready(function () {
 
 
         $('.addingQues').append("<div class='row'>" +
-          "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+          "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + i++ + ").</div>" +
 
           "<div class='col-10 chosenQuestions py-2 pr-4' data-toggle='modal' data-target='.chosenQuestionModal" + value.id + "' data-question='" + value + "'>" +
           value.name + "</div>" +
@@ -329,7 +329,7 @@ $(document).ready(function () {
             console.log(marks)
 
 
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>Q " + i + ".) " + value.name +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>" + i + ".) " + value.name +
               "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
               " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
