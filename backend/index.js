@@ -665,7 +665,7 @@ $(async function() {
 						}
 						act += '</a></div>'
 					if (new Date(activity.doe.replace(/\s/, 'T')) > new Date())
-						act += `<div class="col-11 desc offset-1"><a type='button' href="javascript:void(0)">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></a></div>`;
+						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></div>`;
 					else if (Number(activity.results.answered)) {					
 						act += `<div class="col-11 desc offset-1">A feedback named ${activity.title} has been created and set to expire on ${getFormattedDateTime(new Date(activity.doe.replace(/\s/, 'T')))}<i class="fa fa-external-link"></i></div>
 						<div class="col-md-7 offset-3 mt-3 desc offset-1 col-12">
