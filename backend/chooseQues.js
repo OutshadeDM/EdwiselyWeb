@@ -99,6 +99,9 @@ $(document).ready(function () {
 
             $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
           });
+
+          $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
+
         }
 
 
@@ -146,6 +149,9 @@ $(document).ready(function () {
 
 
 
+  $(document).on('click', '.editTest', function () {
+    window.location.href = 'createAssessment.html?isObj=true&id=' + tId
+  })
 
 
 
