@@ -129,6 +129,11 @@ $(document).ready(function () {
     selectedQuestionsId = []
     selectedQuestions = []
 
+    $('.totalMarks').val(selectedQuestions.length);
+    $('.totalQuestions').val(selectedQuestions.length * sectionMarks);
+
+
+
     $('.chooseQuestionsInput').each(function () {
       $(this).prop('checked', false)
     })
@@ -949,36 +954,43 @@ $(document).ready(function () {
 
   // total question and marks function 
   function totalQuesMarks() {
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
+    // $.ajax({
+    //   url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   headers: {
+    //     'Authorization': `Bearer ${$user.token}`
+    //   },
+    //   success: function (result) {
 
-        let totalMarks = 0;
-        let totalQuestions = 0
+    //     let totalMarks = 0;
+    //     let totalQuestions = 0
 
-        if (result.status == 200 && result.data) {
+    //     if (result.status == 200 && result.data) {
 
-          $.each(result.data, function (key, value) {
+    //       $.each(result.data, function (key, value) {
 
-            totalMarks = totalMarks + marks[sectionIds.indexOf(value.section_id)];
-            ++totalQuestions;
-          });
-          console.log(totalMarks)
-          console.log(totalQuestions)
-          $('.totalMarks').val(totalMarks)
-          $('.totalQuestions').val(totalQuestions)
+    //         totalMarks = totalMarks + marks[sectionIds.indexOf(value.section_id)];
+    //         ++totalQuestions;
+    //       });
+    //       console.log(totalMarks)
+    //       console.log(totalQuestions)
+    //       $('.totalMarks').val(totalMarks)
+    //       $('.totalQuestions').val(totalQuestions)
 
-        }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
+    //     }
+    //   },
+    //   error: function (error) {
+    //     alert("Request Failed with status: " + error.status);
+    //   }
+    // });
+
+
+    $('.totalMarks').val(selectedQuestions.length);
+    $('.totalQuestions').val(selectedQuestions.length * sectionMarks);
+
+
+
   }
 
 
@@ -1023,6 +1035,9 @@ $(document).ready(function () {
             }
 
           });
+
+          $('.totalMarks').val(selectedQuestions.length);
+          $('.totalQuestions').val(selectedQuestions.length * sectionMarks);
 
           let num = 1;
           for (let i = 0; i < selectedQuestions.length; i++) {
@@ -1105,6 +1120,7 @@ $(document).ready(function () {
   //update to panel btn
   $('.addChosenQuestions').on('click', function () {
     displaySelectedQuestions()
+    //$('.saveToSectionBtn').click()
   })
 
   function displaySelectedQuestions() {

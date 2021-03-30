@@ -1005,10 +1005,9 @@ scrollbar-width: none;  /* Firefox */
 .addingQues{
   overflow-y: scroll;
   height: 75vh;
-  /* background-color: white;
-
+  background-color: white;
   border: solid 3px #dfdfdf;
-  border-radius: 10px; */
+  border-radius: 10px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -307,12 +307,12 @@ $(document).ready(function () {
           //alert(result.status)
 
           if (result.status == 200) {
-            new Notify ({
-                title: 'Error',
-                text : "Survey Successfully Sent",
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: "Survey Successfully Sent",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
 
             setTimeout(function () {
@@ -332,12 +332,12 @@ $(document).ready(function () {
 
     }
     else {
-      new Notify ({
-          title: 'Error',
-          text : "Fill Valid Details",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Fill Valid Details",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
   });

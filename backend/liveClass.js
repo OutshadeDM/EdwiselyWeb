@@ -128,7 +128,7 @@ $(async function () {
 			<label class="form-check-label" for="select${tabNumber}">SELECT ALL</label>
 			<input style="float: right;right: 10px;" name="selectAll" data-tab=${tabNumber} type="checkbox" class="form-check-input selectAll" id="select${tabNumber}">		
 		</div>
-		</div><div class="student-list row"></div>`)
+		</div><div class="student-list row" style="height:700px"></div>`)
 		$.each(section.students.data, (index, student) => {
 			$(`#t${tabNumber} .student-list`).append(`<div class="form-check col-12 single">
 	                                  <label class="form-check-label" for="exampleCheck${selectNumber}">${student.roll_number} - ${student.name}</label>
