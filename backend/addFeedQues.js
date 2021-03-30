@@ -98,7 +98,7 @@ $(document).ready(function () {
 
     $.each(questions, function (key, value) {
       $('#addquesDiv').append("<div class='row'>" +
-        "<div class='col-2 pl-2 pt-4 chosenQuestions'>Q" + i++ + ").</div>" +
+        "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + i++ + ").</div>" +
         "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
     });
   }
@@ -177,24 +177,24 @@ $(document).ready(function () {
         success: function (result) {
           // console.log(result);
           if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : result.message,
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: result.message,
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
             $('#loadingDiv').remove();
             clearAll();
             getQuestions();
           }
           else {
-            new Notify ({
-                title: 'Error',
-                text : result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Error',
+              text: result.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
             });
             $('#loadingDiv').remove();
           }
@@ -207,36 +207,36 @@ $(document).ready(function () {
     }
     else {
       if (!option1 || !option2)
-        new Notify ({
-            title: 'Error',
-            text : "2 Options are Mandatory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "2 Options are Mandatory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       else if (!catagory)
-        new Notify ({
-            title: 'Error',
-            text : "Please Select Catagory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Please Select Catagory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       else if (!question)
-        new Notify ({
-            title: 'Error',
-            text : "Please enter Question",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Please enter Question",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       else if (!option1 || !option2 || !catagory || !question)
-        new Notify ({
-            title: 'Error',
-            text : "Some fields are mandatory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Some fields are mandatory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
     }
   });
@@ -250,13 +250,13 @@ $(document).ready(function () {
     else if (!isSend) {
       window.location.href = "myFeedbacks.html";
     }
-    else{
-      new Notify ({
-          title: 'Error',
-          text : "Please Add Questions",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+    else {
+      new Notify({
+        title: 'Error',
+        text: "Please Add Questions",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
   });
@@ -326,12 +326,12 @@ $(document).ready(function () {
           success: function (result) {
             // console.log(result);
             if (result.status == 200) {
-              new Notify ({
-                  title: 'Success',
-                  text : result.message,
-                  autoclose: true,
-                  status: 'success',
-                  autotimeout: 3000
+              new Notify({
+                title: 'Success',
+                text: result.message,
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
               });
               $('#loadingDiv').remove();
               getQuestions();
@@ -339,12 +339,12 @@ $(document).ready(function () {
             }
             else {
               $('#loadingDiv').remove();
-              new Notify ({
-                  title: 'Error',
-                  text : result.message,
-                  autoclose: true,
-                  status: 'error',
-                  autotimeout: 3000
+              new Notify({
+                title: 'Error',
+                text: result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
               });
             }
           },
@@ -394,12 +394,12 @@ $(document).ready(function () {
           success: function (result) {
             // console.log(result);
             if (result.status == 200) {
-              new Notify ({
-                  title: 'Success',
-                  text : result.message,
-                  autoclose: true,
-                  status: 'success',
-                  autotimeout: 3000
+              new Notify({
+                title: 'Success',
+                text: result.message,
+                autoclose: true,
+                status: 'success',
+                autotimeout: 3000
               });
               $('#loadingDiv').remove();
               getQuestions();
@@ -407,12 +407,12 @@ $(document).ready(function () {
             }
             else {
               $('#loadingDiv').remove();
-              new Notify ({
-                  title: 'Error',
-                  text : result.message,
-                  autoclose: true,
-                  status: 'error',
-                  autotimeout: 3000
+              new Notify({
+                title: 'Error',
+                text: result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
               });
             }
           },
@@ -425,36 +425,36 @@ $(document).ready(function () {
     }
     else {
       if (!option1 || !option2)
-        new Notify ({
-            title: 'Error',
-            text : "2 Options are Mandatory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "2 Options are Mandatory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       else if (!catagory)
-        new Notify ({
-            title: 'Error',
-            text : "Please Select Catagory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Please Select Catagory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       else if (!question)
-        new Notify ({
-            title: 'Error',
-            text : "Please enter Question",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Please enter Question",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       else if (!option1 || !option2 || !catagory || !question)
-        new Notify ({
-            title: 'Error',
-            text : "Some fields are mandatory",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Some fields are mandatory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
     }
   });
@@ -487,12 +487,12 @@ $(document).ready(function () {
         success: function (result) {
           console.log(result);
           if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : result.message,
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
+            new Notify({
+              title: 'Success',
+              text: result.message,
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
             });
             $('#loadingDiv').remove();
             getQuestions();
@@ -500,12 +500,12 @@ $(document).ready(function () {
           }
           else {
             $('#loadingDiv').remove();
-            new Notify ({
-                title: 'Error',
-                text : result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
+            new Notify({
+              title: 'Error',
+              text: result.message,
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
             });
           }
         },
@@ -516,12 +516,12 @@ $(document).ready(function () {
       });
     }
     else {
-      new Notify ({
-          title: 'Error',
-          text : "Error, try again later",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: "Error, try again later",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
     }
   });

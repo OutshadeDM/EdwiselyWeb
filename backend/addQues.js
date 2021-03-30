@@ -72,7 +72,7 @@ $(document).ready(function () {
 
   let type = 'public';
   let answer = '';
-  
+
   let sectionMarks = 0
   let section = 0;
   //initially hiding the hint and solution divs
@@ -133,7 +133,7 @@ $(document).ready(function () {
 
   // radios for selecting
   $('.tick').hide();
-  
+
   getTestDetails()
   function getTestDetails() {
     $.ajax({
@@ -148,14 +148,17 @@ $(document).ready(function () {
         if (result.status == 200 && result.data) {
           $.each(result.data.sections, function (key, value) {
             // sectionIds.push(value.id)
-            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-id=' + value.id + ' data-marks='+value.marks+' id="section' + value.id + '">' + value.name + '</label></div>')
+            $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
+
           });
+          $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
           section = result.data.sections[0].id;
           sectionMarks = result.data.sections[0].marks;
           // console.log(section)
           $('#section' + section).addClass('active')
+          $('.tick').hide()
           refreshQuestions();
-        }        
+        }
       },
       error: function (error) {
         alert("Request Failed with status: " + error.status);
@@ -170,6 +173,10 @@ $(document).ready(function () {
     $('#section' + section).addClass('active')
     clearAll(true);
     refreshQuestions();
+  })
+
+  $(document).on('click', '.editTest', function () {
+    window.location.href = 'createAssessment.html?isObj=true&id=' + tId
   })
 
   $('.typeSelect').on('change', function () {
@@ -296,19 +303,19 @@ $(document).ready(function () {
 
   function loadList() {
     console.log(questions);
-    if(questions.length > 0){
+    if (questions.length > 0) {
       $("#addquesDiv").empty();
       let i = 1;
       $.each(questions, function (key, value) {
         // $('#addquesDiv').append(`<div class="addObjQuestions my-2 span-dept p-2" style='background:#e6e6e6;border-radius: 10px;cursor:pointer;'><p class='questions' id='p` + value.id + `' data-id='` + value.id + `'>` + value.name.replace('<pre>', '') + `</p></div>`);
-        if(value.section_id == section || !value.section_id){
+        if (value.section_id == section || !value.section_id) {
           $('#addquesDiv').append("<div class='row'>" +
             "<div class='col-2 pl-2 pt-4 chosenQuestions'>" + i++ + ").</div>" +
             "<div class='col-10 chosenQuestions py-2 pr-2 questions' id='p" + value.id + "' data-id='" + value.id + "' style='cursor:pointer;'>" + value.name.replace('<pre>', '') + "</div>");
         }
       });
-      $("#questionNo").val(i-1);
-      $("#totalMarks").val((i-1)*sectionMarks);
+      $("#questionNo").val(i - 1);
+      $("#totalMarks").val((i - 1) * sectionMarks);
       // console.log(i,i*sectionMarks)
       MathJax.typesetPromise();
     }
@@ -569,12 +576,12 @@ $(document).ready(function () {
       return true
     }
     else {
-      new Notify ({
-          title: 'Error',
-          text : 'Invalid Image Type',
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
+      new Notify({
+        title: 'Error',
+        text: 'Invalid Image Type',
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
       });
       return false;
     }
@@ -728,20 +735,21 @@ $(document).ready(function () {
           console.log(result);
           if (result.status == 200) {
             $('#loadingDiv').remove();
-            new Notify ({
+            new Notify({
               title: 'Success',
-              text : "Question Added to Database Successfully",
+              text: "Question Added to Database Successfully",
               autoclose: true,
               status: 'success',
               autotimeout: 3000
             });
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
-            
+
             clearAll(true);
             questionsList.push(result.data.id);
             questions.push(result.data);
             loadList();
+            $('#tick' + section).show()
             $("input.custom-control-input").attr("disabled", false);
           }
           else {
@@ -758,65 +766,65 @@ $(document).ready(function () {
     }
     else {
       if (topics == null || !topics || topics.length == "0")
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please Select Topics",
+          text: "Please Select Topics",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (!option1 || !option2)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "2 Options are Mandatory",
+          text: "2 Options are Mandatory",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (!bloom_level || !difficulty_level)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please Select Bloom and Diffculty Level values",
+          text: "Please Select Bloom and Diffculty Level values",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (!question)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please enter Question",
+          text: "Please enter Question",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (!type)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please Select Public or Private",
+          text: "Please Select Public or Private",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (!answer)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please Select an Option as Answer",
+          text: "Please Select an Option as Answer",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (!source)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please Enter Source",
+          text: "Please Enter Source",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
         });
       else if (topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type)
-        new Notify ({
+        new Notify({
           title: 'Error',
-          text : "Please Enter Valid Inputs",
+          text: "Please Enter Valid Inputs",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
@@ -938,15 +946,15 @@ $(document).ready(function () {
 
   }
 
-  $("#btnSave").on('click',function () {
+  $("#btnSave").on('click', function () {
     window.location.href = 'myAssessment.html';
   });
 
-  $("#btnSaveSend").on('click',function () {
+  $("#btnSaveSend").on('click', function () {
     window.location.href = "sendQuestionsPage.html?id=" + subSemId + "&tid=" + tId + "&tname=" + tname + "&uid=" + unit_id + "&isObj=true&qc=" + questions.length;
   });
-  
-  $("#saveSection").on('click', function(){
+
+  $("#saveSection").on('click', function () {
     saveQuestions();
   });
 
@@ -987,9 +995,9 @@ $(document).ready(function () {
         success: function (result) {
 
           if (result.status == 200) {
-            new Notify ({
+            new Notify({
               title: 'Success',
-              text : result.message,
+              text: result.message,
               autoclose: true,
               status: 'success',
               autotimeout: 3000
@@ -1007,9 +1015,9 @@ $(document).ready(function () {
           else {
             $('#loadingDiv').remove();
             $("input.custom-control-input").attr("disabled", false);
-            new Notify ({
+            new Notify({
               title: 'Error',
-              text : result.message,
+              text: result.message,
               autoclose: true,
               status: 'error',
               autotimeout: 3000
@@ -1567,9 +1575,9 @@ $(document).ready(function () {
                   },
                   success: function (result) {
                     if (result.status == 200 || result.status == 400) {
-                      new Notify ({
+                      new Notify({
                         title: 'Success',
-                        text : "Question updated Successfully",
+                        text: "Question updated Successfully",
                         autoclose: true,
                         status: 'success',
                         autotimeout: 3000
@@ -1583,7 +1591,9 @@ $(document).ready(function () {
                       const foundIndex = questions.findIndex(x => x.id == questionId);
                       questions[foundIndex].question_type = question_type1;
                       questions[foundIndex] = result1.data;
+                      $('#tick' + section).show()
                       loadList();
+
 
                       if (tId == "0" && sId != "0") {
                         setInterval(function () {
@@ -1602,9 +1612,9 @@ $(document).ready(function () {
 
               }
               else {
-                new Notify ({
+                new Notify({
                   title: 'Success',
-                  text : result1.message,
+                  text: result1.message,
                   autoclose: true,
                   status: 'success',
                   autotimeout: 3000
@@ -1630,9 +1640,9 @@ $(document).ready(function () {
             }
             else {
               $('#loadingDiv').remove();
-              new Notify ({
+              new Notify({
                 title: 'Error',
-                text : result.message,
+                text: result.message,
                 autoclose: true,
                 status: 'error',
                 autotimeout: 3000
@@ -1657,65 +1667,65 @@ $(document).ready(function () {
       }
       else {
         if (!question)
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Please enter Question",
+            text: "Please enter Question",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else if (newOptions.length <= 1)
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "2 Options are Mandatory",
+            text: "2 Options are Mandatory",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else if (topics == null || !topics || topics.length == "0")
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Please Select Topics",
+            text: "Please Select Topics",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else if (!bloom_level)
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Please Select Bloom Level value",
+            text: "Please Select Bloom Level value",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else if (!type)
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Please Select Public or Private",
+            text: "Please Select Public or Private",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else if (!answer)
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Please Select an Option as Answer",
+            text: "Please Select an Option as Answer",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else if (!source)
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Please Enter Source",
+            text: "Please Enter Source",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
           });
         else
-          new Notify ({
+          new Notify({
             title: 'Error',
-            text : "Some fields are mandatory",
+            text: "Some fields are mandatory",
             autoclose: true,
             status: 'error',
             autotimeout: 3000

@@ -369,12 +369,12 @@ $(document).ready(function () {
               //alert(result.status)
 
               if (result.status == 200) {
-                new Notify ({
-                    title: 'Error',
-                    text : "Test Successfully Sent",
-                    autoclose: true,
-                    status: 'error',
-                    autotimeout: 3000
+                new Notify({
+                  title: 'Error',
+                  text: "Test Successfully Sent",
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
                 });
 
                 setTimeout(function () {
@@ -418,12 +418,12 @@ $(document).ready(function () {
               //alert(result.status)
 
               if (result.status == 200) {
-                new Notify ({
-                    title: 'Success',
-                    text : "Test Successfully Sent",
-                    autoclose: true,
-                    status: 'success',
-                    autotimeout: 3000
+                new Notify({
+                  title: 'Success',
+                  text: "Test Successfully Sent",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
                 });
 
                 setTimeout(function () {
@@ -442,12 +442,12 @@ $(document).ready(function () {
         }
       }
       else {
-        new Notify ({
-            title: 'Error',
-            text : "Fill Valid Details",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Fill Valid Details",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       }
     })
@@ -742,7 +742,6 @@ $(document).ready(function () {
 
     $('#sendQuestionsBtn').on('click', function () {
       timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
-
       if (doe && starttime && timelimit_in_secs && selectedStudentsId.length != 0) {
 
         if (objective) {
@@ -770,15 +769,15 @@ $(document).ready(function () {
               'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-              //alert(result.status)
+              console.log(result)
 
               if (result.status == 200) {
-                new Notify ({
-                    title: 'Success',
-                    text : "Test Successfully Sent",
-                    autoclose: true,
-                    status: 'success',
-                    autotimeout: 3000
+                new Notify({
+                  title: 'Success',
+                  text: "Test Successfully Sent",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
                 });
 
                 setTimeout(function () {
@@ -822,12 +821,12 @@ $(document).ready(function () {
               //alert(result.status)
 
               if (result.status == 200) {
-                new Notify ({
-                    title: 'Success',
-                    text : "Test Successfully Sent",
-                    autoclose: true,
-                    status: 'success',
-                    autotimeout: 3000
+                new Notify({
+                  title: 'Success',
+                  text: "Test Successfully Sent",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
                 });
 
                 setTimeout(function () {
@@ -846,12 +845,12 @@ $(document).ready(function () {
         }
       }
       else {
-        new Notify ({
-            title: 'Error',
-            text : "Fill All Details",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
+        new Notify({
+          title: 'Error',
+          text: "Fill All Details",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
         });
       }
     })
