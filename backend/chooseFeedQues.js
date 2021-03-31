@@ -55,7 +55,8 @@ $(document).ready(function () {
   //on selecting templates and categories
   $('#feedbackCategory').on('change', function () {
     category = this.value;
-    console.log(category)
+    $('#feedbackTemplate').find('option').remove()
+    $('#feedbackTemplate').append('<option value="none" selected disabled hidden>Template</option>')
     getTemplates(category)
   })
 
@@ -79,21 +80,25 @@ $(document).ready(function () {
 
 
   function getTemplates(category) {
-
+    var form = new FormData();
+    form.append("category_id", category);
     $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/survey/getFeedbackTemplates?survey_category_id=' + category,
-      type: 'GET',
-      contentType: 'application/json',
+      url: 'https://stagingfacultypython.edwisely.com/survey/getSurveyTemplate',
+      type: 'POST',
+      dataType: 'json',
+      data: form,
+      contentType: false,
+      processData: false,
       headers: {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
         console.log(result.message);
 
-        if (result.status == 200 && result.data) {
+        if (result.status == 200 && result.templates) {
 
           //template = null
-          $.each(result.data, function (key, value) {
+          $.each(result.templates, function (key, value) {
             //console.log(value)
             $('#feedbackTemplate').append('<option value=' + value.id + '>' + value.name + '</option>');
           });
