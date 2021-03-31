@@ -186,6 +186,7 @@ $(document).ready(function () {
   function clearAll() {
     $('#title').val("");
     $('#selectUnit').val(0);
+    $('#selectUnit').prop("disabled",false);
     $('#selectTopic').val(0);
     topics = []
     $('#topicTags').empty();

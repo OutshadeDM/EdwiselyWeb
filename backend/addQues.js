@@ -20,6 +20,8 @@ $(document).ready(function () {
   let tname = "";
   let sId = "0";
   let editQuesJSON = "";
+  let sectionMarks = 0
+  let section = 0;
   let isCookie = false;
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
@@ -33,6 +35,8 @@ $(document).ready(function () {
     if (tname)
       $('#courseName').text(tname);
   }
+  if(searchParams.has('seid'))
+    section = searchParams.get('seid');
 
   //preparing for post api of questions
 
@@ -73,8 +77,6 @@ $(document).ready(function () {
   let type = 'public';
   let answer = '';
 
-  let sectionMarks = 0
-  let section = 0;
   //initially hiding the hint and solution divs
   $('#hintDiv').hide();
   $('#hintBtn').show();
@@ -149,11 +151,14 @@ $(document).ready(function () {
           $.each(result.data.sections, function (key, value) {
             // sectionIds.push(value.id)
             $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
-
           });
           $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
-          section = result.data.sections[0].id;
-          sectionMarks = result.data.sections[0].marks;
+          if(!section || section == 0){
+            section = result.data.sections[0].id;
+            sectionMarks = result.data.sections[0].marks;
+          }
+          else
+            sectionMarks = $('#section'+section).data('marks');
           // console.log(section)
           $('#section' + section).addClass('active')
           $('.tick').hide()
@@ -182,10 +187,10 @@ $(document).ready(function () {
   $('.typeSelect').on('change', function () {
     const page = $('.typeSelect').val()
     if (page == 2) {
-      window.location.href = `uploadQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0`
+      window.location.href = `uploadQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0&seid=${section}`
     }
     if (page == 1) {
-      window.location.href = `chooseQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0`
+      window.location.href = `chooseQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0&seid=${section}`
     }
   })
 

@@ -682,7 +682,7 @@ $(async function() {
 					}
 					act += `<div class="col-lg-3 col-md-6 mt-3  align-self-end align-self-center d-flex align-items-center justify-content-center"><img class="img-fluid mr-2" src="frontend/images/send.svg"> ${activity.sent_to} Send To</div>
 					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' data-toggle="modal" data-target="#comments" data-type="survey" data-id=${activity.id} style='white-space:nowrap'><img class="img-fluid mr-2" src="frontend/images/messenger.svg"> ${typeof activity.comments_counts !== 'undefined'? activity.comments_counts: activity.comments_count} Comments</a></div>
-					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-type="survey" data-id=${activity.id}><i class="fas fa-poll mr-2"></i>Survey Result</a></div>
+					<div class="col-lg-3 col-md-6 mt-3 forward align-self-end d-flex align-items-center justify-content-center" style='white-space:nowrap'><a type='button' style="text-decoration: none; color: #363636" href="javascript:void(0)" data-toggle="modal" data-target="#survey" data-name="${activity.title}" data-id=${activity.id}><i class="fas fa-poll mr-2"></i>Survey Result</a></div>
 					</div>
 			</div>`;
 				} else if (activity.type == 'Subjective') {
@@ -1066,7 +1066,8 @@ $(async function() {
 	$('#survey').on('show.bs.modal', async function (event) {
 		var button = $(event.relatedTarget) // Button that triggered the modal
 		var id = button.data('id');
-		var type = button.data('type'); // Extract info from data-* attributes
+		var name = button.data('name'); // Extract info from data-* attributes
+		$('#surveyName').html(name);
 		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 		var modal = $(this);
 		modal.find('.modal-body').html("Loading...");

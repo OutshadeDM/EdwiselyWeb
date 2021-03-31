@@ -1780,11 +1780,15 @@ $(document).ready(function () {
             $.each(questions, function (key, value) {
                 div = div + "<div class='objQuestionTab'>";
                 div = div + "<div class='row py-2 mx-0'>";
-                div = div + "<div class='col-sm-11 px-2' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
+                div = div + "<div class='col-10 px-2' style='cursor:pointer;' data-toggle='modal' data-id='" + value.id + "' data-target='#courseObjQuestionModal'>";
                 div = div + "<p class='question'>Q." + j + " " + value.question.name + "</p>";
                 div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level " + value.blooms_level + "</p>";
                 div = div + "</div>";
-                div = div + "<div class='col-sm-1 px-0 text-end d-flex align-items-center justify-content-center'>";
+                div = div + "<div class='col-1 px-0 text-end d-flex align-items-center justify-content-center'>";
+                if(value.question.question_img)
+                    div += "<div class='col-1'><i class='fas fa-image fa-lg pl-2'></i></div>";
+                else
+                    div += "<div class='col-1'></div>"
                 if(yourContent){
                     yourQuestions.push(value);
                     div = div + "<div class='dropdown pr-1'>";
