@@ -297,7 +297,6 @@ $(document).ready(function () {
 
   function getAllQuestions(unit) {
     //$('.addingQues').empty()
-    console.log(unit, grandTopicsId, topicsId, subTopicsId)
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/codeEditor/getUnitCodingProblems?unit_id=' + unit + '&grand_topic_ids=' + grandTopicsId + '&topic_ids=' + topicsId + '&sub_topic_ids=' + subTopicsId,
       type: 'GET',
