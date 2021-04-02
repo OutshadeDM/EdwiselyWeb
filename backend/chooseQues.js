@@ -22,6 +22,14 @@ $(document).ready(function () {
   let description = ""
   let objective = false
   let question_count = 0
+
+
+  let sectionIds = []
+  let section = '';
+  let sectionMarks = 0;
+  let marks = []
+
+
   // let units = [];
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
@@ -34,6 +42,8 @@ $(document).ready(function () {
   if (searchParams.has('uid')) {
     unit_id = searchParams.get('uid');
   }
+  if (searchParams.has('seid'))
+    section = searchParams.get('seid');
 
 
   //setting the name of test
@@ -57,19 +67,16 @@ $(document).ready(function () {
 
   let blooms_lvl = 0
   let i = 0;
-  let sectionIds = []
-  let section = '';
-  let sectionMarks = 0;
-  let marks = []
+
 
 
   $('.typeSelect').on('change', function () {
     const page = $('.typeSelect').val()
     if (page == 2) {
-      window.location.href = `uploadQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${description}&isObj=true&qc=0`
+      window.location.href = `uploadQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&isObj=true&qc=0&seid=${section}`
     }
     if (page == 3) {
-      window.location.href = `addQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${description}&isObj=true&qc=0`
+      window.location.href = `addQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${description}&isObj=true&qc=0&seid=${section}`
     }
   })
 
@@ -102,18 +109,22 @@ $(document).ready(function () {
 
           $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
 
+          // section = sectionIds[0]
+          if (!section || section == 0) {
+            section = result.data.sections[0].id;
+            sectionMarks = result.data.sections[0].marks;
+          }
+          else
+            sectionMarks = $('#section' + section).data('marks');
+
+          $('#section' + section).addClass('active')
+          questionsOfTest(section)
+          totalQuesMarks()
+
         }
 
 
         $('.tick').hide()
-
-
-        section = sectionIds[0]
-
-        sectionMarks = $('#section' + section).data('marks')
-        $('#section' + section).addClass('active')
-        questionsOfTest(section)
-        totalQuesMarks()
 
 
       },
@@ -132,8 +143,8 @@ $(document).ready(function () {
     selectedQuestionsId = []
     selectedQuestions = []
 
-    $('.totalMarks').val(selectedQuestions.length);
-    $('.totalQuestions').val(selectedQuestions.length * sectionMarks);
+    $('.totalMarks').val(selectedQuestions.length * sectionMarks);
+    $('.totalQuestions').val(selectedQuestions.length);
 
 
 
@@ -992,8 +1003,8 @@ $(document).ready(function () {
     // });
 
 
-    $('.totalMarks').val(selectedQuestions.length);
-    $('.totalQuestions').val(selectedQuestions.length * sectionMarks);
+    $('.totalMarks').val(selectedQuestions.length * sectionMarks);
+    $('.totalQuestions').val(selectedQuestions.length);
 
 
 
@@ -1042,8 +1053,8 @@ $(document).ready(function () {
 
           });
 
-          $('.totalMarks').val(selectedQuestions.length);
-          $('.totalQuestions').val(selectedQuestions.length * sectionMarks);
+          $('.totalMarks').val(selectedQuestions.length * sectionMarks);
+          $('.totalQuestions').val(selectedQuestions.length);
 
           let num = 1;
           for (let i = 0; i < selectedQuestions.length; i++) {

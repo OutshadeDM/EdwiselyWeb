@@ -19,6 +19,13 @@ $(document).ready(function () {
   let desc = ""
   let objective = false
 
+  let sectionIds = []
+  let section = '';
+  let sectionMarks = 0;
+  let marks = []
+
+
+
   if (searchParams.has('id') && searchParams.has('tid')) {
     subSemId = searchParams.get('id');
     tId = searchParams.get('tid');
@@ -31,6 +38,10 @@ $(document).ready(function () {
     unit_id = searchParams.get('uid');
   }
 
+  if (searchParams.has('seid'))
+    section = searchParams.get('seid');
+
+
   //variables
   let unit = 0
   let topics = []
@@ -42,20 +53,16 @@ $(document).ready(function () {
   $('#courseName').append(tname)
 
 
-  let sectionIds = []
-  let section = '';
-  let sectionMarks = 0;
-  let marks = []
 
 
 
   $('.typeSelect').on('change', function () {
     const page = $('.typeSelect').val()
     if (page == 1) {
-      window.location.href = `chooseQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${desc}&isObj=true&qc=0`
+      window.location.href = `chooseQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${desc}&isObj=true&qc=0&seid=${section}`
     }
     if (page == 3) {
-      window.location.href = `addQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${desc}&isObj=true&qc=0`
+      window.location.href = `addQues.html?id=${subSemId}&tid=${tId}&tname=${tname}&uid=${unit_id}&desc=${description}&isObj=true&qc=0&seid=${section}`
     }
   })
 
@@ -87,17 +94,23 @@ $(document).ready(function () {
 
           });
           $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
+
+          // section = sectionIds[0]
+          if (!section || section == 0) {
+            section = result.data.sections[0].id;
+            sectionMarks = result.data.sections[0].marks;
+          }
+          else
+            sectionMarks = $('#section' + section).data('marks');
+
+          $('#section' + section).addClass('active')
+          questionsOfTest(section)
+          totalQuesMarks()
         }
 
 
         $('.tick').hide()
 
-        section = sectionIds[0]
-
-        sectionMarks = $('#section' + section).data('marks')
-        $('#section' + section).addClass('active')
-        questionsOfTest(section)
-        totalQuesMarks()
 
 
       },
@@ -243,43 +256,16 @@ $(document).ready(function () {
 
   $('.quesUploadFile').on('change', function () {
     uploaded_question = $(".quesUploadFile")[0].files[0];
-    console.log(uploaded_question)
+    console.log(uploaded_question.name)
+    $('#uploadedFileName').text(uploaded_question.name + " has been selected")
   })
 
 
 
   // total question and marks function 
   function totalQuesMarks() {
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/getObjectiveTestQuestions?test_id=' + tId,
-      type: 'GET',
-      contentType: 'application/json',
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-
-        let totalMarks = 0;
-        let totalQuestions = 0
-
-        if (result.status == 200 && result.data) {
-
-          $.each(result.data, function (key, value) {
-
-            totalMarks = totalMarks + marks[sectionIds.indexOf(value.section_id)];
-            ++totalQuestions;
-          });
-          console.log(totalMarks)
-          console.log(totalQuestions)
-          $('.totalMarks').val(totalMarks)
-          $('.totalQuestions').val(totalQuestions)
-
-        }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
+    $('.totalMarks').val(selectedQuestions.length * sectionMarks);
+    $('.totalQuestions').val(selectedQuestions.length);
   }
 
 
@@ -325,6 +311,8 @@ $(document).ready(function () {
             }
 
           });
+          $('.totalMarks').val(selectedQuestions.length * sectionMarks);
+          $('.totalQuestions').val(selectedQuestions.length);
 
           //displaying the already selected questions
           let num = 1;
