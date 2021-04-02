@@ -405,7 +405,7 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!!language)
+      else if (!language)
         new Notify ({
             title: 'Error',
             text : "Plese Select Language",

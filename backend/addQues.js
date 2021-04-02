@@ -770,7 +770,7 @@ $(document).ready(function () {
       });
     }
     else {
-      if (topics == null || !topics || topics.length == "0")
+      if (topics.length <= 0)
         new Notify({
           title: 'Error',
           text: "Please Select Topics",

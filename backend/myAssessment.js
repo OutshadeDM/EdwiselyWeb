@@ -82,8 +82,8 @@ $(document).ready(function () {
                 div += "<div class='col-2'>"+value.start_time+"</div>";
             else
                 div += "<div class='col-2'>"+value.created_at+"</div>"
-            if(value.name.length > 15)
-                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.name+"'>"+value.name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
+            if(value.subject_name.length > 15)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.subject_name+"'>"+value.subject_name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
             else
                 div += "<div class='col-2 d-flex justify-content-center'>"+value.subject_name+"</div>"
             if(value.description.length > 10)

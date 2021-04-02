@@ -1784,11 +1784,11 @@ $(document).ready(function () {
                 div = div + "<p class='question'>Q." + j + " " + value.question.name + "</p>";
                 div = div + "<p class='questionLevel' style='opacity: 0.6;'>Level " + value.blooms_level + "</p>";
                 div = div + "</div>";
-                div = div + "<div class='col-1 px-0 text-end d-flex align-items-center justify-content-center'>";
                 if(value.question.question_img)
-                    div += "<div class='col-1'><i class='fas fa-image fa-lg pl-2'></i></div>";
+                    div += "<div class='col-1 d-flex align-items-center justify-content-center'><i class='fas fa-image fa-lg pl-2'></i></div>";
                 else
                     div += "<div class='col-1'></div>"
+                div = div + "<div class='col-1 px-0 text-end d-flex align-items-center justify-content-center'>";
                 if(yourContent){
                     yourQuestions.push(value);
                     div = div + "<div class='dropdown pr-1'>";

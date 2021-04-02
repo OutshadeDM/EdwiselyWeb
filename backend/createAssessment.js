@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   $user = "";
   if (isLoggedIn()) {
-    // console.log(isLoggedIn(), 'yes');
+    console.log(isLoggedIn(), 'yes');
     $user = JSON.parse(isLoggedIn());
     $('html').removeClass('d-none');
     $("#greetingNav").html($user.name);
@@ -16,7 +16,7 @@ $(document).ready(function () {
   let objective = false
   let i = 1
   let tId = 0;
-  // let units = [];
+  const old_sections = [];
   if (searchParams.has('isObj')) {
     objective = searchParams.get('isObj')
   }
@@ -87,7 +87,8 @@ $(document).ready(function () {
               tabsize: 2,
               height: 200
             });
-            $("#summernote"+1).summernote("code",value.instructions)
+            $("#summernote"+i).summernote("code",value.instructions);
+            old_sections.push(value);
           });
         }        
       },
@@ -187,35 +188,43 @@ $(document).ready(function () {
 
     const section_name1 = $('#section_name1').val();
     const section_marks1 = $('#section_marks1').find(":selected").val();
-    const section_instr1 = $($("#summernote1").summernote("code")).text();
+    const section_instr1 = $("#summernote1").summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
 
     // console.log(title,desc,subject,section_name1,section_marks1,section_instr1);
     
     if (title && desc && subject && section_name1 && section_marks1) {
 
       if (objective == 'true') {
-        const sections = []
-        sections.push({name:section_name1,marks:section_marks1,instructions:section_instr1});
-        let index = 2;
-        while (index <= i){
-          if($('#section_name'+index).val() && $('#section_marks'+index).find(":selected").val()){
-            sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).find(":selected").val(),instructions: $($("#summernote"+index).summernote("code")).text()});
-          }
-          index++;
-        }
-        var form = new FormData();
+        const form = new FormData();
         form.append("name", title);
         form.append("description", desc);
-        form.append("subject_id", subject);
-        form.append("sections", JSON.stringify(sections));
-        console.log(sections);
         // for (var key of form.entries()) {
         //   console.log(key[1]);
         // }
         if(tId){
+          const sections = []
+          sections.push({id:old_sections[0].id,name:section_name1,marks:section_marks1,instructions:section_instr1,upload_rough_sheets:0});
+          let index = 2;
+          while (index <= i){
+            const sname = $('#section_name'+index).val()
+            const smarks = $('#section_marks'+index).find(":selected").val();
+            if(sname && smarks){
+              if(old_sections[index-1])
+                sections.push({id:old_sections[index-1].id,name:sname,marks:smarks,instructions: $("#summernote"+index).summernote("code").replace(/<\/?[^>]+(>|$)/g, ""),upload_rough_sheets:0});
+              else
+                sections.push({name:sname,marks:smarks,instructions: $("#summernote"+index).summernote("code").replace(/<\/?[^>]+(>|$)/g, ""),upload_rough_sheets:0});
+            }
+            index++;
+          }          
           form.append("test_id",tId)
+          form.append("sections", JSON.stringify(sections));
+          // console.log(sections);
+          // for (var key of form.entries()) {
+          //   console.log(key[1]);
+          // }
+
           $.ajax({
-            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTest',
+            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestDetails',
             type: 'POST',
             dataType: 'json',
             data: form,
@@ -225,7 +234,7 @@ $(document).ready(function () {
               'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-              console.log(result);
+              // console.log(result);
               if (result.status == 200) {
                 new Notify ({
                     title: 'Success',
@@ -245,6 +254,19 @@ $(document).ready(function () {
           });
         }
         else{
+          const sections = []
+          sections.push({name:section_name1,marks:section_marks1,instructions:section_instr1});
+          let index = 2;
+          while (index <= i){
+            if($('#section_name'+index).val() && $('#section_marks'+index).find(":selected").val()){
+              sections.push({name:$('#section_name'+index).val(),marks:$('#section_marks'+index).find(":selected").val(),instructions: $($("#summernote"+index).summernote("code")).text()});
+            }
+            index++;
+          }
+          form.append("sections", JSON.stringify(sections));
+          form.append("subject_id", subject);
+          // console.log(sections);
+
           $.ajax({
             url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/createObjectiveTest',
             type: 'POST',
