@@ -121,3 +121,8 @@ text-decoration: none;
   width: 80px;
   color: rgb(34, 34, 34);
 }
+
+#uploadedFileName{
+  font-size: larger;
+  color: #E25BC8;
+}

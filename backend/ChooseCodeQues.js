@@ -306,8 +306,8 @@ $(document).ready(function () {
       },
       success: function (result) {
         $('.chooseQues').empty();
+        console.log(result)
         if (result.status == 200 && result.data) {
-          //console.log(result.data)
 
 
 
