@@ -759,7 +759,7 @@ $(document).ready(function () {
           // }
 
           $.ajax({
-            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTest',
+            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editSendObjectiveTest',
             type: 'POST',
             dataType: 'json',
             data: form,

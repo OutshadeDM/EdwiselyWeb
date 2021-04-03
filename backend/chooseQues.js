@@ -1195,6 +1195,7 @@ $(document).ready(function () {
   }
 
   $('.saveToSectionBtn').on('click', function () {
+    displaySelectedQuestions()
     if (selectedQuestions.length == 0) {
       new Notify({
         title: 'Error',
