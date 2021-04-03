@@ -286,7 +286,6 @@ $(document).ready(function () {
 
     var form = new FormData();
     form.append("name", test_name)
-    form.append("description", $($("#summernote").summernote("code")).text())
     form.append("test_id", test_id)
     form.append("starttime", starttime)
     form.append("doe", doe)

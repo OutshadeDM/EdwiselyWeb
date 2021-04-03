@@ -251,6 +251,7 @@ $(document).ready(function () {
     subTopicsId = []
     topicsId = []
     grandTopicsId = []
+    i = 1
     getTopics()
     $('.chooseQues').empty();
     $('.chooseQues').append("<div class='row'><div class='col-sm-12'><h5 class='text-center'>No Questions</h5></div</div>");

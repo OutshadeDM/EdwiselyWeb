@@ -127,7 +127,9 @@ $(document).ready(function () {
           "<div class='modal-content'>" +
 
           "<div class='modal-body'>" +
-          "<div class='pb-4'>" + value.name + "</div>" +
+          "<div class='pb-4'><b>Question: </b>" + value.name + "</div>" +
+          "<div class='pb-4'><b>Description: </b>" + value.body + "</div>" +
+          "<div class='pb-4'><b>Marks: </b>" + value.marks + "</div>" +
           "<div class='pt-3 pb-1'> <b>Test Cases<b></div>" +
           (value.test_cases[0] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[0].input + "</div><div class='col-6 text-center'>" + value.test_cases[0].output + "</div></div>" : "<div></div>") +
           (value.test_cases[1] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[1].input + "</div><div class='col-6 text-center'>" + value.test_cases[1].output + "</div></div>" : "<div></div>") +
@@ -327,18 +329,20 @@ $(document).ready(function () {
             let marks = ""
             preAddedQues.forEach(function (ques) {
               if (ques.id == value.id) {
-                marks = ques.marks
+                if (ques.marks == "None") {
+                  marks = 0;
+                }
+                else {
+                  marks = Number(ques.marks)
+                }
+
               }
             });
             console.log(value)
 
-            let testCases = value.test_cases
-            console.log(testCases)
 
-
-
-            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>" + i + ".) " + value.name +
-              "</div><div class='col-3' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+            $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-9'>" + i + ".) " + value.name +
+              "</div><div class='col-2' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
               " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
 
@@ -352,7 +356,8 @@ $(document).ready(function () {
               "<div class='modal-content'>" +
 
               "<div class='modal-body'>" +
-              "<div class='pb-1'>" + value.name + "</div>" +
+              "<div class='pb-1'><b>Question: </b>" + value.name + "</div>" +
+              "<div class='pb-1'><b>Description: </b>" + value.body + "</div>" +
               "<div class='pt-3 pb-1'> <b>Test Cases<b></div>" +
               (value.test_cases[0] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[0].input + "</div><div class='col-6 text-center'>" + value.test_cases[0].output + "</div></div>" : "<div></div>") +
               (value.test_cases[1] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[1].input + "</div><div class='col-6 text-center'>" + value.test_cases[1].output + "</div></div>" : "<div></div>") +
@@ -412,25 +417,29 @@ $(document).ready(function () {
 
     currId = $(this).data('id')
     let marks = $("#marks" + currId).val()
-
-    // preAddedQues.forEach(function(ques){
-    //   if(ques.id==currId){
-    //     editQuestionsId
-    //   }
-    // })
-
-
-    questions_values.forEach(function (ques) {
-      if (ques.id == currId) {
-        currQues.id = ques.id
-        currQues.marks = marks
-      }
-    })
-    console.log(currQues);
-    (e.target.checked) ? selectedQuestions.push(currQues) : (selectedQuestions.splice(selectedQuestions.findIndex(function (x) { return x.id == currId }), 1));
-    (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
-    console.log(selectedQuestionsId)
-    console.log(selectedQuestions)
+    if (marks == "") {
+      new Notify({
+        title: 'Error',
+        text: "Enter Marks First",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
+      });
+      (e.target.checked) ? (e.target.checked) = false : (e.target.checked) = true
+    }
+    else {
+      questions_values.forEach(function (ques) {
+        if (ques.id == currId) {
+          currQues.id = ques.id
+          currQues.marks = marks
+        }
+      })
+      console.log(currQues);
+      (e.target.checked) ? selectedQuestions.push(currQues) : (selectedQuestions.splice(selectedQuestions.findIndex(function (x) { return x.id == currId }), 1));
+      (e.target.checked) ? selectedQuestionsId.push($(this).data('id')) : (selectedQuestionsId.splice(selectedQuestionsId.indexOf($(this).data('id')), 1))
+      console.log(selectedQuestionsId)
+      console.log(selectedQuestions)
+    }
   });
 
 
