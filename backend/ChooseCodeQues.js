@@ -128,6 +128,13 @@ $(document).ready(function () {
 
           "<div class='modal-body'>" +
           "<div class='pb-4'>" + value.name + "</div>" +
+          "<div class='pt-3 pb-1'> <b>Test Cases<b></div>" +
+          (value.test_cases[0] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[0].input + "</div><div class='col-6 text-center'>" + value.test_cases[0].output + "</div></div>" : "<div></div>") +
+          (value.test_cases[1] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[1].input + "</div><div class='col-6 text-center'>" + value.test_cases[1].output + "</div></div>" : "<div></div>") +
+          (value.test_cases[2] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[2].input + "</div><div class='col-6 text-center'>" + value.test_cases[2].output + "</div></div>" : "<div></div>") +
+          (value.test_cases[3] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[3].input + "</div><div class='col-6 text-center'>" + value.test_cases[3].output + "</div></div>" : "<div></div>") +
+          (value.test_cases[4] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[4].input + "</div><div class='col-6 text-center'>" + value.test_cases[4].output + "</div></div>" : "<div></div>") +
+
           "</div>" +
 
           "</div>" +
@@ -322,11 +329,12 @@ $(document).ready(function () {
               if (ques.id == value.id) {
                 marks = ques.marks
               }
-              else {
-                marks = ""
-              }
             });
-            console.log(marks)
+            console.log(value)
+
+            let testCases = value.test_cases
+            console.log(testCases)
+
 
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-8'>" + i + ".) " + value.name +
@@ -345,7 +353,12 @@ $(document).ready(function () {
 
               "<div class='modal-body'>" +
               "<div class='pb-1'>" + value.name + "</div>" +
-
+              "<div class='pt-3 pb-1'> <b>Test Cases<b></div>" +
+              (value.test_cases[0] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[0].input + "</div><div class='col-6 text-center'>" + value.test_cases[0].output + "</div></div>" : "<div></div>") +
+              (value.test_cases[1] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[1].input + "</div><div class='col-6 text-center'>" + value.test_cases[1].output + "</div></div>" : "<div></div>") +
+              (value.test_cases[2] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[2].input + "</div><div class='col-6 text-center'>" + value.test_cases[2].output + "</div></div>" : "<div></div>") +
+              (value.test_cases[3] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[3].input + "</div><div class='col-6 text-center'>" + value.test_cases[3].output + "</div></div>" : "<div></div>") +
+              (value.test_cases[4] ? "<div class='row'><div class='col-6 text-center'>" + value.test_cases[4].input + "</div><div class='col-6 text-center'>" + value.test_cases[4].output + "</div></div>" : "<div></div>") +
               "</div>" +
               "</div>" +
               "</div>" +
