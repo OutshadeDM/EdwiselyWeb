@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   $user = "";
   if (isLoggedIn()) {
-    console.log(isLoggedIn(), 'yes');
+    // console.log(isLoggedIn(), 'yes');
     $user = JSON.parse(isLoggedIn());
     $('html').removeClass('d-none');
     $("#greetingNav").html($user.name);
@@ -39,7 +39,7 @@ $(document).ready(function () {
         console.log(result)
         if (result.status == 200 && result.data) {
           $(".sections").empty();
-          $('#courseName').text("Edit Assessment")
+          $('#courseName').text(searchParams.get('tname'));
           i=0;
           $('#title-objective').val(result.data.name)
           $("#summernote").summernote("code",result.data.description)
@@ -234,7 +234,7 @@ $(document).ready(function () {
               'Authorization': `Bearer ${$user.token}`
             },
             success: function (result) {
-              // console.log(result);
+              console.log(result);
               if (result.status == 200) {
                 new Notify ({
                     title: 'Success',
@@ -243,9 +243,9 @@ $(document).ready(function () {
                     status: 'success',
                     autotimeout: 3000
                 });
-                setTimeout(() => {
-                  window.location.href = "addQuestionsPage.html?tid=" + result.tId
-                }, 2000)
+                // setTimeout(() => {
+                //   window.location.href = "addQuestionsPage.html?tid=" + result.test_id +"&tname="+searchParams.get('tname');
+                // }, 2000)
               }
             },
             error: function (error) {
@@ -288,7 +288,7 @@ $(document).ready(function () {
                     autotimeout: 3000
                 });
                 setTimeout(() => {
-                  window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+                  window.location.href = "addQuestionsPage.html?ca=0&tid=" + tId;
                 }, 2000)
               }
             },
@@ -317,9 +317,7 @@ $(document).ready(function () {
             'Authorization': `Bearer ${$user.token}`
           },
           success: function (result) {
-            //alert(result.message);
-            //console.log('4') 
-
+            alert(result.message);
             if (result.status == 200) {
               new Notify ({
                   title: 'Success',
@@ -329,7 +327,7 @@ $(document).ready(function () {
                   autotimeout: 3000
               });
               setTimeout(() => {
-                window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id
+                window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id + "&tname="+result.name;
               }, 2000)
             }
           },

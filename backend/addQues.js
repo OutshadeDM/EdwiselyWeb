@@ -146,7 +146,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // console.log(result.data)
+        console.log(result.data)
         if (result.status == 200 && result.data) {
           $.each(result.data.sections, function (key, value) {
             // sectionIds.push(value.id)
@@ -181,7 +181,7 @@ $(document).ready(function () {
   })
 
   $(document).on('click', '.editTest', function () {
-    window.location.href = 'createAssessment.html?isObj=true&id=' + tId
+    window.location.href = 'createAssessment.html?isObj=true&id=' + tId +"&tname=" + tname;
   })
 
   $('.typeSelect').on('change', function () {

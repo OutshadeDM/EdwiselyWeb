@@ -376,7 +376,7 @@ $(document).ready(function () {
       if (!title)
         new Notify ({
             title: 'Error',
-            text : "Please enter valid title, marks and description",
+            text : "Please enter valid title",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -405,10 +405,10 @@ $(document).ready(function () {
             status: 'error',
             autotimeout: 3000
         });
-      else if (!language)
+      else if (!marks)
         new Notify ({
             title: 'Error',
-            text : "Plese Select Language",
+            text : "Plese Enter Marks",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
