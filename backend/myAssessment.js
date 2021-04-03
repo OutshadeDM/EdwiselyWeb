@@ -82,14 +82,14 @@ $(document).ready(function () {
                 div += "<div class='col-2'>"+value.start_time+"</div>";
             else
                 div += "<div class='col-2'>"+value.created_at+"</div>"
-            if(value.subject_name.length > 15)
-                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.subject_name+"'>"+value.subject_name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
+            if(value.name.length > 15)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.name+"'>"+value.name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
             else
-                div += "<div class='col-2 d-flex justify-content-center'>"+value.subject_name+"</div>"
-            if(value.description.length > 10)
-                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.description+"'>" + value.description.substr(0, 10) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
+                div += "<div class='col-2 d-flex justify-content-center'>"+value.name+"</div>"
+            if(value.subject_name.length > 10)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.subject_name+"'>" + value.subject_name.substr(0, 10) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
             else
-                div += "<div class='col-2 d-flex justify-content-center'>" + value.description + "</div>";
+                div += "<div class='col-2 d-flex justify-content-center'>" + value.subject_name + "</div>";
             div += "<div class='col-2 d-flex justify-content-center'>"+value.questions_count+"&nbsp;<img class='img-responsive' src='frontend/images/info.svg'  data-toggle='tooltip' data-placement='top' title='Sent to - "+value.students_count+"'/></div>";
             // 5th column
             // console.log(isSmall)
