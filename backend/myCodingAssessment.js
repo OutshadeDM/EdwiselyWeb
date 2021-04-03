@@ -1,36 +1,36 @@
 $(document).ready(function () {
     $user = "";
-	if (isLoggedIn()) {
-		// console.log(isLoggedIn(), 'yes');
-		$user = JSON.parse(isLoggedIn());
-		$('html').removeClass('d-none');
+    if (isLoggedIn()) {
+        // console.log(isLoggedIn(), 'yes');
+        $user = JSON.parse(isLoggedIn());
+        $('html').removeClass('d-none');
         $("#greetingNav").html($user.name);
-	} else {
-		window.location.replace("login.html");
+    } else {
+        window.location.replace("login.html");
     }
-    
+
     $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/codeEditor/getCodingAssessments',
         type: 'GET',
         contentType: 'application/json',
         headers: {
-          'Authorization': `Bearer ${$user.token}`
+            'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          console.log(result);
-          $('#assessmentList').empty();
-          if (result.status == 200 && result.data) {
-            displayCards(result.data);
-          }
-          else
-            $('#assessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
+            console.log(result);
+            $('#assessmentList').empty();
+            if (result.status == 200 && result.data) {
+                displayCards(result.data);
+            }
+            else
+                $('#assessmentList').append(`<div class='col-sm-12 py-5 objCard card'><h5><i>"Learners need endless feedback than they need endless teaching"</i> -Grant Wiggins<br><br> Create your assessments and provide the necessary feedback to learners </h5></div>`);
         },
         error: function (error) {
-          alert("Request Failed with status: " + error.status);
+            alert("Request Failed with status: " + error.status);
         }
     });
 
-    function displayCards(data = []){
+    function displayCards(data = []) {
         let currDate = parseInt(new Date().getDate() < 10 ? "0" + new Date().getDate() : new Date().getDate().toString())
         let currMonth = parseInt(new Date().getMonth() + 1 < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1).toString())
         let currYear = parseInt(new Date().getFullYear().toString())
@@ -41,7 +41,6 @@ $(document).ready(function () {
         let div = ""
 
         $.each(data, function (key, value) {
-
             let startTime = value.doe;
             let testDate = parseInt(startTime.substring(8, 10))
             let testMonth = parseInt(startTime.substring(5, 7))
@@ -51,8 +50,8 @@ $(document).ready(function () {
             // let testSecs = startTime.substr(17, 19) < 10 ? "0" + startTime.substr(17, 19) : startTime.substr(17, 19)
 
             let isEdit = false;
-            
-            if (testYear == currYear) {                
+
+            if (testYear == currYear) {
                 if (testMonth > currMonth) {
                     isEdit = true;
                 }
@@ -76,19 +75,19 @@ $(document).ready(function () {
 
             div = div + "<li class='list-group-item objective'>";
             div = div + "<div class='row no-gutters d-flex align-items-center justify-content-center'>";
-            if(value.start_time)
-                div += "<div class='col-2'>"+value.start_time.substring(0,10)+"</div>";
+            if (value.start_time)
+                div += "<div class='col-2'>" + value.start_time.substring(0, 10) + "</div>";
             else
-                div += "<div class='col-2'>"+value.created_at.substring(0,10)+"</div>"
-            if(value.name.length > 15)
-                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.name+"'>"+value.name.substr(0,15)+"...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
+                div += "<div class='col-2'>" + value.created_at.substring(0, 10) + "</div>"
+            if (value.name.length > 15)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='" + value.name + "'>" + value.name.substr(0, 15) + "...&nbsp;<img src='frontend/images/info.svg' width='10' /></div>"
             else
-                div += "<div class='col-2 d-flex justify-content-center'>"+value.name+"</div>"
-            if(value.description.length > 10)
-                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='"+value.description+"'>" + value.description.substr(0, 10) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
+                div += "<div class='col-2 d-flex justify-content-center'>" + value.name + "</div>"
+            if (value.description.length > 10)
+                div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='" + value.description + "'>" + value.description.substr(0, 10) + "... &nbsp;<img src='frontend/images/info.svg' width='10' /></div>";
             else
                 div += "<div class='col-2 d-flex justify-content-center'>" + value.description + "</div>";
-            div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='No of questions'>"+value.questions_count+"</div>";
+            div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='No of questions'>" + value.questions_count + "</div>";
             // 5th column
             if (value.doe == "" && !value.sent && !value.questions_count)
                 div += "<div class='col-2'></div>";
@@ -104,10 +103,10 @@ $(document).ready(function () {
             if (value.doe == "" && !value.sent && !value.questions_count)
                 div += "<div class='col-2 d-flex justify-content-center'><a href='codingQuestions.html?id=" + value.id + "&fname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
             else if (value.doe == "" && !value.sent && value.questions_count > 0)
-                div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
+                div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
             else if (value.doe != "" && value.questions_count > 0 && isEdit)
-            div += "<div class='col-2 d-flex justify-content-center'></div>";
-                // div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Re-Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
+                div += "<div class='col-2 d-flex justify-content-center'></div>";
+            // div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Re-Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
             else if (value.doe != "" && value.questions_count > 0 && !isEdit)
                 div += "<div class='col-2 d-flex justify-content-center'><button class='btn btn-primary text-white pl-4 pr-4 assBtn condLink' data-id='" + value.id + "' data-test='" + value.test_completed + "'>View Result&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></button></div>";
         });
@@ -121,11 +120,11 @@ $(document).ready(function () {
         let test_completed = $(this).data('test');
         console.log(test_completed);
         if (test_completed > 0) {
-          let link = document.createElement('a');
-          link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=" + test_id + "&token=" + `${$user.token}`;
-          link.target = "_blank";
-          link.dispatchEvent(new MouseEvent('click'));
+            let link = document.createElement('a');
+            link.href = "https://develop.createtest.edwisely.com/facaltytestdashboard?test_id=" + test_id + "&token=" + `${$user.token}`;
+            link.target = "_blank";
+            link.dispatchEvent(new MouseEvent('click'));
         }
     });
-    
+
 });
