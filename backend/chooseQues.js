@@ -1135,11 +1135,6 @@ $(document).ready(function () {
     console.log(selectedQuestions)
   });
 
-  //update to panel btn
-  $('.addChosenQuestions').on('click', function () {
-    displaySelectedQuestions()
-    //$('.saveToSectionBtn').click()
-  })
 
   function displaySelectedQuestions() {
 

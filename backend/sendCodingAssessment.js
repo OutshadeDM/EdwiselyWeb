@@ -23,9 +23,9 @@ $(document).ready(function () {
   let preSelectedStudentsIds = []
 
   const searchParams = new URLSearchParams(window.location.search);
-  if (searchParams.has('test_id')) {
-    test_id = searchParams.get('test_id');
-    test_name = searchParams.get('test_name');
+  if (searchParams.has('id')) {
+    test_id = searchParams.get('id');
+    test_name = searchParams.get('tname');
 
   }
 
@@ -306,7 +306,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //alert(result.status)
+        console.log(result)
 
         if (result.status == 200) {
           new Notify({
