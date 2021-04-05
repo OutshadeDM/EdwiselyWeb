@@ -137,6 +137,7 @@ $(document).ready(function () {
           (value.test_cases[3] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[3].input + "</div><div class='col-6 text-center'>" + value.test_cases[3].output + "</div></div>" : "<div></div>") +
           (value.test_cases[4] ? "<div class='row py-0' style='height:auto; border:none;'><div class='col-6 text-center'>" + value.test_cases[4].input + "</div><div class='col-6 text-center'>" + value.test_cases[4].output + "</div></div>" : "<div></div>") +
 
+          (value.source == 'faculty' || value.source == 'Faculty' ? "<div class='pb-3' style='text-align:center;'><button class='btn btn-primary'><a style='color:white; text-decoration:none' href='addCodeQues.html?id=" + test_id + "'>Edit</a></button></div>" : "<div></div>") +
           "</div>" +
 
           "</div>" +
@@ -343,7 +344,7 @@ $(document).ready(function () {
 
 
             $('.chooseQues').append("<li class='chooseQuestionsLi pl-3 pr-2 py-2'><div class='row no-gutters'><div class='col-9'>" + i + ".) " + value.name +
-              "</div><div class='col-2' style:'color:green'><input type='text' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /> marks</div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
+              "</div><div class='col-2' style:'color:green'><input type='text' placeholder='Enter marks' class='marksInput' id='marks" + value.id + "' value='" + marks + "' /></div><div class='col-1'><input type='checkbox' class='chooseQuestionsInput px-3' value='" + value.id +
               "' data-type='" + value.type + "'data-id='" + value.id + "' data-code='" + value.code + "'" +
               " name='chooseQuestionsAdd' id='chooseQuestionsAdd" + value.id + "'/ ></div>" +
 

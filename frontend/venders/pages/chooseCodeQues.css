@@ -237,10 +237,19 @@ pre
 
 .marksInput{
   border:none; 
-  border-bottom:solid 1px green; 
+  border:solid 1px gray;
+  border-radius: 15px; 
   background-color: transparent; 
-  width:50%; 
+  width:80%; 
   text-align:center
+}
+
+.marksInput::placeholder{
+  font-size: x-small;
+}
+
+.marksInput:focus{
+  
 }
 
 .bloomSelect{
