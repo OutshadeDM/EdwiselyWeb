@@ -243,9 +243,9 @@ $(document).ready(function () {
                     status: 'success',
                     autotimeout: 3000
                 });
-                // setTimeout(() => {
-                //   window.location.href = "addQuestionsPage.html?tid=" + result.test_id +"&tname="+searchParams.get('tname');
-                // }, 2000)
+                setTimeout(() => {
+                  window.location.href = "addQuestionsPage.html?tid=" + result.test_id +"&tname="+result.test_name;
+                }, 2000)
               }
             },
             error: function (error) {
@@ -288,7 +288,7 @@ $(document).ready(function () {
                     autotimeout: 3000
                 });
                 setTimeout(() => {
-                  window.location.href = "addQuestionsPage.html?ca=0&tid=" + tId;
+                  window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id;
                 }, 2000)
               }
             },

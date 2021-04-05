@@ -23,7 +23,7 @@ $(document).ready(function () {
     cid = searchParams.get('id');
   }
 
-  $('#fifthOption').hide();
+  // $('#fifthOption').hide();
   $('#editBtn').hide();
   $('#deleteBtn').hide();
   $('#status3').prop('checked', false);
@@ -42,7 +42,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        // console.log(result)
+        console.log(result)
         if (result.status == 200) {
           questions = []
           questions_id = []
@@ -178,11 +178,6 @@ $(document).ready(function () {
 
   });
 
-  $('#addBtn').on('click', function () {
-    $('#addBtn').hide();
-    $('#fifthOption').show();
-  });
-
   function clearAll() {
     $('#title').val("");
     $('#selectUnit').val(0);
@@ -212,9 +207,6 @@ $(document).ready(function () {
     $('#status4').prop('checked', false);
     $('#status5').prop('checked', false);
 
-    $('#fifthOption').hide();
-    $('#addBtn').show();
-
     $('#editBtn').hide();
     $('#deleteBtn').hide();
     $('#doneBtn').show();
@@ -232,7 +224,7 @@ $(document).ready(function () {
       $('#questionId').val(questionId);
 
       const question = questions.filter(question1 => questionId == question1.id)[0];
-      // console.log(question);
+      console.log(question);
 
       $('#selectUnit').val("0");
       $('#selectUnit').prop("disabled",true);
@@ -284,12 +276,61 @@ $(document).ready(function () {
       }
 
       if (question.test_cases[4]) {
-        $("#addBtn").hide();
-        $("#fifthOption").show();
         $('#input5').val(question.test_cases[4].input);
         $('#output5').val(question.test_cases[4].output);
         if (question.test_cases[0].active) $('#status5').prop('checked', true);
         else $('#status5').prop('checked', false);
+      }
+
+      if(question.college_account_id != $user.user_id){
+        $('#editBtn').hide();
+        $('#doneBtn').hide();
+        $('#deleteBtn').hide();
+
+        $('#input1').prop('disabled', true);
+        $('#input2').prop('disabled', true);
+        $('#input3').prop('disabled', true);
+        $('#input4').prop('disabled', true);
+        $('#input5').prop('disabled', true);
+        
+        $('#output1').prop('disabled', true);
+        $('#output2').prop('disabled', true);
+        $('#output3').prop('disabled', true);
+        $('#output4').prop('disabled', true);
+        $('#output5').prop('disabled', true);
+
+        $('#status1').prop('disabled', true);
+        $('#status2').prop('disabled', true);
+        $('#status3').prop('disabled', true);
+        $('#status4').prop('disabled', true);
+        $('#status5').prop('disabled', true);
+
+        $('#title').prop('disabled', true);
+        $('#marks').prop('disabled', true);
+        $('#summernote').summernote('disable');
+      }
+      else{
+        $('#input1').prop('disabled', false);
+        $('#input2').prop('disabled', false);
+        $('#input3').prop('disabled', false);
+        $('#input4').prop('disabled', false);
+        $('#input5').prop('disabled', false);
+        
+        $('#output1').prop('disabled', false);
+        $('#output2').prop('disabled', false);
+        $('#output3').prop('disabled', false);
+        $('#output4').prop('disabled', false);
+        $('#output5').prop('disabled', false);
+
+        $('#status1').prop('disabled', false);
+        $('#status2').prop('disabled', false);
+        $('#status3').prop('disabled', false);
+        $('#status4').prop('disabled', false);
+        $('#status5').prop('disabled', false);
+
+        $('#title').prop('disabled', false);
+        $('#marks').prop('disabled', false);
+        $('#summernote').summernote('enable');
       }
 
     }
