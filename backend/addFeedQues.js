@@ -78,7 +78,7 @@ $(document).ready(function () {
       },
       success: function (result) {
         if (result.status == 200 && result.data) {
-          $('.initData').remove();
+          // $('.initData').remove();
           $.each(result.data, function (key, value) {
             questionsList.push(value.id);
             questions.push(value);
