@@ -21,11 +21,12 @@ $(document).ready(function () {
   let sectionIds = []
   let selectedStudentsId = []
   let preSelectedStudentsIds = []
+  let description = ""
 
   const searchParams = new URLSearchParams(window.location.search);
-  if (searchParams.has('test_id')) {
-    test_id = searchParams.get('test_id');
-    test_name = searchParams.get('test_name');
+  if (searchParams.has('id')) {
+    test_id = searchParams.get('id');
+    test_name = searchParams.get('tname');
 
   }
 
@@ -105,6 +106,7 @@ $(document).ready(function () {
 
   getSections();
   getStudents();
+  getDetails()
 
   function getSections() {
     $.ajax({
@@ -200,7 +202,27 @@ $(document).ready(function () {
     });
   }
 
+  function getDetails() {
 
+    $.ajax({
+      url: 'https://stagingfacultypython.edwisely.com/codeEditor/getCodingTestDetails?test_id=' + test_id,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        if (result.status == 200 && result.data) {
+          console.log(result.data)
+          description = result.data.description
+        }
+
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
 
 
   $('#numberOfStudents').text(selectedStudentsId.length)
@@ -289,11 +311,12 @@ $(document).ready(function () {
     form.append("test_id", test_id)
     form.append("starttime", starttime)
     form.append("doe", doe)
+    form.append("description", description)
     form.append("timelimit", timelimit_in_secs)
     form.append("students", "[" + selectedStudentsId + "]")
-    for (var key of form.entries()) {
-      alert(key[1]);
-    }
+    // for (var key of form.entries()) {
+    //   alert(key[1]);
+    // }
 
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTest',
@@ -306,7 +329,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //alert(result.status)
+        console.log(result)
 
         if (result.status == 200) {
           new Notify({
@@ -318,7 +341,7 @@ $(document).ready(function () {
           });
 
           setTimeout(function () {
-            window.location.href = "index.html";
+            window.location.href = "myCodingAssessment.html";
           }, 3000);
         }
         else if (selectedStudentsId.length == 0) {

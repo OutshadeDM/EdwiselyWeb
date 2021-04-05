@@ -119,13 +119,14 @@
                 <div class="d-flex flex-row-reverse bd-highlight">
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
                     <div id="divSaveSend">
-                      <button type="button" id="btnSaveSend" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                      <button type="button" id="btnSaveSend" style="width: max-content;"
+                        class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
                         <img src="frontend/images/paper-plane.svg" alt="abc" class="pr-1" height="20px" />
                         Save & Send</button>
                     </div>
                   </div>
                   <div class="p-2 bd-highlight justify-content-center align-self-center">
-                    <button type="button" id="btnSaveExit"
+                    <button type="button" id="btnSaveExit" style="width: max-content;"
                       class="btn btn-secondary shadow-sm btnLink mt-3 px-4 py-2"><img
                         src="frontend/images/save-secondary.png" alt="abc" class="pr-1" height="20px" />
                       Save & Exit</button>
@@ -174,7 +175,7 @@
 
           <div class="row">
             <div class="col-3">
-              <div class="text-center mb-3"><strong>Questions in the Section</strong></div>
+              <div class="text-center mb-3"><strong>Questions Panel</strong></div>
               <div class="addingQues p-1">
                 <div class="px-2 text-center">Add Questions to this assessment</div>
               </div>
@@ -266,7 +267,7 @@
               <div class="mt-5 pt-5">
 
                 <!-- <button class="btn btn-secondary btn-block addChosenQuestions">Update to Panel</button> -->
-                <button class="btn btn-primary btn-block saveToSectionBtn">Save to Section</button>
+                <button class="btn btn-block btn-primary  saveToSectionBtn">Save to Section</button>
 
               </div>
 
@@ -275,35 +276,7 @@
           </div>
 
 
-          <!-- toasts -->
-          <div id="toastDiv" style="display: none;">
-            <!-- start error toast -->
-            <div class="toast fade" data-autohide="false" id="errorToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-danger">Error !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="errorToastBody">All fields are mandatory to save.</p>
-              </div>
-            </div>
-            <!-- end error toast -->
 
-            <!-- start success toast -->
-            <div class="toast fade" data-autohide="false" id="successToast">
-              <div class="toast-header">
-                <strong class="mr-auto text-success">Success !!!</strong>
-                <small class="text-muted">Just Now</small>
-              </div>
-              <div class="toast-body">
-                <p id="successToastBody">Content has been saved successfully.</p>
-              </div>
-            </div>
-            <!-- end success toast -->
-
-          </div>
-
-          <!-- end toasts -->
 
 
           <!-- End Page Content -->
