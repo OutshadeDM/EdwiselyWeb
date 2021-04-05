@@ -58,7 +58,7 @@ $(document).ready(function () {
 
 
           $(document).on('click', '#addques', function () {
-            window.location.href = "addQues.html?id=" + subSemId + "&tid=" + tid + "&tname=" + tname + "&uid=" + uid + "&desc=" + description + "&isObj=" + objective + "&qc=" + question_count;
+            window.location.href = "addQues.html?id=" + subSemId + "&tid=" + tid + "&tname=" + tname + "&uid=" + uid + "&isObj=" + objective + "&qc=" + question_count;
           })
 
           $(document).on('click', '#uploadques', function () {

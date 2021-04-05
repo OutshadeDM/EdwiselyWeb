@@ -1,6 +1,3 @@
-//https://stagingfacultypython.edwisely.com/questionnaire/getTopicsQuestions?question_ids=40498,40499,40500
-
-
 $(document).ready(function () {
 
   $user = "";

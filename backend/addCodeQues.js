@@ -282,56 +282,56 @@ $(document).ready(function () {
         else $('#status5').prop('checked', false);
       }
 
-      if(question.college_account_id != $user.user_id){
-        $('#editBtn').hide();
-        $('#doneBtn').hide();
-        $('#deleteBtn').hide();
+      // if(question.college_account_id != $user.user_id){
+      //   $('#editBtn').hide();
+      //   $('#doneBtn').hide();
+      //   $('#deleteBtn').hide();
 
-        $('#input1').prop('disabled', true);
-        $('#input2').prop('disabled', true);
-        $('#input3').prop('disabled', true);
-        $('#input4').prop('disabled', true);
-        $('#input5').prop('disabled', true);
+      //   $('#input1').prop('disabled', true);
+      //   $('#input2').prop('disabled', true);
+      //   $('#input3').prop('disabled', true);
+      //   $('#input4').prop('disabled', true);
+      //   $('#input5').prop('disabled', true);
         
-        $('#output1').prop('disabled', true);
-        $('#output2').prop('disabled', true);
-        $('#output3').prop('disabled', true);
-        $('#output4').prop('disabled', true);
-        $('#output5').prop('disabled', true);
+      //   $('#output1').prop('disabled', true);
+      //   $('#output2').prop('disabled', true);
+      //   $('#output3').prop('disabled', true);
+      //   $('#output4').prop('disabled', true);
+      //   $('#output5').prop('disabled', true);
 
-        $('#status1').prop('disabled', true);
-        $('#status2').prop('disabled', true);
-        $('#status3').prop('disabled', true);
-        $('#status4').prop('disabled', true);
-        $('#status5').prop('disabled', true);
+      //   $('#status1').prop('disabled', true);
+      //   $('#status2').prop('disabled', true);
+      //   $('#status3').prop('disabled', true);
+      //   $('#status4').prop('disabled', true);
+      //   $('#status5').prop('disabled', true);
 
-        $('#title').prop('disabled', true);
-        $('#marks').prop('disabled', true);
-        $('#summernote').summernote('disable');
-      }
-      else{
-        $('#input1').prop('disabled', false);
-        $('#input2').prop('disabled', false);
-        $('#input3').prop('disabled', false);
-        $('#input4').prop('disabled', false);
-        $('#input5').prop('disabled', false);
+      //   $('#title').prop('disabled', true);
+      //   $('#marks').prop('disabled', true);
+      //   $('#summernote').summernote('disable');
+      // }
+      // else{
+      //   $('#input1').prop('disabled', false);
+      //   $('#input2').prop('disabled', false);
+      //   $('#input3').prop('disabled', false);
+      //   $('#input4').prop('disabled', false);
+      //   $('#input5').prop('disabled', false);
         
-        $('#output1').prop('disabled', false);
-        $('#output2').prop('disabled', false);
-        $('#output3').prop('disabled', false);
-        $('#output4').prop('disabled', false);
-        $('#output5').prop('disabled', false);
+      //   $('#output1').prop('disabled', false);
+      //   $('#output2').prop('disabled', false);
+      //   $('#output3').prop('disabled', false);
+      //   $('#output4').prop('disabled', false);
+      //   $('#output5').prop('disabled', false);
 
-        $('#status1').prop('disabled', false);
-        $('#status2').prop('disabled', false);
-        $('#status3').prop('disabled', false);
-        $('#status4').prop('disabled', false);
-        $('#status5').prop('disabled', false);
+      //   $('#status1').prop('disabled', false);
+      //   $('#status2').prop('disabled', false);
+      //   $('#status3').prop('disabled', false);
+      //   $('#status4').prop('disabled', false);
+      //   $('#status5').prop('disabled', false);
 
-        $('#title').prop('disabled', false);
-        $('#marks').prop('disabled', false);
-        $('#summernote').summernote('enable');
-      }
+      //   $('#title').prop('disabled', false);
+      //   $('#marks').prop('disabled', false);
+      //   $('#summernote').summernote('enable');
+      // }
 
     }
   });
@@ -433,7 +433,7 @@ $(document).ready(function () {
       else if (!unit || unit == '0')
         new Notify ({
             title: 'Error',
-            text : "Plese Select Unit",
+            text : "Please Select Unit",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -441,7 +441,7 @@ $(document).ready(function () {
       else if (topics.length <= 0)
         new Notify ({
             title: 'Error',
-            text : "Plese Select Topics",
+            text : "Please Select Topics",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -449,7 +449,7 @@ $(document).ready(function () {
       else if (!marks)
         new Notify ({
             title: 'Error',
-            text : "Plese Enter Marks",
+            text : "Please Enter Marks",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -457,7 +457,7 @@ $(document).ready(function () {
       else
         new Notify ({
             title: 'Error',
-            text : "Plese enter valid details",
+            text : "Please enter valid details",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -639,7 +639,7 @@ $(document).ready(function () {
       else if (topics.length <= 0)
         new Notify ({
             title: 'Error',
-            text : "Plese Select Topics",
+            text : "Please Select Topics",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -647,7 +647,7 @@ $(document).ready(function () {
       else if (!language)
         new Notify ({
             title: 'Error',
-            text : "Plese Select Language",
+            text : "Please Select Language",
             autoclose: true,
             status: 'error',
             autotimeout: 3000
@@ -655,7 +655,7 @@ $(document).ready(function () {
       else
         new Notify ({
             title: 'Error',
-            text : "Plese enter valid details",
+            text : "Please enter valid details",
             autoclose: true,
             status: 'error',
             autotimeout: 3000

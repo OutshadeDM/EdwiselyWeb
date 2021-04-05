@@ -39,7 +39,7 @@ $(document).ready(function () {
         console.log(result)
         if (result.status == 200 && result.data) {
           $(".sections").empty();
-          $('#courseName').text(searchParams.get('tname'));
+          $('#courseName').text(result.data.name);
           i=0;
           $('#title-objective').val(result.data.name)
           $("#summernote").summernote("code",result.data.description)
@@ -244,7 +244,7 @@ $(document).ready(function () {
                     autotimeout: 3000
                 });
                 setTimeout(() => {
-                  window.location.href = "addQuestionsPage.html?tid=" + result.test_id +"&tname="+result.test_name;
+                  window.location.href = "addQuestionsPage.html?tid=" + result.test_id +"&tname="+result.test_name+"&ca=0";
                 }, 2000)
               }
             },

@@ -146,7 +146,7 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        console.log(result.data)
+        console.log(result)
         if (result.status == 200 && result.data) {
           $.each(result.data.sections, function (key, value) {
             // sectionIds.push(value.id)
@@ -181,7 +181,7 @@ $(document).ready(function () {
   })
 
   $(document).on('click', '.editTest', function () {
-    window.location.href = 'createAssessment.html?isObj=true&id=' + tId +"&tname=" + tname;
+    window.location.href = 'createAssessment.html?isObj=true&id=' + tId;
   })
 
   $('.typeSelect').on('change', function () {
@@ -673,170 +673,170 @@ $(document).ready(function () {
 
   //on click of + btn(post request)
 
-  $('#plusBtn').on('click', function () {
+  // $('#plusBtn').on('click', function () {
 
-    bloom_level = $('#selectBloomLevel').val();
-    difficulty_level = $('#selectLevel').val();
+  //   bloom_level = $('#selectBloomLevel').val();
+  //   difficulty_level = $('#selectLevel').val();
 
-    if (topics != null && topics.length > 0 && (option1 || option1_img_url) && (option2 || option2_img_url)
-      && bloom_level && difficulty_level && source && answer && question && type && section) {
+  //   if (topics != null && topics.length > 0 && (option1 || option1_img_url) && (option2 || option2_img_url)
+  //     && bloom_level && difficulty_level && source && answer && question && type && section) {
 
-      //saving in array
-      options.push("" + option1 + "")
-      options.push("" + option2 + "")
-      if (option3 !== "") {
-        options.push("" + option3 + "")
-      }
-      if (option4 !== "") {
-        options.push("" + option4 + "")
-      }
-      if (option5 !== "") {
-        options.push("" + option5 + "")
-      }
+  //     //saving in array
+  //     options.push("" + option1 + "")
+  //     options.push("" + option2 + "")
+  //     if (option3 !== "") {
+  //       options.push("" + option3 + "")
+  //     }
+  //     if (option4 !== "") {
+  //       options.push("" + option4 + "")
+  //     }
+  //     if (option5 !== "") {
+  //       options.push("" + option5 + "")
+  //     }
 
-      const form = new FormData();
-      form.append("question", question);
-      form.append("topics", JSON.stringify(topics))
-      form.append("options", "[" + '"' + options.join('","') + '"' + "]");
-      form.append("blooms_level", bloom_level);
-      form.append("difficulty_level", difficulty_level);
-      form.append("hint", hint);
-      form.append("source", source);
-      form.append("type", type);
-      form.append("field_type", field_type);
-      form.append("answer", answer);
-      form.append("question_img", question_img);
-      form.append("solution_img", solution_img);
-      form.append("option1_img", option1_img);
-      form.append("option2_img", option2_img);
-      form.append("option3_img", option3_img);
-      form.append("option4_img", option4_img);
-      form.append("option5_img", option5_img);
-      form.append("solution", solution);
-      form.append("hint_img", hint_img);
-      form.append("section_id", section);
+  //     const form = new FormData();
+  //     form.append("question", question);
+  //     form.append("topics", JSON.stringify(topics))
+  //     form.append("options", "[" + '"' + options.join('","') + '"' + "]");
+  //     form.append("blooms_level", bloom_level);
+  //     form.append("difficulty_level", difficulty_level);
+  //     form.append("hint", hint);
+  //     form.append("source", source);
+  //     form.append("type", type);
+  //     form.append("field_type", field_type);
+  //     form.append("answer", answer);
+  //     form.append("question_img", question_img);
+  //     form.append("solution_img", solution_img);
+  //     form.append("option1_img", option1_img);
+  //     form.append("option2_img", option2_img);
+  //     form.append("option3_img", option3_img);
+  //     form.append("option4_img", option4_img);
+  //     form.append("option5_img", option5_img);
+  //     form.append("solution", solution);
+  //     form.append("hint_img", hint_img);
+  //     form.append("section_id", section);
 
-      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        background: "#fff",
-        opacity: 0.7
-      }).appendTo($("#abcd").css('position', 'relative'));
-      $("input.custom-control-input").attr("disabled", true);
+  //     $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+  //       position: "absolute",
+  //       width: "100%",
+  //       height: "100%",
+  //       background: "#fff",
+  //       opacity: 0.7
+  //     }).appendTo($("#abcd").css('position', 'relative'));
+  //     $("input.custom-control-input").attr("disabled", true);
 
 
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/addObjectiveQuestion',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          console.log(result);
-          if (result.status == 200) {
-            $('#loadingDiv').remove();
-            new Notify({
-              title: 'Success',
-              text: "Question Added to Database Successfully",
-              autoclose: true,
-              status: 'success',
-              autotimeout: 3000
-            });
-            // $('#successToastBody').text('Question Added to Database Successfully');
-            // $('#successToast').toast('show');
+  //     $.ajax({
+  //       url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/addObjectiveQuestion',
+  //       type: 'POST',
+  //       dataType: 'json',
+  //       data: form,
+  //       contentType: false,
+  //       processData: false,
+  //       headers: {
+  //         'Authorization': `Bearer ${$user.token}`
+  //       },
+  //       success: function (result) {
+  //         console.log(result);
+  //         if (result.status == 200) {
+  //           $('#loadingDiv').remove();
+  //           new Notify({
+  //             title: 'Success',
+  //             text: "Question Added to Database Successfully",
+  //             autoclose: true,
+  //             status: 'success',
+  //             autotimeout: 3000
+  //           });
+  //           // $('#successToastBody').text('Question Added to Database Successfully');
+  //           // $('#successToast').toast('show');
 
-            clearAll(true);
-            questionsList.push(result.data.id);
-            questions.push(result.data);
-            loadList();
-            $('#tick' + section).show()
-            $("input.custom-control-input").attr("disabled", false);
-          }
-          else {
-            $('#loadingDiv').remove();
-            $("input.custom-control-input").attr("disabled", false);
-          }
-        },
-        error: function (error) {
-          $('#loadingDiv').remove();
-          $("input.custom-control-input").attr("disabled", false);
-          alert("Request Failed with status: " + error.status);
-        }
-      });
-    }
-    else {
-      if (topics.length <= 0)
-        new Notify({
-          title: 'Error',
-          text: "Please Select Topics",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (!option1 || !option2)
-        new Notify({
-          title: 'Error',
-          text: "2 Options are Mandatory",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (!bloom_level || !difficulty_level)
-        new Notify({
-          title: 'Error',
-          text: "Please Select Bloom and Diffculty Level values",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (!question)
-        new Notify({
-          title: 'Error',
-          text: "Please enter Question",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (!type)
-        new Notify({
-          title: 'Error',
-          text: "Please Select Public or Private",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (!answer)
-        new Notify({
-          title: 'Error',
-          text: "Please Select an Option as Answer",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (!source)
-        new Notify({
-          title: 'Error',
-          text: "Please Enter Source",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-      else if (topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type)
-        new Notify({
-          title: 'Error',
-          text: "Please Enter Valid Inputs",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-        });
-    }
+  //           clearAll(true);
+  //           questionsList.push(result.data.id);
+  //           questions.push(result.data);
+  //           loadList();
+  //           $('#tick' + section).show()
+  //           $("input.custom-control-input").attr("disabled", false);
+  //         }
+  //         else {
+  //           $('#loadingDiv').remove();
+  //           $("input.custom-control-input").attr("disabled", false);
+  //         }
+  //       },
+  //       error: function (error) {
+  //         $('#loadingDiv').remove();
+  //         $("input.custom-control-input").attr("disabled", false);
+  //         alert("Request Failed with status: " + error.status);
+  //       }
+  //     });
+  //   }
+  //   else {
+  //     if (topics.length <= 0)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please Select Topics",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (!option1 || !option2)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "2 Options are Mandatory",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (!bloom_level || !difficulty_level)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please Select Bloom and Diffculty Level values",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (!question)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please enter Question",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (!type)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please Select Public or Private",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (!answer)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please Select an Option as Answer",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (!source)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please Enter Source",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //     else if (topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type)
+  //       new Notify({
+  //         title: 'Error',
+  //         text: "Please Enter Valid Inputs",
+  //         autoclose: true,
+  //         status: 'error',
+  //         autotimeout: 3000
+  //       });
+  //   }
 
-  });
+  // });
 
   function clearAll(updateTopics) {
     $("input[name='Radios']").prop("checked", false);
@@ -960,7 +960,168 @@ $(document).ready(function () {
   });
 
   $("#saveSection").on('click', function () {
-    saveQuestions();
+    bloom_level = $('#selectBloomLevel').val();
+    difficulty_level = $('#selectLevel').val();
+
+    if (topics != null && topics.length > 0 && (option1 || option1_img_url) && (option2 || option2_img_url)
+      && bloom_level && difficulty_level && source && answer && question && type && section) {
+
+      //saving in array
+      options.push("" + option1 + "")
+      options.push("" + option2 + "")
+      if (option3 !== "") {
+        options.push("" + option3 + "")
+      }
+      if (option4 !== "") {
+        options.push("" + option4 + "")
+      }
+      if (option5 !== "") {
+        options.push("" + option5 + "")
+      }
+
+      const form = new FormData();
+      form.append("question", question);
+      form.append("topics", JSON.stringify(topics))
+      form.append("options", "[" + '"' + options.join('","') + '"' + "]");
+      form.append("blooms_level", bloom_level);
+      form.append("difficulty_level", difficulty_level);
+      form.append("hint", hint);
+      form.append("source", source);
+      form.append("type", type);
+      form.append("field_type", field_type);
+      form.append("answer", answer);
+      form.append("question_img", question_img);
+      form.append("solution_img", solution_img);
+      form.append("option1_img", option1_img);
+      form.append("option2_img", option2_img);
+      form.append("option3_img", option3_img);
+      form.append("option4_img", option4_img);
+      form.append("option5_img", option5_img);
+      form.append("solution", solution);
+      form.append("hint_img", hint_img);
+      form.append("section_id", section);
+
+      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        background: "#fff",
+        opacity: 0.7
+      }).appendTo($("#abcd").css('position', 'relative'));
+      $("input.custom-control-input").attr("disabled", true);
+
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/addObjectiveQuestion',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.status == 200) {
+            $('#loadingDiv').remove();
+            new Notify({
+              title: 'Success',
+              text: "Question Added to Database Successfully",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
+            });
+            // $('#successToastBody').text('Question Added to Database Successfully');
+            // $('#successToast').toast('show');
+            
+            saveQuestions();
+
+            clearAll(true);
+            questionsList.push(result.data.id);
+            questions.push(result.data);
+            loadList();
+            $('#tick' + section).show()
+            $("input.custom-control-input").attr("disabled", false);
+          }
+          else {
+            $('#loadingDiv').remove();
+            $("input.custom-control-input").attr("disabled", false);
+          }
+        },
+        error: function (error) {
+          $('#loadingDiv').remove();
+          $("input.custom-control-input").attr("disabled", false);
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+    }
+    else {
+      if (topics.length <= 0)
+        new Notify({
+          title: 'Error',
+          text: "Please Select Topics",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (!option1 || !option2)
+        new Notify({
+          title: 'Error',
+          text: "2 Options are Mandatory",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (!bloom_level || !difficulty_level)
+        new Notify({
+          title: 'Error',
+          text: "Please Select Bloom and Diffculty Level values",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (!question)
+        new Notify({
+          title: 'Error',
+          text: "Please enter Question",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (!type)
+        new Notify({
+          title: 'Error',
+          text: "Please Select Public or Private",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (!answer)
+        new Notify({
+          title: 'Error',
+          text: "Please Select an Option as Answer",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (!source)
+        new Notify({
+          title: 'Error',
+          text: "Please Enter Source",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+      else if (topics != null && option1 && option2 && bloom_level && difficulty_level && answer && question && type)
+        new Notify({
+          title: 'Error',
+          text: "Please Enter Valid Inputs",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+        });
+    }
   });
 
   function saveQuestions() {
