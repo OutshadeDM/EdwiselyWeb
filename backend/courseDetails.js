@@ -610,11 +610,11 @@ $(document).ready(function () {
                             fileType = "ppt";
                             break;
                         case "URL":
-                            div = div + "<img class='img-responsive' src='frontend/images/course-url.svg' width='20'/>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-pdf.svg' width='20'/>";
                             fileType = "url";
                             break;
                         default:
-                            div = div + "<img class='img-responsive' src='frontend/images/course-url.svg' width='20'/>";
+                            div = div + "<img class='img-responsive' src='frontend/images/course-pdf.svg' width='20'/>";
                             fileType = "url";
                     }
                     div = div + "</div>";
