@@ -2,7 +2,7 @@
 
 .chooseQues{
   overflow-y: scroll;
-  height: 60vh;
+  height: 72vh;
   border-top: solid 1px rgb(206, 206, 206);
 
 }
@@ -248,9 +248,6 @@ pre
   font-size: x-small;
 }
 
-.marksInput:focus{
-  
-}
 
 .bloomSelect{
   border-radius: 5px;
