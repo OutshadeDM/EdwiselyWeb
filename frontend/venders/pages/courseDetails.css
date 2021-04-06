@@ -172,6 +172,7 @@ pre
 }
 
 .bookmark,.unbookmark,.deleteContent,.openContent{
+    cursor: pointer;
     color: black;
     text-decoration: none !important;
 }

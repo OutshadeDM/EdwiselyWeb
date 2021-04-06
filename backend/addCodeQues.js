@@ -474,55 +474,59 @@ $(document).ready(function () {
 
   $('#deleteBtn').on('click', function () {
     // console.log(questions_id);
-    const questionId = $('#questionId').val();
-    if (questionId) {
-      const updated_questions = questions_id.filter(question => question.id != questionId);
-
-      $('#deleteBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
-      const form = new FormData();
-      form.append("test_id", cid);
-      form.append("problems", JSON.stringify(updated_questions));
-
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTestProblems',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          //   console.log(result);
-        $('#deleteBtn').html("Delete");
-          if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : result.message,
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
-            });
-            clearAll();
-            getQuestions(false);
-          }
-          else {
-            new Notify ({
-                title: 'Error',
-                text : result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
-            });
-          }
-        },
-        error: function (error) {
-          $('#deleteBtn').html("Delete");
-          alert("Request Failed with status: " + error.status);
+    $confirm("Do you want to delete this question?", "#FF9100")
+    .then(function(){
+        // $toast("Deleted", "#FF9100");        
+        const questionId = $('#questionId').val();
+        if (questionId) {
+          const updated_questions = questions_id.filter(question => question.id != questionId);
+    
+          $('#deleteBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
+          const form = new FormData();
+          form.append("test_id", cid);
+          form.append("problems", JSON.stringify(updated_questions));
+    
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTestProblems',
+            type: 'POST',
+            dataType: 'json',
+            data: form,
+            contentType: false,
+            processData: false,
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              //   console.log(result);
+            $('#deleteBtn').html("Delete");
+              if (result.status == 200) {
+                new Notify ({
+                    title: 'Success',
+                    text : result.message,
+                    autoclose: true,
+                    status: 'success',
+                    autotimeout: 3000
+                });
+                clearAll();
+                getQuestions(false);
+              }
+              else {
+                new Notify ({
+                    title: 'Error',
+                    text : result.message,
+                    autoclose: true,
+                    status: 'error',
+                    autotimeout: 3000
+                });
+              }
+            },
+            error: function (error) {
+              $('#deleteBtn').html("Delete");
+              alert("Request Failed with status: " + error.status);
+            }
+          });
         }
-      });
-    }
+    })
   })
 
   $('#editBtn').on('click', function () {

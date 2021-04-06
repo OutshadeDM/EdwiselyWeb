@@ -106,7 +106,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.deleteSection', function () {
         $confirm("Do you want to delete this section?", "#FF9100")
-        .then(() => {
+        .then(function(){
             $toast("Deleted", "#FF9100");
             const sectionId = $(this).data('id');
             if(sectionId){
@@ -632,14 +632,14 @@ $(document).ready(function () {
                         if (value.learning_content == "1" && value.display_type == "private"){
                             div += "<a class='pr-3 openContent' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'><i class='fas fa-edit'></i></a>";
                             // div = div + "<a class='dropdown-item' style='cursor:pointer;' data-toggle='modal' data-target='#courseContentModal' data-id='" + value.material_id + "' data-fileType='"+fileType+"' data-type='" + value.type + "' data-topic='" + value.topic_code + "' data-title='" + value.title + "' data-url='" + value.url + "'>Edit</a>";
-                            div += "<a class='pr-3 deleteContent' href='#' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'><i class='fas fa-trash-alt'></i></a>";
+                            div += "<a class='pr-3 deleteContent' data-topic='" + value.topic_id + "' data-id='" + value.material_id + "'><i class='fas fa-trash-alt'></i></a>";
                         }
                 
                             let arrayType = value.learning_content == '1' ? 'academic_materials' : 'learning_content';
                         if (value.bookmarked == "0")
-                            div += "<a class='pr-3 bookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='far fa-bookmark'></i>&nbsp;Bookmark</a>";
+                            div += "<a class='pr-3 bookmark' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='far fa-bookmark'></i></a>";
                         else if(value.bookmarked == "1")
-                            div += "<a class='pr-3 unbookmark' href='#' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='fas fa-bookmark'></i>&nbsp;Unbookmark</a>";
+                            div += "<a class='pr-3 unbookmark' data-id='" + value.material_id + "' data-type='" + arrayType + "' data-content='nav'><i class='fas fa-bookmark'></i></a>";
                         
                         div += "<a class='pr-3 openContent download' style='cursor:pointer;' data-type='"+fileType+"' data-url='" + value.url + "'>Open&nbsp;<img class='img-responsive' src='frontend/images/right-arrow.svg' /></a>";
                             // div = div + "<a >UnBookmark</a>";
@@ -1044,52 +1044,55 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.deleteContent', function () {
-        let material_id = $(this).data('id');
-        let topic_id = $(this).data('topic');
-
-        if (material_id && topic_id) {
-
-            var form = new FormData();
-            form.append("material_id", material_id);
-            form.append("topic_id", topic_id);
-
-            $.ajax({
-                url: 'https://stagingfacultypython.edwisely.com/units/deleteMaterial',
-                type: 'POST',
-                dataType: 'json',
-                data: form,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': `Bearer ${$user.token}`
-                },
-                success: function (result) {
-                    if (result.status == 200) {
-                        new Notify ({
-                            title: 'Success',
-                            text : 'Material Content Deleted SuccessFully',
-                            autoclose: true,
-                            status: 'success',
-                            autotimeout: 3000
-                        });
-                        $("#nav-content-tab").click();
+        $confirm("Do you want to delete this question?", "#FF9100")
+        .then(function(){
+            // $toast("Deleted", "#FF9100");
+            const material_id = $(this).data('id');
+            const topic_id = $(this).data('topic');
+    
+            if (material_id && topic_id) {
+    
+                var form = new FormData();
+                form.append("material_id", material_id);
+                form.append("topic_id", topic_id);
+    
+                $.ajax({
+                    url: 'https://stagingfacultypython.edwisely.com/units/deleteMaterial',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': `Bearer ${$user.token}`
+                    },
+                    success: function (result) {
+                        if (result.status == 200) {
+                            new Notify ({
+                                title: 'Success',
+                                text : 'Material Content Deleted SuccessFully',
+                                autoclose: true,
+                                status: 'success',
+                                autotimeout: 3000
+                            });
+                            $("#nav-content-tab").click();
+                        }
+                        else {
+                            new Notify ({
+                                title: 'Error',
+                                text : 'Request Unsuccessful',
+                                autoclose: true,
+                                status: 'error',
+                                autotimeout: 3000
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert("Request Failed with status: "+error.status);
                     }
-                    else {
-                        new Notify ({
-                            title: 'Error',
-                            text : 'Request Unsuccessful',
-                            autoclose: true,
-                            status: 'error',
-                            autotimeout: 3000
-                        });
-                    }
-                },
-                error: function (error) {
-                    alert("Request Failed with status: "+error.status);
-                }
-            });
-        }
-
+                });
+            }
+        })
     });
 
     $("#courseAddSave").click(function () {

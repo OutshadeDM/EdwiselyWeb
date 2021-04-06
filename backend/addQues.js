@@ -1516,7 +1516,7 @@ $(document).ready(function () {
   //delete btn
   $("#deleteBtn").click(function () {
     $confirm("Do you want to delete this question?", "#FF9100")
-    .then(() => {
+    .then(function(){
         $toast("Deleted", "#FF9100");
         const questionId = $('#questionId').val()
         if (questionId && questionId != "0") {
@@ -1547,7 +1547,7 @@ $(document).ready(function () {
 
   $("#editBtn").click(function () {
     $confirm("Do you want to edit this question?", "#FF9100")
-    .then(() => {
+    .then(function(){
         // $toast("Deleted", "#FF9100");
         let questionId = $('#questionId').val()
         let newQuestion = [];

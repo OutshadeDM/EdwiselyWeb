@@ -1045,6 +1045,6 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .as-okButton{
-  border-radius: 12px;
+  border-radius: 18px;
   background: linear-gradient(131deg, #7175E0 0%, #4D50CB 33%, #E25BC8 100%) left bottom #f9f9f9 no-repeat;
 } 
