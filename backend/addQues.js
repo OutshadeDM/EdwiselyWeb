@@ -1035,11 +1035,11 @@ $(document).ready(function () {
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
             
-            saveQuestions();
 
             clearAll(true);
             questionsList.push(result.data.id);
             questions.push(result.data);
+            saveQuestions();
             loadList();
             $('#tick' + section).show()
             $("input.custom-control-input").attr("disabled", false);
@@ -1159,7 +1159,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-
+          console.log(result)
           if (result.status == 200) {
             new Notify({
               title: 'Success',

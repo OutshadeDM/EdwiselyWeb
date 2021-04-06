@@ -27,18 +27,18 @@ $(document).ready(function () {
   })
 
   $("#sendCodeBtn").click(()=>{
-    if(qc > 0){
-    // window.location.href = "addFeedQues.html?id=" + id + "&fname=" + title;
-    }
-    else{
-      new Notify ({
-          title: 'Error',
-          text : "Please add questions to assesment first",
-          autoclose: true,
-          status: 'error',
-          autotimeout: 3000
-      });
-    }
+    // if(qc > 0){
+    window.location.href = "sendCodingAssessment.html?id=" + id + "&tname=" + title;
+    // }
+    // else{
+    //   new Notify ({
+    //       title: 'Error',
+    //       text : "Please add questions to assesment first",
+    //       autoclose: true,
+    //       status: 'error',
+    //       autotimeout: 3000
+    //   });
+    // }
   });
 
 });
