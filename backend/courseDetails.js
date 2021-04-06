@@ -105,51 +105,49 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.deleteSection', function () {
-        $confirm("Do you want to delete this section?", "#FF9100")
-        .then(function(){
-            $toast("Deleted", "#FF9100");
-            const sectionId = $(this).data('id');
-            if(sectionId){    
-                let form = new FormData();
-                form.append('data',sectionId);
-    
-                $.ajax({
-                    url: 'https://stagingfacultypython.edwisely.com/common/facultyUnassingSubjectSection',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: form,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': `Bearer ${$user.token}`
-                    },
-                    success: function (result) {
-                        if (result.status == 200) {
-                            new Notify ({
-                                title: 'Success',
-                                text : 'Section Unassigned to Subject',
-                                autoclose: true,
-                                status: 'success',
-                                autotimeout: 3000
-                            });
-                            navAbout();
-                        }
-                        else {
-                            new Notify ({
-                                title: 'Error',
-                                text : 'Request Unsuccessful',
-                                autoclose: true,
-                                status: 'error',
-                                autotimeout: 3000
-                            });
-                        }
-                    },
-                    error: function (error) {
-                        alert("Request Failed with status: "+error.status);
+        let sectionId = $(this).data('id');
+
+        if(sectionId){
+
+            let form = new FormData();
+            form.append('data',sectionId);
+
+            $.ajax({
+                url: 'https://stagingfacultypython.edwisely.com/common/facultyUnassingSubjectSection',
+                type: 'POST',
+                dataType: 'json',
+                data: form,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': `Bearer ${$user.token}`
+                },
+                success: function (result) {
+                    if (result.status == 200) {
+                        new Notify ({
+                            title: 'Success',
+                            text : 'Section Unassigned to Subject',
+                            autoclose: true,
+                            status: 'success',
+                            autotimeout: 3000
+                        });
+                        navAbout();
                     }
-                });
-            }
-        });
+                    else {
+                        new Notify ({
+                            title: 'Error',
+                            text : 'Request Unsuccessful',
+                            autoclose: true,
+                            status: 'error',
+                            autotimeout: 3000
+                        });
+                    }
+                },
+                error: function (error) {
+                    alert("Request Failed with status: "+error.status);
+                }
+            });
+        }
     });
 
     

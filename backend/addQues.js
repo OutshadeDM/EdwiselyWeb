@@ -1035,6 +1035,7 @@ $(document).ready(function () {
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
             
+            saveQuestions();
 
             clearAll(true);
             questionsList.push(result.data.id);
@@ -1042,7 +1043,6 @@ $(document).ready(function () {
             loadList();
             $('#tick' + section).show()
             $("input.custom-control-input").attr("disabled", false);
-            saveQuestions();
           }
           else {
             $('#loadingDiv').remove();
@@ -1143,10 +1143,10 @@ $(document).ready(function () {
       form.append("units", "[" + unit_id + "]");
       form.append("section_id", section);
 
-      console.log(tId,questionsList,unit_id)
-      for (var key of form.entries()) {
-        console.log(key[1]);
-      }
+      // console.log(tId,questionsList,unit_id)
+      // for (var key of form.entries()) {
+      //   console.log(key[1]);
+      // }
 
       $.ajax({
         url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveTestQuestions',
@@ -1159,7 +1159,7 @@ $(document).ready(function () {
           'Authorization': `Bearer ${$user.token}`
         },
         success: function (result) {
-          console.log(result);
+
           if (result.status == 200) {
             new Notify({
               title: 'Success',
@@ -1515,19 +1515,17 @@ $(document).ready(function () {
 
   //delete btn
   $("#deleteBtn").click(function () {
-    $confirm("Do you want to delete?", "#FF9100")
-    .then(function(){
-        $toast("Deleted", "#7175E0");
-        const questionId = $('#questionId').val()
-        if (questionId && questionId != "0") {
-          questions = $.grep(questions, function (e) {
-            return e.id != questionId;
-          });
-          questionsList.splice($.inArray("abc", questionsList), 1);
-          loadList();
-          clearAll(true);
-        }
-    })
+
+    const questionId = $('#questionId').val()
+
+    if (questionId && questionId != "0") {
+      questions = $.grep(questions, function (e) {
+        return e.id != questionId;
+      });
+      questionsList.splice($.inArray("abc", questionsList), 1);
+      loadList();
+      clearAll(true);
+    }
   });
 
   $("#addNewBtn").click(function () {
@@ -1547,365 +1545,360 @@ $(document).ready(function () {
 
   $("#editBtn").click(function () {
 
-    $confirm("Do you want to edit this question?", "#FF9100")
-    .then(function(){
-      // $toast("Deleted", "#FF9100");
-      let questionId = $('#questionId').val()
-      let newQuestion = [];
-      let newOptions = [];
-        
-      if (questionId && questionId != "0") {
-  
-        $.each(questions, function (key, value) {
-          if (questionId == value.id) {
-            newQuestion = value;
-            newOptions = value.questions_options;
-            return false;
-          }
-        });
-  
-        newQuestion.college_account_id = parseInt(`${$user.user_id}`);
-        newQuestion.hint = $('#hintInput').val();
-        newQuestion.blooms_level = bloom_level;
-        newQuestion.difficulty_level = difficulty_level;
-        newQuestion.name = $('#quesInput').val();
-        if (topics.length > 0)
-          newQuestion.topics_details = topics;
-        newQuestion.solution = $('#solutionInput').val();
-  
-        if ((newQuestion.question_img && !question_img_url) || question_img) {
-          newQuestion.question_img = "";
-          newQuestion.media = 1
+    let questionId = $('#questionId').val()
+    let newQuestion = [];
+    let newOptions = [];
+
+    if (questionId && questionId != "0") {
+
+      $.each(questions, function (key, value) {
+        if (questionId == value.id) {
+          newQuestion = value;
+          newOptions = value.questions_options;
+          return false;
         }
-  
-        if (newQuestion.solution_image && !solution_img_url)
-          newQuestion.solution_image = "";
-  
-        if (newQuestion.hint_image && !hint_img_url)
-          newQuestion.hint_image = "";
-  
-  
-        if (newOptions[0] && newOptions[0].name) newOptions[0].name = option1;
-        if (newOptions[1] && newOptions[1].name) newOptions[1].name = option2;
-        if (newOptions[2] && newOptions[2].name) newOptions[2].name = option3;
-        if (newOptions[3] && newOptions[3].name) newOptions[3].name = option4;
-        if (newOptions[4] && newOptions[4].name) newOptions[4].name = option4;
-  
-        if (newOptions[0].option_img && !option1_img_url)
-          newOptions[0].option_img = "";
-  
-        if (newOptions[1].option_img && !option2_img_url)
-          newOptions[1].option_img = "";
-  
-        if (newOptions[2] && newOptions[2].option_img && !option3_img_url)
-          newOptions[2].option_img = "";
-  
-        if (newOptions[3] && newOptions[3].option_img && !option4_img_url)
-          newOptions[3].option_img = "";
-  
-        if (newOptions[4] && newOptions[4].option_img && !option5_img_url)
-          newOptions[4].option_img = "";
-  
-        if (!newOptions[2] && (option3 || option3_img)) {
-          let isAnswer = "0";
-          let media = '0';
-          if (!option3_img) media = "1";
-          if (answer == "2") isAnswer = "1";
-          newOptions[2] = {
-            "id": "",
-            "name": option3,
-            "is_answer": isAnswer,
-            "media": media,
-            "option_img": option3_img_url,
-            "question_id": questionId
-          }
-        }
-  
-        if (!newOptions[3] && (option4 || option4_img)) {
-          let isAnswer = "0";
-          let media = '0';
-          if (!option4_img) media = "1";
-          if (answer == "3") isAnswer = "1";
-          newOptions[3] = {
-            "id": "",
-            "name": option4,
-            "is_answer": isAnswer,
-            "media": media,
-            "option_img": option4_img_url,
-            "question_id": questionId
-          }
-        }
-  
-        if (!newOptions[4] && (option5 || option5_img)) {
-          let isAnswer = "0";
-          let media = '0';
-          if (!option5_img) media = "1";
-          if (answer == "4") isAnswer = "1";
-          newOptions[4] = {
-            "id": "",
-            "name": option5,
-            "is_answer": isAnswer,
-            "media": media,
-            "option_img": option5_img_url,
-            "question_id": questionId
-          }
-        }
-  
-        newOptions = newOptions.filter(function (e, index) {
-          if (index == 0 && (option1 || option1_img || option1_img_url)) {
-            if (answer == "0") e.is_answer = 1;
-            else e.is_answer = "0";
-            if (option1_img || option1_img_url) e.media = 1;
-            return e;
-          }
-          if (index == 1 && (option2 || option2_img || option2_img_url)) {
-            if (answer == "1") e.is_answer = 1;
-            else e.is_answer = "0";
-            if (option2_img || option2_img_url) e.media = 1;
-            return e;
-          }
-          if (index == 2 && (option3 || option3_img || option3_img_url)) {
-            if (answer == "2") e.is_answer = 1;
-            else e.is_answer = "0";
-            if (option3_img || option3_img_url) e.media = 1;
-            return e;
-          }
-          if (index == 3 && (option4 || option4_img || option4_img_url)) {
-            if (answer == "3") e.is_answer = 1;
-            else e.is_answer = "0";
-            if (option4_img || option4_img_url) e.media = 1;
-            return e;
-          }
-          if (index == 4 && (option5 || option5_img || option5_img_url)) {
-            if (answer == "4") e.is_answer = 1;
-            else e.is_answer = "0";
-            if (option5_img || option5_img_url) e.media = 1;
-            return e;
-          }
-        });
-  
-        newQuestion.questions_options = newOptions;
-  
-        let question_type1 = $("input[name='public_pvt']:checked").val();
-        if (!question_type1)
-          question_type1 = "private";
-  
-        // console.log(JSON.stringify(newQuestion));
-  
-        if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
-  
-          $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            background: "#fff",
-            opacity: 0.7
-          }).appendTo($("#abcd"));
-          $("input.custom-control-input").attr("disabled", true);
-  
-          let form = new FormData();
-          form.append("question", JSON.stringify(newQuestion));
-          form.append("question_img", question_img);
-          form.append("solution_img", solution_img);
-          form.append("hint_img", hint_img);
-          form.append("option1_img", option1_img);
-          form.append("option2_img", option2_img);
-          form.append("option3_img", option3_img);
-          form.append("option4_img", option4_img);
-          form.append("option5_img", option5_img);
-          form.append("question_id", questionId);
-  
-          $.ajax({
-            url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
-            type: 'POST',
-            dataType: 'json',
-            data: form,
-            contentType: false,
-            processData: false,
-            headers: {
-              'Authorization': `Bearer ${$user.token}`
-            },
-            success: function (result1) {
-  
-              if (result1.status == 200) {
-  
-                if (question_type1 != newQuestion.question_type) {
-                  // alert(question_type1);
-                  let form1 = new FormData();
-                  form1.append("question_id", newQuestion.id);
-                  form1.append("type", question_type1);
-  
-                  $.ajax({
-                    url: 'https://stagingfacultypython.edwisely.com/questions/updateFacultyAddedObjectiveQuestions',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: form1,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                      'Authorization': `Bearer ${$user.token}`
-                    },
-                    success: function (result) {
-                      if (result.status == 200 || result.status == 400) {
-                        new Notify({
-                          title: 'Success',
-                          text: "Question updated Successfully",
-                          autoclose: true,
-                          status: 'success',
-                          autotimeout: 3000
-                        });
-                        // $('#successToastBody').text();
-                        // $('#successToast').toast('show');
-                        $('#loadingDiv').remove();
-                        $("input.custom-control-input").attr("disabled", false);
-                        clearAll(true);
-                        $("#addquesDiv").empty();
-                        const foundIndex = questions.findIndex(x => x.id == questionId);
-                        questions[foundIndex].question_type = question_type1;
-                        questions[foundIndex] = result1.data;
-                        $('#tick' + section).show()
-                        loadList();
-  
-  
-                        if (tId == "0" && sId != "0") {
-                          setInterval(function () {
-                            window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
-                          }, 2000);
-                        }
-  
-                      }
-                    },
-                    error: function (error) {
-                      $('#loadingDiv').remove();
-                      $("input.custom-control-input").attr("disabled", false);
-                      alert("Request Failed with status: " + error.status);
-                    }
-                  });
-  
-                }
-                else {
-                  new Notify({
-                    title: 'Success',
-                    text: result1.message,
-                    autoclose: true,
-                    status: 'success',
-                    autotimeout: 3000
-                  });
-                  // $('#successToastBody').text();
-                  // $('#successToast').toast('show');
-                  $('#loadingDiv').remove();
-                  $("input.custom-control-input").attr("disabled", false);
-                  clearAll(true);
-                  $("#addquesDiv").empty();
-                  const foundIndex = questions.findIndex(x => x.id == questionId);
-                  questions[foundIndex] = result1.data;
-                  console.log(JSON.stringify(questions[foundIndex]));
-                  loadList();
-  
-                  if (tId == "0" && sId != "0") {
-                    setInterval(function () {
-                      window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
-                    }, 2000);
-                  }
-  
-                }
-              }
-              else {
-                $('#loadingDiv').remove();
-                new Notify({
-                  title: 'Error',
-                  text: result.message,
-                  autoclose: true,
-                  status: 'error',
-                  autotimeout: 3000
-                });
-                // $('#errorToastBody').text(result.message);
-                // $('#errorToast').toast('show');
-                $("input.custom-control-input").attr("disabled", false);
-              }
-            },
-            error: function (error) {
-              $('#loadingDiv').remove();
-              $("input.custom-control-input").attr("disabled", false);
-              $("#addquesDiv").empty();
-              alert("Request Failed with status: " + error.status);
-            },
-            error: function (error) {
-              $('#loadingDiv').remove();
-              $("input.custom-control-input").attr("disabled", false);
-              alert("Request Failed with status: " + error.status);
-            }
-          });
-        }
-        else {
-          if (!question)
-            new Notify({
-              title: 'Error',
-              text: "Please enter Question",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else if (newOptions.length <= 1)
-            new Notify({
-              title: 'Error',
-              text: "2 Options are Mandatory",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else if (topics == null || !topics || topics.length == "0")
-            new Notify({
-              title: 'Error',
-              text: "Please Select Topics",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else if (!bloom_level)
-            new Notify({
-              title: 'Error',
-              text: "Please Select Bloom Level value",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else if (!type)
-            new Notify({
-              title: 'Error',
-              text: "Please Select Public or Private",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else if (!answer)
-            new Notify({
-              title: 'Error',
-              text: "Please Select an Option as Answer",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else if (!source)
-            new Notify({
-              title: 'Error',
-              text: "Please Enter Source",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          else
-            new Notify({
-              title: 'Error',
-              text: "Some fields are mandatory",
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
+      });
+
+      newQuestion.college_account_id = parseInt(`${$user.user_id}`);
+      newQuestion.hint = $('#hintInput').val();
+      newQuestion.blooms_level = bloom_level;
+      newQuestion.difficulty_level = difficulty_level;
+      newQuestion.name = $('#quesInput').val();
+      if (topics.length > 0)
+        newQuestion.topics_details = topics;
+      newQuestion.solution = $('#solutionInput').val();
+
+      if ((newQuestion.question_img && !question_img_url) || question_img) {
+        newQuestion.question_img = "";
+        newQuestion.media = 1
+      }
+
+      if (newQuestion.solution_image && !solution_img_url)
+        newQuestion.solution_image = "";
+
+      if (newQuestion.hint_image && !hint_img_url)
+        newQuestion.hint_image = "";
+
+
+      if (newOptions[0] && newOptions[0].name) newOptions[0].name = option1;
+      if (newOptions[1] && newOptions[1].name) newOptions[1].name = option2;
+      if (newOptions[2] && newOptions[2].name) newOptions[2].name = option3;
+      if (newOptions[3] && newOptions[3].name) newOptions[3].name = option4;
+      if (newOptions[4] && newOptions[4].name) newOptions[4].name = option4;
+
+      if (newOptions[0].option_img && !option1_img_url)
+        newOptions[0].option_img = "";
+
+      if (newOptions[1].option_img && !option2_img_url)
+        newOptions[1].option_img = "";
+
+      if (newOptions[2] && newOptions[2].option_img && !option3_img_url)
+        newOptions[2].option_img = "";
+
+      if (newOptions[3] && newOptions[3].option_img && !option4_img_url)
+        newOptions[3].option_img = "";
+
+      if (newOptions[4] && newOptions[4].option_img && !option5_img_url)
+        newOptions[4].option_img = "";
+
+      if (!newOptions[2] && (option3 || option3_img)) {
+        let isAnswer = "0";
+        let media = '0';
+        if (!option3_img) media = "1";
+        if (answer == "2") isAnswer = "1";
+        newOptions[2] = {
+          "id": "",
+          "name": option3,
+          "is_answer": isAnswer,
+          "media": media,
+          "option_img": option3_img_url,
+          "question_id": questionId
         }
       }
-    });
 
+      if (!newOptions[3] && (option4 || option4_img)) {
+        let isAnswer = "0";
+        let media = '0';
+        if (!option4_img) media = "1";
+        if (answer == "3") isAnswer = "1";
+        newOptions[3] = {
+          "id": "",
+          "name": option4,
+          "is_answer": isAnswer,
+          "media": media,
+          "option_img": option4_img_url,
+          "question_id": questionId
+        }
+      }
+
+      if (!newOptions[4] && (option5 || option5_img)) {
+        let isAnswer = "0";
+        let media = '0';
+        if (!option5_img) media = "1";
+        if (answer == "4") isAnswer = "1";
+        newOptions[4] = {
+          "id": "",
+          "name": option5,
+          "is_answer": isAnswer,
+          "media": media,
+          "option_img": option5_img_url,
+          "question_id": questionId
+        }
+      }
+
+      newOptions = newOptions.filter(function (e, index) {
+        if (index == 0 && (option1 || option1_img || option1_img_url)) {
+          if (answer == "0") e.is_answer = 1;
+          else e.is_answer = "0";
+          if (option1_img || option1_img_url) e.media = 1;
+          return e;
+        }
+        if (index == 1 && (option2 || option2_img || option2_img_url)) {
+          if (answer == "1") e.is_answer = 1;
+          else e.is_answer = "0";
+          if (option2_img || option2_img_url) e.media = 1;
+          return e;
+        }
+        if (index == 2 && (option3 || option3_img || option3_img_url)) {
+          if (answer == "2") e.is_answer = 1;
+          else e.is_answer = "0";
+          if (option3_img || option3_img_url) e.media = 1;
+          return e;
+        }
+        if (index == 3 && (option4 || option4_img || option4_img_url)) {
+          if (answer == "3") e.is_answer = 1;
+          else e.is_answer = "0";
+          if (option4_img || option4_img_url) e.media = 1;
+          return e;
+        }
+        if (index == 4 && (option5 || option5_img || option5_img_url)) {
+          if (answer == "4") e.is_answer = 1;
+          else e.is_answer = "0";
+          if (option5_img || option5_img_url) e.media = 1;
+          return e;
+        }
+      });
+
+      newQuestion.questions_options = newOptions;
+
+      let question_type1 = $("input[name='public_pvt']:checked").val();
+      if (!question_type1)
+        question_type1 = "private";
+
+      // console.log(JSON.stringify(newQuestion));
+
+      if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
+
+        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          background: "#fff",
+          opacity: 0.7
+        }).appendTo($("#abcd"));
+        $("input.custom-control-input").attr("disabled", true);
+
+        let form = new FormData();
+        form.append("question", JSON.stringify(newQuestion));
+        form.append("question_img", question_img);
+        form.append("solution_img", solution_img);
+        form.append("hint_img", hint_img);
+        form.append("option1_img", option1_img);
+        form.append("option2_img", option2_img);
+        form.append("option3_img", option3_img);
+        form.append("option4_img", option4_img);
+        form.append("option5_img", option5_img);
+        form.append("question_id", questionId);
+
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result1) {
+
+            if (result1.status == 200) {
+
+              if (question_type1 != newQuestion.question_type) {
+                // alert(question_type1);
+                let form1 = new FormData();
+                form1.append("question_id", newQuestion.id);
+                form1.append("type", question_type1);
+
+                $.ajax({
+                  url: 'https://stagingfacultypython.edwisely.com/questions/updateFacultyAddedObjectiveQuestions',
+                  type: 'POST',
+                  dataType: 'json',
+                  data: form1,
+                  contentType: false,
+                  processData: false,
+                  headers: {
+                    'Authorization': `Bearer ${$user.token}`
+                  },
+                  success: function (result) {
+                    if (result.status == 200 || result.status == 400) {
+                      new Notify({
+                        title: 'Success',
+                        text: "Question updated Successfully",
+                        autoclose: true,
+                        status: 'success',
+                        autotimeout: 3000
+                      });
+                      // $('#successToastBody').text();
+                      // $('#successToast').toast('show');
+                      $('#loadingDiv').remove();
+                      $("input.custom-control-input").attr("disabled", false);
+                      clearAll(true);
+                      $("#addquesDiv").empty();
+                      const foundIndex = questions.findIndex(x => x.id == questionId);
+                      questions[foundIndex].question_type = question_type1;
+                      questions[foundIndex] = result1.data;
+                      $('#tick' + section).show()
+                      loadList();
+
+
+                      if (tId == "0" && sId != "0") {
+                        setInterval(function () {
+                          window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
+                        }, 2000);
+                      }
+
+                    }
+                  },
+                  error: function (error) {
+                    $('#loadingDiv').remove();
+                    $("input.custom-control-input").attr("disabled", false);
+                    alert("Request Failed with status: " + error.status);
+                  }
+                });
+
+              }
+              else {
+                new Notify({
+                  title: 'Success',
+                  text: result1.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+                });
+                // $('#successToastBody').text();
+                // $('#successToast').toast('show');
+                $('#loadingDiv').remove();
+                $("input.custom-control-input").attr("disabled", false);
+                clearAll(true);
+                $("#addquesDiv").empty();
+                const foundIndex = questions.findIndex(x => x.id == questionId);
+                questions[foundIndex] = result1.data;
+                console.log(JSON.stringify(questions[foundIndex]));
+                loadList();
+
+                if (tId == "0" && sId != "0") {
+                  setInterval(function () {
+                    window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
+                  }, 2000);
+                }
+
+              }
+            }
+            else {
+              $('#loadingDiv').remove();
+              new Notify({
+                title: 'Error',
+                text: result.message,
+                autoclose: true,
+                status: 'error',
+                autotimeout: 3000
+              });
+              // $('#errorToastBody').text(result.message);
+              // $('#errorToast').toast('show');
+              $("input.custom-control-input").attr("disabled", false);
+            }
+          },
+          error: function (error) {
+            $('#loadingDiv').remove();
+            $("input.custom-control-input").attr("disabled", false);
+            $("#addquesDiv").empty();
+            alert("Request Failed with status: " + error.status);
+          },
+          error: function (error) {
+            $('#loadingDiv').remove();
+            $("input.custom-control-input").attr("disabled", false);
+            alert("Request Failed with status: " + error.status);
+          }
+        });
+      }
+      else {
+        if (!question)
+          new Notify({
+            title: 'Error',
+            text: "Please enter Question",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else if (newOptions.length <= 1)
+          new Notify({
+            title: 'Error',
+            text: "2 Options are Mandatory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else if (topics == null || !topics || topics.length == "0")
+          new Notify({
+            title: 'Error',
+            text: "Please Select Topics",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else if (!bloom_level)
+          new Notify({
+            title: 'Error',
+            text: "Please Select Bloom Level value",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else if (!type)
+          new Notify({
+            title: 'Error',
+            text: "Please Select Public or Private",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else if (!answer)
+          new Notify({
+            title: 'Error',
+            text: "Please Select an Option as Answer",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else if (!source)
+          new Notify({
+            title: 'Error',
+            text: "Please Enter Source",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        else
+          new Notify({
+            title: 'Error',
+            text: "Some fields are mandatory",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+      }
+    }
   });
 
 });
