@@ -35,7 +35,7 @@ $(document).ready(function () {
     if (tname)
       $('#courseName').text(tname);
   }
-  if(searchParams.has('seid'))
+  if (searchParams.has('seid'))
     section = searchParams.get('seid');
 
   //preparing for post api of questions
@@ -151,17 +151,20 @@ $(document).ready(function () {
           $.each(result.data.sections, function (key, value) {
             // sectionIds.push(value.id)
             $('.sectionContainer').append('<div class="sectionDiv"><label class="sectionLabel" data-marks=' + value.marks + ' data-id=' + value.id + ' id="section' + value.id + '">' + value.name + '<img alt="tick" width="18px" src="frontend/images/savedQuestions.svg" class="tick pl-1 pb-1" id="tick' + value.id + '" /></label></div>')
+            if (value.questions_count == 0) {
+              $('#tick' + value.id).hide()
+            }
           });
           $('.sectionContainer').append('<i class="fas fa-edit pl-5 editTest"></i>')
-          if(!section || section == 0){
+          if (!section || section == 0) {
             section = result.data.sections[0].id;
             sectionMarks = result.data.sections[0].marks;
           }
           else
-            sectionMarks = $('#section'+section).data('marks');
+            sectionMarks = $('#section' + section).data('marks');
           // console.log(section)
           $('#section' + section).addClass('active')
-          $('.tick').hide()
+
           refreshQuestions();
         }
       },
@@ -1034,7 +1037,7 @@ $(document).ready(function () {
             });
             // $('#successToastBody').text('Question Added to Database Successfully');
             // $('#successToast').toast('show');
-            
+
             saveQuestions();
 
             clearAll(true);
@@ -1516,7 +1519,7 @@ $(document).ready(function () {
   //delete btn
   $("#deleteBtn").click(function () {
     $confirm("Do you want to delete this question?", "#FF9100")
-    .then(function(){
+      .then(function () {
         $toast("Deleted", "#FF9100");
         const questionId = $('#questionId').val()
         if (questionId && questionId != "0") {
@@ -1527,7 +1530,7 @@ $(document).ready(function () {
           loadList();
           clearAll(true);
         }
-    })
+      })
   });
 
   $("#addNewBtn").click(function () {
@@ -1547,14 +1550,14 @@ $(document).ready(function () {
 
   $("#editBtn").click(function () {
     $confirm("Do you want to edit this question?", "#FF9100")
-    .then(function(){
+      .then(function () {
         // $toast("Deleted", "#FF9100");
         let questionId = $('#questionId').val()
         let newQuestion = [];
         let newOptions = [];
-    
+
         if (questionId && questionId != "0") {
-    
+
           $.each(questions, function (key, value) {
             if (questionId == value.id) {
               newQuestion = value;
@@ -1562,7 +1565,7 @@ $(document).ready(function () {
               return false;
             }
           });
-    
+
           newQuestion.college_account_id = parseInt(`${$user.user_id}`);
           newQuestion.hint = $('#hintInput').val();
           newQuestion.blooms_level = bloom_level;
@@ -1571,40 +1574,40 @@ $(document).ready(function () {
           if (topics.length > 0)
             newQuestion.topics_details = topics;
           newQuestion.solution = $('#solutionInput').val();
-    
+
           if ((newQuestion.question_img && !question_img_url) || question_img) {
             newQuestion.question_img = "";
             newQuestion.media = 1
           }
-    
+
           if (newQuestion.solution_image && !solution_img_url)
             newQuestion.solution_image = "";
-    
+
           if (newQuestion.hint_image && !hint_img_url)
             newQuestion.hint_image = "";
-    
-    
+
+
           if (newOptions[0] && newOptions[0].name) newOptions[0].name = option1;
           if (newOptions[1] && newOptions[1].name) newOptions[1].name = option2;
           if (newOptions[2] && newOptions[2].name) newOptions[2].name = option3;
           if (newOptions[3] && newOptions[3].name) newOptions[3].name = option4;
           if (newOptions[4] && newOptions[4].name) newOptions[4].name = option4;
-    
+
           if (newOptions[0].option_img && !option1_img_url)
             newOptions[0].option_img = "";
-    
+
           if (newOptions[1].option_img && !option2_img_url)
             newOptions[1].option_img = "";
-    
+
           if (newOptions[2] && newOptions[2].option_img && !option3_img_url)
             newOptions[2].option_img = "";
-    
+
           if (newOptions[3] && newOptions[3].option_img && !option4_img_url)
             newOptions[3].option_img = "";
-    
+
           if (newOptions[4] && newOptions[4].option_img && !option5_img_url)
             newOptions[4].option_img = "";
-    
+
           if (!newOptions[2] && (option3 || option3_img)) {
             let isAnswer = "0";
             let media = '0';
@@ -1619,7 +1622,7 @@ $(document).ready(function () {
               "question_id": questionId
             }
           }
-    
+
           if (!newOptions[3] && (option4 || option4_img)) {
             let isAnswer = "0";
             let media = '0';
@@ -1634,7 +1637,7 @@ $(document).ready(function () {
               "question_id": questionId
             }
           }
-    
+
           if (!newOptions[4] && (option5 || option5_img)) {
             let isAnswer = "0";
             let media = '0';
@@ -1649,7 +1652,7 @@ $(document).ready(function () {
               "question_id": questionId
             }
           }
-    
+
           newOptions = newOptions.filter(function (e, index) {
             if (index == 0 && (option1 || option1_img || option1_img_url)) {
               if (answer == "0") e.is_answer = 1;
@@ -1682,17 +1685,17 @@ $(document).ready(function () {
               return e;
             }
           });
-    
+
           newQuestion.questions_options = newOptions;
-    
+
           let question_type1 = $("input[name='public_pvt']:checked").val();
           if (!question_type1)
             question_type1 = "private";
-    
+
           // console.log(JSON.stringify(newQuestion));
-    
+
           if (topics != null && topics.length > 0 && newOptions.length >= 2 && bloom_level && answer && question && question_type1) {
-    
+
             $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
               position: "absolute",
               width: "100%",
@@ -1701,7 +1704,7 @@ $(document).ready(function () {
               opacity: 0.7
             }).appendTo($("#abcd"));
             $("input.custom-control-input").attr("disabled", true);
-    
+
             let form = new FormData();
             form.append("question", JSON.stringify(newQuestion));
             form.append("question_img", question_img);
@@ -1713,7 +1716,7 @@ $(document).ready(function () {
             form.append("option4_img", option4_img);
             form.append("option5_img", option5_img);
             form.append("question_id", questionId);
-    
+
             $.ajax({
               url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/editObjectiveQuestion',
               type: 'POST',
@@ -1725,15 +1728,15 @@ $(document).ready(function () {
                 'Authorization': `Bearer ${$user.token}`
               },
               success: function (result1) {
-    
+
                 if (result1.status == 200) {
-    
+
                   if (question_type1 != newQuestion.question_type) {
                     // alert(question_type1);
                     let form1 = new FormData();
                     form1.append("question_id", newQuestion.id);
                     form1.append("type", question_type1);
-    
+
                     $.ajax({
                       url: 'https://stagingfacultypython.edwisely.com/questions/updateFacultyAddedObjectiveQuestions',
                       type: 'POST',
@@ -1764,14 +1767,14 @@ $(document).ready(function () {
                           questions[foundIndex] = result1.data;
                           $('#tick' + section).show()
                           loadList();
-    
-    
+
+
                           if (tId == "0" && sId != "0") {
                             setInterval(function () {
                               window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
                             }, 2000);
                           }
-    
+
                         }
                       },
                       error: function (error) {
@@ -1780,7 +1783,7 @@ $(document).ready(function () {
                         alert("Request Failed with status: " + error.status);
                       }
                     });
-    
+
                   }
                   else {
                     new Notify({
@@ -1800,13 +1803,13 @@ $(document).ready(function () {
                     questions[foundIndex] = result1.data;
                     console.log(JSON.stringify(questions[foundIndex]));
                     loadList();
-    
+
                     if (tId == "0" && sId != "0") {
                       setInterval(function () {
                         window.location.href = 'courseDetails.html?id=' + sId + '&uid=' + unit_id;
                       }, 2000);
                     }
-    
+
                   }
                 }
                 else {
@@ -1904,6 +1907,6 @@ $(document).ready(function () {
           }
         }
       });
-    });
+  });
 
 });
