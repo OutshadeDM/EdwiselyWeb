@@ -55,7 +55,9 @@ $(document).ready(function () {
   let preAddedQues = []
   let preAddedQuesId = []
 
-
+  //for questions which are pre added but for sending/saving (only marks and id)
+  let existingQuestionsId = []
+  let existingQuestions = []
 
   getpreAddedQuestions()
 
@@ -79,6 +81,8 @@ $(document).ready(function () {
             let question = {}
             question.id = value.id;
             question.marks = value.marks
+            existingQuestions.push(question)
+            existingQuestionsId.push(value.id)
 
           });
 
@@ -87,6 +91,7 @@ $(document).ready(function () {
           loadList()
           getUnits();
 
+          console.log(existingQuestions)
 
         }
         else {
@@ -450,7 +455,7 @@ $(document).ready(function () {
 
   $('#btnSave').on('click', function () {
     let qc = 0;
-    qc = selectedQuestions.length + preAddedQues.length
+    qc = selectedQuestions.length + existingQuestions.length
 
     selectedQuestions.forEach(function (ques) {
       if (ques.marks == "None") {
@@ -461,13 +466,65 @@ $(document).ready(function () {
       }
     })
 
-    if (selectedQuestions.length == 0) {
+    if (selectedQuestions.length == 0 && existingQuestions.length == 0) {
       new Notify({
         title: 'Error',
         text: "Choose Questions First",
         autoclose: true,
         status: 'error',
         autotimeout: 3000
+      });
+    }
+    else if (selectedQuestions.length == 0 && existingQuestions > 0) {
+      var form = new FormData();
+      form.append("test_id", test_id);
+      form.append("problems", JSON.stringify(existingQuestions));
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
+
+
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/codeEditor/addCodingProblemsToTest',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          console.log(result);
+
+
+          if (result.status == 200) {
+            new Notify({
+              title: 'Success',
+              text: "Questions Added Successfully",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
+            });
+
+            setTimeout(() => {
+              window.location.href = `codingQuestions.html?id=${test_id}&fname=${test_name}&qc=${qc}`
+            }, 2000)
+          }
+          else {
+            new Notify({
+              title: 'Error',
+              text: "Error",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+            });
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
+        }
       });
     }
 
@@ -533,7 +590,8 @@ $(document).ready(function () {
   //save and send btn
 
   $('#btnSaveSend').on('click', function () {
-    if (selectedQuestions.length === 0) {
+    console.log(selectedQuestions)
+    if (selectedQuestions.length === 0 && existingQuestions.length == 0) {
       new Notify({
         title: 'Error',
         text: "Choose Questions First",
@@ -542,6 +600,56 @@ $(document).ready(function () {
         autotimeout: 3000
       });
     }
+
+    else if (selectedQuestions.length == 0 && existingQuestions > 0) {
+      var form = new FormData();
+      form.append("test_id", test_id);
+      form.append("problems", JSON.stringify(existingQuestions));
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
+
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/codeEditor/addCodingProblemsToTest',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+
+
+          if (result.status == 200) {
+            new Notify({
+              title: 'Success',
+              text: "Successfully Added the Questions",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
+            });
+            setTimeout(() => {
+              window.location.href = `sendCodingAssessment.html?test_id=${test_id}&test_name=${test_name}`
+            }, 2000)
+          }
+          else {
+            new Notify({
+              title: 'Error',
+              text: "Error",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+            });
+          }
+        },
+        error: function (error) {
+          alert("Request Failed with status: " + error.status);
+        }
+      });
+    }
+
     else {
       var form = new FormData();
       form.append("test_id", test_id);
