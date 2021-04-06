@@ -22,6 +22,8 @@ $(document).ready(function () {
   let selectedStudentsId = []
   let preSelectedStudentsIds = []
   let description = ""
+  let hours = null;
+  let mins = null;
 
   const searchParams = new URLSearchParams(window.location.search);
   if (searchParams.has('id')) {
@@ -303,57 +305,77 @@ $(document).ready(function () {
 
 
   $('#sendQuestionsBtn').on('click', function () {
-    timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
+    if (hours == null || mins == null) {
+      new Notify({
+        title: 'Error',
+        text: "Fill All Details",
+        autoclose: true,
+        status: 'error',
+        autotimeout: 3000
+      });
+    }
+    else {
+      timelimit_in_secs = (hours * 60 * 60) + (mins * 60)
 
 
-    var form = new FormData();
-    form.append("name", test_name)
-    form.append("test_id", test_id)
-    form.append("starttime", starttime)
-    form.append("doe", doe)
-    form.append("description", description)
-    form.append("timelimit", timelimit_in_secs)
-    form.append("students", "[" + selectedStudentsId + "]")
-    // for (var key of form.entries()) {
-    //   alert(key[1]);
-    // }
+      var form = new FormData();
+      form.append("name", test_name)
+      form.append("test_id", test_id)
+      form.append("starttime", starttime)
+      form.append("doe", doe)
+      form.append("description", description)
+      form.append("timelimit", timelimit_in_secs)
+      form.append("students", "[" + selectedStudentsId + "]")
+      // for (var key of form.entries()) {
+      //   alert(key[1]);
+      // }
 
-    $.ajax({
-      url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTest',
-      type: 'POST',
-      dataType: 'json',
-      data: form,
-      contentType: false,
-      processData: false,
-      headers: {
-        'Authorization': `Bearer ${$user.token}`
-      },
-      success: function (result) {
-        console.log(result)
+      $.ajax({
+        url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingTest',
+        type: 'POST',
+        dataType: 'json',
+        data: form,
+        contentType: false,
+        processData: false,
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        },
+        success: function (result) {
+          console.log(result)
 
-        if (result.status == 200) {
-          new Notify({
-            title: 'Success',
-            text: "Test Successfully Sent",
-            autoclose: true,
-            status: 'success',
-            autotimeout: 3000
-          });
+          if (result.status == 200) {
+            new Notify({
+              title: 'Success',
+              text: "Test Successfully Sent",
+              autoclose: true,
+              status: 'success',
+              autotimeout: 3000
+            });
 
-          setTimeout(function () {
-            window.location.href = "myCodingAssessment.html";
-          }, 3000);
-        }
-        else if (selectedStudentsId.length == 0) {
-          new Notify({
-            title: 'Error',
-            text: "Select atleast one Student",
-            autoclose: true,
-            status: 'error',
-            autotimeout: 3000
-          });
-        }
-        else {
+            setTimeout(function () {
+              window.location.href = "myCodingAssessment.html";
+            }, 3000);
+          }
+          else if (selectedStudentsId.length == 0) {
+            new Notify({
+              title: 'Error',
+              text: "Select atleast one Student",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+            });
+          }
+          else {
+            new Notify({
+              title: 'Error',
+              text: "Fill All Details",
+              autoclose: true,
+              status: 'error',
+              autotimeout: 3000
+            });
+          }
+        },
+        error: function (error) {
           new Notify({
             title: 'Error',
             text: "Fill All Details",
@@ -362,13 +384,9 @@ $(document).ready(function () {
             autotimeout: 3000
           });
         }
-      },
-      error: function (error) {
-        alert("Request Failed with status: " + error.status);
-      }
-    });
+      });
 
-
+    }
 
   })
 })
