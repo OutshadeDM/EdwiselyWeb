@@ -3,3 +3,19 @@
     padding: 5px 15px;
     border-radius: 12px;
 }
+
+.assignmentFile{
+    display: none;
+}
+
+.assignmentUploadLabel{
+    text-align: center;
+    width: 100%;
+    border: 1px gray dashed;
+    border-radius: 15px;
+}
+
+#uploadedFileName{
+    font-size: larger;
+    color: #E25BC8;
+  }

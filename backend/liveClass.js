@@ -130,7 +130,7 @@ $(async function () {
 		</div>
 		</div><div class="student-list row" style="height:700px"></div>`)
 		$.each(section.students.data, (index, student) => {
-			$(`#t${tabNumber} .student-list`).append(`<div class="form-check col-12 single">
+			$(`#t${tabNumber} .student-list`).append(`<div class="form-check col-12 single" style="height:50px">
 	                                  <label class="form-check-label" for="exampleCheck${selectNumber}">${student.roll_number} - ${student.name}</label>
 	                                  <input style="float: right;right: 10px;" name="students[]" value="${student.id}" type="checkbox" class="form-check-input" id="exampleCheck${selectNumber++}">
 	                                </div>`);
