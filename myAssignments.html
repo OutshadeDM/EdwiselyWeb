@@ -24,7 +24,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js'></script>
-  <title>Edwisely - Feedback</title>
+  <title>Edwisely - Assignments</title>
 
 </head>
 
@@ -97,21 +97,21 @@
             <div class="row">
               <div class="col-sm-8">
                 <h2 class="mt-1">
-                  <p class="font-weight-bold" id="courseName">Feedbacks</p>
+                  <p class="font-weight-bold" id="courseName">Assignments</p>
                 </h2>
                 <hr class="titlehr">
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
-                  <span class="list-item-active"><a href="#">Feedbacks</a></span>
+                  <span class="list-item-active"><a href="#">Assignments</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
                 <div class="d-flex flex-row-reverse bd-highlight justify-content-center">
                   <div class="p-2 bd-highlight align-self-center">
                     <a href="createFeedback.html" class="text-white">
-                      <button type="button" class="btn btn-primary shadow-sm btnLink mt-3 px-4 py-2">
+                      <button type="button" class="btn btn-primary shadow-sm btnLink px-4 py-2" style="height: max-content;">
                       <i class="fas fa-laptop-code pr-2"></i>Create
-                        Feedback</button>
+                        Assignment</button>
                       </a>
                   </div>
 
@@ -128,7 +128,7 @@
           <div class="row">
             <div class="col-md-12 px-0">
               <div class="container-fluid px-5">
-                <div class="row text-center" id="feedbackList">
+                <div class="row text-center" id="assignmentList">
                   <div class="loader-wrapper">
                     <div class="loader"></div>
                   </div>
@@ -139,22 +139,6 @@
 
 
           <!-- End Page Content -->
-        </div>
-      </div>
-      <!-- modal -->
-      <div class="modal fade" id="statModal" tabindex="-1" aria-labelledby="statModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="statModalLabel">Feedback Stats</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-          </div>
         </div>
       </div>
 
@@ -169,6 +153,6 @@
 <!-- add extra js files here -->
 <script type="text/javascript" src="frontend/venders/scripts/cookies.js"></script>
 <script type="text/javascript" src="backend/cookies.js"></script>
-<script src="backend/myFeedbacks.js"></script>
+<script src="backend/myAssignments.js"></script>
 
 </html>
