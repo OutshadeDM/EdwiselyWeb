@@ -9,14 +9,40 @@ $(document).ready(function () {
     window.location.replace("login.html");
   }
 
+  const searchParams = new URLSearchParams(window.location.search);
+  let tId = 0;
+  if (searchParams.has('id')) {
+    tId = searchParams.get('id')
+    getTestDetails();
+  }
 
   let uploaded_file = null
 
+  function getTestDetails(){
+    $.ajax({
+      url: `https://stagingfacultypython.edwisely.com/assignment/getAssignmentDetails?assignment_id=${tId}`,
+      type: 'GET',
+      contentType: 'application/json',
+      headers: {
+        'Authorization': `Bearer ${$user.token}`
+      },
+      success: function (result) {
+        console.log(result)
+        if (result.status == 200 && result.data) {
+          $('#courseName').text(result.data.name);
+          $('#title').val(result.data.name);
+          $("#summernote").summernote("code",result.data.description);
+          $("#summernote1").summernote("code",result.data.instructions);
+          getSubjects(result.data.subject_id)
+        }        
+      },
+      error: function (error) {
+        alert("Request Failed with status: " + error.status);
+      }
+    });
+  }
 
-
-  getSubjects(0)
-
-
+  getSubjects(null);
 
   function getSubjects(subject_id) {
     $.ajax({
@@ -27,14 +53,14 @@ $(document).ready(function () {
         'Authorization': `Bearer ${$user.token}`
       },
       success: function (result) {
-        //alert(result.status);
-        $('#courseTags').empty();
+        //alert(result);
         if (result.status == 200 && result.data) {
+          $('#subject').empty();
           $.each(result.data, function (key, value) {
-            // alert(value);
             $('#subject').append("<option value='" + value.id + "'>" + value.name + "</option>");
           });
-
+          if (subject_id)
+            $('#subject').val(subject_id);
         }
       },
       error: function (error) {
@@ -44,119 +70,104 @@ $(document).ready(function () {
   }
 
 
-  $('.quesUploadFile').on('change', function () {
-    uploaded_file = $(".quesUploadFile")[0].files[0];
-    console.log(uploaded_file.name)
-    $('#uploadedFileName').text(uploaded_file.name + " has been selected")
+  $('.assignmentFile').on('change', function () {
+    uploaded_file = $(".assignmentFile")[0].files[0];
+    console.log(uploaded_file)
+    $('#uploadedFileName').text(uploaded_file.name)
   })
 
 
   $('#createAssignmentBtn').on('click', function () {
 
-    const title = $('#title-objective').val()
+    const title = $('#title').val()
     const desc = $("#summernote").summernote("code").replace(/<\/?[^>]+(>|$)/g, "")
     const subject = $("#subject").find(":selected").val()
-
-    const section_name1 = $('#section_name1').val();
-    const section_marks1 = $('#section_marks1').find(":selected").val();
     const instructions = $("#summernote1").summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
 
-    // console.log(title,desc,subject,section_name1,section_marks1,section_instr1);
+    // console.log(title,desc,subject,instructions,uploaded_file);
 
-    if (title && desc && subject && section_name1 && section_marks1) {
-
-      if (objective == 'true') {
+    if (title && desc && subject && instructions && uploaded_file) {
         const form = new FormData();
         form.append("name", title);
         form.append("description", desc);
+        form.append("subject_id",subject);
+        form.append("file",uploaded_file);
+        form.append("instructions",instructions);
 
         // for (var key of form.entries()) {
         //   console.log(key[1]);
         // }
+        console.log(tId);
 
-
-        $.ajax({
-          url: 'https://stagingfacultypython.edwisely.com/assignment/createAssignment',
-          type: 'POST',
-          dataType: 'json',
-          data: form,
-          contentType: false,
-          processData: false,
-          headers: {
-            'Authorization': `Bearer ${$user.token}`
-          },
-          success: function (result) {
-            console.log(result);
-            if (result.status == 200) {
-              new Notify({
-                title: 'Success',
-                text: "Successfully created the Test",
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
-              });
-              setTimeout(() => {
-                window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id;
-              }, 2000)
+        if(!tId){
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/assignment/createAssignment',
+            type: 'POST',
+            dataType: 'json',
+            data: form,
+            contentType: false,
+            processData: false,
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              console.log(result);
+              if (result.status == 200) {
+                new Notify({
+                  title: 'Success',
+                  text: "Successfully created the Test",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+                });
+                // setTimeout(() => {
+                //   window.location.href = "sendAssignment.html?id=" + result.test_id;
+                // }, 2000)
+              }
+            },
+            error: function (error) {
+              alert("Request Failed with status: " + error.status);
             }
-          },
-          error: function (error) {
-            alert("Request Failed with status: " + error.status);
-          }
-        });
-
-      }
-      else if (objective == 'false') {
-        var form = new FormData();
-        form.append("name", title);
-        form.append("description", desc);
-        form.append("subject_id", subject);
-        // for (var key of form.entries()) {
-        //   alert(key[1]);
-        // }
-        $.ajax({
-          url: 'https://stagingfacultypython.edwisely.com/questionnaireWeb/createSubjectiveTest',
-          type: 'POST',
-          dataType: 'json',
-          data: form,
-          contentType: false,
-          processData: false,
-          headers: {
-            'Authorization': `Bearer ${$user.token}`
-          },
-          success: function (result) {
-            alert(result.message);
-            if (result.status == 200) {
-              new Notify({
-                title: 'Success',
-                text: "Successfully created the Test",
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
-              });
-              setTimeout(() => {
-                window.location.href = "addQuestionsPage.html?ca=0&tid=" + result.test_id + "&tname=" + result.name;
-              }, 2000)
+          });
+        }
+        else{
+          console.log("edit")
+          form.append("assignment_id",tId);
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/assignment/editAssignment',
+            type: 'POST',
+            dataType: 'json',
+            data: form,
+            contentType: false,
+            processData: false,
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              console.log(result);
+              if (result.status == 200) {
+                new Notify({
+                  title: 'Success',
+                  text: "Successfully updated the Test",
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+                });
+                // setTimeout(() => {
+                //   window.location.href = "sendAssignment.html?id=" + tId;
+                // }, 2000)
+              }
+            },
+            error: function (error) {
+              alert("Request Failed with status: " + error.status);
             }
-          },
-          error: function (error) {
-            new Notify({
-              title: 'Error',
-              text: result.message,
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          }
-        });
-      }
-
-
+          });
+        }
     }
     else {
       new Notify({
         title: 'Error',
-        text: "Fill all fields",
+        text: "All fields are mandatory",
         autoclose: true,
         status: 'error',
         autotimeout: 3000

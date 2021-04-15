@@ -78,16 +78,16 @@ $(document).ready(function () {
                 // div += "<div class='col-2 d-flex justify-content-center' data-toggle='tooltip' data-placement='top' title='No of questions'>" + value.questions_count + "</div>";
                 div += "<div class='col-2 d-flex justify-content-center'>" + value.subject_name + "</div>";
                 
-                if (!value.questions_count)
+                if (!value.student_count)
                     div += "<div class='col-2'></div>";
-                else if (!value.sent && value.questions_count > 0)
+                else if (!value.due_date && value.student_count > 0)
                     div += "<div class='col-2 d-flex justify-content-center align-items-center' style='color:blue;'><a href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "'><i class='fas fa-edit'></i>&nbsp;Edit</a></div>";
                 else
                     div += "<div class='col-2 d-flex justify-content-center'></div>";
                 
-                if (!value.questions_count)
+                if (!value.student_count)
                     div += "<div class='col-2 d-flex justify-content-center'><a href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "' class='btn btn-secondary text-white pl-4 pr-4 assBtn' disabled>Add&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
-                else if (!value.sent && value.questions_count > 0)
+                else if (!value.due_date && value.student_count > 0)
                     div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
                 else
                     div += "<div class='col-2 d-flex justify-content-center'><button class='btn btn-primary text-white pl-4 pr-4 assBtn condLink' data-id='" + value.id + "' data-name='"+value.name+"' data-toggle='modal' data-target='#statModal'>View Stats&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></button></div>";
