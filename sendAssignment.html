@@ -12,7 +12,7 @@
   <link href="frontend/venders/main.css" rel="stylesheet">
   <link href="frontend/venders/sidebar.css" rel="stylesheet">
   <link href="frontend/venders/radiostyle.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="frontend/venders/pages/sendQuestions.css">
+  <link rel="stylesheet" type="text/css" href="frontend/venders/pages/sendAssignment.css">
 
   <!-- font-awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -34,9 +34,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css">
-  <link rel="stylesheet" href="frontend/venders/simple-notify.min.css" />
   <script src="frontend/venders/scripts/simple-notify.min.js"></script>
   <title>Edwisely - Send Questions</title>
+
+
+  <!-- editor -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
 
 
 </head>
@@ -77,23 +82,25 @@
               Courses</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="addCourseNav"><a class="sidebarNav" href="addCourses.html">Add
               Courses</a></div>
-          <div class="pl-4 py-3 sidebarLinks active">
-            <a class="sidebarNav" href="myAssessment.html">
-              <div class="row no-gutters">
-                <div class="col-10">Assessments</div>
-                <div class="col-2"><i class="fas fa-caret-right"></i></div>
-              </div>
-            </a>
-          </div>
+          <div class="pl-4 py-3 sidebarLinks" id="assessmentNav"><a class="sidebarNav"
+              href="myAssessment.html">Assessments</a></div>
           <div class="pl-4 py-3 sidebarLinks" id="liveClassNav"><a class="sidebarNav" href="liveClass.html">Live
               Class</a></div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="notify.html">Notify</a></div>
           <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myFeedbacks.html">Feedback</a></div>
-          <div class="pl-4 py-3 sidebarLinks"><a class="sidebarNav" href="myCodingAssessment.html">Coding Assessment</a>
+          <div class="pl-4 py-3 sidebarLinks active">
+            <a class="sidebarNav" href="myCodingAssessment.html">
+              <div class="row no-gutters">
+                <div class="col-10">Coding Assessment</div>
+                <div class="col-2"><i class="fas fa-caret-right"></i></div>
+              </div>
+            </a>
           </div>
           <div class="text-center py-3" id="logoutNav" onclick="logout();">
-            <b><img src="frontend/images/logout.png" class="px-2" />Logout
-            </b>
+            <div class="h-100 d-flex align-items-center justify-content-center">
+              <b><img src="frontend/images/logout.png" class="px-2" />Logout
+              </b>
+            </div>
           </div>
         </div>
       </div>
@@ -110,13 +117,12 @@
             <div class="row">
               <div class="col-sm-8">
                 <h2 class="mt-1">
-                  <p class="font-weight-bold" id="courseName">Send Assessment</p>
+                  <p class="font-weight-bold" id="courseName">Send Assignment</p>
                 </h2>
                 <hr class="titlehr">
                 <p class="list">
                   <span class="list-item"><a href="index.html">Home</a> ></span>
-                  <span class="list-item"><a href="myAssessment.html" id="questionBankA">Assessment</a> ></span>
-                  <span class="list-item-active"><a href="#">Send Questions</a></span>
+                  <span class="list-item-active"><a href="#">Send Assignment</a></span>
                 </p>
               </div>
               <div class="col-sm-4">
@@ -149,25 +155,45 @@
 
                     <strong>Test Details</strong>
                     <div class="col-12 py-2" id="testDetails">
-                      Start Date and Time : <input type='text' id="starttime" placeholder="07 Jan 2021 00:35:20"
-                        class="form-control" /> <br>
-                      End Date and Time : <input type='text' id="endtime" placeholder="07 Jan 2021 00:35:20"
-                        class="form-control" /> <br>
-                      Duration :<br>
-                      <label class="px-2">Hours</label><input class="durationHours pl-1" type="number" placeholder="0"
-                        min="0" />
-                      <label class="px-2">Minutes</label><input class="durationMinutes pl-1" type="number"
-                        placeholder="0" max="59" min="0" />
+                      Start Date and Time : <input type='text' id="starttime" autocomplete="off"
+                        placeholder="07 Jan 2021 00:35:20" class="form-control" /> <br>
+                      Due Date and Time : <input type='text' id="endtime" autocomplete="off"
+                        placeholder="07 Jan 2021 00:35:20" class="form-control" /> <br>
+                      Late Submission Date (optional) : <input type='text' id="latetime"
+                        placeholder="07 Jan 2021 00:35:20" autocomplete="off" class="form-control" /> <br>
                     </div>
-
                     <br>
+
+                    <div class="row my-3">
+                      <div class="col-4">
+                        <strong>Grading Type</strong>
+                        <select class="form-control gradingType">
+                          <option value="points">Points</option>
+                        </select>
+                      </div>
+                      <div class="col-4">
+                        <strong>Max Points</strong>
+                        <input type="number" min="0" class="maxPoints form-control" />
+                      </div>
+
+                      <div class="col-4">
+                        <strong>Number Of Attempts</strong>
+                        <input type="number" min="0" class="attempts form-control" />
+                      </div>
+
+                    </div>
+                    <br>
+
                     <strong class="mt-3">Class Select</strong>
                     <div class="col-12 py-3" id="sectionDetails">
                       <ul class="sectionsList p-0 m-0" id="sections"></ul>
                     </div>
                     <br>
+
+
+
                     <strong class="mt-3">Total Selected Students</strong>
-                    <div class="col-12 py-2" id="numberOfStudents">0</div>
+                    <div class="col-12 py-2 mb-4" id="numberOfStudents">0</div>
 
                   </div>
                   <div class="col-md-6 col-12">
@@ -183,6 +209,7 @@
             </div>
           </div>
 
+          <!-- end toasts -->
 
 
           <!-- End Page Content -->
@@ -202,6 +229,6 @@
 <script type="text/javascript" src="backend/cookies.js"></script>
 <script type="text/javascript"
   src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js'></script>
-<script src="backend/sendQues.js"></script>
+<script src="backend/sendAssignment.js"></script>
 
 </html>
