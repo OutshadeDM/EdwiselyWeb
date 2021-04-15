@@ -86,7 +86,7 @@ $(document).ready(function () {
                     div += "<div class='col-2 d-flex justify-content-center'></div>";
                 
                 if (!value.questions_count)
-                    div += "<div class='col-2 d-flex justify-content-center'><a href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Add&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
+                    div += "<div class='col-2 d-flex justify-content-center'><a href='feedbackQuestions.html?id=" + value.id + "&fname=" + value.name + "&qc=" + value.questions_count + "' class='btn btn-secondary text-white pl-4 pr-4 assBtn' disabled>Add&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
                 else if (!value.sent && value.questions_count > 0)
                     div += "<div class='col-2 d-flex justify-content-center'><a href='sendCodingAssessment.html?id=" + value.id + "&tname=" + value.name + "' class='btn btn-primary text-white pl-4 pr-4 assBtn'>Send&nbsp;<img class='img-responsive pb-1' src='frontend/images/right-arrow-white.svg'/></a></div>";
                 else
