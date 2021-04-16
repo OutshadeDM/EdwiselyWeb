@@ -105,8 +105,8 @@ $(document).ready(function () {
 
 
   getSections();
-  getStudents();
   getDetails()
+  getStudents();
 
   function getSections() {
     $.ajax({
@@ -178,6 +178,7 @@ $(document).ready(function () {
         if (result.status == 200) {
 
           $.each(result.data, function (key, value) {
+            console.log(preSelectedStudentsIds)
             if (preSelectedStudentsIds.includes(value.id)) {
               $('.selectStudents').append(`<li class='py-2 px-3'><div class='profileAvatar px-1 mr-2' style='background-image:linear-gradient(140deg, #A0F4FF 0%, #75DAE9 20%, #8459F8 100%);;'>${value.name[0].toUpperCase()}</div><div style='display:inline-block; width:90px;'>${value.roll_number}</div> -  ${value.name}<input style='float:right;' class='mt-1 mr-3 studentsToSelect' name='selectAll' type='checkbox' checked='true' disabled data-roll_number='${value.roll_number}' val='${value.id}' data-id='${value.id}' id='select${value.id}' /></li>`)
             }
@@ -215,6 +216,39 @@ $(document).ready(function () {
         console.log(result)
         if (result.status == 200 && result.data) {
           console.log(result.data)
+
+          if (result.data.start_date) {
+            start_date = result.data.start_date
+            $('#starttime').val(start_date)
+          }
+
+          if (result.data.due_date) {
+            due_date = result.data.due_date
+            $('#endtime').val(due_date)
+          }
+
+          if (result.data.late_submission_date) {
+            late_submission_date = result.data.late_submission_date
+            $('#latetime').val(late_submission_date)
+          }
+
+          if (result.data.max_points) {
+            max_points = result.data.max_points
+            $('.maxPoints').val(max_points)
+          }
+
+          if (result.data.max_upload_attempts) {
+            max_upload_attempts = result.data.max_upload_attempts
+            $('.attempts').val(max_upload_attempts)
+          }
+
+          if (result.data.grading_type) {
+            grading_type = result.data.grading_type
+            $('.gradingType').val(grading_type)
+          }
+
+          preSelectedStudentsIds = result.data.student_ids
+          console.log(preSelectedStudentsIds)
         }
 
       },
@@ -318,9 +352,9 @@ $(document).ready(function () {
     form.append("grading_type", grading_type)
     form.append("max_points", max_points)
     form.append("max_upload_attempts", max_upload_attempts)
-    for (var key of form.entries()) {
-      alert(key[1]);
-    }
+    // for (var key of form.entries()) {
+    //   alert(key[1]);
+    // }
 
     $.ajax({
       url: 'https://stagingfacultypython.edwisely.com/assignment/sendAssignment',
@@ -345,7 +379,7 @@ $(document).ready(function () {
           });
 
           setTimeout(function () {
-            window.location.href = "myAssignment.html";
+            window.location.href = "myAssignments.html";
           }, 3000);
         }
         else if (selectedStudentsId.length == 0) {
