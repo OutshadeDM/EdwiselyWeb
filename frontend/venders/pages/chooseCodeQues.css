@@ -29,26 +29,6 @@ input[type="checkbox"]{
   color: black;
 }
 
-/* .chooseQues :nth-child(6n+0){
-  background-color: transparent;
-}
-
-.chooseQues :nth-child(6n+1){
-  background-color: #E8EFF3;
-}
-
-.chooseQues :nth-child(6n+2){
-  background-color: transparent;
-}
-
-
-.chooseQues :nth-child(6n+3){
-  background-color: #ffffff;
-} */
-
-/* .chooseQues li{
-  background-color: red;
-} */
 
 .chooseQues li:nth-child(4n+1){
   background-color: white;
@@ -125,6 +105,10 @@ input[type="radio"]:checked+label{
 }
 
 #subject-modal-div{
+  background-color: white;
+}
+
+#subject-modal-div:hover{
   background-color: white;
 }
 
