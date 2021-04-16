@@ -121,7 +121,7 @@ $(document).ready(function () {
                   autotimeout: 3000
                 });
                 // setTimeout(() => {
-                //   window.location.href = "sendAssignment.html?id=" + result.test_id;
+                //   window.location.href = "sendAssignment.html?id=" + result.data;
                 // }, 2000)
               }
             },
