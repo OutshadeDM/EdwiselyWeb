@@ -25,7 +25,8 @@ $(document).ready(function () {
   let questions = [];
   const questionsList = [];
   let catagory = "";
-
+  
+  let question = '';
   let option1 = '';
   let option2 = '';
   let option3 = '';
@@ -206,10 +207,11 @@ $(document).ready(function () {
       });
     }
     else {
-      if (!option1 || !option2)
+      // console.log(question);
+      if (!question)
         new Notify({
           title: 'Error',
-          text: "2 Options are Mandatory",
+          text: "Please enter Question",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
@@ -222,10 +224,10 @@ $(document).ready(function () {
           status: 'error',
           autotimeout: 3000
         });
-      else if (!question)
+      else if (!option1 || !option2)
         new Notify({
           title: 'Error',
-          text: "Please enter Question",
+          text: "2 Options are Mandatory",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
@@ -424,10 +426,10 @@ $(document).ready(function () {
       }
     }
     else {
-      if (!option1 || !option2)
+      if (!question)
         new Notify({
           title: 'Error',
-          text: "2 Options are Mandatory",
+          text: "Please enter Question",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
@@ -440,10 +442,10 @@ $(document).ready(function () {
           status: 'error',
           autotimeout: 3000
         });
-      else if (!question)
+      else if (!option1 || !option2)
         new Notify({
           title: 'Error',
-          text: "Please enter Question",
+          text: "2 Options are Mandatory",
           autoclose: true,
           status: 'error',
           autotimeout: 3000
