@@ -276,154 +276,156 @@ $(document).ready(function () {
     const questionId = $('#questionId').val();
     const isTemplate = questions.filter(question1 => questionId == question1.id)[0].has_template_id == 1 ? true : false;
     if (questionId && question && option1 && option2 && catagory != "0" && catagory) {
-
-      if (isTemplate) {
-        const oldOptions = questions.filter(question1 => questionId == question1.id)[0].questions_options;
-        let newOptions = [];
-
-        newOptions[0] = createOption(oldOptions[0].id, option1, questionId);
-        newOptions[1] = createOption(oldOptions[1].id, option2, questionId);
-        if (option3) newOptions[2] = createOption(oldOptions[2] ? newOptions[2].id : null, option3, questionId);
-        if (option4) newOptions[3] = createOption(oldOptions[3] ? newOptions[3].id : null, option4, questionId);
-        if (option5) newOptions[4] = createOption(oldOptions[4] ? newOptions[4].id : null, option5, questionId);
-        newOptions = newOptions.filter(option => option.name !== "" || !option.name);
-
-        const newQuestion = {
-          id: Number.parseInt(questionId),
-          name: question,
-          field_type: 1,
-          survey_category_id: catagory,
-          questions_options: newOptions
+      $confirm("Do you want to edit this question?", "#FF9100")
+      .then(function () {
+        if (isTemplate) {
+          const oldOptions = questions.filter(question1 => questionId == question1.id)[0].questions_options;
+          let newOptions = [];
+  
+          newOptions[0] = createOption(oldOptions[0].id, option1, questionId);
+          newOptions[1] = createOption(oldOptions[1].id, option2, questionId);
+          if (option3) newOptions[2] = createOption(oldOptions[2] ? newOptions[2].id : null, option3, questionId);
+          if (option4) newOptions[3] = createOption(oldOptions[3] ? newOptions[3].id : null, option4, questionId);
+          if (option5) newOptions[4] = createOption(oldOptions[4] ? newOptions[4].id : null, option5, questionId);
+          newOptions = newOptions.filter(option => option.name !== "" || !option.name);
+  
+          const newQuestion = {
+            id: Number.parseInt(questionId),
+            name: question,
+            field_type: 1,
+            survey_category_id: catagory,
+            questions_options: newOptions
+          }
+  
+          // console.log("old",questions.filter(question1 => questionId == question1.id)[0]);
+          // console.log("new",JSON.stringify(newQuestion));
+  
+          const form = new FormData();
+          form.append("survey_id", sId);
+          form.append("question", JSON.stringify(newQuestion));
+  
+          // for (var pair of form.entries()) {
+          //   console.log(pair[0]+ ', ' + pair[1]); 
+          // }
+  
+          $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            background: "#fff",
+            opacity: 0.7
+          }).appendTo($("#abcd").css('position', 'relative'));
+  
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/survey/updateSurveyTemplateQuestion',
+            type: 'POST',
+            dataType: 'json',
+            data: form,
+            contentType: false,
+            processData: false,
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              // console.log(result);
+              if (result.status == 200) {
+                new Notify({
+                  title: 'Success',
+                  text: result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+                });
+                $('#loadingDiv').remove();
+                getQuestions();
+                clearAll();
+              }
+              else {
+                $('#loadingDiv').remove();
+                new Notify({
+                  title: 'Error',
+                  text: result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+                });
+              }
+            },
+            error: function (error) {
+              $('#loadingDiv').remove();
+              alert("Request Failed with status: " + error.status);
+            }
+          });
+  
         }
-
-        // console.log("old",questions.filter(question1 => questionId == question1.id)[0]);
-        // console.log("new",JSON.stringify(newQuestion));
-
-        const form = new FormData();
-        form.append("survey_id", sId);
-        form.append("question", JSON.stringify(newQuestion));
-
-        // for (var pair of form.entries()) {
-        //   console.log(pair[0]+ ', ' + pair[1]); 
-        // }
-
-        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          background: "#fff",
-          opacity: 0.7
-        }).appendTo($("#abcd").css('position', 'relative'));
-
-        $.ajax({
-          url: 'https://stagingfacultypython.edwisely.com/survey/updateSurveyTemplateQuestion',
-          type: 'POST',
-          dataType: 'json',
-          data: form,
-          contentType: false,
-          processData: false,
-          headers: {
-            'Authorization': `Bearer ${$user.token}`
-          },
-          success: function (result) {
-            // console.log(result);
-            if (result.status == 200) {
-              new Notify({
-                title: 'Success',
-                text: result.message,
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
-              });
+        else {
+          const newOptions = [];
+          newOptions.push("\"" + option1 + "\"", "\"" + option2 + "\"");
+          if (option3) newOptions.push("\"" + option3 + "\"");
+          if (option4) newOptions.push("\"" + option4 + "\"");
+          if (option5) newOptions.push("\"" + option5 + "\"");
+  
+          const form = new FormData();
+          form.append("question_id", questionId);
+          form.append("question", question);
+          form.append("options", "[" + newOptions + "]");
+          form.append("survey_category_id", catagory);
+          form.append("field_type", "1");
+  
+          // for (var pair of form.entries()) {
+          //   console.log(pair[0]+ ', ' + pair[1]); 
+          // }
+  
+          $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            background: "#fff",
+            opacity: 0.7
+          }).appendTo($("#abcd").css('position', 'relative'));
+  
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/survey/editSurveyQuestion',
+            type: 'POST',
+            dataType: 'json',
+            data: form,
+            contentType: false,
+            processData: false,
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              // console.log(result);
+              if (result.status == 200) {
+                new Notify({
+                  title: 'Success',
+                  text: result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+                });
+                $('#loadingDiv').remove();
+                getQuestions();
+                clearAll();
+              }
+              else {
+                $('#loadingDiv').remove();
+                new Notify({
+                  title: 'Error',
+                  text: result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+                });
+              }
+            },
+            error: function (error) {
               $('#loadingDiv').remove();
-              getQuestions();
-              clearAll();
+              alert("Request Failed with status: " + error.status);
             }
-            else {
-              $('#loadingDiv').remove();
-              new Notify({
-                title: 'Error',
-                text: result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
-              });
-            }
-          },
-          error: function (error) {
-            $('#loadingDiv').remove();
-            alert("Request Failed with status: " + error.status);
-          }
-        });
-
-      }
-      else {
-        const newOptions = [];
-        newOptions.push("\"" + option1 + "\"", "\"" + option2 + "\"");
-        if (option3) newOptions.push("\"" + option3 + "\"");
-        if (option4) newOptions.push("\"" + option4 + "\"");
-        if (option5) newOptions.push("\"" + option5 + "\"");
-
-        const form = new FormData();
-        form.append("question_id", questionId);
-        form.append("question", question);
-        form.append("options", "[" + newOptions + "]");
-        form.append("survey_category_id", catagory);
-        form.append("field_type", "1");
-
-        // for (var pair of form.entries()) {
-        //   console.log(pair[0]+ ', ' + pair[1]); 
-        // }
-
-        $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          background: "#fff",
-          opacity: 0.7
-        }).appendTo($("#abcd").css('position', 'relative'));
-
-        $.ajax({
-          url: 'https://stagingfacultypython.edwisely.com/survey/editSurveyQuestion',
-          type: 'POST',
-          dataType: 'json',
-          data: form,
-          contentType: false,
-          processData: false,
-          headers: {
-            'Authorization': `Bearer ${$user.token}`
-          },
-          success: function (result) {
-            // console.log(result);
-            if (result.status == 200) {
-              new Notify({
-                title: 'Success',
-                text: result.message,
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
-              });
-              $('#loadingDiv').remove();
-              getQuestions();
-              clearAll();
-            }
-            else {
-              $('#loadingDiv').remove();
-              new Notify({
-                title: 'Error',
-                text: result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
-              });
-            }
-          },
-          error: function (error) {
-            $('#loadingDiv').remove();
-            alert("Request Failed with status: " + error.status);
-          }
-        });
-      }
+          });
+        }
+      })
     }
     else {
       if (!question)
@@ -463,69 +465,72 @@ $(document).ready(function () {
 
   $('#deleteBtn').on('click', function () {
     const questionId = $('#questionId').val();
-    if (questionId) {
-      const form = new FormData();
-      form.append("question_id", questionId);
-      form.append("survey_id", sId);
-
-      $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        background: "#fff",
-        opacity: 0.7
-      }).appendTo($("#abcd").css('position', 'relative'));
-
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/survey/deleteSurveyQuestion',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          console.log(result);
-          if (result.status == 200) {
-            new Notify({
-              title: 'Success',
-              text: result.message,
-              autoclose: true,
-              status: 'success',
-              autotimeout: 3000
-            });
-            $('#loadingDiv').remove();
-            getQuestions();
-            clearAll();
-          }
-          else {
-            $('#loadingDiv').remove();
-            new Notify({
-              title: 'Error',
-              text: result.message,
-              autoclose: true,
-              status: 'error',
-              autotimeout: 3000
-            });
-          }
-        },
-        error: function (error) {
-          $('#loadingDiv').remove();
-          alert("Request Failed with status: " + error.status);
+    $confirm("Do you want to delete this question?", "#FF9100")
+      .then(function () {
+        if (questionId) {
+          const form = new FormData();
+          form.append("question_id", questionId);
+          form.append("survey_id", sId);
+    
+          $("<div id='loadingDiv' class='d-flex align-items-center justify-content-center'><img src='frontend/images/loading.gif' alt='No Image' style='top:50%;left:50%;'></div>").css({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            background: "#fff",
+            opacity: 0.7
+          }).appendTo($("#abcd").css('position', 'relative'));
+    
+          $.ajax({
+            url: 'https://stagingfacultypython.edwisely.com/survey/deleteSurveyQuestion',
+            type: 'POST',
+            dataType: 'json',
+            data: form,
+            contentType: false,
+            processData: false,
+            headers: {
+              'Authorization': `Bearer ${$user.token}`
+            },
+            success: function (result) {
+              console.log(result);
+              if (result.status == 200) {
+                new Notify({
+                  title: 'Success',
+                  text: result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+                });
+                $('#loadingDiv').remove();
+                getQuestions();
+                clearAll();
+              }
+              else {
+                $('#loadingDiv').remove();
+                new Notify({
+                  title: 'Error',
+                  text: result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+                });
+              }
+            },
+            error: function (error) {
+              $('#loadingDiv').remove();
+              alert("Request Failed with status: " + error.status);
+            }
+          });
         }
-      });
-    }
-    else {
-      new Notify({
-        title: 'Error',
-        text: "Error, try again later",
-        autoclose: true,
-        status: 'error',
-        autotimeout: 3000
-      });
-    }
+        else {
+          new Notify({
+            title: 'Error',
+            text: "Error, try again later",
+            autoclose: true,
+            status: 'error',
+            autotimeout: 3000
+          });
+        }
+      })
   });
 
   $(document).on('click', '.questions', function () {

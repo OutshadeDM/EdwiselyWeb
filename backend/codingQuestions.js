@@ -10,12 +10,15 @@ $(document).ready(function () {
   }
 
   const searchParams = new URLSearchParams(window.location.search);
-  let id = 0, title = "";
+  let id = 0, title = "",qc=0;
 
   if (searchParams.has('fname') && searchParams.has("id")) {
     title = searchParams.get('fname');
     id = searchParams.get('id');
     $("#codeName").text(title);
+  }
+  if (searchParams.has('qc')) {
+    qc = searchParams.get("qc");
   }
   
   $(document).on('click', '#addques', function () {
@@ -27,18 +30,18 @@ $(document).ready(function () {
   })
 
   $("#sendCodeBtn").click(()=>{
-    // if(qc > 0){
-    window.location.href = "sendCodingAssessment.html?id=" + id + "&tname=" + title;
-    // }
-    // else{
-    //   new Notify ({
-    //       title: 'Error',
-    //       text : "Please add questions to assesment first",
-    //       autoclose: true,
-    //       status: 'error',
-    //       autotimeout: 3000
-    //   });
-    // }
+    if(qc > 0){
+      window.location.href = "sendCodingAssessment.html?id=" + id + "&tname=" + title;
+    }
+    else{
+      new Notify ({
+          title: 'Error',
+          text : "Please add questions to assesment first",
+          autoclose: true,
+          status: 'error',
+          autotimeout: 3000
+      });
+    }
   });
 
 });

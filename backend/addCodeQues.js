@@ -537,83 +537,86 @@ $(document).ready(function () {
     const problem_id = $("#questionId").val();
 
     if (title && marks && desc && topics.length > 0 && problem_id && language) {
-      $('#editBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
-      const updated_question = questions.filter(question => question.id == problem_id)[0];
-      // console.log(updated_question);
-
-      const form = new FormData();
-      form.append("name", title);
-      form.append("body", desc);
-      form.append("topics", JSON.stringify(topics));
-      form.append("test_id", cid);
-      form.append("marks", marks);
-      form.append("language_id", language);
-      form.append("problem_id", problem_id);
-
-      $.ajax({
-        url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblem',
-        type: 'POST',
-        dataType: 'json',
-        data: form,
-        contentType: false,
-        processData: false,
-        headers: {
-          'Authorization': `Bearer ${$user.token}`
-        },
-        success: function (result) {
-          $('#editBtn').html("Edit");
-          // console.log(result);
-          if (result.status == 200) {
-            new Notify ({
-                title: 'Success',
-                text : result.message,
-                autoclose: true,
-                status: 'success',
-                autotimeout: 3000
-            });
-            
-            if(updated_question.test_cases[0].input != $("#input1").val() || updated_question.test_cases[0].output != $("#output1").val())
-              updateTestCases(updated_question.id,updated_question.test_cases[0].id,$("#input1").val(),$("#output1").val(),$('#status1').prop('checked'))
-            
-            if(updated_question.test_cases[1].input != $("#input2").val() || updated_question.test_cases[1].output != $("#output2").val())
-              updateTestCases(updated_question.id,updated_question.test_cases[1].id,$("#input2").val(),$("#output2").val(),$('#status2').prop('checked'))
-            
-            if(updated_question.test_cases[2] && (updated_question.test_cases[2].input != $("#input3").val() || updated_question.test_cases[2].output != $("#output3").val()))
-              updateTestCases(updated_question.id,updated_question.test_cases[2].id,$("#input3").val(),$("#output3").val(),$('#status3').prop('checked'))
-
-            if(updated_question.test_cases[3] && (updated_question.test_cases[3].input != $("#input4").val() || updated_question.test_cases[3].output != $("#output4").val()))
-              updateTestCases(updated_question.id,updated_question.test_cases[3].id,$("#input4").val(),$("#output4").val(),$('#status4').prop('checked'))
-            
-            if(updated_question.test_cases[4] && (updated_question.test_cases[4].input != $("#input5").val() || updated_question.test_cases[4].output != $("#output5").val()))
-              updateTestCases(updated_question.id,updated_question.test_cases[4].id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
-            
-            if(!updated_question.test_cases[2] && $("#input3").val() && $("#output3").val())
-              addTestCase(updated_question.id,$("#input3").val(),$("#output3").val(),$('#status3').prop('checked'))
-
-            if(!updated_question.test_cases[3] && $("#input4").val() && $("#output4").val())
-              addTestCase(updated_question.id,$("#input4").val(),$("#output4").val(),$('#status4').prop('checked'))
-
-            if(!updated_question.test_cases[4] && $("#input5").val() && $("#output5").val())
-              addTestCase(updated_question.id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
-
-            clearAll();
-            getQuestions(false);
+      $confirm("Do you want to edit this question?", "#FF9100")
+      .then(function () {
+        $('#editBtn').html("<i class='fa fa-spinner fa-spin'></i> Please Wait");
+        const updated_question = questions.filter(question => question.id == problem_id)[0];
+        // console.log(updated_question);
+  
+        const form = new FormData();
+        form.append("name", title);
+        form.append("body", desc);
+        form.append("topics", JSON.stringify(topics));
+        form.append("test_id", cid);
+        form.append("marks", marks);
+        form.append("language_id", language);
+        form.append("problem_id", problem_id);
+  
+        $.ajax({
+          url: 'https://stagingfacultypython.edwisely.com/codeEditor/editCodingProblem',
+          type: 'POST',
+          dataType: 'json',
+          data: form,
+          contentType: false,
+          processData: false,
+          headers: {
+            'Authorization': `Bearer ${$user.token}`
+          },
+          success: function (result) {
+            $('#editBtn').html("Edit");
+            // console.log(result);
+            if (result.status == 200) {
+              new Notify ({
+                  title: 'Success',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'success',
+                  autotimeout: 3000
+              });
+              
+              if(updated_question.test_cases[0].input != $("#input1").val() || updated_question.test_cases[0].output != $("#output1").val())
+                updateTestCases(updated_question.id,updated_question.test_cases[0].id,$("#input1").val(),$("#output1").val(),$('#status1').prop('checked'))
+              
+              if(updated_question.test_cases[1].input != $("#input2").val() || updated_question.test_cases[1].output != $("#output2").val())
+                updateTestCases(updated_question.id,updated_question.test_cases[1].id,$("#input2").val(),$("#output2").val(),$('#status2').prop('checked'))
+              
+              if(updated_question.test_cases[2] && (updated_question.test_cases[2].input != $("#input3").val() || updated_question.test_cases[2].output != $("#output3").val()))
+                updateTestCases(updated_question.id,updated_question.test_cases[2].id,$("#input3").val(),$("#output3").val(),$('#status3').prop('checked'))
+  
+              if(updated_question.test_cases[3] && (updated_question.test_cases[3].input != $("#input4").val() || updated_question.test_cases[3].output != $("#output4").val()))
+                updateTestCases(updated_question.id,updated_question.test_cases[3].id,$("#input4").val(),$("#output4").val(),$('#status4').prop('checked'))
+              
+              if(updated_question.test_cases[4] && (updated_question.test_cases[4].input != $("#input5").val() || updated_question.test_cases[4].output != $("#output5").val()))
+                updateTestCases(updated_question.id,updated_question.test_cases[4].id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
+              
+              if(!updated_question.test_cases[2] && $("#input3").val() && $("#output3").val())
+                addTestCase(updated_question.id,$("#input3").val(),$("#output3").val(),$('#status3').prop('checked'))
+  
+              if(!updated_question.test_cases[3] && $("#input4").val() && $("#output4").val())
+                addTestCase(updated_question.id,$("#input4").val(),$("#output4").val(),$('#status4').prop('checked'))
+  
+              if(!updated_question.test_cases[4] && $("#input5").val() && $("#output5").val())
+                addTestCase(updated_question.id,$("#input5").val(),$("#output5").val(),$('#status5').prop('checked'))
+  
+              clearAll();
+              getQuestions(false);
+            }
+            else {
+              new Notify ({
+                  title: 'Error',
+                  text : result.message,
+                  autoclose: true,
+                  status: 'error',
+                  autotimeout: 3000
+              });
+            }
+          },
+          error: function (error) {
+            $('#editBtn').html("Edit");
+            alert("Request Failed with status: " + error.status);
           }
-          else {
-            new Notify ({
-                title: 'Error',
-                text : result.message,
-                autoclose: true,
-                status: 'error',
-                autotimeout: 3000
-            });
-          }
-        },
-        error: function (error) {
-          $('#editBtn').html("Edit");
-          alert("Request Failed with status: " + error.status);
-        }
-      });
+        });
+      })
     }
     else {
       if (!title || !marks || !desc)
