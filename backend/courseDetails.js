@@ -50,7 +50,7 @@ $(document).ready(function () {
                         $("#courseClass").empty();
                         $("#courseClass").append("<ul>");
                         $.each(result.data.sections, function (key, value) {
-                            $("#courseClass").append("<li class='font-weight-bold'><span class='font-weight-bold'>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-id='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
+                            $("#courseClass").append("<li class='font-weight-bold'><span class='font-weight-bold'>"+value.department_name+"</span>&emsp;" + value.name + "&emsp;<button class='btn deleteSection' data-sid='"+value.faculty_section_id+"' type='button'><i class='fas fa-trash'></i></button></li>");
                         });
                         $("#courseClass").append("</ul>");
                     }
@@ -105,14 +105,15 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.deleteSection', function () {
+        const sectionId = $(this).data('sid');
         $confirm("Do you want to delete this section?", "#FF9100")
         .then(function(){
-            $toast("Deleted", "#FF9100");
-            const sectionId = $(this).data('id');
+            // $toast("Deleted", "#FF9100");
+            console.log(sectionId);
             if(sectionId){
                 const form = new FormData();
                 form.append('data',sectionId);
-    
+                console.log(sectionId);
                 $.ajax({
                     url: 'https://stagingfacultypython.edwisely.com/common/facultyUnassingSubjectSection',
                     type: 'POST',
@@ -124,6 +125,7 @@ $(document).ready(function () {
                         'Authorization': `Bearer ${$user.token}`
                     },
                     success: function (result) {
+                        console.log(result);
                         if (result.status == 200) {
                             new Notify ({
                                 title: 'Success',
@@ -149,6 +151,7 @@ $(document).ready(function () {
                     }
                 });
             }
+            else $toast("Error", "#FF9100");
         })
     });
 

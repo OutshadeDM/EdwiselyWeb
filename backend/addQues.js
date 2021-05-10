@@ -1528,6 +1528,7 @@ $(document).ready(function () {
           questionsList.splice($.inArray("abc", questionsList), 1);
           loadList();
           clearAll(true);
+          saveQuestions();
         }
       })
   });
